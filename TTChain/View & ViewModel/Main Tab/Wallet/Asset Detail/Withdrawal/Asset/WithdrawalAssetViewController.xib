@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalAssetViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="availableAmtLabel" destination="x2q-or-Wus" id="Z3q-OL-BFO"/>
+                <outlet property="coinNameLabel" destination="zec-sk-9dn" id="5pC-BO-zt6"/>
+                <outlet property="sepline" destination="nL9-Qt-vrA" id="YTu-Yd-gpG"/>
+                <outlet property="transferAmtFiatValueLabel" destination="VTq-7H-3kV" id="U4z-cQ-ek3"/>
+                <outlet property="transferAmtTextField" destination="gVs-yW-dbt" id="HTA-zI-Y59"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="361" height="79"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zec-sk-9dn">
+                    <rect key="frame" x="20" y="12" width="42" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2q-or-Wus">
+                    <rect key="frame" x="299" y="14" width="42" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTq-7H-3kV">
+                    <rect key="frame" x="299" y="46" width="42" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="123123123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gVs-yW-dbt">
+                    <rect key="frame" x="20" y="44" width="271" height="17"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nL9-Qt-vrA">
+                    <rect key="frame" x="20" y="70" width="321" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="oll-ep-Mop"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x2q-or-Wus" secondAttribute="trailing" constant="20" id="4Rl-0L-P5j"/>
+                <constraint firstItem="x2q-or-Wus" firstAttribute="centerY" secondItem="zec-sk-9dn" secondAttribute="centerY" id="8Hi-TQ-J7g"/>
+                <constraint firstItem="gVs-yW-dbt" firstAttribute="leading" secondItem="zec-sk-9dn" secondAttribute="leading" id="L2P-Xp-zYz"/>
+                <constraint firstItem="x2q-or-Wus" firstAttribute="trailing" secondItem="nL9-Qt-vrA" secondAttribute="trailing" id="ONp-ZW-VfQ"/>
+                <constraint firstItem="nL9-Qt-vrA" firstAttribute="leading" secondItem="zec-sk-9dn" secondAttribute="leading" id="OZ7-QI-Ulg"/>
+                <constraint firstItem="VTq-7H-3kV" firstAttribute="leading" secondItem="gVs-yW-dbt" secondAttribute="trailing" constant="8" id="RKM-1h-VGb"/>
+                <constraint firstItem="VTq-7H-3kV" firstAttribute="trailing" secondItem="nL9-Qt-vrA" secondAttribute="trailing" id="SAN-ua-H0V"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="nL9-Qt-vrA" secondAttribute="bottom" constant="8" id="XQh-Af-V72"/>
+                <constraint firstItem="zec-sk-9dn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="bNa-ac-8bR"/>
+                <constraint firstItem="nL9-Qt-vrA" firstAttribute="top" secondItem="VTq-7H-3kV" secondAttribute="bottom" constant="8" id="hGY-ll-7Oj"/>
+                <constraint firstItem="zec-sk-9dn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="iVL-3V-n1z"/>
+                <constraint firstItem="VTq-7H-3kV" firstAttribute="top" secondItem="x2q-or-Wus" secondAttribute="bottom" constant="12" id="kgK-jX-Wcg"/>
+                <constraint firstItem="VTq-7H-3kV" firstAttribute="baseline" secondItem="gVs-yW-dbt" secondAttribute="baseline" id="pm7-Xz-yax"/>
+                <constraint firstItem="gVs-yW-dbt" firstAttribute="top" secondItem="zec-sk-9dn" secondAttribute="bottom" constant="8" id="ptu-w1-HzS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="27.5" y="-126.5"/>
+        </view>
+    </objects>
+</document>

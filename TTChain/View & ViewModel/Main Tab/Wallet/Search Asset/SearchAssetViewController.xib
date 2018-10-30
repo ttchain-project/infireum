@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchAssetViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="headerLabel" destination="zuv-c9-fYb" id="FKS-ru-cNA"/>
+                <outlet property="noContentLabel" destination="1Gk-zb-k9l" id="Woy-md-W5B"/>
+                <outlet property="tableView" destination="AVS-Z4-i0D" id="hjY-ht-pjZ"/>
+                <outlet property="view" destination="Jzs-o0-jbe" id="2bd-hG-lOK"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Jzs-o0-jbe">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Gk-zb-k9l">
+                    <rect key="frame" x="20" y="124" width="335" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuv-c9-fYb">
+                    <rect key="frame" x="20" y="84" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AVS-Z4-i0D">
+                    <rect key="frame" x="0.0" y="113" width="375" height="554"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1Gk-zb-k9l" firstAttribute="centerX" secondItem="AVS-Z4-i0D" secondAttribute="centerX" id="2vM-Vp-nmd"/>
+                <constraint firstItem="zuv-c9-fYb" firstAttribute="leading" secondItem="PF0-Vj-1W5" secondAttribute="leading" constant="20" id="HVv-PY-Z08"/>
+                <constraint firstItem="PF0-Vj-1W5" firstAttribute="trailing" secondItem="AVS-Z4-i0D" secondAttribute="trailing" id="HZR-cj-7BK"/>
+                <constraint firstItem="PF0-Vj-1W5" firstAttribute="bottom" secondItem="AVS-Z4-i0D" secondAttribute="bottom" id="N5h-We-Mpw"/>
+                <constraint firstItem="AVS-Z4-i0D" firstAttribute="leading" secondItem="Jzs-o0-jbe" secondAttribute="leading" id="OG7-Ja-w84"/>
+                <constraint firstItem="1Gk-zb-k9l" firstAttribute="top" secondItem="PF0-Vj-1W5" secondAttribute="top" constant="60" id="fAr-gf-Pam"/>
+                <constraint firstItem="AVS-Z4-i0D" firstAttribute="top" secondItem="zuv-c9-fYb" secondAttribute="bottom" constant="8" id="fE7-x6-0KJ"/>
+                <constraint firstItem="1Gk-zb-k9l" firstAttribute="leading" secondItem="PF0-Vj-1W5" secondAttribute="leading" constant="20" id="oP8-tP-OC9"/>
+                <constraint firstItem="zuv-c9-fYb" firstAttribute="top" secondItem="PF0-Vj-1W5" secondAttribute="top" constant="20" id="sw5-1B-dxr"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="PF0-Vj-1W5"/>
+        </view>
+    </objects>
+</document>

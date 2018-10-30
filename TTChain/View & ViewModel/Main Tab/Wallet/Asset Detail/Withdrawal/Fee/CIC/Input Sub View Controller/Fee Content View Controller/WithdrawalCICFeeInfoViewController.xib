@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalCICFeeInfoViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="modeBase" destination="82X-6j-in3" id="7Ox-C3-7ox"/>
+                <outlet property="modeLabel" destination="Tj3-7I-jTe" id="T8Z-Y1-LfF"/>
+                <outlet property="modeSwitch" destination="zkx-UQ-fEd" id="2bY-7w-IeY"/>
+                <outlet property="view" destination="hJd-WQ-CTv" id="dPf-Fb-Fyg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hJd-WQ-CTv">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="368"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82X-6j-in3">
+                    <rect key="frame" x="0.0" y="0.0" width="365" height="368"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zkx-UQ-fEd">
+                    <rect key="frame" x="296" y="317" width="51" height="31"/>
+                </switch>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tj3-7I-jTe">
+                    <rect key="frame" x="234" y="322" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="82X-6j-in3" firstAttribute="trailing" secondItem="edh-48-9T1" secondAttribute="trailing" id="0m4-1U-MAu"/>
+                <constraint firstItem="zkx-UQ-fEd" firstAttribute="top" secondItem="82X-6j-in3" secondAttribute="bottom" constant="20" id="1jM-3z-kkr"/>
+                <constraint firstItem="edh-48-9T1" firstAttribute="bottom" secondItem="82X-6j-in3" secondAttribute="bottom" id="8zD-w7-HWc"/>
+                <constraint firstItem="82X-6j-in3" firstAttribute="top" secondItem="edh-48-9T1" secondAttribute="top" id="9Jg-6W-e9P"/>
+                <constraint firstItem="edh-48-9T1" firstAttribute="bottom" secondItem="zkx-UQ-fEd" secondAttribute="bottom" constant="20" id="Aax-9x-DHP"/>
+                <constraint firstItem="Tj3-7I-jTe" firstAttribute="centerY" secondItem="zkx-UQ-fEd" secondAttribute="centerY" id="ctj-ex-VUv"/>
+                <constraint firstItem="zkx-UQ-fEd" firstAttribute="leading" secondItem="Tj3-7I-jTe" secondAttribute="trailing" constant="20" id="dPP-lH-yOC"/>
+                <constraint firstItem="edh-48-9T1" firstAttribute="trailing" secondItem="zkx-UQ-fEd" secondAttribute="trailing" constant="20" id="fQa-Lw-4MB"/>
+                <constraint firstItem="82X-6j-in3" firstAttribute="leading" secondItem="edh-48-9T1" secondAttribute="leading" id="iNb-qd-0h1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="edh-48-9T1"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="zkx-UQ-fEd"/>
+                    <exclude reference="Tj3-7I-jTe"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="179.5" y="-90"/>
+        </view>
+    </objects>
+</document>

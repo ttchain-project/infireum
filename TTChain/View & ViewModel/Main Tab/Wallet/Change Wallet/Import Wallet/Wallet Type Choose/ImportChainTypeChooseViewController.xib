@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImportChainTypeChooseViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="chainTypeTitleLabel" destination="r7f-3f-mXS" id="WcE-V3-Qp6"/>
+                <outlet property="tableView" destination="Vp2-dL-EkH" id="s1P-Tx-GM6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="walletIcon" destination="c6h-Ed-rKf" id="zLn-r9-nFe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconHeaderSignWalletblackNormal" translatesAutoresizingMaskIntoConstraints="NO" id="c6h-Ed-rKf">
+                    <rect key="frame" x="165" y="84" width="45" height="40"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7f-3f-mXS">
+                    <rect key="frame" x="20" y="132" width="334" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vp2-dL-EkH">
+                    <rect key="frame" x="0.0" y="256" width="375" height="411"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="c6h-Ed-rKf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Ao0-lf-oBM"/>
+                <constraint firstItem="r7f-3f-mXS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="FOS-bU-uXI"/>
+                <constraint firstItem="c6h-Ed-rKf" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="GSy-Xx-cDU"/>
+                <constraint firstItem="Vp2-dL-EkH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S0d-vC-SPV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Vp2-dL-EkH" secondAttribute="bottom" id="aHj-ZM-Kut"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Vp2-dL-EkH" secondAttribute="trailing" id="dPC-xZ-ScO"/>
+                <constraint firstItem="Vp2-dL-EkH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="0.7" id="g45-iK-cNV"/>
+                <constraint firstItem="r7f-3f-mXS" firstAttribute="centerX" secondItem="c6h-Ed-rKf" secondAttribute="centerX" id="s2s-De-nIG"/>
+                <constraint firstItem="r7f-3f-mXS" firstAttribute="top" secondItem="c6h-Ed-rKf" secondAttribute="bottom" constant="8" id="tbs-PQ-7cN"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconHeaderSignWalletblackNormal" width="45" height="40"/>
+    </resources>
+</document>

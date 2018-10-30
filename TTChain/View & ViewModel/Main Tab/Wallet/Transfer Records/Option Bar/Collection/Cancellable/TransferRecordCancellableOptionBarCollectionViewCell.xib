@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="t2w-8O-BGo" customClass="TransferRecordCancellableOptionBarCollectionViewCell" customModule="OfflineWallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="337" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="337" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hc-xc-M71">
+                        <rect key="frame" x="0.0" y="4" width="337" height="42"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rWI-8a-dBU">
+                                <rect key="frame" x="8" y="8" width="42" height="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vg-mM-aeV">
+                                <rect key="frame" x="58" y="10" width="271" height="22"/>
+                                <state key="normal" image="btnCancelWhiteNormal">
+                                    <color key="titleColor" red="0.36232105190000002" green="0.79051865880000005" blue="0.79051865880000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rWI-8a-dBU" firstAttribute="top" secondItem="8hc-xc-M71" secondAttribute="top" constant="8" id="AqH-pN-lRd"/>
+                            <constraint firstAttribute="bottom" secondItem="rWI-8a-dBU" secondAttribute="bottom" constant="8" id="RiL-rs-BLQ"/>
+                            <constraint firstItem="9Vg-mM-aeV" firstAttribute="centerY" secondItem="rWI-8a-dBU" secondAttribute="centerY" id="SG0-bt-cXW"/>
+                            <constraint firstAttribute="trailing" secondItem="9Vg-mM-aeV" secondAttribute="trailing" constant="8" id="b8l-a0-6Ho"/>
+                            <constraint firstItem="9Vg-mM-aeV" firstAttribute="leading" secondItem="rWI-8a-dBU" secondAttribute="trailing" constant="8" id="gh3-gt-mzW"/>
+                            <constraint firstItem="rWI-8a-dBU" firstAttribute="leading" secondItem="8hc-xc-M71" secondAttribute="leading" constant="8" id="tnp-BO-Uil"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="8hc-xc-M71" firstAttribute="top" secondItem="t2w-8O-BGo" secondAttribute="top" constant="4" id="UIn-m8-RQW"/>
+                <constraint firstItem="8hc-xc-M71" firstAttribute="leading" secondItem="t2w-8O-BGo" secondAttribute="leading" id="dwI-vM-q90"/>
+                <constraint firstAttribute="trailing" secondItem="8hc-xc-M71" secondAttribute="trailing" id="gQu-xr-91P"/>
+                <constraint firstAttribute="bottom" secondItem="8hc-xc-M71" secondAttribute="bottom" constant="4" id="rOd-fB-Whk"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Gtu-In-DfE"/>
+            <size key="customSize" width="337" height="50"/>
+            <connections>
+                <outlet property="baseView" destination="8hc-xc-M71" id="T0p-Kt-Qj2"/>
+                <outlet property="cancelBtn" destination="9Vg-mM-aeV" id="XjW-J4-hX7"/>
+                <outlet property="infoLabel" destination="rWI-8a-dBU" id="GRt-I1-wlJ"/>
+            </connections>
+            <point key="canvasLocation" x="177.5" y="54"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="btnCancelWhiteNormal" width="22" height="22"/>
+    </resources>
+</document>

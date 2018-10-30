@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="0.0.0">
+    <entity name="AddressBookUnit" representedClassName=".AddressBookUnit" syncable="YES">
+        <attribute name="address" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="identityID" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="walletType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="identity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Identity" inverseName="addressbookUnits" inverseEntity="Identity" syncable="YES"/>
+    </entity>
+    <entity name="Asset" representedClassName=".Asset" syncable="YES">
+        <attribute name="amount" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="coinID" attributeType="String" syncable="YES"/>
+        <attribute name="walletEPKey" attributeType="String" syncable="YES"/>
+        <relationship name="coin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coin" inverseName="assets" inverseEntity="Coin" syncable="YES"/>
+        <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wallet" inverseName="assets" inverseEntity="Wallet" syncable="YES"/>
+    </entity>
+    <entity name="Coin" representedClassName=".Coin" syncable="YES">
+        <attribute name="contract" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="digit" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="fullname" attributeType="String" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
+        <attribute name="isActive" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isDefault" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isDefaultSelected" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="walletType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="assets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Asset" inverseName="coin" inverseEntity="Asset" syncable="YES"/>
+        <relationship name="coinSelections" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoinSelection" inverseName="coin" inverseEntity="CoinSelection" syncable="YES"/>
+        <relationship name="coinToCoinRates" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoinRate" inverseName="coins" inverseEntity="CoinRate" syncable="YES"/>
+        <relationship name="coinToFiatRates" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoinToFiatRate" inverseName="coin" inverseEntity="CoinToFiatRate" syncable="YES"/>
+        <relationship name="lightningTransRecords" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="LightningTransRecord" inverseName="coins" inverseEntity="LightningTransRecord" syncable="YES"/>
+        <relationship name="transRecords" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TransRecord" inverseName="coins" inverseEntity="TransRecord" syncable="YES"/>
+    </entity>
+    <entity name="CoinRate" representedClassName=".CoinRate" syncable="YES">
+        <attribute name="fromCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="rate" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="syncDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="toCoinID" attributeType="String" syncable="YES"/>
+        <relationship name="coins" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Coin" inverseName="coinToCoinRates" inverseEntity="Coin" syncable="YES"/>
+    </entity>
+    <entity name="CoinSelection" representedClassName="CoinSelection" syncable="YES">
+        <attribute name="coinIdentifier" attributeType="String" syncable="YES"/>
+        <attribute name="isSelected" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="walletEPKey" attributeType="String" syncable="YES"/>
+        <relationship name="coin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coin" inverseName="coinSelections" inverseEntity="Coin" syncable="YES"/>
+        <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wallet" inverseName="coinSelections" inverseEntity="Wallet" syncable="YES"/>
+    </entity>
+    <entity name="CoinToFiatRate" representedClassName=".CoinToFiatRate" syncable="YES">
+        <attribute name="fromCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="rate" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="syncDate" attributeType="Date" syncable="YES"/>
+        <attribute name="toFiatID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="coin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coin" inverseName="coinToFiatRates" inverseEntity="Coin" syncable="YES"/>
+        <relationship name="fiat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fiat" inverseName="coinToFiatRates" inverseEntity="Fiat" syncable="YES"/>
+    </entity>
+    <entity name="Fiat" representedClassName=".Fiat" syncable="YES">
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="symbol" attributeType="String" syncable="YES"/>
+        <relationship name="coinToFiatRates" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoinToFiatRate" inverseName="fiat" inverseEntity="CoinToFiatRate" syncable="YES"/>
+        <relationship name="fiatToFiatRates" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FiatToFiatRate" inverseName="fiats" inverseEntity="FiatToFiatRate" syncable="YES"/>
+        <relationship name="identity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Identity" inverseName="fiat" inverseEntity="Identity" syncable="YES"/>
+    </entity>
+    <entity name="FiatToFiatRate" representedClassName=".FiatToFiatRate" syncable="YES">
+        <attribute name="fromFiatID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="rate" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="syncDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="toFiatID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="fiats" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Fiat" inverseName="fiatToFiatRates" inverseEntity="Fiat" syncable="YES"/>
+    </entity>
+    <entity name="Identity" representedClassName=".Identity" syncable="YES">
+        <attribute name="ePwd" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="prefFiatID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="prefLangID" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pwdHint" attributeType="String" syncable="YES"/>
+        <relationship name="addressbookUnits" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AddressBookUnit" inverseName="identity" inverseEntity="AddressBookUnit" syncable="YES"/>
+        <relationship name="fiat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fiat" inverseName="identity" inverseEntity="Fiat" syncable="YES"/>
+        <relationship name="language" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="identity" inverseEntity="Language" syncable="YES"/>
+        <relationship name="wallets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Wallet" inverseName="identity" inverseEntity="Wallet" syncable="YES"/>
+    </entity>
+    <entity name="Language" representedClassName=".Language" syncable="YES">
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="identity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Identity" inverseName="language" inverseEntity="Identity" syncable="YES"/>
+    </entity>
+    <entity name="LightningTransRecord" representedClassName=".LightningTransRecord" syncable="YES">
+        <attribute name="block" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="confirmations" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="feeAmt" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="feeCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="feeRate" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fromAddress" attributeType="String" syncable="YES"/>
+        <attribute name="fromAmt" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fromCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="syncDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="toAddress" attributeType="String" syncable="YES"/>
+        <attribute name="toAmt" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="toCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="totalFee" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="txID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="coins" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Coin" inverseName="lightningTransRecords" inverseEntity="Coin" syncable="YES"/>
+    </entity>
+    <entity name="ServerSyncRecord" representedClassName=".ServerSyncRecord" syncable="YES">
+        <attribute name="syncDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="syncIdentityName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SubAddress" representedClassName=".SubAddress" syncable="YES">
+        <attribute name="mainAddress" attributeType="String" syncable="YES"/>
+        <attribute name="subAddress" attributeType="String" syncable="YES"/>
+        <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wallet" inverseName="subAddresses" inverseEntity="Wallet" syncable="YES"/>
+    </entity>
+    <entity name="TransRecord" representedClassName=".TransRecord" syncable="YES">
+        <attribute name="block" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="confirmations" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="feeAmt" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="feeCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="feeRate" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fromAddress" attributeType="String" syncable="YES"/>
+        <attribute name="fromAmt" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fromCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="syncDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="toAddress" attributeType="String" syncable="YES"/>
+        <attribute name="toAmt" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="toCoinID" attributeType="String" syncable="YES"/>
+        <attribute name="totalFee" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="txID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="coins" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Coin" inverseName="transRecords" inverseEntity="Coin" syncable="YES"/>
+    </entity>
+    <entity name="Wallet" representedClassName=".Wallet" syncable="YES">
+        <attribute name="address" attributeType="String" syncable="YES"/>
+        <attribute name="eMnemonic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="encryptedPKey" attributeType="String" syncable="YES"/>
+        <attribute name="ePwd" attributeType="String" syncable="YES"/>
+        <attribute name="identityID" attributeType="String" syncable="YES"/>
+        <attribute name="isFromSystem" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="pwdHint" attributeType="String" syncable="YES"/>
+        <attribute name="walletType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="assets" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Asset" inverseName="wallet" inverseEntity="Asset" syncable="YES"/>
+        <relationship name="coinSelections" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CoinSelection" inverseName="wallet" inverseEntity="CoinSelection" syncable="YES"/>
+        <relationship name="identity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Identity" inverseName="wallets" inverseEntity="Identity" syncable="YES"/>
+        <relationship name="subAddresses" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SubAddress" inverseName="wallet" inverseEntity="SubAddress" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AddressBookUnit" positionX="-405" positionY="200" width="128" height="148"/>
+        <element name="Asset" positionX="-227" positionY="765" width="128" height="118"/>
+        <element name="Coin" positionX="-405" positionY="944" width="128" height="285"/>
+        <element name="CoinRate" positionX="-38" positionY="963" width="128" height="118"/>
+        <element name="CoinSelection" positionX="-227" positionY="1145" width="128" height="118"/>
+        <element name="CoinToFiatRate" positionX="-38" positionY="774" width="128" height="133"/>
+        <element name="Fiat" positionX="-234" positionY="608" width="128" height="133"/>
+        <element name="FiatToFiatRate" positionX="-38" positionY="477" width="128" height="118"/>
+        <element name="Identity" positionX="-396" positionY="387" width="128" height="195"/>
+        <element name="Language" positionX="-227" positionY="479" width="128" height="88"/>
+        <element name="LightningTransRecord" positionX="-576" positionY="881" width="128" height="315"/>
+        <element name="ServerSyncRecord" positionX="-576" positionY="1251" width="128" height="75"/>
+        <element name="SubAddress" positionX="-576" positionY="774" width="128" height="88"/>
+        <element name="TransRecord" positionX="-576" positionY="405" width="128" height="313"/>
+        <element name="Wallet" positionX="-396" positionY="639" width="128" height="240"/>
+    </elements>
+</model>

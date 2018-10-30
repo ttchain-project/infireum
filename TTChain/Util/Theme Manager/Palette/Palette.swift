@@ -1,0 +1,99 @@
+//
+//  Palette.swift
+//  OfflineWallet
+//
+//  Created by Keith Lee on 2018/6/14.
+//  Copyright © 2018年 gib. All rights reserved.
+//
+
+import UIKit
+extension UIColor {
+    
+    @nonobjc class var owAzure: UIColor {
+        return UIColor(red: 16.0 / 255.0, green: 142.0 / 255.0, blue: 233.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owWarmGrey: UIColor {
+        return UIColor(white: 136.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owWhite: UIColor {
+        return UIColor(white: 1.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owBlack: UIColor {
+        return UIColor(white: 0.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owSilver: UIColor {
+        return UIColor(red: 199.0 / 255.0, green: 199.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owWhiteTwo: UIColor {
+        return UIColor(white: 240.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owPinkRed: UIColor {
+        return UIColor(red: 254.0 / 255.0, green: 14.0 / 255.0, blue: 95.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owCoolGreen: UIColor {
+        return UIColor(red: 56.0 / 255.0, green: 190.0 / 255.0, blue: 88.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owPumpkinOrange: UIColor {
+        return UIColor(red: 1.0, green: 134.0 / 255.0, blue: 3.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owSunflowerYellow: UIColor {
+        return UIColor(red: 1.0, green: 213.0 / 255.0, blue: 0.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owLiliac: UIColor {
+        return UIColor(red: 206.0 / 255.0, green: 136.0 / 255.0, blue: 1.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owAzureTwo: UIColor {
+        return UIColor(red: 0.0, green: 148.0 / 255.0, blue: 1.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owSicklyYellow: UIColor {
+        return UIColor(red: 212.0 / 255.0, green: 215.0 / 255.0, blue: 54.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owDarkSeaGreen: UIColor {
+        return UIColor(red: 22.0 / 255.0, green: 141.0 / 255.0, blue: 70.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owPaleGrey: UIColor {
+        return UIColor(red: 251.0 / 255.0, green: 252.0 / 255.0, blue: 253.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owBlack40: UIColor {
+        return UIColor(white: 0.0, alpha: 0.4)
+    }
+    
+    @nonobjc class var owBlack20: UIColor {
+        return UIColor(white: 0.0, alpha: 0.2)
+    }
+    
+    @nonobjc class var owMarineBlue: UIColor {
+        return UIColor(red: 0.0, green: 39.0 / 255.0, blue: 98.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owWaterBlue: UIColor {
+        return UIColor(red: 13.0 / 255.0, green: 121.0 / 255.0, blue: 198.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owWindowsBlue: UIColor {
+        return UIColor(red: 72.0 / 255.0, green: 148.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owDarkSlateBlue: UIColor {
+        return UIColor(red: 39.0 / 255.0, green: 56.0 / 255.0, blue: 109.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owCharcoalGrey: UIColor {
+        return UIColor(red: 67.0 / 255.0, green: 70.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
+    }
+}

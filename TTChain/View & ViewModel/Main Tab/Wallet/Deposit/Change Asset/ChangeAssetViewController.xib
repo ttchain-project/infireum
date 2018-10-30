@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeAssetViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelBtn" destination="jUx-fb-RX3" id="U2T-rW-4Hl"/>
+                <outlet property="tableView" destination="7o9-Z2-xkY" id="j28-SL-hBQ"/>
+                <outlet property="titleLabel" destination="cm6-fy-4NG" id="Dck-u2-RnN"/>
+                <outlet property="titleView" destination="kLR-IM-7WK" id="wdX-Pc-O4S"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLR-IM-7WK">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUx-fb-RX3">
+                            <rect key="frame" x="20" y="8" width="46" height="28"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cm6-fy-4NG">
+                            <rect key="frame" x="166" y="12" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="cm6-fy-4NG" firstAttribute="centerY" secondItem="kLR-IM-7WK" secondAttribute="centerY" id="306-Zy-IbD"/>
+                        <constraint firstAttribute="bottom" secondItem="jUx-fb-RX3" secondAttribute="bottom" constant="8" id="bKq-aL-6gV"/>
+                        <constraint firstItem="cm6-fy-4NG" firstAttribute="centerX" secondItem="kLR-IM-7WK" secondAttribute="centerX" id="gIc-4z-Aom"/>
+                        <constraint firstAttribute="height" constant="44" id="mAd-Jn-Uy4"/>
+                        <constraint firstItem="jUx-fb-RX3" firstAttribute="leading" secondItem="kLR-IM-7WK" secondAttribute="leading" constant="20" id="uP6-kt-UVH"/>
+                        <constraint firstItem="jUx-fb-RX3" firstAttribute="top" secondItem="kLR-IM-7WK" secondAttribute="top" constant="8" id="uiq-TS-b7Y"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7o9-Z2-xkY">
+                    <rect key="frame" x="0.0" y="52" width="375" height="615"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="7o9-Z2-xkY" firstAttribute="top" secondItem="kLR-IM-7WK" secondAttribute="bottom" constant="8" id="NDi-0s-xLf"/>
+                <constraint firstItem="kLR-IM-7WK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ogz-CN-HgO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kLR-IM-7WK" secondAttribute="trailing" id="RJH-pH-YeJ"/>
+                <constraint firstAttribute="bottom" secondItem="7o9-Z2-xkY" secondAttribute="bottom" id="e0q-12-1WI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7o9-Z2-xkY" secondAttribute="trailing" id="o8k-Fz-Jla"/>
+                <constraint firstItem="kLR-IM-7WK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rZh-fo-LBX"/>
+                <constraint firstItem="7o9-Z2-xkY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yre-x3-yIy"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

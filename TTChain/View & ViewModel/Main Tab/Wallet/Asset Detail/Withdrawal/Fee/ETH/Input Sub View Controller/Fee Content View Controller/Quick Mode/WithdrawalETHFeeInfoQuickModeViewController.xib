@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalETHFeeInfoQuickModeViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="gasPriceLabel" destination="aat-gF-KfM" id="IBx-Lb-dJa"/>
+                <outlet property="quickLabel" destination="4Fd-eA-qit" id="bZe-qr-ZpD"/>
+                <outlet property="slider" destination="boi-cW-xHf" id="btq-Pw-lcS"/>
+                <outlet property="slowLabel" destination="bMu-qr-z7D" id="Dj6-dG-TMD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="235"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j6z-qB-Lyo">
+                    <rect key="frame" x="30" y="30" width="250" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMu-qr-z7D">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="boi-cW-xHf">
+                            <rect key="frame" x="48" y="0.0" width="154" height="31"/>
+                        </slider>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fd-eA-qit">
+                            <rect key="frame" x="208" y="0.0" width="42" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aat-gF-KfM">
+                    <rect key="frame" x="30" y="90" width="250" height="45"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="j6z-qB-Lyo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="7R5-vb-yx4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="j6z-qB-Lyo" secondAttribute="trailing" constant="30" id="BDZ-rH-zcF"/>
+                <constraint firstItem="aat-gF-KfM" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="S9K-Ka-c1E"/>
+                <constraint firstItem="aat-gF-KfM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="ZDB-wU-SDd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aat-gF-KfM" secondAttribute="bottom" constant="100" id="dLd-E1-5rO"/>
+                <constraint firstItem="j6z-qB-Lyo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="jEK-L5-xfB"/>
+                <constraint firstItem="aat-gF-KfM" firstAttribute="top" secondItem="j6z-qB-Lyo" secondAttribute="bottom" constant="30" id="xP1-s4-pI5"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="56" y="-165.5"/>
+        </view>
+    </objects>
+</document>

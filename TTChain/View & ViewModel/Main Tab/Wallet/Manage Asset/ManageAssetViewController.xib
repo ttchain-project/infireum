@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManageAssetViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="headerLabel" destination="Uor-i8-iow" id="GRs-YJ-DFI"/>
+                <outlet property="tableView" destination="7Ut-Ia-9fs" id="cMN-ku-zsE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uor-i8-iow">
+                    <rect key="frame" x="20" y="84" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Ut-Ia-9fs">
+                    <rect key="frame" x="0.0" y="113" width="375" height="554"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Ut-Ia-9fs" secondAttribute="trailing" id="39a-0h-WDr"/>
+                <constraint firstItem="7Ut-Ia-9fs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BQS-NO-N4l"/>
+                <constraint firstItem="7Ut-Ia-9fs" firstAttribute="top" secondItem="Uor-i8-iow" secondAttribute="bottom" constant="8" id="IlJ-x0-ljF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Ut-Ia-9fs" secondAttribute="bottom" id="JZl-NJ-mrJ"/>
+                <constraint firstItem="Uor-i8-iow" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="pJ9-lk-CTj"/>
+                <constraint firstItem="Uor-i8-iow" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="pgB-XY-Qlg"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

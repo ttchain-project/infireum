@@ -1,0 +1,108 @@
+ //
+//  OWQRCodeParser.swift
+//  OfflineWallet
+//
+//  Created by Keith Lee on 2018/7/20.
+//  Copyright © 2018年 gib. All rights reserved.
+//
+
+import UIKit
+import RxSwift
+import SwiftyJSON
+
+/// OWQRCodeParser:
+/// Support system-defined qrCode content encode/decode logic
+class OWQRCodeEncoder {
+    enum EncodingSource {
+        case deposit(asset: Asset)
+    }
+    
+    func encodeContent(option: EncodingSource) -> String {
+        switch option {
+        case .deposit(asset: let asset):
+            let dictionary: [String : String] = [
+                "address" : asset.wallet!.address!,
+                "coinID" : asset.coinID!
+            ]
+            
+            let jsonString = dictionary.jsonString()!
+            return jsonString
+        }
+    }
+    
+    
+}
+
+
+class OWQRCodeDecoder {
+    var validator: OWStringValidator
+    
+    init(validator: OWStringValidator) {
+        self.validator = validator
+    }
+    
+    var currentValidatingTypes: [OWStringValidator.ValidationSourceType] {
+        return validator.sourceTypes
+    }
+    
+    func updateValidateTypes(_ types: [OWStringValidator.ValidationSourceType]) {
+        validator.sourceTypes = types
+    }
+    
+    typealias DecodingResult = OWStringValidator.ValidationResultType
+    func decodeContent(raw: String) -> Single<DecodingResult> {
+        var validateFlow: Single<OWStringValidator.ValidationResultType>
+        
+        if let data = raw.data(using: .utf8),
+            let json = try? JSON.init(data: data),
+            json.dictionary != nil {
+            if let address = json["address"].string {
+                
+                validateFlow = validator.validate(source: address)
+                
+                if let coinID = json["coinID"].string,
+                    let coin = Coin.getCoin(ofIdentifier: coinID) {
+                    validateFlow = validateFlow.map {
+                        result in
+                        switch result {
+                        case .address(let addr, chainType: let type, coin: _, amt: let amt):
+                            return .address(addr, chainType: type, coin: coin, amt: amt)
+                        default: return result
+                        }
+                    }
+                }
+                
+            }else {
+                validateFlow = validator.validate(source: raw)
+            }
+        }
+        else {
+            validateFlow = validator.validate(source: raw)
+        }
+        
+        return validateFlow
+    }
+    
+    func combineJSONsToSingleJSON(jsonString: [String]) -> [String:Any]? {
+        
+        if let data = jsonString[0].data(using: .utf8),
+            let json = try? JSON.init(data: data),
+            json.dictionary != nil {
+            var updatedJson = json
+            jsonString.dropFirst().forEach { jsonRaw in
+                if let jsonData = jsonRaw.data(using: .utf8),
+                    let jsonFromData = try? JSON.init(data: jsonData),
+                    jsonFromData.dictionary != nil {
+                    if let walletsArray = jsonFromData.dictionary?["content"]?["system"]["wallets"], walletsArray.count > 0 {
+                        var existingWallets = updatedJson.dictionary
+//                        existingWallets.append(walletsArray)
+                    }
+                }
+                
+            }
+            
+        }
+        
+        return [:]
+    }
+}

@@ -1,0 +1,13 @@
+The demo username/pwd can be used both in “创建身份”(create identity) and“恢复身份”(restore identity).
+They're just for identification and validation.
+
+You can also restore the identity (恢复身份) with mnemonic 
+"trip arrow ugly width item buffalo pen corn someone fatigue word defense" 
+
+It will be faster to get an identity as it don't need to go through the whole verification flow of account creation.
+
+For the “密码提示讯息” fields, just enter any words, it's just a password hint.
+
+The attached images explain how to setup the sign-in information of “恢复身份”(restore identity).
+
+Thanks.

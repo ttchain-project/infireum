@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1Ct-jH-mz1" customClass="IdentityQRCodeImportTableViewHeader" customModule="Hope_Seed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="68"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconListProfileNormal" translatesAutoresizingMaskIntoConstraints="NO" id="8Ja-wz-55c">
+                    <rect key="frame" x="20" y="26.5" width="15" height="15"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23V-bJ-I9s">
+                    <rect key="frame" x="47" y="24" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="23V-bJ-I9s" firstAttribute="centerY" secondItem="8Ja-wz-55c" secondAttribute="centerY" id="1xX-Sl-ulB"/>
+                <constraint firstItem="8Ja-wz-55c" firstAttribute="centerY" secondItem="pvn-4v-CcY" secondAttribute="centerY" id="ViO-cy-H3U"/>
+                <constraint firstItem="23V-bJ-I9s" firstAttribute="leading" secondItem="8Ja-wz-55c" secondAttribute="trailing" constant="12" id="Xll-2o-hQd"/>
+                <constraint firstItem="8Ja-wz-55c" firstAttribute="leading" secondItem="1Ct-jH-mz1" secondAttribute="leading" constant="20" id="lUT-O0-swG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="pvn-4v-CcY"/>
+            <connections>
+                <outlet property="icon" destination="8Ja-wz-55c" id="oiI-o2-UNA"/>
+                <outlet property="titleLabel" destination="23V-bJ-I9s" id="fKx-FW-QsP"/>
+            </connections>
+            <point key="canvasLocation" x="33" y="-246"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconListProfileNormal" width="15" height="15"/>
+    </resources>
+</document>

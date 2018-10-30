@@ -1,0 +1,48 @@
+/* 
+  Localizable.strings
+  OfflineWallet
+
+  Created by Keith Lee on 2018/8/22.
+  Copyright © 2018年 gib. All rights reserved.
+*/
+
+"g.ok" = "确定";
+"g.cancel" = "取消";
+"g.loading" = "载入中，请稍等";
+"g.close" = "关闭";
+"g.done" = "完成";
+"g.confirm" = "确认";
+"g.update" = "更新";
+"g.copy" = "复制";
+"g.edit" = "编辑";
+"g.next" = "下一步";
+"g.error.exit" = "是否确认要离开？";
+"g.error.network_issue" = "网路发生问题，请再试一次";
+"g.error.network_timeout" = "连线已逾时，请重新尝试";
+"g.error.emptyform" = "请输入";
+"g.error.network_unreachable" = "当前没有网路";
+"g.error.token_invalid" = "检查到无效的 Token";
+"g.error.api_reject" = "服务器拒绝请求";
+"g.error.token_expired" = "登入 Token 已过时";
+"g.error.app_disabled" = "维护中";
+"g.error.app_disabled_detail" = "App 目前正在维护";
+"g.error.invalid_version" = "版本过时";
+"g.error.empty_data" = "查无资料";
+"g.error.broadcast_fail" = "广播失败";
+
+"str_validate.error.common_space_prefix_or_suffix" = "%@首尾不得空白";
+"str_validate.error.common_length_invalid" = "%@长度需为 %@-%@ 字元";
+"str_validate.error.common_allow_alphanumeric_only" = "%@只允许使用英数字";
+"str_validate.error.mnemonic_12_words_at_least" = "助记词格式错误，必须包含 12 个以上单词";
+"str_validate.error.mnemonic_contain_uppercase" = "助记词格式错误，侦测到含有非小写的单词 %@";
+"str_validate.error.mnemonic_invalid_character" = "助记词格式错误，侦测到非英文字元的单词 %@，请确认是否正确输入，并且使用一个半形空白分开各个单词";
+"str_validate.error.confirm_pwd_diff_with_pwd" = "两次密码输入不同";
+"str_validate.field.identity_name" = "名称";
+"str_validate.field.mnemonic" = "助记词";
+"str_validate.field.pwd" = "密码";
+"str_validate.field.confirm_pwd" = "确认密码";
+"str_validate.field.wallet_name" = "钱包名称";
+
+"tab.wallet" = "钱包";
+"tab.trade" = "交易";
+"tab.mine" = "我的";

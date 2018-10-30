@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="68" id="KGk-i7-Jjw" customClass="ImportChainTypeChooseTableViewCell" customModule="Hope_Seed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="364" height="68"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="364" height="67.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconListBtcNormal" translatesAutoresizingMaskIntoConstraints="NO" id="CY5-6u-1HN">
+                        <rect key="frame" x="20" y="23" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="XgN-ZS-c0W"/>
+                            <constraint firstAttribute="width" constant="22" id="xKs-ZY-s2G"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rL-hr-SUd">
+                        <rect key="frame" x="18" y="66.5" width="328" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="hxz-SI-ijU"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byv-3U-n6u">
+                        <rect key="frame" x="62" y="16" width="42" height="37"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowNavGrey" translatesAutoresizingMaskIntoConstraints="NO" id="rag-x4-Vn1">
+                        <rect key="frame" x="341" y="27" width="8" height="15"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Byv-3U-n6u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="5PM-0J-tfi"/>
+                    <constraint firstItem="Byv-3U-n6u" firstAttribute="leading" secondItem="CY5-6u-1HN" secondAttribute="trailing" constant="20" id="Qq1-Ar-Uaz"/>
+                    <constraint firstAttribute="bottom" secondItem="7rL-hr-SUd" secondAttribute="bottom" id="SHh-Rj-Nh1"/>
+                    <constraint firstItem="CY5-6u-1HN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WsF-OK-nu2"/>
+                    <constraint firstItem="7rL-hr-SUd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="ePS-f1-iI5"/>
+                    <constraint firstAttribute="trailing" secondItem="7rL-hr-SUd" secondAttribute="trailing" constant="18" id="jZw-44-P6z"/>
+                    <constraint firstItem="Byv-3U-n6u" firstAttribute="centerY" secondItem="CY5-6u-1HN" secondAttribute="centerY" id="kAR-vG-tBb"/>
+                    <constraint firstItem="CY5-6u-1HN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="m83-2s-kLr"/>
+                    <constraint firstItem="rag-x4-Vn1" firstAttribute="centerY" secondItem="Byv-3U-n6u" secondAttribute="centerY" id="r2H-6P-mLo"/>
+                    <constraint firstAttribute="trailing" secondItem="rag-x4-Vn1" secondAttribute="trailing" constant="15" id="wr0-dz-M4r"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="icon" destination="CY5-6u-1HN" id="7Nw-7P-98U"/>
+                <outlet property="indicator" destination="rag-x4-Vn1" id="DwP-0W-nWc"/>
+                <outlet property="nameLabel" destination="Byv-3U-n6u" id="o1l-T7-L3U"/>
+                <outlet property="sepline" destination="7rL-hr-SUd" id="7XI-Ea-xcH"/>
+            </connections>
+            <point key="canvasLocation" x="12" y="66"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrowNavGrey" width="8" height="15"/>
+        <image name="iconListBtcNormal" width="22" height="22"/>
+    </resources>
+</document>

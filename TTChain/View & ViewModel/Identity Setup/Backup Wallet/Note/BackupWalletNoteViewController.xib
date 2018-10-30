@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BackupWalletNoteViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="mainNoteLabel" destination="6vY-tp-0TB" id="SfZ-gE-CGB"/>
+                <outlet property="nextStepBtn" destination="pYv-Cq-ZEn" id="GyN-eK-pj4"/>
+                <outlet property="subNoteLabel" destination="4Ra-jB-z23" id="Okq-0r-uGO"/>
+                <outlet property="titleLabel" destination="Vl5-Gt-nBV" id="b8F-vV-oes"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconHeaderSignWalletblackNormal" translatesAutoresizingMaskIntoConstraints="NO" id="n03-bi-mp9">
+                    <rect key="frame" x="137.5" y="84" width="45" height="40"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vl5-Gt-nBV">
+                    <rect key="frame" x="139" y="128" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vY-tp-0TB">
+                    <rect key="frame" x="20" y="199" width="280" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Ra-jB-z23">
+                    <rect key="frame" x="20" y="475" width="280" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYv-Cq-ZEn">
+                    <rect key="frame" x="0.0" y="526" width="320" height="42"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="nextStep:" destination="-1" eventType="touchUpInside" id="EDt-8D-5N2"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="6vY-tp-0TB" firstAttribute="top" secondItem="Vl5-Gt-nBV" secondAttribute="bottom" constant="50" id="38d-gW-oqa"/>
+                <constraint firstItem="pYv-Cq-ZEn" firstAttribute="top" secondItem="4Ra-jB-z23" secondAttribute="bottom" constant="30" id="61q-5T-4LD"/>
+                <constraint firstItem="4Ra-jB-z23" firstAttribute="leading" secondItem="6vY-tp-0TB" secondAttribute="leading" id="F5A-yw-Mi0"/>
+                <constraint firstItem="6vY-tp-0TB" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="GNb-Cd-Y47"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pYv-Cq-ZEn" secondAttribute="trailing" id="GYZ-e5-VQh"/>
+                <constraint firstItem="pYv-Cq-ZEn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Jjb-rL-TI0"/>
+                <constraint firstItem="n03-bi-mp9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="OAt-J8-vks"/>
+                <constraint firstItem="4Ra-jB-z23" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="PKO-Lc-fs7"/>
+                <constraint firstItem="n03-bi-mp9" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dUd-Oe-caB"/>
+                <constraint firstItem="Vl5-Gt-nBV" firstAttribute="centerX" secondItem="n03-bi-mp9" secondAttribute="centerX" id="izi-Rs-Jg9"/>
+                <constraint firstItem="4Ra-jB-z23" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="sa5-kk-CY5"/>
+                <constraint firstItem="pYv-Cq-ZEn" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="ulA-Gt-oJF"/>
+                <constraint firstItem="4Ra-jB-z23" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6vY-tp-0TB" secondAttribute="bottom" constant="30" id="wjW-dQ-ajV"/>
+                <constraint firstItem="Vl5-Gt-nBV" firstAttribute="top" secondItem="n03-bi-mp9" secondAttribute="bottom" constant="4" id="yeZ-MT-mZR"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconHeaderSignWalletblackNormal" width="45" height="40"/>
+    </resources>
+</document>

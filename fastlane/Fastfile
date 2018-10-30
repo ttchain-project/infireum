@@ -1,0 +1,244 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+desc "Update All Build Number"
+  lane :addBuild do
+    increment_build_number
+  end
+
+
+  desc "Match SIT Dev"
+  lane :match_sit_dev do
+    match(
+    type: "development", 
+    force: true,
+    force_for_new_devices: true,
+    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    app_identifier: "com.gib.OfflineWallet-SIT”,
+    team_id: "BKBWK8HFB8"
+    )
+  end
+
+
+
+  desc "Match SIT ADHOC"
+  lane :match_sit_adhoc do
+    match(
+    type: "adhoc", 
+    force: true,
+    force_for_new_devices: true,
+    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    app_identifier: "com.gib.OfflineWallet-SIT",
+    team_id: "BKBWK8HFB8"
+    )
+  end
+
+  desc "Build adhoc .ipa [SIT]"
+  lane :adhoc_sit do
+    match_sit_adhoc
+
+    gym(
+    scheme: "OfflineWallet_SIT",
+    export_method: "ad-hoc",
+    output_directory: "./IPA/SIT",
+    clean: true,
+    output_directory: "./build",
+#     archive_path: "./archives",
+    include_symbols: true,
+    include_bitcode: false,
+    export_options: {
+        compileBitcode: false,
+        uploadBitcode: false
+      }
+    )
+
+    hockey_sit
+  end
+
+  desc "upload adhoc .ipa [SIT] to hockey"
+  lane :hockey_sit do
+    hockey(
+      api_token: "f5683183878c4c8ba39bd6e87d546f77",
+      ipa: "./build/Hope\ Seed\ SIT.ipa",
+      dsym: "./build/Hope\ Seed\ SIT.app.dSYM.zip",
+      mandatory: "1",
+      timeout: 6000,
+      bypass_cdn: true
+    )
+  end
+
+  desc "Match UAT DEV"
+  lane :match_uat_dev do
+    match(
+    type: "development", 
+    force: true,
+    force_for_new_devices: true,
+    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    app_identifier: "com.gib.OfflineWallet-UAT",
+    team_id: "BKBWK8HFB8"
+    )
+  end
+
+  desc "Match UAT ADHOC"
+  lane :match_uat_adhoc do
+    match(
+    type: "adhoc", 
+    force: true,
+    force_for_new_devices: true,
+    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    app_identifier: "com.gib.OfflineWallet-UAT",
+    team_id: "BKBWK8HFB8"
+    )
+  end
+
+desc "Build adhoc .ipa [uat]"
+  lane :adhoc_uat do
+    match_uat_adhoc
+#    increment_build_number
+    gym(
+    scheme: "OfflineWallet_UAT",
+    export_method: "ad-hoc",
+    clean: true,
+    output_directory: "./build",
+#     archive_path: "./archives",
+    include_symbols: true,
+    include_bitcode: false,
+    export_options: {
+        compileBitcode: false,
+        uploadBitcode: false
+      }
+    )
+
+    hockey_uat
+  end
+
+  desc "upload adhoc .ipa [UAT] to hockey"
+  lane :hockey_uat do
+    hockey(
+      api_token: "729e3372a4184f39999090ae8f1b24da",
+      ipa: "./build/Hope\ Seed\ UAT.ipa",
+      dsym: "./build/Hope\ Seed\ UAT.app.dSYM.zip",
+      mandatory: "1",
+      timeout: 6000,
+      bypass_cdn: true
+    )
+  end
+
+  desc "Match PRD DEV"
+  lane :match_prd_dev do
+    match(
+    type: "development", 
+    force: true,
+    force_for_new_devices: true,
+    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    app_identifier: "com.gib.OfflineWallet",
+    team_id: "BKBWK8HFB8"
+    )
+  end
+
+  desc "Match PRD ADHOC"
+  lane :match_prd_adhoc do
+    match(
+    type: "adhoc", 
+    force: true,
+    force_for_new_devices: true,
+    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    app_identifier: "com.gib.OfflineWallet",
+    team_id: "BKBWK8HFB8"
+    )
+  end
+
+desc "Build adhoc .ipa [PRD]"
+  lane :adhoc_prd do
+    match_prd_adhoc
+#    increment_build_number
+    gym(
+    scheme: "OfflineWallet",
+    export_method: "ad-hoc",
+    clean: true,
+    output_directory: "./build",
+#     archive_path: "./archives",
+    include_symbols: true,
+    include_bitcode: false,
+    export_options: {
+        compileBitcode: false,
+        uploadBitcode: false
+      }
+    )
+
+#    hockey_prd
+  end
+
+  desc "upload adhoc .ipa [PRD] to hockey"
+  lane :hockey_prd do
+    hockey(
+      api_token: "02ef2f67648548efb6e8bf29e9ac500e",
+      ipa: "./build/Hope\ Seed.ipa",
+      dsym: "./build/Hope\ Seed.app.dSYM.zip",
+      mandatory: "0",
+      timeout: 6000,
+      bypass_cdn: true
+    )
+  end
+
+  lane :release do
+    match(
+    type: "appstore", 
+    force_for_new_devices: true,
+    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    app_identifier: "com.gib.OfflineWallet",
+    team_id: "BKBWK8HFB8"
+    )
+    # increment_build_number
+    gym(
+    scheme: "OfflineWallet",
+    export_method: "app-store",
+    output_directory: "./build",
+    output_name: "Hope\ Seed_AppStore",
+    include_symbols: true,
+    include_bitcode: true
+    )
+
+    deliver
+  end
+
+  desc "Create test(SIT/UAT) adhoc"
+  lane :adhoc_sit_uat do
+    adhoc_uat
+    adhoc_sit
+  end
+
+  desc "Create all adhoc"
+  lane :adhoc_all do
+    adhoc_prd
+    adhoc_uat
+    adhoc_sit
+  end
+
+  desc "Create all matches"
+  lane :match_all do
+    match_sit_dev
+    match_uat_dev
+    match_prd_dev
+    match_sit_adhoc
+    match_uat_adhoc
+    match_prd_adhoc
+  end
+
+end

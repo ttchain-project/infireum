@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IdentityCreateViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="confirmTextField" destination="o1P-xX-szw" id="wv8-BL-mny"/>
+                <outlet property="createBtn" destination="bmF-m4-tmQ" id="FjS-fB-scF"/>
+                <outlet property="nameTextField" destination="g6A-M4-gRV" id="rbs-EG-U0D"/>
+                <outlet property="pwdHintTextField" destination="h9X-1q-sPD" id="UFh-BD-hD9"/>
+                <outlet property="pwdTextField" destination="fZ5-cL-6v8" id="BWA-mp-7nQ"/>
+                <outlet property="titleLabel" destination="n2U-mE-zGb" id="bzY-e7-aYY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconHeaderSignWalletblackNormal" translatesAutoresizingMaskIntoConstraints="NO" id="1P0-y3-aPk">
+                    <rect key="frame" x="164.5" y="76" width="45" height="40"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2U-mE-zGb">
+                    <rect key="frame" x="166" y="120" width="42" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmF-m4-tmQ">
+                    <rect key="frame" x="0.0" y="625" width="375" height="42"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
+                    <state key="normal" title="Button"/>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7uk-HM-ven">
+                    <rect key="frame" x="20" y="160.5" width="335" height="188"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g6A-M4-gRV" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="EyZ-Lb-oxF"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZ5-cL-6v8" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="48" width="335" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="mmy-Nv-qKc"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o1P-xX-szw" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="96" width="335" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="4xw-nC-ekt"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9X-1q-sPD" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="144" width="335" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Bs5-gu-gaH"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7uk-HM-ven" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="22D-8d-Oqc"/>
+                <constraint firstItem="bmF-m4-tmQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2Ee-bX-M18"/>
+                <constraint firstItem="n2U-mE-zGb" firstAttribute="centerX" secondItem="1P0-y3-aPk" secondAttribute="centerX" id="B8g-NG-umC"/>
+                <constraint firstItem="7uk-HM-ven" firstAttribute="top" secondItem="n2U-mE-zGb" secondAttribute="bottom" constant="20" id="Crl-YN-PAT"/>
+                <constraint firstItem="bmF-m4-tmQ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="CuI-3a-D1x"/>
+                <constraint firstItem="bmF-m4-tmQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="KVn-hY-A8f"/>
+                <constraint firstItem="7uk-HM-ven" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aHC-sk-FuV"/>
+                <constraint firstItem="bmF-m4-tmQ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="csz-k7-8iz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bmF-m4-tmQ" secondAttribute="trailing" id="qsf-e2-iMt"/>
+                <constraint firstItem="1P0-y3-aPk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="sUO-BS-sw9"/>
+                <constraint firstItem="n2U-mE-zGb" firstAttribute="top" secondItem="1P0-y3-aPk" secondAttribute="bottom" constant="4" id="tWl-fW-rok"/>
+                <constraint firstItem="1P0-y3-aPk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="ypN-Xn-MBj"/>
+                <constraint firstItem="bmF-m4-tmQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zIb-05-uL5"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconHeaderSignWalletblackNormal" width="45" height="40"/>
+    </resources>
+</document>

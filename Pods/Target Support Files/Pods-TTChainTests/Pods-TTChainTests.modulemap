@@ -1,0 +1,6 @@
+framework module Pods_TTChainTests {
+  umbrella header "Pods-TTChainTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

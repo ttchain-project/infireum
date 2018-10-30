@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "bgInfoDefault.png",
+      "scale" : "1x",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "bgInfoDefault@2x.png",
+      "scale" : "2x",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "bgInfoDefault@3x.png",
+      "scale" : "3x",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

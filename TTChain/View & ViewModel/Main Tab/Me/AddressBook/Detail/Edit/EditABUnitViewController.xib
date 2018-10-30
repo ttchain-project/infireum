@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditABUnitViewController" customModule="OfflineWallet" customModuleProvider="target">
+            <connections>
+                <outlet property="deleteBase" destination="12w-Na-vO9" id="1ji-vR-A6e"/>
+                <outlet property="nameTextField" destination="Ih4-Y4-xTe" id="h35-nZ-7bS"/>
+                <outlet property="noteTextField" destination="sGP-PE-HvR" id="N0C-iT-Z3K"/>
+                <outlet property="updateBase" destination="9k0-Ao-qIr" id="wfN-Rr-G44"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tZ0-nj-EvS">
+                    <rect key="frame" x="12" y="84" width="351" height="54"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ih4-Y4-xTe" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="351" height="17"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="123" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sGP-PE-HvR" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="37" width="351" height="17"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9k0-Ao-qIr">
+                    <rect key="frame" x="12" y="158" width="351" height="100"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12w-Na-vO9">
+                    <rect key="frame" x="12" y="278" width="351" height="51"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="12w-Na-vO9" firstAttribute="leading" secondItem="9k0-Ao-qIr" secondAttribute="leading" id="0ae-hA-pnL"/>
+                <constraint firstItem="tZ0-nj-EvS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="1ki-lX-2Hl"/>
+                <constraint firstItem="9k0-Ao-qIr" firstAttribute="top" secondItem="tZ0-nj-EvS" secondAttribute="bottom" constant="20" id="BOb-xm-QdT"/>
+                <constraint firstItem="9k0-Ao-qIr" firstAttribute="trailing" secondItem="tZ0-nj-EvS" secondAttribute="trailing" id="BsD-R4-9yi"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tZ0-nj-EvS" secondAttribute="trailing" constant="12" id="FW3-JO-8er"/>
+                <constraint firstItem="tZ0-nj-EvS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="Kvn-z1-h9m"/>
+                <constraint firstItem="9k0-Ao-qIr" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.15" id="aGr-Z9-ccc"/>
+                <constraint firstItem="12w-Na-vO9" firstAttribute="trailing" secondItem="9k0-Ao-qIr" secondAttribute="trailing" id="fS4-Kv-DzJ"/>
+                <constraint firstItem="9k0-Ao-qIr" firstAttribute="leading" secondItem="tZ0-nj-EvS" secondAttribute="leading" id="luw-au-nHA"/>
+                <constraint firstItem="12w-Na-vO9" firstAttribute="height" secondItem="9k0-Ao-qIr" secondAttribute="height" multiplier="0.5" id="nBA-uv-ppw"/>
+                <constraint firstItem="12w-Na-vO9" firstAttribute="top" secondItem="9k0-Ao-qIr" secondAttribute="bottom" constant="20" id="yM2-kH-qhT"/>
+                <constraint firstItem="9k0-Ao-qIr" firstAttribute="top" secondItem="tZ0-nj-EvS" secondAttribute="bottom" constant="20" id="zRG-b2-kn7"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>
