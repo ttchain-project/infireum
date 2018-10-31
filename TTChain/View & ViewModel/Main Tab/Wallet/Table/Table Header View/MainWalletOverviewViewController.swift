@@ -37,7 +37,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
         didSet {
             walletNameLabel.text = wallet.name!
             walletAddressLabel.text = wallet.address
-            walletColorImg.image = self.img(ofMainCoinID: wallet.walletMainCoinID!)
+//            walletColorImg.image = self.img(ofMainCoinID: wallet.walletMainCoinID!)
             manageAssetBtn.isEnabled = (wallet.owChainType != .btc)
         }
     }
@@ -152,36 +152,37 @@ class MainWalletOverviewViewController: KLModuleViewController {
     }
     
     private func setupUI() {
-        let renderShadow: (UIButton) -> Void = {
-            btn in
-            btn.shadowColor = UIColor.init(white: 203.0/256.0, alpha: 0.5)
-            btn.shadowOffset = CGSize.init(width: 2, height: 2)
-            btn.shadowRadius = 0
-            btn.shadowOpacity = 1
-            btn.backgroundColor = .white
-        }
+//        let renderShadow: (UIButton) -> Void = {
+//            btn in
+//            btn.shadowColor = UIColor.init(white: 203.0/256.0, alpha: 0.5)
+//            btn.shadowOffset = CGSize.init(width: 2, height: 2)
+//            btn.shadowRadius = 0
+//            btn.shadowOpacity = 1
+//            btn.backgroundColor = .white
+//        }
         
-        renderShadow(depositBtn)
-        renderShadow(manageAssetBtn)
+//        renderShadow(depositBtn)
+//        renderShadow(manageAssetBtn)
         
-        walletCopyBtn.setImageForAllStates(#imageLiteral(resourceName: "btnListCopyNormal"))
-        walletCopyBtn.setTitle(nil, for: .normal)
+        walletCopyBtn.setImageForAllStates(#imageLiteral(resourceName: "copyAddressButtonPinkBG"))
+//        walletCopyBtn.setTitle(nil, for: .normal)
 //        walletColorImg.clipsToBounds = false
-        walletColorImg.addShadow(ofColor: UIColor.init(red: 31,
-                                                       green: 49,
-                                                       blue: 74)!
-                                                 .withAlphaComponent(0.12),
-                                 radius: 2,
-                                 offset: CGSize.init(width: 0, height: 2),
-                                 opacity: 1)
+//        walletColorImg.addShadow(ofColor: UIColor.init(red: 31,
+//                                                       green: 49,
+//                                                       blue: 74)!
+//                                                 .withAlphaComponent(0.12),
+//                                 radius: 2,
+//                                 offset: CGSize.init(width: 0, height: 2),
+//                                 opacity: 1)
         
-        walletBase.addShadow(ofColor: UIColor.init(red: 31,
-                                                   green: 49,
-                                                   blue: 74)!
-                                              .withAlphaComponent(0.12),
-                             radius: 2,
-                             offset: CGSize.init(width: 0, height: 2),
-                             opacity: 1)
+//        walletBase.addShadow(ofColor: UIColor.init(red: 31,
+//                                                   green: 49,
+//                                                   blue: 74)!
+//                                              .withAlphaComponent(0.12),
+//                             radius: 2,
+//                             offset: CGSize.init(width: 0, height: 2),
+//                             opacity: 1)
+        self.view.backgroundColor = UIColor.white
     }
     
     private func bindWalletSwitchEvent() {
@@ -217,40 +218,40 @@ class MainWalletOverviewViewController: KLModuleViewController {
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        depositBtn.setTitleForAllStates(dls.walletOverview_btn_deposit)
-        manageAssetBtn.setTitleForAllStates(dls.walletOverview_btn_manageAsset)
+//        depositBtn.setTitleForAllStates(dls.walletOverview_btn_deposit)
+//        manageAssetBtn.setTitleForAllStates(dls.walletOverview_btn_manageAsset)
         
-        switchWalletBtn.setTitleForAllStates(dls.walletOverview_btn_switchWallet)
+//        switchWalletBtn.setTitleForAllStates(dls.walletOverview_btn_switchWallet)
     }
     
     override func renderTheme(_ theme: Theme) {
-        view.backgroundColor = theme.palette.bgView_sub
-        mainBG.backgroundColor = theme.palette.bgView_main
+//        view.backgroundColor = thesme.palette.bgView_sub
+//        mainBG.backgroundColor = theme.palette.bgView_main
         
-        walletNameLabel.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 16.3))
-        walletAddressLabel.set(textColor: theme.palette.label_main_2, font: .owRegular(size: 12))
-        totalFiatValueLabel.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 21.7))
+//        walletNameLabel.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 16.3))
+//        walletAddressLabel.set(textColor: theme.palette.label_main_2, font: .owRegular(size: 12))
+//        totalFiatValueLabel.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 21.7))
         
-        walletBase.set(borderInfo: (color: theme.palette.bgView_border, width: 1))
-        walletCopyBtn.set(color: theme.palette.label_main_2)
+//        walletBase.set(borderInfo: (color: theme.palette.bgView_border, width: 1))
+//        walletCopyBtn.set(color: theme.palette.label_main_2)
         
-        depositBtn.set(
-            color: theme.palette.btn_borderFill_enable_text,
-            font: UIFont.owRegular(size: 12.7),
-            borderInfo: (color: theme.palette.btn_borderFill_border_2nd, width: 1)
-        )
+//        depositBtn.set(
+//            color: theme.palette.btn_borderFill_enable_text,
+//            font: UIFont.owRegular(size: 12.7),
+//            borderInfo: (color: theme.palette.btn_borderFill_border_2nd, width: 1)
+//        )
         
-        manageAssetBtn.set(
-            color: theme.palette.btn_borderFill_enable_text,
-            font: UIFont.owRegular(size: 12.7),
-            borderInfo: (color: theme.palette.btn_borderFill_border_2nd, width: 1)
-        )
+//        manageAssetBtn.set(
+//            color: theme.palette.btn_borderFill_enable_text,
+//            font: UIFont.owRegular(size: 12.7),
+//            borderInfo: (color: theme.palette.btn_borderFill_border_2nd, width: 1)
+//        )
         
-        switchWalletBtn.set(
-            color: theme.palette.specific(color: .owWhite),
-            font: UIFont.owRegular(size: 12.7),
-            borderInfo: (color: theme.palette.specific(color: .owWhite), width: 1)
-        )
+//        switchWalletBtn.set(
+//            color: theme.palette.specific(color: .owWhite),
+//            font: UIFont.owRegular(size: 12.7),
+//            borderInfo: (color: theme.palette.specific(color: .owWhite), width: 1)
+//        )
     }
     
     private func copyAddress() {
