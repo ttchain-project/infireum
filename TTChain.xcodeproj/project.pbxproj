@@ -60,6 +60,10 @@
 		553ACEE521649CB7002C59AB /* AgreementMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */; };
 		5569803C2188566F00346757 /* TTChain_PRD-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5569803A2188566F00346757 /* TTChain_PRD-Info.plist */; };
 		5569803D2188566F00346757 /* TTChain_SIT-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5569803B2188566F00346757 /* TTChain_SIT-Info.plist */; };
+		556980532189A91B00346757 /* TransRecord+Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7305E2186E3C0003AE47E /* TransRecord+Comments.swift */; };
+		556980542189A91C00346757 /* TransRecord+Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7305E2186E3C0003AE47E /* TransRecord+Comments.swift */; };
+		556980552189A94100346757 /* MainWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E730592186DC4A003AE47E /* MainWalletViewController.swift */; };
+		556980562189A94100346757 /* MainWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E730592186DC4A003AE47E /* MainWalletViewController.swift */; };
 		55E7305B2186DC4B003AE47E /* MainWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E730592186DC4A003AE47E /* MainWalletViewController.swift */; };
 		55E7305C2186DC4B003AE47E /* MainWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E7305A2186DC4B003AE47E /* MainWalletViewController.xib */; };
 		55E7305F2186E3C1003AE47E /* TransRecord+Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7305E2186E3C0003AE47E /* TransRecord+Comments.swift */; };
@@ -5596,6 +5600,7 @@
 				64D8264F20E0D8D600C8FC63 /* ChangeAssetViewModel.swift in Sources */,
 				64A1179020D5372C00797C2C /* ChainType.swift in Sources */,
 				64F07DD620D241A000A60C5C /* UIViewController+MZFormSheetVC.swift in Sources */,
+				556980562189A94100346757 /* MainWalletViewController.swift in Sources */,
 				55E730742186F33B003AE47E /* WalletOptionsViewController.swift in Sources */,
 				6485005C20DA488000107473 /* OWMnemonicViewController.swift in Sources */,
 				64769B34212416C800C4AB9E /* CICTxFetcher.swift in Sources */,
@@ -5684,6 +5689,7 @@
 				640D891520EF6A6D0010D986 /* TransRecordListViewModel.swift in Sources */,
 				5539A4A621676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
 				64D8268920E3939400C8FC63 /* AssetSort.swift in Sources */,
+				556980542189A91C00346757 /* TransRecord+Comments.swift in Sources */,
 				64C9D4B521044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
 				6414C144214A1C5F00E45F32 /* IdentityQRCodeContentWalletUnit.swift in Sources */,
 				6470D62920F1124300EB0780 /* WithdrawalFeeInfoProvider.swift in Sources */,
@@ -5938,6 +5944,7 @@
 				64769B35212416C800C4AB9E /* CICTxFetcher.swift in Sources */,
 				64A1178C20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
 				64F07E1920D241A000A60C5C /* ServerAPIErrorHandler.swift in Sources */,
+				556980552189A94100346757 /* MainWalletViewController.swift in Sources */,
 				55E730752186F33B003AE47E /* WalletOptionsViewController.swift in Sources */,
 				64C9D4D321044E5C000B0774 /* WithdrawalCICFeeInfoQuickModeViewModel.swift in Sources */,
 				649732D1213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataClass.swift in Sources */,
@@ -6026,6 +6033,7 @@
 				5539A4A721676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
 				640D891B20EF6DD00010D986 /* TransRecordListTabViewController.swift in Sources */,
 				64C9D4B621044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
+				556980532189A91B00346757 /* TransRecord+Comments.swift in Sources */,
 				6414C145214A1C5F00E45F32 /* IdentityQRCodeContentWalletUnit.swift in Sources */,
 				64F07E8420D36B8E00A60C5C /* KLRxViewModel.swift in Sources */,
 				6EEA2F1B2164B22D005FE393 /* QAViewController.swift in Sources */,
