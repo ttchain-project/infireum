@@ -46,6 +46,13 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     @IBOutlet weak var airdropAddressLabel: UILabel!
     @IBOutlet weak var airdropValueLabel: UILabel!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var btcButton: UIButton!
+    @IBOutlet weak var ethButton: UIButton!
+    @IBOutlet weak var rscButton: UIButton!
+    @IBOutlet weak var airdropButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let navBar = self.navigationController?.navigationBar else {
@@ -69,7 +76,76 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         self.viewModel.ethWallet.subscribe(onNext: { (wallet) in
             self.ethAddressLabel.text = wallet?.address
         }).disposed(by: bag)
+        
+        let totalBTC = self.viewModel.totalFiatValuesBTC.flatMapLatest { $0 }.share()
+        let totalETH = self.viewModel.totalFiatValuesETH.flatMapLatest { $0 }.share()
+        let fiat = viewModel.fiat
+        
+        Observable.combineLatest(totalBTC, fiat)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] t, f in
+                self.btcValueLabel.text = self.updateValue(for: f, total: t)
+            })
+            .disposed(by: bag)
+
+        Observable.combineLatest(totalETH, fiat)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] t, f in
+                self.ethValueLabel.text = self.updateValue(for: f, total: t)
+            })
+            .disposed(by: bag)
+        
+        Observable.combineLatest(totalBTC, totalETH)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] btc, eth in
+                let totalBTCValue = btc ?? 0
+                let totalETHValue = eth ?? 0
+                let total = totalBTCValue + totalETHValue
+                self.USDAmountLabel.text = total.asString(digits: 2)
+            })
+            .disposed(by: bag)
+        
+        self.btcAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
+            self?.handleAddressCopied(address: self?.viewModel.btcWallet.value?.address)
+        }).disposed(by: bag)
+        self.ethAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
+            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
+        }).disposed(by: bag)
+        
+        btcButton.rx.tap.bind {
+            self.toWalletDetail()
+        }.disposed(by: bag)
     }
 
+    func updateValue(for fiat:Fiat?, total:Decimal?) -> String{
+        var value = ""
+        if let f = fiat {
+            let symbol = f.fullSymbol
+            
+            if let t = total {
+                value = symbol + t.asString(digits: 2).disguiseIfNeeded()
+            }else {
+                value = symbol + "--"
+            }
+        }
+        return value
+    }
     
+    private func handleAddressCopied(address: String?) {
+        guard let address = address else {
+            return
+        }
+        UIPasteboard.general.string = address
+        EZToast.present(on: self,
+                        content: LM.dls.g_toast_addr_copied)
+    }
+    
+    private func toWalletDetail() {
+        WalletFinder.markWallet(self.viewModel.btcWallet.value!)
+        let vc = MainWalletViewController.instance()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
