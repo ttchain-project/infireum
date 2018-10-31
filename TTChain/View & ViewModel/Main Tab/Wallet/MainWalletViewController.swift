@@ -21,8 +21,11 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     var bag: DisposeBag = DisposeBag.init()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
-//    fileprivate lazy var walletChooseTextField: UITextField = {
+    //    fileprivate lazy var walletChooseTextField: UITextField = {
 //        let frame = CGRect.init(origin: .zero, size: CGSize.init(width: 60, height: 44))
 //        let textField = UITextField.init(frame: frame)
 //        textField.rightView = UIImageView.init(image: #imageLiteral(resourceName: "icDown"))
@@ -44,19 +47,21 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     
     fileprivate let refreshControl = WalletRefreshControl.init()
     
-    fileprivate lazy var transRecordBtn: UIButton = {
-        let text = LM.dls.walletOverview_btn_txRecord
-        return changeLeftBarButton(target: self, selector: #selector(toTransRecord), title: text)
-    }()
+//    fileprivate lazy var transRecordBtn: UIButton = {
+//        let text = LM.dls.walletOverview_btn_txRecord
+//        return changeLeftBarButton(target: self, selector: #selector(toTransRecord), title: text)
+//    }()
     
-    fileprivate lazy var qrCodeScannerBtn: UIButton = {
-        return createRightBarButton(target: self, selector: #selector(toQRCodeScan), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), shouldClear: true)
-    }()
+//    fileprivate lazy var qrCodeScannerBtn: UIButton = {
+//        return createRightBarButton(target: self, selector: #selector(toQRCodeScan), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), shouldClear: true)
+//    }()
     
     
     
     func config(constructor: Void) {
         view.layoutIfNeeded()
+        
+
         let refreshStart = refreshControl.rx.controlEvent(.valueChanged).asDriver().throttle(2.5, latest: true)
         
         viewModel = ViewModel.init(
@@ -107,14 +112,9 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         })
         .disposed(by: bag)
         
-        
-        let titleImg = UIImageView.init(image: #imageLiteral(resourceName: "imgNavHopeseedlogo"))
-        titleImg.contentMode = .scaleAspectFit
-        titleImg.frame = CGRect.init(origin: .zero,
-                                     size: CGSize.init(width: 150, height: 30))
-        
-        navigationItem.titleView = titleImg
-        
+        self.backButton.rx.tap.bind {
+            self.navigationController?.popViewController(animated: true)
+            }.disposed(by: bag)        
         configTableView()
         bindWalletOverviewUpdate()
         bindAssetUpdate()
@@ -123,15 +123,29 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         startMonitorNetworkStatusIfNeeded()
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
+
+       
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
+        if let navBar = self.navigationController?.navigationBar {
+            
+            navBar.setBackgroundImage(UIImage(), for: .default)
+            navBar.shadowImage = UIImage()
+            navBar.isTranslucent = true
+            navBar.isHidden = true
+            
+        }
         // Do any additional setup after loading the view.
-        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+
+    }
     
     
     private func configTableView() {
@@ -217,13 +231,13 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-        let text = lang.dls.walletOverview_btn_txRecord
-        transRecordBtn.setTitleForAllStates(text)
+//        let text = lang.dls.walletOverview_btn_txRecord
+//        transRecordBtn.setTitleForAllStates(text)
     }
     
     override func renderTheme(_ theme: Theme) {
-        transRecordBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
-        qrCodeScannerBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
+//        transRecordBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
+//        qrCodeScannerBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
     }
     
     private func startChangeWallet() {
