@@ -128,6 +128,7 @@ final class TransRecordListViewController: KLModuleViewController, KLVMVC {
                 self.tableView.reloadData()
             })
             .disposed(by: bag)
+        
     }
 
     override func viewDidLoad() {

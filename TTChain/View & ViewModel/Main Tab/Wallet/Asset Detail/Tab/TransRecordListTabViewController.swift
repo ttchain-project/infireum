@@ -128,22 +128,23 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
             )
         )
         
-        let withdrawalVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-                asset: asset, records: transRecords, type: .withdrawal
-            )
-        )
+//        let withdrawalVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
+//                asset: asset, records: transRecords, type: .withdrawal
+//            )
+//        )
+//
+//        let depositVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
+//                asset: asset, records: transRecords, type: .deposit
+//            )
+//        )
+//
+//        let failedVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
+//                asset: asset, records: transRecords, type: .failed
+//            )
+//        )
         
-        let depositVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-                asset: asset, records: transRecords, type: .deposit
-            )
-        )
-        
-        let failedVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-                asset: asset, records: transRecords, type: .failed
-            )
-        )
-        
-        return [totalVC, withdrawalVC, depositVC, failedVC]
+        return [totalVC]
+//        , withdrawalVC, depositVC, failedVC]
     }
     
     override func viewDidLoad() {

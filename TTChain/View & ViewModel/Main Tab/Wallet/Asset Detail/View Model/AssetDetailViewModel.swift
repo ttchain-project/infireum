@@ -13,8 +13,8 @@ import RxCocoa
 class AssetDetailViewModel: KLRxViewModel {
     struct Input {
         let asset: Asset
-        let depositInput: Driver<Void>
-        let withdrawalInput: Driver<Void>
+//        let depositInput: Driver<Void>
+//        let withdrawalInput: Driver<Void>
         let loadMoreInput: Driver<Void>
         let refreshInput: Driver<Void>
     }
@@ -107,14 +107,14 @@ class AssetDetailViewModel: KLRxViewModel {
     
 
     //MARK: - Public
-    public var startDeposit: Observable<Asset> {
-        return input.depositInput.asObservable().map { [unowned self] in self.input.asset }
-    }
-    
-    public var startWithdrawal: Observable<Asset> {
-        return input.withdrawalInput.asObservable().map { [unowned self] in self.input.asset }
-    }
-    
+//    public var startDeposit: Observable<Asset> {
+//        return input.depositInput.asObservable().map { [unowned self] in self.input.asset }
+//    }
+//    
+//    public var startWithdrawal: Observable<Asset> {
+//        return input.withdrawalInput.asObservable().map { [unowned self] in self.input.asset }
+//    }
+//    
     public var startLoading: Observable<Void> {
         return _startLoading.asObservable()
     }

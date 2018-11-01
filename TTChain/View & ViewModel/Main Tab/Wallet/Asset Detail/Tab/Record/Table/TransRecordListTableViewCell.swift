@@ -10,13 +10,13 @@ import UIKit
 
 class TransRecordListTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var icon: UIImageView!
+//    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var addrLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amtLabel: UILabel!
-    @IBOutlet weak var statusBtn: UIButton!
+//    @IBOutlet weak var statusBtn: UIButton!
     @IBOutlet weak var sepline: UIView!
-    @IBOutlet weak var commentsLabel: UILabel!
+//    @IBOutlet weak var commentsLabel: UILabel!
     
     //Will send the blockexplorer url.
     var onTapStatusBtn: ((URL) -> Void)?
@@ -28,8 +28,8 @@ class TransRecordListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
-        statusBtn.addTarget(self, action: #selector(statusBtnTapped), for: .touchUpInside)
-        amtLabel.font = .owRegular(size: 14)
+//        statusBtn.addTarget(self, action: #selector(statusBtnTapped), for: .touchUpInside)
+        amtLabel.font = .owRegular(size: 18)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,39 +45,39 @@ class TransRecordListTableViewCell: UITableViewCell {
         let dls = LM.dls
         let palette = TM.palette
         
-        addrLabel.set(textColor: palette.label_sub, font: .owRegular(size: 14))
+        addrLabel.set(textColor: palette.label_sub, font: .owRegular(size: 18))
         dateLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 12))
-        commentsLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 12))
+//        commentsLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 12))
         amtLabel.textColor = transRecord.getRecordColor(ofAddress: transRecord.fromAddress!)
         
-        let statusDesc: String
-        let underlineStyle: NSUnderlineStyle
-        let statusHidden: Bool
+//        let statusDesc: String
+//        let underlineStyle: NSUnderlineStyle
+//        let statusHidden: Bool
         
-        switch transRecord.owStatus {
-        case .failed:
-            statusDesc = dls.assetDetail_label_tx_failed
-            underlineStyle = .styleSingle
-            statusHidden = false
-        case .success:
-            statusDesc = dls.assetDetail_label_tx_go_check
-            underlineStyle = .styleSingle
-            //Has no explorer of cic, so hide when has cic success records
-            statusHidden = (chainType == .cic)
-        }
+//        switch transRecord.owStatus {
+//        case .failed:
+//            statusDesc = dls.assetDetail_label_tx_failed
+//            underlineStyle = .styleSingle
+//            statusHidden = false
+//        case .success:
+//            statusDesc = dls.assetDetail_label_tx_go_check
+//            underlineStyle = .styleSingle
+//            //Has no explorer of cic, so hide when has cic success records
+//            statusHidden = (chainType == .cic)
+//        }
         
-        statusBtn.set(
-            attrText: NSAttributedString.init(
-                string: statusDesc,
-                attributes: [
-                    NSAttributedStringKey.foregroundColor : transRecord.getRecordColor(ofAddress: transRecord.fromAddress!),
-                    NSAttributedStringKey.font : UIFont.owRegular(size: 10),
-                    NSAttributedStringKey.underlineStyle : underlineStyle.rawValue
-                ]
-            )
-        )
+//        statusBtn.set(
+//            attrText: NSAttributedString.init(
+//                string: statusDesc,
+//                attributes: [
+//                    NSAttributedStringKey.foregroundColor : transRecord.getRecordColor(ofAddress: transRecord.fromAddress!),
+//                    NSAttributedStringKey.font : UIFont.owRegular(size: 10),
+//                    NSAttributedStringKey.underlineStyle : underlineStyle.rawValue
+//                ]
+//            )
+//        )
         
-        statusBtn.isHidden = statusHidden
+//        statusBtn.isHidden = statusHidden
         
         sepline.backgroundColor = palette.sepline
         
@@ -89,8 +89,10 @@ class TransRecordListTableViewCell: UITableViewCell {
             switch type {
             case .deposit:
                 addrLabel.text = transRecord.fromAddress
+                self.amtLabel.textColor = UIColor.green
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
+                self.amtLabel.textColor = UIColor.red
             }
         }
         
@@ -98,7 +100,7 @@ class TransRecordListTableViewCell: UITableViewCell {
             transRecord.date! as Date, withFormat: "MM/dd/yyyy HH:mm:ss"
         )
         
-        commentsLabel.text = transRecord.remarkComment
+//        commentsLabel.text = transRecord.remarkComment
         
         var amtStr: String
         if let amt = (transRecord.toAmt as Decimal?) {
@@ -135,7 +137,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         
         amtLabel.text = amtStr
         
-        icon.image = icon(of: address, in: transRecord)
+//        icon.image = icon(of: address, in: transRecord)
         
         if let txid = transRecord.txID {
             switch chainType {
