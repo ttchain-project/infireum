@@ -139,7 +139,7 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var btn_borderFill_border_2nd: UIColor = .owWhiteTwo
     
-    var label_main_1: UIColor = .owBlack
+    var label_main_1: UIColor = .darkPink
     
     var label_main_2: UIColor = .owWhite
     
@@ -151,11 +151,11 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var input_placeholder: UIColor = .owSilver
     
-    var sepline: UIColor = UIColor.owSilver.withAlphaComponent(0.5)
+    var sepline: UIColor = UIColor.cupid
     
     var bgView_main: UIColor = .owWhite
     
-    var bgView_sub: UIColor = .owWhiteTwo
+    var bgView_sub: UIColor = .lavenderBlush
     
     var bgView_mask: UIColor = .owBlack40
     
