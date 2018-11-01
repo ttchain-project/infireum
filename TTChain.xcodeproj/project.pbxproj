@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		289DCA79124052F4FF5FFF95 /* Pods_TTChainTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D90461CD25AEC5F8E54E9C /* Pods_TTChainTests.framework */; };
+		5528D8BB218AFA130050D0B9 /* AJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528D8B9218AFA130050D0B9 /* AJNavigationController.swift */; };
+		5528D8BC218AFA130050D0B9 /* AJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528D8B9218AFA130050D0B9 /* AJNavigationController.swift */; };
+		5528D8BD218AFA130050D0B9 /* AJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528D8B9218AFA130050D0B9 /* AJNavigationController.swift */; };
+		5528D8BE218AFA130050D0B9 /* AJNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5528D8BA218AFA130050D0B9 /* AJNavigationController.xib */; };
+		5528D8BF218AFA130050D0B9 /* AJNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5528D8BA218AFA130050D0B9 /* AJNavigationController.xib */; };
+		5528D8C0218AFA130050D0B9 /* AJNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5528D8BA218AFA130050D0B9 /* AJNavigationController.xib */; };
 		5539A46F21676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */; };
 		5539A47021676F0300A59ACC /* IdentityQRCodeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */; };
 		5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */; };
@@ -1340,6 +1346,8 @@
 		2EAB463251BF3ECC0FB9A931 /* Pods-OfflineWallet_UAT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OfflineWallet_UAT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OfflineWallet_UAT/Pods-OfflineWallet_UAT.debug.xcconfig"; sourceTree = "<group>"; };
 		48CDCF6C71604E4260BAC74A /* Pods-OfflineWalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OfflineWalletTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OfflineWalletTests/Pods-OfflineWalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		54C0071BFAC32BE4862C30B4 /* Pods-TTChain_UAT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChain_UAT.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTChain_UAT/Pods-TTChain_UAT.release.xcconfig"; sourceTree = "<group>"; };
+		5528D8B9218AFA130050D0B9 /* AJNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJNavigationController.swift; sourceTree = "<group>"; };
+		5528D8BA218AFA130050D0B9 /* AJNavigationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AJNavigationController.xib; sourceTree = "<group>"; };
 		5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeEncryptionFlow.swift; sourceTree = "<group>"; };
 		5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeContentViewController.swift; sourceTree = "<group>"; };
 		5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeContentViewController.xib; sourceTree = "<group>"; };
@@ -4194,6 +4202,8 @@
 			isa = PBXGroup;
 			children = (
 				64F07E3520D2538C00A60C5C /* KLModuleViewController.swift */,
+				5528D8B9218AFA130050D0B9 /* AJNavigationController.swift */,
+				5528D8BA218AFA130050D0B9 /* AJNavigationController.xib */,
 			);
 			path = "View Controller Modulairization";
 			sourceTree = "<group>";
@@ -4494,6 +4504,7 @@
 				64F07E3320D24DDD00A60C5C /* MainViewController.xib in Resources */,
 				6424B6AF20F5F7B800AEBCAD /* TransferRecordsListViewController.xib in Resources */,
 				64F07E7720D36AFE00A60C5C /* IdentitySetupViewController.xib in Resources */,
+				5528D8C0218AFA130050D0B9 /* AJNavigationController.xib in Resources */,
 				64772557212D1643005E75FE /* Localizable.strings in Resources */,
 				649E484920E7D96000B217AD /* ChangeWalletTableViewCell.xib in Resources */,
 				640D890D20EF5FA10010D986 /* TransRecordListTableViewCell.xib in Resources */,
@@ -4598,6 +4609,7 @@
 			files = (
 				64B98ED520F98E9B00C4EB11 /* LightningTransactionViewController.xib in Resources */,
 				6424B64020F4E46B00AEBCAD /* TransferRecordInfoBarCollectionViewCell.xib in Resources */,
+				5528D8BE218AFA130050D0B9 /* AJNavigationController.xib in Resources */,
 				64D8263720DFABB000C8FC63 /* DepositViewController.xib in Resources */,
 				64D8264A20E0D8C400C8FC63 /* ChangeAssetViewController.xib in Resources */,
 				64F07D1320D0E83200A60C5C /* LaunchScreen.storyboard in Resources */,
@@ -4704,6 +4716,7 @@
 			files = (
 				64B98ED620F98E9B00C4EB11 /* LightningTransactionViewController.xib in Resources */,
 				6424B64120F4E46B00AEBCAD /* TransferRecordInfoBarCollectionViewCell.xib in Resources */,
+				5528D8BF218AFA130050D0B9 /* AJNavigationController.xib in Resources */,
 				64D8263820DFABB000C8FC63 /* DepositViewController.xib in Resources */,
 				64D8264B20E0D8C400C8FC63 /* ChangeAssetViewController.xib in Resources */,
 				64F07D2620D0E8FA00A60C5C /* LaunchScreen.storyboard in Resources */,
@@ -5444,6 +5457,7 @@
 				64813AC520DCE8F100CAA4D8 /* FiatManager.swift in Sources */,
 				640D88C920EDBAAA0010D986 /* ImportWalletViaPrivateKeyViewModel.swift in Sources */,
 				64F07DF020D241A000A60C5C /* UILabel+Gradient.swift in Sources */,
+				5528D8BD218AFA130050D0B9 /* AJNavigationController.swift in Sources */,
 				6446E23D20FCE3F700EC1E2E /* ChangePrefFiatViewController.swift in Sources */,
 				640D88E420EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
 				6470D63B20F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,
@@ -5795,6 +5809,7 @@
 				643200B420FAE22E00B11334 /* LightningTradeConfirmViewModel.swift in Sources */,
 				64B2773220D8AE0B004FF75B /* OWQRCodeViewController.swift in Sources */,
 				645D4E88211344150052D0E1 /* TxBlockCache.swift in Sources */,
+				5528D8BB218AFA130050D0B9 /* AJNavigationController.swift in Sources */,
 				64F07DF720D241A000A60C5C /* UIAlertController+EasyGen.swift in Sources */,
 				64F07DE520D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
 				640D88BF20EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
@@ -6139,6 +6154,7 @@
 				649E483320E7CED900B217AD /* ChangeWalletViewController.swift in Sources */,
 				645D4E89211344150052D0E1 /* TxBlockCache.swift in Sources */,
 				64F07DE620D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
+				5528D8BC218AFA130050D0B9 /* AJNavigationController.swift in Sources */,
 				649E489320ECAC4900B217AD /* PwdHintViewController.swift in Sources */,
 				64813AE220DE241500CAA4D8 /* MainTabBarViewController.swift in Sources */,
 				6446E23C20FCE3F700EC1E2E /* ChangePrefFiatViewController.swift in Sources */,
