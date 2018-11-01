@@ -114,7 +114,8 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         
         self.backButton.rx.tap.bind {
             self.navigationController?.popViewController(animated: true)
-            }.disposed(by: bag)        
+        }.disposed(by: bag)
+        
         configTableView()
         bindWalletOverviewUpdate()
         bindAssetUpdate()
@@ -157,8 +158,6 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             let sup = view.superview!
             view.edges == sup.edges
         }
-        
-        
         tableView.tableHeaderView = base
         
         tableView.addSubview(refreshControl)
@@ -238,25 +237,29 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     override func renderTheme(_ theme: Theme) {
 //        transRecordBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
 //        qrCodeScannerBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
+        tableView.backgroundColor = theme.palette.bgView_sub
+
     }
     
     private func startChangeWallet() {
-        let vc = ChangeWalletViewController.instance(from: ChangeWalletViewController.Constructor(assetSupportLimit: nil)
-        )
-        vc.onWalletSelect
-            .observeOn(MainScheduler.instance)
-            .debug("Select Wallet: Prepare dismissing")
-            .subscribe(
-                onNext: {
-                    [unowned self] wallet in
-                    vc.dismiss(animated: true, completion: {
-                        self.viewModel.changeWallet(wallet)
-                    })
-                }
-            )
-            .disposed(by: bag)
+//        let vc = ChangeWalletViewController.instance(from: ChangeWalletViewController.Constructor(assetSupportLimit: nil)
+//        )
+//        vc.onWalletSelect
+//            .observeOn(MainScheduler.instance)
+//            .debug("Select Wallet: Prepare dismissing")
+//            .subscribe(
+//                onNext: {
+//                    [unowned self] wallet in
+//                    vc.dismiss(animated: true, completion: {
+//                        self.viewModel.changeWallet(wallet)
+//                    })
+//                }
+//            )
+//            .disposed(by: bag)
+//
+//        present(vc, animated: true, completion: nil)
         
-        present(vc, animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func startDeposit(wallet: Wallet) {
@@ -288,11 +291,14 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     private func handleAssetSelect(_ asset: Asset, ofWallet wallet: Wallet) {
-        let vc = AssetDetailViewController.navInstance(
-            from: AssetDetailViewController.Config(asset: asset)
-        )
+//        let vc = AssetDetailViewController.navInstance(
+//            from: AssetDetailViewController.Config(asset: asset)
+//        )
         
-        present(vc, animated: true, completion: nil)
+        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
+        
+        self.navigationController?.pushViewController(assetVC, animated: true)
+//        present(vc, animated: true, completion: nil)
     }
     
     @objc private func toTransRecord() {
