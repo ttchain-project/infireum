@@ -24,27 +24,32 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     typealias ViewModel = DepositViewModel
     var viewModel: DepositViewModel!
     
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var headerView: UIView!
-    fileprivate lazy var gradient: CAGradientLayer = {
-        let layer = CAGradientLayer.init()
-        
-        headerView.layer.insertSublayer(layer, at: 0)
-        return layer
-    }()
+    @IBOutlet weak var noteLabel: UILabel!
+    @IBOutlet weak var walletImageView: UIImageView!
     
-    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var shareQRCodeButton: UIButton!
+    @IBOutlet weak var qrCodeBorderImageVew: UIImageView!
+    //    @IBOutlet weak var contentView: UIView!
+//    @IBOutlet weak var headerView: UIView!
+//    fileprivate lazy var gradient: CAGradientLayer = {
+//        let layer = CAGradientLayer.init()
+//
+//        headerView.layer.insertSublayer(layer, at: 0)
+//        return layer
+//    }()
+    
+//    @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var walletAddressLabel: UILabel!
     @IBOutlet weak var walletAddressCopyBtn: UIButton!
     @IBOutlet weak var qrCodeImgView: UIImageView!
     
     /// Use to control visibility of change asset btn and sepline
-    @IBOutlet weak var qrCodeToBottom: NSLayoutConstraint!
-    @IBOutlet weak var qrCodeToSepline: NSLayoutConstraint!
+//    @IBOutlet weak var qrCodeToBottom: NSLayoutConstraint!
+//    @IBOutlet weak var qrCodeToSepline: NSLayoutConstraint!
     
-    @IBOutlet weak var qrCodeTitleLabel: UILabel!
+//    @IBOutlet weak var qrCodeTitleLabel: UILabel!
     
-    @IBOutlet weak var sepline: UIView!
+//    @IBOutlet weak var sepline: UIView!
     @IBOutlet weak var changeAssetBtn: UIButton!
     
     fileprivate var isSelectingAsset: Bool = false
@@ -112,25 +117,33 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
         
         title = wallet.mainCoin?.chainName
         
-        walletNameLabel.text = wallet.name
+        switch wallet.owChainType {
+        case .btc:
+            self.walletImageView.image = #imageLiteral(resourceName: "BTCSmallIcon")
+        case .eth:
+            self.walletImageView.image = #imageLiteral(resourceName: "ETHSmallIcon")
+        default:
+            self.walletImageView.image = #imageLiteral(resourceName: "airDropSmallIcon")
+        }
+//        walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
-        walletAddressCopyBtn.setImage(#imageLiteral(resourceName: "btnListCopyNormal"), for: .normal)
-        walletAddressCopyBtn.setTitle(nil, for: .normal)
+//        walletAddressCopyBtn.setImage(#imageLiteral(resourceName: "btnListCopyNormal"), for: .normal)
+//        walletAddressCopyBtn.setTitle(nil, for: .normal)
         
-        contentView.cornerRadius = 15
+//        contentView.cornerRadius = 15
         
         let theme = TM.instance.theme.value
-        renderGradient(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme)
-        qrCodeTitleLabel.set(
-            textColor: mainColor(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme),
-            font: .owMedium(size: 18)
-        )
+//        renderGradient(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme)
+//        qrCodeTitleLabel.set(
+//            textColor: mainColor(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme),
+//            font: .owMedium(size: 18)
+//        )
         
-        changeAssetBtn.set(
-            color: mainColor(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme),
-            font: UIFont.owMedium(size: 18),
-            image: #imageLiteral(resourceName: "btnChangeAssetsNormal")
-        )
+//        changeAssetBtn.set(
+//            color: mainColor(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme),
+//            font: UIFont.owMedium(size: 18),
+//            image: #imageLiteral(resourceName: "btnChangeAssetsNormal")
+//        )
         
         walletAddressCopyBtn.rx.tap
             .asDriver()
@@ -140,17 +153,24 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
                 self.copyAddress(address: wallet.address!)
             })
             .disposed(by: bag)
-        
+        shareQRCodeButton.rx.tap
+            .asDriver()
+            .throttle(1)
+            .drive(onNext: {
+                [unowned self] in
+                self.startSharing()
+            })
+            .disposed(by: bag)
     }
     
     private func bindViewModel() {
         viewModel.qrCode.bind(to: qrCodeImgView.rx.image).disposed(by: bag)
-        viewModel.selectedAsset
-            .map {
-                LM.dls.deposit_label_depositAddress($0.coin!.inAppName!)
-            }
-            .bind(to: qrCodeTitleLabel.rx.text)
-            .disposed(by: bag)
+//        viewModel.selectedAsset
+//            .map {
+//                LM.dls.deposit_label_depositAddress($0.coin!.inAppName!)
+//            }
+//            .bind(to: qrCodeTitleLabel.rx.text)
+//            .disposed(by: bag)
     }
     
     private func bindChangeAssetDisplay() {
@@ -180,13 +200,13 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     }
     
     private func bindLayer() {
-        headerView.rx.observe(CGRect.self, "bounds").filter { $0 != nil }.map { $0! }
-            .subscribe(onNext: {
-                [unowned self]
-                bs in
-                self.gradient.frame = bs
-            })
-            .disposed(by: bag)
+//        headerView.rx.observe(CGRect.self, "bounds").filter { $0 != nil }.map { $0! }
+//            .subscribe(onNext: {
+//                [unowned self]
+//                bs in
+//                self.gradient.frame = bs
+//            })
+//            .disposed(by: bag)
     }
     
     override func viewWillLayoutSubviews() {
@@ -195,39 +215,39 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        changeAssetBtn.setTitleForAllStates(dls.deposit_btn_changeAsset)
+//        changeAssetBtn.setTitleForAllStates(dls.deposit_btn_changeAsset)
     }
     
     override func renderTheme(_ theme: Theme) {
         renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bg_clear)
         renderNavTitle(color: theme.palette.nav_item_2, font: .owMedium(size: 18))
         
-        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavWhite"), title: nil)
-        createRightBarButton(target: self, selector: #selector(startSharing), image: #imageLiteral(resourceName: "btnNavShareNormal"), title: nil, toColor: theme.palette.nav_item_2, shouldClear: true)
+        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+        createRightBarButton(target: self, selector: #selector(settingsButton), image: #imageLiteral(resourceName: "settings"), title: nil, toColor: theme.palette.nav_item_2, shouldClear: true)
         
-        view.backgroundColor = theme.palette.specific(color: .owMarineBlue)
-        walletAddressCopyBtn.tintColor = theme.palette.label_main_2
+//        view.backgroundColor = theme.palette.specific(color: .owMarineBlue)
+//        walletAddressCopyBtn.tintColor = theme.palette.label_main_2
         
-        walletNameLabel.set(
-            textColor: theme.palette.label_main_2,
-            font: .owMedium(size: 16.3)
-        )
+//        walletNameLabel.set(
+//            textColor: theme.palette.label_main_2,
+//            font: .owMedium(size: 16.3)
+//        )
         
         walletAddressLabel.set(
-            textColor: theme.palette.label_main_2,
-            font: .owRegular(size: 10)
+            textColor: theme.palette.label_main_1,
+            font: .owRegular(size: 14)
         )
         
-        sepline.backgroundColor = theme.palette.sepline
-        contentView.backgroundColor = theme.palette.bgView_main
+//        sepline.backgroundColor = theme.palette.sepline
+//        contentView.backgroundColor = theme.palette.bgView_main
         
         if let vm = viewModel {
             let mainCoinID = vm.input.wallet.walletMainCoinID!
             renderGradient(ofMainCoinID: mainCoinID, inTheme: theme)
-            qrCodeTitleLabel.set(
-                textColor: mainColor(ofMainCoinID: mainCoinID, inTheme: theme),
-                font: .owMedium(size: 18)
-            )
+//            qrCodeTitleLabel.set(
+//                textColor: mainColor(ofMainCoinID: mainCoinID, inTheme: theme),
+//                font: .owMedium(size: 18)
+//            )
             changeAssetBtn.set(
                 textColor: mainColor(ofMainCoinID: mainCoinID, inTheme: theme),
                 font: UIFont.owMedium(size: 18)
@@ -273,13 +293,16 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
         view.makeToast(LM.dls.g_toast_addr_copied)
     }
     
-    @objc private func startSharing() {
+    private func startSharing() {
         let img = screenshot()
         let activityVC = UIActivityViewController.init(activityItems: [img], applicationActivities: nil)
-        
+
         present(activityVC, animated: true, completion: nil)
     }
     
+    @objc private func settingsButton() {
+        
+    }
     
     //MARK: - Helper
     private func mainColor(ofMainCoinID mainCoinID: String, inTheme theme: Theme) -> UIColor {
@@ -301,9 +324,9 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     }
     
     private func renderGradient(ofMainCoinID mainCoinID: String, inTheme theme: Theme) {
-        gradient.startPoint = CGPoint.init(x: 1, y: 0.5)
-        gradient.endPoint = CGPoint.init(x: 0, y: 0.5)
-        gradient.colors = gradientColors(ofMainCoinID: mainCoinID, inTheme: theme)
+//        gradient.startPoint = CGPoint.init(x: 1, y: 0.5)
+//        gradient.endPoint = CGPoint.init(x: 0, y: 0.5)
+//        gradient.colors = gradientColors(ofMainCoinID: mainCoinID, inTheme: theme)
     }
     
     private func gradientColors(ofMainCoinID mainCoinID: String, inTheme theme: Theme) -> [CGColor] {
@@ -341,19 +364,19 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     
     private func switchLayoutOnAssetChangeable(_ changeable: Bool) {
         if !changeable {
-            sepline.removeSubviews()
-            changeAssetBtn.removeFromSuperview()
-            qrCodeToBottom.isActive = true
-            qrCodeToSepline.isActive = false
-        }else {
-            qrCodeToBottom.isActive = false
-            qrCodeToSepline.isActive = true
+//            sepline.removeSubviews()
+//            changeAssetBtn.removeFromSuperview()
+//            qrCodeToBottom.isActive = true
+//            qrCodeToSepline.isActive = false
+//        }else {
+//            qrCodeToBottom.isActive = false
+//            qrCodeToSepline.isActive = true
         }
     }
     
     private func screenshot() -> UIImage {
-        UIGraphicsBeginImageContext(contentView.size)
-        contentView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        UIGraphicsBeginImageContext(qrCodeBorderImageVew.size)
+        qrCodeBorderImageVew.layer.render(in: UIGraphicsGetCurrentContext()!)
         let img = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         

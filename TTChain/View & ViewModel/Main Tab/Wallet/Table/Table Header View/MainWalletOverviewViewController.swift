@@ -228,9 +228,9 @@ class MainWalletOverviewViewController: KLModuleViewController {
 //        view.backgroundColor = thesme.palette.bgView_sub
 //        mainBG.backgroundColor = theme.palette.bgView_main
         
-//        walletNameLabel.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 16.3))
-//        walletAddressLabel.set(textColor: theme.palette.label_main_2, font: .owRegular(size: 12))
-//        totalFiatValueLabel.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 21.7))
+        walletNameLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 16.3))
+        walletAddressLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 12))
+        totalFiatValueLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 21.7))
         
 //        walletBase.set(borderInfo: (color: theme.palette.bgView_border, width: 1))
 //        walletCopyBtn.set(color: theme.palette.label_main_2)

@@ -34,6 +34,7 @@ class MainWalletAssetTableViewCell: UITableViewCell, Rx {
         assetAmtLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 16.3))
         assetFiatValueLabel.set(textColor: palette.label_sub, font: .owRegular(size: 10.9))
         sepline.backgroundColor = palette.sepline
+        self.backgroundColor = palette.bgView_sub
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -116,8 +116,11 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
         
         btcButton.rx.tap.bind {
-            self.toWalletDetail()
+            self.toWalletDetail(withWallet: self.viewModel.btcWallet.value!)
         }.disposed(by: bag)
+        ethButton.rx.tap.bind {
+            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!)
+        }
     }
 
     func updateValue(for fiat:Fiat?, total:Decimal?) -> String{
@@ -143,8 +146,8 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
                         content: LM.dls.g_toast_addr_copied)
     }
     
-    private func toWalletDetail() {
-        WalletFinder.markWallet(self.viewModel.btcWallet.value!)
+    private func toWalletDetail(withWallet wallet: Wallet) {
+        WalletFinder.markWallet(wallet)
         let vc = MainWalletViewController.instance()
         self.navigationController?.pushViewController(vc, animated: true)
     }

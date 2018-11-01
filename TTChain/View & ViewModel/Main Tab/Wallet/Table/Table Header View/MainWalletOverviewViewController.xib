@@ -32,7 +32,7 @@
             <subviews>
                 <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wyu-gD-242">
                     <rect key="frame" x="0.0" y="35" width="414" height="178"/>
-                    <color key="backgroundColor" red="1" green="0.92849844694137573" blue="0.96517688035964966" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="1" green="0.92941176470588238" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmh-xg-R4P">
                     <rect key="frame" x="58" y="43" width="298" height="150"/>
