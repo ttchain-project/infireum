@@ -96,4 +96,15 @@ extension UIColor {
     @nonobjc class var owCharcoalGrey: UIColor {
         return UIColor(red: 67.0 / 255.0, green: 70.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var darkPink: UIColor {
+        return UIColor(red: 245.0 / 255.0, green: 64.0 / 255.0, blue: 194.0 / 255.0, alpha: 1.0)
+    }
+    @nonobjc class var cupid: UIColor {
+        return UIColor(red: 245.0 / 255.0, green: 162.0 / 255.0, blue: 197.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var lavenderBlush: UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 237.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
+    }
 }
