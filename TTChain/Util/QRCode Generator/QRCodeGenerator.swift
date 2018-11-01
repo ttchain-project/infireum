@@ -20,8 +20,8 @@ class QRCodeGenerator {
             
             filter.setValue(data, forKey: "inputMessage")
             colorFilter.setValue(filter.outputImage, forKey: "inputImage")
-            colorFilter.setValue(CIColor(red: 0.08, green: 0.55, blue: 0.27), forKey: "inputColor0") // Foreground
-            colorFilter.setValue(CIColor(red: 0.98, green: 0.98, blue: 0.98), forKey: "inputColor1") // background
+            colorFilter.setValue(CIColor(red: 0, green: 0, blue: 0), forKey: "inputColor0") // Foreground
+            colorFilter.setValue(CIColor(red: 1, green: 1, blue: 1), forKey: "inputColor1") // background
             if let output = colorFilter.outputImage {
                 return output
             }
