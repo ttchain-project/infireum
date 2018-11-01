@@ -38,6 +38,12 @@ class KLModuleViewController: UIViewController,
         // Dispose of any resources that can be recreated.
     }
     
+    func hideDefaultNavBar() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.view.backgroundColor = .clear
+    }
+    
     //MARK: - Network Reachability Responder
     /// Optional network responder, if has value it will auto subscribe to reflect network status change.
     var networkResponder: NetworkStatusReponder? {
@@ -95,6 +101,7 @@ class KLModuleViewController: UIViewController,
     }
     
     
+    
     //MARK: - Must Override
 
     func renderLang(_ lang: Lang) {
@@ -108,4 +115,32 @@ class KLModuleViewController: UIViewController,
     func handleNetworkStatusChange(_ status: NetworkStatus) {
         warning("Please override \(#function) to define the network respond logic of the vc")
     }
+}
+
+extension UINavigationController {
+    
+//    func setupNavBar() {
+//        navigationBar.isTranslucent = true
+//        navigationBar.barStyle = .blackTranslucent
+//        
+//        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "navTitleImage"))
+//        logoImageView.contentMode = .scaleAspectFill
+//        logoImageView.clipsToBounds = true
+//        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+//
+////        logoImageView.frame = (navigationController?.navigationBar.frame)!
+//        view.insertSubview(logoImageView, belowSubview: navigationBar)
+//        
+//        navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationBar.shadowImage = UIImage()
+//        view.backgroundColor = .clear
+//        NSLayoutConstraint.activate([
+//            logoImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
+//            logoImageView.rightAnchor.constraint(equalTo: view.rightAnchor),
+//            logoImageView.topAnchor.constraint(equalTo: view.topAnchor),
+//            logoImageView.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor)
+//            ])
+//        //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navTitleImage"),
+//        //                                                                    for: .default)
+//    }
 }
