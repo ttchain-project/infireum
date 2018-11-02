@@ -66,7 +66,7 @@ final class AddressBookViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
         changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
         changeNavShadowVisibility(true)
-        createBtn.set(color: palette.application_main)
+        createBtn.set(color: palette.btn_bgFill_enable_bg)
         
         view.backgroundColor = palette.bgView_sub
         noDataLabel.set(textColor: palette.label_sub, font: .owRegular(size: 11))
