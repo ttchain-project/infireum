@@ -107,4 +107,11 @@ extension UIColor {
     @nonobjc class var lavenderBlush: UIColor {
         return UIColor(red: 255.0 / 255.0, green: 237.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
     }
+    @nonobjc class var owWewak: UIColor {
+        return UIColor(red: 244.0 / 255.0, green: 151.0 / 255.0, blue: 152.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var owSunsetOrange: UIColor {
+        return UIColor(red: 252.0 / 255.0, green: 77.0 / 255.0, blue: 80.0 / 255.0, alpha: 1.0)
+    }
 }
