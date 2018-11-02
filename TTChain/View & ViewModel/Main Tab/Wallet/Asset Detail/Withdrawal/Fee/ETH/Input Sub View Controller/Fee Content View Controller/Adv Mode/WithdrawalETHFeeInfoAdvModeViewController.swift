@@ -51,9 +51,10 @@ final class WithdrawalETHFeeInfoAdvModeViewController: KLModuleViewController, K
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        gasPriceTextField.set(textColor: palette.input_text, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
-        gasTextField.set(textColor: palette.input_text, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
-        gasPriceLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
+        view.backgroundColor = palette.bgView_sub
+        gasPriceTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
+        gasTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
+        gasPriceLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
         gasPriceSepline.backgroundColor = palette.sepline
         gasSepline.backgroundColor = palette.sepline
     }

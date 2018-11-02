@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalRemarksViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
                 <outlet property="noteTextField" destination="06D-AJ-J9N" id="jyZ-q3-F3B"/>
+                <outlet property="separatorLine" destination="7Mh-0M-dbe" id="Qsz-jy-mmt"/>
                 <outlet property="titleLabel" destination="5Dm-Q7-Vnl" id="1ai-qc-GbQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

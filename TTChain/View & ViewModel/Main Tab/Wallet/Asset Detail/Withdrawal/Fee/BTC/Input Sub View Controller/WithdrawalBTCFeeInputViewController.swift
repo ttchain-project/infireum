@@ -106,7 +106,7 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
             .subscribe(onNext: {
                 [unowned self]
                 isDisplayed in
-                let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
+                let img = isDisplayed ? #imageLiteral(resourceName: "arrowButtonDownPinkSolid") : #imageLiteral(resourceName: "arrowButtonPinkSolid")
                 self.feeBtn.set(image: img, title: nil, titlePosition: .left, additionalSpacing: 8, state: .normal)
             })
             .disposed(by: bag)
@@ -129,12 +129,12 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        headerBase.backgroundColor = palette.bgView_main
-        infoBase.backgroundColor = palette.bgView_main
-        feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
-        feeBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 12))
+        headerBase.backgroundColor = palette.bgView_sub
+        infoBase.backgroundColor = palette.bgView_sub
+        feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
+        feeBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 14))
         let isDisplayed = !infoBase.isHidden
-        let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
+        let img = isDisplayed ? #imageLiteral(resourceName: "arrowButtonDownPinkSolid") : #imageLiteral(resourceName: "arrowButtonPinkSolid")
         self.feeBtn.set(image: img,
                         title: nil,
                         titlePosition: .left,

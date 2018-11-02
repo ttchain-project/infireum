@@ -72,6 +72,8 @@ final class WithdrawalETHFeeInfoViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
+        view.backgroundColor = palette.bgView_sub
+
         modeLabel.set(
             textColor: palette.label_sub,
             font: .owRegular(size: 14)

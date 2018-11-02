@@ -76,10 +76,10 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        
-        regularLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
-        priorityLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
-        manualTextField.set(textColor: palette.label_main_1, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
+        view.backgroundColor = palette.bgView_sub
+        regularLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
+        priorityLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
+        manualTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
         
         regularSepline.backgroundColor = palette.sepline
         prioritySepline.backgroundColor = palette.sepline

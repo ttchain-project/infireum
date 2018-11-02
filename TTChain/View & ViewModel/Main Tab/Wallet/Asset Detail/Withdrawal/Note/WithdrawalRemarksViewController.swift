@@ -35,6 +35,7 @@ final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var noteTextField: UITextField!
+    @IBOutlet weak var separatorLine: UIView!
     
     func config(constructor: WithdrawalRemarksViewController.Config) {
         view.layoutIfNeeded()
@@ -54,13 +55,15 @@ final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
         let dls = lang.dls
         titleLabel.text = dls.abInfo_label_note
         noteTextField.set(placeholder: "请输入20字以内的描述")
+        
     }
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        view.backgroundColor = palette.bgView_main
-        titleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
-        noteTextField.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
+        view.backgroundColor = palette.bgView_sub
+        separatorLine.backgroundColor = palette.sepline
+        titleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
+        noteTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
         noteTextField.rx.text.orEmpty
             .scan("") { (previous, new) -> String in
                 if new.count > 30 {

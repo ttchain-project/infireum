@@ -45,6 +45,10 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
     
     @IBOutlet weak var baseScrollView: UIScrollView!
     @IBOutlet weak var nextStepBtn: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var scanButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     
     //MARK: Child View Controllers
     private var assetVC: WithdrawalAssetViewController!
@@ -69,7 +73,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         baseScrollView.addSubview(assetVC.view)
         
         constrain(assetVC.view, baseScrollView) { [unowned self] (view, scroll) in
-            view.top == scroll.top + 12
+            view.top == scroll.top + 25
             view.leading == scroll.leading
             view.trailing == scroll.trailing
             view.width == scroll.width
@@ -127,7 +131,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             baseScrollView.addSubview(feeVC.view)
 //            return
         case .cic:
-            //This shuold not happend
+            //This shuold not happen
             return errorDebug(response: ())
         }
         
@@ -194,11 +198,19 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        view.backgroundColor = palette.bgView_sub
-        renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
-        renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
-        createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.application_main, shouldClear: true)
+        view.backgroundColor = palette.bgView_main
+//        renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
+        self.hideDefaultNavBar()
+//        renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 18))
+//        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+//        createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.application_main, shouldClear: true)
+        self.backButton.rx.tap.bind {
+            self.navigationController?.popViewController(animated: true)
+            }.disposed(by: bag)
+        
+        self.scanButton.rx.tap.bind {
+            self.toQRCode()
+        }.disposed(by: bag)
         
         nextStepBtn.setTitleColor(palette.btn_bgFill_enable_text, for: .normal)
         nextStepBtn.setTitleColor(palette.btn_bgFill_disable_text, for: .disabled)

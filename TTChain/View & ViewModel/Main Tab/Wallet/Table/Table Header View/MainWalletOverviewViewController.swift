@@ -38,7 +38,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
             walletNameLabel.text = wallet.name!
             walletAddressLabel.text = wallet.address
 //            walletColorImg.image = self.img(ofMainCoinID: wallet.walletMainCoinID!)
-            manageAssetBtn.isEnabled = (wallet.owChainType != .btc)
+            shareAddress.isEnabled = (wallet.owChainType != .btc)
         }
     }
     
@@ -73,13 +73,13 @@ class MainWalletOverviewViewController: KLModuleViewController {
         }
     }
     private(set) lazy var onDeposit: Driver<Wallet> = {
-        return depositBtn.rx.tap.asDriver().map {
+        return transactionRecordButton.rx.tap.asDriver().map {
             [unowned self] in self.wallet
         }
     }()
     
     private(set) lazy var onManageAsset: Driver<Wallet> = {
-        return manageAssetBtn.rx.tap.asDriver()
+        return shareAddress.rx.tap.asDriver()
             .filter {
                 [unowned self] in
                 return ChainType.init(rawValue: self.wallet.chainType) != .btc
@@ -110,8 +110,8 @@ class MainWalletOverviewViewController: KLModuleViewController {
     @IBOutlet weak var walletAddressLabel: UILabel!
     @IBOutlet weak var walletCopyBtn: UIButton!
     @IBOutlet weak var totalFiatValueLabel: UILabel!
-    @IBOutlet weak var depositBtn: UIButton!
-    @IBOutlet weak var manageAssetBtn: UIButton!
+    @IBOutlet weak var transactionRecordButton: UIButton!
+    @IBOutlet weak var shareAddress: UIButton!
     @IBOutlet weak var switchWalletBtn: UIButton!
     
     

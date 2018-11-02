@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalBaseViewController" customModule="OfflineWallet" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalBaseViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="WZW-qQ-Axd" id="RpQ-rz-grk"/>
                 <outlet property="baseScrollView" destination="yUA-61-zwA" id="eg2-QJ-IXM"/>
                 <outlet property="nextStepBtn" destination="1Sj-xC-x8d" id="Ael-Aa-Doh"/>
+                <outlet property="scanButton" destination="XDg-rX-lzn" id="Ned-7H-B1G"/>
+                <outlet property="titleLabel" destination="t2N-dR-sNN" id="Ayf-8i-OWM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,8 +26,50 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yUA-61-zwA">
-                    <rect key="frame" x="0.0" y="20" width="375" height="605"/>
+                    <rect key="frame" x="0.0" y="73.5" width="375" height="551.5"/>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiP-Cn-bBx" userLabel="NavBarView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="r3v-vt-bkx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDg-rX-lzn">
+                            <rect key="frame" x="324.5" y="33" width="30.5" height="27"/>
+                            <state key="normal" image="scanQRCodeButton"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZW-qQ-Axd">
+                            <rect key="frame" x="20" y="34" width="30" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="TLc-SB-JCT"/>
+                                <constraint firstAttribute="width" constant="30" id="ggF-EP-qVX"/>
+                            </constraints>
+                            <state key="normal" image="navBarBackButton"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="asdoiuf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2N-dR-sNN">
+                            <rect key="frame" x="70" y="36" width="234.5" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="r3v-vt-bkx" secondAttribute="trailing" id="2sZ-RD-ugi"/>
+                        <constraint firstItem="r3v-vt-bkx" firstAttribute="leading" secondItem="FiP-Cn-bBx" secondAttribute="leading" id="5Qv-vb-7AI"/>
+                        <constraint firstItem="WZW-qQ-Axd" firstAttribute="centerY" secondItem="XDg-rX-lzn" secondAttribute="centerY" id="8gU-X8-LEf"/>
+                        <constraint firstAttribute="bottom" secondItem="r3v-vt-bkx" secondAttribute="bottom" id="Aii-c4-3Jf"/>
+                        <constraint firstItem="t2N-dR-sNN" firstAttribute="leading" relation="lessThanOrEqual" secondItem="WZW-qQ-Axd" secondAttribute="trailing" constant="20" id="IHa-jj-cUp"/>
+                        <constraint firstItem="XDg-rX-lzn" firstAttribute="centerY" secondItem="r3v-vt-bkx" secondAttribute="centerY" id="OJe-Bb-Mbb"/>
+                        <constraint firstItem="XDg-rX-lzn" firstAttribute="width" secondItem="XDg-rX-lzn" secondAttribute="height" multiplier="91:81" id="XQX-In-jU9"/>
+                        <constraint firstItem="r3v-vt-bkx" firstAttribute="top" secondItem="FiP-Cn-bBx" secondAttribute="top" id="aod-Zs-hqH"/>
+                        <constraint firstItem="XDg-rX-lzn" firstAttribute="height" secondItem="r3v-vt-bkx" secondAttribute="height" multiplier="0.29" id="bxE-jx-QHj"/>
+                        <constraint firstItem="XDg-rX-lzn" firstAttribute="leading" relation="lessThanOrEqual" secondItem="t2N-dR-sNN" secondAttribute="trailing" constant="20" id="eMp-ej-8JH"/>
+                        <constraint firstItem="t2N-dR-sNN" firstAttribute="centerY" secondItem="FiP-Cn-bBx" secondAttribute="centerY" id="ghZ-Uk-Y6k"/>
+                        <constraint firstItem="WZW-qQ-Axd" firstAttribute="leading" secondItem="FiP-Cn-bBx" secondAttribute="leading" constant="20" id="hme-VU-SiS"/>
+                        <constraint firstAttribute="trailing" secondItem="XDg-rX-lzn" secondAttribute="trailing" constant="20" id="l6L-jH-IbD"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sj-xC-x8d">
                     <rect key="frame" x="0.0" y="625" width="375" height="42"/>
                     <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
@@ -32,15 +78,25 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="yUA-61-zwA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6GV-pv-DqX"/>
                 <constraint firstItem="1Sj-xC-x8d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7M1-0I-YAr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1Sj-xC-x8d" secondAttribute="trailing" id="CW6-jU-jjG"/>
+                <constraint firstItem="FiP-Cn-bBx" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.14" id="Gbt-GC-Huy"/>
+                <constraint firstItem="FiP-Cn-bBx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="IaE-B2-7aW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUA-61-zwA" secondAttribute="trailing" id="JWG-as-pu8"/>
+                <constraint firstItem="FiP-Cn-bBx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U1h-it-2tT"/>
+                <constraint firstItem="FiP-Cn-bBx" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="U48-uh-xhj"/>
                 <constraint firstItem="yUA-61-zwA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aay-XJ-K1S"/>
                 <constraint firstItem="1Sj-xC-x8d" firstAttribute="top" secondItem="yUA-61-zwA" secondAttribute="bottom" id="e6Z-9K-ia4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1Sj-xC-x8d" secondAttribute="bottom" id="xOT-fM-Cod"/>
+                <constraint firstItem="yUA-61-zwA" firstAttribute="top" secondItem="r3v-vt-bkx" secondAttribute="bottom" constant="-20" id="zbN-hz-5hc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
     </objects>
+    <resources>
+        <image name="navBarBackButton" width="87" height="65"/>
+        <image name="navTitleImage" width="1080" height="278"/>
+        <image name="scanQRCodeButton" width="101" height="84"/>
+    </resources>
 </document>

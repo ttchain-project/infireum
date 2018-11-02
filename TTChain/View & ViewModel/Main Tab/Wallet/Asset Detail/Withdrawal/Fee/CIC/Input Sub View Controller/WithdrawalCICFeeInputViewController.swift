@@ -123,8 +123,8 @@ final class WithdrawalCICFeeInputViewController: KLModuleViewController, Withdra
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        headerBase.backgroundColor = palette.bgView_main
-        infoBase.backgroundColor = palette.bgView_main
+        headerBase.backgroundColor = palette.bgView_sub
+        infoBase.backgroundColor = palette.bgView_sub
         feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
         feeBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 12))
         let isDisplayed = !infoBase.isHidden

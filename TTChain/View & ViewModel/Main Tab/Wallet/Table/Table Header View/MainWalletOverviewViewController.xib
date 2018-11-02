@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainWalletOverviewViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
-                <outlet property="depositBtn" destination="tOs-qn-KXk" id="cAN-DK-mwL"/>
                 <outlet property="mainBG" destination="wyu-gD-242" id="EjE-nZ-SUf"/>
-                <outlet property="manageAssetBtn" destination="qPU-hX-04P" id="TXE-4e-OLc"/>
+                <outlet property="shareAddress" destination="qPU-hX-04P" id="TXE-4e-OLc"/>
                 <outlet property="switchWalletBtn" destination="h3o-tl-kLM" id="IjU-3l-oTB"/>
                 <outlet property="totalFiatValueLabel" destination="FHf-eV-bmd" id="PfP-Kj-MSx"/>
+                <outlet property="transactionRecordButton" destination="tOs-qn-KXk" id="cAN-DK-mwL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="walletAddressLabel" destination="tRh-Kc-i1K" id="v0n-Ks-Sg1"/>
                 <outlet property="walletBase" destination="dmh-xg-R4P" id="bkH-FF-q1T"/>

@@ -56,9 +56,10 @@ final class WithdrawalETHFeeInfoQuickModeViewController: KLModuleViewController,
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        slowLabel.set(textColor: palette.label_sub, font: .owRegular(size: 14))
-        quickLabel.set(textColor: palette.label_sub, font: .owRegular(size: 14))
-        gasPriceLabel.set(textColor: palette.label_sub, font: .owRegular(size: 14))
+        view.backgroundColor = palette.bgView_sub
+        slowLabel.set(textColor: palette.label_sub, font: .owMedium(size: 17))
+        quickLabel.set(textColor: palette.label_sub, font: .owMedium(size: 17))
+        gasPriceLabel.set(textColor: palette.label_sub, font: .owMedium(size: 17))
     }
     
     override func viewDidLoad() {

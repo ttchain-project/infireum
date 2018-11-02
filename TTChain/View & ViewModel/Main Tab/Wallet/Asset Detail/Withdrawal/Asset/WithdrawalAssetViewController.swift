@@ -94,10 +94,10 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        view.backgroundColor = palette.bgView_main
-        coinNameLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
+        view.backgroundColor = palette.bgView_sub
+        coinNameLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 17))
         transferAmtTextField.set(textColor: palette.label_main_1, font: .owRegular(size: 20), placeHolderColor: palette.input_placeholder)
-        availableAmtLabel.set(textColor: palette.label_asAppMain, font: .owRegular(size: 12))
+        availableAmtLabel.set(textColor: palette.input_text, font: .owRegular(size: 14))
         transferAmtFiatValueLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 20))
         sepline.backgroundColor = palette.sepline
     }

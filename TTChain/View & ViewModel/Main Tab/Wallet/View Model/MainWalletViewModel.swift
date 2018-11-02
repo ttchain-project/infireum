@@ -106,8 +106,7 @@ class MainWalletViewModel: KLRxViewModel {
         sortAssetsInPlace(&_assets, sort: AssetSortingManager.getSortOption())
         
         assets = BehaviorRelay.init(value: _assets)
-        
-        
+
         concatInput()
         concatOutput()
         bindInternalLogic()

@@ -86,7 +86,7 @@ final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalC
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         toAddrTitleLabel.text = dls.withdrawal_label_toAddr
-        addrbookBtn.set(image: #imageLiteral(resourceName: "doneBlue"),
+        addrbookBtn.set(image: #imageLiteral(resourceName: "arrowButtonPinkSolid"),
                         title: dls.withdrawal_btn_common_used_addr,
                         titlePosition: .left,
                         additionalSpacing: 8,
@@ -98,15 +98,15 @@ final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalC
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        view.backgroundColor = palette.bgView_main
-        toAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
-        addrbookBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 12))
-        addrTextField.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
+        view.backgroundColor = palette.bgView_sub
+        toAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
+        addrbookBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 14))
+        addrTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
         addrTextField.sepline.backgroundColor = palette.sepline
         
-        fromAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
-        fromWalletBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 12))
-        fromAddrLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 13))
+        fromAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
+        fromWalletBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 17))
+        fromAddrLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
     }
 
     /*

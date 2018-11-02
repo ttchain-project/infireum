@@ -294,11 +294,14 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
 //        let vc = AssetDetailViewController.navInstance(
 //            from: AssetDetailViewController.Config(asset: asset)
 //        )
+        //        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
+        //        present(vc, animated: true, completion: nil)
+
+        let vc = WithdrawalBaseViewController.instance(
+            from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
+        )
         
-        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
-        
-        self.navigationController?.pushViewController(assetVC, animated: true)
-//        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func toTransRecord() {
@@ -408,6 +411,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             }
         }else {
             guard let asset = Identity.singleton!.getAllAssets(of: coin).first else {
+        
                 navigationController?.topViewController?
                     .showSimplePopUp(
                         with: LM.dls
@@ -419,7 +423,6 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
                 
                 return
             }
-            
             let vc = WithdrawalBaseViewController.navInstance(
                 from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: address)
             )
@@ -434,7 +437,6 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             //        }
         }
     }
-    
     
     
     /*
