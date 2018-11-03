@@ -38,7 +38,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
             walletNameLabel.text = wallet.name!
             walletAddressLabel.text = wallet.address
 //            walletColorImg.image = self.img(ofMainCoinID: wallet.walletMainCoinID!)
-            shareAddress.isEnabled = (wallet.owChainType != .btc)
+//            shareAddress.isEnabled = (wallet.owChainType != .btc)
         }
     }
     
@@ -73,21 +73,26 @@ class MainWalletOverviewViewController: KLModuleViewController {
         }
     }
     private(set) lazy var onDeposit: Driver<Wallet> = {
-        return transactionRecordButton.rx.tap.asDriver().map {
+        return shareAddress.rx.tap.asDriver().map {
             [unowned self] in self.wallet
         }
     }()
     
-    private(set) lazy var onManageAsset: Driver<Wallet> = {
-        return shareAddress.rx.tap.asDriver()
-            .filter {
-                [unowned self] in
-                return ChainType.init(rawValue: self.wallet.chainType) != .btc
-            }
-            .map {
-                [unowned self] in self.wallet
-            }
+//    private(set) lazy var onManageAsset: Driver<Wallet> = {
+//        return shareAddress.rx.tap.asDriver()
+//            .filter {
+//                [unowned self] in
+//                return ChainType.init(rawValue: self.wallet.chainType) != .btc
+//            }
+//            .map {
+//                [unowned self] in self.wallet
+//            }
+//    }()
+    
+    private (set) lazy var onTransactionHistory: Driver<Void> = {
+        return self.transactionRecordButton.rx.tap.asDriver()
     }()
+    
     private(set) lazy var onAddressCopied: Driver<String> = {
         
         return Driver.merge(

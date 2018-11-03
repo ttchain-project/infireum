@@ -12,7 +12,9 @@ extension UIViewController {
     //MARK: 將View的行為綁定到左邊的side menu
     @discardableResult func barButton(target: Any, selector: Selector, tintColor: UIColor? = .black, image: UIImage? = nil, title: String? = nil) -> (UIBarButtonItem, UIButton) {
         let button = UIButton(type: .system)
-        button.tintColor = tintColor!
+        if let tintColor = tintColor {
+            button.tintColor = tintColor
+        }
         
         var resultImage = image
         if let tc = tintColor, let _image = image {

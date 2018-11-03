@@ -101,15 +101,15 @@ final class IdentityQRCodeContentViewController: KLModuleViewController, KLVMVC 
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_1,
-                     barTint: palette.nav_bg_1)
+        renderNavBar(tint: palette.nav_item_2,
+                     barTint: palette.nav_bg_2)
         
-        renderNavTitle(color: palette.nav_item_1,
-                       font: .owMedium(size: 18))
+        renderNavTitle(color: palette.nav_item_2,
+                       font: .owMedium(size: 20))
         
         changeLeftBarButtonToDismissToRoot(
             tintColor: palette.nav_item_1,
-            image: #imageLiteral(resourceName: "arrowNavBlack"),
+            image: #imageLiteral(resourceName: "navBarBackButton"),
             title: nil
         )
         

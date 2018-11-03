@@ -100,8 +100,7 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
                     [weak self] isValid in
                     guard let wSelf = self else { return }
                     let palette = ThemeManager.instance.theme.value.palette
-                    wSelf.importBtn.backgroundColor =
-                        isValid ? palette.btn_bgFill_enable_bg : palette.btn_bgFill_disable_bg
+                    wSelf.importBtn.isEnabled = isValid
                 }
             )
         )
@@ -211,19 +210,19 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bg_1)
-        
-        navigationController?.navigationBar.renderShadow()
+        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bg_clear)
+        renderNavTitle(color: theme.palette.nav_item_2, font: .owMedium(size: 20))
+//        navigationController?.navigationBar.renderShadow()
         
         changeLeftBarButtonToDismissToRoot(
-            tintColor: theme.palette.nav_item_1,
-            image: #imageLiteral(resourceName: "arrowNavBlack")
+            tintColor: theme.palette.nav_item_2,
+            image: #imageLiteral(resourceName: "navBarBackButton")
         )
         
-        createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), toColor: theme.palette.application_main)
+        createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "scanQRCodeButton"), toColor: theme.palette.nav_item_2)
         
         titleLabel.set(
-            textColor: theme.palette.label_sub,
+            textColor: theme.palette.label_main_1,
             font: UIFont.owRegular(size: 12)
         )
         
@@ -239,16 +238,18 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         }
         
         importBtn.set(
-            font: UIFont.owRegular(size: 14),
-            backgroundColor: theme.palette.btn_bgFill_enable_bg
+            font: UIFont.owRegular(size: 14)
         )
         
+        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
+        importBtn.setBackgroundImage(image, for: .normal)
+
         mnemonicBase.set(
             borderInfo: (color: theme.palette.bgView_border, width: 1)
         )
         
         mnemonicTextView.textColor = theme.palette.input_text
-        
+        mnemonicTextView.placeholderLabel.textColor = theme.palette.input_placeholder
         importBtn.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
         importBtn.setTitleColor(theme.palette.btn_bgFill_disable_text, for: .disabled)
     }

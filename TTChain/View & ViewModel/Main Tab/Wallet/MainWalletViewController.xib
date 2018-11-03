@@ -12,10 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainWalletViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
-                <outlet property="backButton" destination="5NT-ny-bbo" id="bZK-Hd-yUS"/>
-                <outlet property="settingsButton" destination="r6P-JI-NKe" id="fKM-SE-cd2"/>
                 <outlet property="tableView" destination="rfS-BM-wwu" id="yfZ-Gf-aSm"/>
-                <outlet property="titleLabel" destination="AJy-c3-uug" id="8OQ-Br-loa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,43 +27,13 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-Do-2gz">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6P-JI-NKe">
-                            <rect key="frame" x="324.5" y="33" width="30.5" height="27"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="r6P-JI-NKe" secondAttribute="height" multiplier="91:81" id="Dmd-qb-fko"/>
-                            </constraints>
-                            <state key="normal" image="settings"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NT-ny-bbo">
-                            <rect key="frame" x="20" y="34" width="30" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="apb-ac-A4l"/>
-                                <constraint firstAttribute="height" constant="25" id="lva-0s-pMY"/>
-                            </constraints>
-                            <state key="normal" image="navBarBackButton"/>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="asdoiuf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJy-c3-uug">
-                            <rect key="frame" x="70" y="36" width="234.5" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="r6P-JI-NKe" secondAttribute="trailing" constant="20" id="2tR-e6-22O"/>
-                        <constraint firstItem="r6P-JI-NKe" firstAttribute="width" secondItem="r6P-JI-NKe" secondAttribute="height" multiplier="91:81" id="8rP-Yo-61E"/>
-                        <constraint firstItem="5NT-ny-bbo" firstAttribute="centerY" secondItem="r6P-JI-NKe" secondAttribute="centerY" id="Mez-rT-5Z0"/>
                         <constraint firstItem="gFj-Do-2gz" firstAttribute="leading" secondItem="xTF-fi-hfe" secondAttribute="leading" id="NeI-uI-Kcn"/>
-                        <constraint firstItem="r6P-JI-NKe" firstAttribute="height" secondItem="gFj-Do-2gz" secondAttribute="height" multiplier="0.29" id="Pbs-xf-4Op"/>
                         <constraint firstItem="gFj-Do-2gz" firstAttribute="top" secondItem="xTF-fi-hfe" secondAttribute="top" id="SP4-qt-Bbf"/>
-                        <constraint firstItem="AJy-c3-uug" firstAttribute="leading" relation="lessThanOrEqual" secondItem="5NT-ny-bbo" secondAttribute="trailing" constant="20" id="Wj7-PL-aPc"/>
-                        <constraint firstItem="5NT-ny-bbo" firstAttribute="leading" secondItem="xTF-fi-hfe" secondAttribute="leading" constant="20" id="dop-7U-t22"/>
-                        <constraint firstItem="r6P-JI-NKe" firstAttribute="leading" relation="lessThanOrEqual" secondItem="AJy-c3-uug" secondAttribute="trailing" constant="20" id="dxF-5v-FAB"/>
                         <constraint firstAttribute="bottom" secondItem="gFj-Do-2gz" secondAttribute="bottom" id="kRw-Wp-7vs"/>
-                        <constraint firstItem="r6P-JI-NKe" firstAttribute="centerY" secondItem="gFj-Do-2gz" secondAttribute="centerY" id="kqB-Tg-xHO"/>
                         <constraint firstAttribute="trailing" secondItem="gFj-Do-2gz" secondAttribute="trailing" id="vQP-VQ-HoX"/>
-                        <constraint firstItem="AJy-c3-uug" firstAttribute="centerY" secondItem="xTF-fi-hfe" secondAttribute="centerY" id="zZ2-5Y-Ba9"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rfS-BM-wwu">
@@ -92,8 +59,6 @@
         </view>
     </objects>
     <resources>
-        <image name="navBarBackButton" width="87" height="65"/>
         <image name="navTitleImage" width="1080" height="278"/>
-        <image name="settings" width="91" height="81"/>
     </resources>
 </document>

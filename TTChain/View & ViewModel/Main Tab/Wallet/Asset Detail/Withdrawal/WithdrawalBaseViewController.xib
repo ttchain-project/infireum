@@ -12,11 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalBaseViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
-                <outlet property="backButton" destination="WZW-qQ-Axd" id="RpQ-rz-grk"/>
                 <outlet property="baseScrollView" destination="yUA-61-zwA" id="eg2-QJ-IXM"/>
                 <outlet property="nextStepBtn" destination="1Sj-xC-x8d" id="Ael-Aa-Doh"/>
-                <outlet property="scanButton" destination="XDg-rX-lzn" id="Ned-7H-B1G"/>
-                <outlet property="titleLabel" destination="t2N-dR-sNN" id="Ayf-8i-OWM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,40 +31,13 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="r3v-vt-bkx">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDg-rX-lzn">
-                            <rect key="frame" x="324.5" y="33" width="30.5" height="27"/>
-                            <state key="normal" image="scanQRCodeButton"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZW-qQ-Axd">
-                            <rect key="frame" x="20" y="34" width="30" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="25" id="TLc-SB-JCT"/>
-                                <constraint firstAttribute="width" constant="30" id="ggF-EP-qVX"/>
-                            </constraints>
-                            <state key="normal" image="navBarBackButton"/>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="asdoiuf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2N-dR-sNN">
-                            <rect key="frame" x="70" y="36" width="234.5" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="r3v-vt-bkx" secondAttribute="trailing" id="2sZ-RD-ugi"/>
                         <constraint firstItem="r3v-vt-bkx" firstAttribute="leading" secondItem="FiP-Cn-bBx" secondAttribute="leading" id="5Qv-vb-7AI"/>
-                        <constraint firstItem="WZW-qQ-Axd" firstAttribute="centerY" secondItem="XDg-rX-lzn" secondAttribute="centerY" id="8gU-X8-LEf"/>
                         <constraint firstAttribute="bottom" secondItem="r3v-vt-bkx" secondAttribute="bottom" id="Aii-c4-3Jf"/>
-                        <constraint firstItem="t2N-dR-sNN" firstAttribute="leading" relation="lessThanOrEqual" secondItem="WZW-qQ-Axd" secondAttribute="trailing" constant="20" id="IHa-jj-cUp"/>
-                        <constraint firstItem="XDg-rX-lzn" firstAttribute="centerY" secondItem="r3v-vt-bkx" secondAttribute="centerY" id="OJe-Bb-Mbb"/>
-                        <constraint firstItem="XDg-rX-lzn" firstAttribute="width" secondItem="XDg-rX-lzn" secondAttribute="height" multiplier="91:81" id="XQX-In-jU9"/>
                         <constraint firstItem="r3v-vt-bkx" firstAttribute="top" secondItem="FiP-Cn-bBx" secondAttribute="top" id="aod-Zs-hqH"/>
-                        <constraint firstItem="XDg-rX-lzn" firstAttribute="height" secondItem="r3v-vt-bkx" secondAttribute="height" multiplier="0.29" id="bxE-jx-QHj"/>
-                        <constraint firstItem="XDg-rX-lzn" firstAttribute="leading" relation="lessThanOrEqual" secondItem="t2N-dR-sNN" secondAttribute="trailing" constant="20" id="eMp-ej-8JH"/>
-                        <constraint firstItem="t2N-dR-sNN" firstAttribute="centerY" secondItem="FiP-Cn-bBx" secondAttribute="centerY" id="ghZ-Uk-Y6k"/>
-                        <constraint firstItem="WZW-qQ-Axd" firstAttribute="leading" secondItem="FiP-Cn-bBx" secondAttribute="leading" constant="20" id="hme-VU-SiS"/>
-                        <constraint firstAttribute="trailing" secondItem="XDg-rX-lzn" secondAttribute="trailing" constant="20" id="l6L-jH-IbD"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sj-xC-x8d">
@@ -95,8 +65,6 @@
         </view>
     </objects>
     <resources>
-        <image name="navBarBackButton" width="87" height="65"/>
         <image name="navTitleImage" width="1080" height="278"/>
-        <image name="scanQRCodeButton" width="101" height="84"/>
     </resources>
 </document>

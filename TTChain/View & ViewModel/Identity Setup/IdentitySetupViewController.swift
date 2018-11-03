@@ -72,9 +72,12 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
         
         createBtn.set(
             textColor: theme.palette.btn_bgFill_enable_text,
-            font: UIFont.owRegular(size: 15),
-            backgroundColor: theme.palette.btn_bgFill_enable_bg
+            font: UIFont.owRegular(size: 15)
         )
+        
+        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
+        
+        createBtn.setBackgroundImage(image, for: .normal)
         
         createNoteLabel.set(
             textColor: theme.palette.label_sub,
@@ -89,13 +92,10 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
         sepline.set(backgroundColor: theme.palette.sepline)
         
         restoreBtn.set(
-            textColor: theme.palette.btn_borderFill_enable_text,
-            font: UIFont.owRegular(size: 15),
-            backgroundColor: theme.palette.btn_borderFill_enable_bg,
-            borderInfo: (
-                color: theme.palette.btn_borderFill_border_1st, width: 1
-            )
+            textColor: theme.palette.btn_bgFill_enable_text,
+            font: UIFont.owRegular(size: 15)
         )
+        restoreBtn.setBackgroundImage(image, for: .normal)
     }
     
     override func renderLang(_ lang: Lang) {

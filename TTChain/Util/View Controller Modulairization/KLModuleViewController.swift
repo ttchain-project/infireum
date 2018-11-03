@@ -116,31 +116,3 @@ class KLModuleViewController: UIViewController,
         warning("Please override \(#function) to define the network respond logic of the vc")
     }
 }
-
-extension UINavigationController {
-    
-//    func setupNavBar() {
-//        navigationBar.isTranslucent = true
-//        navigationBar.barStyle = .blackTranslucent
-//        
-//        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "navTitleImage"))
-//        logoImageView.contentMode = .scaleAspectFill
-//        logoImageView.clipsToBounds = true
-//        logoImageView.translatesAutoresizingMaskIntoConstraints = false
-//
-////        logoImageView.frame = (navigationController?.navigationBar.frame)!
-//        view.insertSubview(logoImageView, belowSubview: navigationBar)
-//        
-//        navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationBar.shadowImage = UIImage()
-//        view.backgroundColor = .clear
-//        NSLayoutConstraint.activate([
-//            logoImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-//            logoImageView.rightAnchor.constraint(equalTo: view.rightAnchor),
-//            logoImageView.topAnchor.constraint(equalTo: view.topAnchor),
-//            logoImageView.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor)
-//            ])
-//        //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navTitleImage"),
-//        //                                                                    for: .default)
-//    }
-}

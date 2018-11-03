@@ -61,7 +61,6 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     func config(constructor: Void) {
         view.layoutIfNeeded()
         
-
         let refreshStart = refreshControl.rx.controlEvent(.valueChanged).asDriver().throttle(2.5, latest: true)
         
         viewModel = ViewModel.init(
@@ -105,16 +104,17 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         })
         .disposed(by: bag)
         
-        walletOverviewVC.onManageAsset.drive(onNext:{
-            [unowned self]
-            wallet in
-            self.startManageAsset(wallet: wallet)
-        })
-        .disposed(by: bag)
+        walletOverviewVC.onTransactionHistory.drive(onNext:{
+            self.toTransRecord()
+        }).disposed(by:bag)
         
-        self.backButton.rx.tap.bind {
-            self.navigationController?.popViewController(animated: true)
-        }.disposed(by: bag)
+//        walletOverviewVC.onManageAsset.drive(onNext:{
+//            [unowned self]
+//            wallet in
+//            self.startManageAsset(wallet: wallet)
+//        })
+//        .disposed(by: bag)
+        
         
         configTableView()
         bindWalletOverviewUpdate()
@@ -130,21 +130,12 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        if let navBar = self.navigationController?.navigationBar {
-            
-            navBar.setBackgroundImage(UIImage(), for: .default)
-            navBar.shadowImage = UIImage()
-            navBar.isTranslucent = true
-            navBar.isHidden = true
-            
-        }
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+//        renderNavTitle(color: .owWhite, font: .owDemiBold(size: 18))
 
     }
     
@@ -232,11 +223,16 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
 //        let text = lang.dls.walletOverview_btn_txRecord
 //        transRecordBtn.setTitleForAllStates(text)
+        self.title = "Title"
     }
     
     override func renderTheme(_ theme: Theme) {
 //        transRecordBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
 //        qrCodeScannerBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
+        let palette = theme.palette
+        renderNavBar(tint: palette.nav_item_2, barTint: .clear)
+        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+
         tableView.backgroundColor = theme.palette.bgView_sub
 
     }

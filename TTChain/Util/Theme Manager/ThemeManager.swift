@@ -113,7 +113,7 @@ extension OfflineWalletThemePalette {
 
 
 struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
-    var application_main: UIColor = .owAzure
+    var application_main: UIColor = .darkPink
     
     var application_alert: UIColor = .owPinkRed
     

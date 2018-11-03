@@ -17,6 +17,10 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
 
     func config(constructor: Void) {
         
+        startMonitorNetworkStatusIfNeeded()
+        startMonitorThemeIfNeeded()
+        startMonitorLangIfNeeded()
+
     }
     typealias Constructor = Void
     
@@ -24,7 +28,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
 
     @IBOutlet weak var USDAmountLabel: UILabel!
  
-    @IBOutlet weak var settingsButton: UIButton!
+//    @IBOutlet weak var settingsButton: UIButton!
     
     @IBOutlet weak var btcAddressLabel: UILabel!
     @IBOutlet weak var btcValueLabel: UILabel!
@@ -46,7 +50,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     @IBOutlet weak var airdropAddressLabel: UILabel!
     @IBOutlet weak var airdropValueLabel: UILabel!
     
-    @IBOutlet weak var titleLabel: UILabel!
+//    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var btcButton: UIButton!
     @IBOutlet weak var ethButton: UIButton!
@@ -55,14 +59,14 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let navBar = self.navigationController?.navigationBar else {
-            return
-        }
+//        guard let navBar = self.navigationController?.navigationBar else {
+//            return
+//        }
         self.viewModel = WalletOptionsViewModel.init(input: (), output: ())
-        navBar.setBackgroundImage(UIImage(), for: .default)
-        navBar.shadowImage = UIImage()
-        navBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = .clear
+//        navBar.setBackgroundImage(UIImage(), for: .default)
+//        navBar.shadowImage = UIImage()
+//        navBar.isTranslucent = true
+//        self.navigationController?.view.backgroundColor = .clear
         self.bindViewModel()
         // Do any additional setup after loading the view.
     }
@@ -120,7 +124,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         }.disposed(by: bag)
         ethButton.rx.tap.bind {
             self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!)
-        }
+        }.disposed(by: bag)
     }
 
     func updateValue(for fiat:Fiat?, total:Decimal?) -> String{
@@ -150,5 +154,18 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         WalletFinder.markWallet(wallet)
         let vc = MainWalletViewController.instance()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func renderTheme(_ theme: Theme) {
+        let palette = theme.palette
+        renderNavBar(tint: palette.nav_item_2, barTint: .clear)
+        renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
+
+    }
+    override func renderLang(_ lang: Lang) {
+        self.title = "TTChain"
+    }
+    @objc func doughnutTapped () {
+        
     }
 }

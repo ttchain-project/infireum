@@ -62,9 +62,9 @@ final class AddressBookViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
-        renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bg_clear)
+        renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 18))
+        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
         changeNavShadowVisibility(true)
         createBtn.set(color: palette.btn_bgFill_enable_bg)
         

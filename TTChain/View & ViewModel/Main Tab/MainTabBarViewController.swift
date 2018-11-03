@@ -40,6 +40,12 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return tradeNav?.viewControllers[0] as? LightningTransactionViewController
     }
     
+//
+//    private weak var tradeNav: UINavigationController?
+//    private var tradeVC: LightningTransactionViewController? {
+//        return tradeNav?.viewControllers[0] as? LightningTransactionViewController
+//    }
+    
     private weak var meVC: MeViewController?
     private lazy var meItem: UITabBarItem = {
         let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
