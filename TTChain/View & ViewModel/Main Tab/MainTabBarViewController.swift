@@ -36,8 +36,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     }()
     
     private weak var tradeNav: UINavigationController?
-    private var tradeVC: LightningTransactionViewController? {
-        return tradeNav?.viewControllers[0] as? LightningTransactionViewController
+    private var tradeVC: MainWalletViewController? {
+        return tradeNav?.viewControllers[0] as? MainWalletViewController
     }
     
 //
@@ -46,8 +46,16 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
 //        return tradeNav?.viewControllers[0] as? LightningTransactionViewController
 //    }
     
-    private weak var meVC: MeViewController?
-    private lazy var meItem: UITabBarItem = {
+//    private weak var meVC: MeViewController?
+//    private lazy var meItem: UITabBarItem = {
+//        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+//        return item
+//    }()
+    
+//    ExploreViewController
+    private weak var exploreVC: ExploreViewController?
+    private lazy var exploreItem: UITabBarItem = {
         let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
@@ -65,25 +73,27 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         // Do any additional setup after loading the view.
         
 //        let walletNav = MainWalletViewController.navInstance()
-        
-        let tradeNav: UINavigationController = LightningTransactionViewController.navInstance()
-        let meVC: MeViewController = MeViewController.instance()
-        
+        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet())
+        let tradeNav: UINavigationController = MainWalletViewController.navInstance(from: configForMainWallet)
+//        let meVC: MeViewController = MeViewController.instance()
+        let exploreVC : ExploreViewController = ExploreViewController.instance()
         let walletOptionsNav = WalletOptionsViewController.navInstance()
         
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem
-        meVC.tabBarItem = meItem
+//        meVC.tabBarItem = meItem
+        exploreVC.tabBarItem = exploreItem
         
         self.walletOptionNav = walletOptionsNav
         self.tradeNav = tradeNav
-        self.meVC = meVC
+//        self.meVC = meVC
+        self.exploreVC = exploreVC
 //        viewControllers = [walletNav, tradeNav, meVC]
 //        viewControllers = [meVC]
         viewControllers = [
             walletOptionsNav,
             tradeNav,
-            meVC
+            exploreVC
         ]
         
 //        monitorLang { [unowned self] (lang) in
@@ -97,7 +107,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
 //            self.tabBar.unselectedItemTintColor = theme.palette.tab_unselected
 //            self.tabBar.tintColor = theme.palette.tab_selected
 //        }
-        observeLightningSwitchWithCoin()
+//        observeLightningSwitchWithCoin()
         self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
     }
 
@@ -107,18 +117,18 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     }
     
     //MARK: - Notification
-    private func observeLightningSwitchWithCoin() {
-        OWRxNotificationCenter
-            .instance
-            .onLightningTradeSwitchWithCoin
-            .subscribe(
-                onNext: {
-                [unowned self, trade = self.tradeVC] coin in
-                    self.selectedIndex = 1
-                    trade?.changeFromCoin(coin)
-            })
-            .disposed(by: bag)
-    }
+//    private func observeLightningSwitchWithCoin() {
+//        OWRxNotificationCenter
+//            .instance
+//            .onLightningTradeSwitchWithCoin
+//            .subscribe(
+//                onNext: {
+//                [unowned self, trade = self.tradeVC] coin in
+//                    self.selectedIndex = 1
+//                    trade?.changeFromCoin(coin)
+//            })
+//            .disposed(by: bag)
+//    }
     
 
     /*

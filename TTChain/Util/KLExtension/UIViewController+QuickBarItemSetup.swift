@@ -37,6 +37,27 @@ extension UIViewController {
         return (barButton, button)
     }
 
+    func setDoughnutMenuButton() {
+        
+        let button = UIButton.init(type: .custom)
+        
+        var resultImage = #imageLiteral(resourceName: "LOGO")
+        let _image = resultImage
+        let newImage = _image.withRenderingMode(.alwaysOriginal)
+        UIGraphicsBeginImageContextWithOptions(_image.size, false, newImage.scale)
+        newImage.draw(in: CGRect(x:0, y:0, width:_image.size.width, height:newImage.size.height))
+        resultImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        button.setTitle(title, for: .normal)
+        button.setImage(resultImage, for: .normal)
+        button.frame = CGRect(origin: .zero, size: CGSize(width: 40, height: 40))
+//        button.addTarget(target, action: selector, for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem = barButton
+
+    }
+    
     @discardableResult func changeLeftBarButton(target: Any, selector: Selector, tintColor: UIColor? = .black, image: UIImage? = nil, title: String? = nil) -> UIButton {
         let btns = barButton(target: target, selector: selector, tintColor: tintColor, image: image, title: title)
         self.navigationItem.leftBarButtonItem = btns.0

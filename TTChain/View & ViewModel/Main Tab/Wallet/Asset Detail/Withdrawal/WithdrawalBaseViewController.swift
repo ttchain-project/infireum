@@ -193,7 +193,6 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         let dls = lang.dls
         title = dls.withdrawal_title(viewModel.input.asset.coin!.inAppName!)
         nextStepBtn.setTitleForAllStates(dls.withdrawal_btn_nextstep)
-        
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -202,7 +201,13 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bg_clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.application_main, shouldClear: true)
-        changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
+
+//        if((self.presentingViewController) != nil) {
+//            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
+//        } else if(self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
+//        }
+        
 //        self.backButton.rx.tap.bind {
 //            self.navigationController?.popViewController(animated: true)
 //            }.disposed(by: bag)

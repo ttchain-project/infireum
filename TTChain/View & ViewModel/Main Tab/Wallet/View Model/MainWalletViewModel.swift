@@ -73,6 +73,8 @@ class MainWalletViewModel: KLRxViewModel {
 //        let walletChangeInput: Driver<Void>
         let assetRowSelect: Driver<Int>
         let walletRefreshInput: Driver<Void>
+        let wallet:Wallet
+        let entryPoint:MainWalletViewController.EntryPoint
     }
     
     struct Output {
@@ -94,13 +96,15 @@ class MainWalletViewModel: KLRxViewModel {
     lazy var fiat: BehaviorRelay<Fiat> = {
         return FiatManager.instance.fiat
     }()
+    var entryPoint: MainWalletViewController.EntryPoint?
     
     required init(input: InputSource, output: OutputSource) {
         self.input = input
         self.output = output
-        self.wallet = BehaviorRelay.init(value: WalletFinder.getWallet())
+        self.wallet = BehaviorRelay.init(value: input.wallet)
+        self.entryPoint = input.entryPoint
         var _assets = Asset.getAllWalletAssetsUnderCurrenIdentity(
-            wallet: WalletFinder.getWallet(), selectedOnly: true
+            wallet: input.wallet, selectedOnly: true
         )
         
         sortAssetsInPlace(&_assets, sort: AssetSortingManager.getSortOption())
@@ -246,7 +250,7 @@ class MainWalletViewModel: KLRxViewModel {
     
     public func changeWallet(_ wallet: Wallet) {
         DispatchQueue.global().async {
-            WalletFinder.markWallet(wallet)
+//            WalletFinder.markWallet(wallet)
             self.wallet.accept(wallet)
         }
     }

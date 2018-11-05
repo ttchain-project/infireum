@@ -13,7 +13,15 @@ import Cartography
 
 final class MainWalletViewController: KLModuleViewController, KLVMVC {
     
-    typealias Constructor = Void
+    enum EntryPoint:Int {
+        case MainTab = 0
+        case MainWallet
+    }
+    struct Config {
+        let entryPoint: EntryPoint
+        let wallet:Wallet
+    }
+    typealias Constructor = Config
     typealias ViewModel = MainWalletViewModel
     
     var viewModel: MainWalletViewModel!
@@ -37,7 +45,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     
     fileprivate lazy var walletOverviewVC: MainWalletOverviewViewController = {
         let vc = MainWalletOverviewViewController.instance(
-            of: WalletFinder.getWallet(),
+            of: viewModel.wallet.value,
             total: viewModel.totalFiatValues.value.value,
             fiat: viewModel.fiat.value
         )
@@ -58,16 +66,19 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     
     
     
-    func config(constructor: Void) {
+    func config(constructor: Constructor) {
         view.layoutIfNeeded()
         
         let refreshStart = refreshControl.rx.controlEvent(.valueChanged).asDriver().throttle(2.5, latest: true)
         
         viewModel = ViewModel.init(
             input: MainWalletViewModel.InputSource(
+                
 //            walletChangeInput: walletChooseTextField.rx.tapGesture().map { _ in () }.skip(1).asDriver(onErrorJustReturn: ()),
             assetRowSelect: tableView.rx.itemSelected.asDriver().map { $0.row },
-            walletRefreshInput: refreshStart
+            walletRefreshInput: refreshStart,
+            wallet:constructor.wallet,
+            entryPoint: constructor.entryPoint
             ),
             output: MainWalletViewModel.OutputSource(
                 finishRefreshWallet: {
@@ -231,10 +242,16 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
 //        qrCodeScannerBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
-        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
-
+        renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
+        switch self.viewModel.entryPoint {
+        case .MainTab?:
+            setDoughnutMenuButton()
+        case .MainWallet?:
+            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+        case .none:
+            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+        }
         tableView.backgroundColor = theme.palette.bgView_sub
-
     }
     
     private func startChangeWallet() {
@@ -293,11 +310,18 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         //        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
         //        present(vc, animated: true, completion: nil)
 
-        let vc = WithdrawalBaseViewController.instance(
-            from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
-        )
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        switch self.viewModel.entryPoint {
+        case .MainWallet?:
+            let vc = WithdrawalBaseViewController.instance(
+                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
+            )
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            let vc = WithdrawalBaseViewController.navInstance(
+                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
+            )
+            self.present(vc, animated: true)
+        }
     }
     
     @objc private func toTransRecord() {
@@ -315,7 +339,6 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             isTypeLocked: false
             )
         )
-        
         present(nav, animated: true, completion: nil)
     }
     

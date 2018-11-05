@@ -43,12 +43,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="ybA-0Q-nbw">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="113.66666666666667"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LOGO" translatesAutoresizingMaskIntoConstraints="NO" id="49z-Af-6Bm">
-                    <rect key="frame" x="20.000000000000004" y="34" width="45.333333333333343" height="45.666666666666657"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="49z-Af-6Bm" secondAttribute="height" multiplier="1:1" id="FCB-ep-5oH"/>
-                    </constraints>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZwJ-8i-mrb">
                     <rect key="frame" x="80.666666666666671" y="125.66666666666669" width="213.66666666666663" height="69"/>
                     <subviews>
@@ -326,11 +320,8 @@
                 <constraint firstItem="au2-Nk-9lw" firstAttribute="top" secondItem="2gf-VU-hjt" secondAttribute="bottom" constant="10" id="cO6-Cp-Qul"/>
                 <constraint firstItem="pYl-Hg-BDv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="i9p-xx-bmP"/>
                 <constraint firstItem="ZwJ-8i-mrb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nbu-0Q-X2p"/>
-                <constraint firstItem="49z-Af-6Bm" firstAttribute="height" secondItem="ybA-0Q-nbw" secondAttribute="height" multiplier="0.4" id="oo6-XZ-t6N"/>
-                <constraint firstItem="49z-Af-6Bm" firstAttribute="centerY" secondItem="ybA-0Q-nbw" secondAttribute="centerY" id="r3k-n9-nvL"/>
                 <constraint firstItem="ybA-0Q-nbw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sLp-nw-Oh4"/>
                 <constraint firstItem="2gf-VU-hjt" firstAttribute="top" secondItem="ZwJ-8i-mrb" secondAttribute="bottom" constant="10" id="uDB-BN-N5n"/>
-                <constraint firstItem="49z-Af-6Bm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="yE2-18-38J"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="47.200000000000003" y="35.467980295566505"/>
@@ -340,7 +331,6 @@
         <image name="AirDropWallet" width="431" height="417"/>
         <image name="BTCWallet" width="431" height="417"/>
         <image name="ETHWallet" width="431" height="417"/>
-        <image name="LOGO" width="113" height="118"/>
         <image name="RSCWallet" width="431" height="417"/>
         <image name="copyWalletAdressIcon" width="39" height="52"/>
         <image name="navTitleImage" width="1080" height="278"/>

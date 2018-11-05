@@ -151,16 +151,17 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     }
     
     private func toWalletDetail(withWallet wallet: Wallet) {
-        WalletFinder.markWallet(wallet)
-        let vc = MainWalletViewController.instance()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        WalletFinder.markWallet(wallet)
+        let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: wallet))
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.present(vc, animated: true, completion: nil)
     }
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-
+        setDoughnutMenuButton()
     }
     override func renderLang(_ lang: Lang) {
         self.title = "TTChain"
