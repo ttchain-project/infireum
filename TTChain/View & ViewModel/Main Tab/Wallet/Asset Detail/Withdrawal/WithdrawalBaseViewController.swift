@@ -202,10 +202,14 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.application_main, shouldClear: true)
 
+        guard self.navigationController != nil else {
+            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
+            return
+        }
+        changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
+
 //        if((self.presentingViewController) != nil) {
-//            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
 //        } else if(self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
-            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
 //        }
         
 //        self.backButton.rx.tap.bind {
