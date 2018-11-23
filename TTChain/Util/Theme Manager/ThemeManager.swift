@@ -220,4 +220,5 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     var recordStatus_withdrawal: UIColor = .owAzure
     
     var recordStatus_failed: UIColor = .owPinkRed
+    
 }
