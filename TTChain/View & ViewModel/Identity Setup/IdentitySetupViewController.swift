@@ -27,6 +27,7 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var orLabel: UILabel!
     @IBOutlet weak var sepline: UIView!
     @IBOutlet weak var restoreBtn: UIButton!
+    @IBOutlet weak var bgHeaderImgView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +97,7 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
             font: UIFont.owRegular(size: 15)
         )
         restoreBtn.setBackgroundImage(image, for: .normal)
+        self.bgHeaderImgView.backgroundColor = .darkPink
     }
     
     override func renderLang(_ lang: Lang) {
@@ -103,7 +105,7 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
         headerLabel.text = dls.login_label_title
         createBtn.setTitleForAllStates(dls.login_btn_create)
         createNoteLabel.text = dls.login_label_desc
-        orLabel.text = dls.login_label_or
+        orLabel.text = " " + dls.login_label_or + " "
         restoreBtn.setTitleForAllStates(dls.login_btn_restore)
     }
     
