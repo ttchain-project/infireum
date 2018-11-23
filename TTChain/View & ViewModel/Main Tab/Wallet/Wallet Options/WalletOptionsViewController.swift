@@ -162,6 +162,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         setDoughnutMenuButton()
+        
     }
     override func renderLang(_ lang: Lang) {
         self.title = "TTChain"

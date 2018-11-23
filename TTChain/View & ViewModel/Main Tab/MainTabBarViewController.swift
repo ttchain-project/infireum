@@ -17,10 +17,6 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     var themeBag: DisposeBag = DisposeBag.init()
     var langBag: DisposeBag = DisposeBag.init()
     
-    private weak var walletNav: UINavigationController?
-    private var walletVC: MainWalletViewController? {
-        return walletNav?.viewControllers[0] as? MainWalletViewController
-    }
     
     private var walletOptionNav: UINavigationController?
     private var walletOptionVC: WalletOptionsViewController? {
@@ -73,12 +69,12 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         // Do any additional setup after loading the view.
         
 //        let walletNav = MainWalletViewController.navInstance()
-        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet())
-        let tradeNav: UINavigationController = MainWalletViewController.navInstance(from: configForMainWallet)
+//        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet())
 //        let meVC: MeViewController = MeViewController.instance()
         let exploreVC : ExploreViewController = ExploreViewController.instance()
         let walletOptionsNav = WalletOptionsViewController.navInstance()
-        
+        let tradeNav = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainTab, wallet: WalletFinder.getWallet()))
+
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem
 //        meVC.tabBarItem = meItem
