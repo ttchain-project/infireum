@@ -67,13 +67,9 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-//        let walletNav = MainWalletViewController.navInstance()
-//        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet())
-//        let meVC: MeViewController = MeViewController.instance()
         let exploreVC : ExploreViewController = ExploreViewController.instance()
         let walletOptionsNav = WalletOptionsViewController.navInstance()
-        let tradeNav = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainTab, wallet: WalletFinder.getWallet()))
+        let tradeNav = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH))
 
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem

@@ -15,6 +15,7 @@ class ManageAssetViewModel: KLRxViewModel {
     
     struct Input {
         let wallet: Wallet
+        let source:MainWalletViewController.Source
     }
     
     typealias InputSource = Input
@@ -53,7 +54,14 @@ class ManageAssetViewModel: KLRxViewModel {
     private func getSelections() -> [CoinSelection] {
         var _coinSels = CoinSelection.getAllSelections(of: input.wallet,
                                                        filterIsSelected: false)
-        
+        switch input.source {
+        case .RSC:
+            _coinSels = _coinSels.filter { $0.coinIdentifier?.contains("_RSC") == true}
+        case .AirDrop:
+            _coinSels = _coinSels.filter { $0.coinIdentifier?.contains("_AIRDROP") == true}
+        default:
+            break
+        }
         _coinSels.sort(by: { (sel1, sel2) -> Bool in
             guard let c1 = sel1.coin, let c2 = sel2.coin else {
                 return true

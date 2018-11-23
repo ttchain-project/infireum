@@ -45,118 +45,134 @@ class CoinSyncHandler {
     
     static func syncCoins(forVersion version: String) -> RxAPIVoidResponse {
         let req = Server.instance.getCoins(queryString: nil, chainType: nil, defaultOnly: true, mainCoinID: nil)
+        let reqTest = Server.instance.getCoinsTest(queryString: nil, chainType: nil, defaultOnly: true, mainCoinID: nil)
         let currentCoins = DB.instance.get(type: Coin.self, predicate: nil, sorts: nil) ?? []
         
-        return req
-            .map {
-            result in
-            switch result {
-            case .failed(error: let err): return .failed(error: err)
-            case .success(let model):
-                let newCoinSources = model.sources 
-                let findLocalCoinWithCoinIdentifier: (String) -> Coin? = {
-                    identifier in
-                    guard !currentCoins.isEmpty else { return nil }
-                    if let idx = currentCoins.index(where: { (coin) -> Bool in
-                        return coin.identifier == identifier
-                    }) {
-                        return currentCoins[idx]
-                    }else {
-                        return nil
-                    }
-                }
-                
-                var insertNeededCoinSources: [CoinsAPIModel.CoinSource] = []
-                var updateFlag: Bool = false
-                for newSource in newCoinSources {
-                    if let coin = findLocalCoinWithCoinIdentifier(newSource.identifier) {
-                        coin.inAppName = newSource.inAppName
-                        coin.chainName = newSource.chainName
-                        coin.walletMainCoinID = newSource.walletMainCoinID
-                        coin.fullname = newSource.fullName
-                        coin.contract = newSource.contract
-                        coin.digit = Int16(newSource.digit)
-                        coin.isDefaultSelected = newSource.isDefaultSelected
-                        coin.isActive = newSource.isActive
-                        coin.isDefault = newSource.isDefault
-                        if let url = URL.init(string: newSource.iconUrlStr) {
-                          KLRxImageDownloader
-                            .instance
-                            .download(
-                                source: url,
-                                onComplete: { result in
-                                    switch result {
-                                    case .success(let img):
-                                        coin.icon = UIImagePNGRepresentation(img) as NSData?
-                                    default: break
-                                    }
-                            })
+        return reqTest
+            .flatMap {
+                result -> RxAPIResponse<(CoinsAPIModel,CoinsTestAPIModel?)> in
+                switch result {
+                case .failed(error: let err): return RxAPIResponse.just(.failed(error: err))
+                case .success(let model):
+                    return req.map {
+                        _result -> APIResult<(CoinsAPIModel, CoinsTestAPIModel?)>  in
+                        switch _result {
+                        case .failed(let e): return .failed(error: e)
+                        case .success(let _m): return .success((_m, model))
                         }
-                        
-                        updateFlag = true
-                    }else {
-                        insertNeededCoinSources.append(newSource)
                     }
                 }
-                
-                
-                
-                if updateFlag {
+            }.flatMap {
+                response in
+                switch response {
+                case .failed(error: let err): return RxAPIVoidResponse.just(.failed(error: err))
+                    
+                case .success(let model, let testModel):
+                    var newCoinSources : [CoinsAPIModel.CoinSource] = model.sources
+                    if let newTestCoinSources = testModel?.sources {
+                        newCoinSources.append(contentsOf: newTestCoinSources)
+                    }
+                    let findLocalCoinWithCoinIdentifier: (String) -> Coin? = {
+                        identifier in
+                        guard !currentCoins.isEmpty else { return nil }
+                        if let idx = currentCoins.index(where: { (coin) -> Bool in
+                            return coin.identifier == identifier
+                        }) {
+                            return currentCoins[idx]
+                        }else {
+                            return nil
+                        }
+                    }
+                    
+                    var insertNeededCoinSources: [CoinsAPIModel.CoinSource] = []
+                    var updateFlag: Bool = false
+                    for newSource in newCoinSources {
+                        if let coin = findLocalCoinWithCoinIdentifier(newSource.identifier) {
+                            coin.inAppName = newSource.inAppName
+                            coin.chainName = newSource.chainName
+                            coin.walletMainCoinID = newSource.walletMainCoinID
+                            coin.fullname = newSource.fullName
+                            coin.contract = newSource.contract
+                            coin.digit = Int16(newSource.digit)
+                            coin.isDefaultSelected = newSource.isDefaultSelected
+                            coin.isActive = newSource.isActive
+                            coin.isDefault = newSource.isDefault
+                            if let url = URL.init(string: newSource.iconUrlStr) {
+                                KLRxImageDownloader
+                                    .instance
+                                    .download(
+                                        source: url,
+                                        onComplete: { result in
+                                            switch result {
+                                            case .success(let img):
+                                                coin.icon = UIImagePNGRepresentation(img) as NSData?
+                                            default: break
+                                            }
+                                    })
+                            }
+                            
+                            updateFlag = true
+                        }else {
+                            insertNeededCoinSources.append(newSource)
+                        }
+                    }
+                    
+                    
+                    
+                    if updateFlag {
+                        DB.instance.update()
+                    }
+                    
+                    if !insertNeededCoinSources.isEmpty {
+                        #if DEBUG
+                        print("Now will start to insert new coins to local database, including:\n")
+                        print(insertNeededCoinSources.map { $0.fullName })
+                        #endif
+                        
+                        let constructors = Coin.createConstructorsFromServerAPIModelSources(
+                            insertNeededCoinSources
+                        )
+                        
+                        //After get the all insert-needed coins,
+                        //Should also create selections for every default selected one.
+                        Coin.syncEntities(constructors: constructors)
+                    }
+                    
                     DB.instance.update()
-                }
-                
-                if !insertNeededCoinSources.isEmpty {
-                    #if DEBUG
-                    print("Now will start to insert new coins to local database, including:\n")
-                    print(insertNeededCoinSources.map { $0.fullName })
-                    #endif
+                    let allCoins = DB.instance.get(type: Coin.self, predicate: nil, sorts: nil)
                     
-                    let constructors = Coin.createConstructorsFromServerAPIModelSources(
-                        insertNeededCoinSources
-                    )
-                    
-                    //After get the all insert-needed coins,
-                    //Should also create selections for every default selected one.
-                    Coin.syncEntities(constructors: constructors)
-                }
-                
-                DB.instance.update()
-                let allCoins = DB.instance.get(type: Coin.self, predicate: nil, sorts: nil)
-                
-                if let _allCoins = allCoins {
-                    if getSyncDateOfCurrentVersion() == nil {
-                        for coin in _allCoins where coin.isDefaultSelected {
-                            let wallets = Wallet.getWallets(ofMainCoinID: coin.walletMainCoinID!)
-                            for wallet in wallets {
-                                print("Mark wallet: \(wallet.name!), of coin: \(coin.inAppName!)")
-                                _ = CoinSelection
-                                    .markSelection(
-                                        of: wallet,
-                                        coin: coin,
-                                        isSelected: true
-                                )
+                    if let _allCoins = allCoins {
+                        if getSyncDateOfCurrentVersion() == nil {
+                            for coin in _allCoins where coin.isDefaultSelected {
+                                let wallets = Wallet.getWallets(ofMainCoinID: coin.walletMainCoinID!)
+                                for wallet in wallets {
+                                    print("Mark wallet: \(wallet.name!), of coin: \(coin.inAppName!)")
+                                    _ = CoinSelection
+                                        .markSelection(
+                                            of: wallet,
+                                            coin: coin,
+                                            isSelected: true
+                                    )
+                                }
                             }
                         }
+                        
+                        //Sync main coins
+                        let mainCoins = _allCoins.reduce([], { (coinIDs, coin) -> [String] in
+                            if coinIDs.contains(coin.walletMainCoinID!) {
+                                return coinIDs
+                            }else {
+                                return coinIDs + [coin.walletMainCoinID!]
+                            }
+                        })
+                        
+                        MainCoinTypStorage
+                            .syncRemoteMainCoinIDs(mainCoins)
                     }
-                    
-                    //Sync main coins
-                    let mainCoins = _allCoins.reduce([], { (coinIDs, coin) -> [String] in
-                        if coinIDs.contains(coin.walletMainCoinID!) {
-                            return coinIDs
-                        }else {
-                            return coinIDs + [coin.walletMainCoinID!]
-                        }
-                    })
-                    
-                    MainCoinTypStorage
-                        .syncRemoteMainCoinIDs(mainCoins)
+                    self.mark(version: version, toDate: Date())
+                    return RxAPIVoidResponse.just(APIResult.success(()))
                 }
-                
-                self.mark(version: version, toDate: Date())
-                return .success(())
-            }
         }
-        
     }
     
     @discardableResult static func mark(version: String, toDate date: Date) -> Bool {

@@ -15,6 +15,7 @@ final class ManageAssetViewController: KLModuleViewController, KLVMVC {
     struct Config {
         let wallet: Wallet
         let updateNotifier: ([Asset]) -> Void
+        let source: MainWalletViewController.Source
     }
     
     typealias Constructor = Config
@@ -45,7 +46,7 @@ final class ManageAssetViewController: KLModuleViewController, KLVMVC {
         
         view.layoutIfNeeded()
         viewModel = ViewModel.init(
-            input: ManageAssetViewModel.InputSource(wallet: constructor.wallet),
+            input: ManageAssetViewModel.InputSource(wallet: constructor.wallet,source:constructor.source),
             output: ()
         )
         

@@ -75,6 +75,8 @@ class MainWalletViewModel: KLRxViewModel {
         let walletRefreshInput: Driver<Void>
         let wallet:Wallet
         let entryPoint:MainWalletViewController.EntryPoint
+        let source:MainWalletViewController.Source
+
     }
     
     struct Output {
@@ -92,7 +94,7 @@ class MainWalletViewModel: KLRxViewModel {
     
     var bag: DisposeBag = DisposeBag.init()
     let wallet: BehaviorRelay<Wallet>
-    
+
     lazy var fiat: BehaviorRelay<Fiat> = {
         return FiatManager.instance.fiat
     }()
@@ -103,9 +105,7 @@ class MainWalletViewModel: KLRxViewModel {
         self.output = output
         self.wallet = BehaviorRelay.init(value: input.wallet)
         self.entryPoint = input.entryPoint
-        var _assets = Asset.getAllWalletAssetsUnderCurrenIdentity(
-            wallet: input.wallet, selectedOnly: true
-        )
+        var _assets = self.fetchAssets()
         
         sortAssetsInPlace(&_assets, sort: AssetSortingManager.getSortOption())
         
@@ -114,6 +114,19 @@ class MainWalletViewModel: KLRxViewModel {
         concatInput()
         concatOutput()
         bindInternalLogic()
+    }
+    
+    private func fetchAssets() -> [Asset] {
+        switch self.input.source {
+        case .RSC:
+            return Asset.getRSCAssets(forETHWallet: input.wallet)
+        case .AirDrop:
+            return Asset.getAirDropAssets(forETHWallet: input.wallet)
+        default:
+            return Asset.getAllWalletAssetsUnderCurrenIdentity(
+                wallet: input.wallet, selectedOnly: true
+            )
+        }
     }
     
     func concatInput() {
@@ -279,7 +292,7 @@ class MainWalletViewModel: KLRxViewModel {
     public func reloadAssets(assets: [Asset]? = nil) {
         DispatchQueue.main.async {
             //As assets update shuold perfrom asap, load it in the main thread to prevent user keeping seeing the assets of previous wallet.
-            var _assets = assets ?? Asset.getAllWalletAssetsUnderCurrenIdentity(wallet: self.wallet.value, selectedOnly: true)
+            var _assets = assets ?? self.fetchAssets()
             self.sortAssetsInPlace(&_assets, sort: AssetSortingManager.getSortOption())
             self.assets.accept(_assets)
             
@@ -495,9 +508,7 @@ extension MainWalletViewModel {
         switch sort {
         case .none:
             //Do the reset
-            sortedAssets = Asset
-                .getAllWalletAssetsUnderCurrenIdentity(wallet: wallet.value,
-                                                       selectedOnly: true)
+            sortedAssets = self.fetchAssets()
         case .alphabetic:
             sortedAssets = assets.sorted(by: { (asset1, asset2) -> Bool in
                 guard let c1 = asset1.coin, let c2 = asset2.coin else {

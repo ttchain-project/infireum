@@ -13,6 +13,9 @@ import Cartography
 
 final class MainWalletViewController: KLModuleViewController, KLVMVC {
     
+    enum Source {
+        case BTC, ETH, RSC, AirDrop
+    }
     enum EntryPoint:Int {
         case MainTab = 0
         case MainWallet
@@ -20,6 +23,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     struct Config {
         let entryPoint: EntryPoint
         let wallet:Wallet
+        let source:Source
     }
     typealias Constructor = Config
     typealias ViewModel = MainWalletViewModel
@@ -74,21 +78,22 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         viewModel = ViewModel.init(
             input: MainWalletViewModel.InputSource(
                 
-//            walletChangeInput: walletChooseTextField.rx.tapGesture().map { _ in () }.skip(1).asDriver(onErrorJustReturn: ()),
-            assetRowSelect: tableView.rx.itemSelected.asDriver().map { $0.row },
-            walletRefreshInput: refreshStart,
-            wallet:constructor.wallet,
-            entryPoint: constructor.entryPoint
+                //            walletChangeInput: walletChooseTextField.rx.tapGesture().map { _ in () }.skip(1).asDriver(onErrorJustReturn: ()),
+                assetRowSelect: tableView.rx.itemSelected.asDriver().map { $0.row },
+                walletRefreshInput: refreshStart,
+                wallet:constructor.wallet,
+                entryPoint: constructor.entryPoint,
+                source:constructor.source
             ),
             output: MainWalletViewModel.OutputSource(
                 finishRefreshWallet: {
                     [unowned self] in
-//                    print("finish refresh")
+                    //                    print("finish refresh")
                     self.refreshControl.endRefreshing()
-            },
+                },
                 startChangeWallet: {
                     [unowned self] in self.startChangeWallet()
-            },
+                },
                 selectAsset: {
                     [unowned self] (asset, wallet) in self.handleAssetSelect(asset, ofWallet: wallet)
                 }
@@ -232,9 +237,24 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-//        let text = lang.dls.walletOverview_btn_txRecord
-//        transRecordBtn.setTitleForAllStates(text)
-        self.title = "Title"
+        //        transRecordBtn.setTitleForAllStates(text)
+        switch self.viewModel.entryPoint! {
+        case .MainTab:
+            self.title = "TTChain"
+        case .MainWallet:
+            self.title = {
+                switch self.viewModel.input.source {
+                case .RSC:
+                    return "RSC"
+                case .AirDrop:
+                    return "AirDrop"
+                default:
+                    return self.viewModel.wallet.value.name
+                }
+            }()
+            
+        }
+        
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -291,7 +311,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             from: ManageAssetViewController.Config(wallet: wallet, updateNotifier: {
                 [unowned self] assets in
                 self.viewModel.reloadAssets(assets: assets)
-            })
+            },source:self.viewModel.input.source)
         )
         
         present(nav, animated: true, completion: nil)

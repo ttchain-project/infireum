@@ -72,37 +72,53 @@ extension DatabaseManager {
     
     fileprivate func remoteConfigure() -> Observable<Bool> {
         //Fire API and wait for configuration responses
-        let getCoin = Server.instance.getCoins(
+        
+        let reqCoin = Server.instance.getCoins(
             queryString: nil,
             chainType: nil,
             defaultOnly: true,
             mainCoinID: nil
-            ).map {
-                
-            result -> Bool in
-            switch result {
-            case .failed(let err):
-                print(err)
-                //NOTE: Should we handle error here?
+            ).asObservable()
+        
+        let reqTestCoin = Server.instance.getCoinsTest(
+            queryString: nil,
+            chainType: nil,
+            defaultOnly: true,
+            mainCoinID: nil
+            ).asObservable()
+        
+        let res = Observable.combineLatest(reqCoin, reqTestCoin).map { coin, testCoin -> Bool in
+            
+            var sources = [CoinsAPIModel.CoinSource]()
+            switch coin {
+            case .failed(_):
                 return false
             case .success(let model):
-                if let allCoins = Coin.syncEntities(constructors: Coin.createConstructorsFromServerAPIModelSources(model.sources)) {
-                    let mainCoins = allCoins.reduce([], { (coinIDs, coin) -> [String] in
-                        if coinIDs.contains(coin.walletMainCoinID!) {
-                            return coinIDs
-                        }else {
-                            return coinIDs + [coin.walletMainCoinID!]
-                        }
-                    })
-                    
-                    MainCoinTypStorage.syncRemoteMainCoinIDs(mainCoins)
-                }
-                
-                ServerSyncRecord.markEntitySyncRecord(entityType: Coin.self)
-                return true
+                sources = model.sources
             }
+            
+            switch testCoin {
+            case .failed(_):
+                return false
+            case .success(let model):
+                sources.append(contentsOf: model.sources)
+            }
+            if let allCoins = Coin.syncEntities(constructors: Coin.createConstructorsFromServerAPIModelSources(sources)) {
+                let mainCoins = allCoins.reduce([], { (coinIDs, coin) -> [String] in
+                    if coinIDs.contains(coin.walletMainCoinID!) {
+                        return coinIDs
+                    }else {
+                        return coinIDs + [coin.walletMainCoinID!]
+                    }
+                })
                 
+                MainCoinTypStorage.syncRemoteMainCoinIDs(mainCoins)
+            }
+            
+            ServerSyncRecord.markEntitySyncRecord(entityType: Coin.self)
+            return true
         }
+        
         
         let getFiat = Server.instance.getFiats().map {
             result -> Bool in
@@ -120,9 +136,9 @@ extension DatabaseManager {
         let getUSDFiatRateTable = FiatToFiatRate.sync()
         
         return Observable.combineLatest(
-            getCoin.asObservable(), getFiat.asObservable(), getUSDFiatRateTable.asObservable()
+            res.asObservable(), getFiat.asObservable(), getUSDFiatRateTable.asObservable()
             )
-//            .debug("Get remotae configure (coins, fiats, fiatRateTable)")
+            //            .debug("Get remotae configure (coins, fiats, fiatRateTable)")
             .map { $0 && $1 && $2 }
     }
 }

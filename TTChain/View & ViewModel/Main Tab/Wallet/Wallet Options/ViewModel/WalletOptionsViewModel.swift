@@ -55,8 +55,10 @@ class WalletOptionsViewModel:KLRxViewModel {
     }()
     
     private(set) var assetsForBTC: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
+    private(set) var assetsForRSC: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
     private(set) var assetsForETH: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
-    
+    private(set) var assetsForAirDrop: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
+
     func fetchWallets() {
         let predForBTC = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.btc.rawValue))
         guard let btcWallet = DB.instance.get(type: Wallet.self, predicate: predForBTC, sorts: nil) else {
@@ -72,8 +74,13 @@ class WalletOptionsViewModel:KLRxViewModel {
         
         let _assetsForBTC = Asset.getAllWalletAssetsUnderCurrenIdentity(wallet: self.btcWallet.value!, selectedOnly: true)
         let _assetsForETH = Asset.getAllWalletAssetsUnderCurrenIdentity(wallet: self.ethWallet.value!, selectedOnly: true)
+        let _assetsForRSC = _assetsForETH.filter { $0.coinID?.contains("_RSC") == true}
+        let _assetsForAirDrop = _assetsForETH.filter { $0.coinID?.contains("_AIRDROP") == true}
+        
         self.assetsForETH = BehaviorRelay.init(value: _assetsForETH)
         self.assetsForBTC = BehaviorRelay.init(value: _assetsForBTC)
+        self.assetsForRSC = BehaviorRelay.init(value: _assetsForRSC)
+        self.assetsForAirDrop = BehaviorRelay.init(value: _assetsForAirDrop)
         self.refreshAllData()
     }
     
@@ -93,6 +100,9 @@ class WalletOptionsViewModel:KLRxViewModel {
         
         totalFiatValuesBTC.accept(createTotalFiatValues(for: assetsForBTC))
         totalFiatValuesETH.accept(createTotalFiatValues(for: assetsForETH))
+        totalFiatValuesRSC.accept(createTotalFiatValues(for: assetsForRSC))
+        totalFiatValuesAirDrop.accept(createTotalFiatValues(for: assetsForAirDrop))
+        
     }
     
     /// Calling this function will renew fiat data (include fiatRate and fiatValue)
@@ -205,6 +215,15 @@ class WalletOptionsViewModel:KLRxViewModel {
     private(set) lazy var totalFiatValuesETH: BehaviorRelay<BehaviorRelay<Decimal?>> = {
         return BehaviorRelay.init(value: createTotalFiatValues(for: assetsForETH))
     }()
+    
+    private(set) lazy var totalFiatValuesRSC: BehaviorRelay<BehaviorRelay<Decimal?>> = {
+        return BehaviorRelay.init(value: createTotalFiatValues(for: assetsForRSC))
+    }()
+    
+    private(set) lazy var totalFiatValuesAirDrop: BehaviorRelay<BehaviorRelay<Decimal?>> = {
+        return BehaviorRelay.init(value: createTotalFiatValues(for: assetsForAirDrop))
+    }()
+
     
     private func createTotalFiatValues(for assets:BehaviorRelay<[Asset]>) -> BehaviorRelay<Decimal?> {
         let source: BehaviorRelay<Decimal?> = BehaviorRelay.init(value: nil)

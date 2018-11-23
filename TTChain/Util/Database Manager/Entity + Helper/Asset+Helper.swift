@@ -11,38 +11,61 @@ import CoreData
 extension Asset {
     static func getAllWalletAssetsUnderCurrenIdentity(wallet: Wallet, selectedOnly: Bool) -> [Asset] {
         /*
-        let assetPred = Asset.genPredicate(fromIdentifierType: .str(keyPath: #keyPath(walletEPKey), value: wallet.encryptedPKey!))
-        guard let assets = DB.instance.get(type: self, predicate: assetPred, sorts: nil)?.filter({
-            $0.wallet! == wallet
-        }) else {
-            return errorDebug(response: [])
-        }
-        */
+         let assetPred = Asset.genPredicate(fromIdentifierType: .str(keyPath: #keyPath(walletEPKey), value: wallet.encryptedPKey!))
+         guard let assets = DB.instance.get(type: self, predicate: assetPred, sorts: nil)?.filter({
+         $0.wallet! == wallet
+         }) else {
+         return errorDebug(response: [])
+         }
+         */
         let selections = CoinSelection.getAllSelections(of: wallet,
                                                         filterIsSelected: selectedOnly)
         let assets = selections.compactMap { $0.findAsset() }
         return assets
         
         /* Test new logic written above
-        //This is to prevent user has remove CoinSelection from db, but db still has the asset record. need to filter out this option.
-        let inListAssets = assets.filter { (asset) -> Bool in
-            if let idx = selections.index(where: { (sel) -> Bool in
-                return sel.coinIdentifier! == asset.coinID!
-            }) {
-                //If is selectedOnly, unselected ones will be filtered out.
-                let sel = selections[idx]
-                if selectedOnly {
-                    return sel.isSelected
-                }else {
-                    return true
-                }
-            }else {
-                return false
-            }
+         //This is to prevent user has remove CoinSelection from db, but db still has the asset record. need to filter out this option.
+         let inListAssets = assets.filter { (asset) -> Bool in
+         if let idx = selections.index(where: { (sel) -> Bool in
+         return sel.coinIdentifier! == asset.coinID!
+         }) {
+         //If is selectedOnly, unselected ones will be filtered out.
+         let sel = selections[idx]
+         if selectedOnly {
+         return sel.isSelected
+         }else {
+         return true
+         }
+         }else {
+         return false
+         }
+         }
+         
+         return inListAssets
+         */
+    }
+    
+    
+    static func getRSCAssets(forETHWallet wallet:Wallet) -> [Asset]{
+        guard wallet.chainType == ChainType.eth.rawValue else {
+            return []
         }
         
-        return inListAssets
-         */
+        let selections = CoinSelection.getAllSelections(of: wallet,
+                                                        filterIsSelected: true)
+        let assets = selections.filter { $0.coinIdentifier?.contains("_RSC") == true  }.compactMap { $0.findAsset() }
+        return assets
+    }
+    
+    static func getAirDropAssets(forETHWallet wallet:Wallet) -> [Asset]{
+        guard wallet.chainType == ChainType.eth.rawValue else {
+            return []
+        }
+        
+        let selections = CoinSelection.getAllSelections(of: wallet,
+                                                        filterIsSelected: true)
+        let assets = selections.filter { $0.coinIdentifier?.contains("_AIRDROP") == true  }.compactMap { $0.findAsset() }
+        return assets
     }
     
     
@@ -66,7 +89,7 @@ extension Asset {
                 asset in
                 asset.coinID = coin.identifier!
                 #if DEBUG
-//                asset.amount = 100
+                //                asset.amount = 100
                 asset.amount = 0
                 #else
                 asset.amount = 0

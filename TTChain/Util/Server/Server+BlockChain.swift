@@ -236,6 +236,22 @@ class Server: MoyaProvider<Router> {
         return fire(router: .helper(.getCoins(api)))
     }
     
+    //MARK: - GET /coinTest
+    func getCoinsTest(
+        queryString: String?,
+        chainType: ChainType?,
+        defaultOnly: Bool,
+        mainCoinID: String?
+        ) -> RxAPIResponse<CoinsTestAPIModel> {
+        let api = CoinsTestAPI.init(
+            query: queryString,
+            defaultOnly: defaultOnly,
+            chainType: chainType,
+            mainCoinID: mainCoinID
+        )
+        return fire(router: .helper(.getCoinsTest(api)))
+    }
+    
     //MARK: - GET /Fiats
     func getFiats() -> RxAPIResponse<FiatsAPIModel> {
         let api = FiatsAPI()

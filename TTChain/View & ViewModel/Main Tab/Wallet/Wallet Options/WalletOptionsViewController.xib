@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletOptionsViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
                 <outlet property="USDAmountLabel" destination="fGa-i3-jGN" id="yNH-Cy-bia"/>
+                <outlet property="airdropAddressCopy" destination="NOS-Kb-f5t" id="a1m-wk-NgC"/>
                 <outlet property="airdropAddressLabel" destination="YlO-gU-GBZ" id="JgE-Ve-42t"/>
                 <outlet property="airdropButton" destination="ApO-73-pk5" id="J4P-BL-F5O"/>
                 <outlet property="airdropSetting" destination="Wfx-WI-9M1" id="wgh-CW-gsB"/>

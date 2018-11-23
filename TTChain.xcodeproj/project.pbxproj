@@ -103,6 +103,8 @@
 		55E7307D21880FC8003AE47E /* WalletOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7307C21880FC8003AE47E /* WalletOptionsViewModel.swift */; };
 		55E7307E21880FC8003AE47E /* WalletOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7307C21880FC8003AE47E /* WalletOptionsViewModel.swift */; };
 		55E7307F21880FC8003AE47E /* WalletOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7307C21880FC8003AE47E /* WalletOptionsViewModel.swift */; };
+		55EF69D221A7F921007E074A /* MainWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E7305A2186DC4B003AE47E /* MainWalletViewController.xib */; };
+		55EF69D321A7F922007E074A /* MainWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E7305A2186DC4B003AE47E /* MainWalletViewController.xib */; };
 		64083D0021101DC300DE1C31 /* TxFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64083CFF21101DC300DE1C31 /* TxFilter.swift */; };
 		64083D0121101DC300DE1C31 /* TxFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64083CFF21101DC300DE1C31 /* TxFilter.swift */; };
 		64083D0221101DC300DE1C31 /* TxFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64083CFF21101DC300DE1C31 /* TxFilter.swift */; };
@@ -4649,6 +4651,7 @@
 				640D88C220EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
 				64C9D47220FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				64C9D46A20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
+				55EF69D321A7F922007E074A /* MainWalletViewController.xib in Resources */,
 				640D88EF20EF0D890010D986 /* AssetDetailViewController.xib in Resources */,
 				64F07E3120D24DDD00A60C5C /* MainViewController.xib in Resources */,
 				6424B6AD20F5F7B800AEBCAD /* TransferRecordsListViewController.xib in Resources */,
@@ -4757,6 +4760,7 @@
 				640D88C320EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
 				64C9D47320FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				64C9D46B20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
+				55EF69D221A7F921007E074A /* MainWalletViewController.xib in Resources */,
 				640D88F020EF0D890010D986 /* AssetDetailViewController.xib in Resources */,
 				64F07E3220D24DDD00A60C5C /* MainViewController.xib in Resources */,
 				6424B6AE20F5F7B800AEBCAD /* TransferRecordsListViewController.xib in Resources */,

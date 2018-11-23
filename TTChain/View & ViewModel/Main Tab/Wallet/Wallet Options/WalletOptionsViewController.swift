@@ -46,7 +46,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     @IBOutlet weak var rscValueLabel: UILabel!
    
     @IBOutlet weak var airdropSetting: UIImageView!
-    @IBOutlet weak var airdropAddressCopy: NSLayoutConstraint!
+    @IBOutlet weak var airdropAddressCopy: UIImageView!
     @IBOutlet weak var airdropAddressLabel: UILabel!
     @IBOutlet weak var airdropValueLabel: UILabel!
     
@@ -79,11 +79,17 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         
         self.viewModel.ethWallet.subscribe(onNext: { (wallet) in
             self.ethAddressLabel.text = wallet?.address
+            self.rscAddressLabel.text = wallet?.address
+            self.airdropAddressLabel.text = wallet?.address
         }).disposed(by: bag)
         
         let totalBTC = self.viewModel.totalFiatValuesBTC.flatMapLatest { $0 }.share()
         let totalETH = self.viewModel.totalFiatValuesETH.flatMapLatest { $0 }.share()
         let fiat = viewModel.fiat
+        
+        let totalRSC = self.viewModel.totalFiatValuesRSC.flatMapLatest { $0 }.share()
+        let totalAirDrop = self.viewModel.totalFiatValuesAirDrop.flatMapLatest { $0 }.share()
+
         
         Observable.combineLatest(totalBTC, fiat)
             .observeOn(MainScheduler.instance)
@@ -112,6 +118,22 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             })
             .disposed(by: bag)
         
+        Observable.combineLatest(totalRSC, fiat)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] t, f in
+                self.rscValueLabel.text = self.updateValue(for: f, total: t)
+            })
+            .disposed(by: bag)
+        
+        Observable.combineLatest(totalAirDrop, fiat)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] t, f in
+                self.airdropValueLabel.text = self.updateValue(for: f, total: t)
+            })
+            .disposed(by: bag)
+        
         self.btcAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
             self?.handleAddressCopied(address: self?.viewModel.btcWallet.value?.address)
         }).disposed(by: bag)
@@ -119,12 +141,26 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
         }).disposed(by: bag)
         
+        self.rscAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
+            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
+        }).disposed(by: bag)
+        
+        self.airdropAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
+            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
+        }).disposed(by: bag)
+        
         btcButton.rx.tap.bind {
-            self.toWalletDetail(withWallet: self.viewModel.btcWallet.value!)
-        }.disposed(by: bag)
+            self.toWalletDetail(withWallet: self.viewModel.btcWallet.value!, source: .BTC)
+            }.disposed(by: bag)
         ethButton.rx.tap.bind {
-            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!)
-        }.disposed(by: bag)
+            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source: .ETH)
+            }.disposed(by: bag)
+        rscButton.rx.tap.bind {
+            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source: .RSC)
+            }.disposed(by: bag)
+        airdropButton.rx.tap.bind {
+            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source:.AirDrop)
+            }.disposed(by: bag)
     }
 
     func updateValue(for fiat:Fiat?, total:Decimal?) -> String{
@@ -150,12 +186,13 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
                         content: LM.dls.g_toast_addr_copied)
     }
     
-    private func toWalletDetail(withWallet wallet: Wallet) {
-//        WalletFinder.markWallet(wallet)
-        let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: wallet))
-//        self.navigationController?.pushViewController(vc, animated: true)
+    private func toWalletDetail(withWallet wallet: Wallet, source: MainWalletViewController.Source) {
+        //        WalletFinder.markWallet(wallet)
+        let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: wallet, source: source))
+        //                self.navigationController?.pushViewController(vc, animated: true)
         self.present(vc, animated: true, completion: nil)
     }
+    
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette

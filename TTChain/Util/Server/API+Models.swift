@@ -1702,6 +1702,7 @@ enum HelperAPI: KLMoyaAPISet {
     var api: KLMoyaAPIData {
         switch self {
         case .getCoins(let api): return api
+        case .getCoinsTest(let api): return api
         case .getFiats(let api): return api
         case .getFiatRateTable(let api): return api
         case .getAddressBook(let api): return api
@@ -1722,6 +1723,7 @@ enum HelperAPI: KLMoyaAPISet {
     case updateAddressBookUnit(UpdateAddressBookUnitAPI)
     case deleteAddressBookUnit(DeleteAddressBookUnitAPI)
     case getCoins(CoinsAPI)
+    case getCoinsTest(CoinsTestAPI)
     case getFiats(FiatsAPI)
     case getFiatRateTable(FiatRateTableAPI)
     
@@ -2034,6 +2036,106 @@ struct CoinsAPIModel: KLJSONMappableMoyaResponse {
                               iconUrlStr: iconURLStr,
                               digit: digit,
                               walletMainCoinID: mainCoinID)
+        }
+        
+        sources = _sources
+    }
+}
+
+//MARK: - GET /coins
+struct CoinsTestAPI: KLMoyaLangAPIData {
+    var path: String { return "/topChain/coinTest" }
+    var method: Moya.Method { return .get }
+    
+    let query: String?
+    let defaultOnly: Bool
+    let chainType: ChainType?
+    let mainCoinID: String?
+    
+    var base: APIBaseEndPointType {
+        let url = URL.init(string: "http://192.168.51.201:9999")!
+        return .custom(url: url)
+    }
+    
+    var task: Task {
+        var params: [String : Any] = [
+            "defaultOnly" : defaultOnly
+        ]
+        
+        if let q = query {
+            params["queryString"] = q
+        }
+        
+        if let type = chainType {
+            params["chainType"] = type.rawValue
+        }
+        
+        if let mainCoinID = mainCoinID {
+            params["mainCoinID"] = mainCoinID
+        }
+        
+        return Moya.Task.requestParameters(
+            parameters: params,
+            encoding: URLEncoding.init(destination: URLEncoding.Destination.queryString, arrayEncoding: URLEncoding.ArrayEncoding.brackets, boolEncoding: URLEncoding.BoolEncoding.literal
+            )
+        )
+    }
+    
+    var stub: Data? { return nil }
+}
+
+struct CoinsTestAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = CoinsTestAPI
+    let sources: [CoinsAPIModel.CoinSource]
+    init(json: JSON, sourceAPI: API) throws {
+        guard let coinJSONs = json.array else {
+            throw GTServerAPIError.noData
+        }
+        
+        let _sources = coinJSONs.compactMap {
+            coinJSON -> CoinsAPIModel.CoinSource? in
+            guard
+                //                let chainTypeRaw = coinJSON["walletType"].int16,
+                let chainTypeRaw = coinJSON["chainType"].int16,
+                let chainType = ChainType.init(rawValue: chainTypeRaw),
+                let identifier = coinJSON["identifier"].string,
+                let chainName = coinJSON["chainName"].string,
+                let displayName = coinJSON["displayName"].string,
+                //                let chainName = coinJSON["name"].string,
+                //                let displayName = coinJSON["name"].string,
+                let fullname = coinJSON["fullName"].string,
+                let iconURLStr = coinJSON["icon"].string,
+                let isDefault = coinJSON["isDefault"].bool,
+                let isDefaultSelected = coinJSON["isDefaultSelected"].bool,
+                let isActive = coinJSON["isActive"].bool,
+                //FIXME:
+                let mainCoinID = coinJSON["mainCoinID"].string
+                else {
+                    return errorDebug(response: nil)
+            }
+            
+            //FIXME:
+            //            let mainCoinID: String
+            //            switch chainType {
+            //            case .btc: mainCoinID = Coin.btc_identifier
+            //            case .eth: mainCoinID = Coin.eth_identifier
+            //            case .cic: mainCoinID = Coin.cic_identifier
+            //            }
+            
+            let contract: String? = coinJSON["contract"].string
+            let digit = coinJSON["digit"].int ?? 18
+            return CoinsAPIModel.CoinSource(chainType: chainType,
+                                            identifier: identifier,
+                                            contract: contract,
+                                            chainName: chainName,
+                                            inAppName: displayName,
+                                            fullName: fullname,
+                                            isDefault: isDefault,
+                                            isDefaultSelected: isDefaultSelected,
+                                            isActive: isActive,
+                                            iconUrlStr: iconURLStr,
+                                            digit: digit,
+                                            walletMainCoinID: mainCoinID)
         }
         
         sources = _sources
