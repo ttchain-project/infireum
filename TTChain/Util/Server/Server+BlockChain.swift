@@ -489,5 +489,154 @@ extension Server {
     }
  }
  
-
+ //MARK: - IM -
+ extension Server {
+    
+    //MARK: - POST /IM/PreLogin -
+    
+    func preLoginIM(withUserId userID:String, andDeviceID deviceID:String) -> RxAPIResponse<PreLoginAPIModel> {
+        let api = PreLoginAPI.init(userId: userID, deviceID: deviceID)
+        return fire(router: .IM(.preLogin(api)))
+    }
+    
+    //MARK: - POST /IM/CreateUser -
+    func createIMUser(userId:String, deviceID: String, nickName: String, headImg: String, introduction: String) -> RxAPIResponse<CreateUserAPIModel> {
+        let api = CreateUserAPI.init(userId:userId, deviceID: deviceID, nickName: nickName, headImg: headImg, introduction: introduction)
+        return fire(router: .IM(.createUser(api)))
+    }
+    
+    //MARK: - POST /IM/RecoveryUser -
+    func recoverIMUser(withUserId userID:String, andDeviceID deviceID:String, recoveryPassword: String) -> RxAPIResponse<RecoverUserAPIModel>{
+        let api = RecoverUserAPI.init(userId: userID, deviceID: deviceID, password:recoveryPassword)
+        return fire(router: .IM(.recoverUser(api)))
+    }
+    
+    //MARK: - POST /IM/SetRecoveryKey -
+    func setRecoveryPassword(withIMUserId uid:String, recoveryPassword: String) -> RxAPIResponse<SetRecoveryPasswordAPIModel>{
+        let api = SetRecoveryPasswordAPI.init(imUserId: uid, password: recoveryPassword)
+        return fire(router: .IM(.setRecoveryPassword(api)))
+    }
+    
+    
+    //MARK: -  GET /IM/GetGroupList
+    func getUserGroupList(imUserId: String) -> RxAPIResponse<GetGroupListAPIModel> {
+        let api = GetGroupListAPI.init(userCode: imUserId)
+        return fire(router: .IM(.getGroupList(api)))
+    }
+    
+    //MARK: - GET /IM/personaldirectory
+    
+    func getUserPersonalChatList(imUserId: String) -> RxAPIResponse<GetPersonalDirectoryAPIModel> {
+        let api = GetPersonalDirectoryAPI.init(userCode: imUserId)
+        return fire(router: .IM(.getPersonDirectory(api)))
+    }
+    
+    //MARK: - POST /IM/friendship
+    func sendFriendRequestAPI(inviterUserID: String, inviteeUserID: String, invitationMessage: String) -> RxAPIResponse<SendFriendRequestAPIModel> {
+        let api = SendFriendRequestAPI.init(inviterUserID: inviterUserID, inviteeUserID: inviteeUserID, invitationMessage: invitationMessage)
+        return fire(router: .IM(.sendFriendRequest(api)))
+    }
+    
+    //MARK: - PUT /IM/friendship/{invitationId} -
+    
+    func respondToFriendRequestAPI(invitationId: Int, accept: Bool) -> RxAPIResponse<RespondFriendRequestAPIModel> {
+        let api = RespondFriendRequestAPI.init(invitationId: invitationId, accept: accept)
+        return fire(router: .IM(.respondFriendRequest(api)))
+    }
+    
+    //MARK: - POST /IM/GroupInviteReply -
+    func respondToGroupRequestAPI(groupID: String, groupAction: GroupAction) -> RxAPIResponse<RespondGroupRequestAPIModel> {
+        let api = RespondGroupRequestAPI.init(groupID: groupID, groupAction:groupAction )
+        return fire(router: .IM(.respondGroupRequest(api)))
+    }
+    //MARK: - GET /IM/communications -
+    func getCommunicationsList() -> RxAPIResponse<GetAllCommunicationsAPIModel> {
+        let api = GetAllCommunicationsAPI.init()
+        return fire(router: .IM(.getAllCommunications(api)))
+    }
+    
+    //MARK: - GET /IM/selfdestructingmessage -
+    func destructMessage(messageID:String, expireTime:String) -> RxAPIResponse<DestructMessageAPIModel> {
+        let api = DestructMessageAPI.init(messageID: messageID, expireTime: expireTime)
+        return fire(router: .IM(.destructMessage(api)))
+    }
+    
+    //MARK: - GET /IM/message/section -
+    
+    func postMessageSection(roomID:String, startTime:String, endTime:String) -> RxAPIResponse<PostMessageSectionAPIModel> {
+        let api = PostMessageSectionAPI.init(startTime: startTime, endTime: endTime, roomID:roomID)
+        return fire(router: .IM(.postMessageSection(api)))
+    }
+    
+    func getGroupInfo(forRoomID roomId: String? = nil, forGroupId groupID:String? = nil) -> RxAPIResponse<GetGroupInfoAPIModel> {
+        if groupID == nil && roomId == nil {
+            return RxAPIResponse.just(APIResult.failed(error: .incorrectResult("No roomID or group ID entered", "")))
+        }
+        let api = GetGroupInfoAPI.init(roomID: roomId ?? "", groupID: groupID ?? "")
+        return fire(router: .IM(.getGroupInfo(api)))
+    }
+    
+    func getUserData(uID: String) -> RxAPIResponse<GetUserDataAPIModel> {
+        let api = GetUserDataAPI.init(userCode: uID)
+        return fire(router: .IM(.getUserData(api)))
+    }
+    
+    // MARK: - GET /IM/SearchUser -
+    
+    func searchUser(uid: String, targetUid: String) -> RxAPIResponse<SearchUserAPIModel> {
+        let api = SearchUserAPI.init(uid: uid, targetUid: targetUid)
+        return fire(router: .IM(.searchUser(api)))
+    }
+    
+    // MARK: - POST /IM/CreateGroup -
+    
+    func createGroup(parameters: CreateGroupAPI.Parameters) -> RxAPIResponse<CreateGroupAPIModel> {
+        let api = CreateGroupAPI.init(parameters: parameters)
+        return fire(router: .IM(.createGroup(api)))
+    }
+    
+    // MARK: - POST /IM/GroupMembers -
+    
+    func groupMembers(parameters: GroupMembersAPI.Parameters) -> RxAPIResponse<GroupMembersAPIModel> {
+        let api = GroupMembersAPI.init(parameters: parameters)
+        return fire(router: .IM(.groupMembers(api)))
+    }
+    
+    // MARK: - POST /IM/UpdateGroup -
+    
+    func updateGroup(parameters: UpdateGroupAPI.Parameters) -> RxAPIResponse<UpdateGroupAPIModel> {
+        let api = UpdateGroupAPI.init(parameters: parameters)
+        return fire(router: .IM(.updateGroup(api)))
+    }
+    
+    // MARK: - POST /IM/DeleteGroup -
+    
+    func deleteGroup(parameters: DeleteGroupAPI.Parameters) -> RxAPIResponse<DeleteGroupAPIModel> {
+        let api = DeleteGroupAPI.init(parameters: parameters)
+        return fire(router: .IM(.deleteGroup(api)))
+    }
+ }
  
+ //MARK: - RocketChat -
+ extension Server {
+    func loginRocketChat(userID: String, password:String) -> RxAPIResponse<RocketChatLoginAPIModel>{
+        let api = RocketChatLoginAPI.init(userName: userID, password: password)
+        return fire(router: .rocketChat(.rocketChatLogin(api)))
+    }
+    
+    func getChatHistory(forRoom roomId:String, roomType: RoomType) -> RxAPIResponse<GetRocketChatMessageHistoryAPIModel> {
+        let api = GetRocketChatMessageHistoryAPI.init(roomType: roomType, roomID: roomId)
+        return fire(router: .rocketChat(.rocketChatHistory(api)))
+    }
+    
+    func getGroupChatHistory(forRoom roomId:String) -> RxAPIResponse<GetRocketChatGroupMessageHistoryAPIModel> {
+        let api = GetRocketChatGroupMessageHistoryAPI.init(roomID: roomId)
+        return fire(router: .rocketChat(.groupChatHistory(api)))
+    }
+    
+    func sendChatMessage(message: String, forRoom roomID:String) -> RxAPIResponse<RocketChatSendMessageAPIModel> {
+        let api = RocketChatSendMessageAPI.init(message: message, roomID: roomID)
+        return fire(router: .rocketChat(.sendChatMessage(api)))
+    }
+    
+ }

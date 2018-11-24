@@ -20,11 +20,14 @@ import RxSwift
 enum Router: TargetType {
     case blockchain(BlockchainAPI)
     case helper(HelperAPI)
-
+    case IM(IMAPI)
+    case rocketChat(RocketChatAPI)
     var api: KLMoyaAPISet {
         switch self {
         case .blockchain(let endpoint): return endpoint
         case .helper(let endpoint): return endpoint
+        case .IM(let endpoint): return endpoint
+        case .rocketChat(let endpoint): return endpoint
         }
     }
     
@@ -36,6 +39,10 @@ enum Router: TargetType {
                 return URL.init(string: C.BlockchainAPI.urlStr_3206)!
             case .helper:
                 return URL.init(string: C.HTTPServerAPI.urlStr)!
+            case .IM:
+                return URL.init(string: C.HTTPServerAPI.urlStr)!
+            case .rocketChat:
+                return URL.init(string: C.HTTPServerAPI.rocketChatURL)!
             }
         case .custom(let url):
             return url
@@ -45,27 +52,27 @@ enum Router: TargetType {
     
     var path: String {
         var p: String
-//        if api.langDepended {
-//            p = "/\(LanguageHandler.systemLang)" + api.path
-//        }else {
-            p = api.path
-//        }
-
-//        print("path is: \(p)")
+        //        if api.langDepended {
+        //            p = "/\(LanguageHandler.systemLang)" + api.path
+        //        }else {
+        p = api.path
+        //        }
+        
+        //        print("path is: \(p)")
         return p
     }
-
+    
     var method: Moya.Method { return api.method }
     var sampleData: Data { return api.stub ?? "".data(using: .utf8)! }
     var task: Task {
         return api.task
     }
-
+    
     var headers: [String : String]? {
         return api.headers
     }
-
-
+    
+    
 }
 
 

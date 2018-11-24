@@ -36,18 +36,17 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return tradeNav?.viewControllers[0] as? MainWalletViewController
     }
     
-//
-//    private weak var tradeNav: UINavigationController?
-//    private var tradeVC: LightningTransactionViewController? {
-//        return tradeNav?.viewControllers[0] as? LightningTransactionViewController
-//    }
+    private weak var chatNav: UINavigationController?
+    private var chatVC: ChatListViewController? {
+        return chatNav?.viewControllers[0] as? ChatListViewController
+    }
     
-//    private weak var meVC: MeViewController?
-//    private lazy var meItem: UITabBarItem = {
-//        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
-//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
-//        return item
-//    }()
+    private lazy var chatItem: UITabBarItem = {
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "chatIcon"), selectedImage: #imageLiteral(resourceName: "chatIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        
+        return item
+    }()
     
 //    ExploreViewController
     private weak var exploreVC: ExploreViewController?
@@ -75,16 +74,21 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         tradeNav.viewControllers[0].tabBarItem = tradeItem
 //        meVC.tabBarItem = meItem
         exploreVC.tabBarItem = exploreItem
-        
+        let chatNav = ChatListViewController.navInstance(from: ())
+        chatNav.viewControllers[0].tabBarItem = chatItem
+
         self.walletOptionNav = walletOptionsNav
         self.tradeNav = tradeNav
 //        self.meVC = meVC
         self.exploreVC = exploreVC
+        self.chatNav = chatNav
+
 //        viewControllers = [walletNav, tradeNav, meVC]
 //        viewControllers = [meVC]
         viewControllers = [
             walletOptionsNav,
             tradeNav,
+            chatNav,
             exploreVC
         ]
         

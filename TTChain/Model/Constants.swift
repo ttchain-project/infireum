@@ -60,6 +60,7 @@ struct Constants {
                 return "http://api-trading.git4u.net:63339"
             }
         }
+        static var rocketChatURL:String { return "http://192.168.51.21:3000"}
     }
     
     struct BlockchainAPI {
@@ -151,6 +152,10 @@ struct Constants {
             static let UAT = ""
             static let PRD = "bbd5ede5ffdb4704bc1f658ad2670fb6"
         }
+    }
+    
+    struct IMDateFormat {
+        static let dateFormatForIM:String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     }
     
     enum PrivateMode {

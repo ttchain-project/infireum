@@ -29,14 +29,15 @@ extension Single where Element == Any {
         return asObservable().map { response -> Element in
             if let json = response as? [String : Any] {
                 if let status = json["code"] as? Int, !(status == 200 || status == 0)  {
-                    if GTServerAPIError.invalidTokenErrorRange
-                        .contains(status) {
-                        throw GTServerAPIError.invalidToken
-                    }else if GTServerAPIError.expiredTokenErrorCode == status {
-                        throw GTServerAPIError.expiredToken
-                    }else {
-                        throw GTServerAPIError.incorrectResult(String(status), json["message"] as! String)
-                    }
+                    //Removed the Error code check for particular error codes. // Discuss with Hermes if any problem
+                    //                    if GTServerAPIError.invalidTokenErrorRange
+                    //                        .contains(status) {
+                    //                        throw GTServerAPIError.invalidToken
+                    //                    }else if GTServerAPIError.expiredTokenErrorCode == status {
+                    //                        throw GTServerAPIError.expiredToken
+                    //                    }else {
+                    throw GTServerAPIError.incorrectResult(String(status), json["message"] as! String)
+                    //                    }
                 }
                 
                 if let data = json["data"] {
@@ -144,11 +145,11 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
                 
                 if let json = JSON.init(rawValue: raw) {
                     return json
-//                    if let errMsg = json["error"].string {
-//                        throw GTServerAPIError.incorrectResult("9999", errMsg)
-//                    }else {
-//                        return json
-//                    }
+                    //                    if let errMsg = json["error"].string {
+                    //                        throw GTServerAPIError.incorrectResult("9999", errMsg)
+                    //                    }else {
+                    //                        return json
+                    //                    }
                 }else {
                     throw GTServerAPIError.noData
                 }
@@ -281,6 +282,43 @@ extension KLMoyaLangAuthAPIData {
     var authNeeded: Bool { return true }
 }
 
+
+protocol KLMoyaIMAPIData: KLMoyaAPIData { }
+extension KLMoyaIMAPIData {
+    var langDepended: Bool { return false }
+    var authNeeded: Bool { return false }
+    
+    var headers: [String : String]? {
+        var h = [String : String]()
+        
+        h["SystemId"] = "1"
+        return h
+    }
+}
+
+protocol KLMoyaRocketChatAPIData:KLMoyaIMAPIData {
+    var rocketChatAuthNeeded : Bool { get }
+}
+
+extension KLMoyaRocketChatAPIData {
+    var headers: [String : String]? {
+        var h = [String : String]()
+        //        if authNeeded {
+        //            h["authorization"] = UserRoleHandler.handler.authedMember?.authToken ?? ""
+        //        }
+        
+        if langDepended {
+            h["lang"] = LangManager.instance.lang.value._db_name
+        }
+        
+        if rocketChatAuthNeeded {
+            h["X-Auth-Token"] = RocketChatManager.manager.rocketChatUser.value?.authToken
+            h["X-User-Id"]  = RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId
+        }
+        return h
+    }
+    
+}
 
 //MARK: - Mocking
 protocol MockableAPI {

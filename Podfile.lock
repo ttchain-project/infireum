@@ -60,7 +60,7 @@ PODS:
   - HockeySDK (5.1.2):
     - HockeySDK/DefaultLib (= 5.1.2)
   - HockeySDK/DefaultLib (5.1.2)
-  - IQKeyboardManagerSwift (5.0.0)
+  - IQKeyboardManagerSwift (6.2.0)
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -131,7 +131,7 @@ DEPENDENCIES:
   - Flurry-iOS-SDK/FlurrySDK
   - GzipSwift
   - HockeySDK
-  - IQKeyboardManagerSwift (= 5.0.0)
+  - IQKeyboardManagerSwift
   - Moya/RxSwift
   - MZFormSheetPresentationController
   - NVActivityIndicatorView
@@ -207,7 +207,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
-  IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetPresentationController: fbfdbad31884f16fac17fbe3c44c168306cc1095
@@ -228,6 +228,6 @@ SPEC CHECKSUMS:
   Tabman: a09f7d7aa62b231ec475ca9eb9171f7cc973a3d7
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: 0e6c004f20d259f70495f42960be0cc72129f1f2
+PODFILE CHECKSUM: 9ec7b98bdc4881925314b76cd119cf11274d6bf2
 
 COCOAPODS: 1.5.3

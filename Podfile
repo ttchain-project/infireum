@@ -6,7 +6,7 @@ target 'TTChain' do
   use_frameworks!
 
   # Pods for OfflineWallet
-    pod 'IQKeyboardManagerSwift', '5.0.0'
+    pod 'IQKeyboardManagerSwift'
     pod 'AlamofireImage'
     pod 'SwiftMoment'
     pod 'SwifterSwift'
@@ -44,7 +44,7 @@ target 'TTChain_SIT' do
   use_frameworks!
 
   # Pods for OfflineWallet
-    pod 'IQKeyboardManagerSwift', '5.0.0'
+    pod 'IQKeyboardManagerSwift'
     pod 'AlamofireImage'
     pod 'SwiftMoment'
     pod 'SwifterSwift'
@@ -69,6 +69,8 @@ target 'TTChain_SIT' do
     pod 'Flurry-iOS-SDK/FlurrySDK'
     pod 'Flurry-iOS-SDK/FlurryAds'
     pod 'GzipSwift'
+    pod 'EliteFramework'
+
 end
 
 target 'TTChain_UAT' do
@@ -76,7 +78,7 @@ target 'TTChain_UAT' do
   use_frameworks!
 
   # Pods for OfflineWallet
-    pod 'IQKeyboardManagerSwift', '5.0.0'
+    pod 'IQKeyboardManagerSwift'
     pod 'AlamofireImage'
     pod 'SwiftMoment'
     pod 'SwifterSwift'
@@ -101,6 +103,8 @@ target 'TTChain_UAT' do
     pod 'Flurry-iOS-SDK/FlurrySDK'
     pod 'Flurry-iOS-SDK/FlurryAds'
     pod 'GzipSwift'
+    pod 'EliteFramework'
+
 end
 
 post_install do |installer|

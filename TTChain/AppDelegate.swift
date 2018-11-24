@@ -130,17 +130,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     .subscribe(onNext: {
                         [unowned self] in
                         self.window?.rootViewController = xib(vc: MainTabBarViewController.self)
-
+                        IMUserManager.launch()
+                        
                     })
                     .disposed(by: bag)
                 
-            }else {
+            } else {
                 window?.rootViewController = xib(vc: MainTabBarViewController.self)
+                IMUserManager.launch()
             }
-        }else {
+        } else {
             window?.rootViewController = IdentitySetupViewController.instance()
         }
-        
         
     }
     
@@ -237,9 +238,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func startKeyboardManaging() {
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().shouldShowToolbarPlaceholder = false
-        IQKeyboardManager.sharedManager().toolbarDoneBarButtonItemText = LM.dls.g_done
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = LM.dls.g_done
     }
 
     
