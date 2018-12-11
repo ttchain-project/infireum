@@ -2066,7 +2066,7 @@ struct CoinsTestAPI: KLMoyaLangAPIData {
     let mainCoinID: String?
     
     var base: APIBaseEndPointType {
-        let url = URL.init(string: "http://192.168.51.201:9999")!
+        let url = URL.init(string: "http://125.227.132.127:3206")!
         return .custom(url: url)
     }
     

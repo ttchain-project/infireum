@@ -30,7 +30,7 @@ desc "Update All Build Number"
     force: true,
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.OfflineWallet-SIT”,
+    app_identifier: "com.gib.TTChain-SIT”,
     team_id: "BKBWK8HFB8"
     )
   end
@@ -44,7 +44,7 @@ desc "Update All Build Number"
     force: true,
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.OfflineWallet-SIT",
+    app_identifier: "com.gib.TTChain-SIT",
     team_id: "BKBWK8HFB8"
     )
   end
@@ -54,7 +54,7 @@ desc "Update All Build Number"
     match_sit_adhoc
 
     gym(
-    scheme: "OfflineWallet_SIT",
+    scheme: "TTChain_SIT",
     export_method: "ad-hoc",
     output_directory: "./IPA/SIT",
     clean: true,
@@ -75,8 +75,8 @@ desc "Update All Build Number"
   lane :hockey_sit do
     hockey(
       api_token: "f5683183878c4c8ba39bd6e87d546f77",
-      ipa: "./build/Hope\ Seed\ SIT.ipa",
-      dsym: "./build/Hope\ Seed\ SIT.app.dSYM.zip",
+      ipa: "./build/TTChain\ SIT.ipa",
+      dsym: "./build/TTChain\ SIT.app.dSYM.zip",
       mandatory: "1",
       timeout: 6000,
       bypass_cdn: true
@@ -90,7 +90,7 @@ desc "Update All Build Number"
     force: true,
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.OfflineWallet-UAT",
+    app_identifier: "com.gib.TTChain-UAT",
     team_id: "BKBWK8HFB8"
     )
   end
@@ -102,7 +102,7 @@ desc "Update All Build Number"
     force: true,
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.OfflineWallet-UAT",
+    app_identifier: "com.gib.TTChain-UAT",
     team_id: "BKBWK8HFB8"
     )
   end
@@ -112,7 +112,7 @@ desc "Build adhoc .ipa [uat]"
     match_uat_adhoc
 #    increment_build_number
     gym(
-    scheme: "OfflineWallet_UAT",
+    scheme: "TTChain_UAT",
     export_method: "ad-hoc",
     clean: true,
     output_directory: "./build",
@@ -131,9 +131,9 @@ desc "Build adhoc .ipa [uat]"
   desc "upload adhoc .ipa [UAT] to hockey"
   lane :hockey_uat do
     hockey(
-      api_token: "729e3372a4184f39999090ae8f1b24da",
-      ipa: "./build/Hope\ Seed\ UAT.ipa",
-      dsym: "./build/Hope\ Seed\ UAT.app.dSYM.zip",
+      api_token: "5447c0280cae4de78d454cc3b459fa93",
+      ipa: "./build/TTChain\ UAT.ipa",
+      dsym: "./build/TTChain\ UAT.app.dSYM.zip",
       mandatory: "1",
       timeout: 6000,
       bypass_cdn: true
@@ -147,7 +147,7 @@ desc "Build adhoc .ipa [uat]"
     force: true,
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.OfflineWallet",
+    app_identifier: "com.gib.TTChain",
     team_id: "BKBWK8HFB8"
     )
   end
@@ -159,7 +159,7 @@ desc "Build adhoc .ipa [uat]"
     force: true,
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.OfflineWallet",
+    app_identifier: "com.gib.TTChain",
     team_id: "BKBWK8HFB8"
     )
   end
@@ -169,7 +169,7 @@ desc "Build adhoc .ipa [PRD]"
     match_prd_adhoc
 #    increment_build_number
     gym(
-    scheme: "OfflineWallet",
+    scheme: "TTChain",
     export_method: "ad-hoc",
     clean: true,
     output_directory: "./build",
@@ -188,9 +188,9 @@ desc "Build adhoc .ipa [PRD]"
   desc "upload adhoc .ipa [PRD] to hockey"
   lane :hockey_prd do
     hockey(
-      api_token: "02ef2f67648548efb6e8bf29e9ac500e",
-      ipa: "./build/Hope\ Seed.ipa",
-      dsym: "./build/Hope\ Seed.app.dSYM.zip",
+      api_token: "047608fb8217427998325536015db462",
+      ipa: "./build/TTChain.ipa",
+      dsym: "./build/TTChain.app.dSYM.zip",
       mandatory: "0",
       timeout: 6000,
       bypass_cdn: true
@@ -202,15 +202,15 @@ desc "Build adhoc .ipa [PRD]"
     type: "appstore", 
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.OfflineWallet",
+    app_identifier: "com.gib.TTChain",
     team_id: "BKBWK8HFB8"
     )
     # increment_build_number
     gym(
-    scheme: "OfflineWallet",
+    scheme: "TTChain",
     export_method: "app-store",
     output_directory: "./build",
-    output_name: "Hope\ Seed_AppStore",
+    output_name: "TTChain_AppStore",
     include_symbols: true,
     include_bitcode: true
     )

@@ -18,6 +18,11 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     var langBag: DisposeBag = DisposeBag.init()
     
     
+    private weak var walletNav: UINavigationController?
+    private var walletVC: MainWalletViewController? {
+        return walletNav?.viewControllers[0] as? MainWalletViewController
+    }
+    
     private var walletOptionNav: UINavigationController?
     private var walletOptionVC: WalletOptionsViewController? {
         return walletOptionNav?.viewControllers[0] as? WalletOptionsViewController
@@ -51,7 +56,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
 //    ExploreViewController
     private weak var exploreVC: ExploreViewController?
     private lazy var exploreItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+            let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
@@ -64,27 +69,33 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        
+        //        let walletNav = MainWalletViewController.navInstance()
+        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH)
+        let tradeNav: UINavigationController = MainWalletViewController.navInstance(from: configForMainWallet)
+//        let meVC: MeViewController = MeViewController.instance()
         let exploreVC : ExploreViewController = ExploreViewController.instance()
         let walletOptionsNav = WalletOptionsViewController.navInstance()
-        let tradeNav = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH))
-
+        let chatNav = ChatListViewController.navInstance(from: ())
+        
+        
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem
 //        meVC.tabBarItem = meItem
-        exploreVC.tabBarItem = exploreItem
-        let chatNav = ChatListViewController.navInstance(from: ())
+                exploreVC.tabBarItem = exploreItem
         chatNav.viewControllers[0].tabBarItem = chatItem
-
+        
+        
         self.walletOptionNav = walletOptionsNav
+        self.chatNav = chatNav
+        
         self.tradeNav = tradeNav
 //        self.meVC = meVC
         self.exploreVC = exploreVC
-        self.chatNav = chatNav
-
-//        viewControllers = [walletNav, tradeNav, meVC]
-//        viewControllers = [meVC]
+        //        viewControllers = [walletNav, tradeNav, meVC]
+        //        viewControllers = [meVC]
         viewControllers = [
             walletOptionsNav,
             tradeNav,
@@ -92,19 +103,20 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
             exploreVC
         ]
         
-//        monitorLang { [unowned self] (lang) in
-//            let dls = lang.dls
-//            self.walletItem.title = dls.tab_wallet
-//            self.tradeItem.title = dls.tab_trade
-//            self.meItem.title = dls.tab_me
-//        }
+        //        monitorLang { [unowned self] (lang) in
+        //            let dls = lang.dls
+        //            self.walletItem.title = dls.tab_wallet
+        //            self.tradeItem.title = dls.tab_trade
+        //            self.meItem.title = dls.tab_me
+        //        }
         
-//        monitorTheme { [unowned self] (theme) in
-//            self.tabBar.unselectedItemTintColor = theme.palette.tab_unselected
-//            self.tabBar.tintColor = theme.palette.tab_selected
-//        }
-//        observeLightningSwitchWithCoin()
+        //        monitorTheme { [unowned self] (theme) in
+        //            self.tabBar.unselectedItemTintColor = theme.palette.tab_unselected
+        //            self.tabBar.tintColor = theme.palette.tab_selected
+        //        }
+        //        observeLightningSwitchWithCoin()
         self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
+        self.view.backgroundColor = .owCharcoalGrey
     }
 
     override func didReceiveMemoryWarning() {
