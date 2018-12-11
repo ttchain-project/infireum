@@ -19,22 +19,15 @@ enum BlockchainAPI: KLMoyaAPISet {
         switch self {
         case .createAccount(let api): return api
         case .keyToAddress(let api): return api
-        
-        case .getAssetAmt(let api): return api
-        case .customComments(let api): return api
             
-        case .postCustomComment(let api): return api
-
+        case .getAssetAmt(let api): return api
+            
         case .getBTCurrentBlock(let api): return api
         case .getBTCUnspent(let api): return api
-        case .signBTCTx(let api): return api
-        case .broadcastBTCTx(let api): return api
         case .getBTCTxRecords(let api): return api
             
         case .getETHCurrentBlock(let api): return api
         case .getETHNonce(let api): return api
-        case .signETHTx(let api): return api
-        case .broadcastETHTx(let api): return api
         case .getETHTxRecords(let api): return api
         case .getETHTokenTxRecords(let api): return api
             
@@ -45,7 +38,7 @@ enum BlockchainAPI: KLMoyaAPISet {
         case .signCICTx(let api): return api
         case .broadcastCICTx(let api): return api
         case .getCICTxRecords(let api): return api
-        
+            
         }
     }
     
@@ -54,24 +47,17 @@ enum BlockchainAPI: KLMoyaAPISet {
     
     //MARK: - General
     case getAssetAmt(GetAssetAmtAPI)
-    case customComments(GetCustomCommentsAPI)
-    
-    case postCustomComment(PostCustomCommentsAPI)
     //MARK: - BTC
     case getBTCurrentBlock(GetBTCCurrentBlockAPI)
     case getBTCUnspent(GetBTCUnspentAPI)
-    case signBTCTx(SignBTCTxAPI)
-    case broadcastBTCTx(BroadcastBTCTxAPI)
     case getBTCTxRecords(GetBTCTxRecordsAPI)
-
+    
     //MARK: - ETH
     case getETHCurrentBlock(GetETHCurrentBlockAPI)
     case getETHNonce(GetETHNonceAPI)
-    case signETHTx(SignETHTxAPI)
-    case broadcastETHTx(BroadcastETHTxAPI)
     case getETHTxRecords(GetETHTxRecordsAPI)
     case getETHTokenTxRecords(GetETHTokenTxRecordsAPI)
-//
+    //
     //MARK: - Lightning Trade(LT) BTC -> BTC Relay
     case lt_signBTCRelayTx(LTSignBTCRelayTxAPI)
     case lt_broadcastBTCRelayTx(LTBroadcastBTCRelayTxAPI)
@@ -89,12 +75,12 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     
     var base: APIBaseEndPointType {
         let urlString: String
-//        switch asset.coin!.owChainType {
-//        case .btc:
-//            urlString = C.BlockchainAPI.BlockExplorer.apiBase
-//        case .eth, .cic:
-            urlString = C.BlockchainAPI.urlStr_32000
-//        }
+        //        switch asset.coin!.owChainType {
+        //        case .btc:
+        //            urlString = C.BlockchainAPI.BlockExplorer.apiBase
+        //        case .eth, .cic:
+        urlString = C.BlockchainAPI.urlStr_32000
+        //        }
         
         let url = URL.init(string: urlString)!
         return .custom(url: url)
@@ -105,12 +91,12 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     var langDepended: Bool { return false }
     
     var path: String {
-//        switch asset.coin!.owChainType {
-//        case .cic, .eth:
-            return "/topChain/getBalance_app/\(asset.wallet!.address!)"
-//        case .btc:
-//            return "/addr/\(asset.wallet!.address!)"
-//        }
+        //        switch asset.coin!.owChainType {
+        //        case .cic, .eth:
+        return "/topChain/getBalance_app/\(asset.wallet!.address!)"
+        //        case .btc:
+        //            return "/addr/\(asset.wallet!.address!)"
+        //        }
     }
     
     var method: Moya.Method { return .get }
@@ -118,6 +104,14 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     var task: Task {
         switch asset.coin!.owChainType {
         case .cic, .btc:
+            
+            if asset.coinID == Coin.usdt_identifier {
+                return Moya.Task.requestParameters(
+                    parameters: [ "token" : "USDT" ],
+                    encoding: URLEncoding.default
+                )
+                
+            }
             return Moya.Task.requestParameters(
                 parameters: [ "token" : asset.wallet!.mainCoin!.chainName!.uppercased() ],
                 encoding: URLEncoding.default
@@ -132,8 +126,8 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
                 parameters: params,
                 encoding: URLEncoding.default
             )
-//        case .btc:
-//            return Moya.Task.requestPlain
+            //        case .btc:
+            //            return Moya.Task.requestPlain
         }
     }
     
@@ -144,17 +138,17 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
     typealias API = GetAssetAmtAPI
     let balanceInCoin: Decimal
     init(json: JSON, sourceAPI: API) throws {
+        
         switch sourceAPI.asset.wallet!.owChainType {
         case .btc:
-            guard let balance = json["balance"].number?.decimalValue else {
+            guard let balanceString = json["balance"].string, let balance = Decimal.init(string: balanceString) else {
                 throw GTServerAPIError.noData
             }
-            
             self.balanceInCoin = balance.satoshiToBTC
         case .eth:
             guard let smallestUnitBalanceStr = json["balance"].string,
                 let smallestUnitBalance = Decimal.init(string: smallestUnitBalanceStr) else {
-                throw GTServerAPIError.noData
+                    throw GTServerAPIError.noData
             }
             
             let rateToCoinUnit: Decimal = 1 / pow(
@@ -276,11 +270,11 @@ struct GetBTCUnspentAPIModel: KLJSONMappableMoyaResponse {
                 let vout = uJSON["vout"].int else {
                     return nil
             }
-        
+            
             let unspent = Unspent(txid: txid, btcAmount: amount, confirmation: confirmations, vout: vout)
             return unspent
-        }
-        .sorted { $0.btcAmount > $1.btcAmount }
+            }
+            .sorted { $0.btcAmount > $1.btcAmount }
         
         var usedUnspents: [Unspent] = []
         var accumulatedUnspentAmount: Decimal = 0
@@ -295,8 +289,8 @@ struct GetBTCUnspentAPIModel: KLJSONMappableMoyaResponse {
         }
         
         //TEST
-//        usedUnspents.append(Unspent.init(txid: "c6b327db5c1f4b75594fc47ae9bf780fb7c74e645bd384aa3532ea9246f7e933", btcAmount: 5.34675, confirmation: 331, vout: 0))
-//        accumulatedUnspentAmount += 5.34675
+        //        usedUnspents.append(Unspent.init(txid: "c6b327db5c1f4b75594fc47ae9bf780fb7c74e645bd384aa3532ea9246f7e933", btcAmount: 5.34675, confirmation: 331, vout: 0))
+        //        accumulatedUnspentAmount += 5.34675
         if accumulatedUnspentAmount >= target {
             result = .unspents(usedUnspents)
         }else {
@@ -311,7 +305,7 @@ struct SignBTCTxAPI: KLMoyaAPIData {
     let btcWalletPrivateKey: String
     let fromBTCAddress: String
     let toBTCAddress: String
-    
+    let isUSDTTx:Bool
     let transferBTC: Decimal
     let feeBTC: Decimal
     
@@ -329,7 +323,7 @@ struct SignBTCTxAPI: KLMoyaAPIData {
     
     var task: Task {
         let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - (transferBTC + feeBTC)
+        let changeBTC = totalUnspentBTC - ((isUSDTTx ? 0 : transferBTC) + feeBTC)
         guard changeBTC >= 0 else {
             return errorDebug(response: Moya.Task.requestPlain)
         }
@@ -351,7 +345,7 @@ struct SignBTCTxAPI: KLMoyaAPIData {
         
         return Moya.Task.requestParameters(
             parameters: [
-                "token" : "btc",
+                "token" : isUSDTTx ? "usdt" : "btc",
                 "encry" : true,
                 "privatekey" : encryptedPKey,
                 "tx": [
@@ -414,7 +408,7 @@ struct BroadcastBTCTxAPI: KLMoyaAPIData {
     var task: Task {
         return Moya.Task.requestParameters(
             parameters: [ "rawtx" : signText,
-                           "comments": comments],
+                          "comments": comments],
             encoding: JSONEncoding.default
         )
     }
@@ -513,8 +507,8 @@ struct GetBTCTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                     j in
                     /* WARNING: As vout address in is array
                      - scriptPubKey: {
-                        - addresses: [String]
-                        ...
+                     - addresses: [String]
+                     ...
                      }
                      
                      now only take the first addr.
@@ -562,7 +556,7 @@ struct GetCustomCommentsAPI: KLMoyaAPIData  {
     var path: String {return "/CustomComments"}
     
     var method: Moya.Method { return .post }
-
+    
     var base: APIBaseEndPointType {
         let url = URL.init(string: C.HTTPServerAPI.urlStr)!
         return .custom(url: url)
@@ -703,18 +697,18 @@ struct GetETHNonceAPI: KLMoyaAPIData {
     
     
     var task: Task {
-            return Moya.Task.requestParameters(
-                parameters: [
-                    "jsonrpc" : "2.0",
-                    "method" : "eth_getTransactionCount",
-                    "params" : [
-                                    ethAddress,
-                                    "latest"
-                                ],
-                    "id" : 1
+        return Moya.Task.requestParameters(
+            parameters: [
+                "jsonrpc" : "2.0",
+                "method" : "eth_getTransactionCount",
+                "params" : [
+                    ethAddress,
+                    "latest"
                 ],
-                encoding: JSONEncoding.default
-            )
+                "id" : 1
+            ],
+            encoding: JSONEncoding.default
+        )
     }
     
     var stub: Data? { return nil }
@@ -726,7 +720,7 @@ struct GetETHNonceAPIModel: KLJSONMappableMoyaResponse {
     let nonce: Int
     init(json: JSON, sourceAPI: API) throws {
         guard let hexNonce = json["result"].string?.drop0xPrefix
-             else {
+            else {
                 let error = json["error"]
                 if let code = error["code"].int,
                     let msg = error["message"].string  {
@@ -738,7 +732,7 @@ struct GetETHNonceAPIModel: KLJSONMappableMoyaResponse {
         
         let nonce = hexNonce.hexaToDecimal
         self.nonce = nonce
-//        self.nonce = nonce + 1
+        //        self.nonce = nonce + 1
     }
 }
 
@@ -750,7 +744,7 @@ struct SignETHTxAPI: KLMoyaAPIData {
     let toETHAddress: String
     let transferToken: Coin
     let transferValueInToken: Decimal
-//    let transferTokenName: String
+    //    let transferTokenName: String
     let pKey: String
     
     var authNeeded: Bool { return false }
@@ -766,7 +760,7 @@ struct SignETHTxAPI: KLMoyaAPIData {
     }
     
     var method: Moya.Method { return .post }
-
+    
     var task: Task {
         guard let encryptedPKey = try?  APISensitiveDataCrypter.encryptPrivateKey(rawPrivateKey: pKey) else {
             return errorDebug(response: Moya.Task.requestPlain)
@@ -792,10 +786,10 @@ struct SignETHTxAPI: KLMoyaAPIData {
         ]
         
         return Moya.Task.requestCompositeParameters(bodyParameters: params, bodyEncoding: JSONEncoding.default, urlParameters: urlParams)
-//        return Moya.Task.requestParameters(
-//            parameters: params,
-//            encoding: JSONEncoding.default
-//        )
+        //        return Moya.Task.requestParameters(
+        //            parameters: params,
+        //            encoding: JSONEncoding.default
+        //        )
     }
     
     var stub: Data? { return nil }
@@ -874,7 +868,7 @@ struct BroadcastETHTxAPIModel: KLJSONMappableMoyaResponse {
     let txid: String
     init(json: JSON, sourceAPI: API) throws {
         guard let txid = json.string else {
-                throw GTServerAPIError.noData
+            throw GTServerAPIError.noData
         }
         
         self.txid = txid
@@ -909,10 +903,10 @@ struct GetETHTxRecordsAPI: KLMoyaAPIData {
             parameters: [
                 "module" : "account",
                 "action" : "txlist",
-                "sort" : "desc",    
+                "sort" : "desc",
                 "address" : ethAddress,
-//                "address" : "0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae",
-//                0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae
+                //                "address" : "0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae",
+                //                0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae
                 "startblock" : startBlock,
                 "endblock" : endBlock,
                 "apikey" : C.BlockchainAPI.Etherscan.apiKey
@@ -960,7 +954,7 @@ struct GetETHTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                 let timestamp = Double.init(r["timeStamp"].stringValue),
                 let contractAddress = r["contractAddress"].string,
                 let input = r["input"].string else {
-                return nil
+                    return nil
             }
             
             let isError = (r["isError"].string == "1")
@@ -973,11 +967,11 @@ struct GetETHTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                 contract = contractAddress
             }
             
-//            guard valueInETH > 0,
-//                Value.count == 0 else {
-//                    //In this case this might be a ERC-20 Token Transfer
-//                    return nil
-//            }
+            //            guard valueInETH > 0,
+            //                Value.count == 0 else {
+            //                    //In this case this might be a ERC-20 Token Transfer
+            //                    return nil
+            //            }
             
             return ETHTx(txid: txid,
                          blockHeight: blockHeight,
@@ -1062,11 +1056,11 @@ struct GetETHTokenTxRecordsAPIModel: KLJSONMappableMoyaResponse {
         
         //If cannot found any tx, will also return error code, but the result will be an array, which means it's just a valid empty result, so just need to check if is array or not.
         guard let result = json["result"].array else {
-                if let errorMsg = json["message"].string {
-                    throw GTServerAPIError.incorrectResult(String(status), errorMsg)
-                }else {
-                    throw GTServerAPIError.noData
-                }
+            if let errorMsg = json["message"].string {
+                throw GTServerAPIError.incorrectResult(String(status), errorMsg)
+            }else {
+                throw GTServerAPIError.noData
+            }
         }
         
         self.originTxsCount = result.count
@@ -1093,7 +1087,7 @@ struct GetETHTokenTxRecordsAPIModel: KLJSONMappableMoyaResponse {
             let tokenInTokenUnit = valueInToken / divisionDenominator
             
             guard valueInToken > 0 else {
-                    return nil
+                return nil
             }
             
             var finalToken: Coin
@@ -1299,7 +1293,7 @@ struct SignCICTxAPI: KLMoyaAPIData {
             return errorDebug(response: Moya.Task.requestPlain)
         }
         
-//        let wallet = fromAsset.wallet!
+        //        let wallet = fromAsset.wallet!
         let coin = fromAsset.coin!
         let addressTypeStr: String
         let token = fromAsset.wallet!.mainCoin!.chainName!.lowercased()
@@ -1433,11 +1427,11 @@ struct GetCICTxRecordsAPIModel: KLJSONMappableMoyaResponse {
     init(json: JSON, sourceAPI: API) throws {
         guard let txJSONs = json["transactions"].array else { throw GTServerAPIError.noData }
         
-//        let identifier = sourceAPI.asset.coin!.blockchainAPI_identifier.lowercased()
+        //        let identifier = sourceAPI.asset.coin!.blockchainAPI_identifier.lowercased()
         let txs = txJSONs.compactMap { (txJSON) -> CICTx? in
             guard let txid = txJSON["txid"].string,
                 let to = txJSON["to"].string,
-//                let from = txJSON["from"].string,
+                //                let from = txJSON["from"].string,
                 let feeStr = txJSON["fee"].string,
                 let feeInCICSmallestUnit = Decimal.init(string: feeStr),
                 let timestamp = txJSON["timestamp"].number?.doubleValue,
@@ -1507,7 +1501,7 @@ struct CreateAccountAPI: KLMoyaAPIData {
         if let mnemonic = defaultMnemonic {
             do {
                 let encryptedMnemonic = try APISensitiveDataCrypter
-                .encryptMnemonic(rawMnemonic: mnemonic)
+                    .encryptMnemonic(rawMnemonic: mnemonic)
                 return Moya.Task.requestParameters(
                     parameters: ["mnemonic" : encryptedMnemonic,
                                  "encry" : true],
@@ -1539,9 +1533,9 @@ struct CreateAccountAPIModel: KLJSONMappableMoyaResponse {
     let hdKey: String
     //MainCoinID : WalletInfo
     private(set) var walletsMap: [String : WalletInfo]
-//    let bitcoin: WalletInfo
-//    let ethereum: WalletInfo
-//    let cic: WalletInfo
+    //    let bitcoin: WalletInfo
+    //    let ethereum: WalletInfo
+    //    let cic: WalletInfo
     
     init(json: JSON, sourceAPI: API) throws {
         guard let content = json["eprivatekey"].string else {
@@ -1553,8 +1547,8 @@ struct CreateAccountAPIModel: KLJSONMappableMoyaResponse {
         }
         
         guard let dictionaryOptional = try? JSONSerialization.jsonObject(with: jsonString.data(using: .utf8)!, options: .allowFragments),
-        let dictionary = dictionaryOptional as? [String : Any] else {
-            throw GTServerAPIError.noData
+            let dictionary = dictionaryOptional as? [String : Any] else {
+                throw GTServerAPIError.noData
         }
         
         let json = JSON.init(dictionary)
@@ -1567,7 +1561,7 @@ struct CreateAccountAPIModel: KLJSONMappableMoyaResponse {
                 throw GTServerAPIError.noData
         }
         
-            
+        
         let fetchWallet: (JSON) -> WalletInfo? = {
             json in
             guard let pKey = json["privateKey"].string,
@@ -1616,8 +1610,8 @@ struct CreateAccountAPIModel: KLJSONMappableMoyaResponse {
                 guard let mainCoin = Coin.getCoin(ofChainName: k, chainType: .cic),
                     let wallet = fetchWallet(v) else {
                         continue
-//                        throw GTServerAPIError.noData
-                    }
+                        //                        throw GTServerAPIError.noData
+                }
                 
                 walletsMap[mainCoin.identifier!] = wallet
             }
@@ -1664,16 +1658,16 @@ struct KeyToAddressAPIModel: KLJSONMappableMoyaResponse {
     
     init(json: JSON, sourceAPI: API) throws {
         
-//        let fetchWallet: (JSON) -> WalletInfo? = {
-//            json in
-//            guard let pKey = json["privateKey"].string,
-//                let address = json["address"].string else {
-//                    return nil
-//            }
-//
-//            return (pKey: pKey, address: address)
-//        }
-//
+        //        let fetchWallet: (JSON) -> WalletInfo? = {
+        //            json in
+        //            guard let pKey = json["privateKey"].string,
+        //                let address = json["address"].string else {
+        //                    return nil
+        //            }
+        //
+        //            return (pKey: pKey, address: address)
+        //        }
+        //
         //Prevent any decrypted-failed case, assume all the address result to optional.
         guard let map = json.dictionary else { throw GTServerAPIError.noData }
         addressMap = [:]
@@ -1715,6 +1709,16 @@ enum HelperAPI: KLMoyaAPISet {
         case .getLightningTransRate(let api): return api
         case .getCoinToUSDRate(let api): return api
         case .getVersion(let api): return api
+            
+        case .broadcastETHTx(let api): return api
+        case .broadcastBTCTx(let api): return api
+        case .customComments(let api): return api
+            
+        case .postCustomComment(let api): return api
+            
+        case .signETHTx(let api): return api
+        case .signBTCTx(let api): return api
+            
         }
     }
     
@@ -1734,6 +1738,15 @@ enum HelperAPI: KLMoyaAPISet {
     case getCoinToUSDRate(GetCoinToUSDRateAPI)
     
     case getVersion(GetVersionAPI)
+    
+    case broadcastETHTx(BroadcastETHTxAPI)
+    case broadcastBTCTx(BroadcastBTCTxAPI)
+    
+    case customComments(GetCustomCommentsAPI)
+    case postCustomComment(PostCustomCommentsAPI)
+    case signETHTx(SignETHTxAPI)
+    case signBTCTx(SignBTCTxAPI)
+    
 }
 
 //MARK: - GET /Addressbook
@@ -1915,9 +1928,9 @@ struct DeleteAddressBookUnitAPI: KLMoyaAPIData {
         ]
         
         return Moya.Task.requestParameters(
-                parameters: unit,
-                encoding: URLEncoding.default
-            )
+            parameters: unit,
+            encoding: URLEncoding.default
+        )
     }
     
     var stub: Data? { return nil }
@@ -1995,14 +2008,14 @@ struct CoinsAPIModel: KLJSONMappableMoyaResponse {
         let _sources = coinJSONs.compactMap {
             coinJSON -> CoinSource? in
             guard
-//                let chainTypeRaw = coinJSON["walletType"].int16,
+                //                let chainTypeRaw = coinJSON["walletType"].int16,
                 let chainTypeRaw = coinJSON["chainType"].int16,
                 let chainType = ChainType.init(rawValue: chainTypeRaw),
                 let identifier = coinJSON["identifier"].string,
                 let chainName = coinJSON["chainName"].string,
                 let displayName = coinJSON["displayName"].string,
-//                let chainName = coinJSON["name"].string,
-//                let displayName = coinJSON["name"].string,
+                //                let chainName = coinJSON["name"].string,
+                //                let displayName = coinJSON["name"].string,
                 let fullname = coinJSON["fullName"].string,
                 let iconURLStr = coinJSON["icon"].string,
                 let isDefault = coinJSON["isDefault"].bool,
@@ -2015,12 +2028,12 @@ struct CoinsAPIModel: KLJSONMappableMoyaResponse {
             }
             
             //FIXME:
-//            let mainCoinID: String
-//            switch chainType {
-//            case .btc: mainCoinID = Coin.btc_identifier
-//            case .eth: mainCoinID = Coin.eth_identifier
-//            case .cic: mainCoinID = Coin.cic_identifier
-//            }
+            //            let mainCoinID: String
+            //            switch chainType {
+            //            case .btc: mainCoinID = Coin.btc_identifier
+            //            case .eth: mainCoinID = Coin.eth_identifier
+            //            case .cic: mainCoinID = Coin.cic_identifier
+            //            }
             
             let contract: String? = coinJSON["contract"].string
             let digit = coinJSON["digit"].int ?? 18
@@ -2142,6 +2155,8 @@ struct CoinsTestAPIModel: KLJSONMappableMoyaResponse {
     }
 }
 
+
+
 //MARK: - GET /Fiats
 struct FiatsAPI: KLMoyaLangAPIData {
     var path: String { return "/Fiats" }
@@ -2209,11 +2224,11 @@ struct GetBTCFeeAPIModel: KLJSONMappableMoyaResponse {
             let priority = json["priority"].number?.decimalValue else {
                 throw GTServerAPIError.noData
         }
-//        #if DEBUG
-//        regularFee = Decimal.init(25).satoshiToBTC
-//        #else
+        //        #if DEBUG
+        //        regularFee = Decimal.init(25).satoshiToBTC
+        //        #else
         regularFee = regular
-//        #endif
+        //        #endif
         priorityFee = priority
     }
 }
@@ -2244,9 +2259,9 @@ struct GetETHFeeAPIModel: KLJSONMappableMoyaResponse {
     
     init(json: JSON, sourceAPI: API) throws {
         guard let suggestGasPrice = json["suggestGasPrice"].number?.decimalValue,
-        let minGasPrice = json["minGasPrice"].number?.decimalValue,
-        let maxGasPrice = json["maxGasPrice"].number?.decimalValue else {
-            throw GTServerAPIError.noData
+            let minGasPrice = json["minGasPrice"].number?.decimalValue,
+            let maxGasPrice = json["maxGasPrice"].number?.decimalValue else {
+                throw GTServerAPIError.noData
         }
         
         self.suggestGasPrice = suggestGasPrice
@@ -2301,9 +2316,9 @@ struct GetCICFeeAPIModel: KLJSONMappableMoyaResponse {
         self.minGasPrice = minGasPrice.power(digit * -1)
         self.maxGasPrice = maxGasPrice.power(digit * -1)
         
-//        self.suggestGasPrice = Decimal.init(0).power(digit * -1)
-//        self.minGasPrice = Decimal.init(0).cicUnitToCIC.power(digit * -1)
-//        self.maxGasPrice = Decimal.init(0).cicUnitToCIC.power(digit * -1)
+        //        self.suggestGasPrice = Decimal.init(0).power(digit * -1)
+        //        self.minGasPrice = Decimal.init(0).cicUnitToCIC.power(digit * -1)
+        //        self.maxGasPrice = Decimal.init(0).cicUnitToCIC.power(digit * -1)
     }
 }
 
@@ -2449,7 +2464,7 @@ struct GetVersionAPIModel: KLJSONMappableMoyaResponse {
             let minimum = iOSVersions["minimum"].string else {
                 throw GTServerAPIError.noData
         }
-//        self.minimum = "1.0.1"
+        //        self.minimum = "1.0.1"
         self.minimum = minimum
         self.latest = latest
     }

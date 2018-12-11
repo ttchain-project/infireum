@@ -169,7 +169,11 @@ extension WithdrawalConfirmPwdValidationViewModel {
                 case .success(let model):
                     switch model.result {
                     case .unspents(let unspents):
-                        return self.signBTC(with: &info, unspents: unspents)
+                        if info.feeCoin.identifier == Coin.usdt_identifier {
+                            return self.signUSDT(with: &info, unspents: unspents)
+                        }else {
+                            return self.signBTC(with: &info, unspents: unspents)
+                        }
                     case .insufficient:
                         let digit = Int(info.feeCoin.digit)
                         let totalFee = info.totalFee.asString(digits: digit)
@@ -227,8 +231,30 @@ extension WithdrawalConfirmPwdValidationViewModel {
     private func signBTC(with info: inout WithdrawalInfo, unspents: [Unspent]) -> RxAPIResponse<SignBTCTxAPIModel> {
         let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
         info.feeAmt = Decimal.init(amt)
+        
+        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
+        
+        if changeBTC < 0 {
+            return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
+        }
         return Server.instance.signBTCTx(pkey: info.wallet.pKey,
-                                         fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, feeBTC: info.totalFee,
+                                         fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, feeBTC: info.totalFee,
+                                         unspents: unspents)
+    }
+    
+    private func signUSDT(with info: inout WithdrawalInfo, unspents: [Unspent]) -> RxAPIResponse<SignBTCTxAPIModel> {
+        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
+        info.feeAmt = Decimal.init(amt)
+        
+        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC - info.totalFee
+        
+        if changeBTC < 0 {
+            return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
+        }
+        return Server.instance.signBTCTx(pkey: info.wallet.pKey,
+                                         fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:true, feeBTC: info.totalFee,
                                          unspents: unspents)
     }
     

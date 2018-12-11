@@ -115,7 +115,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         let type = ChainType.init(rawValue: config.asset.wallet!.chainType)!
         switch type {
         case .btc:
-            let feeVC = WithdrawalBTCFeeInputViewController.instance()
+            let feeVC = WithdrawalBTCFeeInputViewController.instance(from: WithdrawalBTCFeeInputViewController.Config(asset:config.asset))
             addChildViewController(feeVC)
             feeVC.didMove(toParentViewController: self)
             self.feeVC = feeVC

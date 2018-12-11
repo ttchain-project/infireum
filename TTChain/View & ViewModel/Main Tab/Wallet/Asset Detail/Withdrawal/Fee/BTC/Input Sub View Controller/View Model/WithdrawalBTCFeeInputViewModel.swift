@@ -17,7 +17,7 @@ class WithdrawalBTCFeeInputViewModel: KLRxViewModel, WithdrawalFeeInfoProvider {
     
     func getFeeInfo() -> WithdrawalFeeInfoProvider.FeeInfo? {
         if let rate = _satPerByte.value {
-            return (rate: rate.satoshiToBTC, amt: 0, coin: Coin.btc, option: _feeOption.value)
+            return (rate: rate.satoshiToBTC, amt: 0, coin: self.input.asset.coin ?? Coin.btc, option: _feeOption.value)
         }else {
             return nil
         }
@@ -35,6 +35,7 @@ class WithdrawalBTCFeeInputViewModel: KLRxViewModel, WithdrawalFeeInfoProvider {
     
     struct Input {
         let feeInfoIsDisplayedInput: Driver<Void>
+        let asset:Asset
     }
     
     typealias InputSource = Input

@@ -1,27 +1,27 @@
  //
-//  ServerAPIHandler.swift
-//  ECommerce
-//
-//  Created by Keith Lee on 2017/2/13.
-//  Copyright © 2017年 Keith Lee. All rights reserved.
-//
-
-//API errror response
-let kGTAPIResponseOK : Int = 0
-//let kGTAPIResponseInvalidToken: Int = 9005
-//let kGTAPIResponseNeedRefreshToken: Int = 9007
-//
-//let kDefaultNationID: String = "1"
-//let kDefaultSetCookie: String = "\(kDefaultNationID)"
-//let kWDDateFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-
-import Foundation
-import Moya
-import SwiftyJSON
-import RxSwift
-import Alamofire
-
-extension URLRequest {
+ //  ServerAPIHandler.swift
+ //  ECommerce
+ //
+ //  Created by Keith Lee on 2017/2/13.
+ //  Copyright © 2017年 Keith Lee. All rights reserved.
+ //
+ 
+ //API errror response
+ let kGTAPIResponseOK : Int = 0
+ //let kGTAPIResponseInvalidToken: Int = 9005
+ //let kGTAPIResponseNeedRefreshToken: Int = 9007
+ //
+ //let kDefaultNationID: String = "1"
+ //let kDefaultSetCookie: String = "\(kDefaultNationID)"
+ //let kWDDateFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+ 
+ import Foundation
+ import Moya
+ import SwiftyJSON
+ import RxSwift
+ import Alamofire
+ 
+ extension URLRequest {
     
     /// Returns a cURL command for a request
     /// - return A String object that contains cURL command or "" if an URL is not properly initalized.
@@ -67,17 +67,17 @@ extension URLRequest {
     static func escapeAllSingleQuotes(_ value: String) -> String {
         return value.replacingOccurrences(of: "'", with: "'\\''")
     }
-}
-
-//MARK: - Server (Define network request)
-
-enum APIResult<Value> {
+ }
+ 
+ //MARK: - Server (Define network request)
+ 
+ enum APIResult<Value> {
     case success(Value)
     case failed(error: GTServerAPIError)
-}
-
-typealias RxAPIResponse<E> = Single<APIResult<E>>
-typealias RxAPIVoidResponse = Single<APIResult<Void>>
+ }
+ 
+ typealias RxAPIResponse<E> = Single<APIResult<E>>
+ typealias RxAPIVoidResponse = Single<APIResult<Void>>
  
  class DefaultAlamofireManager: Alamofire.SessionManager {
     static let sharedManager: DefaultAlamofireManager = {
@@ -90,9 +90,9 @@ typealias RxAPIVoidResponse = Single<APIResult<Void>>
     }()
  }
  
-/// Server is a class where defines all the api calls,
-/// In the Offline Wallet, server sperate into two parts, first is from internal server, the other is from blockchain library.
-class Server: MoyaProvider<Router> {
+ /// Server is a class where defines all the api calls,
+ /// In the Offline Wallet, server sperate into two parts, first is from internal server, the other is from blockchain library.
+ class Server: MoyaProvider<Router> {
     class Logger: PluginType {
         func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
             let start = request.cURL.startIndex
@@ -300,10 +300,10 @@ class Server: MoyaProvider<Router> {
         return fire(router: .helper(.getVersion(api)),
                     shouldEnsureVersionIsValid: false)
     }
-}
+ }
  
-// MARK: - Blockchain
-extension Server {
+ // MARK: - Blockchain
+ extension Server {
     //MARK: - GET AssetAmt
     func getAssetAmt(ofAsset asset: Asset) -> RxAPIResponse<GetAssetAmtAPIModel> {
         let api = GetAssetAmtAPI.init(asset: asset)
@@ -339,21 +339,23 @@ extension Server {
                    fromAddress: String,
                    toAddress: String,
                    tranferBTC: Decimal,
+                   isUSDTTx:Bool,
                    feeBTC: Decimal,
                    unspents: [Unspent]) -> RxAPIResponse<SignBTCTxAPIModel> {
         let api = SignBTCTxAPI.init(btcWalletPrivateKey: pkey,
                                     fromBTCAddress: fromAddress,
                                     toBTCAddress: toAddress,
+                                    isUSDTTx:isUSDTTx,
                                     transferBTC: tranferBTC,
                                     feeBTC: feeBTC,
                                     unspents: unspents)
-        return fire(router: .blockchain(.signBTCTx(api)))
+        return fire(router: .helper(.signBTCTx(api)))
     }
     
     //MARK: - POST https://blockexplorer.com/api/tx/send
     func broadcastBTCTx(withSignText signText: String, withComments comments:String) -> RxAPIResponse<BroadcastBTCTxAPIModel> {
         let api = BroadcastBTCTxAPI.init(signText: signText, comments: comments)
-        return fire(router: .blockchain(.broadcastBTCTx(api)))
+        return fire(router: .helper(.broadcastBTCTx(api)))
     }
     
     //MARK: - GET https://blockexplorer.com/api/addrs/[:addrs]/txs[?from=&to=]
@@ -390,25 +392,25 @@ extension Server {
                                     transferValueInToken: transferValueInTokenUnit,
                                     pKey: pkey)
         
-        return fire(router: .blockchain(.signETHTx(api)))
+        return fire(router: .helper(.signETHTx(api)))
     }
     
     //MARK: - POST /CustomComments -
     func fetchTransactionRemarks(for transactions:[String?]) -> RxAPIResponse<GetCustomCommentsAPIModel> {
         let api = GetCustomCommentsAPI.init(txIDs: transactions)
-        return fire(router: .blockchain(.customComments(api)))
+        return fire(router: .helper(.customComments(api)))
     }
     
     //MARK: - POST /CustomComments -
     func postCommentsForTransaction(for transactionId: String, comment: String?) -> RxAPIResponse<PostCustomCommentsAPIModel> {
         let api = PostCustomCommentsAPI.init(comment: comment, txID: transactionId)
-        return fire(router: .blockchain(.postCustomComment(api)))
+        return fire(router: .helper(.postCustomComment(api)))
     }
     
     //MARK: - POST /topChain/HC_signInformationOut/{signText}
     func broadcastETH(signText: String, andComments comments: String) -> RxAPIResponse<BroadcastETHTxAPIModel> {
         let api = BroadcastETHTxAPI.init(signText: signText, comments: comments)
-        return fire(router: .blockchain(.broadcastETHTx(api)))
+        return fire(router: .helper(.broadcastETHTx(api)))
     }
     
     //MARK: - GET https://api.etherscan.io/api?module=account&action=txlist&address=0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae&startblock=0&endblock=99999999&sort=desc&apikey=YourApiKeyToken
@@ -488,6 +490,7 @@ extension Server {
         return fire(router: .blockchain(.getCICTxRecords(api)))
     }
  }
+ 
  
  //MARK: - IM -
  extension Server {
@@ -640,3 +643,6 @@ extension Server {
     }
     
  }
+ 
+ 
+ 

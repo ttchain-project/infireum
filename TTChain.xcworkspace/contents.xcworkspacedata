@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Volumes/Aj/PROJECTS/TTChain/TTChain.xcodeproj">
+      location = "group:TTChain.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:TTChain.xcodeproj">
    </FileRef>
 </Workspace>

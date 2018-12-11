@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Database Manager/Database+Configuration.swift"
+            timestampString = "566216724.644985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "localConfigure()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Database Manager/Database+Configuration.swift"
+            timestampString = "566216724.645101"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "remoteConfigure()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Database Manager/Database+Configuration.swift"
+            timestampString = "566216724.64517"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "remoteConfigure()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (TTChain.APIResult&lt;TTChain.FiatsAPIModel&gt;) -&gt; Swift.Bool in TTChain.DatabaseManager.(remoteConfigure in _75D8566DE219B53E450E8CE83D409F26)() -&gt; RxSwift.Observable&lt;Swift.Bool&gt;"
+                  moduleName = "TTChain"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajinkyasharma/Projects/TTChain/TTChain/Util/Database%20Manager/Database+Configuration.swift"
+                  timestampString = "566216724.703073"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "38">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (TTChain.APIResult&lt;TTChain.FiatsAPIModel&gt;) -&gt; Swift.Bool in TTChain.DatabaseManager.(remoteConfigure in _75D8566DE219B53E450E8CE83D409F26)() -&gt; RxSwift.Observable&lt;Swift.Bool&gt;"
+                  moduleName = "TTChain"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajinkyasharma/Projects/TTChain/TTChain/Util/Database%20Manager/Database+Configuration.swift"
+                  timestampString = "566216724.705795"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "63">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Database Manager/Database+Configuration.swift"
+            timestampString = "566216724.645231"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "remoteConfigure()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TTChain.APIResult&lt;TTChain.CoinsAPIModel&gt;, TTChain.APIResult&lt;TTChain.CoinsTestAPIModel&gt;) -&gt; Swift.Bool in TTChain.DatabaseManager.(remoteConfigure in _75D8566DE219B53E450E8CE83D409F26)() -&gt; RxSwift.Observable&lt;Swift.Bool&gt;"
+                  moduleName = "TTChain"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajinkyasharma/Projects/TTChain/TTChain/Util/Database%20Manager/Database+Configuration.swift"
+                  timestampString = "566216724.723717"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "349">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TTChain.APIResult&lt;TTChain.CoinsAPIModel&gt;, TTChain.APIResult&lt;TTChain.CoinsTestAPIModel&gt;) -&gt; Swift.Bool in TTChain.DatabaseManager.(remoteConfigure in _75D8566DE219B53E450E8CE83D409F26)() -&gt; RxSwift.Observable&lt;Swift.Bool&gt;"
+                  moduleName = "TTChain"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajinkyasharma/Projects/TTChain/TTChain/Util/Database%20Manager/Database+Configuration.swift"
+                  timestampString = "566216724.726174"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "383">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Server/API+Models.swift"
+            timestampString = "566216724.645336"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2060"
+            endingLineNumber = "2060"
+            landmarkName = "CoinsTestAPI"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Server/API+Models.swift"
+            timestampString = "566216731.364655"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2108"
+            endingLineNumber = "2108"
+            landmarkName = "init(json:sourceAPI:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TTChain.CoinsTestAPIModel.init(json: SwiftyJSON.JSON, sourceAPI: TTChain.CoinsTestAPI) throws -&gt; TTChain.CoinsTestAPIModel"
+                  moduleName = "TTChain"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajinkyasharma/Projects/TTChain/TTChain/Util/Server/API+Models.swift"
+                  timestampString = "566216731.376307"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2108"
+                  endingLineNumber = "2108"
+                  offsetFromSymbolStart = "121">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftyJSON.JSON) -&gt; Swift.Optional&lt;TTChain.CoinsAPIModel.CoinSource&gt; in TTChain.CoinsTestAPIModel.init(json: SwiftyJSON.JSON, sourceAPI: TTChain.CoinsTestAPI) throws -&gt; TTChain.CoinsTestAPIModel"
+                  moduleName = "TTChain"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajinkyasharma/Projects/TTChain/TTChain/Util/Server/API+Models.swift"
+                  timestampString = "566216731.379081"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2112"
+                  endingLineNumber = "2112"
+                  offsetFromSymbolStart = "57">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Server/API+Models.swift"
+            timestampString = "566216735.765144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2104"
+            endingLineNumber = "2104"
+            landmarkName = "init(json:sourceAPI:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TTChain/Util/Database Manager/Database+Configuration.swift"
+            timestampString = "566216761.247849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "remoteConfigure()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

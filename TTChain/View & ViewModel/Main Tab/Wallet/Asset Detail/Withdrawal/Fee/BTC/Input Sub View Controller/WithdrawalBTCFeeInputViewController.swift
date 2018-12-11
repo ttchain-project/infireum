@@ -13,16 +13,20 @@ import Cartography
 
 final class WithdrawalBTCFeeInputViewController: KLModuleViewController, WithdrawalChildVC, KLVMVC, WithdrawalFeeViewControllerBase {
     
+    struct Config {
+        let asset:Asset
+    }
     typealias FeeInfoProvider = ViewModel
-    typealias Constructor = Void
+    typealias Constructor = Config
     typealias ViewModel = WithdrawalBTCFeeInputViewModel
     var viewModel: WithdrawalBTCFeeInputViewModel!
     var bag: DisposeBag = DisposeBag.init()
-    func config(constructor: Void) {
+    func config(constructor: Config) {
         view.layoutIfNeeded()
         viewModel = ViewModel.init(
             input: WithdrawalBTCFeeInputViewModel.InputSource(
-                feeInfoIsDisplayedInput: feeBtn.rx.tap.asDriver()
+                feeInfoIsDisplayedInput: feeBtn.rx.tap.asDriver(),
+                asset:constructor.asset
             ),
             output: ()
         )
@@ -31,6 +35,7 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
     }
+
     
     var preferedHeight: CGFloat {
         return view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height

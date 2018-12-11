@@ -374,8 +374,14 @@ extension Coin {
         
         return _cic
     }
-
-}
+    
+    static var USDT: Coin {
+        guard let _usdt = getCoin(ofIdentifier: Coin.usdt_identifier) else {
+            fatalError()
+        }
+        
+        return _usdt
+    }}
 
 // MARK: - Coin Static ID Definition
 extension Coin {
@@ -397,6 +403,9 @@ extension Coin {
     
     static var guc_identifier: String {
         return "0x43ccb7d0f229f96488b7f963d2cf25434efbe611b9e7c8ff28176e761c5f7944"
+    }
+    static var usdt_identifier: String {
+        return "Identifier_USDT"
     }
 }
 

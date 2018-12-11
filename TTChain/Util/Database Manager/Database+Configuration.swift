@@ -139,6 +139,9 @@ extension DatabaseManager {
             res.asObservable(), getFiat.asObservable(), getUSDFiatRateTable.asObservable()
             )
             //            .debug("Get remotae configure (coins, fiats, fiatRateTable)")
-            .map { $0 && $1 && $2 }
+            .map {
+                $0 && $1 && $2
+                
+        }
     }
 }
