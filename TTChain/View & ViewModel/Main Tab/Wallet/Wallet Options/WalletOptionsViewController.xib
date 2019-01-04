@@ -41,11 +41,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="ybA-0Q-nbw">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="113.66666666666667"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZwJ-8i-mrb">
-                    <rect key="frame" x="80.666666666666671" y="125.66666666666669" width="213.66666666666663" height="69"/>
+                    <rect key="frame" x="80.666666666666671" y="59" width="213.66666666666663" height="69"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="totalUSDBackground" translatesAutoresizingMaskIntoConstraints="NO" id="t1E-dX-BDi">
                             <rect key="frame" x="0.0" y="0.0" width="213.66666666666666" height="69"/>
@@ -54,13 +51,13 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CNY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSM-Sg-ncL">
-                            <rect key="frame" x="89.333333333333329" y="4.9999999999999858" width="35" height="21"/>
+                            <rect key="frame" x="89.333333333333329" y="5" width="35" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGa-i3-jGN">
-                            <rect key="frame" x="21.333333333333329" y="30.999999999999986" width="171" height="31.333333333333329"/>
+                            <rect key="frame" x="21.333333333333329" y="31" width="171" height="31.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -80,7 +77,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="pYl-Hg-BDv">
-                    <rect key="frame" x="10" y="204.66666666666663" width="155" height="150"/>
+                    <rect key="frame" x="10" y="138" width="155" height="150"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTn-OY-liq">
                             <rect key="frame" x="0.0" y="0.0" width="155" height="150"/>
@@ -98,7 +95,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walletSettingIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CSg-FJ-oEM">
-                            <rect key="frame" x="112" y="28.666666666666686" width="23.666666666666657" height="22"/>
+                            <rect key="frame" x="112" y="28.666666666666657" width="23.666666666666657" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="23.670000000000002" id="DMr-vd-CIv"/>
                                 <constraint firstAttribute="height" constant="22" id="G4X-ag-rGV"/>
@@ -136,7 +133,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="2gf-VU-hjt">
-                    <rect key="frame" x="210" y="204.66666666666663" width="155" height="150"/>
+                    <rect key="frame" x="210" y="138" width="155" height="150"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iy2-KA-rDv">
                             <rect key="frame" x="0.0" y="0.0" width="155" height="150"/>
@@ -154,7 +151,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walletSettingIcon" translatesAutoresizingMaskIntoConstraints="NO" id="9KY-Ek-dzm">
-                            <rect key="frame" x="112" y="28.666666666666686" width="23.666666666666657" height="22"/>
+                            <rect key="frame" x="112" y="28.666666666666657" width="23.666666666666657" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="c4d-2k-3xy"/>
                                 <constraint firstAttribute="width" constant="23.670000000000002" id="zEt-8Q-tpC"/>
@@ -193,7 +190,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="EpP-6O-Dkc">
-                    <rect key="frame" x="10" y="364.66666666666669" width="155" height="150.00000000000006"/>
+                    <rect key="frame" x="10" y="298" width="155" height="150"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDR-FB-Dgh">
                             <rect key="frame" x="0.0" y="0.0" width="155" height="150"/>
@@ -204,20 +201,20 @@
                             <state key="normal" image="RSCWallet"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asfjkljasldjflkjlaskjdflkjasdf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhH-X4-yaM">
-                            <rect key="frame" x="24" y="68.666666666666629" width="89" height="12.666666666666671"/>
+                            <rect key="frame" x="24" y="68.666666666666686" width="89" height="12.666666666666671"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="copyWalletAdressIcon" translatesAutoresizingMaskIntoConstraints="NO" id="BQX-a9-7Ss">
-                            <rect key="frame" x="129" y="65.666666666666629" width="14" height="18.666666666666671"/>
+                            <rect key="frame" x="129" y="65.666666666666686" width="14" height="18.666666666666671"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18.719999999999999" id="Rex-tR-Xj7"/>
                                 <constraint firstAttribute="width" constant="14.039999999999999" id="dnZ-rM-1xF"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walletSettingIcon" translatesAutoresizingMaskIntoConstraints="NO" id="KtO-D5-ivh">
-                            <rect key="frame" x="112" y="28.666666666666629" width="23.666666666666657" height="22"/>
+                            <rect key="frame" x="112" y="28.666666666666686" width="23.666666666666657" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="8vJ-N3-8qS"/>
                                 <constraint firstAttribute="width" constant="23.670000000000002" id="EQj-sf-FNd"/>
@@ -250,7 +247,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="au2-Nk-9lw">
-                    <rect key="frame" x="210" y="364.66666666666669" width="155" height="150.33333333333331"/>
+                    <rect key="frame" x="210" y="298" width="155" height="150.33333333333337"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApO-73-pk5">
                             <rect key="frame" x="0.0" y="0.0" width="155" height="150.33333333333334"/>
@@ -310,18 +307,14 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="au2-Nk-9lw" secondAttribute="trailing" constant="10" id="028-M8-W2b"/>
                 <constraint firstItem="EpP-6O-Dkc" firstAttribute="top" secondItem="pYl-Hg-BDv" secondAttribute="bottom" constant="10" id="24Y-kH-ghb"/>
-                <constraint firstItem="ybA-0Q-nbw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="505-gC-H8T"/>
-                <constraint firstItem="ybA-0Q-nbw" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.14" id="CfD-4z-bUq"/>
                 <constraint firstItem="EpP-6O-Dkc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="E5t-uh-LBC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2gf-VU-hjt" secondAttribute="trailing" constant="10" id="FrX-WB-Poz"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ybA-0Q-nbw" secondAttribute="trailing" id="Igm-cG-ft1"/>
-                <constraint firstItem="ZwJ-8i-mrb" firstAttribute="top" secondItem="ybA-0Q-nbw" secondAttribute="bottom" constant="12" id="Sao-iB-h4y"/>
                 <constraint firstItem="pYl-Hg-BDv" firstAttribute="top" secondItem="ZwJ-8i-mrb" secondAttribute="bottom" constant="10" id="XVR-Lv-u9j"/>
                 <constraint firstItem="t1E-dX-BDi" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.57" id="ZPg-el-isf"/>
+                <constraint firstItem="ZwJ-8i-mrb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="bgx-ru-3Wx"/>
                 <constraint firstItem="au2-Nk-9lw" firstAttribute="top" secondItem="2gf-VU-hjt" secondAttribute="bottom" constant="10" id="cO6-Cp-Qul"/>
                 <constraint firstItem="pYl-Hg-BDv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="i9p-xx-bmP"/>
                 <constraint firstItem="ZwJ-8i-mrb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nbu-0Q-X2p"/>
-                <constraint firstItem="ybA-0Q-nbw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sLp-nw-Oh4"/>
                 <constraint firstItem="2gf-VU-hjt" firstAttribute="top" secondItem="ZwJ-8i-mrb" secondAttribute="bottom" constant="10" id="uDB-BN-N5n"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -334,7 +327,6 @@
         <image name="ETHWallet" width="431" height="417"/>
         <image name="RSCWallet" width="431" height="417"/>
         <image name="copyWalletAdressIcon" width="39" height="52"/>
-        <image name="navTitleImage" width="1080" height="278"/>
         <image name="totalUSDBackground" width="528" height="126"/>
         <image name="walletSettingIcon" width="66" height="61"/>
     </resources>

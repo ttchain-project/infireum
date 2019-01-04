@@ -54,7 +54,10 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     }()
     
 //    ExploreViewController
-    private weak var exploreVC: ExploreViewController?
+    private weak var exploreNav: UINavigationController?
+    private weak var exploreVC: ExploreViewController?{
+        return exploreNav?.viewControllers[0] as? ExploreViewController
+    }
     private lazy var exploreItem: UITabBarItem = {
             let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
@@ -76,7 +79,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH)
         let tradeNav: UINavigationController = MainWalletViewController.navInstance(from: configForMainWallet)
 //        let meVC: MeViewController = MeViewController.instance()
-        let exploreVC : ExploreViewController = ExploreViewController.instance()
+        let exploreNav : UINavigationController = ExploreViewController.navInstance()
         let walletOptionsNav = WalletOptionsViewController.navInstance()
         let chatNav = ChatListViewController.navInstance(from: ())
         
@@ -84,7 +87,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem
 //        meVC.tabBarItem = meItem
-                exploreVC.tabBarItem = exploreItem
+                exploreNav.tabBarItem = exploreItem
         chatNav.viewControllers[0].tabBarItem = chatItem
         
         
@@ -93,14 +96,14 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         self.tradeNav = tradeNav
 //        self.meVC = meVC
-        self.exploreVC = exploreVC
+        self.exploreNav = exploreNav
         //        viewControllers = [walletNav, tradeNav, meVC]
         //        viewControllers = [meVC]
         viewControllers = [
             walletOptionsNav,
             tradeNav,
             chatNav,
-            exploreVC
+            exploreNav
         ]
         
         //        monitorLang { [unowned self] (lang) in

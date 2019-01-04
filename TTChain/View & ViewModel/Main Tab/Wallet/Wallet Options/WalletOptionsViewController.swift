@@ -198,8 +198,12 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-        setDoughnutMenuButton()
-        
+
+//        setDoughnutMenuButton()
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        gradient.colors = [(UIColor.init(hexString: "b8d4ea", transparency: 1)?.cgColor)!,(UIColor.init(hexString: "f3cdbf", transparency: 1)?.cgColor)!]
+        self.view.layer.insertSublayer(gradient, at: 0)
     }
     override func renderLang(_ lang: Lang) {
         self.title = "TTChain"

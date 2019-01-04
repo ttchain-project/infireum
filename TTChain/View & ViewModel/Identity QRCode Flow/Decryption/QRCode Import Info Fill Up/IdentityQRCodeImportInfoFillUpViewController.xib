@@ -29,30 +29,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9d-6e-lsL" userLabel="NavBarView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="Jbb-u0-eZD">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="Jbb-u0-eZD" firstAttribute="top" secondItem="k9d-6e-lsL" secondAttribute="top" id="AXM-0O-XWy"/>
-                        <constraint firstAttribute="trailing" secondItem="Jbb-u0-eZD" secondAttribute="trailing" id="NLP-Py-wd8"/>
-                        <constraint firstAttribute="bottom" secondItem="Jbb-u0-eZD" secondAttribute="bottom" id="vBp-1q-kTt"/>
-                        <constraint firstItem="Jbb-u0-eZD" firstAttribute="leading" secondItem="k9d-6e-lsL" secondAttribute="leading" id="xMu-ds-o9P"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="4xI-FM-809"/>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI2-CB-zwF">
-                    <rect key="frame" x="20" y="123.5" width="42" height="20.5"/>
+                    <rect key="frame" x="20" y="30" width="42" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="u91-69-SQs">
-                    <rect key="frame" x="20" y="174" width="335" height="135"/>
+                    <rect key="frame" x="20" y="80.5" width="335" height="135"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Uc3-EB-Zly">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="45"/>
@@ -152,24 +136,17 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nba-4m-wqO" secondAttribute="trailing" id="15h-Yo-a53"/>
-                <constraint firstItem="k9d-6e-lsL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="6Wg-KZ-590"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="u91-69-SQs" secondAttribute="trailing" constant="20" id="6w3-uY-D7E"/>
-                <constraint firstItem="KI2-CB-zwF" firstAttribute="top" secondItem="k9d-6e-lsL" secondAttribute="bottom" constant="30" id="9gK-Yv-NS7"/>
+                <constraint firstItem="KI2-CB-zwF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="9gK-Yv-NS7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="nba-4m-wqO" secondAttribute="bottom" id="AB3-6y-BTH"/>
                 <constraint firstItem="u91-69-SQs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aaU-c1-8dD"/>
-                <constraint firstItem="k9d-6e-lsL" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.14" id="c3H-FL-n2x"/>
                 <constraint firstItem="u91-69-SQs" firstAttribute="top" secondItem="KI2-CB-zwF" secondAttribute="bottom" constant="30" id="cy0-jy-cc0"/>
                 <constraint firstItem="nba-4m-wqO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iBO-Af-L49"/>
                 <constraint firstItem="KI2-CB-zwF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ncx-7G-nog"/>
-                <constraint firstItem="k9d-6e-lsL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vGW-Rc-Hrm"/>
-                <constraint firstItem="k9d-6e-lsL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vqG-hS-wHl"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="navTitleImage" width="1080" height="278"/>
-    </resources>
 </document>

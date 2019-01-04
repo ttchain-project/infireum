@@ -82,7 +82,7 @@ final class IdentityQRCodeImportInfoFillUpViewController: KLModuleViewController
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bg_1)
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bg_clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"))
         

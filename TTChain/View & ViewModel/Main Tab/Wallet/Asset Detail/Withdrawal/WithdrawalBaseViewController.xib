@@ -23,23 +23,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yUA-61-zwA">
-                    <rect key="frame" x="0.0" y="73.5" width="375" height="551.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="625"/>
                 </scrollView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiP-Cn-bBx" userLabel="NavBarView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="r3v-vt-bkx">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="r3v-vt-bkx" secondAttribute="trailing" id="2sZ-RD-ugi"/>
-                        <constraint firstItem="r3v-vt-bkx" firstAttribute="leading" secondItem="FiP-Cn-bBx" secondAttribute="leading" id="5Qv-vb-7AI"/>
-                        <constraint firstAttribute="bottom" secondItem="r3v-vt-bkx" secondAttribute="bottom" id="Aii-c4-3Jf"/>
-                        <constraint firstItem="r3v-vt-bkx" firstAttribute="top" secondItem="FiP-Cn-bBx" secondAttribute="top" id="aod-Zs-hqH"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sj-xC-x8d">
                     <rect key="frame" x="0.0" y="625" width="375" height="42"/>
                     <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
@@ -50,21 +35,14 @@
             <constraints>
                 <constraint firstItem="1Sj-xC-x8d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7M1-0I-YAr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1Sj-xC-x8d" secondAttribute="trailing" id="CW6-jU-jjG"/>
-                <constraint firstItem="FiP-Cn-bBx" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.14" id="Gbt-GC-Huy"/>
-                <constraint firstItem="FiP-Cn-bBx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="IaE-B2-7aW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUA-61-zwA" secondAttribute="trailing" id="JWG-as-pu8"/>
-                <constraint firstItem="FiP-Cn-bBx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U1h-it-2tT"/>
-                <constraint firstItem="FiP-Cn-bBx" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="U48-uh-xhj"/>
                 <constraint firstItem="yUA-61-zwA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aay-XJ-K1S"/>
                 <constraint firstItem="1Sj-xC-x8d" firstAttribute="top" secondItem="yUA-61-zwA" secondAttribute="bottom" id="e6Z-9K-ia4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1Sj-xC-x8d" secondAttribute="bottom" id="xOT-fM-Cod"/>
-                <constraint firstItem="yUA-61-zwA" firstAttribute="top" secondItem="r3v-vt-bkx" secondAttribute="bottom" constant="-20" id="zbN-hz-5hc"/>
+                <constraint firstItem="yUA-61-zwA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-20" id="zbN-hz-5hc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
     </objects>
-    <resources>
-        <image name="navTitleImage" width="1080" height="278"/>
-    </resources>
 </document>

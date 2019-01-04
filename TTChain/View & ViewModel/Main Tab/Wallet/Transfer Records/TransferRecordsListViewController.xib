@@ -24,30 +24,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZl-kg-3Fc" userLabel="NavBarView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="K9r-cE-atB">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="K9r-cE-atB" secondAttribute="trailing" id="COp-GW-N5V"/>
-                        <constraint firstItem="K9r-cE-atB" firstAttribute="top" secondItem="mZl-kg-3Fc" secondAttribute="top" id="D7W-Jw-Vx9"/>
-                        <constraint firstItem="K9r-cE-atB" firstAttribute="leading" secondItem="mZl-kg-3Fc" secondAttribute="leading" id="FmM-dd-2BJ"/>
-                        <constraint firstAttribute="bottom" secondItem="K9r-cE-atB" secondAttribute="bottom" id="OBe-rj-mGN"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1P-Dx-NJw">
-                    <rect key="frame" x="0.0" y="93.5" width="375" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="250" constant="100" id="mYT-MR-LTq"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ISf-NE-aOC">
-                    <rect key="frame" x="0.0" y="193.5" width="375" height="473.5"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kjasdlfj ljadlfjljasdlkfjljalkdf ljasldfj ljasdflj laskjdfl lajdfljasldfj lasdf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJT-CS-YQy">
@@ -59,25 +44,18 @@
             </subviews>
             <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="mZl-kg-3Fc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="84i-0O-evP"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ISf-NE-aOC" secondAttribute="bottom" id="9VA-5j-oWb"/>
                 <constraint firstItem="WJT-CS-YQy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Aza-OK-gK8"/>
-                <constraint firstItem="mZl-kg-3Fc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Bsc-rk-DJy"/>
                 <constraint firstItem="ISf-NE-aOC" firstAttribute="top" secondItem="n1P-Dx-NJw" secondAttribute="bottom" id="ElQ-VY-yi8"/>
                 <constraint firstItem="ISf-NE-aOC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ev3-df-Opz"/>
-                <constraint firstItem="mZl-kg-3Fc" firstAttribute="bottom" secondItem="n1P-Dx-NJw" secondAttribute="top" id="OXU-JT-uX9"/>
+                <constraint firstAttribute="top" secondItem="n1P-Dx-NJw" secondAttribute="top" id="OXU-JT-uX9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ISf-NE-aOC" secondAttribute="trailing" id="PGA-zp-abb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="n1P-Dx-NJw" secondAttribute="trailing" id="Xjm-JX-Z4p"/>
                 <constraint firstItem="n1P-Dx-NJw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bAZ-Al-5wp"/>
-                <constraint firstItem="mZl-kg-3Fc" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.14" id="bd4-qI-0Gy"/>
                 <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="WJT-CS-YQy" secondAttribute="width" constant="20" id="tGN-jg-phW"/>
                 <constraint firstItem="WJT-CS-YQy" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="uY2-sF-ykZ"/>
-                <constraint firstItem="mZl-kg-3Fc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vMy-IN-MLo"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
-    <resources>
-        <image name="navTitleImage" width="1080" height="278"/>
-    </resources>
 </document>

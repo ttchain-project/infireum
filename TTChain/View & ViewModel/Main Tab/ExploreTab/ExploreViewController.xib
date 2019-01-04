@@ -29,32 +29,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArH-Uy-9El" userLabel="NavBarView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navTitleImage" translatesAutoresizingMaskIntoConstraints="NO" id="fDS-Pr-EVi">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LOGO" translatesAutoresizingMaskIntoConstraints="NO" id="eo1-A8-GbO">
-                            <rect key="frame" x="20" y="28" width="37.5" height="37.5"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="eo1-A8-GbO" secondAttribute="height" multiplier="1:1" id="ZTP-gJ-sWH"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="eo1-A8-GbO" firstAttribute="height" secondItem="fDS-Pr-EVi" secondAttribute="height" multiplier="0.4" id="GKb-JH-pHS"/>
-                        <constraint firstItem="eo1-A8-GbO" firstAttribute="leading" secondItem="ArH-Uy-9El" secondAttribute="leading" constant="20" id="GeG-fu-aXm"/>
-                        <constraint firstItem="fDS-Pr-EVi" firstAttribute="top" secondItem="ArH-Uy-9El" secondAttribute="top" id="Ia0-Ko-UJ5"/>
-                        <constraint firstAttribute="bottom" secondItem="fDS-Pr-EVi" secondAttribute="bottom" id="W46-eV-xED"/>
-                        <constraint firstAttribute="trailing" secondItem="fDS-Pr-EVi" secondAttribute="trailing" id="jsF-Ly-AD5"/>
-                        <constraint firstItem="fDS-Pr-EVi" firstAttribute="leading" secondItem="ArH-Uy-9El" secondAttribute="leading" id="ljg-uB-u3W"/>
-                        <constraint firstItem="eo1-A8-GbO" firstAttribute="centerY" secondItem="ArH-Uy-9El" secondAttribute="centerY" id="x6Q-E2-fbT"/>
-                    </constraints>
-                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iPv-IM-uEp">
-                    <rect key="frame" x="0.0" y="93.5" width="375" height="573.5"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gcp-Ic-X7m">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="328"/>
@@ -70,7 +46,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHD-nB-9EJ">
-                                            <rect key="frame" x="102" y="30.5" width="253" height="20.5"/>
+                                            <rect key="frame" x="102" y="31" width="253" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -106,7 +82,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voA-Wf-R1w">
-                                            <rect key="frame" x="102" y="30.5" width="253" height="20.5"/>
+                                            <rect key="frame" x="102" y="31" width="253" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -142,7 +118,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rC0-rP-jh8">
-                                            <rect key="frame" x="102" y="30.5" width="253" height="20.5"/>
+                                            <rect key="frame" x="102" y="31" width="253" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -213,14 +189,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ArH-Uy-9El" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.14" id="0TW-Yc-Wgf"/>
-                <constraint firstItem="iPv-IM-uEp" firstAttribute="top" secondItem="ArH-Uy-9El" secondAttribute="bottom" id="4cc-0f-Pdh"/>
                 <constraint firstItem="dID-7r-8t5" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" constant="-30" id="4kH-oo-3yS"/>
-                <constraint firstItem="ArH-Uy-9El" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ck1-De-0Xa"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ArH-Uy-9El" secondAttribute="trailing" id="UKf-mS-Ng9"/>
+                <constraint firstItem="iPv-IM-uEp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="NAa-1n-hs7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iPv-IM-uEp" secondAttribute="trailing" id="hAN-ym-ptO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="iPv-IM-uEp" secondAttribute="bottom" id="k0i-SC-poX"/>
-                <constraint firstItem="ArH-Uy-9El" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sDU-yd-edU"/>
                 <constraint firstItem="iPv-IM-uEp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="u24-MI-hnC"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -228,9 +200,7 @@
         </view>
     </objects>
     <resources>
-        <image name="LOGO" width="113" height="118"/>
         <image name="friendsImage" width="177" height="177"/>
-        <image name="navTitleImage" width="1080" height="278"/>
         <image name="newsImage" width="177" height="177"/>
         <image name="videosImage" width="177" height="177"/>
     </resources>

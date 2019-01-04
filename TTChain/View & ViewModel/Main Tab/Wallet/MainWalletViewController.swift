@@ -264,12 +264,10 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         switch self.viewModel.entryPoint {
-        case .MainTab?:
-            setDoughnutMenuButton()
         case .MainWallet?:
             changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
-        case .none:
-            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+        default:
+            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:nil, title: nil)
         }
         tableView.backgroundColor = theme.palette.bgView_sub
     }

@@ -131,10 +131,6 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
 
         tableView.backgroundColor = palette.nav_bg_clear
         view.backgroundColor = palette.bgView_main
-
-
-        self.setDoughnutMenuButton()
-
     }
     
     override func renderLang(_ lang: Lang) {
