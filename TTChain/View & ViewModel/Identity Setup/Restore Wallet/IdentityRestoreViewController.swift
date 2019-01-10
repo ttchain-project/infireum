@@ -317,7 +317,7 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     func toMainTab() {
         let tab = xib(vc: MainTabBarViewController.self)
         present(tab, animated: true, completion: {
-        
+            IMUserManager.launch()
         })
     }
     

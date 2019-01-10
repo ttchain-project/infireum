@@ -17,7 +17,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     var themeBag: DisposeBag = DisposeBag.init()
     var langBag: DisposeBag = DisposeBag.init()
     
-    
+    //MARK: - Wallet
     private weak var walletNav: UINavigationController?
     private var walletVC: MainWalletViewController? {
         return walletNav?.viewControllers[0] as? MainWalletViewController
@@ -36,11 +36,18 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return item
     }()
     
+    //MARK:- Trade
     private weak var tradeNav: UINavigationController?
     private var tradeVC: MainWalletViewController? {
         return tradeNav?.viewControllers[0] as? MainWalletViewController
     }
+    private lazy var tradeItem: UITabBarItem = {
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "lightningTransactionIcon"), selectedImage: #imageLiteral(resourceName: "lightningTransactionIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        return item
+    }()
     
+    //MARK: = Chat
     private weak var chatNav: UINavigationController?
     private var chatVC: ChatListViewController? {
         return chatNav?.viewControllers[0] as? ChatListViewController
@@ -53,6 +60,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return item
     }()
     
+        //MARK: = Explore
 //    ExploreViewController
     private weak var exploreNav: UINavigationController?
     private weak var exploreVC: ExploreViewController?{
@@ -63,13 +71,17 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
-    
-    private lazy var tradeItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "lightningTransactionIcon"), selectedImage: #imageLiteral(resourceName: "lightningTransactionIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        //MARK: = Setting
+   
+    private weak var settingNav: UINavigationController?
+    private weak var settingVC: SettingMenuViewController?{
+        return settingNav?.viewControllers[0] as? SettingMenuViewController
+    }
+    private lazy var settingItem: UITabBarItem = {
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "settings"), selectedImage: #imageLiteral(resourceName: "settings").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,33 +89,37 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         //        let walletNav = MainWalletViewController.navInstance()
         let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH)
+       
         let tradeNav: UINavigationController = MainWalletViewController.navInstance(from: configForMainWallet)
 //        let meVC: MeViewController = MeViewController.instance()
-        let exploreNav : UINavigationController = ExploreViewController.navInstance()
-        let walletOptionsNav = WalletOptionsViewController.navInstance()
-        let chatNav = ChatListViewController.navInstance(from: ())
         
+//        let exploreNav : UINavigationController = ExploreViewController.navInstance()
+        
+        let walletOptionsNav = WalletOptionsViewController.navInstance()
+        
+        let chatNav = ChatListViewController.navInstance(from: ())
+        let settingsNav = SettingMenuViewController.navInstance()
         
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem
 //        meVC.tabBarItem = meItem
-                exploreNav.tabBarItem = exploreItem
-        chatNav.viewControllers[0].tabBarItem = chatItem
+//        exploreNav.tabBarItem = exploreItem
         
+        chatNav.viewControllers[0].tabBarItem = chatItem
+        settingsNav.viewControllers[0].tabBarItem = settingItem
         
         self.walletOptionNav = walletOptionsNav
         self.chatNav = chatNav
         
         self.tradeNav = tradeNav
 //        self.meVC = meVC
-        self.exploreNav = exploreNav
-        //        viewControllers = [walletNav, tradeNav, meVC]
-        //        viewControllers = [meVC]
+//        self.exploreNav = exploreNav
+        self.settingNav = settingsNav
         viewControllers = [
             walletOptionsNav,
             tradeNav,
             chatNav,
-            exploreNav
+            settingsNav
         ]
         
         //        monitorLang { [unowned self] (lang) in

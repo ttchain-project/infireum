@@ -489,6 +489,13 @@
         let api = GetCICTxRecordsAPI.init(address: address, mainCoin: mainCoin)
         return fire(router: .blockchain(.getCICTxRecords(api)))
     }
+    
+    //MARK: = topChain/markettest
+    
+    func getMarketTest() -> RxAPIResponse<MarketTestAPIModel> {
+        let api = MarketTestAPI.init()
+        return fire(router: .blockchain(.getMarketTestAPI(api)))
+    }
  }
  
  

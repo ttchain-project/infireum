@@ -12,6 +12,8 @@ extension String {
     ///
     /// - Returns: 
     func disguiseIfNeeded() -> String {
+        
+        
         return SettingsManager.isPrivateModeEnabled ? C.PrivateMode.disguisedValueStr : self
     }
 }

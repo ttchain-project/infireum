@@ -333,6 +333,7 @@ extension IdentitySetupViewController: UIImagePickerControllerDelegate, UINaviga
     func toMainTab() {
         let tab = xib(vc: MainTabBarViewController.self)
         present(tab, animated: true, completion: {
+            IMUserManager.launch()
         })
     }
 }

@@ -143,8 +143,8 @@ class MeViewController: KLModuleViewController, Rx {
     }
     
     private func toAgreement() {
-        let nav = AgreementMeViewController.navInstance(from: AgreementMeViewController.Config(identity: Identity.singleton!))
-        tabBarController?.present(nav, animated: true, completion: nil)
+//        let nav = AgreementMeViewController.navInstance(from: AgreementMeViewController.Config(identity: Identity.singleton!, text: <#String#>))
+//        tabBarController?.present(nav, animated: true, completion: nil)
         
     }
     

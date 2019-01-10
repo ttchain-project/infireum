@@ -30,13 +30,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI2-CB-zwF">
-                    <rect key="frame" x="20" y="30" width="42" height="20.5"/>
+                    <rect key="frame" x="20" y="84" width="42" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="u91-69-SQs">
-                    <rect key="frame" x="20" y="80.5" width="335" height="135"/>
+                    <rect key="frame" x="20" y="134.5" width="335" height="135"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Uc3-EB-Zly">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="45"/>
@@ -137,14 +137,14 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nba-4m-wqO" secondAttribute="trailing" id="15h-Yo-a53"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="u91-69-SQs" secondAttribute="trailing" constant="20" id="6w3-uY-D7E"/>
-                <constraint firstItem="KI2-CB-zwF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="9gK-Yv-NS7"/>
+                <constraint firstItem="KI2-CB-zwF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="9gK-Yv-NS7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="nba-4m-wqO" secondAttribute="bottom" id="AB3-6y-BTH"/>
                 <constraint firstItem="u91-69-SQs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aaU-c1-8dD"/>
                 <constraint firstItem="u91-69-SQs" firstAttribute="top" secondItem="KI2-CB-zwF" secondAttribute="bottom" constant="30" id="cy0-jy-cc0"/>
                 <constraint firstItem="nba-4m-wqO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iBO-Af-L49"/>
                 <constraint firstItem="KI2-CB-zwF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ncx-7G-nog"/>
             </constraints>
-            <nil key="simulatedTopBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>

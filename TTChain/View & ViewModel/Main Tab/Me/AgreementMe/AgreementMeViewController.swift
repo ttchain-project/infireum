@@ -19,6 +19,8 @@ final class AgreementMeViewController: KLModuleViewController, KLVMVC {
     var viewModel: AgreementMeViewModel!
     struct Config {
         let identity: Identity
+        let text:String
+        let title:String
     }
     var bag: DisposeBag = DisposeBag.init()
     
@@ -41,8 +43,9 @@ final class AgreementMeViewController: KLModuleViewController, KLVMVC {
     func config(constructor: AgreementMeViewController.Config) {
         print(view)
         view.layoutIfNeeded()
-        viewModel = ViewModel.init(input: AgreementMeViewModel.InputSource(identity: constructor.identity),
+        viewModel = ViewModel.init(input: AgreementMeViewModel.InputSource(identity: constructor.identity,content:constructor.text),
                                    output: ())
+        self.title = constructor.title
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
     }
@@ -51,9 +54,9 @@ final class AgreementMeViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var agreementLabel: UILabel!
     
     override func renderLang(_ lang: Lang) {
-        let dls = lang.dls
-        title = dls.me_label_agreement
-        agreementLabel.attributedText = content
+//        let dls = lang.dls
+//        title = dls.me_label_agreement
+        agreementLabel.attributedText = NSAttributedString.init(string: viewModel.input.content)
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -62,7 +65,6 @@ final class AgreementMeViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
         changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
         changeNavShadowVisibility(true)
-        
         view.backgroundColor = palette.bgView_sub
     }
     

@@ -130,19 +130,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     .subscribe(onNext: {
                         [unowned self] in
                         self.window?.rootViewController = xib(vc: MainTabBarViewController.self)
-                        IMUserManager.launch()
                         
+                        IMUserManager.launch()
+                        self.setupSetting()
                     })
                     .disposed(by: bag)
                 
             } else {
                 window?.rootViewController = xib(vc: MainTabBarViewController.self)
                 IMUserManager.launch()
+                self.setupSetting()
             }
         } else {
             window?.rootViewController = IdentitySetupViewController.instance()
         }
         
+    }
+    func setupSetting()  {
+        Server.instance.getMarketTest().subscribe().disposed(by: bag)
     }
     
     private func syncLocalDefaultInfoIfNeverSyncBefore() {

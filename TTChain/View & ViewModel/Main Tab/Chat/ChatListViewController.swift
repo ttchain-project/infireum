@@ -134,8 +134,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-//        let dls = lang.dls
-//        title = dls.chat_list_title
+        let dls = lang.dls
+        title = dls.chat_list_title
     }
     
     @objc func settingsButtonTapped() {

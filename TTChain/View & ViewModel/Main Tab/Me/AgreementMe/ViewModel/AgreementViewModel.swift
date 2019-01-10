@@ -18,6 +18,7 @@ class AgreementMeViewModel: KLRxViewModel {
     struct Input {
         
         let identity: Identity
+        let content:String
     }
     
     var input: AgreementMeViewModel.Input
