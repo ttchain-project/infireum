@@ -93,7 +93,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         let tradeNav: UINavigationController = MainWalletViewController.navInstance(from: configForMainWallet)
 //        let meVC: MeViewController = MeViewController.instance()
         
-//        let exploreNav : UINavigationController = ExploreViewController.navInstance()
+        let exploreNav : UINavigationController = ExploreViewController.navInstance()
         
         let walletOptionsNav = WalletOptionsViewController.navInstance()
         
@@ -101,9 +101,9 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         let settingsNav = SettingMenuViewController.navInstance()
         
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
-        tradeNav.viewControllers[0].tabBarItem = tradeItem
+//        tradeNav.viewControllers[0].tabBarItem = tradeItem
 //        meVC.tabBarItem = meItem
-//        exploreNav.tabBarItem = exploreItem
+        exploreNav.viewControllers[0].tabBarItem = exploreItem
         
         chatNav.viewControllers[0].tabBarItem = chatItem
         settingsNav.viewControllers[0].tabBarItem = settingItem
@@ -113,12 +113,12 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         self.tradeNav = tradeNav
 //        self.meVC = meVC
-//        self.exploreNav = exploreNav
+        self.exploreNav = exploreNav
         self.settingNav = settingsNav
         viewControllers = [
             walletOptionsNav,
-            tradeNav,
             chatNav,
+            exploreNav,
             settingsNav
         ]
         

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CoinMarketCollectionViewCell" customModule="Hope_Seed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="137" height="125"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="137" height="125"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnK-Ph-MaP">
+                        <rect key="frame" x="52" y="5" width="33.5" height="63"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELN-Jb-H8f">
+                        <rect key="frame" x="0.0" y="99" width="137" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPW-BH-CXe">
+                        <rect key="frame" x="0.0" y="73" width="137" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="ELN-Jb-H8f" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Ezp-3T-3di"/>
+                <constraint firstItem="oPW-BH-CXe" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="NHx-7R-Odm"/>
+                <constraint firstItem="wnK-Ph-MaP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Pig-Iw-Rs2"/>
+                <constraint firstItem="ELN-Jb-H8f" firstAttribute="top" secondItem="oPW-BH-CXe" secondAttribute="bottom" constant="5" id="Wvb-x2-Opv"/>
+                <constraint firstAttribute="bottom" secondItem="ELN-Jb-H8f" secondAttribute="bottom" constant="5" id="iOs-iH-9e0"/>
+                <constraint firstItem="ELN-Jb-H8f" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="mzM-nC-gJb"/>
+                <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="wnK-Ph-MaP" secondAttribute="width" constant="5" id="ohe-YU-Hcr"/>
+                <constraint firstItem="oPW-BH-CXe" firstAttribute="top" secondItem="wnK-Ph-MaP" secondAttribute="bottom" constant="5" id="r7d-Mv-caw"/>
+                <constraint firstItem="wnK-Ph-MaP" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ueR-mC-QKI"/>
+                <constraint firstItem="oPW-BH-CXe" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="z3A-uV-pFW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="137" height="125"/>
+            <connections>
+                <outlet property="changeLabel" destination="ELN-Jb-H8f" id="CkI-TN-YqH"/>
+                <outlet property="priceLabel" destination="oPW-BH-CXe" id="gkw-Kz-ktl"/>
+                <outlet property="titleLabel" destination="wnK-Ph-MaP" id="r0X-Vi-RvE"/>
+            </connections>
+            <point key="canvasLocation" x="-7.2000000000000002" y="154.27286356821591"/>
+        </collectionViewCell>
+    </objects>
+</document>

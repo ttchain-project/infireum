@@ -19,7 +19,7 @@ class SettingMenuCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setupCell(model:SettingsTabModel) {
+    func setupCell(model:MarketTest) {
         imageView.af_setImage(withURL: URL.init(string: model.img)!)
         self.titleLabel.text = model.title
     }

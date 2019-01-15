@@ -40,7 +40,10 @@ enum BlockchainAPI: KLMoyaAPISet {
         case .getCICTxRecords(let api): return api
            
         case .getMarketTestAPI(let api): return api
+        case .getQuotesTestAPI(let api): return api
+
         }
+        
     }
     
     case createAccount(CreateAccountAPI)
@@ -69,6 +72,7 @@ enum BlockchainAPI: KLMoyaAPISet {
     case broadcastCICTx(BroadcastCICTxAPI)
     case getCICTxRecords(GetCICTxRecordsAPI)
     case getMarketTestAPI(MarketTestAPI)
+    case getQuotesTestAPI(QuotesTestAPI)
 }
 
 //MARK: - GET AssetAmt
@@ -1715,10 +1719,40 @@ struct MarketTestAPIModel: KLJSONMappableMoyaResponse{
     typealias API = MarketTestAPI
     
     init(json: JSON, sourceAPI: API) throws {
-        guard let settings_A = json[SettingKeyEnum.SettingA.rawValue].array,let settings_B = json[SettingKeyEnum.SettingB.rawValue].array,let setting_C = json[SettingKeyEnum.SettingC.rawValue].array,let setting_D = json[SettingKeyEnum.SettingD.rawValue].array  else {
+        guard json != JSON.null else {
             throw GTServerAPIError.noData
         }
-        SettingTabHandler.shared.syncSettingsTabData(json: [settings_A,settings_B,setting_C,setting_D])
+        MarketTestHandler.shared.manageMarketTestData(json: json)
+        
+    }
+}
+
+struct QuotesTestAPI: KLMoyaAPIData {
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
+    var path: String { return "/topChain/quotesTest" }
+    
+    var method: Moya.Method { return .get }
+    
+    var task: Task {
+        return Moya.Task.requestPlain
+    }
+    
+    var stub: Data? { return nil }
+}
+
+
+struct QuotesTestAPIModel: KLJSONMappableMoyaResponse{
+    typealias API = QuotesTestAPI
+    
+    init(json: JSON, sourceAPI: API) throws {
+        guard json != JSON.null else {
+            throw GTServerAPIError.noData
+        }
+        MarketTestHandler.shared.managetQuotesTestData(json: json)
+        
     }
 }
 

@@ -31,8 +31,8 @@ class SettingMenuViewModel: KLRxViewModel {
     var bag: DisposeBag = DisposeBag.init()
     
     
-    lazy var datasource: RxCollectionViewSectionedReloadDataSource<SettingsSectionModel> = {
-        let source = RxCollectionViewSectionedReloadDataSource<SettingsSectionModel>.init(configureCell: { (source, tv, idxPath, model) -> UICollectionViewCell in
+    lazy var datasource: RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel> = {
+        let source = RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel>.init(configureCell: { (source, tv, idxPath, model) -> UICollectionViewCell in
             fatalError()
         }, configureSupplementaryView: { (source, cv, kind, indexPath) -> UICollectionReusableView in
             fatalError()

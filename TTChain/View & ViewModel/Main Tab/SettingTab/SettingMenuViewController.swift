@@ -90,17 +90,17 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
             }
             return UICollectionReusableView()
         }
-        SettingTabHandler.shared.settingsArray
+        MarketTestHandler.shared.settingsArray
             .bind(to: collectionView.rx.items(
                 dataSource: viewModel.datasource)
             )
             .disposed(by: bag)
 
         collectionView.rx.itemSelected.subscribe(onNext: { (indexPath) in
-            let settingModel = SettingTabHandler.shared.settingsArray.value[indexPath.section].items[indexPath.row]
-            if settingModel.isExternalLink {
-                if UIApplication.shared.canOpenURL(settingModel.url) {
-                    UIApplication.shared.open(settingModel.url, options: [:], completionHandler: nil)
+            let settingModel: MarketTestTabModel = MarketTestHandler.shared.settingsArray.value[indexPath.section].items[indexPath.row] as! MarketTestTabModel
+            if settingModel.isExternalLink , settingModel.url != nil{
+                if UIApplication.shared.canOpenURL(settingModel.url!) {
+                    UIApplication.shared.open(settingModel.url!, options: [:], completionHandler: nil)
                 }
             }else {
                 self.handleNavigation(model: settingModel)
@@ -130,9 +130,12 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         view.backgroundColor = palette.bgView_main
     }
     
-    func handleNavigation(model:SettingsTabModel) {
-        if model.url.scheme == "app" {
-            let key = model.url.absoluteString.replacingOccurrences(of: "app://", with: "")
+    func handleNavigation(model:MarketTestTabModel) {
+        guard let url = model.url else {
+            return
+        }
+        if url.scheme == "app" {
+            let key = url.absoluteString.replacingOccurrences(of: "app://", with: "")
             switch key {
             case "safety":
                 toExportWalletPKey()

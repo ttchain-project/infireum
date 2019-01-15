@@ -9,17 +9,17 @@
 import Foundation
 import RxDataSources
 
-struct SettingsSectionModel: SectionModelType{
+struct MarketTestSectionModel: SectionModelType{
   
-    var items: [SettingsTabModel]
+    var items: [MarketTest]
     
-    init(original: SettingsSectionModel, items: [Item]) {
+    init(original: MarketTestSectionModel, items: [Item]) {
         self = original
         self.categoryTitle = ""
         self.items = items
     }
     
-    typealias Item = SettingsTabModel
+    typealias Item = MarketTest
     
     var categoryTitle:String
     
