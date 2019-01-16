@@ -61,7 +61,32 @@ final class ExploreDetailCollectionViewController: KLModuleViewController, KLVMV
             )
             .disposed(by: bag)
         
+        collectionView.rx.itemSelected.subscribe(onNext: { (indexPath) in
+            let settingModel = self.viewModel.marketArray.value[indexPath.section].items[indexPath.row]
+            if settingModel is GroupShortcutModel {
+                self.showGroupChat(model: settingModel as! GroupShortcutModel)
+            }else if settingModel is MarketTestTabModel {
+                let model = settingModel as! MarketTestTabModel
+                if model.isExternalLink {
+                    let vc = ExploreDetailWebViewController.navInstance(from: ExploreDetailWebViewController.Config(model:model))
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+            
+        }).disposed(by: bag)
+        
+        
     }
+    
+    func showGroupChat(model: GroupShortcutModel) {
+        var image : UIImage?
+        if let url = URL.init(string: model.img),  let data = try? Data.init(contentsOf: url) {
+            image = UIImage.init(data: data)
+        }
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .group, chatTitle: model.title, roomID: model.content, chatAvatar: image))
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
@@ -71,7 +96,7 @@ final class ExploreDetailCollectionViewController: KLModuleViewController, KLVMV
     }
     
     override func renderLang(_ lang: Lang) {
-        
+        self.title = self.viewModel.input.marketModel.title
     }
 
     

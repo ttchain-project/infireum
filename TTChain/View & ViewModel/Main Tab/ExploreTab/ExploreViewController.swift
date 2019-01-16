@@ -18,7 +18,11 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
         view.layoutIfNeeded()
         self.viewModel =
             ExploreTabViewModel.init(input: ExploreTabViewModel.InputSource(selectionIdxPath:self.exploreOptionsCollectionView.rx.itemSelected.asDriver()), output: ExploreTabViewModel.OutputSource(selectedModel: { model in
-                
+                if model is GroupShortcutModel {
+                    self.showGroupChat(model:model as! GroupShortcutModel)
+                }else {
+                    self.handleShortcutNavigation(model: model as! MarketTestTabModel)
+                }
             }))
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
@@ -225,6 +229,14 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
                 }
             }
         }
+    }
+    func showGroupChat(model: GroupShortcutModel) {
+        var image : UIImage?
+        if let url = URL.init(string: model.img),  let data = try? Data.init(contentsOf: url) {
+            image = UIImage.init(data: data)
+        }
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .group, chatTitle: model.title, roomID: model.content, chatAvatar: image))
+        show(vc, sender: self)
     }
 }
 

@@ -134,7 +134,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         //            self.tabBar.tintColor = theme.palette.tab_selected
         //        }
         //        observeLightningSwitchWithCoin()
-        self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
+//        self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
+        self.tabBar.backgroundColor = UIColor.init(red: 163, green: 220, blue: 212)
         self.view.backgroundColor = .owCharcoalGrey
     }
 

@@ -22,6 +22,7 @@ final class ExploreDetailWebViewController: KLModuleViewController, KLVMVC {
         self.view.setNeedsLayout()
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
+        self.title = constructor.model.title
         guard let url = constructor.model.url else {
             return
         }
@@ -34,6 +35,7 @@ final class ExploreDetailWebViewController: KLModuleViewController, KLVMVC {
             self.webview.load(URLRequest.init(url: url))
 
         }
+        
     }
     
     typealias ViewModel = ExploreDetailWebViewModel
@@ -52,7 +54,6 @@ final class ExploreDetailWebViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-        
     }
     
     override func viewDidLoad() {

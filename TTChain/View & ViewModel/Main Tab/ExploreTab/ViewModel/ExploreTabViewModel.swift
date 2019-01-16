@@ -23,15 +23,32 @@ class ExploreTabViewModel: KLRxViewModel {
     required init(input: Input, output: Output) {
         self.input = input
         self.output = output
+        self.concatInput()
     }
     
     var input: Input
     var output: Output
     func concatInput() {
         input.selectionIdxPath.drive(onNext: { [unowned self](indexpath) in
-            _ = MarketTestHandler.shared.exploreOptionsObservable.map { sectionArray -> Void in
-                self.output.selectedModel(sectionArray[indexpath.section].items[indexpath.row])
+            switch indexpath.section {
+            case 0:
+                //ChatGroup
+                self.output.selectedModel(MarketTestHandler.shared.chatGroupArray.value[indexpath.row])
+                print("")
+            case 1:
+                //FinNews
+                self.output.selectedModel(MarketTestHandler.shared.finNewsArray.value[indexpath.row])
+            case 2:
+                //Daps
+                self.output.selectedModel(MarketTestHandler.shared.dappArray.value[indexpath.row])
+            case 3:
+                //Explore
+                self.output.selectedModel(MarketTestHandler.shared.explorerArray.value[indexpath.row])
+
+            default:
+                print("")
             }
+            
         } ).disposed(by: bag)
     }
     
