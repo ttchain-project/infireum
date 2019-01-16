@@ -240,9 +240,9 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         importBtn.set(
             font: UIFont.owRegular(size: 14)
         )
-        
-        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
-        importBtn.setBackgroundImage(image, for: .normal)
+        importBtn.backgroundColor = theme.palette.btn_bgFill_enable_bg
+//        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
+//        importBtn.setBackgroundImage(image, for: .normal)
 
         mnemonicBase.set(
             borderInfo: (color: theme.palette.bgView_border, width: 1)
@@ -318,6 +318,8 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         let tab = xib(vc: MainTabBarViewController.self)
         present(tab, animated: true, completion: {
             IMUserManager.launch()
+            MarketTestHandler.shared.launch()
+
         })
     }
     

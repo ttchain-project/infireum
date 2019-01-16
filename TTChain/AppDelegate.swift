@@ -147,8 +147,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     func setupSetting()  {
-        Server.instance.getMarketTest().subscribe().disposed(by: bag)
-        Server.instance.getQuotesTest().subscribe().disposed(by: bag)
+//        Server.instance.getMarketTest().subscribe().disposed(by: bag)
+        MarketTestHandler.shared.launch()
+//        Server.instance.getQuotesTest().subscribe().disposed(by: bag)
     }
     
     private func syncLocalDefaultInfoIfNeverSyncBefore() {

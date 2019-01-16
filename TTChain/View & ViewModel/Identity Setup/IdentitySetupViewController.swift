@@ -43,6 +43,11 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
         restoreBtn.roundBothSides()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.setGradientColor()
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -75,10 +80,11 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
             textColor: theme.palette.btn_bgFill_enable_text,
             font: UIFont.owRegular(size: 15)
         )
+        createBtn.backgroundColor = theme.palette.btn_bgFill_enable_bg
         
-        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
+//        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
         
-        createBtn.setBackgroundImage(image, for: .normal)
+//        createBtn.setBackgroundImage(image, for: .normal)
         
         createNoteLabel.set(
             textColor: theme.palette.label_sub,
@@ -96,8 +102,10 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
             textColor: theme.palette.btn_bgFill_enable_text,
             font: UIFont.owRegular(size: 15)
         )
-        restoreBtn.setBackgroundImage(image, for: .normal)
-        self.bgHeaderImgView.backgroundColor = .darkPink
+        restoreBtn.backgroundColor = theme.palette.btn_bgFill_enable_bg
+
+        self.bgHeaderImgView.backgroundColor = .clear
+     
     }
     
     override func renderLang(_ lang: Lang) {
@@ -334,6 +342,8 @@ extension IdentitySetupViewController: UIImagePickerControllerDelegate, UINaviga
         let tab = xib(vc: MainTabBarViewController.self)
         present(tab, animated: true, completion: {
             IMUserManager.launch()
+            MarketTestHandler.shared.launch()
+
         })
     }
 }

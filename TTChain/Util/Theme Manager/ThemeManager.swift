@@ -113,13 +113,13 @@ extension OfflineWalletThemePalette {
 
 
 struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
-    var application_main: UIColor = .darkPink
+    var application_main: UIColor = .owIceCold
     
     var application_alert: UIColor = .owPinkRed
     
     var application_success: UIColor = .owCoolGreen
     
-    var btn_bgFill_enable_bg: UIColor = .darkPink
+    var btn_bgFill_enable_bg: UIColor = .owIceCold
     
     var btn_bgFill_enable_text: UIColor = .owWhite
     
@@ -139,7 +139,7 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var btn_borderFill_border_2nd: UIColor = .owWhiteTwo
     
-    var label_main_1: UIColor = .darkPink
+    var label_main_1: UIColor = .owBlack
     
     var label_main_2: UIColor = .owWhite
     
@@ -147,15 +147,15 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var label_sub: UIColor = .owWarmGrey
     
-    var input_text: UIColor = .owSunsetOrange
+    var input_text: UIColor = .owBlack
     
-    var input_placeholder: UIColor = .owWewak
+    var input_placeholder: UIColor = .owSilver
     
-    var sepline: UIColor = UIColor.cupid
+    var sepline: UIColor = UIColor.owSilver.withAlphaComponent(0.5)
     
     var bgView_main: UIColor = .owWhite
     
-    var bgView_sub: UIColor = .lavenderBlush
+    var bgView_sub: UIColor = .owWhiteTwo
     
     var bgView_mask: UIColor = .owBlack40
     
@@ -220,5 +220,4 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     var recordStatus_withdrawal: UIColor = .owAzure
     
     var recordStatus_failed: UIColor = .owPinkRed
-    
 }

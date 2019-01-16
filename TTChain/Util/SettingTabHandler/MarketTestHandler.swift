@@ -30,6 +30,7 @@ enum SettingKeyEnum:String {
 
 class MarketTestHandler {
     
+    let bag = DisposeBag.init()
     static var shared:MarketTestHandler = MarketTestHandler.init()
     
     var settingsArray: BehaviorRelay<[MarketTestSectionModel]> = {
@@ -206,5 +207,10 @@ class MarketTestHandler {
     
     init() {
         
+    }
+    
+    func launch() {
+        Server.instance.getMarketTest().subscribe().disposed(by: bag)
+        Server.instance.getQuotesTest().subscribe().disposed(by: bag)
     }
 }

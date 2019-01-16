@@ -21,6 +21,14 @@ extension UIView {
             borderWidth = border.width
         }
     }
+    
+    func setGradientColor() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [(UIColor.init(hexString: "b8d4ea", transparency: 1)?.cgColor)!,(UIColor.init(hexString: "f3cdbf", transparency: 1)?.cgColor)!]
+        let frame = self.bounds
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: frame.size.height)
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }
 
 protocol KLUIFastSetup {
@@ -149,4 +157,6 @@ extension UIButton: KLUIFastSetup {
     func roundBothSides() {
         cornerRadius = height * 0.5
     }
+    
+    
 }
