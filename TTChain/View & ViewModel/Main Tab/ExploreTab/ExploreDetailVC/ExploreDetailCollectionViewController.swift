@@ -83,7 +83,7 @@ final class ExploreDetailCollectionViewController: KLModuleViewController, KLVMV
         if let url = URL.init(string: model.img),  let data = try? Data.init(contentsOf: url) {
             image = UIImage.init(data: data)
         }
-        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .group, chatTitle: model.title, roomID: model.content, chatAvatar: image))
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .channel, chatTitle: model.title, roomID: model.content, chatAvatar: image))
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

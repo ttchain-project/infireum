@@ -235,13 +235,13 @@ struct GetUserDataAPIModel:KLJSONMappableMoyaResponse {
     init(json: JSON, sourceAPI: GetUserDataAPI) throws {
         guard let nickName = json["nickName"].string,
             let introduction = json["introduction"].string,
-            let headImg = json["headImg"].string,
+            let headImg = json["headImg"].dictionary,let headImgM = headImg["medium"]?.string,
             let status = json["status"].int else {
                 throw GTServerAPIError.noData
         }
         self.nickName = nickName
         self.introduction = introduction
-        self.headImg = headImg
+        self.headImg = headImgM
         self.status = status
     }
     
@@ -487,14 +487,15 @@ struct GetAllCommunicationsAPIModel:KLJSONMappableMoyaResponse {
         self.communicationList = response.compactMap ( { (dict) in
             guard let roomId = dict["roomId"].string,
                 let displayName = dict["displayName"].string,
-                let img = dict["img"].string,
+                let img = dict["headImg"].dictionary,
+                let headImg = img["small"]?.string,
                 let lastMessage = dict["lastMessage"].string,
                 let roomType = dict["roomType"].string,
                 let updateTime = dict["updateTime"].string
                 else {
                     return nil
             }
-            return CommunicationListModel.init(roomId: roomId, displayName: displayName, img: img, lastMessage: lastMessage, roomType: roomType, updateTime:updateTime)
+            return CommunicationListModel.init(roomId: roomId, displayName: displayName, img: headImg, lastMessage: lastMessage, roomType: roomType, updateTime:updateTime)
         })
     }
     typealias API = GetAllCommunicationsAPI
@@ -669,7 +670,7 @@ struct SearchUserAPIModel:KLJSONMappableMoyaResponse {
     let isBlock: Bool
     
     init(json: JSON, sourceAPI: SearchUserAPI) throws {
-        guard let uid = json["uid"].string, let nickname = json["nickname"].string, let headshotImg = json["headshotImg"].string?.imageFromBase64EncodedString, let isFriend = json["isFriend"].bool, let isBlock = json["isBlock"].bool else { throw GTServerAPIError.noData }
+        guard let uid = json["uid"].string, let nickname = json["nickname"].string, let headImg = json["headImg"].dictionary,let headshotImg = headImg["medium"]?.string, let isFriend = json["isFriend"].bool, let isBlock = json["isBlock"].bool else { throw GTServerAPIError.noData }
         self.imUser = IMUser(uID: uid, nickName: nickname, introduction: String(), headImg: headshotImg)
         self.isFriend = isFriend
         self.isBlock = isBlock

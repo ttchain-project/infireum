@@ -99,7 +99,7 @@ class IMUserManager {
             switch userDataResult {
             case .success(let userData):
                 DLogInfo(userData)
-                let userModel = IMUser.init(uID: uID, nickName: userData.nickName, introduction: userData.introduction, headImg: userData.headImg.imageFromBase64EncodedString)
+                let userModel = IMUser.init(uID: uID, nickName: userData.nickName, introduction: userData.introduction, headImg: userData.headImg)
                 self.userModel = BehaviorRelay.init(value: userModel)
                 self.shouldLoginToRocketChat.onNext(())
                 self.saveIMUser()

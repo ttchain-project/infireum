@@ -30,7 +30,7 @@ desc "Update All Build Number"
     force: true,
     force_for_new_devices: true,
     git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
-    app_identifier: "com.gib.TTChain-SIT”,
+    app_identifier: "com.gib.TTChain-SIT",
     team_id: "BKBWK8HFB8"
     )
   end

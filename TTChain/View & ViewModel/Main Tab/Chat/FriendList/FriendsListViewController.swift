@@ -56,7 +56,7 @@ final class FriendsListViewController: TabmanViewController, RxThemeRespondable,
             
             appearance.indicator.bounces = true
             
-            appearance.style.background = TabmanBar.BackgroundView.Style.solid(color: .owCharcoalGrey)
+            appearance.style.background = TabmanBar.BackgroundView.Style.solid(color:UIColor.owIceCold)
             appearance.bottomSeparator.color = UIColor.init(hex: 0xd6d6d6, transparency: 0.5)
         })
     }

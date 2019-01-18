@@ -34,7 +34,11 @@ class CommunicationListModel {
         guard self.img.count > 0 else {
             return #imageLiteral(resourceName: "userPresetS")
         }
-        return self.img.imageFromBase64EncodedString ?? #imageLiteral(resourceName: "userPresetS")
+        var image : UIImage?
+        if let url = URL.init(string: self.img),  let data = try? Data.init(contentsOf: url) {
+            image = UIImage.init(data: data)
+        }
+        return image ?? #imageLiteral(resourceName: "userPresetS")
     }()
     var lastMessage : String
     var roomType: RoomType
