@@ -22,27 +22,7 @@ extension Asset {
                                                         filterIsSelected: selectedOnly)
         let assets = selections.compactMap { $0.findAsset() }
         return assets
-        
-        /* Test new logic written above
-         //This is to prevent user has remove CoinSelection from db, but db still has the asset record. need to filter out this option.
-         let inListAssets = assets.filter { (asset) -> Bool in
-         if let idx = selections.index(where: { (sel) -> Bool in
-         return sel.coinIdentifier! == asset.coinID!
-         }) {
-         //If is selectedOnly, unselected ones will be filtered out.
-         let sel = selections[idx]
-         if selectedOnly {
-         return sel.isSelected
-         }else {
-         return true
-         }
-         }else {
-         return false
-         }
-         }
-         
-         return inListAssets
-         */
+    
     }
     
     
@@ -68,6 +48,49 @@ extension Asset {
         return assets
     }
     
+    static func getETHAssets(forETHWallet wallet:Wallet) -> [Asset] {
+        guard wallet.chainType == ChainType.eth.rawValue else {
+            return []
+        }
+        
+        let selections = CoinSelection.getAllSelections(of: wallet,
+                                                        filterIsSelected: true)
+        let assets = selections.filter { $0.coinIdentifier?.contains("_FIAT") == false  }.compactMap { $0.findAsset() }
+        return assets
+    }
+    
+    static func getBTCAssets(forBTCWallet wallet:Wallet) -> [Asset] {
+        guard wallet.chainType == ChainType.btc.rawValue else {
+            return []
+        }
+        
+        let selections = CoinSelection.getAllSelections(of: wallet,
+                                                        filterIsSelected: true)
+        let assets = selections.filter { $0.coinIdentifier != Coin.usdt_identifier  }.compactMap { $0.findAsset() }
+        return assets
+    }
+    
+    static func getStableETHAssets(forETHWallet wallet:Wallet) -> [Asset] {
+        guard wallet.chainType == ChainType.eth.rawValue else {
+            return []
+        }
+        
+        let selections = CoinSelection.getAllSelections(of: wallet,
+                                                        filterIsSelected: true)
+        let assets = selections.filter { $0.coinIdentifier?.contains("_FIAT") == true  }.compactMap { $0.findAsset() }
+        return assets
+    }
+    
+    static func getStableBTCAssets(forBTCWallet wallet:Wallet) -> [Asset] {
+        guard wallet.chainType == ChainType.btc.rawValue else {
+            return []
+        }
+        
+        let selections = CoinSelection.getAllSelections(of: wallet,
+                                                        filterIsSelected: true)
+        let assets = selections.filter { $0.coinIdentifier == Coin.usdt_identifier  }.compactMap { $0.findAsset() }
+        return assets
+    }
     
     static func createDefaultEntitiesOfWallet(wallet: Wallet) -> [Asset] {
         let coinPred = Coin.genPredicate(

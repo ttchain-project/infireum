@@ -72,11 +72,11 @@ class MainWalletOverviewViewController: KLModuleViewController {
             }
         }
     }
-    private(set) lazy var onDeposit: Driver<Wallet> = {
-        return shareAddress.rx.tap.asDriver().map {
-            [unowned self] in self.wallet
-        }
-    }()
+//    private(set) lazy var onDeposit: Driver<Wallet> = {
+//        return shareAddress.rx.tap.asDriver().map {
+//            [unowned self] in self.wallet
+//        }
+//    }()
     
 //    private(set) lazy var onManageAsset: Driver<Wallet> = {
 //        return shareAddress.rx.tap.asDriver()
@@ -89,9 +89,9 @@ class MainWalletOverviewViewController: KLModuleViewController {
 //            }
 //    }()
     
-    private (set) lazy var onTransactionHistory: Driver<Void> = {
-        return self.transactionRecordButton.rx.tap.asDriver()
-    }()
+//    private (set) lazy var onTransactionHistory: Driver<Void> = {
+//        return self.transactionRecordButton.rx.tap.asDriver()
+//    }()
     
     private(set) lazy var onAddressCopied: Driver<String> = {
         
@@ -106,7 +106,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
     
     }()
     
-    private(set) var onSwitchWallet: Driver<Void>!
+//    private(set) var onSwitchWallet: Driver<Void>!
     
     @IBOutlet weak var mainBG: UIView!
     @IBOutlet weak var walletBase: UIView!
@@ -115,9 +115,9 @@ class MainWalletOverviewViewController: KLModuleViewController {
     @IBOutlet weak var walletAddressLabel: UILabel!
     @IBOutlet weak var walletCopyBtn: UIButton!
     @IBOutlet weak var totalFiatValueLabel: UILabel!
-    @IBOutlet weak var transactionRecordButton: UIButton!
-    @IBOutlet weak var shareAddress: UIButton!
-    @IBOutlet weak var switchWalletBtn: UIButton!
+//    @IBOutlet weak var transactionRecordButton: UIButton!
+//    @IBOutlet weak var shareAddress: UIButton!
+//    @IBOutlet weak var switchWalletBtn: UIButton!
     
     
     
@@ -137,7 +137,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
         setupUI()
         
 //        startMonitorNetworkStatusIfNeeded()
-        bindWalletSwitchEvent()
+//        bindWalletSwitchEvent()
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
         observeWalletUpdateEvent()
@@ -169,7 +169,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
 //        renderShadow(depositBtn)
 //        renderShadow(manageAssetBtn)
         
-        walletCopyBtn.setImageForAllStates(#imageLiteral(resourceName: "copyAddressButtonPinkBG"))
+        walletCopyBtn.setImageForAllStates(#imageLiteral(resourceName: "copyAddressButtonCircle"))
 //        walletCopyBtn.setTitle(nil, for: .normal)
 //        walletColorImg.clipsToBounds = false
 //        walletColorImg.addShadow(ofColor: UIColor.init(red: 31,
@@ -190,9 +190,9 @@ class MainWalletOverviewViewController: KLModuleViewController {
         self.view.backgroundColor = UIColor.white
     }
     
-    private func bindWalletSwitchEvent() {
-        onSwitchWallet = switchWalletBtn.rx.tap.asDriver()
-    }
+//    private func bindWalletSwitchEvent() {
+//        onSwitchWallet = switchWalletBtn.rx.tap.asDriver()
+//    }
     
     private func observPrivateModeUpdateEvent() {
         OWRxNotificationCenter.instance

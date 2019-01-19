@@ -36,17 +36,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    
-    //    fileprivate lazy var walletChooseTextField: UITextField = {
-//        let frame = CGRect.init(origin: .zero, size: CGSize.init(width: 60, height: 44))
-//        let textField = UITextField.init(frame: frame)
-//        textField.rightView = UIImageView.init(image: #imageLiteral(resourceName: "icDown"))
-//        textField.rightViewMode = .always
-//        textField.delegate = self
-//
-//        return textField
-//    }()
-    
+        
     fileprivate lazy var walletOverviewVC: MainWalletOverviewViewController = {
         let vc = MainWalletOverviewViewController.instance(
             of: viewModel.wallet.value,
@@ -100,11 +90,11 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             )
         )
         
-        walletOverviewVC.onSwitchWallet.drive(onNext:{
-            [unowned self] in
-            self.startChangeWallet()
-        })
-        .disposed(by: bag)
+//        walletOverviewVC.onSwitchWallet.drive(onNext:{
+//            [unowned self] in
+//            self.startChangeWallet()
+//        })
+//        .disposed(by: bag)
         
         walletOverviewVC.onAddressCopied.drive(onNext:{
             [unowned self]
@@ -113,16 +103,16 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         })
         .disposed(by: bag)
         
-        walletOverviewVC.onDeposit.drive(onNext:{
-            [unowned self]
-            wallet in
-            self.startDeposit(wallet: wallet)
-        })
-        .disposed(by: bag)
+//        walletOverviewVC.onDeposit.drive(onNext:{
+//            [unowned self]
+//            wallet in
+//            self.startDeposit(wallet: wallet)
+//        })
+//        .disposed(by: bag)
         
-        walletOverviewVC.onTransactionHistory.drive(onNext:{
-            self.toTransRecord()
-        }).disposed(by:bag)
+//        walletOverviewVC.onTransactionHistory.drive(onNext:{
+//            self.toTransRecord()
+//        }).disposed(by:bag)
         
 //        walletOverviewVC.onManageAsset.drive(onNext:{
 //            [unowned self]
@@ -266,6 +256,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         switch self.viewModel.entryPoint {
         case .MainWallet?:
             changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+            createCustomRightBarButton(img: #imageLiteral(resourceName: "settings"), target: self, action: #selector(toSettings))
         default:
             changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:nil, title: nil)
         }
@@ -345,6 +336,11 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     @objc private func toTransRecord() {
         let nav = TransferRecordsListViewController.navInstance()
         present(nav, animated: true, completion: nil)
+    }
+    
+    @objc private func toSettings() {
+        let vc = ManageWalletViewController.navInstance(from: ManageWalletViewController.Config(wallet: viewModel.wallet.value))
+        present(vc, animated: true, completion: nil)
     }
     
     @objc private func toQRCodeScan() {

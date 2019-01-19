@@ -13,10 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainWalletOverviewViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
                 <outlet property="mainBG" destination="wyu-gD-242" id="EjE-nZ-SUf"/>
-                <outlet property="shareAddress" destination="qPU-hX-04P" id="TXE-4e-OLc"/>
-                <outlet property="switchWalletBtn" destination="h3o-tl-kLM" id="IjU-3l-oTB"/>
                 <outlet property="totalFiatValueLabel" destination="FHf-eV-bmd" id="PfP-Kj-MSx"/>
-                <outlet property="transactionRecordButton" destination="tOs-qn-KXk" id="cAN-DK-mwL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="walletAddressLabel" destination="tRh-Kc-i1K" id="v0n-Ks-Sg1"/>
                 <outlet property="walletBase" destination="dmh-xg-R4P" id="bkH-FF-q1T"/>
@@ -32,7 +29,7 @@
             <subviews>
                 <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wyu-gD-242">
                     <rect key="frame" x="0.0" y="35" width="414" height="178"/>
-                    <color key="backgroundColor" red="1" green="0.92941176470588238" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmh-xg-R4P">
                     <rect key="frame" x="58" y="43" width="298" height="150"/>
@@ -40,56 +37,32 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walletBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="cCl-PO-80e">
                             <rect key="frame" x="0.0" y="0.0" width="298" height="150"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPU-hX-04P">
-                            <rect key="frame" x="64" y="104.5" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="APJ-15-xRR"/>
-                                <constraint firstAttribute="height" constant="30" id="qE2-TD-vLm"/>
-                            </constraints>
-                            <state key="normal" image="dollarButton"/>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRh-Kc-i1K">
-                            <rect key="frame" x="55" y="54" width="42" height="20.5"/>
+                            <rect key="frame" x="10" y="44.5" width="42" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.99827569723129272" green="0.22430229187011719" blue="0.78662914037704468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qch-rs-UIp">
-                            <rect key="frame" x="105" y="49.5" width="30" height="30"/>
+                            <rect key="frame" x="60" y="40" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="Iso-iW-BUJ"/>
                                 <constraint firstAttribute="height" constant="30" id="lXy-uW-bp6"/>
                             </constraints>
-                            <state key="normal" image="copyAddressButtonPinkBG"/>
+                            <state key="normal" image="copyAddressButtonCircle"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QUt-nQ-chP">
-                            <rect key="frame" x="55" y="20" width="42" height="30"/>
+                            <rect key="frame" x="10" y="20" width="42" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.99827569723129272" green="0.22430229187011719" blue="0.78662914037704468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="CNY" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FHf-eV-bmd">
-                            <rect key="frame" x="114" y="109" width="164" height="21"/>
+                            <rect key="frame" x="243" y="109" width="35" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.99827569723129272" green="0.22430229187011719" blue="0.78662914037704468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3o-tl-kLM">
-                            <rect key="frame" x="20" y="20" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="apf-Z4-Njj"/>
-                                <constraint firstAttribute="height" constant="30" id="uaO-hP-X7u"/>
-                            </constraints>
-                            <state key="normal" image="switchWalletButton"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOs-qn-KXk">
-                            <rect key="frame" x="20" y="104.5" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="1sx-Wc-Yc5"/>
-                                <constraint firstAttribute="width" constant="30" id="KLV-9n-mh4"/>
-                            </constraints>
-                            <state key="normal" image="saveButton"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.99536150693893433" green="0.93057948350906372" blue="0.96653729677200317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -99,31 +72,23 @@
                         <constraint firstItem="tRh-Kc-i1K" firstAttribute="width" relation="lessThanOrEqual" secondItem="cCl-PO-80e" secondAttribute="width" multiplier="0.6" id="AbC-2Q-nlk"/>
                         <constraint firstItem="tRh-Kc-i1K" firstAttribute="top" secondItem="QUt-nQ-chP" secondAttribute="bottom" constant="4" id="AhU-hc-0VV"/>
                         <constraint firstItem="Qch-rs-UIp" firstAttribute="leading" secondItem="tRh-Kc-i1K" secondAttribute="trailing" constant="8" id="FtL-uf-cHh"/>
-                        <constraint firstItem="h3o-tl-kLM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cCl-PO-80e" secondAttribute="top" constant="4" id="Gpx-YX-rRC"/>
                         <constraint firstItem="FHf-eV-bmd" firstAttribute="bottom" secondItem="cCl-PO-80e" secondAttribute="bottom" priority="600" constant="-20" id="Gtu-DD-jz3"/>
-                        <constraint firstItem="qPU-hX-04P" firstAttribute="leading" secondItem="tOs-qn-KXk" secondAttribute="trailing" constant="14" id="I0a-XS-vXQ"/>
+                        <constraint firstItem="QUt-nQ-chP" firstAttribute="leading" secondItem="dmh-xg-R4P" secondAttribute="leading" constant="10" id="LAe-K0-BHq"/>
                         <constraint firstItem="QUt-nQ-chP" firstAttribute="top" secondItem="cCl-PO-80e" secondAttribute="top" priority="700" constant="20" id="Le3-8T-N1l"/>
-                        <constraint firstItem="tRh-Kc-i1K" firstAttribute="top" relation="greaterThanOrEqual" secondItem="h3o-tl-kLM" secondAttribute="bottom" constant="4" id="MZ6-sV-4dd"/>
-                        <constraint firstItem="h3o-tl-kLM" firstAttribute="leading" secondItem="dmh-xg-R4P" secondAttribute="leading" constant="20" id="Mq0-Pq-C0k"/>
                         <constraint firstAttribute="bottom" secondItem="cCl-PO-80e" secondAttribute="bottom" id="QTs-Al-2R6"/>
+                        <constraint firstItem="tRh-Kc-i1K" firstAttribute="leading" secondItem="dmh-xg-R4P" secondAttribute="leading" constant="10" id="U9l-qH-PcD"/>
                         <constraint firstItem="FHf-eV-bmd" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="cCl-PO-80e" secondAttribute="bottom" constant="-8" id="VgA-KA-4za"/>
                         <constraint firstItem="QUt-nQ-chP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dmh-xg-R4P" secondAttribute="top" constant="20" id="Zhv-YR-9nF"/>
                         <constraint firstItem="tRh-Kc-i1K" firstAttribute="leading" secondItem="QUt-nQ-chP" secondAttribute="leading" id="a24-tz-dIL"/>
                         <constraint firstItem="cCl-PO-80e" firstAttribute="top" secondItem="dmh-xg-R4P" secondAttribute="top" id="dWa-If-agc"/>
-                        <constraint firstItem="QUt-nQ-chP" firstAttribute="leading" secondItem="h3o-tl-kLM" secondAttribute="trailing" constant="5" id="eOG-Q2-McC"/>
                         <constraint firstItem="Qch-rs-UIp" firstAttribute="centerY" secondItem="tRh-Kc-i1K" secondAttribute="centerY" id="fBd-4E-0oP"/>
-                        <constraint firstItem="h3o-tl-kLM" firstAttribute="centerY" secondItem="QUt-nQ-chP" secondAttribute="centerY" id="gnm-Ha-9N6"/>
-                        <constraint firstItem="FHf-eV-bmd" firstAttribute="leading" relation="lessThanOrEqual" secondItem="qPU-hX-04P" secondAttribute="trailing" constant="20" id="kca-Hx-k5J"/>
                         <constraint firstItem="cCl-PO-80e" firstAttribute="leading" secondItem="dmh-xg-R4P" secondAttribute="leading" id="l5E-yO-j2d"/>
-                        <constraint firstItem="qPU-hX-04P" firstAttribute="centerY" secondItem="FHf-eV-bmd" secondAttribute="centerY" id="ldg-ge-2gz"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qch-rs-UIp" secondAttribute="trailing" constant="20" id="m6x-ZM-z64"/>
-                        <constraint firstItem="tOs-qn-KXk" firstAttribute="centerY" secondItem="FHf-eV-bmd" secondAttribute="centerY" id="mZj-5H-GMC"/>
                         <constraint firstItem="FHf-eV-bmd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Qch-rs-UIp" secondAttribute="bottom" constant="8" id="muP-X4-86L"/>
-                        <constraint firstItem="tOs-qn-KXk" firstAttribute="leading" secondItem="h3o-tl-kLM" secondAttribute="leading" id="tHu-bN-PkF"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Management" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-EE-5Ja">
-                    <rect key="frame" x="25" y="9" width="101" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-EE-5Ja">
+                    <rect key="frame" x="25" y="9" width="62" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.99827569723129272" green="0.22430229187011719" blue="0.78662914037704468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -157,10 +122,7 @@
         </view>
     </objects>
     <resources>
-        <image name="copyAddressButtonPinkBG" width="77" height="77"/>
-        <image name="dollarButton" width="77" height="77"/>
-        <image name="saveButton" width="77" height="77"/>
-        <image name="switchWalletButton" width="77" height="77"/>
-        <image name="walletBackgroundImage" width="786" height="456"/>
+        <image name="copyAddressButtonCircle" width="77" height="77"/>
+        <image name="walletBackgroundImage" width="936" height="456"/>
     </resources>
 </document>

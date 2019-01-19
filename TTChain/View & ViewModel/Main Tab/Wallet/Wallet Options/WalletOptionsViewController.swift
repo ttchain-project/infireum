@@ -42,26 +42,18 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     @IBOutlet weak var ethView: UIView!
     
 //    @IBOutlet weak var rscSetting: UIImageView!
-    @IBOutlet weak var rscTitleLabel: UILabel!
-    @IBOutlet weak var rscAddressCopy: UIButton!
-    @IBOutlet weak var rscAddressLabel: UILabel!
-    @IBOutlet weak var rscValueLabel: UILabel!
-    @IBOutlet weak var rscView: UIView!
+    @IBOutlet weak var stableCoinTitleLabel: UILabel!
+    @IBOutlet weak var stableCoinAddressCopy: UIButton!
+    @IBOutlet weak var stableCoinAddressLabel: UILabel!
+    @IBOutlet weak var stableCoinValueLabel: UILabel!
+    @IBOutlet weak var stableCoinView: UIView!
     
 //    @IBOutlet weak var airdropSetting: UIImageView!
-    @IBOutlet weak var airdropView: UIView!
-    @IBOutlet weak var airdropTitleLabel: UILabel!
-    @IBOutlet weak var airdropAddressCopy: UIButton!
-    @IBOutlet weak var airdropAddressLabel: UILabel!
-    @IBOutlet weak var airdropValueLabel: UILabel!
-    
-//    @IBOutlet weak var titleLabel: UILabel!
-    
-//    @IBOutlet weak var btcButton: UIButton!
-//    @IBOutlet weak var ethButton: UIButton!
-//    @IBOutlet weak var rscButton: UIButton!
-//    @IBOutlet weak var airdropButton: UIButton!
-
+    @IBOutlet weak var listedCoinView: UIView!
+    @IBOutlet weak var listedCoinTitleLabel: UILabel!
+    @IBOutlet weak var listedCoinAddressCopy: UIButton!
+    @IBOutlet weak var listedCoinAddressLabel: UILabel!
+    @IBOutlet weak var listedCoinValueLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        guard let navBar = self.navigationController?.navigationBar else {
@@ -84,16 +76,16 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         
         self.viewModel.ethWallet.subscribe(onNext: { (wallet) in
             self.ethAddressLabel.text = wallet?.address
-            self.rscAddressLabel.text = wallet?.address
-            self.airdropAddressLabel.text = wallet?.address
+            self.stableCoinAddressLabel.text = wallet?.address
+            self.listedCoinAddressLabel.text = wallet?.address
         }).disposed(by: bag)
         
         let totalBTC = self.viewModel.totalFiatValuesBTC.flatMapLatest { $0 }.share()
         let totalETH = self.viewModel.totalFiatValuesETH.flatMapLatest { $0 }.share()
         let fiat = viewModel.fiat
         
-        let totalRSC = self.viewModel.totalFiatValuesRSC.flatMapLatest { $0 }.share()
-        let totalAirDrop = self.viewModel.totalFiatValuesAirDrop.flatMapLatest { $0 }.share()
+        let totalRSC = self.viewModel.totalFiatValuesForStableCoins.flatMapLatest { $0 }.share()
+        let totalAirDrop = self.viewModel.totalFiatValuesListedCoins.flatMapLatest { $0 }.share()
 
         
         Observable.combineLatest(totalBTC, fiat)
@@ -127,7 +119,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 [unowned self] t, f in
-                self.rscValueLabel.text = self.updateValue(for: f, total: t)
+                self.stableCoinValueLabel.text = self.updateValue(for: f, total: t)
             })
             .disposed(by: bag)
         
@@ -135,7 +127,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 [unowned self] t, f in
-                self.airdropValueLabel.text = self.updateValue(for: f, total: t)
+                self.listedCoinValueLabel.text = self.updateValue(for: f, total: t)
             })
             .disposed(by: bag)
         
@@ -146,17 +138,13 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
         }).disposed(by: bag)
         
-        self.rscAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
+        self.stableCoinAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
             self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
         }).disposed(by: bag)
         
-        self.airdropAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
+        self.listedCoinAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
             self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
         }).disposed(by: bag)
-        
-//        btcView.rx.tapGesture().bind { _ in
-//            self.toWalletDetail(withWallet: self.viewModel.btcWallet.value!, source: .BTC)
-//        }.disposed(by: bag)
         
         btcView.rx.klrx_tap.asDriver().drive(onNext: { _ in
             self.toWalletDetail(withWallet: self.viewModel.btcWallet.value!, source: .BTC)
@@ -167,13 +155,14 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
         
 
-        rscView.rx.klrx_tap.asDriver().drive(onNext: {
-            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source: .RSC)
-            }).disposed(by: bag)
+        stableCoinView.rx.klrx_tap.asDriver().drive(onNext: {
+            self.showStableCoinOptions()
+            
+        }).disposed(by: bag)
     
-            airdropView.rx.klrx_tap.asDriver().drive(onNext: {
+        listedCoinView.rx.klrx_tap.asDriver().drive(onNext: {
             self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source:.AirDrop)
-            }).disposed(by: bag)
+        }).disposed(by: bag)
     }
 
     func updateValue(for fiat:Fiat?, total:Decimal?) -> String{
@@ -206,31 +195,61 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         self.present(vc, animated: true, completion: nil)
     }
     
+    private func showStableCoinOptions() {
+        let actionSheet = UIAlertController.init(title: "Stable Coin",message: "", preferredStyle: .actionSheet)
+        let actionBTC = UIAlertAction.init(title: "BTC", style: .default) { _ in
+            let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: self.viewModel.btcWallet.value!, source: .RSC))
+            //                self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        let actionETH = UIAlertAction.init(title: "ETH", style: .default) { _ in
+            let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: self.viewModel.ethWallet.value!, source: .RSC))
+            //                self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        actionSheet.addAction(actionBTC)
+        actionSheet.addAction(actionETH)
+        self.present(actionSheet, animated: true, completion: nil)
+        
+    }
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
+        createCustomRightBarButton(img: #imageLiteral(resourceName: "tt_icon_create"),target: self, action: #selector(importWallet))
+        
         self.btcTitleLabel.backgroundColor = palette.application_main
-        self.rscTitleLabel.backgroundColor = palette.application_main
+        self.stableCoinTitleLabel.backgroundColor = palette.application_main
         
         self.ethTitleLabel.backgroundColor = palette.application_alert
-        self.airdropTitleLabel.backgroundColor = palette.application_alert
+        self.listedCoinTitleLabel.backgroundColor = palette.application_alert
         
         self.btcAddressCopy.backgroundColor = palette.application_main
         self.ethAddressCopy.backgroundColor = palette.application_alert
-        self.rscAddressCopy.backgroundColor = palette.application_main
-        self.airdropAddressCopy.backgroundColor = palette.application_alert
+        self.stableCoinAddressCopy.backgroundColor = palette.application_main
+        self.listedCoinAddressCopy.backgroundColor = palette.application_alert
         
         self.btcView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
+        self.ethView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
+        self.stableCoinView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
+        self.listedCoinView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
+
         self.view.setGradientColor()
+        
     }
+    
     override func renderLang(_ lang: Lang) {
         self.title = "TTChain"
         
         
     }
-    @objc func doughnutTapped () {
-        
+    @objc func importWallet() {
+        let vc = xib(vc: ImportWalletTypeChooseViewController.self)
+        let nav = UINavigationController.init(rootViewController: vc)
+        present(nav, animated: true, completion: nil)
     }
 }
