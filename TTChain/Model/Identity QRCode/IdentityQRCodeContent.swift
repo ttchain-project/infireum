@@ -84,12 +84,21 @@ class IdentityQRCodeContent: Codable {
             return nil
         }
         
-        let systemWallets = systemWalletJSONs.compactMap {
-            IdentityQRCodeContentWalletUnit.init(json: $0, pwd: pwd)
+        let systemWallets = systemWalletJSONs.compactMap { (json) -> IdentityQRCodeContentWalletUnit? in
+            if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier {
+                return IdentityQRCodeContentWalletUnit.init(json: json, pwd: pwd)
+            }
+                return nil
         }
         
-        let importedWallets = importedWalletJSONs.compactMap {
-            IdentityQRCodeContentWalletUnit.init(json: $0, pwd: pwd)
+    
+        
+        
+        let importedWallets = importedWalletJSONs.compactMap { (json) -> IdentityQRCodeContentWalletUnit? in
+            if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier {
+                return IdentityQRCodeContentWalletUnit.init(json: json, pwd: pwd)
+            }
+            return nil
         }
         
         self.init(timestamp: timestamp,

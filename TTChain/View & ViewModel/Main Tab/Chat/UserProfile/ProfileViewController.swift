@@ -79,12 +79,12 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         
         self.saveButton.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
             
-            if self.imUser!.nickName != self.userNameTextField.text {
-                //UpdateName
-            }
+            
             if self.didUpdateProfileImage  {
                 //UpdateImage
                 self.updateProfilePhoto()
+            } else if self.imUser!.nickName != self.userNameTextField.text {
+                self.updateUserName()
             }
         }).disposed(by: bag)
         
@@ -173,10 +173,12 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             switch result {
             case .success(_):
                 LocalIMUser.updateLocalIMUser()
-                guard let vc = self.navigationController?.popViewController(animated: true) else {
-                    return
+                if self.imUser!.nickName != self.userNameTextField.text {
+                    //UpdateName
+                    self.updateUserName()
+                } else {
+                    self.navigationController?.popViewController(animated: true)
                 }
-                EZToast.present(on: vc, content: "User Profile Updated")
             case .failed(error: let error):
                 print("error %@", error)
             }
@@ -185,12 +187,20 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     }
     
     func updateUserName() {
-       
-        let parameter = UpdateUserAPI.Parameters.init(uid: (imUser?.uID)! , nickName: self.userNameTextField.text!, introduction: imUser?.introduction ?? "")
+        guard let userName = self.userNameTextField.text, userName.count > 0 else {
+            self.showSimplePopUp(with: "Error", contents: "Name cannot be nil", cancelTitle: "Ok") { _ in
+                self.userNameTextField.becomeFirstResponder()
+            }
+            return
+        }
+        let parameter = UpdateUserAPI.Parameters.init(uid: (imUser?.uID)! , nickName: userName, introduction: imUser?.introduction ?? "")
 
         Server.instance.updateUserData(parameters: parameter).asObservable().subscribe(onNext: { (result) in
             switch result {
             case .success(_):
+                self.imUser?.nickName = self.userNameTextField.text!
+                LocalIMUser.updateLocalIMUser()
+
                 self.navigationController?.popViewController(animated: true)
             case .failed(error: let error):
                 print("error %@", error)

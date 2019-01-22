@@ -48,9 +48,6 @@
                             <rect key="frame" x="150" y="0.0" width="75" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" image="tt_icon_contact"/>
-                            <connections>
-                                <action selector="requestsButton:" destination="-1" eventType="touchUpInside" id="SPn-3W-Z6L"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWJ-om-SkG">
                             <rect key="frame" x="225" y="0.0" width="75" height="50"/>

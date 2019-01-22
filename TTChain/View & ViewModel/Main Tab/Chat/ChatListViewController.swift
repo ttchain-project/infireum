@@ -105,8 +105,10 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     func bindElements() {
         self.qrcodeButton.rx.tap.asDriver()
             .drive(onNext: {
-                [unowned self] in
-            
+                _ in
+                let model = FriendRequestInformationModel.init(imUser: IMUserManager.manager.userModel.value!)
+                let vc = UserIMQRCodeViewController.instance(from: model)
+                self.navigationController?.pushViewController(vc)
             })
             .disposed(by: bag)
         self.editButton.rx.tap.asDriver()
@@ -125,14 +127,14 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         self.searchButton.rx.tap.asDriver()
             .drive(onNext: {
                 [unowned self] in
-                self.toFriendList()
+                self.toFriendList(purpose: .Search)
             })
             .disposed(by: bag)
         
         self.requestListButton.rx.tap.asDriver()
             .drive(onNext: {
                 [unowned self] in
-                self.toFriendList()
+                self.toFriendList(purpose: .Browse)
             })
             .disposed(by: bag)
     }
@@ -153,7 +155,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
             self.popExtendMenu()
         }).disposed(by: bag)
         friendBarButtonItem.rx.tap.asDriver().drive(onNext: {
-            self.toFriendList()
+//            self.toFriendList()
         }).disposed(by: bag)
     }
     
@@ -187,8 +189,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     @objc func settingsButtonTapped() {
     
     }
-    @objc func toFriendList() {
-        let viewController = FriendListContainerViewController.instance()
+    func toFriendList(purpose: FriendListContainerViewController.Purpose) {
+        let viewController = FriendListContainerViewController.instance(from: FriendListContainerViewController.Constructor(purpose: purpose))
         self.show(viewController, sender: nil)
     }
     

@@ -11,8 +11,18 @@ import RxCocoa
 import RxSwift
 import Cartography
 
+
 final class FriendListContainerViewController: KLModuleViewController,KLVMVC {
    
+    enum Purpose {
+        case Browse
+        case Search
+    }
+    
+    struct Input {
+        let purpose:Purpose
+    }
+    
     var friendListVC : FriendsListViewController!
     var viewModel: FriendListContainerViewModel!
     typealias ViewModel = FriendListContainerViewModel
@@ -23,8 +33,9 @@ final class FriendListContainerViewController: KLModuleViewController,KLVMVC {
     @IBOutlet var leftContraintForTextField: NSLayoutConstraint!
     @IBOutlet var searchTextfieldWidthConstraint: NSLayoutConstraint!
     
+    var purpose: Purpose = .Browse
     @IBOutlet weak var searchTextField: UITextField!
-    func config(constructor: Void) {
+    func config(constructor: Input) {
         self.view.layoutIfNeeded()
         self.viewModel = ViewModel.init(input: (), output: ())
         self.friendListVC = FriendsListViewController.instance(searchTextInOut: self.searchTextField.rx.text, searchStatus: self.viewModel.searchStatus)
@@ -33,16 +44,29 @@ final class FriendListContainerViewController: KLModuleViewController,KLVMVC {
         self.bindView()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
+       self.purpose = constructor.purpose
+        
+        switch self.purpose {
+        case .Search:
+            perform(#selector(showSearchView), with: nil, afterDelay: 0.5)
+
+//            showSearchView()
+        default:
+            return
+        }
     }
     
     var bag: DisposeBag = DisposeBag.init()
-    typealias Constructor = Void
+    typealias Constructor = Input
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -102,7 +126,7 @@ final class FriendListContainerViewController: KLModuleViewController,KLVMVC {
         self.searchTextField.leftViewMode = .always
     }
     
-    func showSearchView() {
+    @objc func showSearchView() {
         self.leftContraintForTextField.isActive = true
         self.searchTextfieldWidthConstraint.isActive = false
         self.viewModel.searchStatus.accept(true)
