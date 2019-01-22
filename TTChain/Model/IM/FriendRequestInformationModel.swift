@@ -28,7 +28,17 @@ class FriendRequestInformationModel: FriendModel {
         self.nickName = nickName
         self.message = message
         if headShotImage != nil {
-            self.avatar = headShotImage?.imageFromBase64EncodedString
+            guard let url = URL.init(string: headShotImage!) else {
+                return
+            }
+            KLRxImageDownloader.instance.download(source: url) {
+                result in
+                switch result {
+                case .failed: warning("Cannot download img from url \(headShotImage ?? " " )")
+                case .success(let img):
+                    self.avatar  = img
+                }
+            }
         }
     }
     
@@ -52,8 +62,19 @@ class FriendInfoModel: FriendModel {
         self.uid = uid
         self.nickName = nickName
         self.roomId = roomId
-        self.avatar = headhShotImgString.imageFromBase64EncodedString
-    }
+        
+            guard let url = URL.init(string: headhShotImgString) else {
+                return
+            }
+            KLRxImageDownloader.instance.download(source: url) {
+                result in
+                switch result {
+                case .failed: warning("Cannot download img from url \(headhShotImgString)")
+                case .success(let img):
+                    self.avatar  = img
+                }
+            }
+        }
 }
 
 

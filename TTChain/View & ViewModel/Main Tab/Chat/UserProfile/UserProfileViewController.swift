@@ -33,11 +33,43 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     
     typealias ViewModel = UserProfileViewModel
     var bag: DisposeBag = DisposeBag.init()
+    private var switchDisposeBag = DisposeBag()
     private var setRecoverBag = DisposeBag()
+    
     var user: FriendModel? = nil {
         didSet {
             userIconImageView.image = user?.avatar
             userIdLabel.text = user?.uid
+            if let groupMember = user as? GroupMemberModel {
+                blockUserSwitch.isOn = groupMember.isBlocked ?? false
+            } else if let uid = user?.uid, uid == IMUserManager.manager.userModel.value?.uID {
+                Server.instance.getUserData(uID: uid).asObservable().subscribe(onNext: {
+                    [weak self] result in
+                    guard let `self` = self else { return }
+                    switch result {
+                    case .failed(error: _): return
+                    case .success(let value):
+                        guard let url = URL.init(string: value.headImg) else {
+                            return
+                        }
+                        self.userIconImageView.af_setImage(withURL: url)
+                        
+                    }
+                }).disposed(by: bag)
+            } else {
+                guard let uid = IMUserManager.manager.userModel.value?.uID, let targetUid = user?.uid else { return }
+                Server.instance.searchUser(uid: uid, targetUid: targetUid).asObservable().subscribe(onNext: {
+                    [weak self] result in
+                    guard let `self` = self else { return }
+                    switch result {
+                    case .failed(error: _): return
+                    case .success(let value):
+                        self.blockUserSwitch.isOn = value.isBlock
+                        self.userIconImageView.image = value.imUser.headImg
+                        self.userIdLabel.text = value.imUser.uID
+                    }
+                }).disposed(by: bag)
+            }
         }
     }
     var purpose: Purpose = .myself
@@ -69,6 +101,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             copyUserIdButton.rx.tap.subscribe({
                 [unowned self] _ in
                 UIPasteboard.general.string = self.userIdLabel.text
+                EZToast.present(on: self, content: "複製成功")
             }).disposed(by: bag)
         }
     }
@@ -76,7 +109,25 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var blockUserView: UIView!
     @IBOutlet weak var relationShipTiitleLabel: UILabel!
     @IBOutlet weak var blockUserLabel: UILabel!
-    @IBOutlet weak var blockUserSwitch: UISwitch!
+    @IBOutlet weak var blockUserSwitch: UISwitch!{
+        didSet {
+            blockUserSwitch.rx.isOn.subscribe(onNext: {
+                [unowned self] isOn in
+                guard let uid = IMUserManager.manager.userModel.value?.uID, let blockedUid = self.user?.uid else { return }
+                Server.instance.blockUser(parameters: BlockUserAPI.Parameters(uid: uid, blockedUid: blockedUid, action: isOn ? BlockUserAPI.Parameters.Action.block : BlockUserAPI.Parameters.Action.unblock)).asObservable().subscribe(onNext: {
+                    [weak self] result in
+                    guard let `self` = self else { return }
+                    switch result {
+                    case .failed(error: let error):
+                        EZToast.present(on: self, content: error.localizedDescription)
+                        self.blockUserSwitch.isOn = !isOn
+                    case .success:
+                        DLogInfo("switch block status for \(blockedUid) to \(isOn)")
+                    }
+                }).disposed(by: self.switchDisposeBag)
+            }).disposed(by: bag)
+        }
+    }
     
     @IBOutlet weak var logoutView: UIView!
     @IBOutlet weak var logoutIMLabel: UILabel!

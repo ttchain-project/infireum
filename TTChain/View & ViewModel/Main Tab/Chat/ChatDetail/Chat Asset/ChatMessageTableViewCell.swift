@@ -83,7 +83,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     private func configForLeft(message:MessageModel,leftImage: UIImage?) {
         self.leftMessageLabel.text = message.msg
         self.leftDateLabel.text = message.timestamp.string()
-        self.leftAvatarImageView.image = leftImage ?? #imageLiteral(resourceName: "userPresetS")
+        self.leftAvatarImageView.image = leftImage
         
         self.rightSpeakerContentView.isHidden = true
         self.leftSpeakerContentView.isHidden = false

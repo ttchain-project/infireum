@@ -22,7 +22,7 @@ class PrivateChatSettingViewModel: KLRxViewModel  {
     enum PrivateChatDuration {
         case singleConversation
         case pvt_10_minutes
-        case pvt_30_minutes
+        case pvt_1_minutes
         
         var title : String {
             switch self {
@@ -30,8 +30,8 @@ class PrivateChatSettingViewModel: KLRxViewModel  {
                 return "Single Conversation"
             case .pvt_10_minutes:
                 return "For 10 minutes"
-            case .pvt_30_minutes:
-                return "For 30 minute"
+            case .pvt_1_minutes:
+                return "For 1 minute"
             }
         }
     }
@@ -50,7 +50,7 @@ class PrivateChatSettingViewModel: KLRxViewModel  {
         return _privateChatDuration.value
     }
     
-    public let durationOptions : [PrivateChatSettingViewModel.PrivateChatDuration] = [.singleConversation,.pvt_10_minutes,.pvt_30_minutes]
+    public let durationOptions : [PrivateChatSettingViewModel.PrivateChatDuration] = [.singleConversation, .pvt_1_minutes, .pvt_10_minutes]
 
     
     required init(input: InputSource, output: Void) {

@@ -48,7 +48,17 @@ class UserGroupInfoModel {
         self.headImg = headImg
         self.imGroupId = imGroupId
         self.isPostMsg = isPostMsg
-        self.groupIcon = self.headImg.imageFromBase64EncodedString
+        if let url = URL.init(string: headImg)  {
+            KLRxImageDownloader.instance.download(source: url) {
+                result in
+                switch result {
+                case .failed: warning("Cannot download img from url \(headImg )")
+                case .success(let img):
+                    self.groupIcon  = img
+                }
+            }
+        }
+        
         if membersArray != nil {
             self.membersArray = membersArray
         }

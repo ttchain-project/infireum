@@ -504,7 +504,7 @@
  }
  
  
- //MARK: - IM -
+ //MARK: - IM
  extension Server {
     
     //MARK: - POST /IM/PreLogin -
@@ -637,9 +637,24 @@
         return fire(router: .IM(.deleteGroup(api)))
     }
     
+    // MARK: - POST /IM/blocklist -
+    
+    func blockUser(parameters: BlockUserAPI.Parameters) -> RxAPIResponse<BlockUserAPIModel> {
+        let api = BlockUserAPI.init(parameters: parameters)
+        return fire(router: .IM(.blockUser(api)))
+    }
+    
     func uploadHeadImg(parameters: UploadHeadImageAPI.Parameters) -> RxAPIResponse<UploadHeadImageAPIModel> {
         let api = UploadHeadImageAPI.init(parameters: parameters)
         return fire(router: .IM(.uploadHeadImage(api)))
+    }
+    
+    //MARK: - POST /IM/SendMessage
+    
+    func sendMessage(parameters:IMSendMessageAPI.Parameter) -> RxAPIResponse<IMSendMessageAPIModel> {
+        let api = IMSendMessageAPI.init(parameters: parameters)
+        return fire(router: .IM(.sendMessage(api)))
+
     }
  }
  

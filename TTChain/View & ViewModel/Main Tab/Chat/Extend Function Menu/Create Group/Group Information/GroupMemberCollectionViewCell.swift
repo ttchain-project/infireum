@@ -33,4 +33,10 @@ class GroupMemberCollectionViewCell: UICollectionViewCell {
             viewModel.output.closeButtonIsHidden.bind(to: closeImageView.rx.isHidden).disposed(by: disposeBag)
         }
     }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        avatarImageView.layer.cornerRadius = avatarImageView.bounds.size.height / 2
+    }
+
 }

@@ -87,8 +87,13 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
                     if isSuccess {
                         self.viewModel.getCommunicationList()
                     } else {
-                        EZToast.present(on: self, content: "還原失敗")
-                        self.showTransferAlert()
+                        let alertController = UIAlertController(title: "钱包帐号与移转备份密码不符", message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "好", style: .default, handler: {
+                            _ in
+                            self.showTransferAlert()
+                        }))
+                        self.present(alertController, animated: true, completion: nil)
+
                     }
                 })
             }
@@ -98,7 +103,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     }
     
     func chatSelected(forModel model:CommunicationListModel) {
-        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: model.roomType, chatTitle: model.displayName, roomID: model.roomId,chatAvatar:model.avatar))
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: model.roomType, chatTitle: model.displayName, roomID: model.roomId,chatAvatar:model.avatar, uid: model.privateMessageTargetUid))
         self.navigationController?.pushViewController(vc)
     }
     

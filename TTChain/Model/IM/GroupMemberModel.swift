@@ -22,7 +22,19 @@ class GroupMemberModel:FriendModel {
         self.uid = uid
         self.nickName = nickName
         self.status = status
-        avatar = headImg.imageFromBase64EncodedString ?? ImageUntil.drawAvatar(text: nickName)
+        
+        if let url = URL.init(string: headImg) {
+            KLRxImageDownloader.instance.download(source: url) {
+                result in
+                switch result {
+                case .failed: warning("Cannot download img from url \(headImg )")
+                case .success(let img):
+                    self.avatar  = img
+                }
+            }
+        }else {
+           self.avatar = ImageUntil.drawAvatar(text: nickName)
+        }
         self.isFriend = isFriend ?? false
         self.isBlocked = isBlocked ?? false
     }

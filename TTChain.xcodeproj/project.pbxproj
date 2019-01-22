@@ -145,6 +145,21 @@
 		55BB1B43218FDCE70061F189 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */; };
 		55BB1B44218FDCE70061F189 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */; };
 		55BB1B45218FDCE70061F189 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */; };
+		55E113FC21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */; };
+		55E113FD21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */; };
+		55E113FE21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */; };
+		55E113FF21F7278C0062198B /* GroupCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */; };
+		55E1140021F7278C0062198B /* GroupCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */; };
+		55E1140121F7278C0062198B /* GroupCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */; };
+		55E1140321F728480062198B /* Reactive+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1140221F728480062198B /* Reactive+UITextView.swift */; };
+		55E1140421F728480062198B /* Reactive+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1140221F728480062198B /* Reactive+UITextView.swift */; };
+		55E1140521F728480062198B /* Reactive+UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1140221F728480062198B /* Reactive+UITextView.swift */; };
+		55E1141021F72CF70062198B /* ChatKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1140E21F72CF50062198B /* ChatKeyboardView.swift */; };
+		55E1141121F72CF70062198B /* ChatKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1140E21F72CF50062198B /* ChatKeyboardView.swift */; };
+		55E1141221F72CF70062198B /* ChatKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E1140E21F72CF50062198B /* ChatKeyboardView.swift */; };
+		55E1141321F72CF70062198B /* ChatKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E1140F21F72CF60062198B /* ChatKeyboardView.xib */; };
+		55E1141421F72CF70062198B /* ChatKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E1140F21F72CF60062198B /* ChatKeyboardView.xib */; };
+		55E1141521F72CF70062198B /* ChatKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E1140F21F72CF60062198B /* ChatKeyboardView.xib */; };
 		55E7305B2186DC4B003AE47E /* MainWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E730592186DC4A003AE47E /* MainWalletViewController.swift */; };
 		55E7305C2186DC4B003AE47E /* MainWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E7305A2186DC4B003AE47E /* MainWalletViewController.xib */; };
 		55E7305F2186E3C1003AE47E /* TransRecord+Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7305E2186E3C0003AE47E /* TransRecord+Comments.swift */; };
@@ -198,12 +213,6 @@
 		55EF6A5421A812C6007E074A /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69E221A812C5007E074A /* ChatViewController.xib */; };
 		55EF6A5521A812C6007E074A /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69E221A812C5007E074A /* ChatViewController.xib */; };
 		55EF6A5621A812C6007E074A /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69E221A812C5007E074A /* ChatViewController.xib */; };
-		55EF6A5721A812C6007E074A /* ChatKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69E421A812C5007E074A /* ChatKeyboardView.swift */; };
-		55EF6A5821A812C6007E074A /* ChatKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69E421A812C5007E074A /* ChatKeyboardView.swift */; };
-		55EF6A5921A812C6007E074A /* ChatKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69E421A812C5007E074A /* ChatKeyboardView.swift */; };
-		55EF6A5A21A812C6007E074A /* ChatKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69E521A812C5007E074A /* ChatKeyboardView.xib */; };
-		55EF6A5B21A812C6007E074A /* ChatKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69E521A812C5007E074A /* ChatKeyboardView.xib */; };
-		55EF6A5C21A812C6007E074A /* ChatKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69E521A812C5007E074A /* ChatKeyboardView.xib */; };
 		55EF6A5D21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69E621A812C5007E074A /* KeyboardFunctionCollectionViewCell.swift */; };
 		55EF6A5E21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69E621A812C5007E074A /* KeyboardFunctionCollectionViewCell.swift */; };
 		55EF6A5F21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69E621A812C5007E074A /* KeyboardFunctionCollectionViewCell.swift */; };
@@ -1756,6 +1765,11 @@
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
+		55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCollectionReusableView.xib; sourceTree = "<group>"; };
+		55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCollectionReusableView.swift; sourceTree = "<group>"; };
+		55E1140221F728480062198B /* Reactive+UITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reactive+UITextView.swift"; sourceTree = "<group>"; };
+		55E1140E21F72CF50062198B /* ChatKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatKeyboardView.swift; sourceTree = "<group>"; };
+		55E1140F21F72CF60062198B /* ChatKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatKeyboardView.xib; sourceTree = "<group>"; };
 		55E730592186DC4A003AE47E /* MainWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWalletViewController.swift; sourceTree = "<group>"; };
 		55E7305A2186DC4B003AE47E /* MainWalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWalletViewController.xib; sourceTree = "<group>"; };
 		55E7305E2186E3C0003AE47E /* TransRecord+Comments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TransRecord+Comments.swift"; sourceTree = "<group>"; };
@@ -1775,8 +1789,6 @@
 		55EF69E021A812C5007E074A /* PrivateChatSettingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateChatSettingViewModel.swift; sourceTree = "<group>"; };
 		55EF69E121A812C5007E074A /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		55EF69E221A812C5007E074A /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
-		55EF69E421A812C5007E074A /* ChatKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatKeyboardView.swift; sourceTree = "<group>"; };
-		55EF69E521A812C5007E074A /* ChatKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatKeyboardView.xib; sourceTree = "<group>"; };
 		55EF69E621A812C5007E074A /* KeyboardFunctionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFunctionCollectionViewCell.swift; sourceTree = "<group>"; };
 		55EF69E721A812C5007E074A /* KeyboardFunctionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardFunctionCollectionViewCell.xib; sourceTree = "<group>"; };
 		55EF69E921A812C5007E074A /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -2664,8 +2676,8 @@
 		55EF69E321A812C5007E074A /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				55EF69E421A812C5007E074A /* ChatKeyboardView.swift */,
-				55EF69E521A812C5007E074A /* ChatKeyboardView.xib */,
+				55E1140E21F72CF50062198B /* ChatKeyboardView.swift */,
+				55E1140F21F72CF60062198B /* ChatKeyboardView.xib */,
 				55EF69E621A812C5007E074A /* KeyboardFunctionCollectionViewCell.swift */,
 				55EF69E721A812C5007E074A /* KeyboardFunctionCollectionViewCell.xib */,
 			);
@@ -2708,6 +2720,8 @@
 		55EF69F221A812C5007E074A /* Group Information */ = {
 			isa = PBXGroup;
 			children = (
+				55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */,
+				55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */,
 				55EF69F321A812C5007E074A /* AddGroupMemberCollectionViewCell.swift */,
 				55EF69F421A812C5007E074A /* AddGroupMemberCollectionViewCell.xib */,
 				55EF69F521A812C5007E074A /* AddGroupMemberTableViewCell.swift */,
@@ -2938,6 +2952,7 @@
 				55EF6B4021A81567007E074A /* Paramenter.swift */,
 				55EF6B4121A81567007E074A /* String+Extension.swift */,
 				55EF6B4221A81567007E074A /* UIView+UIImage.swift */,
+				55E1140221F728480062198B /* Reactive+UITextView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -5450,6 +5465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64B98ED720F98E9B00C4EB11 /* LightningTransactionViewController.xib in Resources */,
+				55E113FE21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */,
 				55EF6AD121A812C6007E074A /* ChatPersonListViewController.xib in Resources */,
 				6424B64220F4E46B00AEBCAD /* TransferRecordInfoBarCollectionViewCell.xib in Resources */,
 				5508742621EDC6EF007B3B3B /* ExploreDetailCollectionViewController.xib in Resources */,
@@ -5482,7 +5498,6 @@
 				64C9D45520FDD230000B0774 /* AddressBookUnitBrowseViewController.xib in Resources */,
 				6470D6E020F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				55EF6A7721A812C6007E074A /* ChatExtendFunctionMenuViewController.xib in Resources */,
-				55EF6A5C21A812C6007E074A /* ChatKeyboardView.xib in Resources */,
 				55EF6A8F21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
 				6424B68920F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200BD20FB1D9400B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
@@ -5534,6 +5549,7 @@
 				6424B69D20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.xib in Resources */,
 				5539A49F21676F8C00A59ACC /* IdentityQRCodeImportTableViewCell.xib in Resources */,
 				6470D66F20F2565700EB0780 /* WithdrawalBTCInfoOverviewViewController.xib in Resources */,
+				55E1141521F72CF70062198B /* ChatKeyboardView.xib in Resources */,
 				64C9D4D021044D7B000B0774 /* WithdrawalCICFeeInfoQuickModeViewController.xib in Resources */,
 				55EF6A7D21A812C6007E074A /* AddGroupMemberCollectionViewCell.xib in Resources */,
 				55EF6A7121A812C6007E074A /* ChatNavigationController.xib in Resources */,
@@ -5643,7 +5659,7 @@
 				55EF6AC021A812C6007E074A /* SearchGroupViewController.xib in Resources */,
 				6470D61C20F0EEBE00EB0780 /* WithdrawalAddressViewController.xib in Resources */,
 				6470D64320F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
-				55EF6A5A21A812C6007E074A /* ChatKeyboardView.xib in Resources */,
+				55E1141321F72CF70062198B /* ChatKeyboardView.xib in Resources */,
 				6424B64B20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.xib in Resources */,
 				6446E23020FC966800EC1E2E /* SettingsViewController.xib in Resources */,
 				55EF6A3F21A812C6007E074A /* ChatHistoryTableViewCell.xib in Resources */,
@@ -5736,6 +5752,7 @@
 				649E487C20EC6FFF00B217AD /* ManageWalletViewController.xib in Resources */,
 				640D891D20EF6DD00010D986 /* TransRecordListTabViewController.xib in Resources */,
 				64813AE420DE241500CAA4D8 /* MainTabBarViewController.xib in Resources */,
+				55E113FC21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */,
 				6424B69320F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.xib in Resources */,
 				649E48AE20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.xib in Resources */,
 				64813ACF20DD071F00CAA4D8 /* MainWalletOverviewViewController.xib in Resources */,
@@ -5790,7 +5807,7 @@
 				55EF6AC121A812C6007E074A /* SearchGroupViewController.xib in Resources */,
 				6470D61D20F0EEBE00EB0780 /* WithdrawalAddressViewController.xib in Resources */,
 				6470D64420F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
-				55EF6A5B21A812C6007E074A /* ChatKeyboardView.xib in Resources */,
+				55E1141421F72CF70062198B /* ChatKeyboardView.xib in Resources */,
 				6424B64C20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.xib in Resources */,
 				6446E23120FC966800EC1E2E /* SettingsViewController.xib in Resources */,
 				55EF6A4021A812C6007E074A /* ChatHistoryTableViewCell.xib in Resources */,
@@ -5883,6 +5900,7 @@
 				649E487D20EC6FFF00B217AD /* ManageWalletViewController.xib in Resources */,
 				640D891E20EF6DD00010D986 /* TransRecordListTabViewController.xib in Resources */,
 				64813AE520DE241500CAA4D8 /* MainTabBarViewController.xib in Resources */,
+				55E113FD21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */,
 				6424B69420F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.xib in Resources */,
 				649E48AF20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.xib in Resources */,
 				64813AD020DD071F00CAA4D8 /* MainWalletOverviewViewController.xib in Resources */,
@@ -6273,6 +6291,7 @@
 				64D826C020E3E53600C8FC63 /* Identity+CoreDataClass.swift in Sources */,
 				64813AC920DCEE7900CAA4D8 /* CoinToFiatRate+Helper.swift in Sources */,
 				6424B68D20F5CEAB00AEBCAD /* TransferRecordStatusOptionViewModel.swift in Sources */,
+				55E1140521F728480062198B /* Reactive+UITextView.swift in Sources */,
 				6470D6CF20F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.swift in Sources */,
 				648139BE20DB77A500CAA4D8 /* KLPlaceholderTextView.swift in Sources */,
 				64F07E8120D36B8700A60C5C /* KLViewModel.swift in Sources */,
@@ -6465,6 +6484,7 @@
 				64C9D4B721044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
 				64B2772920D7F04B004FF75B /* KLMoyaAPIBase.swift in Sources */,
 				6414C146214A1C5F00E45F32 /* IdentityQRCodeContentWalletUnit.swift in Sources */,
+				55E1141221F72CF70062198B /* ChatKeyboardView.swift in Sources */,
 				64D8269F20E3E2AC00C8FC63 /* TransRecord+CoreDataProperties.swift in Sources */,
 				6EEA2F1C2164B22D005FE393 /* QAViewController.swift in Sources */,
 				6485005820DA440400107473 /* KLTagFlowLayout.swift in Sources */,
@@ -6570,7 +6590,6 @@
 				640D892520F0691B0010D986 /* WithdrawalBaseViewController.swift in Sources */,
 				55EF6A9221A812C6007E074A /* SearchMemberViewController.swift in Sources */,
 				6470D6DD20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.swift in Sources */,
-				55EF6A5921A812C6007E074A /* ChatKeyboardView.swift in Sources */,
 				6470D6B120F35B1000EB0780 /* WithdrawalETHFeeInfoViewController.swift in Sources */,
 				55EF6AEF21A812C7007E074A /* GroupChatTableViewCell.swift in Sources */,
 				55EF6B4B21A81567007E074A /* Paramenter.swift in Sources */,
@@ -6603,6 +6622,7 @@
 				55EF6B6C21A81A58007E074A /* MemberPersonalChatAndGroupsModel.swift in Sources */,
 				5528D8BD218AFA130050D0B9 /* AJNavigationController.swift in Sources */,
 				6446E23D20FCE3F700EC1E2E /* ChangePrefFiatViewController.swift in Sources */,
+				55E1140121F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				640D88E420EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
 				6470D63B20F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,
 				643200C620FB1E0400B11334 /* WithdrawalCICFeeInfoViewModel.swift in Sources */,
@@ -6707,6 +6727,7 @@
 				64F07E4020D269A300A60C5C /* NSManagedObject+IdentifiablePredication.swift in Sources */,
 				64813A5820DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataProperties.swift in Sources */,
 				64F07E0C20D241A000A60C5C /* UIViewController+QuickAlertPopUp.swift in Sources */,
+				55E1140321F728480062198B /* Reactive+UITextView.swift in Sources */,
 				6424B68B20F5CEAB00AEBCAD /* TransferRecordStatusOptionViewModel.swift in Sources */,
 				64813A8A20DCAE3B00CAA4D8 /* Fiat+Helper.swift in Sources */,
 				64F07E1220D241A000A60C5C /* UIViewController+QuickBarItemSetup.swift in Sources */,
@@ -6899,6 +6920,7 @@
 				64C9D45820FDD55A000B0774 /* AddressBookUnitBrowseViewModel.swift in Sources */,
 				640D891520EF6A6D0010D986 /* TransRecordListViewModel.swift in Sources */,
 				5539A4A621676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
+				55E1141021F72CF70062198B /* ChatKeyboardView.swift in Sources */,
 				64D8268920E3939400C8FC63 /* AssetSort.swift in Sources */,
 				556980542189A91C00346757 /* TransRecord+Comments.swift in Sources */,
 				64C9D4B521044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
@@ -7004,7 +7026,6 @@
 				64B98ED220F98E9B00C4EB11 /* LightningTransactionViewController.swift in Sources */,
 				55EF6A9021A812C6007E074A /* SearchMemberViewController.swift in Sources */,
 				55E7306B2186E567003AE47E /* CommentsModel.swift in Sources */,
-				55EF6A5721A812C6007E074A /* ChatKeyboardView.swift in Sources */,
 				64083D0021101DC300DE1C31 /* TxFilter.swift in Sources */,
 				55EF6AED21A812C7007E074A /* GroupChatTableViewCell.swift in Sources */,
 				55EF6B4921A81567007E074A /* Paramenter.swift in Sources */,
@@ -7037,6 +7058,7 @@
 				55EF6B6A21A81A58007E074A /* MemberPersonalChatAndGroupsModel.swift in Sources */,
 				5528D8BB218AFA130050D0B9 /* AJNavigationController.swift in Sources */,
 				64F07DF720D241A000A60C5C /* UIAlertController+EasyGen.swift in Sources */,
+				55E113FF21F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				64F07DE520D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
 				640D88BF20EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				64813A3720DCA6EE00CAA4D8 /* SubAddress+CoreDataClass.swift in Sources */,
@@ -7134,6 +7156,7 @@
 				64D80D6321364B50004DAC09 /* APISensitiveDataCrypter.swift in Sources */,
 				648139C720DBABC000CAA4D8 /* OWCrypter.swift in Sources */,
 				6424B68C20F5CEAB00AEBCAD /* TransferRecordStatusOptionViewModel.swift in Sources */,
+				55E1140421F728480062198B /* Reactive+UITextView.swift in Sources */,
 				6470D6CE20F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.swift in Sources */,
 				640D890020EF5F860010D986 /* TransRecordListViewController.swift in Sources */,
 				64F07E4120D269A300A60C5C /* NSManagedObject+IdentifiablePredication.swift in Sources */,
@@ -7326,6 +7349,7 @@
 				64C9D45920FDD55A000B0774 /* AddressBookUnitBrowseViewModel.swift in Sources */,
 				6470D62E20F1131100EB0780 /* FeeRateManager.swift in Sources */,
 				5539A4A721676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
+				55E1141121F72CF70062198B /* ChatKeyboardView.swift in Sources */,
 				640D891B20EF6DD00010D986 /* TransRecordListTabViewController.swift in Sources */,
 				64C9D4B621044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
 				556980532189A91B00346757 /* TransRecord+Comments.swift in Sources */,
@@ -7431,7 +7455,6 @@
 				64F07DF820D241A000A60C5C /* UIAlertController+EasyGen.swift in Sources */,
 				55EF6A9121A812C6007E074A /* SearchMemberViewController.swift in Sources */,
 				55E7306A2186E567003AE47E /* CommentsModel.swift in Sources */,
-				55EF6A5821A812C6007E074A /* ChatKeyboardView.swift in Sources */,
 				648139DF20DC977800CAA4D8 /* MainWalletViewModel.swift in Sources */,
 				55EF6AEE21A812C7007E074A /* GroupChatTableViewCell.swift in Sources */,
 				55EF6B4A21A81567007E074A /* Paramenter.swift in Sources */,
@@ -7464,6 +7487,7 @@
 				55EF6B6B21A81A58007E074A /* MemberPersonalChatAndGroupsModel.swift in Sources */,
 				5528D8BC218AFA130050D0B9 /* AJNavigationController.swift in Sources */,
 				649E489320ECAC4900B217AD /* PwdHintViewController.swift in Sources */,
+				55E1140021F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				64813AE220DE241500CAA4D8 /* MainTabBarViewController.swift in Sources */,
 				6446E23C20FCE3F700EC1E2E /* ChangePrefFiatViewController.swift in Sources */,
 				648139B120DB5E4000CAA4D8 /* IdentityRestoreViewController.swift in Sources */,

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 struct GroupMemberCollectionViewCellModel: ViewModel {
     var input: Input
@@ -38,6 +39,18 @@ struct GroupMemberCollectionViewCellModel: ViewModel {
         let groupMemberModel = GroupMemberModel.init(uid: friendInfoModel.uid, nickName: friendInfoModel.nickName, headImg: friendInfoModel.avatar?.base64EncodedString ?? String(), status: 0)
         input = Input.init(groupMemberModel: groupMemberModel)
         output = Output.init(text: groupMemberModel.nickName, avatarImage: friendInfoModel.avatar)
+    }
+}
+
+extension GroupMemberCollectionViewCellModel: IdentifiableType {
+    typealias Identity = String
+    
+    var identity: Identity { return input.groupMemberModel?.uid ?? output.text }
+}
+
+extension GroupMemberCollectionViewCellModel: Equatable {
+    static func == (lhs: GroupMemberCollectionViewCellModel, rhs: GroupMemberCollectionViewCellModel) -> Bool {
+        return lhs.identity == rhs.identity
     }
 }
 

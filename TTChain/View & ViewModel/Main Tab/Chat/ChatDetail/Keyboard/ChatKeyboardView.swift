@@ -30,6 +30,9 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var inputContentView: UIView!
     @IBOutlet weak var inputContentViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var blockView: UIView! {
+        didSet { blockView.isHidden = !isBlock }
+    }
     
     @IBOutlet weak var privateChatBannerView: UIView!
     @IBOutlet weak var privateChatDurationTitleLabel: UILabel!
@@ -56,6 +59,9 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     var input: Input? = nil
     var output: Output? = nil
+    var isBlock: Bool = false {
+        didSet { blockView.isHidden = !isBlock }
+    }
     
     func config(input: Input, output: Output) {
         self.input = input
@@ -120,7 +126,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func initPvtChatBanner() {
-        self.privateChatBannerView.backgroundColor = .green
+        self.privateChatBannerView.backgroundColor = .owPumpkinOrange
         self.privateChatDurationTitleLabel.textColor = .white
         self.privateChatBannerView.isHidden = true
         self.privateChatDurationTitleLabel.set(textColor: .white, font: .owRegular(size: 10))

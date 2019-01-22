@@ -22,11 +22,11 @@ struct PrivateChatSetup {
 
 struct TimeFromNow {
     var currentTime : Date {
-       return Date.init(timeIntervalSinceNow: 0)
+        return Date.init(timeIntervalSinceNow: 0)
     }
     var tenMinutesFromNow :Date { return Date.init(timeIntervalSinceNow: 600) }
-    var thirtyMinutesFromNow : Date {
-        return Date.init(timeIntervalSinceNow: 1800)
+    var oneMinutesFromNow : Date {
+        return Date.init(timeIntervalSinceNow: 60)
         
     }
 }
@@ -39,6 +39,7 @@ class ChatViewModel: KLRxViewModel {
         var roomID:String
         var chatAvatar:UIImage?
         var messageText:UITextField
+        var uid: String?
     }
     
     struct Output {
@@ -53,7 +54,7 @@ class ChatViewModel: KLRxViewModel {
     }()
     
     public var messages: Observable<[MessageModel]> {
-       return _messages.asObservable().share()
+        return _messages.asObservable().share()
     }
     
     public var shouldScrollToBottom: PublishSubject<Void> = PublishSubject.init()
@@ -78,15 +79,17 @@ class ChatViewModel: KLRxViewModel {
                 case .pvt_10_minutes:
                     privateChat.startTime = timeFromNow.currentTime
                     privateChat.endTime = timeFromNow.tenMinutesFromNow
-                case .pvt_30_minutes:
+                case .pvt_1_minutes:
                     privateChat.startTime = timeFromNow.currentTime
-                    privateChat.endTime = timeFromNow.thirtyMinutesFromNow
+                    privateChat.endTime = timeFromNow.oneMinutesFromNow
                 case .singleConversation:
                     privateChat.startTime = timeFromNow.currentTime
                 }
             }
         }
     }
+    
+    let blockSubject = PublishSubject<Void>()
     
     required init(input: Input, output: Void) {
         self.input = input
@@ -96,7 +99,7 @@ class ChatViewModel: KLRxViewModel {
             self.getGroupDetails()
         }
         self.timerSub = timer.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] _ in
-            self.fetchAllMessages()
+            self.fetchAllMessagesForPrivateChat()
         })
         
         self.groupInfoModel.asObservable().subscribe(onNext: { (model) in
@@ -110,7 +113,7 @@ class ChatViewModel: KLRxViewModel {
         }).disposed(by: bag)
         self.concatInput()
         self.concatOutput()
-        fetchAllMessages()
+        fetchAllMessagesForPrivateChat()
     }
     
     func concatInput() {
@@ -132,7 +135,7 @@ class ChatViewModel: KLRxViewModel {
         }
     }
     
-    func fetchAllMessages() {
+    func fetchAllMessagesForPrivateChat() {
         Server.instance.getChatHistory(forRoom: self.input.roomID, roomType: self.input.roomType).asObservable().subscribe(onNext: { [unowned self] (response) in
             switch response {
             case .failed(error: let error):
@@ -165,19 +168,55 @@ class ChatViewModel: KLRxViewModel {
         guard let trimmed = string else {
             return
         }
-        Server.instance.sendChatMessage(message: trimmed, forRoom:self.input.roomID).asObservable().subscribe(onNext: { (result) in
-            switch result {
-            case .failed(error: let error):
-                print(error)
-            case .success(let message):
-                print(message)
-                if self.privateChat.isPrivateChatOn.value {
-                    if self.privateChat.privateChatDuration != .singleConversation {
-                        self.sendDestroyMessage(messageID: message.msgId)
+        
+        guard let user = IMUserManager.manager.userModel.value else {
+            return
+        }
+        var message = trimmed
+
+        let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID, roomId: self.input.roomID, isGroup: self.input.roomType == .pvtChat ? false : true, msg: message)
+        
+        repeat {
+            Server.instance.sendMessage(parameters: parameter).asObservable().subscribe(onNext: { (result) in
+                switch result {
+                case .failed(error: let error):
+                    DLogError(error)
+                case .success(let message):
+                    DLogInfo(message)
+                    if message.status {
+                        if self.privateChat.isPrivateChatOn.value {
+//                            if self.privateChat.privateChatDuration != .singleConversation, let id = message.msgId {
+//                                self.sendDestroyMessage(messageID: id)
+//                            }
+                        }
+                    } else {
+                        self.blockSubject.onNext(())
                     }
                 }
+            }).disposed(by: bag)
+            if message.count > 500 {
+                message = String(message[message.index(message.startIndex, offsetBy: 500)..<message.endIndex])
+                if message.count < 500 {
+                    Server.instance.sendChatMessage(message: message, forRoom:self.input.roomID).asObservable().subscribe(onNext: { (result) in
+                        switch result {
+                        case .failed(error: let error):
+                            DLogError(error)
+                        case .success(let message):
+                            DLogInfo(message)
+                            if message.status {
+                                if self.privateChat.isPrivateChatOn.value {
+//                                    if self.privateChat.privateChatDuration != .singleConversation, let id = message.msgId {
+//                                        self.sendDestroyMessage(messageID: id)
+//                                    }
+                                }
+                            } else {
+                                self.blockSubject.onNext(())
+                            }
+                        }
+                    }).disposed(by: bag)
+                }
             }
-        }).disposed(by: bag)
+        } while message.count > 500
     }
     
     func sendDestroyMessage(messageID:String) {
@@ -201,7 +240,7 @@ class ChatViewModel: KLRxViewModel {
             return
         }
         
-          guard  let startTimeDate = self.privateChat.startTime
+        guard  let startTimeDate = self.privateChat.startTime
             else {
                 return
         }
@@ -210,12 +249,16 @@ class ChatViewModel: KLRxViewModel {
         
         Server.instance.postMessageSection(roomID: self.input.roomID, startTime:startTimeString, endTime:endTimeString).asObservable()
             .subscribe(onNext: { response in
-            switch response {
-            case .failed(error: let error):
-                print(error)
-            case .success( _):
-                print("message")
-            }
-        }).disposed(by: bag)
+                switch response {
+                case .failed(error: let error):
+                    print(error)
+                case .success( _):
+                    print("message")
+                }
+            }).disposed(by: bag)
+    }
+    
+    private func isBlocked() {
+        
     }
 }

@@ -102,7 +102,7 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
     }
     
     private func chatSelected(forModel model: UserGroupInfoModel) {
-        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .group, chatTitle: model.groupName, roomID: model.imGroupId, chatAvatar: model.headImg.imageFromBase64EncodedString))
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: model.isPrivate ? .group : .channel, chatTitle: model.groupName, roomID: model.imGroupId, chatAvatar: model.groupIcon, uid: nil))
         show(vc, sender: self)
     }
 }

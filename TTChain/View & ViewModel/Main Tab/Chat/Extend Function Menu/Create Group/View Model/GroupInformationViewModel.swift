@@ -34,17 +34,31 @@ final class GroupInformationViewModel: ViewModel {
     struct Output {
         let title = BehaviorRelay<String>(value: String())
         let groupName = BehaviorRelay<String?>(value: nil)
-        let isPrivate = BehaviorRelay<Bool>(value: false)
+        let isPrivate = BehaviorRelay<Bool>(value: true)
         let isPostable = BehaviorRelay<Bool>(value: false)
         let introduction = BehaviorRelay<String?>(value: nil)
         let bottomButtonIsEnabled = BehaviorRelay<Bool>(value: false)
-        let groupMemberCollectionViewCellModels = BehaviorRelay<[GroupMemberCollectionViewCellModel]>(value: [GroupMemberCollectionViewCellModel]())
+        let animatableSectionModel = BehaviorRelay<[AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>]>(value: [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>]())
         let isEditable = BehaviorRelay<Bool>(value: false)
         let errorMessageSubject = PublishSubject<String>()
         let dismissSubject = PublishSubject<Void>()
         let popToRootSubject = PublishSubject<Void>()
         let buttonType = BehaviorRelay<ButtonType>(value: GroupInformationViewModel.ButtonType.leave)
         let groupImageString = BehaviorRelay<String>(value: String())
+        let leaveGroupActionSubject = PublishSubject<(() -> ())>()
+        let dataSource = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>>.init(configureCell: { (dataSource, collectionView, indexPath, viewModel) -> UICollectionViewCell in
+            let cell = collectionView.dequeueReusableCell(with: GroupMemberCollectionViewCell.self, for: indexPath)
+            cell.viewModel = viewModel
+            return cell
+        }, configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) -> UICollectionReusableView in
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withClass: GroupCollectionReusableView.self, for: indexPath)
+            headerView.titleLabel.text = dataSource[indexPath.section].model
+            return headerView
+        })
+        let nameCountHintString = BehaviorSubject<String>(value: String())
+        let nameCountHintColor = BehaviorSubject<UIColor>(value: UIColor.black)
+        let introductionCountHintString = BehaviorSubject<String>(value: String())
+        let introductionCountHintColor = BehaviorSubject<UIColor>(value: UIColor.black)
     }
     
     var input: Input
@@ -69,13 +83,13 @@ final class GroupInformationViewModel: ViewModel {
             case .create: return .create
             case .edit: return .confirm
             case .normal:
-                if self.input.userGroupInfoModelSubject.value.groupOwnerUID == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId {
-                    return .leave
-                } else {
+                if self.input.userGroupInfoModelSubject.value.groupOwnerUID == RocketChatManager.manager.rocketChatUser.value?.name {
                     return .edit
+                } else {
+                    return .leave
                 }
             }
-        }.bind(to: output.buttonType).disposed(by: disposeBag)
+            }.bind(to: output.buttonType).disposed(by: disposeBag)
         input.userGroupInfoModelSubject.asDriver().drive(onNext: {
             [unowned self] userGroupInfoModel in
             self.output.title.accept(userGroupInfoModel.groupID.isEmpty ? "创建群组" : "群组成员")
@@ -83,36 +97,78 @@ final class GroupInformationViewModel: ViewModel {
             self.output.isPrivate.accept(userGroupInfoModel.isPrivate)
             self.output.isPostable.accept(userGroupInfoModel.isPostMsg)
             self.output.introduction.accept(userGroupInfoModel.introduction)
-            if let members = userGroupInfoModel.membersArray {
-                self.output.groupMemberCollectionViewCellModels.accept(members.map(GroupMemberCollectionViewCellModel.init))
-            } else {
-                guard let user = IMUserManager.manager.userModel.value else { return }
-                self.output.groupMemberCollectionViewCellModels.accept([GroupMemberCollectionViewCellModel.init(), GroupMemberCollectionViewCellModel.init(text: user.nickName ?? "", avatarImge: user.headImg)])
+            var animatableSectionModels = [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>]()
+            if let memberCellModels = userGroupInfoModel.membersArray?.map(GroupMemberCollectionViewCellModel.init) {
+                animatableSectionModels = [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: "成员", items: memberCellModels)]
             }
+            let inviteCellModels = userGroupInfoModel.invitedMembersArray?.map(GroupMemberCollectionViewCellModel.init) ?? [GroupMemberCollectionViewCellModel.init()]
+            animatableSectionModels.append(AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: "正在邀请", items: inviteCellModels))
+            self.output.animatableSectionModel.accept(animatableSectionModels)
         }).disposed(by: disposeBag)
         input.typeSubject.subscribe(onNext: {
             [unowned self] type in
-            self.output.groupMemberCollectionViewCellModels.value.forEach({ (viewModel) in
-                let isHidden = type == .normal || viewModel.input.groupMemberModel?.uid == IMUserManager.manager.userModel.value?.uID || viewModel.input.groupMemberModel == nil
-                viewModel.output.closeButtonIsHidden.accept(isHidden)
+            self.output.animatableSectionModel.value.forEach({ (sectionModel) in
+                if sectionModel.model == "正在邀请" {
+                    sectionModel.items.forEach({ (viewModel) in
+                        let isHidden = type == .normal || viewModel.input.groupMemberModel?.uid == IMUserManager.manager.userModel.value?.uID || viewModel.input.groupMemberModel == nil
+                        viewModel.output.closeButtonIsHidden.accept(isHidden)
+                    })
+                }
             })
+            switch type {
+            case .create: return
+            case .edit:
+                self.output.animatableSectionModel.value.forEach({ (sectionModel) in
+                    if sectionModel.model == "正在邀请" {
+                        if sectionModel.items.isEmpty || sectionModel.items.first?.input.groupMemberModel != nil {
+                            var section = self.output.animatableSectionModel.value
+                            if var inviteSection = section.first(where: { $0.model == "正在邀请"} ) {
+                                inviteSection.items.insert(GroupMemberCollectionViewCellModel(), at: 0)
+                                section.removeLast()
+                                section.append(inviteSection)
+                                self.output.animatableSectionModel.accept(section)
+                            }
+                        }
+                    }
+                })
+            case .normal:
+                self.output.animatableSectionModel.value.forEach({ (sectionModel) in
+                    if sectionModel.model == "正在邀请" {
+                        if sectionModel.items.first?.input.groupMemberModel == nil {
+                            var section = self.output.animatableSectionModel.value
+                            if var inviteSection = section.first(where: { $0.model == "正在邀请"} ) {
+                                if !inviteSection.items.isEmpty {
+                                    inviteSection.items.removeFirst()
+                                }
+                                section.removeLast()
+                                section.append(inviteSection)
+                                self.output.animatableSectionModel.accept(section)
+                            }
+                        }
+                    }
+                })
+            }
         }).disposed(by: disposeBag)
         input.addMembersSubject.subscribe(onNext: {
             [unowned self] newValue in
-            let value = self.output.groupMemberCollectionViewCellModels.value
-            let models = value.compactMap({ $0.input.groupMemberModel })
+            let allMembers = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
             let needToAddFriends = newValue.filter({ (model) -> Bool in
-                return !models.contains(where: { $0.uid == model.uid })
+                return !allMembers.contains(where: { $0.uppercased() == model.uid.uppercased() })
             }).map(GroupMemberCollectionViewCellModel.init)
-            let result = value + needToAddFriends
-            self.output.groupMemberCollectionViewCellModels.accept(result)
+            if var value = self.output.animatableSectionModel.value.first(where: { $0.model == "正在邀请" }) {
+                value.items.append(contentsOf: needToAddFriends)
+                var section = self.output.animatableSectionModel.value
+                section.removeLast()
+                section.append(value)
+                self.output.animatableSectionModel.accept(section)
+            }
         }).disposed(by: disposeBag)
         input.buttonTapSubject.subscribe(onNext: {
             [unowned self] in
             switch self.output.buttonType.value {
             case .create:
                 guard let groupName = self.output.groupName.value else { fatalError("groupName should not be nil.") }
-                let memberIDs = self.output.groupMemberCollectionViewCellModels.value.compactMap({ $0.input.groupMemberModel?.uid })
+                let memberIDs = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
                 let parameters = CreateGroupAPI.Parameters.init(isPrivate: self.output.isPrivate.value, groupName: groupName, isPostMsg: self.output.isPostable.value, headImg: self.output.groupImageString.value, introduction: self.output.introduction.value ?? String())
                 Server.instance.createGroup(parameters: parameters).asObservable().subscribe(onNext: {
                     [weak self] result in
@@ -133,22 +189,25 @@ final class GroupInformationViewModel: ViewModel {
                     self.createGroupDisposeBag = DisposeBag()
                 }).disposed(by: self.createGroupDisposeBag)
             case .leave:
-                let groupID = self.input.userGroupInfoModelSubject.value.groupID
-                Server.instance.respondToGroupRequestAPI(groupID: groupID, groupAction: GroupAction.reject).asObservable().subscribe(onNext: {
-                    [weak self] result in
-                    guard let `self` = self else { return }
-                    switch result {
-                    case .success: self.output.popToRootSubject.onCompleted()
-                    case .failed(error: let error):
-                        DLogError(error)
-                        self.output.errorMessageSubject.onNext(error.localizedDescription)
-                    }
-                }).disposed(by: self.disposeBag)
+                self.output.leaveGroupActionSubject.onNext {
+                    [unowned self] in
+                    let groupID = self.input.userGroupInfoModelSubject.value.groupID
+                    Server.instance.respondToGroupRequestAPI(groupID: groupID, groupAction: GroupAction.reject).asObservable().subscribe(onNext: {
+                        [weak self] result in
+                        guard let `self` = self else { return }
+                        switch result {
+                        case .success: self.output.popToRootSubject.onCompleted()
+                        case .failed(error: let error):
+                            DLogError(error)
+                            self.output.errorMessageSubject.onNext(error.localizedDescription)
+                        }
+                    }).disposed(by: self.disposeBag)
+                }
             case .edit: self.input.typeSubject.accept(GroupInformationViewModel.ViewModelType.edit)
             case .confirm:
                 guard let groupName = self.output.groupName.value else { fatalError("groupName should not be nil.") }
                 let groupID = self.input.userGroupInfoModelSubject.value.groupID
-                let memberIDs = self.output.groupMemberCollectionViewCellModels.value.compactMap({ $0.input.groupMemberModel?.uid })
+                let memberIDs = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
                 let parameters = UpdateGroupAPI.Parameters.init(groupID: groupID, groupName: groupName, isPostMsg: self.output.isPostable.value, headImg: self.output.groupImageString.value, introduction: self.output.introduction.value ?? String())
                 Server.instance.updateGroup(parameters: parameters).asObservable().subscribe(onNext: {
                     [weak self] result in
@@ -170,17 +229,37 @@ final class GroupInformationViewModel: ViewModel {
                 }).disposed(by: self.createGroupDisposeBag)
             }
         }).disposed(by: disposeBag)
-        Observable.combineLatest(output.groupName.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged(), self.output.groupMemberCollectionViewCellModels) { [unowned self] (groupName, cellModels) -> Bool in
-            guard let groupName = groupName, !(cellModels.compactMap({ $0.input.groupMemberModel?.uid }).isEmpty && self.input.userGroupInfoModelSubject.value.invitedMembersArray.isNilOrEmpty) else { return false }
-            return !(groupName.isEmpty && (self.output.buttonType.value == .confirm || self.output.buttonType.value == .create))
-        }.bind(to: output.bottomButtonIsEnabled).disposed(by: disposeBag)
-        output.groupMemberCollectionViewCellModels.subscribe(onNext: {
+        Observable.combineLatest(output.groupName.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged(), output.animatableSectionModel, output.introduction.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged()) { [unowned self] (groupName, sectionModels, introduce) -> Bool in
+            guard let groupName = groupName else { return false }
+            switch self.input.typeSubject.value {
+            case .normal: return true
+            case .edit: guard !(sectionModels.first(where: { $0.model == "正在邀请" })?.items.compactMap({ $0.input.groupMemberModel?.uid }).isEmpty ?? true) else { return false }
+            case .create: break
+            }
+            switch (groupName.count, introduce?.count ?? 0) {
+            case (1...20, 0...100): return true
+            default: return false
+            }
+            }.bind(to: output.bottomButtonIsEnabled).disposed(by: disposeBag)
+        output.animatableSectionModel.subscribe(onNext: {
             [unowned self] value in
             let type = self.input.typeSubject.value
-            value.forEach({ (viewModel) in
-                let isHidden = type == .normal || viewModel.input.groupMemberModel?.uid == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId || viewModel.input.groupMemberModel == nil
-                viewModel.output.closeButtonIsHidden.accept(isHidden)
+            value.forEach({ (sectionModel) in
+                sectionModel.items.forEach({ (viewModel) in
+                    let isHidden = type == .normal || viewModel.input.groupMemberModel?.uid == RocketChatManager.manager.rocketChatUser.value?.name || viewModel.input.groupMemberModel == nil
+                    viewModel.output.closeButtonIsHidden.accept(isHidden)
+                })
             })
+        }).disposed(by: disposeBag)
+        output.groupName.map({ $0?.count ?? 0}).subscribe(onNext: {
+            [unowned self] count in
+            self.output.nameCountHintString.onNext(count > 20 ? "字数过长 \(count)/20" : "\(count)/20")
+            self.output.nameCountHintColor.onNext(count > 20 ? UIColor.owPumpkinOrange : UIColor.lightGray)
+        }).disposed(by: disposeBag)
+        output.introduction.map({ $0?.count ?? 0}).subscribe(onNext: {
+            [unowned self] count in
+            self.output.introductionCountHintString.onNext(count > 100 ? "字数过长 \(count)/100" : "\(count)/100")
+            self.output.introductionCountHintColor.onNext(count > 100 ? UIColor.owPumpkinOrange : UIColor.lightGray)
         }).disposed(by: disposeBag)
     }
 }

@@ -39,17 +39,21 @@ class CommunicationListModel {
             image = UIImage.init(data: data)
         }
         return image ?? #imageLiteral(resourceName: "userPresetS")
+        
     }()
+    
     var lastMessage : String
     var roomType: RoomType
     var updateTime: String
+    var privateMessageTargetUid: String?
     
-    init(roomId:String, displayName:String, img: String,lastMessage : String,roomType: String,updateTime: String) {
+    init(roomId:String, displayName:String, img: String,lastMessage : String,roomType: String,updateTime: String, privateMessageTargetUid: String?) {
         self.roomId = roomId
         self.displayName = displayName
         self.img = img
         self.lastMessage = lastMessage
         self.roomType = RoomType.init(rawValue: roomType) ?? .pvtChat
         self.updateTime = updateTime
+        self.privateMessageTargetUid = privateMessageTargetUid
     }
 }

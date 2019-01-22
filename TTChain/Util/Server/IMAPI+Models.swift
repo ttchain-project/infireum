@@ -52,6 +52,9 @@ enum IMAPI :KLMoyaAPISet {
         case .updateGroup(let api): return api
         case .deleteGroup(let api): return api
         case .uploadHeadImage(let api): return api
+        case .sendMessage(let api): return api
+        case .blockUser(let api): return api
+
         }
     }
     case preLogin(PreLoginAPI)
@@ -75,6 +78,9 @@ enum IMAPI :KLMoyaAPISet {
     case updateGroup(UpdateGroupAPI)
     case deleteGroup(DeleteGroupAPI)
     case uploadHeadImage(UploadHeadImageAPI)
+    case sendMessage(IMSendMessageAPI)
+    case blockUser(BlockUserAPI)
+
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -532,7 +538,7 @@ struct GetAllCommunicationsAPIModel:KLJSONMappableMoyaResponse {
                 else {
                     return nil
             }
-            return CommunicationListModel.init(roomId: roomId, displayName: displayName, img: headImg, lastMessage: lastMessage, roomType: roomType, updateTime:updateTime)
+            return CommunicationListModel.init(roomId: roomId, displayName: displayName, img: headImg, lastMessage: lastMessage, roomType: roomType, updateTime:updateTime, privateMessageTargetUid: dict["privateMessageTargetUid"].string)
         })
     }
     typealias API = GetAllCommunicationsAPI
@@ -754,6 +760,45 @@ struct UploadHeadImageAPIModel:KLJSONMappableMoyaResponse {
         if let url = URL.init(string: mediumImg), let data = try? Data.init(contentsOf: url) {
             IMUserManager.manager.userModel.value!.headImg = UIImage.init(data: data)
         }
+    }
+}
+
+//MARK: - /IM/message/SendMessage
+
+struct IMSendMessageAPI:KLMoyaIMAPIData {
+    
+    struct Parameter:Paramenter {
+        var uid:String
+        var roomId :String
+        var isGroup : Bool
+        var msg : String
+    }
+    let parameters: Parameter
+    var path: String {return "/IM/message/SendMessage" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        
+        var dict = parameters.asDictionary()
+        dict["authToken"] = Tokens.getAuthTokenAndRocketChatUserID().0
+        dict["rocketChatUserId"] = Tokens.getAuthTokenAndRocketChatUserID().1
+        return Moya.Task.requestParameters(
+            parameters: parameters.asDictionary(),
+            encoding: JSONEncoding.default
+        )
+    }
+    var stub: Data? {return nil}
+}
+
+
+struct IMSendMessageAPIModel:KLJSONMappableMoyaResponse {
+    typealias API = IMSendMessageAPI
+    var status : Bool
+    init(json: JSON, sourceAPI: IMSendMessageAPI) throws {
+        guard let success = json["success"].bool
+            else {
+                throw GTServerAPIError.noData
+        }
+        self.status = success
     }
 }
 
@@ -1104,6 +1149,41 @@ struct DeleteGroupAPIModel: KLJSONMappableMoyaResponse {
     let isSuccess: Bool
     
     init(json: JSON, sourceAPI: DeleteGroupAPI) throws {
+        guard let response = json.bool else { throw GTServerAPIError.noData }
+        self.isSuccess = response
+    }
+}
+
+// MARK: - /IM/blocklist
+
+struct BlockUserAPI: KLMoyaIMAPIData {
+    
+    struct Parameters: Paramenter {
+        enum Action: String, Codable {
+            case block = "Block"
+            case unblock = "Unblock"
+        }
+        
+        let uid: String
+        let blockedUid: String
+        let action: Action
+    }
+    
+    var path: String { return "/IM/blocklist" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+    }
+    var stub: Data? { return nil }
+    let parameters: Parameters
+}
+
+struct BlockUserAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = BlockUserAPI
+    
+    let isSuccess: Bool
+    
+    init(json: JSON, sourceAPI: BlockUserAPI) throws {
         guard let response = json.bool else { throw GTServerAPIError.noData }
         self.isSuccess = response
     }

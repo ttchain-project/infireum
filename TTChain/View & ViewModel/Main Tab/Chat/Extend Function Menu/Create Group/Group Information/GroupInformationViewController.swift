@@ -19,6 +19,18 @@ class GroupInformationViewController: UIViewController {
     @IBOutlet weak var publicButton: UIButton!
     @IBOutlet weak var managerButton: UIButton!
     @IBOutlet weak var membersButton: UIButton!
+    @IBOutlet private weak var groupNameHintLabel: UILabel! {
+        didSet {
+            viewModel.output.nameCountHintString.bind(to: groupNameHintLabel.rx.text).disposed(by: disposeBag)
+            viewModel.output.nameCountHintColor.bind(to: groupNameHintLabel.rx.textColor).disposed(by: disposeBag)
+        }
+    }
+    @IBOutlet private weak var introduceHintLabel: UILabel! {
+        didSet {
+            viewModel.output.introductionCountHintColor.bind(to: introduceHintLabel.rx.textColor).disposed(by: disposeBag)
+            viewModel.output.introductionCountHintString.bind(to: introduceHintLabel.rx.text).disposed(by: disposeBag)
+        }
+    }
     @IBOutlet weak var groupNameFirstLabel: UILabel! {
         didSet { viewModel.output.groupName.map({ $0?.first?.string }).bind(to: groupNameFirstLabel.rx.text).disposed(by: disposeBag) }
     }
@@ -28,11 +40,14 @@ class GroupInformationViewController: UIViewController {
             viewModel.output.isEditable.bind(to: groupNameTextField.rx.isEnabled).disposed(by: disposeBag)
         }
     }
-    @IBOutlet weak var introduceTextField: UITextField! {
+    @IBOutlet private weak var introductTextView: UITextView! {
         didSet {
-            (introduceTextField.rx.text <-> viewModel.output.introduction).disposed(by: disposeBag)
-            viewModel.output.isEditable.bind(to: introduceTextField.rx.isEnabled).disposed(by: disposeBag)
+            (introductTextView.rx.text <-> viewModel.output.introduction).disposed(by: disposeBag)
+            viewModel.output.isEditable.bind(to: introductTextView.rx.isEditable).disposed(by: disposeBag)
         }
+    }
+    @IBOutlet private weak var placeholderLabel: UILabel! {
+        didSet { viewModel.output.introduction.map({ !($0?.isEmpty ?? true) }).bind(to: placeholderLabel.rx.isHidden).disposed(by: disposeBag) }
     }
     @IBOutlet weak var bottomButton: UIButton! {
         didSet {
@@ -44,31 +59,33 @@ class GroupInformationViewController: UIViewController {
         }
     }
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout! {
-        didSet { collectionViewFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width / 4, height: UIScreen.main.bounds.size.width / 4 - 18 * 2 + 18 + 6 + 12 + 12) }
+        didSet {
+            collectionViewFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width / 4, height: UIScreen.main.bounds.size.width / 4 - 18 * 2 + 18 + 6 + 12 + 12)
+            collectionViewFlowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.size.width, height: 30)
+        }
     }
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet  {
             collectionView.register(cellType: GroupMemberCollectionViewCell.self)
+            collectionView.register(reusableViewType: GroupCollectionReusableView.self)
             collectionView.rx.itemSelected.subscribe(onNext: {
                 [unowned self] indexPath in
                 switch self.viewModel.input.typeSubject.value {
-                case .create:
-                    switch indexPath.row {
-                    case 0: self.presentAddGroupMemberView()
-                    case 1: return
-                    default:
-                        var value = self.viewModel.output.groupMemberCollectionViewCellModels.value
-                        value.remove(at: indexPath.row)
-                        self.viewModel.output.groupMemberCollectionViewCellModels.accept(value)
-                    }
-                case .edit:
-                    var value = self.viewModel.output.groupMemberCollectionViewCellModels.value
-                    let model = value[indexPath.row].input.groupMemberModel
-                    if model?.uid != IMUserManager.manager.userModel.value?.uID {
-                        value.remove(at: indexPath.row)
-                        self.viewModel.output.groupMemberCollectionViewCellModels.accept(value)
-                    }
                 case .normal: break
+                default:
+                    var sections = self.viewModel.output.animatableSectionModel.value
+                    var sectionModel = sections[indexPath.section]
+                    if let targetUid = sectionModel.items[indexPath.row].input.groupMemberModel?.uid {
+                        guard let uid = RocketChatManager.manager.rocketChatUser.value?.name else { return }
+                        if targetUid != uid {
+                            sectionModel.items.remove(at: indexPath.row)
+                            sections.remove(at: indexPath.section)
+                            sections.insert(sectionModel, at: indexPath.section)
+                            self.viewModel.output.animatableSectionModel.accept(sections)
+                        }
+                    } else {
+                        self.presentAddGroupMemberView()
+                    }
                 }
             }).disposed(by: disposeBag)
         }
@@ -79,12 +96,21 @@ class GroupInformationViewController: UIViewController {
     private var addMembersDisposeBag = DisposeBag()
     
     private lazy var deleteGroupBarButtonItem: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(title: "刪除", style: .plain, target: self, action: nil)
+        let barButtonItem = UIBarButtonItem(title: "删除群组", style: .plain, target: self, action: nil)
         barButtonItem.rx.tap.subscribe(onNext: {
             [unowned self] in
             self.deleteGroup()
         }).disposed(by: disposeBag)
-        barButtonItem.tintColor = UIColor.green
+        barButtonItem.tintColor = UIColor.owPumpkinOrange
+        return barButtonItem
+    }()
+    private lazy var cancelEditGroupBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(title: "取消编辑", style: .plain, target: self, action: nil)
+        barButtonItem.rx.tap.subscribe(onNext: {
+            [unowned self] in
+            self.undoGroup()
+        }).disposed(by: disposeBag)
+        barButtonItem.tintColor = UIColor.owPumpkinOrange
         return barButtonItem
     }()
     
@@ -104,8 +130,6 @@ class GroupInformationViewController: UIViewController {
     }
     
     private func setUpRx() {
-//        self.navigationItem.leftBarButtonItem?.tintColor = .white
-        changeBackBarButton(toColor: .white, image: #imageLiteral(resourceName: "arrowNavWhite"))
         viewModel.output.isPostable.subscribe(onNext: {
             [unowned self] isPostable in
             self.managerButton.setImageForAllStates(isPostable ? #imageLiteral(resourceName: "radioButtonOff.png") : #imageLiteral(resourceName: "radioButtonOn.png"))
@@ -120,7 +144,7 @@ class GroupInformationViewController: UIViewController {
         }).disposed(by: disposeBag)
         viewModel.input.typeSubject.subscribe(onNext: {
             [unowned self] type in
-            self.publicButton.isHidden = type == .normal ? self.viewModel.output.isPrivate.value : false
+            self.publicButton.isHidden = type == .normal ? self.viewModel.output.isPrivate.value : true
             self.privateButton.isHidden = type == .normal ? !self.publicButton.isHidden : false
             self.managerButton.isHidden = type == .normal ? self.viewModel.output.isPostable.value : false
             self.membersButton.isHidden = type == .normal ? !self.managerButton.isHidden : false
@@ -130,6 +154,8 @@ class GroupInformationViewController: UIViewController {
             self.publicButton.isEnabled = type == .create
             self.managerButton.isEnabled = type != .normal
             self.membersButton.isEnabled = type != .normal
+            self.introduceHintLabel.isHidden = type == .normal
+            self.groupNameHintLabel.isHidden = type == .normal
             if type == .normal {
                 self.publicButton.setImage(nil, for: .disabled)
                 self.privateButton.setImage(nil, for: .disabled)
@@ -143,12 +169,13 @@ class GroupInformationViewController: UIViewController {
                 self.viewModel.output.isPrivate.accept(self.viewModel.output.isPrivate.value)
                 self.viewModel.output.isPostable.accept(self.viewModel.output.isPostable.value)
             }
-            self.navigationItem.rightBarButtonItem = type == .edit && self.viewModel.input.userGroupInfoModelSubject.value.groupOwnerUID == IMUserManager.manager.userModel.value?.uID ? self.deleteGroupBarButtonItem : nil
+            if self.viewModel.input.userGroupInfoModelSubject.value.groupOwnerUID == IMUserManager.manager.userModel.value?.uID {
+                self.navigationItem.rightBarButtonItem = type == .edit ? self.cancelEditGroupBarButtonItem : self.deleteGroupBarButtonItem
+            } else {
+                self.navigationItem.rightBarButtonItem = nil
+            }
         }).disposed(by: disposeBag)
-        viewModel.output.groupMemberCollectionViewCellModels.bind(to: collectionView.rx.items(cellIdentifier: GroupMemberCollectionViewCell.className, cellType: GroupMemberCollectionViewCell.self)) {
-            _, source, cell in
-            cell.viewModel = source
-            }.disposed(by: disposeBag)
+        viewModel.output.animatableSectionModel.bind(to: collectionView.rx.items(dataSource: viewModel.output.dataSource)).disposed(by: disposeBag)
         viewModel.output.errorMessageSubject.subscribe(onNext: {
             [weak self] message in
             guard let `self` = self else { return }
@@ -174,7 +201,18 @@ class GroupInformationViewController: UIViewController {
             case .leave: self.bottomButton.setTitleForAllStates("退出群組")
             case .edit: self.bottomButton.setTitleForAllStates("管理群組")
             }
-            self.bottomButton.backgroundColor = type == .leave ? UIColor.green : UIColor.owAzure
+            self.bottomButton.backgroundColor = type == .leave ? UIColor.owPumpkinOrange : UIColor.owIceCold
+        }).disposed(by: disposeBag)
+        viewModel.output.leaveGroupActionSubject.subscribe(onNext: {
+            [unowned self] action in
+            let alertController = UIAlertController(title: "确认退出群组？", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: LM.dls.g_confirm, style: .default, handler: { (_) in
+                action()
+            })
+            let cancelAction = UIAlertAction(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
         }).disposed(by: disposeBag)
     }
     
@@ -202,6 +240,15 @@ class GroupInformationViewController: UIViewController {
                         EZToast.present(on: self, content: error.localizedDescription)
                     }
                 }).disposed(by: self.disposeBag)
+            }
+        }
+    }
+    
+    private func undoGroup() {
+        showAlert(title: "确认取消编辑？", message: nil, buttonTitles: [LM.dls.g_cancel, LM.dls.g_confirm]) { [unowned self] (index) in
+            if index == 1 {
+                self.viewModel.input.typeSubject.accept(.normal)
+                self.viewModel.input.userGroupInfoModelSubject.accept(self.viewModel.input.userGroupInfoModelSubject.value)
             }
         }
     }

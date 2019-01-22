@@ -46,6 +46,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         var chatTitle:String
         var roomID:String
         var chatAvatar:UIImage?
+        var uid: String?
     }
     
     typealias Constructor = Config
@@ -59,7 +60,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 chatTitle: constructor.chatTitle,
                 roomID: constructor.roomID,
                 chatAvatar: constructor.chatAvatar,
-                messageText: self.keyboardView.textField
+                messageText: self.keyboardView.textField, uid: constructor.uid
             ),
             output: ())
         
@@ -113,7 +114,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     
     func bindViewModel() {
         
-        viewModel.messages.bind(to: tableView.rx.items(cellIdentifier: ChatMessageTableViewCell.cellIdentifier(), cellType: ChatMessageTableViewCell.self)) {[unowned self]
+        viewModel.messages.distinctUntilChanged().bind(to: tableView.rx.items(cellIdentifier: ChatMessageTableViewCell.cellIdentifier(), cellType: ChatMessageTableViewCell.self)) {
+            [unowned self]
             row, record, cell in
                 switch self.viewModel.input.roomType {
                 case .group,.channel:

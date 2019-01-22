@@ -34,3 +34,10 @@ class MessageModel {
         self.userName = userName
     }
 }
+
+extension MessageModel: Equatable {
+    static func == (lhs: MessageModel, rhs: MessageModel) -> Bool {
+        return lhs.messageId == rhs.messageId
+    }
+}
+

@@ -86,7 +86,7 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
                 self.show(viewController, sender: nil)
             case 1:
                 let model = self.viewModel.friendsList.value[indexPath.row]
-                    let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: RoomType.pvtChat, chatTitle: model.nickName, roomID: model.roomId,chatAvatar:model.avatar))
+                    let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: RoomType.pvtChat, chatTitle: model.nickName, roomID: model.roomId,chatAvatar:model.avatar, uid: model.uid))
                     self.navigationController?.pushViewController(vc)
             default:
                 print("Err")
