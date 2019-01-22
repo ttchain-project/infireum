@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="editProfileButton" destination="DbS-IO-p6U" id="B0n-xi-qSA"/>
+                <outlet property="profileImageView" destination="iI5-pJ-Ol8" id="Osb-jN-OlV"/>
+                <outlet property="saveButton" destination="S7F-dP-Sh3" id="59H-VD-jwB"/>
+                <outlet property="userNameTextField" destination="8uL-9k-PFf" id="L21-em-Emr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userAvatarDefault01180" translatesAutoresizingMaskIntoConstraints="NO" id="iI5-pJ-Ol8">
+                    <rect key="frame" x="142.5" y="70" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="EcA-mv-Csd"/>
+                        <constraint firstAttribute="height" constant="90" id="uoI-Dn-87X"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconAvatarBorder180" translatesAutoresizingMaskIntoConstraints="NO" id="bYc-IG-PL0">
+                    <rect key="frame" x="142.5" y="70" width="90" height="90"/>
+                </imageView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8uL-9k-PFf">
+                    <rect key="frame" x="20" y="220" width="335" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="D43-bV-QxK"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jW-Vz-ukX">
+                    <rect key="frame" x="20" y="272" width="335" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="fdr-q7-4gE"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbS-IO-p6U">
+                    <rect key="frame" x="217.5" y="138" width="18" height="22"/>
+                    <state key="normal" image="iconCameraPhotoEdit"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7F-dP-Sh3">
+                    <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="Bv5-YG-b8g"/>
+                    </constraints>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5jW-Vz-ukX" secondAttribute="trailing" constant="20" id="3Xy-E8-gND"/>
+                <constraint firstItem="bYc-IG-PL0" firstAttribute="height" secondItem="iI5-pJ-Ol8" secondAttribute="height" id="5sW-JT-81g"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8uL-9k-PFf" secondAttribute="trailing" constant="20" id="9WO-WI-LzG"/>
+                <constraint firstItem="8uL-9k-PFf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BP3-Ir-iCZ"/>
+                <constraint firstItem="DbS-IO-p6U" firstAttribute="leading" secondItem="iI5-pJ-Ol8" secondAttribute="trailing" constant="-15" id="Bq6-U9-byN"/>
+                <constraint firstItem="bYc-IG-PL0" firstAttribute="width" secondItem="iI5-pJ-Ol8" secondAttribute="width" id="IMd-pX-IsP"/>
+                <constraint firstItem="iI5-pJ-Ol8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="L9c-pu-vmb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="S7F-dP-Sh3" secondAttribute="trailing" id="OEq-8v-oZP"/>
+                <constraint firstItem="8uL-9k-PFf" firstAttribute="top" secondItem="bYc-IG-PL0" secondAttribute="bottom" constant="60" id="Qzg-Om-mcp"/>
+                <constraint firstItem="DbS-IO-p6U" firstAttribute="bottom" secondItem="iI5-pJ-Ol8" secondAttribute="bottom" id="UrT-Rp-cGu"/>
+                <constraint firstItem="bYc-IG-PL0" firstAttribute="centerY" secondItem="iI5-pJ-Ol8" secondAttribute="centerY" id="XL7-Bk-pj4"/>
+                <constraint firstItem="bYc-IG-PL0" firstAttribute="centerX" secondItem="iI5-pJ-Ol8" secondAttribute="centerX" id="dwf-3K-LnJ"/>
+                <constraint firstItem="5jW-Vz-ukX" firstAttribute="top" secondItem="8uL-9k-PFf" secondAttribute="bottom" constant="2" id="evQ-Yr-8zQ"/>
+                <constraint firstItem="iI5-pJ-Ol8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gXy-WX-iJ7"/>
+                <constraint firstItem="S7F-dP-Sh3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kqJ-R5-gjh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="S7F-dP-Sh3" secondAttribute="bottom" id="mTc-GO-hUZ"/>
+                <constraint firstItem="8uL-9k-PFf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uiD-B0-az3"/>
+                <constraint firstItem="5jW-Vz-ukX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="y2K-Cf-e6i"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="154.27286356821591"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconAvatarBorder180" width="90" height="90"/>
+        <image name="iconCameraPhotoEdit" width="18" height="18"/>
+        <image name="userAvatarDefault01180" width="90" height="90"/>
+    </resources>
+</document>

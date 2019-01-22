@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "103C159A8E41B13CC7B3B8B027604542"
+               BlueprintIdentifier = "2D9AAD759BD7AF70FC8497D8DAB0DDDB"
                BuildableName = "Gzip.framework"
                BlueprintName = "GzipSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "103C159A8E41B13CC7B3B8B027604542"
+            BlueprintIdentifier = "2D9AAD759BD7AF70FC8497D8DAB0DDDB"
             BuildableName = "Gzip.framework"
             BlueprintName = "GzipSwift"
             ReferencedContainer = "container:Pods.xcodeproj">

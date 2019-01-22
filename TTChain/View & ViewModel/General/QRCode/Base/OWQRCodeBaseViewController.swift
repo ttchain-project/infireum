@@ -71,7 +71,9 @@ class OWQRCodeBaseViewController: KLModuleViewController, Rx {
     
     func configureScannerSetting() {
         DispatchQueue.main.async {
-            let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)!
+            guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else {
+                return
+            }
             
             do {
                 // Initialize the captureSession object.

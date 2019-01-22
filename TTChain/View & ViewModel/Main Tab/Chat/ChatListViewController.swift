@@ -19,11 +19,12 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
             input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().map { $0.row }),
             output: ChatListViewModel.Output(selectedChat: { [unowned self] model in self.chatSelected(forModel: model) })
         )
-        initNavigationBarItems()
+//        initNavigationBarItems()
         initTableView()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
         bindViewModel()
+        bindElements()
     }
     
     typealias ViewModel = ChatListViewModel
@@ -31,6 +32,15 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     typealias Constructor = Void
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var stackView: UIStackView!
+    
+    @IBOutlet weak var qrcodeButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var requestListButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    
     
     var bag: DisposeBag = DisposeBag()
     
@@ -92,6 +102,41 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         self.navigationController?.pushViewController(vc)
     }
     
+    func bindElements() {
+        self.qrcodeButton.rx.tap.asDriver()
+            .drive(onNext: {
+                [unowned self] in
+            
+            })
+            .disposed(by: bag)
+        self.editButton.rx.tap.asDriver()
+            .drive(onNext: {
+                [unowned self] in
+                self.toEditProfile()
+            })
+            .disposed(by: bag)
+        
+        self.addButton.rx.tap.asDriver()
+            .drive(onNext: {
+                [unowned self] in
+                
+            })
+            .disposed(by: bag)
+        self.searchButton.rx.tap.asDriver()
+            .drive(onNext: {
+                [unowned self] in
+                self.toFriendList()
+            })
+            .disposed(by: bag)
+        
+        self.requestListButton.rx.tap.asDriver()
+            .drive(onNext: {
+                [unowned self] in
+                self.toFriendList()
+            })
+            .disposed(by: bag)
+    }
+    
     
     func initNavigationBarItems() {
         let friendBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "iconCommunicationUserDark").withRenderingMode(UIImageRenderingMode.alwaysTemplate), style: UIBarButtonItemStyle.done, target: self, action: nil)
@@ -131,6 +176,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
 
         tableView.backgroundColor = palette.nav_bg_clear
         view.backgroundColor = palette.bgView_main
+        self.stackView.backgroundColor = UIColor.gray
     }
     
     override func renderLang(_ lang: Lang) {
@@ -145,7 +191,26 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         let viewController = FriendListContainerViewController.instance()
         self.show(viewController, sender: nil)
     }
-
+    
+    func toQRCodeScan() {
+        self.show(MyQRCodeViewController.instance(), sender: self)
+    }
+    
+    func showAddFriendsList() {
+        
+    }
+    
+    func toSearchFriendList() {
+        self.show(SearchGroupViewController.instance(), sender: self)
+    }
+    
+    func toEditProfile() {
+//        let user = IMUserManager.manager.userModel.value ?? IMUser.init(uID: String(), nickName: String(), introduction: String(), headImg: nil)
+//        let model = FriendRequestInformationModel.init(imUser: user)
+//        let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.myself, user: model)
+        let viewController = ProfileViewController.instance()
+        self.show(viewController, sender: nil)
+    }
     
     @objc func popExtendMenu() {
         let viewController = xib(vc: ChatExtendFunctionMenuViewController.self)

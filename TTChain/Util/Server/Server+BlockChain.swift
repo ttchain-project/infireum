@@ -596,6 +596,12 @@
         return fire(router: .IM(.getUserData(api)))
     }
     
+    // MARK: - GET /IM/UpdateUser
+    func updateUserData(parameters: UpdateUserAPI.Parameters) -> RxAPIResponse<UpdateUserAPIModel> {
+        let api = UpdateUserAPI.init(parameters: parameters)
+        return fire(router: .IM(.updateUserData(api)))
+    }
+    
     // MARK: - GET /IM/SearchUser -
     
     func searchUser(uid: String, targetUid: String) -> RxAPIResponse<SearchUserAPIModel> {
@@ -629,6 +635,11 @@
     func deleteGroup(parameters: DeleteGroupAPI.Parameters) -> RxAPIResponse<DeleteGroupAPIModel> {
         let api = DeleteGroupAPI.init(parameters: parameters)
         return fire(router: .IM(.deleteGroup(api)))
+    }
+    
+    func uploadHeadImg(parameters: UploadHeadImageAPI.Parameters) -> RxAPIResponse<UploadHeadImageAPIModel> {
+        let api = UploadHeadImageAPI.init(parameters: parameters)
+        return fire(router: .IM(.uploadHeadImage(api)))
     }
  }
  

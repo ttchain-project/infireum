@@ -99,7 +99,10 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     var path: String {
         //        switch asset.coin!.owChainType {
         //        case .cic, .eth:
-        return "/topChain/getBalance_app/\(asset.wallet!.address!)"
+        guard let wallet = asset.wallet,let  address = wallet.address else {
+            return ""
+        }
+        return "/topChain/getBalance_app/\(address)"
         //        case .btc:
         //            return "/addr/\(asset.wallet!.address!)"
         //        }

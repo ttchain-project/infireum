@@ -118,6 +118,12 @@
 		553ACEE321646024002C59AB /* UIImageView+CrispQRCodeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553ACEE021646024002C59AB /* UIImageView+CrispQRCodeImage.swift */; };
 		553ACEE421649CB7002C59AB /* AgreementMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */; };
 		553ACEE521649CB7002C59AB /* AgreementMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */; };
+		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
+		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
+		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
+		5568384E21F5A8460006892C /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5568384A21F5A8460006892C /* ProfileViewController.xib */; };
+		5568384F21F5A8460006892C /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5568384A21F5A8460006892C /* ProfileViewController.xib */; };
+		5568385021F5A8460006892C /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5568384A21F5A8460006892C /* ProfileViewController.xib */; };
 		5569803C2188566F00346757 /* TTChain_PRD-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5569803A2188566F00346757 /* TTChain_PRD-Info.plist */; };
 		5569803D2188566F00346757 /* TTChain_SIT-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5569803B2188566F00346757 /* TTChain_SIT-Info.plist */; };
 		556980532189A91B00346757 /* TransRecord+Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7305E2186E3C0003AE47E /* TransRecord+Comments.swift */; };
@@ -1741,6 +1747,8 @@
 		5539A48521676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeImportTableViewHeader.xib; sourceTree = "<group>"; };
 		5539A48721676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeImportViewModel.swift; sourceTree = "<group>"; };
 		553ACEE021646024002C59AB /* UIImageView+CrispQRCodeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+CrispQRCodeImage.swift"; sourceTree = "<group>"; };
+		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
 		5569803B2188566F00346757 /* TTChain_SIT-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_SIT-Info.plist"; sourceTree = "<group>"; };
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
@@ -2879,6 +2887,8 @@
 				55EF6A3521A812C6007E074A /* UserProfileViewController.swift */,
 				55EF6A3621A812C6007E074A /* UserProfileViewController.xib */,
 				55EF6A3721A812C6007E074A /* ViewModel */,
+				5568384921F5A8460006892C /* ProfileViewController.swift */,
+				5568384A21F5A8460006892C /* ProfileViewController.xib */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -5449,6 +5459,7 @@
 				64F07CF520D0E4CE00A60C5C /* LaunchScreen.storyboard in Resources */,
 				6470D65120F1A1A200EB0780 /* WithdrawalBTCFeeInfoViewController.xib in Resources */,
 				640D88C420EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
+				5568385021F5A8460006892C /* ProfileViewController.xib in Resources */,
 				64C9D47420FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				55EF6A8321A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
 				55E7305C2186DC4B003AE47E /* MainWalletViewController.xib in Resources */,
@@ -5692,6 +5703,7 @@
 				64E4E4D32147B434009B556B /* LaunchViewController.xib in Resources */,
 				640D88DE20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
 				6456192A2150DFBF001092E5 /* IdentityBackupTypeChooseViewController.xib in Resources */,
+				5568384E21F5A8460006892C /* ProfileViewController.xib in Resources */,
 				55EF6AB421A812C6007E074A /* MyQRCodeViewController.xib in Resources */,
 				6481398E20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.xib in Resources */,
 				55EF6B0821A812C7007E074A /* UserIMQRCodeViewController.xib in Resources */,
@@ -5838,6 +5850,7 @@
 				64E4E4D42147B434009B556B /* LaunchViewController.xib in Resources */,
 				640D88DF20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
 				6456192B2150DFBF001092E5 /* IdentityBackupTypeChooseViewController.xib in Resources */,
+				5568384F21F5A8460006892C /* ProfileViewController.xib in Resources */,
 				55EF6AB521A812C6007E074A /* MyQRCodeViewController.xib in Resources */,
 				6481398F20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.xib in Resources */,
 				55EF6B0921A812C7007E074A /* UserIMQRCodeViewController.xib in Resources */,
@@ -6348,6 +6361,7 @@
 				64F07E2020D241A000A60C5C /* KLInsetLabel.swift in Sources */,
 				64D826A220E3E2AC00C8FC63 /* LightningTransRecord+CoreDataClass.swift in Sources */,
 				55EF6AE321A812C7007E074A /* FriendListContainerViewController.swift in Sources */,
+				5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */,
 				55EF6A7A21A812C6007E074A /* AddGroupMemberCollectionViewCell.swift in Sources */,
 				64C9D4D421044E5C000B0774 /* WithdrawalCICFeeInfoQuickModeViewModel.swift in Sources */,
 				55EF6B4E21A81567007E074A /* String+Extension.swift in Sources */,
@@ -6781,6 +6795,7 @@
 				64D8264F20E0D8D600C8FC63 /* ChangeAssetViewModel.swift in Sources */,
 				64A1179020D5372C00797C2C /* ChainType.swift in Sources */,
 				64F07DD620D241A000A60C5C /* UIViewController+MZFormSheetVC.swift in Sources */,
+				5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */,
 				55EF6AE121A812C7007E074A /* FriendListContainerViewController.swift in Sources */,
 				55EF6A7821A812C6007E074A /* AddGroupMemberCollectionViewCell.swift in Sources */,
 				556980562189A94100346757 /* MainWalletViewController.swift in Sources */,
@@ -7207,6 +7222,7 @@
 				64A1178C20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
 				64F07E1920D241A000A60C5C /* ServerAPIErrorHandler.swift in Sources */,
 				55EF6AE221A812C7007E074A /* FriendListContainerViewController.swift in Sources */,
+				5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */,
 				55EF6A7921A812C6007E074A /* AddGroupMemberCollectionViewCell.swift in Sources */,
 				556980552189A94100346757 /* MainWalletViewController.swift in Sources */,
 				55EF6B4D21A81567007E074A /* String+Extension.swift in Sources */,

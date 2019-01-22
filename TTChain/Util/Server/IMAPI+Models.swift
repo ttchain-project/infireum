@@ -35,6 +35,7 @@ enum IMAPI :KLMoyaAPISet {
         case .createUser(let api): return api
         case .recoverUser(let api): return api
         case .getUserData(let api): return api
+        case .updateUserData(let api): return api
         case .getGroupList(let api): return api
         case .getPersonDirectory(let api): return api
         case .sendFriendRequest(let api): return api
@@ -50,12 +51,14 @@ enum IMAPI :KLMoyaAPISet {
         case .groupMembers(let api): return api
         case .updateGroup(let api): return api
         case .deleteGroup(let api): return api
+        case .uploadHeadImage(let api): return api
         }
     }
     case preLogin(PreLoginAPI)
     case createUser(CreateUserAPI)
     case recoverUser(RecoverUserAPI)
     case getUserData(GetUserDataAPI)
+    case updateUserData(UpdateUserAPI)
     case getGroupList(GetGroupListAPI)
     case getPersonDirectory(GetPersonalDirectoryAPI)
     case sendFriendRequest(SendFriendRequestAPI)
@@ -71,6 +74,7 @@ enum IMAPI :KLMoyaAPISet {
     case groupMembers(GroupMembersAPI)
     case updateGroup(UpdateGroupAPI)
     case deleteGroup(DeleteGroupAPI)
+    case uploadHeadImage(UploadHeadImageAPI)
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -141,6 +145,39 @@ struct CreateUserAPIModel:KLJSONMappableMoyaResponse {
         self.status = userStatus
     }
     typealias API = CreateUserAPI
+}
+
+//MARK: - POST /IM/UpdaetUser
+
+
+struct UpdateUserAPI : KLMoyaIMAPIData {
+    struct Parameters:Paramenter {
+        var uid:String
+//        var deviceID: String
+        var nickName: String
+        var introduction: String
+    }
+    var path: String {return "/IM/UpdateUser" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        return Moya.Task.requestParameters(
+            parameters: parameters.asDictionary(),
+            encoding: JSONEncoding.default
+        )
+    }
+    let parameters : Parameters
+    var stub: Data? {return nil}
+}
+
+struct UpdateUserAPIModel:KLJSONMappableMoyaResponse {
+    var status:Bool
+    init(json: JSON, sourceAPI: UpdateUserAPI) throws {
+        guard let status = json.bool else {
+                throw GTServerAPIError.noData
+        }
+        self.status = status
+    }
+    typealias API = UpdateUserAPI
 }
 
 //MARK: - POST /IM/RecoveryUser -
@@ -676,6 +713,50 @@ struct SearchUserAPIModel:KLJSONMappableMoyaResponse {
         self.isBlock = isBlock
     }
 }
+
+//MARK: - POST /IM/UploadHeadImage
+
+struct UploadHeadImageAPI: KLMoyaIMAPIData {
+    struct Parameters:Paramenter {
+        var personalOrGroupId :String
+        var isGroup: Bool
+        var image : Data
+    }
+    let parameters: Parameters
+
+    var path: String {return "/IM/UploadHeadImage"}
+    
+    var method: Moya.Method {return .post}
+    
+    var task: Task {
+        let multiPartData : [MultipartFormData] =
+            [MultipartFormData.init(provider: .data(parameters.image), name: "file", fileName: "file.jpeg", mimeType:"image/jpeg"),
+             MultipartFormData.init(provider: .data(parameters.isGroup.string.data(using: .utf8)!), name: "isGroup"),
+             MultipartFormData.init(provider: .data(parameters.personalOrGroupId.data(using: .utf8)!), name: "personalOrGroupId"),
+             ]
+        return .uploadMultipart(multiPartData)}
+    
+    var stub: Data? {return nil}
+    
+    var headers: [String : String]? {
+        return ["Content-Type" : "multipart/form-data", "SystemId":"2"]
+    }
+    
+}
+
+struct UploadHeadImageAPIModel:KLJSONMappableMoyaResponse {
+    
+    typealias API = UploadHeadImageAPI
+    init(json: JSON, sourceAPI: UploadHeadImageAPI) throws {
+        guard let mediumImg = json["medium"].string else {
+            throw GTServerAPIError.noData
+        }
+        if let url = URL.init(string: mediumImg), let data = try? Data.init(contentsOf: url) {
+            IMUserManager.manager.userModel.value!.headImg = UIImage.init(data: data)
+        }
+    }
+}
+
 
 //MARK: - ROCKETCHAT API AND MODELS
 

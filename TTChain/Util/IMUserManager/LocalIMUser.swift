@@ -25,6 +25,14 @@ struct LocalIMUser: Codable {
         return LocalIMUser(uID:imUser.uID, nickName:imUser.nickName ?? "", introduction: imUser.introduction ?? "", headImg:imageData)
     }
     
+    static func updateLocalIMUser() {
+        guard let user = IMUserManager.manager.userModel.value else {
+            return
+        }
+        let localUser = LocalIMUser.createLocalIMUser(from: user)
+        _ = try? localUser.store()
+    }
+    
     func store()  throws {
         let encoder = JSONEncoder()
         //        encoder.dateEncodingStrategy = .iso8601
