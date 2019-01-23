@@ -1711,7 +1711,22 @@ struct MarketTestAPI: KLMoyaAPIData {
     var method: Moya.Method { return .get }
         
     var task: Task {
-        return Moya.Task.requestPlain
+        var lang: String
+        switch LangManager.instance.lang.value._db_name {
+        case Lang.en_us._db_name:
+            lang = "en"
+        case Lang.zh_cn._db_name:
+            lang = "cs"
+        case Lang.zh_tw._db_name:
+            lang = "zh"
+        default:
+            lang = "zh"
+        }
+        return Moya.Task.requestParameters(
+            parameters: [ "language" : lang
+                          ],
+            encoding: URLEncoding.default
+        )
     }
     
     var stub: Data? { return nil }

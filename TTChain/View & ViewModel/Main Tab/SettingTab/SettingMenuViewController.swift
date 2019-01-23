@@ -593,5 +593,6 @@ extension SettingMenuViewController: UIPickerViewDelegate,UIPickerViewDataSource
         let selectedLang = Lang.supportLangs[row]
         let selectedLanguage = Lang.init(rawValue: selectedLang.rawValue)
         LM.instance.lang.accept(selectedLanguage ?? Lang.default)
+        MarketTestHandler.shared.launch()
     }
 }
