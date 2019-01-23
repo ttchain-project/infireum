@@ -223,7 +223,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
                     })
                     .disposed(by: self.bag)
                 
-                self.systemWalletSyncHandler?.startSyncMainWalletIfNeeded()
+//                self.systemWalletSyncHandler?.startSyncMainWalletIfNeeded()
                 self.systemWalletSyncedFlag = true
             })
             .disposed(by: bag)
