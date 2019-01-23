@@ -25,6 +25,7 @@ class GroupInformationViewController: UIViewController {
             viewModel.output.nameCountHintColor.bind(to: groupNameHintLabel.rx.textColor).disposed(by: disposeBag)
         }
     }
+    
     @IBOutlet private weak var introduceHintLabel: UILabel! {
         didSet {
             viewModel.output.introductionCountHintColor.bind(to: introduceHintLabel.rx.textColor).disposed(by: disposeBag)
@@ -53,7 +54,7 @@ class GroupInformationViewController: UIViewController {
         didSet {
             bottomButton.rx.tap.subscribe(onNext: {
                 [unowned self] in
-                self.viewModel.output.groupImageString.accept(self.groupCreateImageView.asImage().base64EncodedString)
+                self.viewModel.output.groupImage.accept(self.groupCreateImageView.asImage())
                 self.viewModel.input.buttonTapSubject.onNext(())
             }).disposed(by: disposeBag)
         }

@@ -130,6 +130,9 @@
 		556980542189A91C00346757 /* TransRecord+Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7305E2186E3C0003AE47E /* TransRecord+Comments.swift */; };
 		556980552189A94100346757 /* MainWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E730592186DC4A003AE47E /* MainWalletViewController.swift */; };
 		556980562189A94100346757 /* MainWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E730592186DC4A003AE47E /* MainWalletViewController.swift */; };
+		55787FBB21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */; };
+		55787FBC21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */; };
+		55787FBD21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */; };
 		557D4E5821E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
 		557D4E5921E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
 		557D4E5A21E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
@@ -255,9 +258,6 @@
 		55EF6A8421A812C6007E074A /* GroupInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69F721A812C5007E074A /* GroupInformationViewController.swift */; };
 		55EF6A8521A812C6007E074A /* GroupInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69F721A812C5007E074A /* GroupInformationViewController.swift */; };
 		55EF6A8621A812C6007E074A /* GroupInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69F721A812C5007E074A /* GroupInformationViewController.swift */; };
-		55EF6A8721A812C6007E074A /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69F821A812C5007E074A /* GroupInformationViewController.xib */; };
-		55EF6A8821A812C6007E074A /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69F821A812C5007E074A /* GroupInformationViewController.xib */; };
-		55EF6A8921A812C6007E074A /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69F821A812C5007E074A /* GroupInformationViewController.xib */; };
 		55EF6A8A21A812C6007E074A /* GroupMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69F921A812C5007E074A /* GroupMemberCollectionViewCell.swift */; };
 		55EF6A8B21A812C6007E074A /* GroupMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69F921A812C5007E074A /* GroupMemberCollectionViewCell.swift */; };
 		55EF6A8C21A812C6007E074A /* GroupMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69F921A812C5007E074A /* GroupMemberCollectionViewCell.swift */; };
@@ -1760,6 +1760,7 @@
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
 		5569803B2188566F00346757 /* TTChain_SIT-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_SIT-Info.plist"; sourceTree = "<group>"; };
+		55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupInformationViewController.xib; sourceTree = "<group>"; };
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
 		557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestTabModel.swift; sourceTree = "<group>"; };
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
@@ -1803,7 +1804,6 @@
 		55EF69F521A812C5007E074A /* AddGroupMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupMemberTableViewCell.swift; sourceTree = "<group>"; };
 		55EF69F621A812C5007E074A /* AddGroupMemberTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddGroupMemberTableViewCell.xib; sourceTree = "<group>"; };
 		55EF69F721A812C5007E074A /* GroupInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInformationViewController.swift; sourceTree = "<group>"; };
-		55EF69F821A812C5007E074A /* GroupInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupInformationViewController.xib; sourceTree = "<group>"; };
 		55EF69F921A812C5007E074A /* GroupMemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		55EF69FA21A812C5007E074A /* GroupMemberCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupMemberCollectionViewCell.xib; sourceTree = "<group>"; };
 		55EF69FB21A812C5007E074A /* SearchMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMemberViewController.swift; sourceTree = "<group>"; };
@@ -2720,6 +2720,7 @@
 		55EF69F221A812C5007E074A /* Group Information */ = {
 			isa = PBXGroup;
 			children = (
+				55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */,
 				55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */,
 				55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */,
 				55EF69F321A812C5007E074A /* AddGroupMemberCollectionViewCell.swift */,
@@ -2727,7 +2728,6 @@
 				55EF69F521A812C5007E074A /* AddGroupMemberTableViewCell.swift */,
 				55EF69F621A812C5007E074A /* AddGroupMemberTableViewCell.xib */,
 				55EF69F721A812C5007E074A /* GroupInformationViewController.swift */,
-				55EF69F821A812C5007E074A /* GroupInformationViewController.xib */,
 				55EF69F921A812C5007E074A /* GroupMemberCollectionViewCell.swift */,
 				55EF69FA21A812C5007E074A /* GroupMemberCollectionViewCell.xib */,
 				55EF69FB21A812C5007E074A /* SearchMemberViewController.swift */,
@@ -5543,7 +5543,7 @@
 				6446E24E20FCE85A00EC1E2E /* SelectFiatTableViewCell.xib in Resources */,
 				55EF6A6221A812C6007E074A /* KeyboardFunctionCollectionViewCell.xib in Resources */,
 				643200D020FB22F400B11334 /* WithdrawalChangeToAddressViewController.xib in Resources */,
-				55EF6A8921A812C6007E074A /* GroupInformationViewController.xib in Resources */,
+				55787FBD21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				649E489720ECAC4900B217AD /* PwdHintViewController.xib in Resources */,
 				6424B67120F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.xib in Resources */,
 				6424B69D20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.xib in Resources */,
@@ -5643,7 +5643,6 @@
 				55EF6AEA21A812C7007E074A /* FriendsListViewController.xib in Resources */,
 				55E730712186E580003AE47E /* WithdrawalRemarksViewController.xib in Resources */,
 				5508740021E5A398007B3B3B /* SettingMenuHeaderCollectionReusableView.xib in Resources */,
-				55EF6A8721A812C6007E074A /* GroupInformationViewController.xib in Resources */,
 				64772555212D1643005E75FE /* Localizable.strings in Resources */,
 				649E484720E7D96000B217AD /* ChangeWalletTableViewCell.xib in Resources */,
 				55EF6ADB21A812C6007E074A /* InviteTableViewCell.xib in Resources */,
@@ -5651,6 +5650,7 @@
 				649E483520E7CED900B217AD /* ChangeWalletViewController.xib in Resources */,
 				64C9D45320FDD230000B0774 /* AddressBookUnitBrowseViewController.xib in Resources */,
 				5539A49721676F8C00A59ACC /* IdentityQRCodeImportViewController.xib in Resources */,
+				55787FBB21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				6470D6DE20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				55EF6AF021A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B68720F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
@@ -5791,7 +5791,6 @@
 				55EF6AEB21A812C7007E074A /* FriendsListViewController.xib in Resources */,
 				55E7306F2186E57F003AE47E /* WithdrawalRemarksViewController.xib in Resources */,
 				5508740121E5A398007B3B3B /* SettingMenuHeaderCollectionReusableView.xib in Resources */,
-				55EF6A8821A812C6007E074A /* GroupInformationViewController.xib in Resources */,
 				64772556212D1643005E75FE /* Localizable.strings in Resources */,
 				649E484820E7D96000B217AD /* ChangeWalletTableViewCell.xib in Resources */,
 				55EF6ADC21A812C6007E074A /* InviteTableViewCell.xib in Resources */,
@@ -5799,6 +5798,7 @@
 				649E483620E7CED900B217AD /* ChangeWalletViewController.xib in Resources */,
 				64C9D45420FDD230000B0774 /* AddressBookUnitBrowseViewController.xib in Resources */,
 				5539A49821676F8C00A59ACC /* IdentityQRCodeImportViewController.xib in Resources */,
+				55787FBC21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				6470D6DF20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				55EF6AF121A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B68820F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,

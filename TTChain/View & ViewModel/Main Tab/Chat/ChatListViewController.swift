@@ -126,7 +126,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         self.addButton.rx.tap.asDriver()
             .drive(onNext: {
                 [unowned self] in
-                
+                self.showAddFriendsList()
             })
             .disposed(by: bag)
         self.searchButton.rx.tap.asDriver()
@@ -144,25 +144,6 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
             .disposed(by: bag)
     }
     
-    
-    func initNavigationBarItems() {
-        let friendBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "iconCommunicationUserDark").withRenderingMode(UIImageRenderingMode.alwaysTemplate), style: UIBarButtonItemStyle.done, target: self, action: nil)
-        friendBarButtonItem.tintColor = .white
-        moreBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "iconHorizontalDark").withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.done, target: self, action: nil)
-
-        navigationItem.rightBarButtonItems = [moreBarButtonItem!, friendBarButtonItem]
-        
-//        navigationController?.navigationBar.backgroundImage(for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage.init(color: UIColor.init(hex: 0xD6D6D6)!, size: CGSize(width: 1.0, height: 1.0))
-        
-        
-        moreBarButtonItem?.rx.tap.asDriver().drive(onNext: {
-            self.popExtendMenu()
-        }).disposed(by: bag)
-        friendBarButtonItem.rx.tap.asDriver().drive(onNext: {
-//            self.toFriendList()
-        }).disposed(by: bag)
-    }
     
     func initTableView() {
         tableView.register(ChatHistoryTableViewCell.nib, forCellReuseIdentifier: ChatHistoryTableViewCell.cellIdentifier())
@@ -199,12 +180,28 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         self.show(viewController, sender: nil)
     }
     
-    func toQRCodeScan() {
-        self.show(MyQRCodeViewController.instance(), sender: self)
-    }
-    
     func showAddFriendsList() {
         
+        let addAction = UIAlertAction.init(title: "Add a friend", style: .default) { _ in
+            self.show(InviteFriendViewController.instance(), sender: self)
+        }
+        let joinGroupAction = UIAlertAction.init(title: "Join A group", style: .default) { _ in
+            
+        }
+        let createGroupAction = UIAlertAction.init(title: "Create A Group", style: .default) { _ in
+            let viewModel = GroupInformationViewModel()
+            let viewController = GroupInformationViewController.init(viewModel: viewModel)
+            self.show(viewController, sender: nil)
+        }
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { _ in
+            
+        }
+        let vc = UIAlertController.init(title: "", message: "", preferredStyle: .actionSheet)
+        vc.addAction(addAction)
+        vc.addAction(joinGroupAction)
+        vc.addAction(createGroupAction)
+        vc.addAction(cancelAction)
+        self.present(vc, animated: true, completion: nil)
     }
     
     func toSearchFriendList() {
@@ -217,47 +214,6 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
 //        let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.myself, user: model)
         let viewController = ProfileViewController.instance()
         self.show(viewController, sender: nil)
-    }
-    
-    @objc func popExtendMenu() {
-        let viewController = xib(vc: ChatExtendFunctionMenuViewController.self)
-        
-        viewController.modalPresentationStyle = .popover
-        viewController.preferredContentSize = CGSize.init(width: 145, height: 99 + 12)
-        viewController.startMonitorLangIfNeeded()
-        if let popViewController = viewController.popoverPresentationController {
-            popViewController.barButtonItem = moreBarButtonItem
-            popViewController.permittedArrowDirections = .any
-            popViewController.delegate = self
-            self.present(viewController, animated: true, completion: nil)
-        }
-        
-        viewController.tableView.rx.itemSelected.subscribe(onNext: { (indexPath) in
-            viewController.tableView.deselectRow(at: indexPath, animated: true)
-            viewController.dismiss(animated: true, completion: {
-                guard let item = ExtendItem.init(rawValue: indexPath.row) else { return }
-                switch item {
-                case .sweepQRCode:     self.show(MyQRCodeViewController.instance(), sender: self)
-                case .manageGroup:
-//                    let constructor = ManageGroupViewController.Constructor.init(purpose: .create)
-//                    let viewController = ManageGroupViewController.instance(from: constructor)
-//                    self.show(viewController, sender: nil)
-                    let viewModel = GroupInformationViewModel()
-                    let viewController = GroupInformationViewController.init(viewModel: viewModel)
-                    self.show(viewController, sender: nil)
-                case .inviteFriend:     self.show(InviteFriendViewController.instance(), sender: self)
-                case .searchGroup:     self.show(SearchGroupViewController.instance(), sender: self)
-                case .redEnvelope:     self.show(RedEnvelopeViewController.instance(), sender: self)
-                case .userProfile:
-                    let user = IMUserManager.manager.userModel.value ?? IMUser.init(uID: String(), nickName: String(), introduction: String(), headImg: nil)
-                    let model = FriendRequestInformationModel.init(imUser: user)
-                    let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.myself, user: model)
-                    let viewController = UserProfileViewController.instance(from: config)
-                    self.show(viewController, sender: nil)
-                }
-            })
-            self.tabBarController?.tabBar.isHidden = true
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: bag)
     }
     
     

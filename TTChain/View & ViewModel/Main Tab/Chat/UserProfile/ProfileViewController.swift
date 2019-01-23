@@ -171,8 +171,13 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         
         Server.instance.uploadHeadImg(parameters: parameter).asObservable().subscribe(onNext: { (result) in
             switch result {
-            case .success(_):
+            case .success(let model):
+                
+                if let url = URL.init(string: model.image), let data = try? Data.init(contentsOf: url) {
+                    IMUserManager.manager.userModel.value!.headImg = UIImage.init(data: data)
+                }
                 LocalIMUser.updateLocalIMUser()
+                
                 if self.imUser!.nickName != self.userNameTextField.text {
                     //UpdateName
                     self.updateUserName()

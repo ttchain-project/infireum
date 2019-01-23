@@ -753,13 +753,12 @@ struct UploadHeadImageAPI: KLMoyaIMAPIData {
 struct UploadHeadImageAPIModel:KLJSONMappableMoyaResponse {
     
     typealias API = UploadHeadImageAPI
+    let image :String
     init(json: JSON, sourceAPI: UploadHeadImageAPI) throws {
         guard let mediumImg = json["medium"].string else {
             throw GTServerAPIError.noData
         }
-        if let url = URL.init(string: mediumImg), let data = try? Data.init(contentsOf: url) {
-            IMUserManager.manager.userModel.value!.headImg = UIImage.init(data: data)
-        }
+        self.image = mediumImg
     }
 }
 
@@ -782,7 +781,7 @@ struct IMSendMessageAPI:KLMoyaIMAPIData {
         dict["authToken"] = Tokens.getAuthTokenAndRocketChatUserID().0
         dict["rocketChatUserId"] = Tokens.getAuthTokenAndRocketChatUserID().1
         return Moya.Task.requestParameters(
-            parameters: parameters.asDictionary(),
+            parameters: dict,
             encoding: JSONEncoding.default
         )
     }
@@ -1034,7 +1033,6 @@ struct CreateGroupAPI: KLMoyaIMAPIData {
         let rocketChatUserId: String =  RocketChatManager.manager.rocketChatUser.value!.rocketChatUserId
         let groupName: String
         let isPostMsg: Bool
-        let headImg: String
         let introduction: String
     }
     
@@ -1096,7 +1094,6 @@ struct UpdateGroupAPI: KLMoyaIMAPIData {
         let groupID: String
         let groupName: String
         let isPostMsg: Bool
-        let headImg: String
         let introduction: String
     }
     

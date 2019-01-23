@@ -44,7 +44,7 @@ final class GroupInformationViewModel: ViewModel {
         let dismissSubject = PublishSubject<Void>()
         let popToRootSubject = PublishSubject<Void>()
         let buttonType = BehaviorRelay<ButtonType>(value: GroupInformationViewModel.ButtonType.leave)
-        let groupImageString = BehaviorRelay<String>(value: String())
+        let groupImage:BehaviorRelay<UIImage?> = BehaviorRelay<UIImage?>(value: nil)
         let leaveGroupActionSubject = PublishSubject<(() -> ())>()
         let dataSource = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>>.init(configureCell: { (dataSource, collectionView, indexPath, viewModel) -> UICollectionViewCell in
             let cell = collectionView.dequeueReusableCell(with: GroupMemberCollectionViewCell.self, for: indexPath)
@@ -169,7 +169,7 @@ final class GroupInformationViewModel: ViewModel {
             case .create:
                 guard let groupName = self.output.groupName.value else { fatalError("groupName should not be nil.") }
                 let memberIDs = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
-                let parameters = CreateGroupAPI.Parameters.init(isPrivate: self.output.isPrivate.value, groupName: groupName, isPostMsg: self.output.isPostable.value, headImg: self.output.groupImageString.value, introduction: self.output.introduction.value ?? String())
+                let parameters = CreateGroupAPI.Parameters.init(isPrivate: self.output.isPrivate.value, groupName: groupName, isPostMsg: self.output.isPostable.value, introduction: self.output.introduction.value ?? String())
                 Server.instance.createGroup(parameters: parameters).asObservable().subscribe(onNext: {
                     [weak self] result in
                     guard let `self` = self else { return }
@@ -180,7 +180,10 @@ final class GroupInformationViewModel: ViewModel {
                         Server.instance.groupMembers(parameters: parameters).asObservable().subscribe(onNext: {
                             [weak self] result in
                             guard let `self` = self else { return }
-                            self.output.dismissSubject.onCompleted()
+                            self.uploadGroupPicture(forGroupID: value.groupID).asObservable().subscribe(onNext: { [weak self] (result) in
+                                 guard let `self` = self else { return }
+                                self.output.dismissSubject.onCompleted()
+                            }).disposed(by: self.groupMembersDisposeBag)
                         }).disposed(by: self.groupMembersDisposeBag)
                     case .failed(error: let error):
                         DLogError(error)
@@ -208,7 +211,7 @@ final class GroupInformationViewModel: ViewModel {
                 guard let groupName = self.output.groupName.value else { fatalError("groupName should not be nil.") }
                 let groupID = self.input.userGroupInfoModelSubject.value.groupID
                 let memberIDs = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
-                let parameters = UpdateGroupAPI.Parameters.init(groupID: groupID, groupName: groupName, isPostMsg: self.output.isPostable.value, headImg: self.output.groupImageString.value, introduction: self.output.introduction.value ?? String())
+                let parameters = UpdateGroupAPI.Parameters.init(groupID: groupID, groupName: groupName, isPostMsg: self.output.isPostable.value, introduction: self.output.introduction.value ?? String())
                 Server.instance.updateGroup(parameters: parameters).asObservable().subscribe(onNext: {
                     [weak self] result in
                     guard let `self` = self else { return }
@@ -262,4 +265,14 @@ final class GroupInformationViewModel: ViewModel {
             self.output.introductionCountHintColor.onNext(count > 100 ? UIColor.owPumpkinOrange : UIColor.lightGray)
         }).disposed(by: disposeBag)
     }
+    
+    func uploadGroupPicture(forGroupID groupId:String) -> RxAPIResponse<UploadHeadImageAPIModel> {
+        
+        guard let image = self.output.groupImage.value else {
+            return .just(.failed(error: GTServerAPIError.noData))
+        }
+        let parameter = UploadHeadImageAPI.Parameters.init(personalOrGroupId:groupId , isGroup: true, image: UIImageJPEGRepresentation(image, 0.5)!)
+        return Server.instance.uploadHeadImg(parameters: parameter)
+    }
+    
 }
