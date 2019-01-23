@@ -102,6 +102,7 @@ class IMUserManager {
                 let userModel = IMUser.init(uID: uID, nickName: userData.nickName, introduction: userData.introduction, headImg: userData.headImg)
                 self.userModel = BehaviorRelay.init(value: userModel)
                 self.shouldLoginToRocketChat.onNext(())
+                self.userLoginStatus.accept(.userExists)
                 self.saveIMUser()
             case .failed(error: let error):
                 DLogError(error.localizedDescription)

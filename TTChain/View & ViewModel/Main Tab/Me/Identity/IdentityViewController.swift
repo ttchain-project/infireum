@@ -391,6 +391,8 @@ final class IdentityViewController: KLModuleViewController, KLVMVC {
                 [unowned self] in
                 self.clearHUD.stopAnimating()
                 OWRxNotificationCenter.instance.notifyIdentityCleared()
+                IMUserManager.manager.clearIMUser()
+
             })
         }
     }

@@ -37,15 +37,15 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet weak var privateChatBannerView: UIView!
     @IBOutlet weak var privateChatDurationTitleLabel: UILabel!
     
-    enum ChatFunctionEnum {
+    enum ChatFunctionEnum : Int{
         
-        case addPhoto
-        case openCamera
-        case addVideo
+        case addPhoto = 0
+        case openCamera = 1
+        case addVideo = 2
+        case startSecretChat = 3
         case addRedEnvelope
         case makeAudioCall
         case makeVideoCall
-        case startSecretChat
     }
     
     struct Input {
@@ -55,6 +55,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     struct Output {
         var didChangeViewHeight: (CGFloat) -> Void
         var onSelectChatFunction:(FunctionModel) -> Void
+
     }
     
     var input: Input? = nil
@@ -76,7 +77,11 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     let functions: [FunctionModel] = [
-                                      FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat)]
+                                      FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
+                                      FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
+                                      FunctionModel.init(title: "影片", image: UIImage(named: "iconFilmColor"), type: .addVideo),
+                                      FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat)
+]
     
     //TODO: Change this implementation, looks very lame :-\
     /*
@@ -188,6 +193,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("\(indexPath.row)")
-        self.output?.onSelectChatFunction(self.functions[indexPath.row])
-    }
+       
+            self.output?.onSelectChatFunction(self.functions[indexPath.row])
+        }
 }

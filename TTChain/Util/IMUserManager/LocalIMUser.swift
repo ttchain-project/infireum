@@ -49,13 +49,14 @@ struct LocalIMUser: Codable {
     }
     
     static func clear() {
-        if try! getFromLocal() != nil {
-            UserDefaults.standard.set(nil, forKey: LocalIMUser.localKey)
-        }
-        else {
-            UserDefaults.standard.set(nil, forKey: LocalIMUser.localKey)
-        }
-        
+//        if try! getFromLocal() != nil {
+//            UserDefaults.standard.set(nil, forKey: LocalIMUser.localKey)
+//        }
+//        else {
+//            UserDefaults.standard.set(nil, forKey: LocalIMUser.localKey)
+//        }
+        UserDefaults.standard.set(nil, forKey: LocalIMUser.localKey)
+
     }
     
     static func getFromLocal() throws -> IMUser? {

@@ -371,6 +371,8 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
                 [unowned self] in
                 self.clearHUD.stopAnimating()
                 OWRxNotificationCenter.instance.notifyIdentityCleared()
+                IMUserManager.manager.clearIMUser()
+
             })
         }
     }

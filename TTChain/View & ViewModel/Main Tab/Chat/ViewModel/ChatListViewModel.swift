@@ -17,7 +17,6 @@ class ChatListViewModel: KLRxViewModel {
         self.concatInput()
     }
     
-    
     struct Input {
         let chatSelected: Driver<Int>
     }
@@ -67,6 +66,7 @@ class ChatListViewModel: KLRxViewModel {
             }
         }).disposed(by: bag)
     }
+    
     
     
 }

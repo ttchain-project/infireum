@@ -52,6 +52,7 @@ enum IMAPI :KLMoyaAPISet {
         case .updateGroup(let api): return api
         case .deleteGroup(let api): return api
         case .uploadHeadImage(let api): return api
+        case .uploadFile(let api): return api
         case .sendMessage(let api): return api
         case .blockUser(let api): return api
 
@@ -78,6 +79,7 @@ enum IMAPI :KLMoyaAPISet {
     case updateGroup(UpdateGroupAPI)
     case deleteGroup(DeleteGroupAPI)
     case uploadHeadImage(UploadHeadImageAPI)
+    case uploadFile(UploadFileAPI)
     case sendMessage(IMSendMessageAPI)
     case blockUser(BlockUserAPI)
 
@@ -131,7 +133,10 @@ struct CreateUserAPI : KLMoyaIMAPIData {
     var method: Moya.Method { return .post }
     var task: Task {
         return Moya.Task.requestParameters(
-            parameters: [ "userID" : userId, "deviceID": deviceID,"nickName":nickName, "headImg":headImg, "introduction":introduction ],
+            parameters: [ "userID" : userId,
+                          "deviceID": deviceID,
+                          "nickName":nickName,
+                          "introduction":introduction ],
             encoding: JSONEncoding.default
         )
     }
@@ -278,10 +283,12 @@ struct GetUserDataAPIModel:KLJSONMappableMoyaResponse {
     init(json: JSON, sourceAPI: GetUserDataAPI) throws {
         guard let nickName = json["nickName"].string,
             let introduction = json["introduction"].string,
-            let headImg = json["headImg"].dictionary,let headImgM = headImg["medium"]?.string,
             let status = json["status"].int else {
                 throw GTServerAPIError.noData
         }
+        let headImg = json["headImg"].dictionary
+        let headImgM = headImg?["medium"]?.string ?? ""
+
         self.nickName = nickName
         self.introduction = introduction
         self.headImg = headImgM
@@ -323,13 +330,15 @@ struct GetGroupListAPIModel:KLJSONMappableMoyaResponse {
                 let groupName = dict["groupName"].string,
                 let isPrivate = dict["isPrivate"].bool,
                 let introduction = dict["introduction"].string,
-                let headImg = dict["headImg"].string,
                 let imGroupId = dict ["imGroupID"].string,
                 let isPostMsg = dict["isPostMsg"].bool,
                 let status = dict["status"].int else {
                     return nil
             }
-            return UserGroupInfoModel.init(groupID: groupID, groupOwnerUID: groupOwnerUID, ownerName: ownerName, status: status, groupName: groupName, isPrivate: isPrivate, introduction: introduction, headImg: headImg, imGroupId: imGroupId, isPostMsg: isPostMsg)
+            let headImg = dict["headImg"].dictionary
+            let headImgM = headImg?["small"]?.string ?? ""
+
+            return UserGroupInfoModel.init(groupID: groupID, groupOwnerUID: groupOwnerUID, ownerName: ownerName, status: status, groupName: groupName, isPrivate: isPrivate, introduction: introduction, headImg: headImgM, imGroupId: imGroupId, isPostMsg: isPostMsg)
         })
         
         invitationList = invitationListData.compactMap ({ (dict) in
@@ -339,13 +348,15 @@ struct GetGroupListAPIModel:KLJSONMappableMoyaResponse {
                 let groupName = dict["groupName"].string,
                 let isPrivate = dict["isPrivate"].bool,
                 let introduction = dict["introduction"].string,
-                let headImg = dict["headImg"].string,
                 let imGroupId = dict ["imGroupID"].string,
                 let isPostMsg = dict["isPostMsg"].bool,
                 let status = dict["status"].int else {
                     return nil
             }
-            return UserGroupInfoModel.init(groupID: groupID, groupOwnerUID: groupOwnerUID, ownerName: ownerName, status: status, groupName: groupName, isPrivate: isPrivate, introduction: introduction, headImg: headImg, imGroupId: imGroupId, isPostMsg: isPostMsg)
+            let headImg = dict["headImg"].dictionary
+            let headImgM = headImg?["small"]?.string ?? ""
+
+            return UserGroupInfoModel.init(groupID: groupID, groupOwnerUID: groupOwnerUID, ownerName: ownerName, status: status, groupName: groupName, isPrivate: isPrivate, introduction: introduction, headImg: headImgM, imGroupId: imGroupId, isPostMsg: isPostMsg)
         })
     }
     typealias API = GetGroupListAPI
@@ -379,24 +390,25 @@ struct GetPersonalDirectoryAPIModel:KLJSONMappableMoyaResponse {
             guard let invitationId = dict["invitationId"].int,
                 let uid = dict["uid"].string,
                 let nickname = dict["nickname"].string,
-                let message = dict["message"].string,
-            let headShotImg = dict["headshotImg"].string
-                
+                let message = dict["message"].string
             else {
                 return nil
             }
-            return FriendRequestInformationModel.init(invitationID:invitationId, uid:uid,nickName:nickname,message:message, headShotImage: headShotImg)
+            let img = dict["headImg"].dictionary
+            let headImg = img?["medium"]?.string ?? ""
+            return FriendRequestInformationModel.init(invitationID:invitationId, uid:uid,nickName:nickname,message:message, headShotImage: headImg)
         })
         let friendListArray : [FriendInfoModel] = friendList.compactMap ({ (dict) in
             guard let uid = dict["uid"].string,
                 let nickname = dict["nickname"].string,
-                let roomId = dict["roomId"].string,
-            let headShotImg = dict["headshotImg"].string
-                
+                let roomId = dict["roomId"].string
+            
             else {
                 return nil
             }
-            return FriendInfoModel.init(uid:uid,nickName:nickname,roomId:roomId,headhShotImgString: headShotImg)
+            let img = dict["headImg"].dictionary
+            let headImg = img?["medium"]?.string ?? ""
+            return FriendInfoModel.init(uid:uid,nickName:nickname,roomId:roomId,headhShotImgString: headImg)
             }
         )
         self.personalDirectoryModel = MemberPersonalChatAndGroupsModel.init(invitationList:inviationListArray, friendList:friendListArray)
@@ -530,14 +542,14 @@ struct GetAllCommunicationsAPIModel:KLJSONMappableMoyaResponse {
         self.communicationList = response.compactMap ( { (dict) in
             guard let roomId = dict["roomId"].string,
                 let displayName = dict["displayName"].string,
-                let img = dict["headImg"].dictionary,
-                let headImg = img["small"]?.string,
                 let lastMessage = dict["lastMessage"].string,
                 let roomType = dict["roomType"].string,
                 let updateTime = dict["updateTime"].string
                 else {
                     return nil
             }
+            let img = dict["headImg"].dictionary
+            let headImg = img?["small"]?.string ?? ""
             return CommunicationListModel.init(roomId: roomId, displayName: displayName, img: headImg, lastMessage: lastMessage, roomType: roomType, updateTime:updateTime, privateMessageTargetUid: dict["privateMessageTargetUid"].string)
         })
     }
@@ -646,7 +658,6 @@ struct GetGroupInfoAPIModel:KLJSONMappableMoyaResponse {
             let groupName = dict["groupName"]?.string,
             let isPrivate = dict["isPrivate"]?.bool,
             let introduction = dict["introduction"]?.string,
-            let headImg = dict["headImg"]?.string,
             let imGroupId = dict ["imGroupID"]?.string,
             let isPostMsg = dict["isPostMsg"]?.bool,
             let status = dict["status"]?.int,
@@ -655,34 +666,38 @@ struct GetGroupInfoAPIModel:KLJSONMappableMoyaResponse {
             else {
                 throw GTServerAPIError.noData
         }
-        
+        let img = dict["headImg"]?.dictionary
+        let groupHeadImg = img?["small"]?.string ?? ""
         let invitedMembersArray:[GroupMemberModel] = invitationMemberDict.compactMap ( { (dict) in
             guard let uid = dict["uid"].string,
                 let nickName = dict["nickName"].string,
-                let headImg = dict["headImg"].string,
                 let status = dict["status"].int,
                 let isFriend = dict["isFriend"].bool,
                 let isBlocked = dict["isBlock"].bool
                 else {
                     return nil
             }
-            return GroupMemberModel.init(uid:uid, nickName:nickName, headImg:headImg, status:status,isFriend:isFriend, isBlocked:isBlocked)
+            let img = dict["headImg"].dictionary
+            let memberHeadImg = img?["medium"]?.string ?? ""
+            return GroupMemberModel.init(uid:uid, nickName:nickName, headImg:memberHeadImg, status:status,isFriend:isFriend, isBlocked:isBlocked)
         })
 
         let membersArray:[GroupMemberModel] = membersDict.compactMap ({ (dict) in
             guard let uid = dict["uid"].string,
                 let nickName = dict["nickName"].string,
-                let headImg = dict["headImg"].string,
                 let status = dict["status"].int,
                 let isFriend = dict["isFriend"].bool,
                 let isBlocked = dict["isBlock"].bool
                 else {
                     return nil
             }
-            return GroupMemberModel.init(uid:uid, nickName:nickName, headImg:headImg, status:status,isFriend:isFriend, isBlocked:isBlocked)
+            let img = dict["headImg"].dictionary
+            let memberHeadImg = img?["medium"]?.string ?? ""
+
+            return GroupMemberModel.init(uid:uid, nickName:nickName, headImg:memberHeadImg, status:status,isFriend:isFriend, isBlocked:isBlocked)
         })
 
-        self.groupInfo = UserGroupInfoModel.init(groupID: groupID, groupOwnerUID: groupOwnerUID, ownerName: ownerName, status: status, groupName: groupName, isPrivate: isPrivate, introduction: introduction, headImg: headImg, imGroupId: imGroupId, isPostMsg: isPostMsg,membersArray:membersArray, invitedMembersArray:invitedMembersArray)
+        self.groupInfo = UserGroupInfoModel.init(groupID: groupID, groupOwnerUID: groupOwnerUID, ownerName: ownerName, status: status, groupName: groupName, isPrivate: isPrivate, introduction: introduction, headImg: groupHeadImg, imGroupId: imGroupId, isPostMsg: isPostMsg,membersArray:membersArray, invitedMembersArray:invitedMembersArray)
     }
     
     typealias API = GetGroupInfoAPI
@@ -713,7 +728,17 @@ struct SearchUserAPIModel:KLJSONMappableMoyaResponse {
     let isBlock: Bool
     
     init(json: JSON, sourceAPI: SearchUserAPI) throws {
-        guard let uid = json["uid"].string, let nickname = json["nickname"].string, let headImg = json["headImg"].dictionary,let headshotImg = headImg["medium"]?.string, let isFriend = json["isFriend"].bool, let isBlock = json["isBlock"].bool else { throw GTServerAPIError.noData }
+        guard let uid = json["uid"].string,
+            let nickname = json["nickname"].string,
+            
+            let isFriend = json["isFriend"].bool,
+            let isBlock = json["isBlock"].bool
+            else {
+                throw GTServerAPIError.noData
+                
+        }
+        let headImg = json["headImg"].dictionary
+        let headshotImg = headImg?["medium"]?.string ?? ""
         self.imUser = IMUser(uID: uid, nickName: nickname, introduction: String(), headImg: headshotImg)
         self.isFriend = isFriend
         self.isBlock = isBlock
@@ -738,7 +763,7 @@ struct UploadHeadImageAPI: KLMoyaIMAPIData {
         let multiPartData : [MultipartFormData] =
             [MultipartFormData.init(provider: .data(parameters.image), name: "file", fileName: "file.jpeg", mimeType:"image/jpeg"),
              MultipartFormData.init(provider: .data(parameters.isGroup.string.data(using: .utf8)!), name: "isGroup"),
-             MultipartFormData.init(provider: .data(parameters.personalOrGroupId.data(using: .utf8)!), name: "personalOrGroupId"),
+             MultipartFormData.init(provider: .data(parameters.personalOrGroupId.data(using: .utf8)!), name: "personalOrGroupId")
              ]
         return .uploadMultipart(multiPartData)}
     
@@ -762,6 +787,50 @@ struct UploadHeadImageAPIModel:KLJSONMappableMoyaResponse {
     }
 }
 
+//MARK: - POST /IM/FileUpload
+
+struct UploadFileAPI: KLMoyaIMAPIData {
+    struct Parameters:Paramenter {
+        var uid :String
+        var isGroup: Bool
+        var image : Data
+        var roomId:String
+    }
+    let parameters: Parameters
+    
+    var path: String {return "/IM/FileUpload"}
+    
+    var method: Moya.Method {return .post}
+    
+    var task: Task {
+        let multiPartData : [MultipartFormData] =
+            [MultipartFormData.init(provider: .data(parameters.image), name: "file", fileName: "file.jpeg", mimeType:"image/jpeg"),
+             MultipartFormData.init(provider: .data(parameters.isGroup.string.data(using: .utf8)!), name: "isGroup"),
+             MultipartFormData.init(provider: .data(parameters.uid.data(using: .utf8)!), name: "uid"),
+             MultipartFormData.init(provider: .data(parameters.roomId.data(using: .utf8)!), name: "roomId"),
+             MultipartFormData.init(provider: .data("image".data(using: .utf8)!), name: "fileType"),
+             MultipartFormData.init(provider: .data(Tokens.getAuthTokenAndRocketChatUserID().0.data(using: .utf8)!), name: "authToken"),
+             MultipartFormData.init(provider: .data(Tokens.getAuthTokenAndRocketChatUserID().1.data(using: .utf8)!), name: "rocketChatUserId")
+        ]
+        return .uploadMultipart(multiPartData)}
+    
+    var stub: Data? {return nil}
+    
+    var headers: [String : String]? {
+        return ["Content-Type" : "multipart/form-data", "SystemId":"2"]
+    }
+}
+
+struct UploadFileAPIModel:KLJSONMappableMoyaResponse {
+    typealias API = UploadFileAPI
+    init(json: JSON, sourceAPI: UploadFileAPI) throws {
+        guard json["fileUrl"].string != nil else {
+            throw GTServerAPIError.noData
+        }
+    }
+}
+
+
 //MARK: - /IM/message/SendMessage
 
 struct IMSendMessageAPI:KLMoyaIMAPIData {
@@ -773,7 +842,7 @@ struct IMSendMessageAPI:KLMoyaIMAPIData {
         var msg : String
     }
     let parameters: Parameter
-    var path: String {return "/IM/message/SendMessage" }
+    var path: String { return "/IM/message/SendMessage" }
     var method: Moya.Method { return .post }
     var task: Task {
         

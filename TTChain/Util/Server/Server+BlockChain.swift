@@ -649,6 +649,10 @@
         return fire(router: .IM(.uploadHeadImage(api)))
     }
     
+    func uploadFile(parameters: UploadFileAPI.Parameters) -> RxAPIResponse<UploadFileAPIModel> {
+        let api = UploadFileAPI.init(parameters: parameters)
+        return fire(router: .IM(.uploadFile(api)))
+    }
     //MARK: - POST /IM/SendMessage
     
     func sendMessage(parameters:IMSendMessageAPI.Parameter) -> RxAPIResponse<IMSendMessageAPIModel> {

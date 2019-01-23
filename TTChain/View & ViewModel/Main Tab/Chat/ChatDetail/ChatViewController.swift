@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import IQKeyboardManagerSwift
+import PhotosUI
 
 final class ChatViewController: KLModuleViewController, KLVMVC {
 
@@ -39,7 +40,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     private var friendInfoModel: FriendInfoModel?
     var viewModel: ChatViewModel!
     var bag: DisposeBag = DisposeBag()
-
+    var imagePicker: UIImagePickerController!
+    
     private var isNavigatingToUserProfile: Bool = false
     struct Config {
         var roomType:RoomType
@@ -64,11 +66,39 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             ),
             output: ())
         
+        viewModel.blockSubject.subscribe(onNext: {
+            [weak self] in
+            guard let `self` = self else { return }
+            self.keyboardView.endEditing(true)
+            self.alert(title: "对方已封锁聊天", button: "好")
+            self.keyboardView.isBlock = true
+        }).disposed(by: bag)
+        
         initTableView()
         initKeyboardView()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
         bindViewModel()
+    }
+    
+    fileprivate var hasAuthedCamera: Bool {
+        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        switch status {
+        case .authorized, .notDetermined:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    fileprivate var hasAuthedPhotoLibrary: Bool {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized, .notDetermined:
+            return true
+        default:
+            return false
+        }
     }
     
     override func viewDidLoad() {
@@ -171,7 +201,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     
     func initKeyboardView() {
         
-        
         keyboardView.config(input: ChatKeyboardView.Input(),
                             output: ChatKeyboardView.Output.init(didChangeViewHeight: { (value) in
                                 self.view.setNeedsLayout()
@@ -183,6 +212,17 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                 switch function.type {
                                 case .startSecretChat:
                                     self.toChatSecretViewController()
+                                case .addPhoto:
+                                    guard self.hasAuthedPhotoLibrary else {
+                                        return
+                                    }
+                                    self.displayCamera(forSource: .photoLibrary)
+                                case .openCamera:
+                                    guard self.hasAuthedCamera else {
+                                        return
+                                    }
+                                    self.displayCamera(forSource: .camera)
+                                    
                                 default:
                                     print("Pending implementation")
                                 }
@@ -219,6 +259,39 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             self.viewModel.privateChat.isPrivateChatOn.accept(isSelected)
         }).disposed(by: bag)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func toCameraView() {
+        
+    }
+    
+    fileprivate func displayCamera(forSource sourceType:UIImagePickerController.SourceType ) {
+        
+        
+        imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = sourceType
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    fileprivate func displayImageSource() {
+        guard hasAuthedPhotoLibrary else {
+            
+            return
+        }
+        
+        imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
     func toUserProfileVC(forFriend friend: FriendModel) {
@@ -268,3 +341,40 @@ extension UITableView {
     }
 }
 
+extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
+//            self.didUpdateProfileImage = true
+//            self.profileImageView.image = resizedImg
+            self.viewModel.sendImageAsMessage(image:resizedImg)
+            picker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func targetSize(for originImg:UIImage) -> CGSize {
+        let originSize = originImg.size
+        enum Longer {
+            case w
+            case h
+        }
+        
+        var targetSize: CGSize = .zero
+        let longer : Longer = (originSize.width >= originSize.height) ? .w : .h
+        switch longer {
+        case .w:
+            targetSize.width = min(originSize.width, 480)
+            let compressRatio = targetSize.width / originSize.width
+            targetSize.height = originSize.height * compressRatio
+        case .h:
+            targetSize.height = min(originSize.height, 480)
+            let compressRatio = targetSize.height / originSize.height
+            targetSize.width = originSize.width * compressRatio
+        }
+        
+        return targetSize
+    }
+}

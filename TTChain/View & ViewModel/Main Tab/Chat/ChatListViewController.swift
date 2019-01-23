@@ -175,6 +175,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     @objc func settingsButtonTapped() {
     
     }
+    
     func toFriendList(purpose: FriendListContainerViewController.Purpose) {
         let viewController = FriendListContainerViewController.instance(from: FriendListContainerViewController.Constructor(purpose: purpose))
         self.show(viewController, sender: nil)
@@ -185,9 +186,9 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         let addAction = UIAlertAction.init(title: "Add a friend", style: .default) { _ in
             self.show(InviteFriendViewController.instance(), sender: self)
         }
-        let joinGroupAction = UIAlertAction.init(title: "Join A group", style: .default) { _ in
-            
-        }
+//        let joinGroupAction = UIAlertAction.init(title: "Join A group", style: .default) { _ in
+//
+//        }
         let createGroupAction = UIAlertAction.init(title: "Create A Group", style: .default) { _ in
             let viewModel = GroupInformationViewModel()
             let viewController = GroupInformationViewController.init(viewModel: viewModel)
@@ -198,7 +199,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         }
         let vc = UIAlertController.init(title: "", message: "", preferredStyle: .actionSheet)
         vc.addAction(addAction)
-        vc.addAction(joinGroupAction)
+//        vc.addAction(joinGroupAction)
         vc.addAction(createGroupAction)
         vc.addAction(cancelAction)
         self.present(vc, animated: true, completion: nil)

@@ -162,6 +162,21 @@ class ChatViewModel: KLRxViewModel {
         }).disposed(by: bag)
     }
     
+    func sendImageAsMessage(image:UIImage) {
+        guard let user = IMUserManager.manager.userModel.value,let imgData = UIImageJPEGRepresentation(image, 0.5) else {
+            return
+        }
+        let param = UploadFileAPI.Parameters.init(uid: user.uID, isGroup: self.input.roomType == .pvtChat ? false : true, image: imgData, roomId: self.input.roomID)
+        Server.instance.uploadFile(parameters:param).asObservable().subscribe(onNext: { (result) in
+            switch result {
+            case .failed(error: let error):
+                DLogError(error)
+            case .success(let message):
+                DLogInfo(message)
+            }
+        }).disposed(by: bag)
+    }
+    
     func sendMessage() {
         var string = self.input.messageText.text
         string = string?.trimmingCharacters(in: .whitespacesAndNewlines)
