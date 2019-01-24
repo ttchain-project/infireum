@@ -39,12 +39,6 @@ extension KLInstanceSetupViewController where Self: UIViewController, Constructo
         return navInstance(from: ())
     }
     
-    static func AJNavInstance() -> AJNavigationController {
-        let vc = xib(vc: self)
-        let nav = AJNavigationController.init(rootViewController: vc)
-        vc.config(constructor: ())
-        return nav
-    }
 }
 
 
