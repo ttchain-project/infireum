@@ -91,7 +91,7 @@ final class ExploreDetailCollectionViewController: KLModuleViewController, KLVMV
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
 
     }
     

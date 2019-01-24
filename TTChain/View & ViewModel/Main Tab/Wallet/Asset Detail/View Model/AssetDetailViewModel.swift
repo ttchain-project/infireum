@@ -1,20 +1,20 @@
  //
-//  AssetDetailViewModel.swift
-//  OfflineWallet
-//
-//  Created by Keith Lee on 2018/7/6.
-//  Copyright © 2018年 gib. All rights reserved.
-//
-
-import UIKit
-import RxSwift
-import RxCocoa
-
-class AssetDetailViewModel: KLRxViewModel {
+ //  AssetDetailViewModel.swift
+ //  OfflineWallet
+ //
+ //  Created by Keith Lee on 2018/7/6.
+ //  Copyright © 2018年 gib. All rights reserved.
+ //
+ 
+ import UIKit
+ import RxSwift
+ import RxCocoa
+ 
+ class AssetDetailViewModel: KLRxViewModel {
     struct Input {
         let asset: Asset
-//        let depositInput: Driver<Void>
-//        let withdrawalInput: Driver<Void>
+        let depositInput: Driver<Void>
+        let withdrawalInput: Driver<Void>
         let loadMoreInput: Driver<Void>
         let refreshInput: Driver<Void>
     }
@@ -31,7 +31,7 @@ class AssetDetailViewModel: KLRxViewModel {
     }()
     
     private lazy var ethHandler: ETHTxHandler = {
-       return ETHTxHandler.init(asset: input.asset, filter: ETHTxFilter())
+        return ETHTxHandler.init(asset: input.asset, filter: ETHTxFilter())
     }()
     
     private lazy var tokenHandler: TokenTxHandler = {
@@ -39,6 +39,14 @@ class AssetDetailViewModel: KLRxViewModel {
     }()
     
     private lazy var cicHandler: CICTxHandler = {
+        return CICTxHandler.init(specificAsset: input.asset, filter: CICTxFilter())
+    }()
+    
+    private lazy var bnnHandler: CICTxHandler = {
+        return CICTxHandler.init(specificAsset: input.asset, filter: CICTxFilter())
+    }()
+    
+    private lazy var cfpHandler: CICTxHandler = {
         return CICTxHandler.init(specificAsset: input.asset, filter: CICTxFilter())
     }()
     
@@ -59,13 +67,13 @@ class AssetDetailViewModel: KLRxViewModel {
             .filter { [unowned self] in !self.loading }
             .throttle(1)
             .drive(
-            onNext: {
-                [unowned self]
-                _ in
-                self.getTransRecords(reset: false)
-            }
-        )
-        .disposed(by: bag)
+                onNext: {
+                    [unowned self]
+                    _ in
+                    self.getTransRecords(reset: false)
+                }
+            )
+            .disposed(by: bag)
         
         input.refreshInput
             .throttle(1)
@@ -105,16 +113,16 @@ class AssetDetailViewModel: KLRxViewModel {
             .disposed(by: bag)
     }
     
-
+    
     //MARK: - Public
-//    public var startDeposit: Observable<Asset> {
-//        return input.depositInput.asObservable().map { [unowned self] in self.input.asset }
-//    }
-//    
-//    public var startWithdrawal: Observable<Asset> {
-//        return input.withdrawalInput.asObservable().map { [unowned self] in self.input.asset }
-//    }
-//    
+    public var startDeposit: Observable<Asset> {
+        return input.depositInput.asObservable().map { [unowned self] in self.input.asset }
+    }
+    
+    public var startWithdrawal: Observable<Asset> {
+        return input.withdrawalInput.asObservable().map { [unowned self] in self.input.asset }
+    }
+    
     public var startLoading: Observable<Void> {
         return _startLoading.asObservable()
     }
@@ -279,10 +287,10 @@ class AssetDetailViewModel: KLRxViewModel {
         
         return dbValue
     }
-}
-
-// MARK: - Mock
-extension AssetDetailViewModel {
+ }
+ 
+ // MARK: - Mock
+ extension AssetDetailViewModel {
     /// Create the observable of the net value of asset
     fileprivate func getAmtFromBlockchain() -> Observable<Decimal?> {
         return input.asset.getAmtFromServerIfPossible().asObservable().takeUntil(amtsUpdateStopper)
@@ -291,4 +299,4 @@ extension AssetDetailViewModel {
     fileprivate func getFiatRateFromServer() -> Observable<Decimal?> {
         return CoinToFiatRate.getRateFromServerIfPossible(coin: input.asset.coin!, fiat: _fiat.value).asObservable().takeUntil(fiatUpdateStopper).debug("\(input.asset.coin!.identifier!)/\(_fiat.value.name!)")
     }
-}
+ }

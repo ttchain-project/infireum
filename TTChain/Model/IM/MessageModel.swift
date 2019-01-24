@@ -7,6 +7,10 @@
 //
 
 import Foundation
+enum MessageType:String {
+    case general = "general"
+    case file = "file"
+}
 class MessageModel {
     
     var messageId: String
@@ -16,13 +20,14 @@ class MessageModel {
     var senderName: String
     var timestamp:Date
     var userName:String?
-    
+    var msgType:MessageType
     init(messageId: String,
     roomId: String,
     msg: String,
     senderId: String,
     senderName: String,
     timestamp:Date,
+    messageType:MessageType,
     userName:String? = nil) {
      
         self.messageId = messageId
@@ -32,6 +37,7 @@ class MessageModel {
         self.senderName = senderName
         self.timestamp = timestamp
         self.userName = userName
+        self.msgType = messageType
     }
 }
 

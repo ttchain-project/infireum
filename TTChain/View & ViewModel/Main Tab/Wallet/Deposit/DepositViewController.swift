@@ -219,11 +219,10 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     }
     
     override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bg_clear)
+        renderNavBar(tint: theme.palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: theme.palette.nav_item_2, font: .owMedium(size: 18))
-        
-        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
-        createRightBarButton(target: self, selector: #selector(settingsButton), image: #imageLiteral(resourceName: "settings"), title: nil, toColor: theme.palette.nav_item_2, shouldClear: true)
+        changeLeftBarButtonToDismissToRoot(tintColor:theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+//        createRightBarButton(target: self, selector: #selector(settingsButton), image: #imageLiteral(resourceName: "settings"), title: nil, toColor: theme.palette.nav_item_2, shouldClear: true)
         
 //        view.backgroundColor = theme.palette.specific(color: .owMarineBlue)
 //        walletAddressCopyBtn.tintColor = theme.palette.label_main_2
@@ -298,10 +297,6 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
         let activityVC = UIActivityViewController.init(activityItems: [img], applicationActivities: nil)
 
         present(activityVC, animated: true, completion: nil)
-    }
-    
-    @objc private func settingsButton() {
-        
     }
     
     //MARK: - Helper

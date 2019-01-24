@@ -74,7 +74,7 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
         self.bar.style = .buttonBar
         self.bar.appearance = TabmanBar.Appearance({ (appearance) in
             appearance.indicator.preferredStyle = TabmanIndicator.Style.line
-            appearance.style.background = Tabman.TabmanBar.BackgroundView.Style.solid(color: UIColor.clear)
+            appearance.style.background = Tabman.TabmanBar.BackgroundView.Style.solid(color: UIColor.white)
             switch bar.style {
             case .scrollingButtonBar:
                 appearance.layout.itemDistribution = .leftAligned
@@ -101,6 +101,7 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
             self.bar.appearance?.state.selectedColor = theme.palette.label_main_1
             self.bar.appearance?.state.color = theme.palette.label_sub
             self.config(with: theme.palette)
+            self.view.backgroundColor = theme.palette.nav_bg_clear
         }
     }
     
@@ -128,23 +129,22 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
             )
         )
         
-//        let withdrawalVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-//                asset: asset, records: transRecords, type: .withdrawal
-//            )
-//        )
-//
-//        let depositVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-//                asset: asset, records: transRecords, type: .deposit
-//            )
-//        )
-//
-//        let failedVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-//                asset: asset, records: transRecords, type: .failed
-//            )
-//        )
+        let withdrawalVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
+                asset: asset, records: transRecords, type: .withdrawal
+            )
+        )
+
+        let depositVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
+                asset: asset, records: transRecords, type: .deposit
+            )
+        )
+
+        let failedVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
+                asset: asset, records: transRecords, type: .failed
+            )
+        )
         
-        return [totalVC]
-//        , withdrawalVC, depositVC, failedVC]
+        return [totalVC, withdrawalVC, depositVC, failedVC]
     }
     
     override func viewDidLoad() {

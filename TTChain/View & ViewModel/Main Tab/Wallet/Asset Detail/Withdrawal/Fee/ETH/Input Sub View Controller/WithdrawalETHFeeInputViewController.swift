@@ -98,7 +98,7 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
             .subscribe(onNext: {
                 [unowned self]
                 isDisplayed in
-                let img = isDisplayed ? #imageLiteral(resourceName: "arrowButtonDownPinkSolid") : #imageLiteral(resourceName: "arrowButtonPinkSolid")
+                let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
                 self.feeBtn.set(image: img,
                                 title: nil,
                                 titlePosition: .left,
@@ -130,7 +130,7 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
         feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
         feeBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 14))
         let isDisplayed = !infoBase.isHidden
-        let img = isDisplayed ? #imageLiteral(resourceName: "arrowButtonDownPinkSolid") : #imageLiteral(resourceName: "arrowButtonPinkSolid")
+        let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
         self.feeBtn.set(image: img, title: nil, titlePosition: .left, additionalSpacing: 8, state: .normal)
     }
     

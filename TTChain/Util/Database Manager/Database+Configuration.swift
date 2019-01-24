@@ -95,7 +95,7 @@ extension DatabaseManager {
                         }
                     })
                     
-                    MainCoinTypStorage.syncRemoteMainCoinIDs(mainCoins)
+//                    MainCoinTypStorage.syncRemoteMainCoinIDs(mainCoins)
                 }
                 
                 ServerSyncRecord.markEntitySyncRecord(entityType: Coin.self)

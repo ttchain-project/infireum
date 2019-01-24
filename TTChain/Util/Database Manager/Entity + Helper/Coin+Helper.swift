@@ -149,8 +149,8 @@ class CoinSyncHandler {
                         }
                     })
                     
-                    MainCoinTypStorage
-                        .syncRemoteMainCoinIDs(mainCoins)
+//                    MainCoinTypStorage
+//                        .syncRemoteMainCoinIDs(mainCoins)
                 }
                 
                 self.mark(version: version, toDate: Date())

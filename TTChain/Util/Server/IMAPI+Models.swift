@@ -1025,13 +1025,28 @@ struct  GetRocketChatMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
                 let userDict = jsonDict["u"].dictionary,
                 let userId = userDict["_id"]?.string,
                 let name = userDict["name"]?.string,
-                let userName = userDict["username"]?.string
+                let userName = userDict["username"]?.string,
+                let msgType = jsonDict["msgType"].string,
+                let messageType = MessageType.init(rawValue: msgType)
                 else {
                     return nil
             }
-
+            var msg:String = ""
+            if messageType == .file {
+                if let url = jsonDict["msg"].string  {
+                    if let data = url.data(using: .utf8) {
+                        let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        if dict != nil, dict!["fileUrl"] != nil {
+                            msg = dict!["fileUrl"] as! String
+                        }
+                    }
+                }
+            }else {
+                msg = jsonDict["msg"].string ?? ""
+            }
+            
             let date = DateFormatter.date(from: timeStampString, withFormat: C.IMDateFormat.dateFormatForIM)
-            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: message, senderId:userId, senderName:name, timestamp: date!,userName:userName)
+            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: msg, senderId:userId, senderName:name, timestamp: date!, messageType: messageType, userName:userName)
             return messageModel
         })
         
@@ -1078,13 +1093,15 @@ struct  GetRocketChatGroupMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
                 let userDict = jsonDict["u"].dictionary,
                 let userId = userDict["_id"]?.string,
                 let name = userDict["name"]?.string,
-                let userName = userDict["username"]?.string
+                let userName = userDict["username"]?.string,
+                let msgType = jsonDict["msgType"].string,
+                let messageType = MessageType.init(rawValue: msgType)
                 else {
                     return nil
             }
             
             let date = DateFormatter.date(from: timeStampString, withFormat: C.IMDateFormat.dateFormatForIM)
-            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: message, senderId:userId, senderName:name, timestamp: date!,userName:userName)
+            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: message, senderId:userId, senderName:name, timestamp: date!, messageType: messageType,userName:userName)
             return messageModel
         })
         

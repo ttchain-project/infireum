@@ -255,10 +255,10 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         switch self.viewModel.entryPoint {
         case .MainWallet?:
-            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
             createCustomRightBarButton(img: #imageLiteral(resourceName: "settings"), target: self, action: #selector(toSettings))
         default:
-            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:nil, title: nil)
+            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
         }
         tableView.backgroundColor = theme.palette.bgView_sub
     }
@@ -313,24 +313,24 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     private func handleAssetSelect(_ asset: Asset, ofWallet wallet: Wallet) {
-//        let vc = AssetDetailViewController.navInstance(
-//            from: AssetDetailViewController.Config(asset: asset)
-//        )
+        let vc = AssetDetailViewController.navInstance(
+            from: AssetDetailViewController.Config(asset: asset)
+        )
         //        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
-        //        present(vc, animated: true, completion: nil)
+                present(vc, animated: true, completion: nil)
 
-        switch self.viewModel.entryPoint {
-        case .MainWallet?:
-            let vc = WithdrawalBaseViewController.instance(
-                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
-            )
-            self.navigationController?.pushViewController(vc, animated: true)
-        default:
-            let vc = WithdrawalBaseViewController.navInstance(
-                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
-            )
-            self.present(vc, animated: true)
-        }
+//        switch self.viewModel.entryPoint {
+//        case .MainWallet?:
+//            let vc = WithdrawalBaseViewController.instance(
+//                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
+//            )
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        default:
+//            let vc = WithdrawalBaseViewController.navInstance(
+//                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil)
+//            )
+//            self.present(vc, animated: true)
+//        }
     }
     
     @objc private func toTransRecord() {

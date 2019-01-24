@@ -107,11 +107,8 @@ final class IdentityQRCodeContentViewController: KLModuleViewController, KLVMVC 
         renderNavTitle(color: palette.nav_item_2,
                        font: .owMedium(size: 20))
         
-        changeLeftBarButtonToDismissToRoot(
-            tintColor: palette.nav_item_1,
-            image: #imageLiteral(resourceName: "navBarBackButton"),
-            title: nil
-        )
+        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+
         
         qrCodeBase.set(backgroundColor: palette.bgView_main)
         

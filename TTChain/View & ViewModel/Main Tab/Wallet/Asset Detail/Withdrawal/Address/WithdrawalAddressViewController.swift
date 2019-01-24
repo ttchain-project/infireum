@@ -86,7 +86,7 @@ final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalC
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         toAddrTitleLabel.text = dls.withdrawal_label_toAddr
-        addrbookBtn.set(image: #imageLiteral(resourceName: "arrowButtonPinkSolid"),
+        addrbookBtn.set(image: #imageLiteral(resourceName: "doneBlue"),
                         title: dls.withdrawal_btn_common_used_addr,
                         titlePosition: .left,
                         additionalSpacing: 8,

@@ -140,33 +140,75 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     
     func initTableView() {
         tableView.register(ChatMessageTableViewCell.nib, forCellReuseIdentifier: ChatMessageTableViewCell.nameOfClass)
+        tableView.register(ChatMessageImageTableViewCell.nib, forCellReuseIdentifier: ChatMessageImageTableViewCell.nameOfClass)
+
     }
     
     func bindViewModel() {
-        
-        viewModel.messages.distinctUntilChanged().bind(to: tableView.rx.items(cellIdentifier: ChatMessageTableViewCell.cellIdentifier(), cellType: ChatMessageTableViewCell.self)) {
-            [unowned self]
-            row, record, cell in
-                switch self.viewModel.input.roomType {
-                case .group,.channel:
-                    cell.config(forMessage: record, leftImage: self.viewModel.memberAvatarMapping[record.userName ?? ""], leftImageAction: { id in
-                        guard let friendModel = self.viewModel.getFriendsModel(for: record.userName ?? "") else {
-                            return
-                        }
-                        self.toUserProfileVC(forFriend: friendModel)
 
-                    })
-                case .pvtChat:
-                    cell.config(forMessage: record, leftImage: self.viewModel.input.chatAvatar , leftImageAction: { id in
-                        guard let friendModel = self.viewModel.getFriendsModel(for: record.userName ?? "") else {
-                            return
-                        }
-                        self.toUserProfileVC(forFriend: friendModel)
-                        
-                    })
-                }
+        viewModel.messages.distinctUntilChanged().bind(to: tableView.rx.items) {
+            [unowned self]
+            tv,row,messageModel in
+            
+            var cell: UITableViewCell
+            var leftImage: UIImage?
+            
+            switch self.viewModel.input.roomType {
+            case .group,.channel:
+                leftImage = self.viewModel.memberAvatarMapping[messageModel.userName ?? ""]
+            case .pvtChat:
+                leftImage = self.viewModel.input.chatAvatar
             }
-            .disposed(by: bag)
+            
+            switch messageModel.msgType {
+            case .general:
+                let chatCell = tv.dequeueReusableCell(withIdentifier: ChatMessageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageTableViewCell
+                
+                chatCell.config(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
+                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                        return
+                    }
+                    self.toUserProfileVC(forFriend: friendModel)
+                })
+                cell = chatCell
+                
+            case .file:
+                let chatImgCell = tv.dequeueReusableCell(withIdentifier: ChatMessageImageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageImageTableViewCell
+                
+                chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
+                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                        return
+                    }
+                    self.toUserProfileVC(forFriend: friendModel)
+                })
+                cell = chatImgCell
+            }
+            return cell
+        }.disposed(by: bag)
+        
+//        viewModel.messages.distinctUntilChanged().bind(to: tableView.rx.items(cellIdentifier: ChatMessageTableViewCell.cellIdentifier(), cellType: ChatMessageTableViewCell.self)) {
+//            [unowned self]
+//            row, record, cell in
+//                switch self.viewModel.input.roomType {
+//                case .group,.channel:
+//                    cell.config(forMessage: record, leftImage: self.viewModel.memberAvatarMapping[record.userName ?? ""], leftImageAction: { id in
+//                        guard let friendModel = self.viewModel.getFriendsModel(for: record.userName ?? "") else {
+//                            return
+//                        }
+//                        self.toUserProfileVC(forFriend: friendModel)
+//
+//                    })
+//                case .pvtChat:
+//                    cell.config(forMessage: record, leftImage: self.viewModel.input.chatAvatar , leftImageAction: { id in
+//                        guard let friendModel = self.viewModel.getFriendsModel(for: record.userName ?? "") else {
+//                            return
+//                        }
+//                        self.toUserProfileVC(forFriend: friendModel)
+//
+//                    })
+//                }
+//            }
+//            .disposed(by: bag)
         
         viewModel.shouldScrollToBottom.asObservable().subscribe(onNext: {[unowned self] in
             self.tableView.scrollToLastRow()

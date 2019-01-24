@@ -30,6 +30,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         selectionStyle = .none
 //        statusBtn.addTarget(self, action: #selector(statusBtnTapped), for: .touchUpInside)
         amtLabel.font = .owRegular(size: 18)
+        self.backgroundColor = .clear
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,7 +47,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         let palette = TM.palette
         
         addrLabel.set(textColor: palette.label_sub, font: .owRegular(size: 18))
-        dateLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 12))
+        dateLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
 //        commentsLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 12))
         amtLabel.textColor = transRecord.getRecordColor(ofAddress: transRecord.fromAddress!)
         
@@ -89,10 +90,10 @@ class TransRecordListTableViewCell: UITableViewCell {
             switch type {
             case .deposit:
                 addrLabel.text = transRecord.fromAddress
-                self.amtLabel.textColor = UIColor.green
+                self.amtLabel.textColor = UIColor.owCoolGreen
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
-                self.amtLabel.textColor = UIColor.red
+                self.amtLabel.textColor = UIColor.owWaterBlue
             }
         }
         

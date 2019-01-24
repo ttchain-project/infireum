@@ -183,7 +183,10 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         // Do any additional setup after loading the view.
         
     }
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.setGradientColor()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -197,16 +200,16 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        view.backgroundColor = palette.bgView_main
+//        view.backgroundColor = palette.bgView_main
         renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bg_clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-        createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.application_main, shouldClear: true)
+        createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.nav_item_2, shouldClear: true)
 
         guard self.navigationController != nil else {
-            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
+            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
             return
         }
-        changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "navBarBackButton"))
+        changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
 
 //        if((self.presentingViewController) != nil) {
 //        } else if(self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {

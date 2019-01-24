@@ -131,7 +131,7 @@ final class TransferRecordsListViewController: KLModuleViewController, KLVMVC {
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 18))
         self.hideDefaultNavBar()
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "navBarBackButton"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
         noDataLabel.set(
             textColor: palette.label_sub,
             font: .owRegular(size: 11)
