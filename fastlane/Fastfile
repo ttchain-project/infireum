@@ -109,7 +109,7 @@ desc "Update All Build Number"
 
 desc "Build adhoc .ipa [uat]"
   lane :adhoc_uat do
-    # match_uat_adhoc
+    match_uat_adhoc
 #    increment_build_number
     gym(
     scheme: "TTChain_UAT",
