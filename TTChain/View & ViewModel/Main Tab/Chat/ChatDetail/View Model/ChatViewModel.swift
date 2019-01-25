@@ -15,9 +15,7 @@ import RxDataSources
 
 struct PrivateChatSetup {
     var isPrivateChatOn : BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
-    var privateChatDuration : PrivateChatSettingViewModel.PrivateChatDuration? = nil
-    var startTime:Date? = nil
-    var endTime:Date? = nil
+    var privateChatDuration : PrivateChatDuration? = nil
 }
 
 struct TimeFromNow {
@@ -63,8 +61,6 @@ class ChatViewModel: KLRxViewModel {
     
     lazy var timer : Observable<NSInteger> = { return Observable<NSInteger>.interval(5, scheduler: SerialDispatchQueueScheduler(qos: .background)) }()
     
-    var timeFromNow : TimeFromNow = TimeFromNow.init()
-    
     var timerSub: Disposable?
     var groupInfoModel: BehaviorRelay<UserGroupInfoModel?> = {
         return BehaviorRelay.init(value: nil)
@@ -72,22 +68,7 @@ class ChatViewModel: KLRxViewModel {
     
     public var memberAvatarMapping: [String:UIImage] = [:]
     
-    var privateChat : PrivateChatSetup {
-        didSet {
-            if let duration = privateChat.privateChatDuration {
-                switch duration {
-                case .pvt_10_minutes:
-                    privateChat.startTime = timeFromNow.currentTime
-                    privateChat.endTime = timeFromNow.tenMinutesFromNow
-                case .pvt_1_minutes:
-                    privateChat.startTime = timeFromNow.currentTime
-                    privateChat.endTime = timeFromNow.oneMinutesFromNow
-                case .singleConversation:
-                    privateChat.startTime = timeFromNow.currentTime
-                }
-            }
-        }
-    }
+    var privateChat : PrivateChatSetup
     
     let blockSubject = PublishSubject<Void>()
     
@@ -114,6 +95,7 @@ class ChatViewModel: KLRxViewModel {
         self.concatInput()
         self.concatOutput()
         fetchAllMessagesForPrivateChat()
+        self.getPrivateChatStatus()
     }
     
     func concatInput() {
@@ -200,9 +182,6 @@ class ChatViewModel: KLRxViewModel {
                     DLogInfo(message)
                     if message.status {
                         if self.privateChat.isPrivateChatOn.value {
-//                            if self.privateChat.privateChatDuration != .singleConversation, let id = message.msgId {
-//                                self.sendDestroyMessage(messageID: id)
-//                            }
                         }
                     } else {
                         self.blockSubject.onNext(())
@@ -219,11 +198,7 @@ class ChatViewModel: KLRxViewModel {
                         case .success(let message):
                             DLogInfo(message)
                             if message.status {
-                                if self.privateChat.isPrivateChatOn.value {
-//                                    if self.privateChat.privateChatDuration != .singleConversation, let id = message.msgId {
-//                                        self.sendDestroyMessage(messageID: id)
-//                                    }
-                                }
+                                
                             } else {
                                 self.blockSubject.onNext(())
                             }
@@ -234,46 +209,20 @@ class ChatViewModel: KLRxViewModel {
         } while message.count > 500
     }
     
-    func sendDestroyMessage(messageID:String) {
-        guard self.privateChat.privateChatDuration != nil, let endTime = self.privateChat.endTime else {
-            return
-        }
-        let endTimeString = DateFormatter.dateString(from: endTime, withFormat:C.IMDateFormat.dateFormatForIM)
-        
-        Server.instance.destructMessage(messageID: messageID, expireTime: endTimeString).asObservable().subscribe(onNext: { (response) in
-            switch response {
-            case .failed(error: let error):
-                print(error)
-            case .success( _):
-                print("message destructionSend")
-            }
-        } ).disposed(by: bag)
-    }
-    
-    func postChatSection() {
-        guard self.privateChat.privateChatDuration == .singleConversation else{
-            return
-        }
-        
-        guard  let startTimeDate = self.privateChat.startTime
-            else {
-                return
-        }
-        let startTimeString = DateFormatter.dateString(from: startTimeDate, withFormat:C.IMDateFormat.dateFormatForIM)
-        let endTimeString = DateFormatter.dateString(from: timeFromNow.currentTime, withFormat:C.IMDateFormat.dateFormatForIM)
-        
-        Server.instance.postMessageSection(roomID: self.input.roomID, startTime:startTimeString, endTime:endTimeString).asObservable()
-            .subscribe(onNext: { response in
-                switch response {
-                case .failed(error: let error):
-                    print(error)
-                case .success( _):
-                    print("message")
-                }
-            }).disposed(by: bag)
-    }
-    
     private func isBlocked() {
         
+    }
+    
+    func getPrivateChatStatus() {
+        let parameter = GetSelfDestructingStatusAPI.Parameter.init(roomId: self.input.roomID, roomType: self.input.roomType.rawValue)
+        Server.instance.getDestructMessageSetting(parameter: parameter).asObservable().subscribe(onNext: { (result) in
+            switch result {
+            case .failed(error:let error) :
+                print(error)
+            case .success(let model):
+                self.privateChat.isPrivateChatOn.accept(model.isOpenSelfDestructingMessage)
+                self.privateChat.privateChatDuration = model.privateChatType
+            }
+        }).disposed(by: bag)
     }
 }

@@ -44,6 +44,7 @@ enum IMAPI :KLMoyaAPISet {
         case .setRecoveryPassword(let api): return api
         case .getAllCommunications(let api): return api
         case .destructMessage(let api): return api
+        case .getDestructMessageSetting(let api):return api
         case .postMessageSection(let api): return api
         case .getGroupInfo(let api): return api
         case .searchUser(let api): return api
@@ -70,7 +71,7 @@ enum IMAPI :KLMoyaAPISet {
     case respondGroupRequest(RespondGroupRequestAPI)
     case setRecoveryPassword(SetRecoveryPasswordAPI)
     case getAllCommunications(GetAllCommunicationsAPI)
-    case destructMessage(DestructMessageAPI)
+    case destructMessage(SelfDestructMessageSettingAPI)
     case postMessageSection(PostMessageSectionAPI)
     case getGroupInfo(GetGroupInfoAPI)
     case searchUser(SearchUserAPI)
@@ -82,7 +83,7 @@ enum IMAPI :KLMoyaAPISet {
     case uploadFile(UploadFileAPI)
     case sendMessage(IMSendMessageAPI)
     case blockUser(BlockUserAPI)
-
+    case getDestructMessageSetting(GetSelfDestructingStatusAPI)
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -587,33 +588,77 @@ struct PostMessageSectionAPIModel:KLJSONMappableMoyaResponse {
 }
 
 
-//MARK: - Post /IM/selfdestructingmessage -
+//MARK: - POST /IM/selfdestructingmessagesetting
 
-struct DestructMessageAPI : KLMoyaIMAPIData {
-    
-    var messageID:String
-    var expireTime:String
+struct SelfDestructMessageSettingAPI : KLMoyaIMAPIData {
+    struct Parameter:Paramenter {
+        var roomId:String
+        var roomType:String
+        var uid:String
+        var selfDestructingMessageType:String
+    }
+    let parameter:Paramenter
     var stub: Data? {return nil}
-    var path: String {return "/IM/selfdestructingmessage" }
+    var path: String {return "/IM/selfdestructingmessagesetting" }
     var method: Moya.Method { return .post }
     var task: Task {
         return Moya.Task.requestParameters(
-            parameters: ["messageId":messageID,"expireTime":expireTime ],
+            parameters: parameter.asDictionary(),
             encoding: JSONEncoding.default
         )
     }
 }
 
-struct DestructMessageAPIModel:KLJSONMappableMoyaResponse {
+struct SelfDestructMessageSettingAPIModel:KLJSONMappableMoyaResponse {
     
-    init(json: JSON, sourceAPI: DestructMessageAPI) throws {
+    init(json: JSON, sourceAPI: SelfDestructMessageSettingAPI) throws {
         guard let response = json.bool, response == true
             else {
                 throw GTServerAPIError.noData
         }
     }
-    typealias API = DestructMessageAPI
+    typealias API = SelfDestructMessageSettingAPI
 }
+
+//MARK: - GET /IM/selfdestructingmessagesetting
+
+struct GetSelfDestructingStatusAPI : KLMoyaIMAPIData {
+    struct Parameter:Paramenter {
+        var roomId:String
+        var roomType:String
+    }
+    let parameter:Paramenter
+    var stub: Data? {return nil}
+    var path: String {return "/IM/selfdestructingmessagesetting" }
+    var method: Moya.Method { return .get }
+    var task: Task {
+        return Moya.Task.requestParameters(
+            parameters: parameter.asDictionary(),
+            encoding: URLEncoding.default
+        )
+    }
+}
+
+struct GetSelfDestructingStatusAPIModel:KLJSONMappableMoyaResponse {
+    var isOpenSelfDestructingMessage: Bool
+    var privateChatType:PrivateChatDuration?
+    init(json: JSON, sourceAPI: GetSelfDestructingStatusAPI) throws {
+        guard let dict = json.dictionary
+            else {
+                throw GTServerAPIError.noData
+        }
+        self.isOpenSelfDestructingMessage = dict["isOpenSelfDestructingMessage"]?.bool ??  false
+        guard let chatTypeString = dict ["selfDestructingMessageType"]?.string,
+            let privateChatType = PrivateChatDuration.init(rawValue:chatTypeString) else {
+                return
+        }
+        self.privateChatType = privateChatType
+    }
+    typealias API = GetSelfDestructingStatusAPI
+}
+
+
+
 
 //MARK: - GET /IM/GetGroupInfo -
 
@@ -1020,7 +1065,6 @@ struct  GetRocketChatMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
         self.messageArray = messagesJSON.compactMap({ (jsonDict)  in
             guard let msgID = jsonDict["_id"].string,
                 let roomId = jsonDict["rid"].string,
-                let message = jsonDict["msg"].string,
                 let timeStampString = jsonDict["ts"].string,
                 let userDict = jsonDict["u"].dictionary,
                 let userId = userDict["_id"]?.string,

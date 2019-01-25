@@ -13,8 +13,11 @@ import RxCocoa
 final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     
     struct Config {
-        var selectedDurationIfAny: PrivateChatSettingViewModel.PrivateChatDuration?
+        var selectedDurationIfAny: PrivateChatDuration?
         var privateModeStatusIfAny: Bool?
+        var roomId:String
+        var roomType:RoomType
+        var uId:String
     }
     
     typealias Constructor = Config
@@ -34,9 +37,9 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     let pickerView: UIPickerView = UIPickerView.init()
     private let pickerResponder = UITextField.init()
  
-    private let chatSecretChoices : PublishRelay<(PrivateChatSettingViewModel.PrivateChatDuration?,Bool)> = PublishRelay.init()
+    private let chatSecretChoices : PublishRelay<(PrivateChatDuration?,Bool)> = PublishRelay.init()
     
-    var onChatSecretChoicesComplete : Observable<(PrivateChatSettingViewModel.PrivateChatDuration?,Bool)> {
+    var onChatSecretChoicesComplete : Observable<(PrivateChatDuration?,Bool)> {
         return chatSecretChoices.asObservable()
     }
     
@@ -45,7 +48,16 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     func config(constructor: PrivateChatSettingViewController.Config) {
         self.view.layoutIfNeeded()
         
-        self.viewModel = ViewModel.init(input: PrivateChatSettingViewModel.InputSource(selectedDuration:constructor.selectedDurationIfAny,selectedStatus:constructor.privateModeStatusIfAny, privateChatSwitch: self.privateModeSwitch.rx.isOn, pickerSelectedIndex: self.pickerView.rx.itemSelected.asDriver().map { $0.row }), output: ())
+        self.viewModel =
+            ViewModel.init(input: PrivateChatSettingViewModel.InputSource(
+            selectedDuration:constructor.selectedDurationIfAny,
+            selectedStatus:constructor.privateModeStatusIfAny,
+            privateChatSwitch: self.privateModeSwitch.rx.isOn,
+            pickerSelectedIndex: self.pickerView.rx.itemSelected.asDriver().map { $0.row },
+            roomId: constructor.roomId,
+            roomType:constructor.roomType,
+            uId:constructor.uId
+            ),output: ())
         self.startMonitorLangIfNeeded()
         self.startMonitorThemeIfNeeded()
         self.bindViewModel()
@@ -85,7 +97,7 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
             font: .owRegular(size: 10)
         )
         
-        privateModelDurationButton.set(color: palette.label_main_2, font: UIFont.owRegular(size: 12))
+        privateModelDurationButton.set(color: palette.label_main_1, font: UIFont.owRegular(size: 12))
         privateModelDurationButton.setTitleColor(palette.label_sub, for: .disabled)
         
         self.privateModeSwitch.layer.anchorPoint = CGPoint.init(x: 1.0, y: 1.0)
@@ -96,7 +108,8 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
                                        titlePosition: .left,
                                        additionalSpacing: 8,
                                        state: .normal)
-
+        
+        self.createRightBarButton(target: self, selector: #selector(saveSetting), title: "Save", toColor: palette.label_main_2, shouldClear: true)
     }
     
     override func renderLang(_ lang: Lang) {
@@ -135,15 +148,26 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if self.viewModel.isChatPrivate() {
-            self.chatSecretChoices.accept((self.viewModel.getPrivateChatDuration(), self.viewModel.isChatPrivate()))
-        } else {
-            self.chatSecretChoices.accept((nil, self.viewModel.isChatPrivate()))
-        }
     }
     
     
-    
+    @objc func saveSetting() {
+        self.viewModel.setDestructMessageSetting().asObservable()
+            .subscribe(onNext: { response in
+                switch response {
+                case .failed(error: let error):
+                    print(error)
+                case .success( _):
+                    print("message")
+                    if self.viewModel.isChatPrivate() {
+                        self.chatSecretChoices.accept((self.viewModel.getPrivateChatDuration(), self.viewModel.isChatPrivate()))
+                    } else {
+                        self.chatSecretChoices.accept((nil, self.viewModel.isChatPrivate()))
+                    }
+                    self.navigationController?.popViewController()
+                }
+            }).disposed(by: bag)
+    }
 }
 
 //extension PrivateChatSettingViewController : UIPickerViewDelegate, UIPickerViewDataSource {

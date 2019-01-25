@@ -186,30 +186,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             return cell
         }.disposed(by: bag)
         
-//        viewModel.messages.distinctUntilChanged().bind(to: tableView.rx.items(cellIdentifier: ChatMessageTableViewCell.cellIdentifier(), cellType: ChatMessageTableViewCell.self)) {
-//            [unowned self]
-//            row, record, cell in
-//                switch self.viewModel.input.roomType {
-//                case .group,.channel:
-//                    cell.config(forMessage: record, leftImage: self.viewModel.memberAvatarMapping[record.userName ?? ""], leftImageAction: { id in
-//                        guard let friendModel = self.viewModel.getFriendsModel(for: record.userName ?? "") else {
-//                            return
-//                        }
-//                        self.toUserProfileVC(forFriend: friendModel)
-//
-//                    })
-//                case .pvtChat:
-//                    cell.config(forMessage: record, leftImage: self.viewModel.input.chatAvatar , leftImageAction: { id in
-//                        guard let friendModel = self.viewModel.getFriendsModel(for: record.userName ?? "") else {
-//                            return
-//                        }
-//                        self.toUserProfileVC(forFriend: friendModel)
-//
-//                    })
-//                }
-//            }
-//            .disposed(by: bag)
-        
         viewModel.shouldScrollToBottom.asObservable().subscribe(onNext: {[unowned self] in
             self.tableView.scrollToLastRow()
         })
@@ -222,7 +198,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.viewModel.privateChat.isPrivateChatOn
             .asObservable().map { status in
                 if status {
-                    self.keyboardView.privateChatDurationTitleLabel.text = "Private Chat:" + self.viewModel.privateChat.privateChatDuration!.title
+                    self.keyboardView.privateChatDurationTitleLabel.text = "Private Chat is on"
                 }else {
                     self.keyboardView.privateChatDurationTitleLabel.text = ""
                 }
@@ -230,13 +206,14 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             }
             .bind(to: self.keyboardView.privateChatBannerView.rx.isHidden)
             .disposed(by: bag)
+        
         Observable.just(self.viewModel.privateChat.privateChatDuration).asObservable().subscribe(onNext: { (duration) in
             
         }).disposed(by: bag)
     }
     
     @objc func backButtonTapped() {
-        self.viewModel.postChatSection()
+//        self.viewModel.postChatSection()
         self.viewModel.timerSub?.dispose()
         self.navigationController?.popViewController(animated: true)
     }
@@ -294,7 +271,13 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     func toChatSecretViewController() {
-        let vc = PrivateChatSettingViewController.instance(from: PrivateChatSettingViewController.Config(selectedDurationIfAny:self.viewModel.privateChat.privateChatDuration, privateModeStatusIfAny:self.viewModel.privateChat.isPrivateChatOn.value))
+        let vc =
+            PrivateChatSettingViewController.instance(from: PrivateChatSettingViewController.Config(selectedDurationIfAny:self.viewModel.privateChat.privateChatDuration,
+             privateModeStatusIfAny:self.viewModel.privateChat.isPrivateChatOn.value,
+             roomId: self.viewModel.input.roomID,
+             roomType:self.viewModel.input.roomType,
+             uId:self.viewModel.input.uid!)
+        )
         
         vc.onChatSecretChoicesComplete.asObservable().subscribe(onNext: {[unowned self] (duration, isSelected) in
             self.viewModel.privateChat.privateChatDuration = duration
@@ -303,12 +286,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func toCameraView() {
-        
-    }
     
     fileprivate func displayCamera(forSource sourceType:UIImagePickerController.SourceType ) {
-        
         
         imagePicker = UIImagePickerController()
         
@@ -325,7 +304,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             
             return
         }
-        
         imagePicker = UIImagePickerController()
         
         imagePicker.delegate = self

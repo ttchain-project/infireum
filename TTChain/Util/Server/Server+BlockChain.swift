@@ -570,10 +570,16 @@
         return fire(router: .IM(.getAllCommunications(api)))
     }
     
-    //MARK: - GET /IM/selfdestructingmessage -
-    func destructMessage(messageID:String, expireTime:String) -> RxAPIResponse<DestructMessageAPIModel> {
-        let api = DestructMessageAPI.init(messageID: messageID, expireTime: expireTime)
+    //MARK: - POST /IM/selfdestructingmessagesetting -
+    func destructMessage(parameter:Paramenter) -> RxAPIResponse<SelfDestructMessageSettingAPIModel> {
+        let api = SelfDestructMessageSettingAPI.init(parameter: parameter)
         return fire(router: .IM(.destructMessage(api)))
+    }
+    
+    //MARK: - GET /IM/selfdestructingmessagesetting -
+    func getDestructMessageSetting(parameter:Paramenter) -> RxAPIResponse<GetSelfDestructingStatusAPIModel> {
+        let api = GetSelfDestructingStatusAPI.init(parameter: parameter)
+        return fire(router: .IM(.getDestructMessageSetting(api)))
     }
     
     //MARK: - GET /IM/message/section -

@@ -7882,6 +7882,7 @@
 			baseConfigurationReference = 2D016C577E961DD6B360E8EE /* Pods-TTChain_UAT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_UAT-Info.plist";
@@ -7891,11 +7892,11 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-UAT";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "TTChain UAT";
 				PROVISIONING_PROFILE = "ea62f369-2c3e-4536-9abc-5bd2822faf77";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.OfflineWallet-UAT";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -7917,11 +7918,11 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-UAT";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "TTChain UAT";
 				PROVISIONING_PROFILE = "eaaef35c-9348-4f80-938b-dbb8be522513";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.OfflineWallet-UAT";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -16,6 +16,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePics: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var msgImageView: UIImageView!
+    @IBOutlet var senderConstraint: NSLayoutConstraint!
+    @IBOutlet var receiverConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,20 +36,26 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         self.msgImageView.layer.borderWidth = 5.0
         self.msgImageView.layer.borderColor = UIColor.white.cgColor
         dateLabel.set(textColor: .gray, font: .owMedium(size: 9))
+        self.backgroundColor = .clear
+        self.selectionStyle = .none
     }
     
     func setMessage(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
         dateLabel.text = message.timestamp.string()
         if message.senderId == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId {
             self.profilePics.isHidden = true
+            self.dateLabel.textAlignment = .right
+            self.senderConstraint.isActive = true
+            self.receiverConstraint.isActive = false
         }else {
             self.profilePics.isHidden = false
+            self.dateLabel.textAlignment = .left
+            self.senderConstraint.isActive = false
+            self.receiverConstraint.isActive = true
         }
-        self.profilePics.rx.tapGesture().asDriver().drive(onNext: { _ in
+        self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)
         }).disposed(by: bag)
-        
-
         
         guard let url = URL.init(string: message.msg) else {
             return
