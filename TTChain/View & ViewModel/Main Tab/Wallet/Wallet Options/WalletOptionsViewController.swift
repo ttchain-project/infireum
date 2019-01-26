@@ -237,16 +237,18 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         self.ethView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
         self.stableCoinView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
         self.listedCoinView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
-
-        self.view.setGradientColor()
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.setGradientColor()
     }
     
     override func renderLang(_ lang: Lang) {
         self.title = "TTChain"
-        
-        
     }
+    
     @objc func importWallet() {
         let vc = xib(vc: ImportWalletTypeChooseViewController.self)
         let nav = UINavigationController.init(rootViewController: vc)
