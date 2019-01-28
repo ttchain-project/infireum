@@ -60,7 +60,7 @@ struct Constants {
                 return "http://api-trading.git4u.net:63339"
             }
         }
-        static var rocketChatURL:String { return "http://192.168.51.21:3000"}
+        static var rocketChatURL:String { return "http://api-trading.git4u.net:3000"}
     }
     
     struct BlockchainAPI {

@@ -41,6 +41,11 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
         doneButton.setTitleForAllStates(dls.g_confirm)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         titleLabel.set(textColor: palette.label_main_2,

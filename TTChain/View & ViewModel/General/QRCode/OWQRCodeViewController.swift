@@ -22,7 +22,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
     
     typealias ViewModel = OWQRCodeViewModel
     var viewModel: OWQRCodeViewModel!
-
+    
     fileprivate var cornerLayer: CAShapeLayer!
     
     @IBOutlet weak var introLabel: UILabel!
@@ -35,7 +35,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
     fileprivate var focusingBtn: UIButton!
     
     fileprivate lazy var indicator: UIView = {
-       let indi = UIView(frame:
+        let indi = UIView(frame:
             CGRect.init(
                 origin: .zero,
                 size: CGSize.init(width: 10, height: 10)
@@ -55,10 +55,11 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
         case restoreIdentity
         case importWallet(String?)
         case addContacts(String?)
+        case userId
         
         var targetMainCoinID: String? {
             switch self {
-            case .restoreIdentity: return nil
+            case .restoreIdentity, .userId: return nil
             case .general(let id), .addContacts(let id), .importWallet(let id), .withdrawal(let id):
                 return id
             }
@@ -80,31 +81,32 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
             case .importWallet: return .importWallet
             case .addContacts: return .contact
             case .restoreIdentity: return .restoreIdentity
+            case .userId: return .userId
             }
         }
         
-//        var supportSourceTypes: [OWStringValidator.ValidationSourceType] {
-//            switch self {
-//            case .general(let type):
-//                return [
-//                    .withdrawal(type: type),
-//                    .privateKey(type: type),
-//                    .mnemonic(type: type),
-//                    .addressBook(type: type)
-//                ]
-//            case .importWallet(let type):
-//                return [
-//                    .privateKey(type: type),
-//                    .mnemonic(type: type)
-//                ]
-//            case .addContacts(let type):
-//                return [ .addressBook(type: type) ]
-//            case .withdrawal(let type):
-//                return [ .withdrawal(type: type) ]
-//            case .restoreIdentity:
-//                return [ .mnemonic(type: nil) ]
-//            }
-//        }
+        //        var supportSourceTypes: [OWStringValidator.ValidationSourceType] {
+        //            switch self {
+        //            case .general(let type):
+        //                return [
+        //                    .withdrawal(type: type),
+        //                    .privateKey(type: type),
+        //                    .mnemonic(type: type),
+        //                    .addressBook(type: type)
+        //                ]
+        //            case .importWallet(let type):
+        //                return [
+        //                    .privateKey(type: type),
+        //                    .mnemonic(type: type)
+        //                ]
+        //            case .addContacts(let type):
+        //                return [ .addressBook(type: type) ]
+        //            case .withdrawal(let type):
+        //                return [ .withdrawal(type: type) ]
+        //            case .restoreIdentity:
+        //                return [ .mnemonic(type: nil) ]
+        //            }
+        //        }
     }
     
     enum ScanningType {
@@ -112,6 +114,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
         case importWallet
         case contact
         case restoreIdentity
+        case userId
         
         func supportSourceTypes(ofPurpose purpose: Purpose) -> [OWStringValidator.ValidationSourceType] {
             switch self {
@@ -132,6 +135,8 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
                 return [ .addressBook(id: purpose.targetMainCoinID) ]
             case .restoreIdentity:
                 return [ .identityQRCode ]
+            case .userId:
+                return [ .userId ]
             }
         }
     }
@@ -178,10 +183,10 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
             OWQRCodeViewModel.InputSource(
                 validationTypesSource: sourceChoose
                     .startWith(
-                    constructor.purpose.scanningType
-                        .supportSourceTypes(
-                            ofPurpose: constructor.purpose)
-                        )
+                        constructor.purpose.scanningType
+                            .supportSourceTypes(
+                                ofPurpose: constructor.purpose)
+                )
             ),
             output:
             OWQRCodeViewModel.OutputSource(
@@ -204,13 +209,15 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
             moveIndicator(toBtn: importWalletBtn, animated: false)
         case .withdrawal:
             moveIndicator(toBtn: withdrawalBtn, animated: false)
+        case .userId:
+            moveIndicator(toBtn: withdrawalBtn, animated: false)
         }
-    
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
     }
@@ -221,7 +228,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
             moveIndicator(toBtn: btn, animated: false)
         }
     }
-
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if let btn = focusingBtn, indicator.center.x != btn.center.x || indicator.center.y != btn.frame.maxY + 12 {
@@ -241,7 +248,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
     override func configureLayout() {
         super.configureLayout()
         cornerLayer = CAShapeLayer.init()
-    
+        
         cornerLayer.lineWidth = lineWidth
         cornerLayer.strokeColor = UIColor.owWhite.cgColor
         cornerLayer.fillColor = UIColor.clear.cgColor
@@ -308,7 +315,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
         
         return path.cgPath.mutableCopy()!
     }
-
+    
     private func leftDownPath(in square: CGRect) -> CGMutablePath {
         let path = UIBezierPath.init()
         let left = CGPoint.init(x: square.minX, y: square.maxY - sideLength)
@@ -354,7 +361,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
         
         return path.cgPath.mutableCopy()!
     }
-
+    
     override func findQRCode(content: String) {
         viewModel.updateNewScannedSource(content)
     }
@@ -390,14 +397,15 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
                 return self.importWalletBtn
             case .withdrawal:
                 return self.withdrawalBtn
+            case .userId: return self.withdrawalBtn
             }
-        }
-        .observeOn(MainScheduler.instance)
-        .subscribe(onNext: {
-            [unowned self] btn in
-            self.moveIndicator(toBtn: btn, animated: true)
-        })
-        .disposed(by: bag)
+            }
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] btn in
+                self.moveIndicator(toBtn: btn, animated: true)
+            })
+            .disposed(by: bag)
     }
     
     override func renderLang(_ lang: Lang) {
@@ -494,7 +502,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
             cancelHandler: nil
         )
     }
-
+    
     private var hud: KLHUD?
     private func startAnalyzeImgQRCodeContent(img: UIImage) {
         let scanner = QRCodeImgScanner.init()
@@ -519,7 +527,6 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
                     self.hud = nil
                     self.presentImgAnalyzeFailedAlert()
                 }
-                
                 return
             }
             
@@ -629,6 +636,9 @@ extension OWQRCodeViewController {
             }
         case .unsupported:
             presentUnsupportWarning(fromResult: result)
+        case .userId:
+            resultCallback?(result, self._purpose, self._scanningType.value)
+            dismiss(animated: true, completion: nil)
         default:
             resultCallback?(result, self._purpose, self._scanningType.value)
         }
@@ -669,7 +679,7 @@ extension OWQRCodeViewController {
                                             style: .cancel,
                                             handler: { (_) in
                                                 result(.success(nil))
-                                            })
+            })
             
             alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)

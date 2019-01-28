@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReceiptRequestViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="coinNameTextField" destination="sbo-2o-OYA" id="EPk-oB-A41"/>
+                <outlet property="coinTitleLabel" destination="aSk-z4-hHu" id="7UW-FU-lZC"/>
+                <outlet property="receiptAmounTextField" destination="PzR-yK-fs8" id="IsC-yQ-7fR"/>
+                <outlet property="receiptAmountLabel" destination="Giw-ae-4pv" id="adP-SU-pXA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSk-z4-hHu">
+                    <rect key="frame" x="20" y="40" width="335" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sbo-2o-OYA">
+                    <rect key="frame" x="20" y="81" width="335" height="17"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-ae-4pv">
+                    <rect key="frame" x="20" y="128" width="335" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PzR-yK-fs8">
+                    <rect key="frame" x="20" y="169" width="335" height="17"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PzR-yK-fs8" secondAttribute="trailing" constant="20" id="1Uw-pI-cp1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Giw-ae-4pv" secondAttribute="trailing" constant="20" id="23v-fL-jKC"/>
+                <constraint firstItem="PzR-yK-fs8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="72D-Xj-XB1"/>
+                <constraint firstItem="aSk-z4-hHu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="84N-fd-fB4"/>
+                <constraint firstItem="sbo-2o-OYA" firstAttribute="top" secondItem="aSk-z4-hHu" secondAttribute="bottom" constant="20" id="AU2-IG-PqU"/>
+                <constraint firstItem="PzR-yK-fs8" firstAttribute="top" secondItem="Giw-ae-4pv" secondAttribute="bottom" constant="20" id="Bm6-SF-YL3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aSk-z4-hHu" secondAttribute="trailing" constant="20" id="ShJ-Ff-B4I"/>
+                <constraint firstItem="Giw-ae-4pv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dex-rG-gcx"/>
+                <constraint firstItem="sbo-2o-OYA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="e9U-9u-L4d"/>
+                <constraint firstItem="aSk-z4-hHu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hYo-H5-9i1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sbo-2o-OYA" secondAttribute="trailing" constant="20" id="jtc-BL-Vg6"/>
+                <constraint firstItem="PzR-yK-fs8" firstAttribute="top" secondItem="Giw-ae-4pv" secondAttribute="bottom" constant="20" id="sMb-5G-8ux"/>
+                <constraint firstItem="Giw-ae-4pv" firstAttribute="top" secondItem="sbo-2o-OYA" secondAttribute="bottom" constant="30" id="xIb-wq-oBx"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

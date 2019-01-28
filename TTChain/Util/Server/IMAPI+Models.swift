@@ -916,6 +916,171 @@ struct IMSendMessageAPIModel:KLJSONMappableMoyaResponse {
 }
 
 
+
+// MARK: - /IM/CreateGroup
+
+struct CreateGroupAPI: KLMoyaIMAPIData {
+    struct Parameters: Paramenter {
+        let groupOwnerUID: String = IMUserManager.manager.userModel.value!.uID
+        let isPrivate: Bool
+        let authToken: String = RocketChatManager.manager.rocketChatUser.value!.authToken
+        let rocketChatUserId: String =  RocketChatManager.manager.rocketChatUser.value!.rocketChatUserId
+        let groupName: String
+        let isPostMsg: Bool
+        let introduction: String
+    }
+    
+    var path: String { return "/IM/CreateGroup" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+    }
+    var stub: Data? { return nil }
+    let parameters: Parameters
+}
+
+struct CreateGroupAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = CreateGroupAPI
+    
+    let groupID: String
+    
+    init(json: JSON, sourceAPI: CreateGroupAPI) throws {
+        guard let groupID = json["groupID"].string else {throw GTServerAPIError.noData }
+        self.groupID = groupID
+    }
+}
+
+// MARK: - /IM/GroupMembers
+
+struct GroupMembersAPI: KLMoyaIMAPIData {
+    struct Parameters: Paramenter {
+        let authToken: String = RocketChatManager.manager.rocketChatUser.value!.authToken
+        let rocketChatUserId: String = RocketChatManager.manager.rocketChatUser.value!.rocketChatUserId
+        let groupID: String
+        let members: [String]
+        let action: Int = 2
+    }
+    
+    var path: String { return "/IM/GroupMembers" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+    }
+    var stub: Data? { return nil }
+    let parameters: Parameters
+}
+
+struct GroupMembersAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = GroupMembersAPI
+    
+    let isSuccess: Bool
+    
+    init(json: JSON, sourceAPI: GroupMembersAPI) throws {
+        guard let response = json.bool else { throw GTServerAPIError.noData }
+        self.isSuccess = response
+    }
+}
+
+// MARK: - /IM/UpdateGroup
+
+struct UpdateGroupAPI: KLMoyaIMAPIData {
+    struct Parameters: Paramenter {
+        let groupID: String
+        let groupName: String
+        let isPostMsg: Bool
+        let introduction: String
+    }
+    
+    var path: String { return "/IM/UpdateGroup" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+    }
+    var stub: Data? { return nil }
+    let parameters: Parameters
+}
+
+struct UpdateGroupAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = UpdateGroupAPI
+    
+    let isSuccess: Bool
+    
+    init(json: JSON, sourceAPI: UpdateGroupAPI) throws {
+        guard let response = json.bool else { throw GTServerAPIError.noData }
+        self.isSuccess = response
+    }
+}
+
+// MARK: - /IM/DeleteGroup
+
+struct DeleteGroupAPI: KLMoyaIMAPIData {
+    struct Parameters: Paramenter {
+        let authToken: String = RocketChatManager.manager.rocketChatUser.value!.authToken
+        let rocketChatUserId: String = RocketChatManager.manager.rocketChatUser.value!.rocketChatUserId
+        let uid: String = IMUserManager.manager.userModel.value!.uID
+        let groupID: String
+        
+        init(userGroupInfoModel: UserGroupInfoModel) {
+            groupID = userGroupInfoModel.groupID
+        }
+    }
+    
+    var path: String { return "/IM/DeleteGroup" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+    }
+    var stub: Data? { return nil }
+    let parameters: Parameters
+}
+
+struct DeleteGroupAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = DeleteGroupAPI
+    
+    let isSuccess: Bool
+    
+    init(json: JSON, sourceAPI: DeleteGroupAPI) throws {
+        guard let response = json.bool else { throw GTServerAPIError.noData }
+        self.isSuccess = response
+    }
+}
+
+// MARK: - /IM/blocklist
+
+struct BlockUserAPI: KLMoyaIMAPIData {
+    
+    struct Parameters: Paramenter {
+        enum Action: String, Codable {
+            case block = "Block"
+            case unblock = "Unblock"
+        }
+        
+        let uid: String
+        let blockedUid: String
+        let action: Action
+    }
+    
+    var path: String { return "/IM/blocklist" }
+    var method: Moya.Method { return .post }
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+    }
+    var stub: Data? { return nil }
+    let parameters: Parameters
+}
+
+struct BlockUserAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = BlockUserAPI
+    
+    let isSuccess: Bool
+    
+    init(json: JSON, sourceAPI: BlockUserAPI) throws {
+        guard let response = json.bool else { throw GTServerAPIError.noData }
+        self.isSuccess = response
+    }
+}
+
+
 //MARK: - ROCKETCHAT API AND MODELS
 
 enum RocketChatAPI: KLMoyaAPISet {
@@ -926,12 +1091,14 @@ enum RocketChatAPI: KLMoyaAPISet {
         case .rocketChatHistory(let api): return api
         case .groupChatHistory(let api): return api
         case .sendChatMessage(let api): return api
+        case .joinPublicGroupRocketChat(let api): return api
         }
     }
     case rocketChatLogin(RocketChatLoginAPI)
     case rocketChatHistory(GetRocketChatMessageHistoryAPI)
     case sendChatMessage(RocketChatSendMessageAPI)
     case groupChatHistory(GetRocketChatGroupMessageHistoryAPI)
+    case joinPublicGroupRocketChat(JoinPubliGroupRocketChatAPI)
 }
 
 //MARK: - /api/v1/login
@@ -1069,12 +1236,13 @@ struct  GetRocketChatMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
                 let userDict = jsonDict["u"].dictionary,
                 let userId = userDict["_id"]?.string,
                 let name = userDict["name"]?.string,
-                let userName = userDict["username"]?.string,
-                let msgType = jsonDict["msgType"].string,
-                let messageType = MessageType.init(rawValue: msgType)
+                let userName = userDict["username"]?.string
                 else {
                     return nil
             }
+            
+            let msgType = jsonDict["msgType"].string ?? "general"
+            let messageType = MessageType.init(rawValue: msgType)
             var msg:String = ""
             if messageType == .file {
                 if let url = jsonDict["msg"].string  {
@@ -1090,12 +1258,13 @@ struct  GetRocketChatMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
             }
             
             let date = DateFormatter.date(from: timeStampString, withFormat: C.IMDateFormat.dateFormatForIM)
-            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: msg, senderId:userId, senderName:name, timestamp: date!, messageType: messageType, userName:userName)
+            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: msg, senderId:userId, senderName:name, timestamp: date!, messageType: messageType!, userName:userName)
             return messageModel
         })
         
-        typealias API = GetRocketChatMessageHistoryAPI
     }
+    typealias API = GetRocketChatMessageHistoryAPI
+
 }
 
 
@@ -1149,169 +1318,39 @@ struct  GetRocketChatGroupMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
             return messageModel
         })
         
-        typealias API = GetRocketChatGroupMessageHistoryAPI
     }
+    typealias API = GetRocketChatGroupMessageHistoryAPI
+
 }
 
-// MARK: - /IM/CreateGroup
 
-struct CreateGroupAPI: KLMoyaIMAPIData {
-    struct Parameters: Paramenter {
-        let groupOwnerUID: String = IMUserManager.manager.userModel.value!.uID
-        let isPrivate: Bool
-        let authToken: String = RocketChatManager.manager.rocketChatUser.value!.authToken
-        let rocketChatUserId: String =  RocketChatManager.manager.rocketChatUser.value!.rocketChatUserId
-        let groupName: String
-        let isPostMsg: Bool
-        let introduction: String
-    }
+//MARK: - /api/v1/channels.join
+
+struct JoinPubliGroupRocketChatAPI:KLMoyaRocketChatAPIData {
+    var rocketChatAuthNeeded: Bool {return true}
     
-    var path: String { return "/IM/CreateGroup" }
+    let roomID: String
+    var path: String {return "/api/v1/channels.join" }
     var method: Moya.Method { return .post }
     var task: Task {
-        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+        return Moya.Task.requestParameters(
+            parameters: ["roomId" : roomID,  "joinCode":"1234"],
+            encoding: JSONEncoding.default
+        )
     }
-    var stub: Data? { return nil }
-    let parameters: Parameters
+    var stub: Data? {return nil}
 }
 
-struct CreateGroupAPIModel: KLJSONMappableMoyaResponse {
-    typealias API = CreateGroupAPI
-    
-    let groupID: String
-    
-    init(json: JSON, sourceAPI: CreateGroupAPI) throws {
-        guard let groupID = json["groupID"].string else {throw GTServerAPIError.noData }
-        self.groupID = groupID
-    }
-}
 
-// MARK: - /IM/GroupMemebers
-
-struct GroupMembersAPI: KLMoyaIMAPIData {
-    struct Parameters: Paramenter {
-        let authToken: String = RocketChatManager.manager.rocketChatUser.value!.authToken
-        let rocketChatUserId: String = RocketChatManager.manager.rocketChatUser.value!.rocketChatUserId
-        let groupID: String
-        let members: [String]
-        let action: Int = 2
-    }
+struct  JoinPubliGroupRocketChatAPIModel:KLJSONMappableMoyaResponse {
     
-    var path: String { return "/IM/GroupMemebers" }
-    var method: Moya.Method { return .post }
-    var task: Task {
-        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
-    }
-    var stub: Data? { return nil }
-    let parameters: Parameters
-}
-
-struct GroupMembersAPIModel: KLJSONMappableMoyaResponse {
-    typealias API = GroupMembersAPI
-    
-    let isSuccess: Bool
-    
-    init(json: JSON, sourceAPI: GroupMembersAPI) throws {
-        guard let response = json.bool else { throw GTServerAPIError.noData }
-        self.isSuccess = response
-    }
-}
-
-// MARK: - /IM/UpdateGroup
-
-struct UpdateGroupAPI: KLMoyaIMAPIData {
-    struct Parameters: Paramenter {
-        let groupID: String
-        let groupName: String
-        let isPostMsg: Bool
-        let introduction: String
-    }
-    
-    var path: String { return "/IM/UpdateGroup" }
-    var method: Moya.Method { return .post }
-    var task: Task {
-        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
-    }
-    var stub: Data? { return nil }
-    let parameters: Parameters
-}
-
-struct UpdateGroupAPIModel: KLJSONMappableMoyaResponse {
-    typealias API = UpdateGroupAPI
-    
-    let isSuccess: Bool
-    
-    init(json: JSON, sourceAPI: UpdateGroupAPI) throws {
-        guard let response = json.bool else { throw GTServerAPIError.noData }
-        self.isSuccess = response
-    }
-}
-
-// MARK: - /IM/DeleteGroup
-
-struct DeleteGroupAPI: KLMoyaIMAPIData {
-    struct Parameters: Paramenter {
-        let authToken: String = RocketChatManager.manager.rocketChatUser.value!.authToken
-        let rocketChatUserId: String = RocketChatManager.manager.rocketChatUser.value!.rocketChatUserId
-        let uid: String = IMUserManager.manager.userModel.value!.uID
-        let groupID: String
-        
-        init(userGroupInfoModel: UserGroupInfoModel) {
-            groupID = userGroupInfoModel.groupID
+    typealias API = JoinPubliGroupRocketChatAPI
+    init(json: JSON, sourceAPI: JoinPubliGroupRocketChatAPI) throws {
+        guard let channel = json["channel"].dictionary else {
+             throw GTServerAPIError.noData
         }
-    }
-    
-    var path: String { return "/IM/DeleteGroup" }
-    var method: Moya.Method { return .post }
-    var task: Task {
-        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
-    }
-    var stub: Data? { return nil }
-    let parameters: Parameters
-}
-
-struct DeleteGroupAPIModel: KLJSONMappableMoyaResponse {
-    typealias API = DeleteGroupAPI
-    
-    let isSuccess: Bool
-    
-    init(json: JSON, sourceAPI: DeleteGroupAPI) throws {
-        guard let response = json.bool else { throw GTServerAPIError.noData }
-        self.isSuccess = response
-    }
-}
-
-// MARK: - /IM/blocklist
-
-struct BlockUserAPI: KLMoyaIMAPIData {
-    
-    struct Parameters: Paramenter {
-        enum Action: String, Codable {
-            case block = "Block"
-            case unblock = "Unblock"
+        if channel["_id"]?.string == sourceAPI.roomID {
+            print(sourceAPI.roomID)
         }
-        
-        let uid: String
-        let blockedUid: String
-        let action: Action
-    }
-    
-    var path: String { return "/IM/blocklist" }
-    var method: Moya.Method { return .post }
-    var task: Task {
-        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
-    }
-    var stub: Data? { return nil }
-    let parameters: Parameters
-}
-
-struct BlockUserAPIModel: KLJSONMappableMoyaResponse {
-    typealias API = BlockUserAPI
-    
-    let isSuccess: Bool
-    
-    init(json: JSON, sourceAPI: BlockUserAPI) throws {
-        guard let response = json.bool else { throw GTServerAPIError.noData }
-        self.isSuccess = response
     }
 }

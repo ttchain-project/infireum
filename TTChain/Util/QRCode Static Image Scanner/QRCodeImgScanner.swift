@@ -26,6 +26,17 @@ class QRCodeImgScanner {
         return qrCodeMsgs
     }
     
+    public func detectForuserId(_ image: UIImage) -> [String]? {
+        guard let features = detectQRCode(image) else {
+            return nil
+        }
+        let qrCodeMsgs = features.compactMap { (feature) -> String? in
+            guard let str =  (feature as? CIQRCodeFeature)?.messageString else { return nil }
+            return str
+        }
+        return qrCodeMsgs
+    }
+    
     private func detectQRCode(_ image: UIImage) -> [CIFeature]? {
         guard let ciImage = CIImage.init(image: image) else { return nil }
         

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 final class InviteFriendViewController: KLModuleViewController, KLVMVC {
-
+    
     @IBOutlet weak var userNameLabel: UILabel! {
         didSet { userNameLabel.text = nil }
     }
@@ -21,26 +21,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         didSet {
             textField.rx.text.orEmpty.skip(1).throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged().subscribe(onNext: {
                 [unowned self] text in
-                guard let uid = IMUserManager.manager.userModel.value?.uID, let _ = UUID(uuidString: text) else {
-                    self.userImageView.image = nil
-                    self.userNameLabel.text = nil
-                    self.confirmButton.isEnabled = false
-                    self.confirmButton.backgroundColor = UIColor.owSilver
-                    return
-                }
-                self.searchUserBag = DisposeBag()
-                Server.instance.searchUser(uid: uid, targetUid: text).asObservable().subscribe(onNext: {
-                    [weak self] result in
-                    guard let `self` = self else { return }
-                    switch result {
-                    case .success(let value):
-                        self.userImageView.image = value.imUser.headImg
-                        self.userNameLabel.text = value.imUser.nickName
-                        self.confirmButton.isEnabled = !(value.isFriend || value.isBlock)
-                        self.confirmButton.backgroundColor = self.confirmButton.isEnabled ? UIColor.owAzure : UIColor.owSilver
-                    case .failed(error: let error): EZToast.present(on: self, content: error.localizedDescription)
-                    }
-                }).disposed(by: self.searchUserBag)
+                self.searchUser(text: text)
             }).disposed(by: bag)
         }
     }
@@ -62,42 +43,70 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         viewModel = InviteFriendViewModel.init(input: InviteFriendViewModel.Input(), output: InviteFriendViewModel.Output())
     }
     
+    private func searchUser(text: String) {
+        guard let uid = IMUserManager.manager.userModel.value?.uID, let _ = UUID(uuidString: text) else {
+            userImageView.image = nil
+            userNameLabel.text = nil
+            confirmButton.isEnabled = false
+            confirmButton.backgroundColor = UIColor.owSilver
+            return
+        }
+        self.searchUserBag = DisposeBag()
+        Server.instance.searchUser(uid: uid, targetUid: text).asObservable().subscribe(onNext: {
+            [weak self] result in
+            guard let `self` = self else { return }
+            switch result {
+            case .success(let value):
+                self.userImageView.image = value.imUser.headImg
+                self.userNameLabel.text = value.imUser.nickName
+                self.confirmButton.isEnabled = !(value.isFriend || value.isBlock)
+                self.confirmButton.backgroundColor = self.confirmButton.isEnabled ? UIColor.owAzure : UIColor.owSilver
+            case .failed(error: let error): EZToast.present(on: self, content: error.localizedDescription)
+            }
+        }).disposed(by: searchUserBag)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem()
         tabBarController?.tabBar.isHidden = true
         textField.text = String()
         startMonitorLangIfNeeded()
-        startMonitorThemeIfNeeded()
         qrcodeButton.rx.tap.asDriver().drive(onNext: { (button) in
             //
-//            let viewController = OWQRCodeViewController()
-//            viewController.navigationController?.navigationBar.backIndicatorImage = UIImage()
-//            viewController.title = "掃碼"
-////            viewController.scanningType
-//            self.show(viewController, sender: self)
+            //            let viewController = OWQRCodeViewController()
+            //            viewController.navigationController?.navigationBar.backIndicatorImage = UIImage()
+            //            viewController.title = "掃碼"
+            ////            viewController.scanningType
+            //            self.show(viewController, sender: self)
             
-//            OWQRCodeViewController._Constructor.init(purpose: OWQRCodeViewController.Purpose.restoreIdentity, resultCallback: <#T##OWQRCodeViewController.ResultCallback##OWQRCodeViewController.ResultCallback##(OWStringValidator.ValidationResultType, OWQRCodeViewController.Purpose, OWQRCodeViewController.ScanningType) -> Void#>, isTypeLocked: <#T##Bool#>)
+            //            OWQRCodeViewController._Constructor.init(purpose: OWQRCodeViewController.Purpose.restoreIdentity, resultCallback: <#T##OWQRCodeViewController.ResultCallback##OWQRCodeViewController.ResultCallback##(OWStringValidator.ValidationResultType, OWQRCodeViewController.Purpose, OWQRCodeViewController.ScanningType) -> Void#>, isTypeLocked: <#T##Bool#>)
             let qrCode = OWQRCodeViewController.navInstance(from: OWQRCodeViewController._Constructor(
-                purpose: .general(nil),
+                purpose: .userId,
                 resultCallback: { [weak self]
                     (result, purpose, scanningType) in
                     print(result)
                     print(purpose)
                     print(scanningType)
-//                    switch result {
-//                    case .identityQRCode(rawContent: let raw):
-//
-////                        self.qrCodeVCNav?.dismiss(animated: true, completion: {
-////                            self?.startQRCodeDecryptionFlow(withRawContent: raw)
-////                        })
-//                    default: break
-//                    }
+                    switch result {
+                    case .userId(let id):
+                        self?.textField.text = id
+                        self?.searchUser(text: id)
+                    default: return
+                    }
+                    //                    switch result {
+                    //                    case .identityQRCode(rawContent: let raw):
+                    //
+                    ////                        self.qrCodeVCNav?.dismiss(animated: true, completion: {
+                    ////                            self?.startQRCodeDecryptionFlow(withRawContent: raw)
+                    ////                        })
+                    //                    default: break
+                    //                    }
                 },
                 isTypeLocked: true
             ))
             
-//            qrCodeVCNav = qrCode
+            //            qrCodeVCNav = qrCode
             self.present(qrCode, animated: true, completion: nil)
             
         }).disposed(by: bag)
@@ -123,12 +132,6 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         title = lang.dls.add_friend_title
     }
     
-    override func renderTheme(_ theme: Theme) {
-        let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bg_2)
-        renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 15))
-        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
-    }
     func showStep1AlertDialog() {
         let alertController = UIAlertController.init(title: LM.dls.add_friend_alert_title, message: LM.dls.add_friend_alert_message, preferredStyle: .alert)
         
@@ -146,7 +149,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         
         present(alertController, animated: true, completion: nil)
     }
-
+    
     func showStep2AlertDialog(rocketChatUID: String, welcomeMessage: String) {
         guard let myselfRocketChatUID = RocketChatManager.manager.rocketChatUser.value?.name else { return }
         inviteBag = DisposeBag()
@@ -157,7 +160,8 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
             case .success: self.showAlert(title: LM.dls.add_friend_alert_success, message: nil, completion: { [weak self] (_) in
                 self?.navigationController?.popViewController()
             })
-            case .failed(error: let error): EZToast.present(on: self, content: error.localizedDescription)
+            case .failed(error: let error):
+                EZToast.present(on: self, content: error.localizedDescription)
             }
         }).disposed(by: inviteBag)
     }

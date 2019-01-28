@@ -368,8 +368,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
-//            self.didUpdateProfileImage = true
-//            self.profileImageView.image = resizedImg
             self.viewModel.sendImageAsMessage(image:resizedImg)
             picker.dismiss(animated: true, completion: nil)
         }

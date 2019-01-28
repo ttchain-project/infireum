@@ -41,9 +41,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         
         case addPhoto = 0
         case openCamera = 1
-        case addVideo = 2
-        case startSecretChat = 3
-        case addRedEnvelope
+        case startSecretChat = 2
+        case addReceipt
         case makeAudioCall
         case makeVideoCall
     }
@@ -79,8 +78,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     let functions: [FunctionModel] = [
                                       FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
                                       FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
-                                      FunctionModel.init(title: "影片", image: UIImage(named: "iconFilmColor"), type: .addVideo),
-                                      FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat)
+                                      FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat),
+                                       FunctionModel.init(title: "Receipt", image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt)
 ]
     
     //TODO: Change this implementation, looks very lame :-\

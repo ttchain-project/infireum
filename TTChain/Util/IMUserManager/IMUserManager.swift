@@ -118,7 +118,7 @@ class IMUserManager {
         Server.instance.createIMUser(userId: userID, deviceID: deviceId, nickName: user.name ?? "", headImg: "", introduction: "").asObservable().subscribe(onNext: {[weak self] (result) in
             switch result {
             case .success(let model):
-                let userModel = IMUser.init(uID: model.uID, nickName: "", introduction: "", headImg: nil)
+                let userModel = IMUser.init(uID: model.uID, nickName: user.name ?? "", introduction: "", headImg: nil)
                 self?.userModel = BehaviorRelay.init(value: userModel)
                 self?.shouldLoginToRocketChat.onNext(())
                 self?.saveIMUser()

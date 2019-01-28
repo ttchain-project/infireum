@@ -2240,7 +2240,11 @@ struct CoinsTestAPIModel: KLJSONMappableMoyaResponse {
 
 
 //MARK: - GET /Fiats
-struct FiatsAPI: KLMoyaLangAPIData {
+struct FiatsAPI: KLMoyaAPIData {
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
     var path: String { return "/Fiats" }
     var method: Moya.Method { return .get }
     

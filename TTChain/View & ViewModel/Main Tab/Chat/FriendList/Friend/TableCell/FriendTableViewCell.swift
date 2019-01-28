@@ -16,13 +16,16 @@ class FriendTableViewCell: UITableViewCell {
     
     var friendModel: FriendInfoModel? {
         didSet {
-            
-            if friendModel?.avatar == nil {
-                self.avatarImageView.image = ImageUntil.drawAvatar(text: friendModel?.nickName ?? "A")
-            }else {
-                self.avatarImageView.image = friendModel?.avatar
+            guard let friendModel = friendModel else {
+                return
             }
-            self.descriptionLabel.text = friendModel?.nickName
+            self.avatarImageView.image = friendModel.avatar
+            if friendModel.avatar == nil, friendModel.avatarUrl == nil {
+                self.avatarImageView.image = ImageUntil.drawAvatar(text: friendModel.nickName)
+            } else {
+                self.avatarImageView.af_setImage(withURL: friendModel.avatarUrl!)
+            }
+            self.descriptionLabel.text = friendModel.nickName
         }
     }
     

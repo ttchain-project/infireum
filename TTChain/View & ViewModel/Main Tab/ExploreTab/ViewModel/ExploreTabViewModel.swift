@@ -33,8 +33,7 @@ class ExploreTabViewModel: KLRxViewModel {
             switch indexpath.section {
             case 0:
                 //ChatGroup
-                self.output.selectedModel(MarketTestHandler.shared.chatGroupArray.value[indexpath.row])
-                print("")
+                self.joinPublicGroup(groupModel: MarketTestHandler.shared.chatGroupArray.value[indexpath.row])
             case 1:
                 //FinNews
                 self.output.selectedModel(MarketTestHandler.shared.finNewsArray.value[indexpath.row])
@@ -90,4 +89,24 @@ class ExploreTabViewModel: KLRxViewModel {
         })
         return source
     }()
+    
+    func joinPublicGroup(groupModel: GroupShortcutModel) {
+        
+        self.output.selectedModel(groupModel)
+//
+//        guard let memberId = IMUserManager.manager.userModel.value?.uID else {
+//            return
+//        }
+//        let parameter = GroupMembersAPI.Parameters.init(groupID: groupModel.content, members: [memberId])
+//        Server.instance.groupMembers(parameters:parameter).asObservable().subscribe(onNext: { (result) in
+//            switch result {
+//            case .failed(error: let error):
+//                print(error)
+//
+//            case .success(_):
+//                self.output.selectedModel(groupModel)
+//            }
+//        }).disposed(by: bag)
+        
+    }
 }

@@ -61,6 +61,10 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
         
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
 
     func configCollectionView() {
         bannerCollectionView.register(BannerCollectionViewCell.nib,
@@ -125,11 +129,11 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
             return cell
         }
         
-
         MarketTestHandler.shared.bannerArray.map { array in
             guard array.count > 0, array[0].items.count > 0 else {
                 return array
             }
+            
             self.pageControl.numberOfPages = array[0].items.count
             return array
             }
@@ -146,7 +150,6 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
                 }
             }
         }).disposed(by: bag)
-        
         
         viewModel.shortcutsDataSource.configureCell = {
             (datasource, cv, indexPath, settingModel) in
@@ -187,8 +190,6 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
                 dataSource: viewModel.marketCoinDataSource)
             )
             .disposed(by: bag)
-        
-        
         
         bannerCollectionView.rx.didScroll.asObservable().subscribe(onNext: { () in
             

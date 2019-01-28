@@ -17,6 +17,7 @@ class OWStringValidator {
         case mnemonic(id: String?)
         case privateKey(id: String?)
         case identityQRCode
+        case userId
     }
     
     enum ValidationResultType {
@@ -30,11 +31,12 @@ class OWStringValidator {
         case privateKey(String, possibleAddresssesInfo: [AddressInfo])
         case identityQRCode(rawContent: String)
         case unsupported(String)
+        case userId(String)
     }
     
-//    static let instance = OWStringValidator.init(
-//        sourceTypes: [.withdrawal(type: nil)]
-//    )
+    //    static let instance = OWStringValidator.init(
+    //        sourceTypes: [.withdrawal(type: nil)]
+    //    )
     
     public var pKeyConvertStopper: Observable<Void> {
         return _pKeyConvertStopper.asObservable()
@@ -90,6 +92,8 @@ class OWStringValidator {
             result = attemptMatchingPrivateKeyType(from: source)
         case .identityQRCode:
             result = attemptMatchingIdentityQRCodeType(from: source)
+        case .userId:
+            result = attemptMatchingUserIdQRCodeType(from: source)
         }
         
         return result
@@ -124,7 +128,7 @@ extension OWStringValidator {
                         }else {
                             return .unsupported(source)
                         }
-                    }
+                }
             case .eth:
                 return isSourceETHAddress(source)
                     .map {
@@ -146,7 +150,7 @@ extension OWStringValidator {
                         }else {
                             return .unsupported(source)
                         }
-                    }
+                }
             }
         }else {
             //Non-specific type detection
@@ -171,8 +175,8 @@ extension OWStringValidator {
                 .flatMap {
                     result -> Single<ValidationResultType> in
                     switch result {
-                        case .unsupported: return ethCheck
-                        default: return Single.just(result)
+                    case .unsupported: return ethCheck
+                    default: return Single.just(result)
                     }
                 }
                 .flatMap {
@@ -181,7 +185,7 @@ extension OWStringValidator {
                     case .unsupported: return cicCheck
                     default: return Single.just(result)
                     }
-                }
+            }
         }
     }
     
@@ -200,6 +204,10 @@ extension OWStringValidator {
         }else {
             return .just(.unsupported(source))
         }
+    }
+    
+    fileprivate func attemptMatchingUserIdQRCodeType(from source: String) -> Single<ValidationResultType> {
+        return Single.just(ValidationResultType.userId(source))
     }
 }
 
@@ -227,7 +235,13 @@ extension OWStringValidator {
             return "^cx[a-fA-F0-9]{40}$"
         }else if id == Coin.guc_identifier {
             return "^gx[a-fA-F0-9]{40}$"
-        }else {
+        }
+//        else if id == Coin.bnn_identifier {
+//            return "^bnn[a-fA-F0-9]{40}$"
+//        }else if id == Coin.cfp_identifier {
+//            return "^cf[a-fA-F0-9]{40}$"
+//        }
+        else {
             //If system cannot tell the main coin, use this regex as default format.
             return "^[a-zA-Z0-9]{40,}$"
         }
@@ -295,7 +309,7 @@ extension OWStringValidator {
                             }
                             
                             return .init(address: v, mainCoin: c)
-                        }
+                    }
                     
                     guard !infos.isEmpty else { return .unsupported(source) }
                     return ValidationResultType.privateKey(
@@ -303,6 +317,6 @@ extension OWStringValidator {
                         possibleAddresssesInfo: infos
                     )
                 }
-            }
+        }
     }
 }

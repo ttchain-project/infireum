@@ -223,7 +223,6 @@ class BackupWalletMnemonicVerifyViewController: KLModuleViewController {
         present(tab, animated: true, completion: {
             IMUserManager.launch()
             MarketTestHandler.shared.launch()
-
         })
     }
     

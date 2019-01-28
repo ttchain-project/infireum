@@ -21,6 +21,7 @@ class FriendRequestInformationModel: FriendModel {
     var nickName: String = ""
     var message: String = ""
     var avatar: UIImage?
+    var avatarUrl: URL?
     
     init(invitationID: Int = 0, uid: String = "", nickName: String = "", message: String = "",headShotImage :String? = nil) {
         self.invitationID = invitationID
@@ -31,6 +32,7 @@ class FriendRequestInformationModel: FriendModel {
             guard let url = URL.init(string: headShotImage!) else {
                 return
             }
+            self.avatarUrl = url
             KLRxImageDownloader.instance.download(source: url) {
                 result in
                 switch result {
@@ -57,7 +59,8 @@ class FriendInfoModel: FriendModel {
     var uid: String = ""
     var nickName: String = ""
     var roomId: String = ""
-    
+    var avatarUrl: URL?
+
     init(uid: String = "", nickName: String = "", roomId: String = "", headhShotImgString: String = "") {
         self.uid = uid
         self.nickName = nickName
@@ -66,6 +69,7 @@ class FriendInfoModel: FriendModel {
             guard let url = URL.init(string: headhShotImgString) else {
                 return
             }
+            self.avatarUrl = url
             KLRxImageDownloader.instance.download(source: url) {
                 result in
                 switch result {

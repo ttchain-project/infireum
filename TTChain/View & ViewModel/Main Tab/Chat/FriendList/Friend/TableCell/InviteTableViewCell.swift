@@ -27,8 +27,10 @@ class InviteTableViewCell: UITableViewCell {
             self.nameLabel.text = friendRequestModel.nickName
             self.resumeLabel.text = friendRequestModel.message
             
-            if friendRequestModel.avatar == nil {
+            if friendRequestModel.avatar == nil, friendRequestModel.avatarUrl == nil {
                 self.avatarImageView.image = ImageUntil.drawAvatar(text: friendRequestModel.nickName)
+            } else {
+                self.avatarImageView.af_setImage(withURL: friendRequestModel.avatarUrl!)
             }
         }
     }

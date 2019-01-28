@@ -142,6 +142,12 @@
 		559CB0E2218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E3218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E4218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
+		55AADEF921FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */; };
+		55AADEFA21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */; };
+		55AADEFB21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */; };
+		55AADEFC21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */; };
+		55AADEFD21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */; };
+		55AADEFE21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */; };
 		55BB1B40218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B41218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B42218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
@@ -1770,6 +1776,8 @@
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
 		557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestTabModel.swift; sourceTree = "<group>"; };
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
+		55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewController.swift; sourceTree = "<group>"; };
+		55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptRequestViewController.xib; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -2559,6 +2567,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		55AADEF621FF109800F403C8 /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+				55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */,
+				55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */,
+			);
+			path = Receipt;
+			sourceTree = "<group>";
+		};
 		55BB1B3D218FDC410061F189 /* ExploreTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -2705,6 +2722,7 @@
 		55EF69EE21A812C5007E074A /* Extend Function Menu */ = {
 			isa = PBXGroup;
 			children = (
+				55AADEF621FF109800F403C8 /* Receipt */,
 				55EF69EF21A812C5007E074A /* ChatExtendFunctionMenuViewController.swift */,
 				55EF69F021A812C5007E074A /* ChatExtendFunctionMenuViewController.xib */,
 				55EF69F121A812C5007E074A /* Create Group */,
@@ -5531,6 +5549,7 @@
 				5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */,
 				55EF6AB621A812C6007E074A /* MyQRCodeViewController.xib in Resources */,
 				649E485120E7D98100B217AD /* SystemWalletTableHeaderView.xib in Resources */,
+				55AADEFE21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */,
 				55EF6A9521A812C6007E074A /* SearchMemberViewController.xib in Resources */,
 				64C9D4AD21042F5B000B0774 /* LocalAuthViewController.xib in Resources */,
 				55E730792186F33B003AE47E /* WalletOptionsViewController.xib in Resources */,
@@ -5673,6 +5692,7 @@
 				6424B64B20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.xib in Resources */,
 				6446E23020FC966800EC1E2E /* SettingsViewController.xib in Resources */,
 				55EF6A3F21A812C6007E074A /* ChatHistoryTableViewCell.xib in Resources */,
+				55AADEFC21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */,
 				55EF6A6021A812C6007E074A /* KeyboardFunctionCollectionViewCell.xib in Resources */,
 				643200E920FB8CB700B11334 /* MeViewController.xib in Resources */,
 				55E730772186F33B003AE47E /* WalletOptionsViewController.xib in Resources */,
@@ -5822,6 +5842,7 @@
 				6424B64C20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.xib in Resources */,
 				6446E23120FC966800EC1E2E /* SettingsViewController.xib in Resources */,
 				55EF6A4021A812C6007E074A /* ChatHistoryTableViewCell.xib in Resources */,
+				55AADEFD21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */,
 				55EF6A6121A812C6007E074A /* KeyboardFunctionCollectionViewCell.xib in Resources */,
 				643200EA20FB8CB700B11334 /* MeViewController.xib in Resources */,
 				55E730782186F33B003AE47E /* WalletOptionsViewController.xib in Resources */,
@@ -6375,6 +6396,7 @@
 				55E7307F21880FC8003AE47E /* WalletOptionsViewModel.swift in Sources */,
 				649732DE213FF38E00C4D1D5 /* MainCoinTypeStorage.swift in Sources */,
 				649732D5213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataProperties.swift in Sources */,
+				55AADEFB21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				64813A3C20DCA6EE00CAA4D8 /* SubAddress+CoreDataProperties.swift in Sources */,
 				55EF6B2E21A81500007E074A /* LocalIMUser.swift in Sources */,
 				64C9D42D20FD98BC000B0774 /* AddressBookUnit+Helper.swift in Sources */,
@@ -6812,6 +6834,7 @@
 				6470D67820F32B7700EB0780 /* WithdrawalConfirmChangeWalletViewModel.swift in Sources */,
 				64F07E1520D241A000A60C5C /* UIApplication+Top.swift in Sources */,
 				649732DC213FF38E00C4D1D5 /* MainCoinTypeStorage.swift in Sources */,
+				55AADEF921FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				649732D3213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataProperties.swift in Sources */,
 				64813A7E20DCADEB00CAA4D8 /* Asset+Helper.swift in Sources */,
 				55EF6B2C21A81500007E074A /* LocalIMUser.swift in Sources */,
@@ -7242,6 +7265,7 @@
 				649732DD213FF38E00C4D1D5 /* MainCoinTypeStorage.swift in Sources */,
 				649732D4213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataProperties.swift in Sources */,
 				649E48B720ECE79600B217AD /* WalletPrivateKeyInfoViewController.swift in Sources */,
+				55AADEFA21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				64813A7720DCA6EE00CAA4D8 /* CoinRate+CoreDataProperties.swift in Sources */,
 				55EF6B2D21A81500007E074A /* LocalIMUser.swift in Sources */,
 				55E7306E2186E57F003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
@@ -7736,7 +7760,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_beta;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
@@ -7761,7 +7785,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F630B72BFE309FD5E439D675 /* Pods-TTChain.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_beta;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
@@ -7882,7 +7906,7 @@
 			baseConfigurationReference = 2D016C577E961DD6B360E8EE /* Pods-TTChain_UAT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_UAT-Info.plist";
@@ -7896,7 +7920,7 @@
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "TTChain UAT";
 				PROVISIONING_PROFILE = "ea62f369-2c3e-4536-9abc-5bd2822faf77";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain-UAT";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -659,8 +659,8 @@
         let api = UploadFileAPI.init(parameters: parameters)
         return fire(router: .IM(.uploadFile(api)))
     }
-    //MARK: - POST /IM/SendMessage
     
+    //MARK: - POST /IM/SendMessage
     func sendMessage(parameters:IMSendMessageAPI.Parameter) -> RxAPIResponse<IMSendMessageAPIModel> {
         let api = IMSendMessageAPI.init(parameters: parameters)
         return fire(router: .IM(.sendMessage(api)))
@@ -690,6 +690,10 @@
         return fire(router: .rocketChat(.sendChatMessage(api)))
     }
     
+    func joinPublicGroup(groupID: String) -> RxAPIResponse<JoinPubliGroupRocketChatAPIModel> {
+        let api = JoinPubliGroupRocketChatAPI(roomID: groupID)
+        return fire(router: .rocketChat(.joinPublicGroupRocketChat(api)))
+    }
  }
  
  
