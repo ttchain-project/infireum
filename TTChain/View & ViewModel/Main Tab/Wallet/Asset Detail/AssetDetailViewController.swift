@@ -229,7 +229,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     private func toWithdrawal(with asset: Asset) {
         switch asset.wallet!.owChainType {
         case .btc, .eth:
-            let nav = WithdrawalBaseViewController.navInstance(from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil))
+            let nav = WithdrawalBaseViewController.navInstance(from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil,defaultAmount:nil))
             present(nav, animated: true, completion: nil)
         case .cic:
             OWRxNotificationCenter.instance

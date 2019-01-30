@@ -148,6 +148,15 @@
 		55AADEFC21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */; };
 		55AADEFD21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */; };
 		55AADEFE21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */; };
+		55AADF0121FFFB8700F403C8 /* ReceiptRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF0021FFFB8700F403C8 /* ReceiptRequestViewModel.swift */; };
+		55AADF0221FFFB8700F403C8 /* ReceiptRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF0021FFFB8700F403C8 /* ReceiptRequestViewModel.swift */; };
+		55AADF0321FFFB8700F403C8 /* ReceiptRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF0021FFFB8700F403C8 /* ReceiptRequestViewModel.swift */; };
+		55AADF0722004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF0522004ED900F403C8 /* ReceiptTableViewCell.swift */; };
+		55AADF0822004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF0522004ED900F403C8 /* ReceiptTableViewCell.swift */; };
+		55AADF0922004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF0522004ED900F403C8 /* ReceiptTableViewCell.swift */; };
+		55AADF0A22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */; };
+		55AADF0B22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */; };
+		55AADF0C22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */; };
 		55BB1B40218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B41218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B42218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
@@ -1778,6 +1787,9 @@
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
 		55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewController.swift; sourceTree = "<group>"; };
 		55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptRequestViewController.xib; sourceTree = "<group>"; };
+		55AADF0021FFFB8700F403C8 /* ReceiptRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewModel.swift; sourceTree = "<group>"; };
+		55AADF0522004ED900F403C8 /* ReceiptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptTableViewCell.swift; sourceTree = "<group>"; };
+		55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptTableViewCell.xib; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -2570,10 +2582,32 @@
 		55AADEF621FF109800F403C8 /* Receipt */ = {
 			isa = PBXGroup;
 			children = (
+				55AADEFF21FFFB7000F403C8 /* ViewModel */,
 				55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */,
 				55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */,
 			);
 			path = Receipt;
+			sourceTree = "<group>";
+		};
+		55AADEFF21FFFB7000F403C8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				55AADF0021FFFB8700F403C8 /* ReceiptRequestViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		55AADF0422004E6000F403C8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				55EF69DA21A812C5007E074A /* ChatMessageTableViewCell.swift */,
+				55EF69DB21A812C5007E074A /* ChatMessageTableViewCell.xib */,
+				55F70E4721F986E400B5ED75 /* ChatMessageImageTableViewCell.swift */,
+				55F70E4821F986E400B5ED75 /* ChatMessageImageTableViewCell.xib */,
+				55AADF0522004ED900F403C8 /* ReceiptTableViewCell.swift */,
+				55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		55BB1B3D218FDC410061F189 /* ExploreTab */ = {
@@ -2661,6 +2695,7 @@
 		55EF69D821A812C5007E074A /* ChatDetail */ = {
 			isa = PBXGroup;
 			children = (
+				55AADF0422004E6000F403C8 /* Cell */,
 				55EF69D921A812C5007E074A /* Chat Asset */,
 				55EF69E121A812C5007E074A /* ChatViewController.swift */,
 				55EF69E221A812C5007E074A /* ChatViewController.xib */,
@@ -2673,11 +2708,7 @@
 		55EF69D921A812C5007E074A /* Chat Asset */ = {
 			isa = PBXGroup;
 			children = (
-				55EF69DA21A812C5007E074A /* ChatMessageTableViewCell.swift */,
-				55EF69DB21A812C5007E074A /* ChatMessageTableViewCell.xib */,
 				55EF69DC21A812C5007E074A /* Private Chat Setting */,
-				55F70E4721F986E400B5ED75 /* ChatMessageImageTableViewCell.swift */,
-				55F70E4821F986E400B5ED75 /* ChatMessageImageTableViewCell.xib */,
 			);
 			path = "Chat Asset";
 			sourceTree = "<group>";
@@ -5538,6 +5569,7 @@
 				643200EB20FB8CB700B11334 /* MeViewController.xib in Resources */,
 				6424B63920F4E3FF00AEBCAD /* TransferRecordInfoBarViewController.xib in Resources */,
 				6485006120DA488000107473 /* OWMnemonicViewController.xib in Resources */,
+				55AADF0C22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */,
 				64D8266320E22F4300C8FC63 /* ManageAssetViewController.xib in Resources */,
 				645619232150D339001092E5 /* ImportWalletTypeChooseViewController.xib in Resources */,
 				5569803D2188566F00346757 /* TTChain_SIT-Info.plist in Resources */,
@@ -5739,6 +5771,7 @@
 				6424B69B20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.xib in Resources */,
 				6470D66D20F2565700EB0780 /* WithdrawalBTCInfoOverviewViewController.xib in Resources */,
 				64C9D4CE21044D7B000B0774 /* WithdrawalCICFeeInfoQuickModeViewController.xib in Resources */,
+				55AADF0A22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */,
 				64D8265820E0E1F600C8FC63 /* ChangeAssetTableViewCell.xib in Resources */,
 				6EB422F121635B8C00DF75DB /* AgreementMeViewController.xib in Resources */,
 				640D890220EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
@@ -5889,6 +5922,7 @@
 				6424B69C20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.xib in Resources */,
 				6470D66E20F2565700EB0780 /* WithdrawalBTCInfoOverviewViewController.xib in Resources */,
 				64C9D4CF21044D7B000B0774 /* WithdrawalCICFeeInfoQuickModeViewController.xib in Resources */,
+				55AADF0B22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */,
 				64D8265920E0E1F600C8FC63 /* ChangeAssetTableViewCell.xib in Resources */,
 				6EB422F221635B8C00DF75DB /* AgreementMeViewController.xib in Resources */,
 				640D890320EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
@@ -6552,6 +6586,7 @@
 				640D891720EF6A6D0010D986 /* TransRecordListViewModel.swift in Sources */,
 				649E48B820ECE79600B217AD /* WalletPrivateKeyInfoViewController.swift in Sources */,
 				6481397720DA4AF100CAA4D8 /* OWMnemonicViewModel.swift in Sources */,
+				55AADF0321FFFB8700F403C8 /* ReceiptRequestViewModel.swift in Sources */,
 				6470D67A20F32B7700EB0780 /* WithdrawalConfirmChangeWalletViewModel.swift in Sources */,
 				6485005E20DA488000107473 /* OWMnemonicViewController.swift in Sources */,
 				64813A3F20DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataClass.swift in Sources */,
@@ -6598,6 +6633,7 @@
 				649E483C20E7CEED00B217AD /* ChangeWalletViewModel.swift in Sources */,
 				64813A4520DCA6EE00CAA4D8 /* Fiat+CoreDataClass.swift in Sources */,
 				645D4ED3211801EB0052D0E1 /* TokenTxFetcher.swift in Sources */,
+				55AADF0922004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */,
 				64C9D47120FDDFAA000B0774 /* CreatetABUnitAddressViewController.swift in Sources */,
 				645D4E7D211151C00052D0E1 /* ETHTx.swift in Sources */,
 				64F07DFF20D241A000A60C5C /* GTQuickLogExtensions.swift in Sources */,
@@ -6990,6 +7026,7 @@
 				64813A2E20DCA6EE00CAA4D8 /* Language+CoreDataProperties.swift in Sources */,
 				64C9D4DE21044F6D000B0774 /* WithdrawalCICFeeInfoAdvModeViewModel.swift in Sources */,
 				649E485320E7D98E00B217AD /* ImportedWalletTableHeaderView.swift in Sources */,
+				55AADF0121FFFB8700F403C8 /* ReceiptRequestViewModel.swift in Sources */,
 				640D893620F069F80010D986 /* WithdrawalChildVCProtocol.swift in Sources */,
 				64F07DE220D241A000A60C5C /* UIViewController+Visible.swift in Sources */,
 				64F07E0020D241A000A60C5C /* UITableViewCell+CellIdentifier.swift in Sources */,
@@ -7036,6 +7073,7 @@
 				6424B63420F4E3FF00AEBCAD /* TransferRecordInfoBarViewController.swift in Sources */,
 				6EB422F621635F9900DF75DB /* AgreementViewModel.swift in Sources */,
 				64F07DF120D241A000A60C5C /* Formatter+QuickGen.swift in Sources */,
+				55AADF0722004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */,
 				646198C6212D09AD00432D8E /* Localizations.swift in Sources */,
 				64F07DD020D241A000A60C5C /* WindowOrientaionLocker.swift in Sources */,
 				64813A7320DCA6EE00CAA4D8 /* CoinRate+CoreDataClass.swift in Sources */,
@@ -7421,6 +7459,7 @@
 				640D892420F0691B0010D986 /* WithdrawalBaseViewController.swift in Sources */,
 				64C9D4DF21044F6D000B0774 /* WithdrawalCICFeeInfoAdvModeViewModel.swift in Sources */,
 				6470D62320F1024400EB0780 /* ThemeManager.swift in Sources */,
+				55AADF0221FFFB8700F403C8 /* ReceiptRequestViewModel.swift in Sources */,
 				64813ADD20DD22F500CAA4D8 /* MainWalletAssetTableViewCell.swift in Sources */,
 				6470D67920F32B7700EB0780 /* WithdrawalConfirmChangeWalletViewModel.swift in Sources */,
 				64813A7B20DCADD500CAA4D8 /* Identity+Helper.swift in Sources */,
@@ -7467,6 +7506,7 @@
 				6EB422F721635F9900DF75DB /* AgreementViewModel.swift in Sources */,
 				646198C7212D09AD00432D8E /* Localizations.swift in Sources */,
 				64813AB720DCD45A00CAA4D8 /* Language+Helper.swift in Sources */,
+				55AADF0822004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */,
 				64D8266B20E23F5D00C8FC63 /* CoinSelection+Helper.swift in Sources */,
 				64F07E7320D36AFE00A60C5C /* IdentitySetupViewController.swift in Sources */,
 				649E484C20E7D97800B217AD /* SystemWalletTableHeaderView.swift in Sources */,
@@ -7761,6 +7801,7 @@
 			baseConfigurationReference = 67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
@@ -7774,7 +7815,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
 				PRODUCT_NAME = TTChain;
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.OfflineWallet";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain";
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -7799,7 +7840,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
 				PRODUCT_NAME = TTChain;
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.OfflineWallet";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain";
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

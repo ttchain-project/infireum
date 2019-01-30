@@ -31,6 +31,11 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.bag = DisposeBag.init()
+    }
+    
     func setup() {
         
         self.msgImageView.layer.borderWidth = 5.0
@@ -52,6 +57,7 @@ class ChatMessageImageTableViewCell: UITableViewCell {
             self.dateLabel.textAlignment = .left
             self.senderConstraint.isActive = false
             self.receiverConstraint.isActive = true
+            self.profilePics.image = leftImage ?? #imageLiteral(resourceName: "no_image")
         }
         self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)
@@ -60,6 +66,6 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         guard let url = URL.init(string: message.msg) else {
             return
         }
-        self.msgImageView.af_setImage(withURL: url, placeholderImage: UIImage.init())
+        self.msgImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "no_image"))
     }
 }

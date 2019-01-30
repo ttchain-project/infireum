@@ -457,7 +457,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
                 return
             }
             let vc = WithdrawalBaseViewController.navInstance(
-                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: address)
+                from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: address, defaultAmount:nil)
             )
             
             //        if presentingViewController == nil {

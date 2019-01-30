@@ -29,6 +29,7 @@ class GroupMemberModel:FriendModel {
                 switch result {
                 case .failed: warning("Cannot download img from url \(headImg )")
                 case .success(let img):
+                    print("Image downloaded for %@",self.uid)
                     self.avatar  = img
                 }
             }

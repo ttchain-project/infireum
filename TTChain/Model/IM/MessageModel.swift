@@ -7,10 +7,21 @@
 //
 
 import Foundation
-enum MessageType:String {
-    case general = "general"
-    case file = "file"
+enum MessageType {
+    case general
+    case file
+    case receipt(messageDict : [String:String])
+    
+    var messageDict:[String:String] {
+        switch  self {
+        case .general, .file:
+            return [:]
+        case .receipt(messageDict: let dict):
+            return dict
+        }
+    }
 }
+
 class MessageModel {
     
     var messageId: String

@@ -16,6 +16,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
     struct Config {
         let asset: Asset
         let defaultToAddress: String?
+        let defaultAmount: String?
     }
     
     typealias Constructor = Config
@@ -71,6 +72,9 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         addChildViewController(assetVC)
         assetVC.didMove(toParentViewController: self)
         baseScrollView.addSubview(assetVC.view)
+        if let defaultAmount = config.defaultAmount,let amountInDecimal = Decimal.init(string: defaultAmount) {
+            assetVC.viewModel.updateAmt(amountInDecimal)
+        }
         
         constrain(assetVC.view, baseScrollView) { [unowned self] (view, scroll) in
             view.top == scroll.top + 25

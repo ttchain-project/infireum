@@ -1242,9 +1242,17 @@ struct  GetRocketChatMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
             }
             
             let msgType = jsonDict["msgType"].string ?? "general"
-            let messageType = MessageType.init(rawValue: msgType)
+            var messageType : MessageType = {
+                switch msgType {
+                case "file":
+                    return .file
+                default:
+                    return .general
+                }
+            }()
+            
             var msg:String = ""
-            if messageType == .file {
+            if case .file = messageType {
                 if let url = jsonDict["msg"].string  {
                     if let data = url.data(using: .utf8) {
                         let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -1255,10 +1263,20 @@ struct  GetRocketChatMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
                 }
             }else {
                 msg = jsonDict["msg"].string ?? ""
+                if msg.contains("address"),msg.contains("amount"),msg.contains("coinID") {
+                    if let url = jsonDict["msg"].string  {
+                        if let data = url.data(using: .utf8) {
+                            let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                            if dict != nil, dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
+                                messageType = .receipt(messageDict: dict as! [String : String])
+                            }
+                        }
+                    }
+                }
             }
             
             let date = DateFormatter.date(from: timeStampString, withFormat: C.IMDateFormat.dateFormatForIM)
-            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: msg, senderId:userId, senderName:name, timestamp: date!, messageType: messageType!, userName:userName)
+            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: msg, senderId:userId, senderName:name, timestamp: date!, messageType: messageType, userName:userName)
             return messageModel
         })
         
@@ -1306,11 +1324,44 @@ struct  GetRocketChatGroupMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
                 let userDict = jsonDict["u"].dictionary,
                 let userId = userDict["_id"]?.string,
                 let name = userDict["name"]?.string,
-                let userName = userDict["username"]?.string,
-                let msgType = jsonDict["msgType"].string,
-                let messageType = MessageType.init(rawValue: msgType)
+                let userName = userDict["username"]?.string
                 else {
                     return nil
+            }
+            
+            
+            let msgType = jsonDict["msgType"].string ?? "general"
+            var messageType : MessageType = {
+                switch msgType {
+                case "file":
+                    return .file
+                default:
+                    return .general
+                }
+            }()
+            
+            var msg:String = ""
+            if case .file = messageType {
+                if let url = jsonDict["msg"].string  {
+                    if let data = url.data(using: .utf8) {
+                        let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        if dict != nil, dict!["fileUrl"] != nil {
+                            msg = dict!["fileUrl"] as! String
+                        }
+                    }
+                }
+            }else {
+                msg = jsonDict["msg"].string ?? ""
+                if msg.contains("address"),msg.contains("amount"),msg.contains("coinID") {
+                    if let url = jsonDict["msg"].string  {
+                        if let data = url.data(using: .utf8) {
+                            let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                            if dict != nil, dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
+                                messageType = .receipt(messageDict: dict as! [String : String])
+                            }
+                        }
+                    }
+                }
             }
             
             let date = DateFormatter.date(from: timeStampString, withFormat: C.IMDateFormat.dateFormatForIM)

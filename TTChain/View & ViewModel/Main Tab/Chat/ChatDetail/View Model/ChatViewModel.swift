@@ -105,8 +105,15 @@ class ChatViewModel: KLRxViewModel {
     func getFriendsModel(for memberId:String) -> FriendModel? {
         switch self.input.roomType {
         case .group, .channel:
-            let groupMemberModel = self.groupInfoModel.value?.membersArray?.filter { $0.uid == memberId }.first
-            if (groupMemberModel?.isBlocked)! {
+            guard let groupMemberModelArray = self.groupInfoModel.value?.membersArray?.filter({ $0.uid == memberId }) else {
+                return nil
+            }
+            if groupMemberModelArray.count <= 0 {
+                return nil
+            }
+            let groupMemberModel = groupMemberModelArray[0]
+//            let groupMemberModel = self.groupInfoModel.value?.membersArray?.filter { $0.uid == memberId }.first
+            if let isBlocked = groupMemberModel.isBlocked, isBlocked {
                 return nil
             }
             return groupMemberModel
@@ -158,14 +165,33 @@ class ChatViewModel: KLRxViewModel {
             }
         }).disposed(by: bag)
     }
-    
+    func sendReceiptMessage(for walletAddress: String , identifier: String, amount: String) {
+        let message = "{\"address\":\"" + walletAddress + "\",\"amount\":\"" + amount + "\",\"coinID\":\"" + identifier + "\"}"
+       
+        guard let user = IMUserManager.manager.userModel.value else {
+            return
+        }
+        let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID,
+                                                        roomId: self.input.roomID,
+                                                        isGroup: self.input.roomType == .pvtChat ? false : true,
+                                                        msg: message)
+
+        Server.instance.sendMessage(parameters: parameter).asObservable().subscribe(onNext: { (result) in
+            switch result {
+            case .failed(error: let error):
+                DLogError(error)
+            case .success(let message):
+                DLogInfo(message)
+            }
+        }).disposed(by: bag)
+        
+    }
     func sendMessage() {
         var string = self.input.messageText.text
         string = string?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let trimmed = string else {
             return
         }
-        
         guard let user = IMUserManager.manager.userModel.value else {
             return
         }

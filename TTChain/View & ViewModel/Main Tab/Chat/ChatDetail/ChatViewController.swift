@@ -141,7 +141,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     func initTableView() {
         tableView.register(ChatMessageTableViewCell.nib, forCellReuseIdentifier: ChatMessageTableViewCell.nameOfClass)
         tableView.register(ChatMessageImageTableViewCell.nib, forCellReuseIdentifier: ChatMessageImageTableViewCell.nameOfClass)
-
+        tableView.register(ReceiptTableViewCell.nib, forCellReuseIdentifier: ReceiptTableViewCell.nameOfClass)
     }
     
     func bindViewModel() {
@@ -182,6 +182,25 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     self.toUserProfileVC(forFriend: friendModel)
                 })
                 cell = chatImgCell
+            case .receipt :
+                let receiptCell = tv.dequeueReusableCell(withIdentifier: ReceiptTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ReceiptTableViewCell
+                
+                receiptCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
+                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                        return
+                    }
+                    self.toUserProfileVC(forFriend: friendModel)
+                })
+                
+                receiptCell.bgView.rx.klrx_tap.asDriver().drive(onNext: { [weak self] _ in
+                    guard let `self` = self else {
+                        return
+                    }
+                    let dict = messageModel.msgType.messageDict
+                    self.toTransferByReceipt(dict:dict)
+                }).disposed(by: receiptCell.bag)
+                
+                cell = receiptCell
             }
             return cell
         }.disposed(by: bag)
@@ -241,7 +260,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                         return
                                     }
                                     self.displayCamera(forSource: .camera)
-                                    
+                                case .addReceipt:
+                                    self.toAddReciept()
                                 default:
                                     print("Pending implementation")
                                 }
@@ -286,6 +306,30 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func toAddReciept() {
+        let recieptVC = ReceiptRequestViewController.instance()
+        self.navigationController?.pushViewController(recieptVC, animated: true)
+        
+        recieptVC.onSelectingCoin.asObservable().subscribe(onNext: { [unowned self] (walletAddress,identifier,amount) in
+            self.viewModel.sendReceiptMessage(for: walletAddress, identifier: identifier, amount: amount)
+        }).disposed(by: bag)
+    }
+    
+    func toTransferByReceipt(dict : [String:String]) {
+        guard let coinId = dict["coinID"], let address = dict["address"], let amount = dict["amount"] else {
+            return
+        }
+        guard let coin = Coin.getCoin(ofIdentifier: coinId) else {
+            return
+        }
+        guard let asset = Identity.singleton?.getAllAssets(of: coin).first else {
+            return
+        }
+        let config = WithdrawalBaseViewController.Config.init(asset: asset, defaultToAddress: address, defaultAmount: amount)
+        
+        let vc = WithdrawalBaseViewController.instance(from: config)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     fileprivate func displayCamera(forSource sourceType:UIImagePickerController.SourceType ) {
         

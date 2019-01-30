@@ -36,11 +36,15 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         selectionStyle = .none
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.bag = DisposeBag.init()
+    }
     func setupUI () {
         leftSpeakerContentView.backgroundColor = .clear
-        leftAvatarImageView.layer.cornerRadius = 15.0
+        leftAvatarImageView.layer.cornerRadius = 20.0
         leftAvatarImageView.layer.masksToBounds = true
-        leftValueContentView.backgroundColor = .owWhiteTwo
+        leftValueContentView.backgroundColor = .white
         leftValueContentView.layer.cornerRadius = 5.0
         leftValueContentView.layer.masksToBounds = true
         
@@ -83,7 +87,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     private func configForLeft(message:MessageModel,leftImage: UIImage?) {
         self.leftMessageLabel.text = message.msg
         self.leftDateLabel.text = message.timestamp.string()
-        self.leftAvatarImageView.image = leftImage
+        self.leftAvatarImageView.image = leftImage ?? #imageLiteral(resourceName: "no_image")
         
         self.rightSpeakerContentView.isHidden = true
         self.leftSpeakerContentView.isHidden = false
