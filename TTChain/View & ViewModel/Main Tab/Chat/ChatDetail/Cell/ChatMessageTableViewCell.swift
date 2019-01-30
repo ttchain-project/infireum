@@ -23,6 +23,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     @IBOutlet weak var rightMessageLabel:           UILabel!
     
     @IBOutlet weak var leftDateLabel: UILabel!
+    @IBOutlet weak var senderNameLabel: UILabel!
     @IBOutlet weak var rightDateLabel: UILabel!
     @IBOutlet weak var profilePicBtn: UIButton!
     
@@ -54,6 +55,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         rightValueContentView.layer.masksToBounds = true
         
         leftDateLabel.set(textColor: .gray, font: .owMedium(size: 9))
+        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 11))
         rightDateLabel.set(textColor: .gray, font: .owMedium(size: 9))
         
         leftMessageLabel.set(textColor: .black)
@@ -70,6 +72,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
             self.configForSender(message: message)
         }else {
             self.configForLeft(message: message, leftImage: leftImage)
+            
         }
         self.profilePicBtn.rx.tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)
@@ -91,6 +94,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         
         self.rightSpeakerContentView.isHidden = true
         self.leftSpeakerContentView.isHidden = false
+        self.senderNameLabel.text = message.senderName
     }
     
 }

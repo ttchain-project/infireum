@@ -117,4 +117,8 @@ extension UIColor {
     @nonobjc class var owIceCold: UIColor {
         return UIColor.init(red: 163, green: 220, blue: 212)!
     }
+    
+    @nonobjc class var owHopBush: UIColor {
+        return UIColor.init(red: 207, green: 105, blue: 149)!
+    }
 }

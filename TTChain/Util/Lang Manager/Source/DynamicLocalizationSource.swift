@@ -403,6 +403,12 @@ protocol DynamicLocalizationSource {
     var settings_label_language: String { get set }
     var settings_label_currencyUnit: String { get set }
     var settings_alert_verify_to_turn_off_functionality: String { get set }
+    
+    var account_setting_title: String { get set }
+    var basic_setting_title: String { get set }
+    var follow_us_title: String { get set }
+    var others_title: String { get set }
+    
     var changePrefFiat_title: String { get set }
     var changePrefFiat_btn_save: String { get set }
     var addressbook_title: String { get set }

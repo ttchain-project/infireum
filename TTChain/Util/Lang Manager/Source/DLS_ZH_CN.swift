@@ -402,6 +402,12 @@ struct DLS_ZH_CN: DLS {
     var settings_label_language = "语言"
     var settings_label_currencyUnit = "货币单位"
     var settings_alert_verify_to_turn_off_functionality = "验证以关闭功能"
+    
+    var account_setting_title = "帐户设定"
+    var basic_setting_title = "基本设置"
+    var follow_us_title = "关注我们"
+    var others_title = "其他"
+    
     var changePrefFiat_title = "货币单位"
     var changePrefFiat_btn_save = "保存"
     var addressbook_title = "常用地址"

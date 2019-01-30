@@ -14,6 +14,7 @@ class ChatMessageImageTableViewCell: UITableViewCell {
 
     var bag: DisposeBag = DisposeBag.init()
     @IBOutlet weak var profilePics: UIImageView!
+    @IBOutlet weak var senderNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var msgImageView: UIImageView!
     @IBOutlet var senderConstraint: NSLayoutConstraint!
@@ -41,6 +42,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         self.msgImageView.layer.borderWidth = 5.0
         self.msgImageView.layer.borderColor = UIColor.white.cgColor
         dateLabel.set(textColor: .gray, font: .owMedium(size: 9))
+        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 11))
+
         self.backgroundColor = .clear
         self.selectionStyle = .none
     }
@@ -52,12 +55,15 @@ class ChatMessageImageTableViewCell: UITableViewCell {
             self.dateLabel.textAlignment = .right
             self.senderConstraint.isActive = true
             self.receiverConstraint.isActive = false
+            self.senderNameLabel.text = ""
         }else {
             self.profilePics.isHidden = false
             self.dateLabel.textAlignment = .left
             self.senderConstraint.isActive = false
             self.receiverConstraint.isActive = true
             self.profilePics.image = leftImage ?? #imageLiteral(resourceName: "no_image")
+            self.senderNameLabel.text = message.senderName
+
         }
         self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)

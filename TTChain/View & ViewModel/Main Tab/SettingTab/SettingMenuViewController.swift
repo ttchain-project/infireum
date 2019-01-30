@@ -85,7 +85,19 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         viewModel.datasource.configureSupplementaryView = { (datasource, cv, kind, indexpath) in
             if (kind == UICollectionElementKindSectionHeader) {
                 let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
-                headerView.setup(title:"Title")
+                
+                let titleString : String = {
+                    switch indexpath.section {
+                    case 0:  return LM.dls.account_setting_title
+                    case 1:  return LM.dls.basic_setting_title
+                    case 2:  return LM.dls.follow_us_title
+                    case 3:  return LM.dls.others_title
+                    default:
+                        return ""
+                    }
+                    
+                }()
+                headerView.setup(title: titleString)
                 return headerView
             }
             return UICollectionReusableView()

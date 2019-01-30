@@ -21,6 +21,8 @@ class ReceiptTableViewCell: UITableViewCell {
     func setup() {
         
         dateLabel.set(textColor: .gray, font: .owMedium(size: 9))
+        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 11))
+
         self.messageContent.set(textColor: .gray, font: .owMedium(size: 12))
         self.backgroundColor = .clear
         self.selectionStyle = .none
@@ -33,6 +35,7 @@ class ReceiptTableViewCell: UITableViewCell {
     @IBOutlet var receiverConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageContent: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var senderNameLabel: UILabel!
     @IBOutlet weak var profilePicImageView: UIImageView!
     @IBOutlet weak var bgView: UIView!
 
@@ -55,14 +58,15 @@ class ReceiptTableViewCell: UITableViewCell {
             self.dateLabel.textAlignment = .right
             self.senderConstraint.isActive = false
             self.receiverConstraint.isActive = true
-
+            self.senderNameLabel.text = ""
         }else {
             self.profilePicImageView.isHidden = false
             self.dateLabel.textAlignment = .left
             self.senderConstraint.isActive = true
             self.receiverConstraint.isActive = false
             self.profilePicImageView.image = leftImage ?? #imageLiteral(resourceName: "no_image")
-
+            self.senderNameLabel.text = message.senderName
+            
         }
         self.profilePicImageView.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)

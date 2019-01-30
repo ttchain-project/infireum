@@ -404,6 +404,12 @@ struct DLS_ZH_TW: DLS {
     var settings_alert_verify_to_turn_off_functionality = "驗證以關閉功能"
     var changePrefFiat_title = "貨幣單位"
     var changePrefFiat_btn_save = "存儲"
+    
+    var account_setting_title = "帐户设定"
+    var basic_setting_title = "基本设置"
+    var follow_us_title = "关注我们"
+    var others_title = "其他"
+    
     var addressbook_title = "常用地址"
     var addressbook_label_empty_addressbook = "暫無紀錄"
     var abInfo_title = "聯絡人資訊"

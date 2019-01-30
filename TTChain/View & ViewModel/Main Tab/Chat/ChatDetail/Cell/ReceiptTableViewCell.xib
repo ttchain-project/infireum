@@ -49,8 +49,14 @@
                             <constraint firstAttribute="width" constant="40" id="czg-QN-fH0"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABb-cv-APs">
-                        <rect key="frame" x="70" y="21" width="435" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text=" najinksdf kjlasdf " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABb-cv-APs">
+                        <rect key="frame" x="70" y="21" width="132" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" text="jalksdfjkl jl jadf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnB-mt-iFB">
+                        <rect key="frame" x="204" y="21" width="321" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -59,10 +65,12 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="z9a-SL-xat" secondAttribute="bottom" constant="10" id="4Rl-3O-KQM"/>
                     <constraint firstAttribute="trailing" secondItem="z9a-SL-xat" secondAttribute="trailing" constant="10" id="BlB-ze-A7r"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ABb-cv-APs" secondAttribute="trailing" constant="10" id="Fqj-y4-iNB"/>
                     <constraint firstItem="z9a-SL-xat" firstAttribute="top" secondItem="ABb-cv-APs" secondAttribute="bottom" constant="10" id="SRM-La-fRg"/>
                     <constraint firstItem="ABb-cv-APs" firstAttribute="leading" secondItem="pmG-uc-Gvb" secondAttribute="trailing" constant="10" id="U8v-S0-Ijj"/>
+                    <constraint firstItem="AnB-mt-iFB" firstAttribute="leading" secondItem="ABb-cv-APs" secondAttribute="trailing" constant="2" id="YaY-MJ-hA6"/>
+                    <constraint firstAttribute="trailing" secondItem="AnB-mt-iFB" secondAttribute="trailing" constant="10" id="ZsI-4z-SQt"/>
                     <constraint firstItem="pmG-uc-Gvb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="arZ-BD-wQ3"/>
+                    <constraint firstItem="AnB-mt-iFB" firstAttribute="centerY" secondItem="ABb-cv-APs" secondAttribute="centerY" id="ea6-e0-h2D"/>
                     <constraint firstItem="z9a-SL-xat" firstAttribute="leading" secondItem="pmG-uc-Gvb" secondAttribute="trailing" constant="10" id="fKl-PD-Xxi"/>
                     <constraint firstItem="ABb-cv-APs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="faQ-gP-QNV"/>
                     <constraint firstItem="pmG-uc-Gvb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="gRl-b1-iPe"/>
@@ -71,11 +79,12 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="bgView" destination="z9a-SL-xat" id="fu9-2v-nW4"/>
-                <outlet property="dateLabel" destination="ABb-cv-APs" id="YOM-dl-hug"/>
+                <outlet property="dateLabel" destination="AnB-mt-iFB" id="mLP-bs-RVg"/>
                 <outlet property="messageContent" destination="hyN-Mt-esZ" id="aWi-lo-sFg"/>
                 <outlet property="profilePicImageView" destination="pmG-uc-Gvb" id="7qi-bp-owB"/>
                 <outlet property="receiverConstraint" destination="BlB-ze-A7r" id="Sh0-j6-c4v"/>
                 <outlet property="senderConstraint" destination="fKl-PD-Xxi" id="2QG-2e-U1k"/>
+                <outlet property="senderNameLabel" destination="ABb-cv-APs" id="KK1-hB-aUd"/>
             </connections>
             <point key="canvasLocation" x="309.60000000000002" y="214.99250374812596"/>
         </tableViewCell>

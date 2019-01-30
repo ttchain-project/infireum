@@ -55,6 +55,8 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var recoveryPasswordButton: UIButton!
+    
     func config(constructor: Void) {
         self.view.layoutIfNeeded()
        
@@ -78,8 +80,6 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             .disposed(by: bag)
         
         self.saveButton.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
-            
-            
             if self.didUpdateProfileImage  {
                 //UpdateImage
                 self.updateProfilePhoto()
@@ -88,6 +88,9 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             }
         }).disposed(by: bag)
         
+        self.recoveryPasswordButton.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
+           self.setRecoveryPassword()
+        }).disposed(by: bag)
     }
     
     override func viewDidLoad() {
@@ -104,12 +107,17 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
         self.saveButton.setTitle("Save", for: .normal)
         self.userNameTextField.placeholder = "Enter Name"
+        self.recoveryPasswordButton.setTitle("Set Recovery Password", for: .normal)
     }
     
     override func renderTheme(_ theme: Theme) {
         
         self.saveButton.backgroundColor = theme.palette.application_main
+        self.recoveryPasswordButton.backgroundColor = theme.palette.application_main
+        
         self.userNameTextField.set(textColor: theme.palette.input_text, font: .owRegular(size: 25), placeHolderColor: theme.palette.input_placeholder)
+        
+        
     }
     fileprivate func displayCamera() {
         guard hasAuthedCamera else {
@@ -205,13 +213,68 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             case .success(_):
                 self.imUser?.nickName = self.userNameTextField.text!
                 LocalIMUser.updateLocalIMUser()
-
                 self.navigationController?.popViewController(animated: true)
             case .failed(error: let error):
                 print("error %@", error)
             }
         }).disposed(by: bag)
     }
+    
+    func setRecoveryPassword() {
+        
+        self.getRecoveryPasswordFromUser().subscribe(onSuccess: { password in
+            guard let id = IMUserManager.manager.userModel.value?.uID else { return }
+            Server.instance.setRecoveryPassword(withIMUserId: id, recoveryPassword: password).asObservable().subscribe(onNext: {
+                [weak self] result in
+                guard let `self` = self else { return }
+                switch result {
+                case .success: DLogDebug("set recovery key successful.")
+                EZToast.present(on: self, content: "Password set successfully")
+                case .failed(error: let error):
+                    DLogError(error)
+                    EZToast.present(on: self, content: error.localizedDescription)
+                }
+            }).disposed(by:self.bag)
+        }).disposed(by: bag)
+    }
+    
+    func getRecoveryPasswordFromUser() -> Single<String> {
+        return Single.create { [unowned self] (handler) -> Disposable in
+            let palette = TM.palette
+            let dls = LM.dls
+            let alert = UIAlertController.init(
+                title: "IM Recovery Password",
+                message: "Please set a password to recover your IM account on another device",
+                preferredStyle: .alert
+            )
+            
+            let cancel = UIAlertAction.init(title: dls.g_cancel,
+                                            style: .cancel,
+                                            handler: nil)
+            var textField: UITextField!
+            let confirm = UIAlertAction.init(title: dls.g_confirm,
+                                             style: .default) {
+                                                (_) in
+                                                if let pwd = textField.text, pwd.count > 0 {
+                                                    handler(.success(pwd))
+                                                }
+            }
+            
+            alert.addTextField { [unowned self] (tf) in
+                tf.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
+                tf.set(placeholder:"Enter recovery password")
+                textField = tf
+                tf.rx.text.map { $0?.count ?? 0 }.map { $0 > 0 }.bind(to: confirm.rx.isEnabled).disposed(by: self.bag)
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            self.present(alert, animated: true, completion: nil)
+            
+            return Disposables.create()
+        }
+    }
+    
 }
 
 

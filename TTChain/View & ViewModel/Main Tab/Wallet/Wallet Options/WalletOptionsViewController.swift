@@ -225,13 +225,13 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         self.btcTitleLabel.backgroundColor = palette.application_main
         self.stableCoinTitleLabel.backgroundColor = palette.application_main
         
-        self.ethTitleLabel.backgroundColor = palette.application_alert
-        self.listedCoinTitleLabel.backgroundColor = palette.application_alert
+        self.ethTitleLabel.backgroundColor = .owHopBush
+        self.listedCoinTitleLabel.backgroundColor = .owHopBush
         
         self.btcAddressCopy.backgroundColor = palette.application_main
-        self.ethAddressCopy.backgroundColor = palette.application_alert
+        self.ethAddressCopy.backgroundColor = .owHopBush
         self.stableCoinAddressCopy.backgroundColor = palette.application_main
-        self.listedCoinAddressCopy.backgroundColor = palette.application_alert
+        self.listedCoinAddressCopy.backgroundColor = .owHopBush
         
         self.btcView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)
         self.ethView.backgroundColor = UIColor.init(white: 1, alpha: 0.5)

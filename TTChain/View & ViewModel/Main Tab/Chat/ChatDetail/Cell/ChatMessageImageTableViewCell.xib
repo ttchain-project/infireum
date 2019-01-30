@@ -13,28 +13,34 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="236" id="KGk-i7-Jjw" customClass="ChatMessageImageTableViewCell" customModule="Hope_Seed" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="249" height="236"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="236"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="249" height="235.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="235.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="blz-tX-4G0">
-                        <rect key="frame" x="57" y="75.5" width="150" height="150"/>
+                        <rect key="frame" x="72" y="75.5" width="150" height="150"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="XEN-nh-nxA"/>
                             <constraint firstAttribute="height" constant="150" id="gVc-Oo-Lti"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HAd-jb-DrP">
-                        <rect key="frame" x="5" y="5" width="40" height="40"/>
+                        <rect key="frame" x="20" y="5" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Ibo-T7-lvE"/>
                             <constraint firstAttribute="width" constant="40" id="oSz-dH-hJH"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm8-pG-23B">
-                        <rect key="frame" x="53" y="14.5" width="42" height="41"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="jaskdjf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm8-pG-23B">
+                        <rect key="frame" x="70" y="14.5" width="49.5" height="41"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dus-Yw-CTb">
+                        <rect key="frame" x="121.5" y="25" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -43,24 +49,27 @@
                 <constraints>
                     <constraint firstItem="blz-tX-4G0" firstAttribute="leading" secondItem="HAd-jb-DrP" secondAttribute="trailing" constant="12" id="1vD-iD-ob9"/>
                     <constraint firstItem="Dm8-pG-23B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3.5" id="4Rl-cM-VNy"/>
+                    <constraint firstItem="dus-Yw-CTb" firstAttribute="centerY" secondItem="Dm8-pG-23B" secondAttribute="centerY" id="DcD-s4-4b4"/>
                     <constraint firstAttribute="trailing" secondItem="blz-tX-4G0" secondAttribute="trailing" constant="20" id="Eey-zt-v2U"/>
                     <constraint firstItem="HAd-jb-DrP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="HHg-Ob-A1o"/>
+                    <constraint firstItem="dus-Yw-CTb" firstAttribute="leading" secondItem="Dm8-pG-23B" secondAttribute="trailing" constant="2" id="Jvz-nW-xgS"/>
                     <constraint firstAttribute="bottom" secondItem="blz-tX-4G0" secondAttribute="bottom" constant="10" id="Kkf-QZ-l9D"/>
-                    <constraint firstItem="Dm8-pG-23B" firstAttribute="leading" secondItem="HAd-jb-DrP" secondAttribute="trailing" constant="8" symbolic="YES" id="O9W-dg-x2f"/>
-                    <constraint firstAttribute="trailing" secondItem="Dm8-pG-23B" secondAttribute="trailing" constant="20" id="WoJ-vB-0F6"/>
-                    <constraint firstItem="HAd-jb-DrP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="aYc-WD-hLA"/>
+                    <constraint firstItem="Dm8-pG-23B" firstAttribute="leading" secondItem="HAd-jb-DrP" secondAttribute="trailing" constant="10" id="O9W-dg-x2f"/>
+                    <constraint firstItem="HAd-jb-DrP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="aYc-WD-hLA"/>
+                    <constraint firstAttribute="trailing" secondItem="dus-Yw-CTb" secondAttribute="trailing" constant="10" id="m9u-c0-RXl"/>
                     <constraint firstItem="blz-tX-4G0" firstAttribute="top" secondItem="Dm8-pG-23B" secondAttribute="bottom" constant="20" id="rZ9-g2-8aV"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="dateLabel" destination="Dm8-pG-23B" id="jt4-iZ-T4M"/>
+                <outlet property="dateLabel" destination="dus-Yw-CTb" id="ZCb-yJ-TPo"/>
                 <outlet property="msgImageView" destination="blz-tX-4G0" id="lqy-oO-tNI"/>
                 <outlet property="profilePics" destination="HAd-jb-DrP" id="SGd-Mt-USO"/>
                 <outlet property="receiverConstraint" destination="1vD-iD-ob9" id="Mfs-y3-3fJ"/>
                 <outlet property="senderConstraint" destination="Eey-zt-v2U" id="0sF-r2-Hw2"/>
+                <outlet property="senderNameLabel" destination="Dm8-pG-23B" id="Mia-Fp-pgX"/>
             </connections>
-            <point key="canvasLocation" x="80.799999999999997" y="241.07946026986508"/>
+            <point key="canvasLocation" x="265.60000000000002" y="241.07946026986508"/>
         </tableViewCell>
     </objects>
 </document>

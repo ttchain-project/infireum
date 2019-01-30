@@ -44,7 +44,6 @@ class IMUserManager {
                 if value {
                     self?.userLoginStatus.accept(.userExists)
                     //Call RocketChat Login
-                    self?.shouldLoginToRocketChat.onNext(())
                 }else {
                     DLogDebug("authenticate user")
                     self?.authenticateUser()
@@ -121,6 +120,7 @@ class IMUserManager {
                 let userModel = IMUser.init(uID: model.uID, nickName: user.name ?? "", introduction: "", headImg: nil)
                 self?.userModel = BehaviorRelay.init(value: userModel)
                 self?.shouldLoginToRocketChat.onNext(())
+                self?.userLoginStatus.accept(.userExists)
                 self?.saveIMUser()
             case .failed(let error):
                 DLogError(error)
