@@ -16,7 +16,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     func config(constructor: Void) {
         view.layoutIfNeeded()
         self.viewModel = ChatListViewModel.init(
-            input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().map { $0.row }),
+            input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().map { $0 }),
             output: ChatListViewModel.Output(selectedChat: { [unowned self] model in self.chatSelected(forModel: model) })
         )
 //        initNavigationBarItems()
@@ -65,7 +65,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         if IMUserManager.manager.userLoginStatus.value == .deviceIDNotMatched {
             showTransferAlert()
         } else {
-            self.viewModel.getCommunicationList()
+            self.viewModel.getList()
         }
     }
     
@@ -85,7 +85,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
                 IMUserManager.manager.recoverUser(withPassword: text, handle: { [weak self] (isSuccess) in
                     guard let `self` = self else { return }
                     if isSuccess {
-                        self.viewModel.getCommunicationList()
+                        self.viewModel.getList()
                     } else {
                         let alertController = UIAlertController(title: "钱包帐号与移转备份密码不符", message: nil, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "好", style: .default, handler: {
@@ -112,6 +112,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
             .drive(onNext: {
                 _ in
                 let model = FriendRequestInformationModel.init(imUser: IMUserManager.manager.userModel.value!)
+                
                 let vc = UserIMQRCodeViewController.instance(from: model)
                 self.navigationController?.pushViewController(vc)
             })
@@ -144,17 +145,74 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
             .disposed(by: bag)
     }
     
-    
     func initTableView() {
         tableView.register(ChatHistoryTableViewCell.nib, forCellReuseIdentifier: ChatHistoryTableViewCell.cellIdentifier())
+        tableView.register(GroupInviteTableViewCell.nib, forCellReuseIdentifier: GroupInviteTableViewCell.cellIdentifier())
+        tableView.register(InviteTableViewCell.nib, forCellReuseIdentifier: InviteTableViewCell.cellIdentifier())
     }
     
     func bindViewModel() {
-        viewModel.communicationList.bind(to: tableView.rx.items(cellIdentifier: ChatHistoryTableViewCell.cellIdentifier(), cellType: ChatHistoryTableViewCell.self)) {
-            row, record, cell in
-            cell.config(model: record)
+//        viewModel.communicationList.bind(to: tableView.rx.items(cellIdentifier: ChatHistoryTableViewCell.cellIdentifier(), cellType: ChatHistoryTableViewCell.self)) {
+//            row, record, cell in
+//            cell.config(model: record)
+//            }
+//            .disposed(by: bag)
+        
+        viewModel.dataSource.configureCell = {
+            (datasource, tv, indexPath, model) in
+            
+            switch (indexPath.section) {
+            case 0:
+                let cell = tv.dequeueReusableCell(withIdentifier: InviteTableViewCell.nameOfClass) as! InviteTableViewCell
+                guard model is FriendRequestInformationModel else {
+                    return cell
+                }
+                let friendRequestModel = model as! FriendRequestInformationModel
+                
+                cell.config(friendRequestModel: friendRequestModel, onFriendRequestAction: { [weak self](response) in
+                    
+                    guard let wSelf = self else {
+                        return
+                    }
+                    wSelf.viewModel.handleFriendRequest(withStatus: response, forModel: friendRequestModel)
+                })
+                
+                return cell
+            case 1:
+                let cell = tv.dequeueReusableCell(withIdentifier: GroupInviteTableViewCell.nameOfClass) as! GroupInviteTableViewCell
+                guard model is UserGroupInfoModel else {
+                    return cell
+                }
+                let groupModel = model as! UserGroupInfoModel
+                cell.config(groupRequestModel: groupModel, onGroupRequestAction: { [weak self](response) in
+                    guard let wSelf = self else {
+                        return
+                    }
+                    wSelf.viewModel.handleGroupRequest(withAction:response, forModel: groupModel)
+                })
+                return cell
+            case 2:
+                let cell = tv.dequeueReusableCell(withIdentifier: ChatHistoryTableViewCell.nameOfClass) as! ChatHistoryTableViewCell
+                
+                guard model is CommunicationListModel else {
+                    return cell
+                }
+                let chatListModel = model as! CommunicationListModel
+                cell.config(model: chatListModel)
+                return cell
+            default:
+                return UITableViewCell()
             }
+        }
+        
+        viewModel
+            .chatListSections
+            .bind(to: tableView.rx.items(
+                dataSource: viewModel.dataSource)
+            )
             .disposed(by: bag)
+        
+        
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -216,8 +274,6 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         let viewController = ProfileViewController.instance()
         self.show(viewController, sender: nil)
     }
-    
-    
 }
 
 extension ChatListViewController: UIPopoverPresentationControllerDelegate {
@@ -228,46 +284,5 @@ extension ChatListViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
-extension ChatListViewController {
-    enum ExtendItem: Int {
-        case manageGroup = 0
-        case inviteFriend = 1
-        case userProfile = 2
-        case sweepQRCode = 3
-        case searchGroup = 4
-        case redEnvelope = 5
-    }
-}
 
-/*
- // MARK: UITableViewDataSource
- func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
- return 2
- }
- 
- func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
- return 70
- }
- 
- func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
- let cell = tableView.dequeueReusableCell(withIdentifier: "ChatHistoryTableViewCell") as! ChatHistoryTableViewCell
- 
- 
- cell.titleLabel.text = "Hopeseed 官方帐号"
- cell.coverImageView.image = UIImage.init(named: "userPresetS")
- cell.descriptionLabel.text = "您好，欢迎来到HopeSeed"
- cell.dateLabel.text = "上午 11:45"
- cell.countLabel.text = "\(indexPath.row + 1)"
- 
- return cell
- }
- 
- func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
- tableView.deselectRow(at: indexPath, animated: true)
- 
- let viewController = ChatViewController.instance(from: ChatViewController.Config(roomName: "789"))
- //        let viewController2 = UserProfileViewController.instance(from: UserProfileViewController.Config())
- //
- navigationController?.show(viewController, sender: nil)
- }
- */
+

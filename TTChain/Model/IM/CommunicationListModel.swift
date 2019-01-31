@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol ChatListPage {
+    
+}
+
 enum RoomType : String {
     typealias RawValue = String
     
@@ -26,7 +30,7 @@ enum RoomType : String {
     }
 }
 
-class CommunicationListModel {
+class CommunicationListModel:ChatListPage {
     var roomId:String
     var displayName:String
     var img: String

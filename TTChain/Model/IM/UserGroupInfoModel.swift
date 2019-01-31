@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RxDataSources
 
-class UserGroupInfoModel {
+class UserGroupInfoModel:ChatListPage {
     var groupID: String = ""
     var groupOwnerUID: String = ""
     var ownerName: String = ""

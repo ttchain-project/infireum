@@ -51,7 +51,7 @@ class InviteTableViewCell: UITableViewCell {
         let palette = TM.palette
         
         self.nameLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 18))
-        self.resumeLabel.set(textColor: palette.label_sub, font: .owMedium(size: 14))
+        self.resumeLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 14))
         self.backgroundColor = .clear
     }
 

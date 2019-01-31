@@ -70,6 +70,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         if self.input!.roomType == .pvtChat {
             self.functions.append(FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat)
             )
+            self.collectionView.reloadData()
         }
     }
     

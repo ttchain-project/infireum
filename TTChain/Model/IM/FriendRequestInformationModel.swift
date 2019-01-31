@@ -15,7 +15,7 @@ protocol FriendModel {
     var avatar: UIImage? {get set}
 }
 
-class FriendRequestInformationModel: FriendModel {
+class FriendRequestInformationModel: FriendModel,ChatListPage {
     var invitationID: Int = 0
     var uid: String = ""
     var nickName: String = ""
