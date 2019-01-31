@@ -157,6 +157,18 @@
 		55AADF0A22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */; };
 		55AADF0B22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */; };
 		55AADF0C22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */; };
+		55AADF122202CC3200F403C8 /* USDTTx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF112202CC3200F403C8 /* USDTTx.swift */; };
+		55AADF132202CC3200F403C8 /* USDTTx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF112202CC3200F403C8 /* USDTTx.swift */; };
+		55AADF142202CC3200F403C8 /* USDTTx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF112202CC3200F403C8 /* USDTTx.swift */; };
+		55AADF172202D2B100F403C8 /* USDTTXFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF162202D2B100F403C8 /* USDTTXFilter.swift */; };
+		55AADF182202D2B100F403C8 /* USDTTXFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF162202D2B100F403C8 /* USDTTXFilter.swift */; };
+		55AADF192202D2B100F403C8 /* USDTTXFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF162202D2B100F403C8 /* USDTTXFilter.swift */; };
+		55AADF1C2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF1B2202D42B00F403C8 /* USDTTxFetcher.swift */; };
+		55AADF1D2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF1B2202D42B00F403C8 /* USDTTxFetcher.swift */; };
+		55AADF1E2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF1B2202D42B00F403C8 /* USDTTxFetcher.swift */; };
+		55AADF212202DF8500F403C8 /* USDTTxHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF202202DF8500F403C8 /* USDTTxHandler.swift */; };
+		55AADF222202DF8500F403C8 /* USDTTxHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF202202DF8500F403C8 /* USDTTxHandler.swift */; };
+		55AADF232202DF8500F403C8 /* USDTTxHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF202202DF8500F403C8 /* USDTTxHandler.swift */; };
 		55BB1B40218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B41218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B42218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
@@ -1790,6 +1802,10 @@
 		55AADF0021FFFB8700F403C8 /* ReceiptRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewModel.swift; sourceTree = "<group>"; };
 		55AADF0522004ED900F403C8 /* ReceiptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptTableViewCell.swift; sourceTree = "<group>"; };
 		55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptTableViewCell.xib; sourceTree = "<group>"; };
+		55AADF112202CC3200F403C8 /* USDTTx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDTTx.swift; sourceTree = "<group>"; };
+		55AADF162202D2B100F403C8 /* USDTTXFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDTTXFilter.swift; sourceTree = "<group>"; };
+		55AADF1B2202D42B00F403C8 /* USDTTxFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDTTxFetcher.swift; sourceTree = "<group>"; };
+		55AADF202202DF8500F403C8 /* USDTTxHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDTTxHandler.swift; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -2610,6 +2626,58 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		55AADF0E2202C96C00F403C8 /* BTC */ = {
+			isa = PBXGroup;
+			children = (
+				64083CF42110184F00DE1C31 /* Filter */,
+				64083CF22110183E00DE1C31 /* Fetcher */,
+				64083CF32110184500DE1C31 /* Handler */,
+			);
+			path = BTC;
+			sourceTree = "<group>";
+		};
+		55AADF0F2202C97D00F403C8 /* USDT */ = {
+			isa = PBXGroup;
+			children = (
+				55AADF1F2202DF6800F403C8 /* Handler */,
+				55AADF1A2202D3F800F403C8 /* Fetcher */,
+				55AADF152202D29E00F403C8 /* Filter */,
+			);
+			path = USDT;
+			sourceTree = "<group>";
+		};
+		55AADF102202CC1800F403C8 /* USDT */ = {
+			isa = PBXGroup;
+			children = (
+				55AADF112202CC3200F403C8 /* USDTTx.swift */,
+			);
+			path = USDT;
+			sourceTree = "<group>";
+		};
+		55AADF152202D29E00F403C8 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				55AADF162202D2B100F403C8 /* USDTTXFilter.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		55AADF1A2202D3F800F403C8 /* Fetcher */ = {
+			isa = PBXGroup;
+			children = (
+				55AADF1B2202D42B00F403C8 /* USDTTxFetcher.swift */,
+			);
+			path = Fetcher;
+			sourceTree = "<group>";
+		};
+		55AADF1F2202DF6800F403C8 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				55AADF202202DF8500F403C8 /* USDTTxHandler.swift */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
 		55BB1B3D218FDC410061F189 /* ExploreTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -3099,9 +3167,8 @@
 		64083CF5211018EA00DE1C31 /* BTC Chain */ = {
 			isa = PBXGroup;
 			children = (
-				64083CF42110184F00DE1C31 /* Filter */,
-				64083CF22110183E00DE1C31 /* Fetcher */,
-				64083CF32110184500DE1C31 /* Handler */,
+				55AADF0F2202C97D00F403C8 /* USDT */,
+				55AADF0E2202C96C00F403C8 /* BTC */,
 			);
 			path = "BTC Chain";
 			sourceTree = "<group>";
@@ -4641,6 +4708,7 @@
 				6473AE9421421DA5009FB8E9 /* API Wallet Create Result */,
 				64083CF02110182500DE1C31 /* Tx */,
 				64F43BA7210B258A00982AFD /* BTC */,
+				55AADF102202CC1800F403C8 /* USDT */,
 				64083D27211087BF00DE1C31 /* ETH */,
 				64769B262123FFE600C4AB9E /* CIC */,
 				6485000C20D8DFC100107473 /* Validator */,
@@ -6411,6 +6479,7 @@
 				649E488D20EC9D5E00B217AD /* OWRxNotificationCenter.swift in Sources */,
 				64F07E8C20D3809800A60C5C /* Router.swift in Sources */,
 				6470D6A220F3550700EB0780 /* WithdrawalETHFeeInputViewController.swift in Sources */,
+				55AADF142202CC3200F403C8 /* USDTTx.swift in Sources */,
 				64813A3920DCA6EE00CAA4D8 /* SubAddress+CoreDataClass.swift in Sources */,
 				5539A49321676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewModel.swift in Sources */,
 				55EF6B3521A81516007E074A /* RocketChatManager.swift in Sources */,
@@ -6502,6 +6571,7 @@
 				6EEA2F212164B32C005FE393 /* QAViewModel.swift in Sources */,
 				640D893D20F06DFB0010D986 /* WithdrawalAssetViewModel.swift in Sources */,
 				55EF6AAA21A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
+				55AADF232202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
 				6424B69A20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
 				64D8268420E33FAF00C8FC63 /* ManageAssetTableViewCell.swift in Sources */,
 				64813A8020DCADEB00CAA4D8 /* Asset+Helper.swift in Sources */,
@@ -6573,6 +6643,7 @@
 				64813A7520DCA6EE00CAA4D8 /* CoinRate+CoreDataClass.swift in Sources */,
 				6470D69520F341BC00EB0780 /* WithdrawalConfirmPwdValidationViewController.swift in Sources */,
 				64F07DDE20D241A000A60C5C /* Printer.swift in Sources */,
+				55AADF192202D2B100F403C8 /* USDTTXFilter.swift in Sources */,
 				559CB0E4218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */,
 				64B98EB120F8B90C00C4EB11 /* LightningTransRecord+Helper.swift in Sources */,
 				55EF6B1321A812C7007E074A /* UserProfileViewModel.swift in Sources */,
@@ -6695,6 +6766,7 @@
 				6446E23D20FCE3F700EC1E2E /* ChangePrefFiatViewController.swift in Sources */,
 				55E1140121F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				640D88E420EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
+				55AADF1E2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */,
 				6470D63B20F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,
 				643200C620FB1E0400B11334 /* WithdrawalCICFeeInfoViewModel.swift in Sources */,
 				64CFD3C82134204F00A04727 /* LightningTransMatchInfoPackager.swift in Sources */,
@@ -6851,6 +6923,7 @@
 				55EF6B1421A812C7007E074A /* UserQRCodeViewModel.swift in Sources */,
 				6424B66720F5B1D600AEBCAD /* TransferRecordChainTypeOptionViewModel.swift in Sources */,
 				643200EF20FBA74E00B11334 /* IdentityViewController.swift in Sources */,
+				55AADF122202CC3200F403C8 /* USDTTx.swift in Sources */,
 				64CDE1A0213E50ED00105BFB /* MigrationPolicy_1_0_0To1_0_4.swift in Sources */,
 				64813AA220DCB18F00CAA4D8 /* Asset+CoreDataProperties.swift in Sources */,
 				64D826C120E3E53600C8FC63 /* Identity+CoreDataProperties.swift in Sources */,
@@ -6942,6 +7015,7 @@
 				64F07E0620D241A000A60C5C /* NSObject+NameOfClass.swift in Sources */,
 				55EF6AA821A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
 				64D8266A20E23F5D00C8FC63 /* CoinSelection+Helper.swift in Sources */,
+				55AADF212202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
 				6424B66C20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
 				64C9D45020FDD230000B0774 /* AddressBookUnitBrowseViewController.swift in Sources */,
 				6EEA2F1F2164B32C005FE393 /* QAViewModel.swift in Sources */,
@@ -7013,6 +7087,7 @@
 				6456191E2150D339001092E5 /* ImportWalletTypeChooseViewController.swift in Sources */,
 				64F07DAD20D240FF00A60C5C /* Any+ReachabilityMonitor.swift in Sources */,
 				559CB0E2218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */,
+				55AADF172202D2B100F403C8 /* USDTTXFilter.swift in Sources */,
 				64D8269A20E3E2AC00C8FC63 /* TransRecord+CoreDataClass.swift in Sources */,
 				55EF6B1121A812C7007E074A /* UserProfileViewModel.swift in Sources */,
 				6470D6AF20F35B1000EB0780 /* WithdrawalETHFeeInfoViewController.swift in Sources */,
@@ -7135,6 +7210,7 @@
 				64F07DF720D241A000A60C5C /* UIAlertController+EasyGen.swift in Sources */,
 				55E113FF21F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				64F07DE520D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
+				55AADF1C2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */,
 				640D88BF20EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				64813A3720DCA6EE00CAA4D8 /* SubAddress+CoreDataClass.swift in Sources */,
 				64F07DEE20D241A000A60C5C /* UILabel+Gradient.swift in Sources */,
@@ -7284,6 +7360,7 @@
 				55EF6B1521A812C7007E074A /* UserQRCodeViewModel.swift in Sources */,
 				64CDE1A1213E50ED00105BFB /* MigrationPolicy_1_0_0To1_0_4.swift in Sources */,
 				64D8263D20DFABC400C8FC63 /* DepositViewModel.swift in Sources */,
+				55AADF132202CC3200F403C8 /* USDTTx.swift in Sources */,
 				64D8267D20E339C200C8FC63 /* OfflineWallet.xcdatamodeld in Sources */,
 				649E48C220ECF42600B217AD /* WalletPKeyQRCodeViewModel.swift in Sources */,
 				55EF6B3421A81516007E074A /* RocketChatManager.swift in Sources */,
@@ -7375,6 +7452,7 @@
 				6424B66D20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
 				64C9D45120FDD230000B0774 /* AddressBookUnitBrowseViewController.swift in Sources */,
 				55EF6AA921A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
+				55AADF222202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
 				6424B64920F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.swift in Sources */,
 				649E488720EC705100B217AD /* ManageWalletViewModel.swift in Sources */,
 				6EEA2F202164B32C005FE393 /* QAViewModel.swift in Sources */,
@@ -7446,6 +7524,7 @@
 				6456191F2150D339001092E5 /* ImportWalletTypeChooseViewController.swift in Sources */,
 				6470D6D620F3649D00EB0780 /* WithdrawalETFFeeInfoModeBase.swift in Sources */,
 				640D892F20F069BF0010D986 /* WithdrawalAssetViewController.swift in Sources */,
+				55AADF182202D2B100F403C8 /* USDTTXFilter.swift in Sources */,
 				559CB0E3218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */,
 				64B2772E20D8A296004FF75B /* OWQRCodeBaseViewController.swift in Sources */,
 				55EF6B1221A812C7007E074A /* UserProfileViewModel.swift in Sources */,
@@ -7568,6 +7647,7 @@
 				649E489320ECAC4900B217AD /* PwdHintViewController.swift in Sources */,
 				55E1140021F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				64813AE220DE241500CAA4D8 /* MainTabBarViewController.swift in Sources */,
+				55AADF1D2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */,
 				6446E23C20FCE3F700EC1E2E /* ChangePrefFiatViewController.swift in Sources */,
 				648139B120DB5E4000CAA4D8 /* IdentityRestoreViewController.swift in Sources */,
 				6470D63A20F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,

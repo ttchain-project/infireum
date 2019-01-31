@@ -364,6 +364,11 @@
         return fire(router: .blockchain(.getBTCTxRecords(api)))
     }
     
+    func getUSDTTxRecords(ofAddress addr: String, page:Int) -> RxAPIResponse<GetUSDTTransactionAPIModel> {
+        let api = GetUSDTTransactionAPI.init(page:page, address: addr)
+        return fire(router: .blockchain(.getUSDTTransaction(api)))
+    }
+    
     //MARK: - GET https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=YourApiKeyToken
     func getETHBlockHeight() -> RxAPIResponse<GetETHCurrentBlockAPIModel> {
         let api = GetETHCurrentBlockAPI.init()

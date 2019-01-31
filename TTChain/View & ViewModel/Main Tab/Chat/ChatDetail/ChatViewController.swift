@@ -42,7 +42,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     var bag: DisposeBag = DisposeBag()
     var imagePicker: UIImagePickerController!
     
-    private var isNavigatingToUserProfile: Bool = false
     struct Config {
         var roomType:RoomType
         var chatTitle:String
@@ -117,7 +116,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.shared.enable = IQKeyboardManagerEnableStatus
-        isNavigatingToUserProfile = false
     }
 
     override func renderTheme(_ theme: Theme) {
@@ -239,7 +237,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     
     func initKeyboardView() {
         
-        keyboardView.config(input: ChatKeyboardView.Input(),
+        keyboardView.config(input: ChatKeyboardView.Input(roomType:self.viewModel.input.roomType),
                             output: ChatKeyboardView.Output.init(didChangeViewHeight: { (value) in
                                 self.view.setNeedsLayout()
                                 self.keyboardViewHeight.constant = value
@@ -266,7 +264,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                     print("Pending implementation")
                                 }
                             }))
-        
         
         keyboardView
             .sendButton
@@ -359,14 +356,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     func toUserProfileVC(forFriend friend: FriendModel) {
-        //This flag is a terrible hack, since we are reloading the data of the table constantly,
-        //we keep getting multiple event for action on cell component
-        //Hence to avoid the multiple VC pushes.
-        //Hopefully this changes to websocket implementation in future. At that time, remove this comment and save me from misery!!
-        if isNavigatingToUserProfile {
-            return
-        }
-        self.isNavigatingToUserProfile = true
+        
         var purpose : UserProfileViewController.Purpose
         if friend is GroupMemberModel {
             let friends = friend as! GroupMemberModel

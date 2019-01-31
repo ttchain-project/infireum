@@ -30,6 +30,10 @@
         return BTCTxHandler.init(asset: input.asset, filter: BTCTxFilter())
     }()
     
+    private lazy var usdtHandler: USDTTxHandler = {
+        return USDTTxHandler.init(asset: input.asset, filter: USDTTXFilter())
+    }()
+    
     private lazy var ethHandler: ETHTxHandler = {
         return ETHTxHandler.init(asset: input.asset, filter: ETHTxFilter())
     }()
@@ -187,7 +191,11 @@
         let relay: BehaviorRelay<[TransRecord]>
         switch input.asset.coin!.owChainType {
         case .btc:
-            relay = btcHandler.records
+            if input.asset.coinID == Coin.usdt_identifier {
+                relay = usdtHandler.records
+            }else {
+                relay = btcHandler.records
+            }
         case .eth:
             if input.asset.coinID == Coin.eth_identifier {
                 relay = ethHandler.records
@@ -207,13 +215,28 @@
         let load: RxAPIVoidResponse
         switch input.asset.coin!.owChainType {
         case .btc:
-            if reset { btcHandler.reset() }
-            guard !btcHandler.didReachedSearchLine else {
-                _finishLoading.accept(.success(()))
-                return
+            if input.asset.coinID == Coin.usdt_identifier {
+                if reset {
+                    usdtHandler.reset()
+                }
+                guard !usdtHandler.didReachedSearchLine else {
+                    _finishLoading.accept(.success(()))
+                    return
+                }
+                
+                load = usdtHandler.loadCurrentPage()
+
+            }else {
+                if reset {
+                    btcHandler.reset()
+                }
+                guard !btcHandler.didReachedSearchLine else {
+                    _finishLoading.accept(.success(()))
+                    return
+                }
+                load = btcHandler.loadCurrentPage()
             }
             
-            load = btcHandler.loadCurrentPage()
         case .eth:
             if input.asset.coinID == Coin.eth_identifier {
                 if reset { ethHandler.reset() }

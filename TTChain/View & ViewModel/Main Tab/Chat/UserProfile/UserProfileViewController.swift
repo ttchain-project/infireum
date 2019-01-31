@@ -29,6 +29,10 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         userNameLabel.text = user?.nickName
         
         changeUserInterface(purpose: purpose)
+        
+        self.sendRequestButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
+           self.showStep1AlertDialog()
+        }).disposed(by: bag)
     }
     
     typealias ViewModel = UserProfileViewModel
@@ -253,5 +257,38 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             }).disposed(by: self.setRecoverBag)
         }))
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func showStep1AlertDialog() {
+        let alertController = UIAlertController.init(title: LM.dls.add_friend_alert_title, message: LM.dls.add_friend_alert_message, preferredStyle: .alert)
+        
+        alertController.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = LM.dls.add_friend_placeholder_message
+        })
+        
+        alertController.addAction(UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil))
+        
+        alertController.addAction(UIAlertAction.init(title: LM.dls.g_confirm, style: .default, handler: { (action) in
+            if let textFields = alertController.textFields, let textField = textFields.first, let text = textField.text {
+                self.showStep2AlertDialog(rocketChatUID: self.user!.uid, welcomeMessage: text)
+            }
+        }))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showStep2AlertDialog(rocketChatUID: String, welcomeMessage: String) {
+        guard let myselfRocketChatUID = RocketChatManager.manager.rocketChatUser.value?.name else { return }
+        IMUserManager.manager.inviteFriend(myselfRocketChatUID: myselfRocketChatUID, friendRocketChatUID: rocketChatUID, welcomeMessage: welcomeMessage).asObservable().subscribe(onNext: {
+            [weak self] result in
+            guard let `self` = self else { return }
+            switch result {
+            case .success: self.showAlert(title: LM.dls.add_friend_alert_success, message: nil, completion: {  (_) in
+//                self?.changeUserInterface(purpose: .myFriend)
+            })
+            case .failed(error: let error):
+                EZToast.present(on: self, content: error.localizedDescription)
+            }
+        }).disposed(by: bag)
     }
 }

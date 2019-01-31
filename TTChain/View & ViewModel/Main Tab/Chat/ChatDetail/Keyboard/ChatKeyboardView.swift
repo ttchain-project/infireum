@@ -48,7 +48,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     struct Input {
-        
+        var roomType:RoomType
     }
     
     struct Output {
@@ -66,6 +66,11 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     func config(input: Input, output: Output) {
         self.input = input
         self.output = output
+        
+        if self.input!.roomType == .pvtChat {
+            self.functions.append(FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat)
+            )
+        }
     }
     
     var inputContentViewHeight: CGFloat {
@@ -75,12 +80,14 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         return inputContentViewBottomConstraint?.constant ?? 0
     }
     
-    let functions: [FunctionModel] = [
+    var functions: [FunctionModel] = [
                                       FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
                                       FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
-                                      FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat),
+                                      
                                        FunctionModel.init(title: "Receipt", image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt)
+   
 ]
+    
     
     //TODO: Change this implementation, looks very lame :-\
     /*

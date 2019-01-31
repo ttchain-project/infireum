@@ -26,6 +26,7 @@ enum BlockchainAPI: KLMoyaAPISet {
         case .getBTCUnspent(let api): return api
         case .getBTCTxRecords(let api): return api
             
+        case .getUSDTTransaction(let api): return api
         case .getETHCurrentBlock(let api): return api
         case .getETHNonce(let api): return api
         case .getETHTxRecords(let api): return api
@@ -56,6 +57,7 @@ enum BlockchainAPI: KLMoyaAPISet {
     case getBTCUnspent(GetBTCUnspentAPI)
     case getBTCTxRecords(GetBTCTxRecordsAPI)
     
+    case getUSDTTransaction(GetUSDTTransactionAPI)
     //MARK: - ETH
     case getETHCurrentBlock(GetETHCurrentBlockAPI)
     case getETHNonce(GetETHNonceAPI)
@@ -556,6 +558,76 @@ struct GetBTCTxRecordsAPIModel: KLJSONMappableMoyaResponse {
     }
 }
 
+
+//MARK: - POST https://api.omniexplorer.info/v1/transaction/address
+
+struct GetUSDTTransactionAPI : KLMoyaAPIData {
+    var path: String {return "/v1/transaction/address"}
+    var page: Int
+    var address: String
+    var method: Moya.Method {return .post}
+    
+    var task: Task {
+        let multiPartData : [MultipartFormData] =
+            [MultipartFormData.init(provider: .data(address.data(using: .utf8)!), name: "addr"),
+             MultipartFormData.init(provider: .data(page.string.data(using: .utf8)!), name: "page"),
+        ]
+        return .uploadMultipart(multiPartData)
+    }
+    
+    var stub: Data? {return nil}
+
+    var authNeeded: Bool {return false}
+    
+    var langDepended: Bool {return false}
+    
+    var base : APIBaseEndPointType {
+        let url  = URL.init(string: "https://api.omniexplorer.info")!
+        return .custom(url:url)
+    }
+    var headers: [String : String]? {
+        return ["Content-Type" : "application/x-www-form-urlencoded"]
+    }
+}
+
+struct GetUSDTTransactionAPIModel:KLJSONMappableMoyaResponse {
+    typealias API = GetUSDTTransactionAPI
+    
+    let currentPage: Int
+    let pages: Int
+    let transactions : [USDTTx]
+    
+    init(json: JSON, sourceAPI: API) throws {
+       
+        guard let currentPage = json["current_page"].number?.intValue,
+        let pages = json["pages"].number?.intValue,
+            let tx = json["transactions"].array else {
+                throw GTServerAPIError.noData
+        }
+        
+        let transactions = tx.compactMap { (json) -> USDTTx? in
+            guard
+                let txid = json["txid"].string,
+                let blockHeight = json["block"].number?.intValue,
+                let confirmations = json["confirmations"].number?.intValue,
+                let amountDecimal = Double.init(json["amount"].stringValue),
+                let feeDecimal = Double.init(json["fee"].stringValue),
+                let timeStamp = json["blocktime"].double,
+                let fromAddress = json["sendingaddress"].string,
+                let toAddress = json ["referenceaddress"].string,
+                let valid = json["valid"].bool
+                else {
+                    return nil
+            }
+            
+            return USDTTx.init(txid: txid, blockHeight: blockHeight, confirmations: confirmations, amount: Decimal.init(amountDecimal), fee: Decimal.init(feeDecimal), timestamp: timeStamp, fromAddress: fromAddress, toAddress: toAddress, valid: valid)
+        }
+        
+        self.transactions = transactions
+        self.currentPage = currentPage
+        self.pages = pages
+    }
+}
 
 //MARK: - POST /CustomComments -
 struct GetCustomCommentsAPI: KLMoyaAPIData  {

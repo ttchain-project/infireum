@@ -449,7 +449,7 @@ struct DLS_EN_US: DLS {
     var chat_extend_item_social_envelope = ""
     var chat_extend_item_user_information = ""
     var user_profile_title = ""
-    var user_profile_button_add_friend = ""
+    var user_profile_button_add_friend = "Add Friend"
     var user_profile_block_user = ""
     var user_profile_transfer_account = ""
     var user_profile_alert_transfer_account_title = ""

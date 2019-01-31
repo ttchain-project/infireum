@@ -113,6 +113,7 @@ extension BTCTx {
     private func transRecordSetup(withAddress addr: String)
         -> (TransRecord) -> Void {
         let inoutType = inoutTypeOfAddress(addr)
+            
         return {
             //            [unowned self]
             record in

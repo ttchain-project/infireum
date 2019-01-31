@@ -125,9 +125,9 @@ class TransRecordListTableViewCell: UITableViewCell {
                 case .some(let type):
                     switch type {
                     case .deposit:
-                        amtStr = "↑" + amtStr
-                    case .withdrawal:
                         amtStr = "↓" + amtStr
+                    case .withdrawal:
+                        amtStr = "↑" + amtStr
                     }
                 }
                 
