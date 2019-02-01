@@ -97,10 +97,11 @@ final class FriendListContainerViewController: KLModuleViewController,KLVMVC {
         self.titleLabel.set(textColor: palette.nav_item_2, font: .owMedium(size: 18))
         self.backButton.setImageForAllStates(#imageLiteral(resourceName: "arrowNavBlack").withRenderingMode(.alwaysTemplate))
         self.backButton.tintColor = palette.nav_item_2
+        
         self.view.backgroundColor = palette.application_main
     }
     override func renderLang(_ lang: Lang) {
-        self.titleLabel.text = "通讯录"
+        self.titleLabel.text = lang.dls.contact_title
     }
     func bindView() {
         self.backButton.rx.tap.asDriver().drive(onNext: { _ in

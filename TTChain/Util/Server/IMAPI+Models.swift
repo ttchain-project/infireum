@@ -441,7 +441,6 @@ struct SendFriendRequestAPI : KLMoyaIMAPIData {
 
 struct SendFriendRequestAPIModel:KLJSONMappableMoyaResponse {
     let response: Bool
-    
     init(json: JSON, sourceAPI: SendFriendRequestAPI) throws {
         guard let response = json.bool
             else {

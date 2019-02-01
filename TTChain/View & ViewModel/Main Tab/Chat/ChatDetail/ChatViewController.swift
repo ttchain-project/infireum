@@ -30,6 +30,22 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 let viewModel = GroupInformationViewModel(userGroupInfoModel: userGroupInfoModel)
                 let viewController = GroupInformationViewController.init(viewModel: viewModel)
                 self.show(viewController, sender: nil)
+            case .pvtChat:
+                self.toUserProfileVC(forFriend:self.viewModel.getFriendsModel(for:self.viewModel.input.uid!)!)
+            }
+        }).disposed(by: bag)
+        return barButtonButton
+    }()
+    
+    private lazy var qrCodeBarButton: UIBarButtonItem = {
+        let barButtonButton = UIBarButtonItem(image: #imageLiteral(resourceName: "tt_QRCode_icon"), style: .plain, target: self, action: nil)
+        barButtonButton.rx.tap.subscribe(onNext: {
+            [unowned self] in
+            switch self.viewModel.input.roomType {
+            case .group, .channel:
+                guard let userGroupInfoModel = self.viewModel.groupInfoModel.value else { return }
+                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:userGroupInfoModel.groupID))
+                self.navigationController?.pushViewController(vc)
             case .pvtChat: return
             }
         }).disposed(by: bag)
@@ -127,7 +143,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         tableView.backgroundColor = palette.nav_bg_clear
         changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: palette.nav_item_2, image:#imageLiteral(resourceName: "arrowNavBlack") )
         self.viewToHideKeyboard.backgroundColor = palette.bgView_main
-        navigationItem.rightBarButtonItem = viewModel.input.roomType == .pvtChat ? nil : profileBarButtonButton
+        navigationItem.rightBarButtonItems = viewModel.input.roomType == .pvtChat ? [profileBarButtonButton] : [profileBarButtonButton,qrCodeBarButton]
         navigationItem.rightBarButtonItem?.tintColor = palette.nav_item_2
         
     }

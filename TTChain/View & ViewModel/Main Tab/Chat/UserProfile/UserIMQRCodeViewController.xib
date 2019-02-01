@@ -16,6 +16,8 @@
                 <outlet property="qrCodeImageView" destination="TLk-gQ-TxE" id="dN0-Iq-vRK"/>
                 <outlet property="titleLabel" destination="xZL-qF-ym2" id="M78-dl-Q63"/>
                 <outlet property="titleView" destination="yIq-Kf-Fio" id="42a-yw-JG3"/>
+                <outlet property="uidCopyButton" destination="X1M-rJ-Blg" id="Eq8-bV-Mtp"/>
+                <outlet property="uidLabel" destination="8Nx-nb-DAu" id="T0X-ie-4gW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -51,14 +53,33 @@
                         <constraint firstItem="xZL-qF-ym2" firstAttribute="top" secondItem="yIq-Kf-Fio" secondAttribute="top" constant="12" id="bg8-9b-fgr"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nx-nb-DAu">
+                    <rect key="frame" x="75" y="507" width="225" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1M-rJ-Blg">
+                    <rect key="frame" x="308" y="497.5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="94z-Gi-ypm"/>
+                        <constraint firstAttribute="height" constant="40" id="XXa-lt-Si4"/>
+                    </constraints>
+                    <state key="normal" image="copyAddressButtonCircle"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="TLk-gQ-TxE" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="8GH-OT-od7"/>
+                <constraint firstItem="8Nx-nb-DAu" firstAttribute="top" secondItem="TLk-gQ-TxE" secondAttribute="bottom" constant="61" id="9nf-I8-bRC"/>
                 <constraint firstItem="aZm-1T-MRK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Fpr-8O-akb"/>
                 <constraint firstItem="TLk-gQ-TxE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MSu-IW-a8x"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yIq-Kf-Fio" secondAttribute="trailing" id="WcD-PE-Oqm"/>
+                <constraint firstItem="X1M-rJ-Blg" firstAttribute="leading" secondItem="8Nx-nb-DAu" secondAttribute="trailing" constant="8" id="Zjb-JO-UbU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aZm-1T-MRK" secondAttribute="bottom" constant="20" id="aLB-og-BoP"/>
+                <constraint firstItem="X1M-rJ-Blg" firstAttribute="centerY" secondItem="8Nx-nb-DAu" secondAttribute="centerY" id="apx-Kw-b0K"/>
+                <constraint firstItem="8Nx-nb-DAu" firstAttribute="trailing" secondItem="TLk-gQ-TxE" secondAttribute="trailing" id="dUd-f9-kdc"/>
+                <constraint firstItem="8Nx-nb-DAu" firstAttribute="leading" secondItem="TLk-gQ-TxE" secondAttribute="leading" id="fb3-kX-USZ"/>
                 <constraint firstItem="yIq-Kf-Fio" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="lS4-JR-7Sg"/>
                 <constraint firstItem="aZm-1T-MRK" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="lZI-KN-cXc"/>
                 <constraint firstItem="yIq-Kf-Fio" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="woz-0W-M9w"/>
@@ -67,4 +88,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
+    <resources>
+        <image name="copyAddressButtonCircle" width="77" height="77"/>
+    </resources>
 </document>

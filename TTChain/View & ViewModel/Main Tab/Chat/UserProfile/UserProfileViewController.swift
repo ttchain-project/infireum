@@ -221,7 +221,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             #endif
             return
         }
-        let vc = UserIMQRCodeViewController.instance(from: user)
+        let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uid))
         self.navigationController?.pushViewController(vc)
 //        let vc = xib(vc: UserIMQRCodeViewController.self)
 //        vc.config(constructor: user)
@@ -284,9 +284,9 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             guard let `self` = self else { return }
             switch result {
             case .success: self.showAlert(title: LM.dls.add_friend_alert_success, message: nil, completion: {  (_) in
-//                self?.changeUserInterface(purpose: .myFriend)
             })
             case .failed(error: let error):
+                
                 EZToast.present(on: self, content: error.localizedDescription)
             }
         }).disposed(by: bag)

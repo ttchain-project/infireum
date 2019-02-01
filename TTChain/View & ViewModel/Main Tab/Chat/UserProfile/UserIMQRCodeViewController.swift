@@ -11,13 +11,20 @@ import RxSwift
 import RxCocoa
 
 final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
+   
+    
     typealias ViewModel = UserQRCodeViewModel
-    typealias Constructor = FriendModel
-
+    typealias Constructor = Config
+    
+    struct Config {
+        let uid :String
+    }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var uidLabel: UILabel!
+    @IBOutlet weak var uidCopyButton: UIButton!
     
     var bag: DisposeBag = DisposeBag.init()
     var viewModel: UserQRCodeViewModel!
@@ -57,10 +64,19 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
                                backgroundColor: palette.btn_bgFill_enable_bg)
     }
     
-    func config(constructor: FriendModel) {
+    func config(constructor: UserIMQRCodeViewController.Config) {
         view.layoutIfNeeded()
         let output = UserQRCodeViewModel.Output()
-        viewModel = ViewModel.init(input: UserQRCodeViewModel.Input(imUser: constructor), output: output)
+        viewModel = ViewModel.init(input: UserQRCodeViewModel.Input.init(uid:constructor.uid), output: output)
         viewModel.output.image.bind(to: qrCodeImageView.rx.image).disposed(by: bag)
+        self.uidLabel.text = self.viewModel.uID.value        
+        self.uidCopyButton.rx.tap.asDriver()
+            .throttle(1)
+            .drive(onNext: {
+                [unowned self] in
+                UIPasteboard.general.string = self.viewModel.uID.value
+                self.view.makeToast(LM.dls.g_toast_addr_copied)
+            })
+            .disposed(by: bag)
     }
 }

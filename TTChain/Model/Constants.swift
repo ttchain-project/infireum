@@ -55,13 +55,24 @@ struct Constants {
             case .prd:
                 return "https://hopeseed-api.bibi2u.com"
             case .sit:
-                return "https://hopeseed-api.bibi2u.com"
+                return "http://api-trading.git4u.net:63339"
             case .uat:
                 return "http://api-trading.git4u.net:63339"
             }
         }
-        static var rocketChatURL:String { return "http://api-trading.git4u.net:3000"}
+        static var rocketChatURL:String {
+            switch env() {
+            case .prd:
+                return "http://hopeseed-im.bibi2u.com:3000"
+            case .sit:
+                return "http://192.168.51.21:3000"
+            case .uat:
+                return "http://api-trading.git4u.net:3000"
+            }
+        }
     }
+    
+    
     
     struct BlockchainAPI {
         static var urlStr_3206: String {

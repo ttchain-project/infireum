@@ -161,7 +161,16 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
                 self?.navigationController?.popViewController()
             })
             case .failed(error: let error):
-                EZToast.present(on: self, content: error.localizedDescription)
+                switch error {
+                case .incorrectResult(let code, let errorString):
+                    if code == "9048" {
+                        self.showSimplePopUp(with: "", contents: errorString, cancelTitle: LM.dls.g_cancel, cancelHandler: { (_) in
+                            self.navigationController?.popViewController(animated: true)
+                        })
+                    }
+                default:
+                    EZToast.present(on: self, content: error.localizedDescription)
+                }
             }
         }).disposed(by: inviteBag)
     }

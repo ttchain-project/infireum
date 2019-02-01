@@ -104,7 +104,7 @@ struct DLS_ZH_TW: DLS {
     var tab_wallet = "錢包"
     var tab_trade = "交易"
     var tab_me = "我的"
-    var tab_chat = "通訊"
+    var tab_chat = ""
     var tab_alert_newSystemWallet_title = "Hope Seed 支援了新的錢包！"
     var tab_alert_newSystemWallet_content = "若要新增錢包，請輸入身份(錢包)密碼"
     var tab_alert_placeholder_identityPwd = "身份(錢包)密碼"
@@ -482,4 +482,12 @@ struct DLS_ZH_TW: DLS {
     var chat_secret_keep_5 = "保留5分钟"
     var chat_secret_keep_10 = "保留10分钟"
     var chat_secret_keep_20 = "保留20分钟"
+    
+    var tab_explorer = "发现"
+    var tab_social = "社群"
+    var tab_setting = "设定"
+    
+    var contact_title = "通讯录"
+    var contact_individual = "个人"
+    var contact_group = "群组"
 }

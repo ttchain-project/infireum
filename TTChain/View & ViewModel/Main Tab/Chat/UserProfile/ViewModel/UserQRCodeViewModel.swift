@@ -15,15 +15,15 @@ final class UserQRCodeViewModel: KLRxViewModel {
     typealias OutputSource = Output
 
     struct Input {
-        let uID = BehaviorRelay<String?>(value: nil)
-        
-        init(imUser: FriendModel) {
-            uID.accept(imUser.uid)
-        }
+        let uid:String
     }
     struct Output {
         let image = BehaviorRelay<UIImage?>(value: nil)
     }
+
+    lazy var uID :BehaviorRelay<String?> = {
+        return BehaviorRelay.init(value: self.input.uid)
+    }()
 
     var input: UserQRCodeViewModel.Input
     var output: UserQRCodeViewModel.Output
@@ -37,7 +37,7 @@ final class UserQRCodeViewModel: KLRxViewModel {
     }
     
     func concatInput() {
-        input.uID.map({ text -> UIImage? in
+        self.uID.map({ text -> UIImage? in
             guard let text = text else { return nil }
             return UIImage.init(ciImage: QRCodeGenerator.generateQRCode(from: text)!)
         }).bind(to: output.image).disposed(by: bag)

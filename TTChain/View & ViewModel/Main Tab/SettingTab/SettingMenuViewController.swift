@@ -130,7 +130,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     }
     
     override func renderLang(_ lang: Lang) {
-        self.title = "Setting"
+        self.navigationItem.title = lang.dls.tab_setting
     }
     
     override func renderTheme(_ theme: Theme) {

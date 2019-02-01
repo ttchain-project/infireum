@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,20 +27,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBf-NH-GRN">
-                    <rect key="frame" x="20" y="30" width="30" height="34"/>
+                    <rect key="frame" x="10" y="30" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="BuP-RZ-M8b"/>
+                        <constraint firstAttribute="height" constant="40" id="MpN-TF-YJU"/>
+                    </constraints>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OeZ-Xi-3Ug">
-                    <rect key="frame" x="166.5" y="30" width="42" height="34"/>
+                    <rect key="frame" x="166.5" y="30" width="42" height="40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKb-3Y-2PZ">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9pK-SG-K5i">
-                    <rect key="frame" x="339" y="37.5" width="20" height="19"/>
+                    <rect key="frame" x="339" y="40.5" width="20" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="0Fo-Bl-Nbh"/>
                     </constraints>
@@ -62,7 +66,7 @@
                 <constraint firstItem="vKb-3Y-2PZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="crH-Gm-vU7"/>
                 <constraint firstItem="vKb-3Y-2PZ" firstAttribute="top" secondItem="OeZ-Xi-3Ug" secondAttribute="bottom" id="foH-9Z-IAA"/>
                 <constraint firstItem="9pK-SG-K5i" firstAttribute="leading" secondItem="VBf-NH-GRN" secondAttribute="trailing" constant="20" id="hhD-zm-q7W"/>
-                <constraint firstItem="VBf-NH-GRN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="rpM-h8-BDE"/>
+                <constraint firstItem="VBf-NH-GRN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="rpM-h8-BDE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <variation key="default">

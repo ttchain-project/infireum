@@ -483,4 +483,13 @@ struct DLS_EN_US: DLS {
     var chat_secret_keep_5 = "Keep 5 minutes"
     var chat_secret_keep_10 = "Keep 10 minutes"
     var chat_secret_keep_20 = "Keep 20 minutes"
+    
+    var tab_explorer = "Explorer"
+    var tab_social = "Social"
+    var tab_setting = "Setting"
+    
+    var contact_title = "Contact"
+    var contact_individual = "Individual"
+    var contact_group = "Group"
+
 }

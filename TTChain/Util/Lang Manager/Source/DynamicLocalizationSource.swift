@@ -484,4 +484,12 @@ protocol DynamicLocalizationSource {
     var chat_secret_keep_5 : String { get set }
     var chat_secret_keep_10 : String { get set }
     var chat_secret_keep_20 : String { get set }
+    
+    var tab_explorer : String { get set }
+    var tab_social : String { get set }
+    var tab_setting : String { get set }
+
+    var contact_title : String { get set }
+    var contact_individual : String { get set }
+    var contact_group : String { get set }
 }

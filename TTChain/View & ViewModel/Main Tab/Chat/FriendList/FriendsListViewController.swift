@@ -41,10 +41,10 @@ final class FriendsListViewController: TabmanViewController, RxThemeRespondable,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "通訊錄"
+        self.navigationItem.title = LM.dls.contact_title
         self.dataSource = self
 
-        self.bar.items = [Item(title: "个人"), Item(title: "群组")]
+        self.bar.items = [Item(title: LM.dls.contact_individual), Item(title: LM.dls.contact_group)]
 
         bar.appearance = TabmanBar.Appearance.init({ (appearance) in
             appearance.layout.itemDistribution = TabmanBar.Appearance.Layout.ItemDistribution.leftAligned

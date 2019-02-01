@@ -223,7 +223,7 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
     }
   
     override func renderLang(_ lang: Lang) {
-        self.title = "Explore"
+        self.navigationItem.title = lang.dls.tab_explorer
     }
     
     func handleShortcutNavigation(model:MarketTestTabModel) {
