@@ -462,4 +462,26 @@ protocol DynamicLocalizationSource {
     var add_friend_placeholder_message: String { get set }
     var add_friend_alert_success: String { get set }
     var add_friend_placeholder_friend_id: String { get set }
+    
+    var friend_request_title: String { get set }
+    var group_request_title: String { get set }
+    var friend: String { get set }
+    var group: String { get set }
+    
+    var trend: String { get set }
+    var hot_group: String { get set }
+    var media: String { get set }
+    var blockchain_explorer: String { get set }
+    
+    var select_from_camera: String { get set }
+    var select_from_gallery: String { get set }
+
+    var create_group: String { get set }
+    var chat_secret_setting: String { get set }
+    var decentralize: String { get set }
+    var time_limit: String { get set }
+    var chat_secret_single: String { get set }
+    var chat_secret_keep_5 : String { get set }
+    var chat_secret_keep_10 : String { get set }
+    var chat_secret_keep_20 : String { get set }
 }
