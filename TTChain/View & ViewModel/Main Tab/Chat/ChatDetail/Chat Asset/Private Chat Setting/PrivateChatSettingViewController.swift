@@ -113,9 +113,9 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-        self.privateModeTitleLabel.text = "Chat History Display"
-        self.privateModelLabel.text = "Decentralization"
-        self.privateModeDurationLabel.text = "Time Limit"
+        self.privateModeTitleLabel.text = lang.dls.chat_secret_setting
+        self.privateModelLabel.text = lang.dls.decentralize
+        self.privateModeDurationLabel.text = lang.dls.time_limit
     }
     
     func bindViewModel() {

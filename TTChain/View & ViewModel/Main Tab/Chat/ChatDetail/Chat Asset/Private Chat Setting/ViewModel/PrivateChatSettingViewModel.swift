@@ -19,13 +19,13 @@ enum PrivateChatDuration:String {
     var title : String {
         switch self {
         case .singleConversation:
-            return "Single Conversation"
+            return LM.dls.chat_secret_single
         case .pvt_10_minutes:
-            return "For 10 minutes"
+            return LM.dls.chat_secret_keep_10
         case .pvt_5_minutes:
-            return "For 5 minutes"
+            return LM.dls.chat_secret_keep_5
         case .pvt_20_minutes:
-            return "For 20 minutes"
+            return LM.dls.chat_secret_keep_20
         }
     }
     var apiValue:String {

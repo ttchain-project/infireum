@@ -85,12 +85,11 @@ class ChatPersonListViewModel: KLRxViewModel {
                 if let searchText = searchText, searchText.count > 0 {
                     let filterFriendsListArray = friendListArray.filter { $0.nickName.localizedCaseInsensitiveContains(searchText) }
                     let filterFriendRequestArray = friendRequestListArray.filter { $0.nickName.localizedCaseInsensitiveContains(searchText) }
-                    return  [FriendsSectionModel.FriendRequestSection(title:"Friend Request", items:filterFriendRequestArray),
-                             FriendsSectionModel.FriendInfoSection(title:"Friend Info", items:filterFriendsListArray)]
+                    return  [FriendsSectionModel.FriendRequestSection(title:LM.dls.friend_request_title, items:filterFriendRequestArray),
+                             FriendsSectionModel.FriendInfoSection(title:LM.dls.friend, items:filterFriendsListArray)]
                 }else {
-                    return  [FriendsSectionModel.FriendRequestSection(title:"Friend Request", items:friendRequestListArray),
-                             FriendsSectionModel.FriendInfoSection(title:"Friend Info", items:friendListArray)]
-
+                    return  [FriendsSectionModel.FriendRequestSection(title:LM.dls.friend_request_title, items:friendRequestListArray),
+                             FriendsSectionModel.FriendInfoSection(title:LM.dls.friend, items:friendListArray)]
                 }
                 
         }

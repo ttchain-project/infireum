@@ -374,7 +374,8 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     private func clearIdentity(_ identity: Identity) {
         clearHUD.startAnimating(inView: self.view)
         identity.clear()
-        
+        IMUserManager.manager.clearIMUser()
+
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             [unowned self] in
             self.clearHUD.updateType(KLHUD.HUDType.img(#imageLiteral(resourceName: "iconSpinnerAlertOk")),
@@ -383,8 +384,6 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
                 [unowned self] in
                 self.clearHUD.stopAnimating()
                 OWRxNotificationCenter.instance.notifyIdentityCleared()
-                IMUserManager.manager.clearIMUser()
-
             })
         }
     }

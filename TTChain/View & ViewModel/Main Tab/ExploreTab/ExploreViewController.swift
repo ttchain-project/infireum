@@ -92,7 +92,22 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
         viewModel.exploreOptionsDataSource.configureSupplementaryView = { (datasource, cv, kind, indexpath) in
             if (kind == UICollectionElementKindSectionHeader) {
                 let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
-                headerView.setup(title:"Title")
+              
+                var title :String {
+                    switch indexpath.section {
+                    case 0:
+                    return LM.dls.hot_group
+                    case 1:
+                    return LM.dls.media
+                    case 2:
+                    return "dApp"
+                    case 3:
+                    return LM.dls.blockchain_explorer
+                    default: return ""
+                    }
+                }
+                
+                headerView.setup(title:title)
                 return headerView
             }
             return UICollectionReusableView()
@@ -179,7 +194,7 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
         viewModel.marketCoinDataSource.configureSupplementaryView = { (datasource, cv, kind, indexpath) in
             if (kind == UICollectionElementKindSectionHeader) {
                 let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
-                headerView.setup(title:"Title")
+                headerView.setup(title:LM.dls.trend)
                 return headerView
             }
             return UICollectionReusableView()
@@ -275,17 +290,17 @@ extension ExploreViewController: UICollectionViewDelegateFlowLayout {
        
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-       
-        if (kind == UICollectionElementKindSectionHeader) {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexPath) as!  SettingMenuHeaderCollectionReusableView
-            headerView.setup(title:"Title")
-            headerView.backgroundColor = UIColor.gray
-            headerView.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 40)
-            return headerView
-        }else {
-            return UIView() as! UICollectionReusableView
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//
+//        if (kind == UICollectionElementKindSectionHeader) {
+//            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexPath) as!  SettingMenuHeaderCollectionReusableView
+//            headerView.setup(title:"Title")
+//            headerView.backgroundColor = UIColor.gray
+//            headerView.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 40)
+//            return headerView
+//        }else {
+//            return UIView() as! UICollectionReusableView
+//        }
+//    }
     
 }

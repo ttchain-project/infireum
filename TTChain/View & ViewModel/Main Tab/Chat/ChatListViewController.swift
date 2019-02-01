@@ -241,18 +241,18 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     
     func showAddFriendsList() {
         
-        let addAction = UIAlertAction.init(title: "Add a friend", style: .default) { _ in
+        let addAction = UIAlertAction.init(title: LM.dls.user_profile_button_add_friend, style: .default) { _ in
             self.show(InviteFriendViewController.instance(), sender: self)
         }
 //        let joinGroupAction = UIAlertAction.init(title: "Join A group", style: .default) { _ in
 //
 //        }
-        let createGroupAction = UIAlertAction.init(title: "Create A Group", style: .default) { _ in
+        let createGroupAction = UIAlertAction.init(title: LM.dls.create_group, style: .default) { _ in
             let viewModel = GroupInformationViewModel()
             let viewController = GroupInformationViewController.init(viewModel: viewModel)
             self.show(viewController, sender: nil)
         }
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { _ in
+        let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel) { _ in
             
         }
         let vc = UIAlertController.init(title: "", message: "", preferredStyle: .actionSheet)

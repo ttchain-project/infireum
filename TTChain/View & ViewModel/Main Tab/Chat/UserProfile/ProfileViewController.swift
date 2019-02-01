@@ -99,15 +99,20 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.view.setGradientColor()
     }
     
     override func renderLang(_ lang: Lang) {
-        self.saveButton.setTitle("Save", for: .normal)
-        self.userNameTextField.placeholder = "Enter Name"
-        self.recoveryPasswordButton.setTitle("Set Recovery Password", for: .normal)
+        self.saveButton.setTitle(lang.dls.ab_update_btn_save, for: .normal)
+        self.userNameTextField.placeholder = lang.dls.myIdentity_label_name
+        self.recoveryPasswordButton.setTitle(lang.dls.user_profile_transfer_account, for: .normal)
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -151,17 +156,17 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     }
     
     fileprivate func showImgSourceActionSheet() {
-        let actionSheet = UIAlertController.init(title: "Choose a picture", message: nil, preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController.init(title: "", message: nil, preferredStyle: .actionSheet)
         
-        let camera = UIAlertAction.init(title: "Camera", style: .default) { (_) in
+        let camera = UIAlertAction.init(title: LM.dls.select_from_camera, style: .default) { (_) in
             self.displayCamera()
         }
         
-        let gallery = UIAlertAction.init(title: "Gallery", style: .default) { (_) in
+        let gallery = UIAlertAction.init(title: LM.dls.select_from_gallery, style: .default) { (_) in
             self.displayImageSource()
         }
         
-        let cancel = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
         
         actionSheet.addAction(camera)
         actionSheet.addAction(gallery)

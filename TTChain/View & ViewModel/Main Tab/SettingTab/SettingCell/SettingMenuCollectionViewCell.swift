@@ -20,7 +20,12 @@ class SettingMenuCollectionViewCell: UICollectionViewCell {
     }
     
     func setupCell(model:MarketTest) {
-        imageView.af_setImage(withURL: URL.init(string: model.img)!)
         self.titleLabel.text = model.title
+        guard let imageURL = URL.init(string: model.img) else {
+            imageView.image = #imageLiteral(resourceName: "no_image")
+            return
+        }
+        imageView.af_setImage(withURL: imageURL)
+        
     }
 }

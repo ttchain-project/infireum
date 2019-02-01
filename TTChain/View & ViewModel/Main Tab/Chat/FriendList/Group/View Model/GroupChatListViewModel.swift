@@ -78,11 +78,11 @@ class GroupChatListViewModel: KLRxViewModel {
             if let searchText = searchText, searchText.count > 0 {
                 let filterGroupListArray = groupListArray.filter { $0.groupName.localizedCaseInsensitiveContains(searchText) }
                 let filterGroupRequestArray = groupRequestListArray.filter { $0.groupName.localizedCaseInsensitiveContains(searchText) }
-                return  [GroupListSectionModel.init(title: "Group Requests", items: filterGroupRequestArray),
-                         GroupListSectionModel.init(title: "Group Info", items:filterGroupListArray)]
+                return  [GroupListSectionModel.init(title: LM.dls.group_request_title, items: filterGroupRequestArray),
+                         GroupListSectionModel.init(title: LM.dls.group, items:filterGroupListArray)]
             }else {
-                return  [GroupListSectionModel.init(title: "Group Requests", items: groupRequestListArray),
-                         GroupListSectionModel.init(title: "Group Info", items:groupListArray)]
+                return  [GroupListSectionModel.init(title: LM.dls.group_request_title, items: groupRequestListArray),
+                         GroupListSectionModel.init(title: LM.dls.group, items:groupListArray)]
             }
         }
     }()

@@ -161,7 +161,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
     
         listedCoinView.rx.klrx_tap.asDriver().drive(onNext: {
-            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source:.AirDrop)
+//            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source:.AirDrop)
         }).disposed(by: bag)
     }
 
@@ -208,7 +208,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             //                self.navigationController?.pushViewController(vc, animated: true)
             self.present(vc, animated: true, completion: nil)
         }
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         actionSheet.addAction(actionBTC)
         actionSheet.addAction(actionETH)

@@ -115,7 +115,9 @@ class MainWalletOverviewViewController: KLModuleViewController {
     @IBOutlet weak var walletAddressLabel: UILabel!
     @IBOutlet weak var walletCopyBtn: UIButton!
     @IBOutlet weak var totalFiatValueLabel: UILabel!
-//    @IBOutlet weak var transactionRecordButton: UIButton!
+    @IBOutlet weak var manageLabel: UILabel!
+    @IBOutlet weak var assetsLabel: UILabel!
+    //    @IBOutlet weak var transactionRecordButton: UIButton!
 //    @IBOutlet weak var shareAddress: UIButton!
 //    @IBOutlet weak var switchWalletBtn: UIButton!
     
@@ -224,8 +226,8 @@ class MainWalletOverviewViewController: KLModuleViewController {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
 //        depositBtn.setTitleForAllStates(dls.walletOverview_btn_deposit)
-//        manageAssetBtn.setTitleForAllStates(dls.walletOverview_btn_manageAsset)
-        
+        self.manageLabel.text =  dls.walletOverview_btn_manageAsset
+        self.assetsLabel.text = dls.manageAsset_label_myAsset
 //        switchWalletBtn.setTitleForAllStates(dls.walletOverview_btn_switchWallet)
     }
     
