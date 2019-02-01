@@ -20,13 +20,26 @@ class OWQRCodeEncoder {
     func encodeContent(option: EncodingSource) -> String {
         switch option {
         case .deposit(asset: let asset):
-            let dictionary: [String : String] = [
-                "address" : asset.wallet!.address!,
-                "coinID" : asset.coinID!
-            ]
+//            let dictionary: [String : String] = [
+//                "address" : asset.wallet!.address!,
+//                "coinID" : asset.coinID!
+//            ]
+            var encodedString:String = ""
+            switch asset.coin?.owChainType {
+            case .btc? :
+                encodedString = "bitcoin:" + asset.wallet!.address! + "?amount="
+            case .eth?:
+                encodedString = "ethereum:" + asset.wallet!.address! + "?"
+                if asset.coin?.identifier != Coin.eth_identifier {
+                    encodedString = encodedString + "contractAddress=" + (asset.coin!.contract!) + "&"
+                }
+                encodedString = encodedString +  "decimal=18&value=0"
+
+            default:
+                return ""
+            }
             
-            let jsonString = dictionary.jsonString()!
-            return jsonString
+            return encodedString
         }
     }
     
@@ -55,8 +68,8 @@ class OWQRCodeDecoder {
         
         if let data = raw.data(using: .utf8),
             let json = try? JSON.init(data: data),
-            json.dictionary != nil {
-            if let address = json["address"].string {
+            json.string != nil {
+             if let address = json["address"].string {
                 
                 validateFlow = validator.validate(source: address)
                 
@@ -74,6 +87,33 @@ class OWQRCodeDecoder {
                 
             }else {
                 validateFlow = validator.validate(source: raw)
+            }
+        } else if raw.hasPrefix("bitcoin:") {
+            guard let address = raw.slice(from: "bitcoin:", to: "?") else {
+                return validator.validate(source: raw)
+            }
+            validateFlow = validator.validate(source: address)
+            validateFlow = validateFlow.map {
+                result in
+                switch result {
+                case .address(let addr, chainType: let type, coin: _, amt: let amt):
+                    return .address(addr, chainType: type, coin: nil, amt: amt)
+                default: return result
+                }
+            }
+            
+        }else if raw.hasPrefix("ethereum:") {
+            guard let address = raw.slice(from: "ethereum:", to: "?") else {
+                return validator.validate(source: raw)
+            }
+            validateFlow = validator.validate(source: address)
+            validateFlow = validateFlow.map {
+                result in
+                switch result {
+                case .address(let addr, chainType: let type, coin: _, amt: let amt):
+                    return .address(addr, chainType: type, coin: nil, amt: amt)
+                default: return result
+                }
             }
         }
         else {
@@ -106,3 +146,16 @@ class OWQRCodeDecoder {
         return [:]
     }
 }
+
+ 
+ extension String {
+    
+    func slice(from: String, to: String) -> String? {
+        
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
+    }
+ }
