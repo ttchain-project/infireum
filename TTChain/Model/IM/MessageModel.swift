@@ -57,4 +57,12 @@ extension MessageModel: Equatable {
         return lhs.messageId == rhs.messageId
     }
 }
+extension MessageModel {
+    func isUserSender() -> Bool {
+        guard (RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId) != nil else {
+            return false
+        }
+        return self.senderId == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId
+    }
+}
 

@@ -7881,7 +7881,7 @@
 			baseConfigurationReference = 67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
@@ -7895,7 +7895,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
 				PRODUCT_NAME = TTChain;
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain";
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

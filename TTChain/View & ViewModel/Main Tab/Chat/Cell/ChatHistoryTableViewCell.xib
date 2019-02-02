@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,25 +30,24 @@
                         <rect key="frame" x="86" y="18" width="216" height="67.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Hopeseed 官方帐号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-YE-NoA">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
+                                <rect key="frame" x="0.0" y="5" width="160" height="42.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="0.40392156862745099" green="0.396078431372549" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您好，欢迎来到HopeSeed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsu-eU-Ufw">
-                                <rect key="frame" x="0.0" y="53" width="196" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.56470588235294117" green="0.5607843137254902" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="50.5" width="196" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上午 11:45" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jl-Pq-reA">
-                                <rect key="frame" x="171.5" y="0.0" width="44.5" height="11"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <rect key="frame" x="158" y="0.0" width="58" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9q9-Az-bl5">
-                                <rect key="frame" x="201" y="17" width="15" height="15"/>
+                                <rect key="frame" x="201" y="20.5" width="15" height="15"/>
                                 <color key="backgroundColor" red="0.90980392156862744" green="0.32941176470588235" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -68,9 +67,8 @@
                             <constraint firstItem="9q9-Az-bl5" firstAttribute="top" secondItem="3jl-Pq-reA" secondAttribute="bottom" constant="6" id="PHt-gV-rBe"/>
                             <constraint firstAttribute="trailing" secondItem="3jl-Pq-reA" secondAttribute="trailing" id="aUm-ZL-WQv"/>
                             <constraint firstItem="Tsu-eU-Ufw" firstAttribute="top" secondItem="5Oc-YE-NoA" secondAttribute="bottom" constant="3" id="dsU-pV-fOf"/>
-                            <constraint firstItem="3jl-Pq-reA" firstAttribute="leading" secondItem="5Oc-YE-NoA" secondAttribute="trailing" constant="11.5" id="i0W-kl-ytb"/>
                             <constraint firstItem="Tsu-eU-Ufw" firstAttribute="leading" secondItem="8uJ-yh-xti" secondAttribute="leading" id="jeO-Ko-weN"/>
-                            <constraint firstItem="5Oc-YE-NoA" firstAttribute="top" secondItem="8uJ-yh-xti" secondAttribute="top" id="khR-gs-Dd7"/>
+                            <constraint firstItem="5Oc-YE-NoA" firstAttribute="top" secondItem="8uJ-yh-xti" secondAttribute="top" constant="5" id="khR-gs-Dd7"/>
                             <constraint firstAttribute="bottom" secondItem="Tsu-eU-Ufw" secondAttribute="bottom" id="wnA-dD-Xch"/>
                             <constraint firstAttribute="trailing" secondItem="9q9-Az-bl5" secondAttribute="trailing" id="wwa-av-Srn"/>
                         </constraints>

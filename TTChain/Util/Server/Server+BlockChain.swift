@@ -699,6 +699,10 @@
         let api = JoinPubliGroupRocketChatAPI(roomID: groupID)
         return fire(router: .rocketChat(.joinPublicGroupRocketChat(api)))
     }
+    func deleteMessage(messageId:String, roomID:String) -> RxAPIResponse<DeleteChatMessageAPIModel> {
+        let api = DeleteChatMessageAPI.init(roomID: roomID, msgID: messageId)
+        return fire(router: .rocketChat(.deleteMessage(api)))
+    }
  }
  
  

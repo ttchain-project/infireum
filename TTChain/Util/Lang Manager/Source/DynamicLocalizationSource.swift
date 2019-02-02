@@ -492,4 +492,11 @@ protocol DynamicLocalizationSource {
     var contact_title : String { get set }
     var contact_individual : String { get set }
     var contact_group : String { get set }
+    
+    var stable_coin : String { get set }
+    var sto_coin : String { get set }
+    var delete : String {get set}
+    var forward : String {get set}
+
+    var message_action : String {get set}
 }

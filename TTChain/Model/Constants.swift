@@ -53,7 +53,9 @@ struct Constants {
         static var urlStr: String {
             switch env() {
             case .prd:
-                return "https://hopeseed-api.bibi2u.com"
+                //sit as prd for now
+                return "http://api-trading.git4u.net:63339"
+//                return "https://hopeseed-api.bibi2u.com"
             case .sit:
                 return "http://api-trading.git4u.net:63339"
             case .uat:
@@ -63,7 +65,10 @@ struct Constants {
         static var rocketChatURL:String {
             switch env() {
             case .prd:
-                return "http://hopeseed-im.bibi2u.com:3000"
+                //sit as prd for now
+
+                return "http://api-trading.git4u.net:3000"
+//                return "http://hopeseed-im.bibi2u.com:3000"
             case .sit:
                 return "http://192.168.51.21:3000"
             case .uat:

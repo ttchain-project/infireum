@@ -145,7 +145,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.viewToHideKeyboard.backgroundColor = palette.bgView_main
         navigationItem.rightBarButtonItems = viewModel.input.roomType == .pvtChat ? [profileBarButtonButton] : [profileBarButtonButton,qrCodeBarButton]
         navigationItem.rightBarButtonItem?.tintColor = palette.nav_item_2
-        
     }
     
     override func renderLang(_ lang: Lang) {
@@ -184,6 +183,10 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     }
                     self.toUserProfileVC(forFriend: friendModel)
                 })
+                
+                chatCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    self.showOptionsForLongGesture(for: messageModel)
+                }).disposed(by: chatCell.bag)
                 cell = chatCell
                 
             case .file:
@@ -326,6 +329,39 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         recieptVC.onSelectingCoin.asObservable().subscribe(onNext: { [unowned self] (walletAddress,identifier,amount) in
             self.viewModel.sendReceiptMessage(for: walletAddress, identifier: identifier, amount: amount)
         }).disposed(by: bag)
+    }
+    
+    func showOptionsForLongGesture(for message:MessageModel) {
+        let actionCopy = UIAlertAction.init(title: LM.dls.g_copy, style: .default) { (_) in
+            UIPasteboard.general.string = message.msg
+        }
+        let delete = UIAlertAction.init(title:LM.dls.delete,style:.default) { (_) in
+            //to Delete Message
+            self.viewModel.deleteChatMessage(messageModel:message)
+        }
+        let cancelButton = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+//        let forward = UIAlertAction.init(title:LM.dls.forward,style:.default) { (_) in
+//            //to forward Message
+//        }
+        
+        let alertVC = UIAlertController.init(title: "", message: "", preferredStyle: .actionSheet)
+        
+        if message.isUserSender() {
+            alertVC.addAction(delete)
+        }
+        switch message.msgType {
+        case .general:
+            alertVC.addAction(actionCopy)
+            break
+        default:
+            break
+        }
+        if alertVC.actions.count == 0 {
+            return
+        }
+        alertVC.addAction(cancelButton)
+
+        self.present(alertVC, animated: true, completion: nil)
     }
     
     func toTransferByReceipt(dict : [String:String]) {

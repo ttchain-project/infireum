@@ -462,35 +462,39 @@ struct DLS_ZH_CN: DLS {
     var add_friend_alert_success = "已送出交友邀请"
     var add_friend_placeholder_friend_id = "输入朋友ID"
     
-    var friend_request_title = "交友邀請"
-    var group_request_title = "群组邀請"
+    var friend_request_title = "交友邀请"
+    var group_request_title = "群组邀请"
     var friend = "好友"
     var group = "群组"
     
     var trend = "行情"
     var hot_group = "热门群组"
-    var media =  "媒體"
-    var blockchain_explorer = "區塊鏈瀏覽器"
-
-    var select_from_camera = "相机"
-    var select_from_gallery = "从照片相簿选取"
-
+    var media =  "媒体"
+    var blockchain_explorer = "区块链浏览器"
+    var select_from_camera = "相機"
+    var select_from_gallery = "從照片相簿選取"
     var create_group = "建立群組"
-    
-    var chat_secret_setting = "密聊設定"
+
+    var chat_secret_setting = "密聊设定"
     var decentralize = "去中心化"
-    var time_limit = "時間限制"
-    var chat_secret_single = "單次對話"
-    var chat_secret_keep_5 = "保留5分鐘"
-    var chat_secret_keep_10 = "保留10分鐘"
-    var chat_secret_keep_20 = "保留20分鐘"
-
-    var tab_explorer = "發現"
+    var time_limit = "时间限制"
+    var chat_secret_single = "单次对话"
+    var chat_secret_keep_5 = "保留5分钟"
+    var chat_secret_keep_10 = "保留10分钟"
+    var chat_secret_keep_20 = "保留20分钟"
+    
+    var tab_explorer = "发现"
     var tab_social = "社群"
-    var tab_setting = "設定"
+    var tab_setting = "设定"
+    
+    var contact_title = "通讯录"
+    var contact_individual = "个人"
+    var contact_group = "群组"
 
-    var contact_title = "通訊錄"
-    var contact_individual = "個人"
-    var contact_group = "群組"
 
+    var stable_coin = "稳定币"
+    var sto_coin = "上市区"
+    var delete = "删除"
+    var forward = "转传"
+    var message_action =  "消息动作" 
 }

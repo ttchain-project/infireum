@@ -18,17 +18,6 @@ struct PrivateChatSetup {
     var privateChatDuration : PrivateChatDuration? = nil
 }
 
-struct TimeFromNow {
-    var currentTime : Date {
-        return Date.init(timeIntervalSinceNow: 0)
-    }
-    var tenMinutesFromNow :Date { return Date.init(timeIntervalSinceNow: 600) }
-    var oneMinutesFromNow : Date {
-        return Date.init(timeIntervalSinceNow: 60)
-        
-    }
-}
-
 class ChatViewModel: KLRxViewModel {
     
     struct Input {
@@ -59,7 +48,7 @@ class ChatViewModel: KLRxViewModel {
     public var shouldRefreshCellsForDataUpdate: PublishSubject<Void> = PublishSubject.init()
     var bag: DisposeBag = DisposeBag()
     
-    lazy var timer : Observable<NSInteger> = { return Observable<NSInteger>.interval(5, scheduler: SerialDispatchQueueScheduler(qos: .background)) }()
+    lazy var timer : Observable<NSInteger> = { return Observable<NSInteger>.interval(3, scheduler: SerialDispatchQueueScheduler(qos: .background)) }()
     
     var timerSub: Disposable?
     var groupInfoModel: BehaviorRelay<UserGroupInfoModel?> = {
@@ -112,7 +101,6 @@ class ChatViewModel: KLRxViewModel {
                 return nil
             }
             let groupMemberModel = groupMemberModelArray[0]
-//            let groupMemberModel = self.groupInfoModel.value?.membersArray?.filter { $0.uid == memberId }.first
             if let isBlocked = groupMemberModel.isBlocked, isBlocked {
                 return nil
             }
@@ -162,6 +150,8 @@ class ChatViewModel: KLRxViewModel {
                 DLogError(error)
             case .success(let message):
                 DLogInfo(message)
+                self.fetchAllMessagesForPrivateChat()
+
             }
         }).disposed(by: bag)
     }
@@ -206,6 +196,7 @@ class ChatViewModel: KLRxViewModel {
                     DLogError(error)
                 case .success(let message):
                     DLogInfo(message)
+                    self.fetchAllMessagesForPrivateChat()
                     if message.status {
                         if self.privateChat.isPrivateChatOn.value {
                         }
@@ -223,6 +214,8 @@ class ChatViewModel: KLRxViewModel {
                             DLogError(error)
                         case .success(let message):
                             DLogInfo(message)
+                            self.fetchAllMessagesForPrivateChat()
+
                             if message.status {
                                 
                             } else {
@@ -248,6 +241,16 @@ class ChatViewModel: KLRxViewModel {
             case .success(let model):
                 self.privateChat.isPrivateChatOn.accept(model.isOpenSelfDestructingMessage)
                 self.privateChat.privateChatDuration = model.privateChatType
+            }
+        }).disposed(by: bag)
+    }
+    func deleteChatMessage(messageModel:MessageModel) {
+        Server.instance.deleteMessage(messageId:messageModel.messageId, roomID:messageModel.roomId).asObservable().subscribe(onNext: { (result) in
+            switch result {
+            case .failed(error:let error) :
+                print(error)
+            case .success(_):
+                self.fetchAllMessagesForPrivateChat()
             }
         }).disposed(by: bag)
     }

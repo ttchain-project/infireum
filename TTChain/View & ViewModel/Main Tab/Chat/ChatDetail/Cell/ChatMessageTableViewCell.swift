@@ -33,7 +33,6 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         self.setupUI()
         backgroundColor = .clear
         contentView.backgroundColor = .clear
-        
         selectionStyle = .none
     }
     
@@ -54,12 +53,12 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         rightValueContentView.layer.cornerRadius = 5.0
         rightValueContentView.layer.masksToBounds = true
         
-        leftDateLabel.set(textColor: .gray, font: .owMedium(size: 9))
-        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 11))
-        rightDateLabel.set(textColor: .gray, font: .owMedium(size: 9))
+        leftDateLabel.set(textColor: .black, font: .owMedium(size: 12))
+        senderNameLabel.set(textColor: .black, font: .owDemiBold(size: 14))
+        rightDateLabel.set(textColor: .black, font: .owMedium(size: 12))
         
-        leftMessageLabel.set(textColor: .black)
-        rightMessageLabel.set(textColor: .black)
+        leftMessageLabel.set(textColor: .black,font :.owRegular(size: 16))
+        rightMessageLabel.set(textColor: .black,font :.owRegular(size: 16))
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

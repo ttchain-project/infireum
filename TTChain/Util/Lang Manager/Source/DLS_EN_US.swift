@@ -492,4 +492,9 @@ struct DLS_EN_US: DLS {
     var contact_individual = "Individual"
     var contact_group = "Group"
 
+    var stable_coin = "Stable Coin"
+    var sto_coin = "Listed Coin"
+    var delete = "Delete"
+    var forward = "Forward"
+    var message_action = "Message Action"
 }
