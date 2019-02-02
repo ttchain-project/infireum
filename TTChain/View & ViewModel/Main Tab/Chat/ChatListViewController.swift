@@ -60,7 +60,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tabBarController?.tabBar.isHidden = false
+
+        self.tabBarController?.tabBar.isHidden = false
         
         if IMUserManager.manager.userLoginStatus.value == .deviceIDNotMatched {
             showTransferAlert()

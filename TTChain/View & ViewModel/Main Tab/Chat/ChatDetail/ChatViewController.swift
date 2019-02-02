@@ -198,6 +198,13 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     }
                     self.toUserProfileVC(forFriend: friendModel)
                 })
+                chatImgCell.msgImageView!.rx.klrx_tap.drive(onNext: { _ in
+                    self.toImageViewer(for: messageModel)
+                }).disposed(by: chatImgCell.bag)
+                chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    self.showOptionsForLongGesture(for: messageModel)
+                }).disposed(by: chatImgCell.bag)
+                
                 cell = chatImgCell
             case .receipt :
                 let receiptCell = tv.dequeueReusableCell(withIdentifier: ReceiptTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ReceiptTableViewCell
@@ -208,6 +215,10 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     }
                     self.toUserProfileVC(forFriend: friendModel)
                 })
+                
+                receiptCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    self.showOptionsForLongGesture(for: messageModel)
+                }).disposed(by: receiptCell.bag)
                 
                 receiptCell.bgView.rx.klrx_tap.asDriver().drive(onNext: { [weak self] _ in
                     guard let `self` = self else {
@@ -344,7 +355,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
 //            //to forward Message
 //        }
         
-        let alertVC = UIAlertController.init(title: "", message: "", preferredStyle: .actionSheet)
+        let alertVC = UIAlertController.init(title: LM.dls.message_action, message: "", preferredStyle: .actionSheet)
         
         if message.isUserSender() {
             alertVC.addAction(delete)
@@ -364,6 +375,13 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.present(alertVC, animated: true, completion: nil)
     }
     
+    func toImageViewer(for message:MessageModel) {
+        guard let url = URL.init(string: message.msg) else {
+            return
+        }
+        let vc = ChatImageViewController.instance(from: ChatImageViewController.Config(image: url))
+        self.show(vc, sender: nil)
+    }
     func toTransferByReceipt(dict : [String:String]) {
         guard let coinId = dict["coinID"], let address = dict["address"], let amount = dict["amount"] else {
             return

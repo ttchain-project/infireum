@@ -112,6 +112,15 @@
 		553ACEE321646024002C59AB /* UIImageView+CrispQRCodeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553ACEE021646024002C59AB /* UIImageView+CrispQRCodeImage.swift */; };
 		553ACEE421649CB7002C59AB /* AgreementMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */; };
 		553ACEE521649CB7002C59AB /* AgreementMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */; };
+		555A45AE22057F35004A713A /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45AC22057F35004A713A /* ChatImageViewController.swift */; };
+		555A45AF22057F35004A713A /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45AC22057F35004A713A /* ChatImageViewController.swift */; };
+		555A45B022057F35004A713A /* ChatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45AC22057F35004A713A /* ChatImageViewController.swift */; };
+		555A45B122057F35004A713A /* ChatImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555A45AD22057F35004A713A /* ChatImageViewController.xib */; };
+		555A45B222057F35004A713A /* ChatImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555A45AD22057F35004A713A /* ChatImageViewController.xib */; };
+		555A45B322057F35004A713A /* ChatImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555A45AD22057F35004A713A /* ChatImageViewController.xib */; };
+		555A45B522057FA0004A713A /* ChatImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45B422057FA0004A713A /* ChatImageViewModel.swift */; };
+		555A45B622057FA0004A713A /* ChatImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45B422057FA0004A713A /* ChatImageViewModel.swift */; };
+		555A45B722057FA0004A713A /* ChatImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45B422057FA0004A713A /* ChatImageViewModel.swift */; };
 		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
@@ -1787,6 +1796,9 @@
 		5539A48521676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeImportTableViewHeader.xib; sourceTree = "<group>"; };
 		5539A48721676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeImportViewModel.swift; sourceTree = "<group>"; };
 		553ACEE021646024002C59AB /* UIImageView+CrispQRCodeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+CrispQRCodeImage.swift"; sourceTree = "<group>"; };
+		555A45AC22057F35004A713A /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
+		555A45AD22057F35004A713A /* ChatImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageViewController.xib; sourceTree = "<group>"; };
+		555A45B422057FA0004A713A /* ChatImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewModel.swift; sourceTree = "<group>"; };
 		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
@@ -2577,6 +2589,16 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		555A45AB22057F12004A713A /* ChatImageViewer */ = {
+			isa = PBXGroup;
+			children = (
+				555A45AC22057F35004A713A /* ChatImageViewController.swift */,
+				555A45AD22057F35004A713A /* ChatImageViewController.xib */,
+				555A45B422057FA0004A713A /* ChatImageViewModel.swift */,
+			);
+			path = ChatImageViewer;
+			sourceTree = "<group>";
+		};
 		557D4E5621E357A90073B8D8 /* SettingTabHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -2763,6 +2785,7 @@
 		55EF69D821A812C5007E074A /* ChatDetail */ = {
 			isa = PBXGroup;
 			children = (
+				555A45AB22057F12004A713A /* ChatImageViewer */,
 				55AADF0422004E6000F403C8 /* Cell */,
 				55EF69D921A812C5007E074A /* Chat Asset */,
 				55EF69E121A812C5007E074A /* ChatViewController.swift */,
@@ -5694,6 +5717,7 @@
 				55EF6A6B21A812C6007E074A /* ChatListViewController.xib in Resources */,
 				64D8268720E33FAF00C8FC63 /* ManageAssetTableViewCell.xib in Resources */,
 				5539A49021676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewController.xib in Resources */,
+				555A45B322057F35004A713A /* ChatImageViewController.xib in Resources */,
 				64E4E4D52147B434009B556B /* LaunchViewController.xib in Resources */,
 				5539A4A521676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib in Resources */,
 				640D88E020EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
@@ -5834,6 +5858,7 @@
 				64769B1D2121E86F00C4AB9E /* AgreementViewController.xib in Resources */,
 				6446E24C20FCE85A00EC1E2E /* SelectFiatTableViewCell.xib in Resources */,
 				643200CE20FB22F400B11334 /* WithdrawalChangeToAddressViewController.xib in Resources */,
+				555A45B122057F35004A713A /* ChatImageViewController.xib in Resources */,
 				649E489520ECAC4900B217AD /* PwdHintViewController.xib in Resources */,
 				6424B66F20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.xib in Resources */,
 				6424B69B20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.xib in Resources */,
@@ -5985,6 +6010,7 @@
 				64769B1E2121E86F00C4AB9E /* AgreementViewController.xib in Resources */,
 				6446E24D20FCE85A00EC1E2E /* SelectFiatTableViewCell.xib in Resources */,
 				643200CF20FB22F400B11334 /* WithdrawalChangeToAddressViewController.xib in Resources */,
+				555A45B222057F35004A713A /* ChatImageViewController.xib in Resources */,
 				649E489620ECAC4900B217AD /* PwdHintViewController.xib in Resources */,
 				6424B67020F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.xib in Resources */,
 				6424B69C20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.xib in Resources */,
@@ -6502,6 +6528,7 @@
 				55AADEFB21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				64813A3C20DCA6EE00CAA4D8 /* SubAddress+CoreDataProperties.swift in Sources */,
 				55EF6B2E21A81500007E074A /* LocalIMUser.swift in Sources */,
+				555A45B022057F35004A713A /* ChatImageViewController.swift in Sources */,
 				64C9D42D20FD98BC000B0774 /* AddressBookUnit+Helper.swift in Sources */,
 				6446E23720FC967B00EC1E2E /* SettingsViewModel.swift in Sources */,
 				64F07E1D20D241A000A60C5C /* NVActivityExtension.swift in Sources */,
@@ -6702,6 +6729,7 @@
 				55EF6B8A21A81D43007E074A /* DLS_ZH_CN.swift in Sources */,
 				64F07E2A20D241A500A60C5C /* KLRx.swift in Sources */,
 				649E483C20E7CEED00B217AD /* ChangeWalletViewModel.swift in Sources */,
+				555A45B722057FA0004A713A /* ChatImageViewModel.swift in Sources */,
 				64813A4520DCA6EE00CAA4D8 /* Fiat+CoreDataClass.swift in Sources */,
 				645D4ED3211801EB0052D0E1 /* TokenTxFetcher.swift in Sources */,
 				55AADF0922004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */,
@@ -6946,6 +6974,7 @@
 				55AADEF921FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				649732D3213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataProperties.swift in Sources */,
 				64813A7E20DCADEB00CAA4D8 /* Asset+Helper.swift in Sources */,
+				555A45AE22057F35004A713A /* ChatImageViewController.swift in Sources */,
 				55EF6B2C21A81500007E074A /* LocalIMUser.swift in Sources */,
 				55E730702186E580003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
 				64C9D47720FDDFBB000B0774 /* UpdatetABUnitAddressViewController.swift in Sources */,
@@ -7146,6 +7175,7 @@
 				55EF6B8821A81D43007E074A /* DLS_ZH_CN.swift in Sources */,
 				6470D6B620F35B2B00EB0780 /* WithdrawalETHFeeInfoViewModel.swift in Sources */,
 				6424B63420F4E3FF00AEBCAD /* TransferRecordInfoBarViewController.swift in Sources */,
+				555A45B522057FA0004A713A /* ChatImageViewModel.swift in Sources */,
 				6EB422F621635F9900DF75DB /* AgreementViewModel.swift in Sources */,
 				64F07DF120D241A000A60C5C /* Formatter+QuickGen.swift in Sources */,
 				55AADF0722004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */,
@@ -7383,6 +7413,7 @@
 				55AADEFA21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				64813A7720DCA6EE00CAA4D8 /* CoinRate+CoreDataProperties.swift in Sources */,
 				55EF6B2D21A81500007E074A /* LocalIMUser.swift in Sources */,
+				555A45AF22057F35004A713A /* ChatImageViewController.swift in Sources */,
 				55E7306E2186E57F003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
 				64F07E7B20D36B4200A60C5C /* IdentitySetupViewModel.swift in Sources */,
 				64C9D42C20FD98BC000B0774 /* AddressBookUnit+Helper.swift in Sources */,
@@ -7583,6 +7614,7 @@
 				55EF6B8921A81D43007E074A /* DLS_ZH_CN.swift in Sources */,
 				64813A3820DCA6EE00CAA4D8 /* SubAddress+CoreDataClass.swift in Sources */,
 				6EB422F721635F9900DF75DB /* AgreementViewModel.swift in Sources */,
+				555A45B622057FA0004A713A /* ChatImageViewModel.swift in Sources */,
 				646198C7212D09AD00432D8E /* Localizations.swift in Sources */,
 				64813AB720DCD45A00CAA4D8 /* Language+Helper.swift in Sources */,
 				55AADF0822004ED900F403C8 /* ReceiptTableViewCell.swift in Sources */,
