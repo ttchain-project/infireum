@@ -499,4 +499,5 @@ protocol DynamicLocalizationSource {
     var forward : String {get set}
 
     var message_action : String {get set}
+    var select_wallet_address : String {get set}
 }

@@ -405,9 +405,9 @@ struct DLS_ZH_TW: DLS {
     var changePrefFiat_title = "貨幣單位"
     var changePrefFiat_btn_save = "存儲"
     
-    var account_setting_title = "帐户设定"
-    var basic_setting_title = "基本设置"
-    var follow_us_title = "关注我们"
+    var account_setting_title = "帳戶設定"
+    var basic_setting_title = "基本設置"
+    var follow_us_title = "關注我們"
     var others_title = "其他"
     
     var addressbook_title = "常用地址"
@@ -471,7 +471,7 @@ struct DLS_ZH_TW: DLS {
     
 
     var trend = "行情"
-    var hot_group = "热门群组"
+    var hot_group = "熱門群組"
     var media =  "媒體"
     var blockchain_explorer = "區塊鏈瀏覽器"
     
@@ -504,4 +504,6 @@ struct DLS_ZH_TW: DLS {
     var delete = "刪除"
     var forward = "轉傳"
     var message_action = "消息動作"
+    
+    var select_wallet_address = "請選擇錢包地址"
 }

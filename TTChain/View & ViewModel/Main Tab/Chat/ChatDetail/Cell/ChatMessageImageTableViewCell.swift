@@ -41,8 +41,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         
         self.msgImageView.layer.borderWidth = 5.0
         self.msgImageView.layer.borderColor = UIColor.white.cgColor
-        dateLabel.set(textColor: .gray, font: .owMedium(size: 9))
-        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 11))
+        dateLabel.set(textColor: .gray, font: .owMedium(size: 14))
+        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 16))
 
         self.backgroundColor = .clear
         self.selectionStyle = .none

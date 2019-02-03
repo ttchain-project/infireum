@@ -42,11 +42,11 @@ class WalletOptionsViewModel:KLRxViewModel {
     
     var bag: DisposeBag = DisposeBag.init()
     
-    private(set) lazy var btcWallet: BehaviorRelay<Wallet?> = {
+    lazy var btcWallet: BehaviorRelay<[Wallet]?> = {
         return BehaviorRelay.init(value: nil)
     }()
     
-    private(set) lazy var ethWallet: BehaviorRelay<Wallet?> = {
+    lazy var ethWallet: BehaviorRelay<[Wallet]?> = {
         return BehaviorRelay.init(value: nil)
     }()
 
@@ -64,18 +64,20 @@ class WalletOptionsViewModel:KLRxViewModel {
         guard let btcWallet = DB.instance.get(type: Wallet.self, predicate: predForBTC, sorts: nil) else {
             return
         }
-        self.btcWallet.accept(btcWallet[0])
+        self.btcWallet.accept(btcWallet)
         
         let predForETH = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.eth.rawValue))
         guard let ethWallet = DB.instance.get(type: Wallet.self, predicate: predForETH, sorts: nil) else {
             return
         }
-        self.ethWallet.accept(ethWallet[0])
+        self.ethWallet.accept(ethWallet)
         
-        let _assetsForBTC = Asset.getBTCAssets(forBTCWallet: self.btcWallet.value!)
-        let _assetsForETH = Asset.getETHAssets(forETHWallet: self.ethWallet.value!)
-        var _assetsStableCoins = Asset.getStableETHAssets(forETHWallet: self.ethWallet.value!)
-        _assetsStableCoins.append(contentsOf: Asset.getStableBTCAssets(forBTCWallet: self.btcWallet.value!))
+       
+        
+        let _assetsForBTC = Asset.getBTCAssets(forBTCWallet: self.btcWallet.value![0])
+        let _assetsForETH = Asset.getETHAssets(forETHWallet: self.ethWallet.value![0])
+        var _assetsStableCoins = Asset.getStableETHAssets(forETHWallet:  self.ethWallet.value![0])
+        _assetsStableCoins.append(contentsOf: Asset.getStableBTCAssets(forBTCWallet: self.btcWallet.value![0]))
         let _assetsForAirDrop:[Asset] = []
         
         self.assetsForETH = BehaviorRelay.init(value: _assetsForETH)

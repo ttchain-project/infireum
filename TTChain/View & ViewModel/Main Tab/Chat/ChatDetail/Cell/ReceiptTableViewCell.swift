@@ -20,10 +20,10 @@ class ReceiptTableViewCell: UITableViewCell {
 
     func setup() {
         
-        dateLabel.set(textColor: .gray, font: .owMedium(size: 9))
-        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 11))
+        dateLabel.set(textColor: .black, font: .owMedium(size: 14))
+        senderNameLabel.set(textColor: .black, font: .owDemiBold(size: 16))
 
-        self.messageContent.set(textColor: .gray, font: .owMedium(size: 12))
+        self.messageContent.set(textColor: .black, font: .owMedium(size: 16))
         self.backgroundColor = .clear
         self.selectionStyle = .none
         self.profilePicImageView.cornerRadius = 20.0

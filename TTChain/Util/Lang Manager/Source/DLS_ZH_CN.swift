@@ -470,6 +470,7 @@ struct DLS_ZH_CN: DLS {
     var trend = "行情"
     var hot_group = "热门群组"
     var media =  "媒体"
+    
     var blockchain_explorer = "区块链浏览器"
     var select_from_camera = "相機"
     var select_from_gallery = "從照片相簿選取"
@@ -496,5 +497,8 @@ struct DLS_ZH_CN: DLS {
     var sto_coin = "上市区"
     var delete = "删除"
     var forward = "转传"
-    var message_action =  "消息动作" 
+    var message_action =  "消息动作"
+    
+    var select_wallet_address = "请选择钱包地址"
+
 }

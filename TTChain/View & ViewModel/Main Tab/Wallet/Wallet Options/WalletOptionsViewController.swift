@@ -10,7 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
+
 final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
+    
+    enum NavPurpose {
+        case WalletDetail
+        case StableCoin
+    }
     var viewModel: WalletOptionsViewModel!
     
     typealias ViewModel = WalletOptionsViewModel
@@ -69,15 +76,18 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     }
     
     private func bindViewModel() {
-        self.viewModel.btcWallet.subscribe(onNext: { (wallet) in
-            self.btcAddressLabel.text = wallet?.address
-            
+        
+        
+        self.viewModel.ethWallet.asObservable().subscribe(onNext: { array in
+            self.ethAddressLabel.text = array?.first?.address
+            self.stableCoinAddressLabel.text = array?.first?.address
+            self.listedCoinAddressLabel.text = array?.first?.address
+
         }).disposed(by: bag)
         
-        self.viewModel.ethWallet.subscribe(onNext: { (wallet) in
-            self.ethAddressLabel.text = wallet?.address
-            self.stableCoinAddressLabel.text = wallet?.address
-            self.listedCoinAddressLabel.text = wallet?.address
+        
+        self.viewModel.btcWallet.asObservable().subscribe(onNext: { (wallet) in
+            self.btcAddressLabel.text = wallet?.first?.address
         }).disposed(by: bag)
         
         let totalBTC = self.viewModel.totalFiatValuesBTC.flatMapLatest { $0 }.share()
@@ -132,26 +142,37 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             .disposed(by: bag)
         
         self.btcAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
-            self?.handleAddressCopied(address: self?.viewModel.btcWallet.value?.address)
+            self?.handleAddressCopied(address: self?.viewModel.btcWallet.value?[0].address)
         }).disposed(by: bag)
         self.ethAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
-            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
+            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?[0].address)
         }).disposed(by: bag)
         
         self.stableCoinAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
-            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
+            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?[0].address)
         }).disposed(by: bag)
         
         self.listedCoinAddressCopy.rx.tapGesture().skip(1).subscribe(onNext: {[weak self] (gesture) in
-            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?.address)
+            self?.handleAddressCopied(address: self?.viewModel.ethWallet.value?[0].address)
         }).disposed(by: bag)
         
         btcView.rx.klrx_tap.asDriver().drive(onNext: { _ in
-            self.toWalletDetail(withWallet: self.viewModel.btcWallet.value!, source: .BTC)
+            
+            if self.viewModel.btcWallet.value!.count == 1 {
+                self.toWalletDetail(withWallet: self.viewModel.btcWallet.value![0], source: .BTC)
+            }else {
+                self.chooseWalletActionSheet(wallets: self.viewModel.btcWallet.value!,source: .BTC)
+            }
+            
         }).disposed(by: bag)
         
         ethView.rx.klrx_tap.asDriver().drive(onNext: { _ in
-            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source: .ETH)
+            if self.viewModel.btcWallet.value!.count == 1 {
+                self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: .ETH)
+            }else {
+                self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!,source: .ETH)
+            }
+
         }).disposed(by: bag)
         
 
@@ -163,6 +184,13 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         listedCoinView.rx.klrx_tap.asDriver().drive(onNext: {
 //            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source:.AirDrop)
         }).disposed(by: bag)
+        
+        OWRxNotificationCenter.instance.walletImported.subscribe(onNext: {
+            [unowned self] _ in
+            self.viewModel.fetchWallets()
+        })
+            .disposed(by: bag)
+
     }
 
     func updateValue(for fiat:Fiat?, total:Decimal?) -> String{
@@ -189,24 +217,31 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     }
     
     private func toWalletDetail(withWallet wallet: Wallet, source: MainWalletViewController.Source) {
-        //        WalletFinder.markWallet(wallet)
+        
         let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: wallet, source: source))
-        //                self.navigationController?.pushViewController(vc, animated: true)
         self.present(vc, animated: true, completion: nil)
     }
     
     private func showStableCoinOptions() {
         let actionSheet = UIAlertController.init(title: "Stable Coin",message: "", preferredStyle: .actionSheet)
         let actionBTC = UIAlertAction.init(title: "BTC", style: .default) { _ in
-            let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: self.viewModel.btcWallet.value!, source: .RSC))
-            //                self.navigationController?.pushViewController(vc, animated: true)
-            self.present(vc, animated: true, completion: nil)
+
+            if self.viewModel.btcWallet.value!.count == 0 {
+                self.toWalletDetail(withWallet: self.viewModel.btcWallet.value![0], source: .RSC)
+
+            } else {
+                self.chooseWalletActionSheet(wallets: self.viewModel.btcWallet.value!, source: .RSC)
+            }
         }
         
         let actionETH = UIAlertAction.init(title: "ETH", style: .default) { _ in
-            let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: self.viewModel.ethWallet.value!, source: .RSC))
-            //                self.navigationController?.pushViewController(vc, animated: true)
-            self.present(vc, animated: true, completion: nil)
+            
+            if self.viewModel.btcWallet.value!.count == 0 {
+                self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: .RSC)
+            }else {
+                self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!, source: .RSC)
+            }
+ 
         }
         let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
@@ -247,7 +282,26 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         self.title = "TTChain"
+        self.stableCoinTitleLabel.text = lang.dls.stable_coin
+        self.listedCoinTitleLabel.text = lang.dls.sto_coin
     }
+    
+    func chooseWalletActionSheet(wallets:[Wallet], source: MainWalletViewController.Source) {
+        let actionSheet = UIAlertController.init(title: LM.dls.select_wallet_address, message: "", preferredStyle: .actionSheet)
+        
+        for wallet in wallets {
+            let title = (wallet.name)! + " - " + wallet.address!
+            let action = UIAlertAction.init(title: title, style: .default) { _ in
+                self.toWalletDetail(withWallet: wallet, source: source)
+            }
+            actionSheet.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
     
     @objc func importWallet() {
         let vc = xib(vc: ImportWalletTypeChooseViewController.self)

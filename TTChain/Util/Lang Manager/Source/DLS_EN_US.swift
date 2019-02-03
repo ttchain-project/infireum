@@ -497,4 +497,7 @@ struct DLS_EN_US: DLS {
     var delete = "Delete"
     var forward = "Forward"
     var message_action = "Message Action"
+    
+    var select_wallet_address = "Please select wallet address"
+    
 }
