@@ -62,6 +62,21 @@
 		5508743521EDD978007B3B3B /* ExploreDetailWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508743421EDD978007B3B3B /* ExploreDetailWebViewModel.swift */; };
 		5508743621EDD978007B3B3B /* ExploreDetailWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508743421EDD978007B3B3B /* ExploreDetailWebViewModel.swift */; };
 		5508743721EDD978007B3B3B /* ExploreDetailWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5508743421EDD978007B3B3B /* ExploreDetailWebViewModel.swift */; };
+		5526B52C2211247F00573576 /* ForwardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B52A2211247F00573576 /* ForwardListViewController.swift */; };
+		5526B52D2211247F00573576 /* ForwardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B52A2211247F00573576 /* ForwardListViewController.swift */; };
+		5526B52E2211247F00573576 /* ForwardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B52A2211247F00573576 /* ForwardListViewController.swift */; };
+		5526B52F2211247F00573576 /* ForwardListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5526B52B2211247F00573576 /* ForwardListViewController.xib */; };
+		5526B5302211247F00573576 /* ForwardListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5526B52B2211247F00573576 /* ForwardListViewController.xib */; };
+		5526B5312211247F00573576 /* ForwardListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5526B52B2211247F00573576 /* ForwardListViewController.xib */; };
+		5526B53422114BB100573576 /* ForwardListContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53222114BB100573576 /* ForwardListContainerViewController.swift */; };
+		5526B53522114BB100573576 /* ForwardListContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53222114BB100573576 /* ForwardListContainerViewController.swift */; };
+		5526B53622114BB100573576 /* ForwardListContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53222114BB100573576 /* ForwardListContainerViewController.swift */; };
+		5526B53722114BB100573576 /* ForwardListContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5526B53322114BB100573576 /* ForwardListContainerViewController.xib */; };
+		5526B53822114BB100573576 /* ForwardListContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5526B53322114BB100573576 /* ForwardListContainerViewController.xib */; };
+		5526B53922114BB100573576 /* ForwardListContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5526B53322114BB100573576 /* ForwardListContainerViewController.xib */; };
+		5526B53B22114BDB00573576 /* ForwardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53A22114BDB00573576 /* ForwardListViewModel.swift */; };
+		5526B53C22114BDB00573576 /* ForwardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53A22114BDB00573576 /* ForwardListViewModel.swift */; };
+		5526B53D22114BDB00573576 /* ForwardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53A22114BDB00573576 /* ForwardListViewModel.swift */; };
 		5539A46F21676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */; };
 		5539A47021676F0300A59ACC /* IdentityQRCodeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */; };
 		5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */; };
@@ -1780,6 +1795,11 @@
 		5508742C21EDD627007B3B3B /* ExploreDetailWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailWebViewController.swift; sourceTree = "<group>"; };
 		5508742D21EDD627007B3B3B /* ExploreDetailWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreDetailWebViewController.xib; sourceTree = "<group>"; };
 		5508743421EDD978007B3B3B /* ExploreDetailWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailWebViewModel.swift; sourceTree = "<group>"; };
+		5526B52A2211247F00573576 /* ForwardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardListViewController.swift; sourceTree = "<group>"; };
+		5526B52B2211247F00573576 /* ForwardListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwardListViewController.xib; sourceTree = "<group>"; };
+		5526B53222114BB100573576 /* ForwardListContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardListContainerViewController.swift; sourceTree = "<group>"; };
+		5526B53322114BB100573576 /* ForwardListContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwardListContainerViewController.xib; sourceTree = "<group>"; };
+		5526B53A22114BDB00573576 /* ForwardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardListViewModel.swift; sourceTree = "<group>"; };
 		5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeEncryptionFlow.swift; sourceTree = "<group>"; };
 		5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeContentViewController.swift; sourceTree = "<group>"; };
 		5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeContentViewController.xib; sourceTree = "<group>"; };
@@ -2488,6 +2508,18 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		5526B5292211189A00573576 /* ForwardMessageList */ = {
+			isa = PBXGroup;
+			children = (
+				5526B52A2211247F00573576 /* ForwardListViewController.swift */,
+				5526B52B2211247F00573576 /* ForwardListViewController.xib */,
+				5526B53222114BB100573576 /* ForwardListContainerViewController.swift */,
+				5526B53322114BB100573576 /* ForwardListContainerViewController.xib */,
+				5526B53A22114BDB00573576 /* ForwardListViewModel.swift */,
+			);
+			path = ForwardMessageList;
+			sourceTree = "<group>";
+		};
 		5539A46821676F0300A59ACC /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
@@ -2766,6 +2798,7 @@
 				55EF69EC21A812C5007E074A /* ChatNavigationController.swift */,
 				55EF69ED21A812C5007E074A /* ChatNavigationController.xib */,
 				55EF69EE21A812C5007E074A /* Extend Function Menu */,
+				5526B5292211189A00573576 /* ForwardMessageList */,
 				55EF6A1821A812C5007E074A /* FriendList */,
 				55EF6A3221A812C6007E074A /* UserProfile */,
 				55EF6A3A21A812C6007E074A /* ViewModel */,
@@ -5627,6 +5660,7 @@
 				640D88C420EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
 				5568385021F5A8460006892C /* ProfileViewController.xib in Resources */,
 				64C9D47420FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
+				5526B53922114BB100573576 /* ForwardListContainerViewController.xib in Resources */,
 				55EF6A8321A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
 				55E7305C2186DC4B003AE47E /* MainWalletViewController.xib in Resources */,
 				64C9D46C20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
@@ -5676,6 +5710,7 @@
 				55EF6A9521A812C6007E074A /* SearchMemberViewController.xib in Resources */,
 				64C9D4AD21042F5B000B0774 /* LocalAuthViewController.xib in Resources */,
 				55E730792186F33B003AE47E /* WalletOptionsViewController.xib in Resources */,
+				5526B5312211247F00573576 /* ForwardListViewController.xib in Resources */,
 				6481398520DA719700CAA4D8 /* BackupWalletNoteViewController.xib in Resources */,
 				55EF6AA721A812C6007E074A /* InviteFriendViewController.xib in Resources */,
 				6470D6B420F35B1000EB0780 /* WithdrawalETHFeeInfoViewController.xib in Resources */,
@@ -5889,8 +5924,10 @@
 				64813ADC20DD22F400CAA4D8 /* MainWalletAssetTableViewCell.xib in Resources */,
 				6470D6D020F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.xib in Resources */,
 				640D892620F0691B0010D986 /* WithdrawalBaseViewController.xib in Resources */,
+				5526B52F2211247F00573576 /* ForwardListViewController.xib in Resources */,
 				64C9D4B821044AFF000B0774 /* WithdrawalCICFeeInputViewController.xib in Resources */,
 				6424B65320F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.xib in Resources */,
+				5526B53722114BB100573576 /* ForwardListContainerViewController.xib in Resources */,
 				5539A4A321676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib in Resources */,
 				64C9D44B20FDC8C6000B0774 /* AddressBookViewController.xib in Resources */,
 				55EF6ACF21A812C6007E074A /* ChatPersonListViewController.xib in Resources */,
@@ -6041,8 +6078,10 @@
 				64813ADE20DD22F500CAA4D8 /* MainWalletAssetTableViewCell.xib in Resources */,
 				6470D6D120F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.xib in Resources */,
 				640D892720F0691B0010D986 /* WithdrawalBaseViewController.xib in Resources */,
+				5526B5302211247F00573576 /* ForwardListViewController.xib in Resources */,
 				64C9D4B921044AFF000B0774 /* WithdrawalCICFeeInputViewController.xib in Resources */,
 				6424B65420F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.xib in Resources */,
+				5526B53822114BB100573576 /* ForwardListContainerViewController.xib in Resources */,
 				5539A4A421676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib in Resources */,
 				64C9D44C20FDC8C6000B0774 /* AddressBookViewController.xib in Resources */,
 				55EF6AD021A812C6007E074A /* ChatPersonListViewController.xib in Resources */,
@@ -6539,6 +6578,7 @@
 				6470D66C20F2565700EB0780 /* WithdrawalBTCInfoOverviewViewController.swift in Sources */,
 				64F07E1720D241A000A60C5C /* UIApplication+Top.swift in Sources */,
 				64F07DD820D241A000A60C5C /* UIViewController+MZFormSheetVC.swift in Sources */,
+				5526B53D22114BDB00573576 /* ForwardListViewModel.swift in Sources */,
 				64813A4220DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataProperties.swift in Sources */,
 				55E730652186E534003AE47E /* WIthdrawalRemarkViewModel.swift in Sources */,
 				64769B36212416C800C4AB9E /* CICTxFetcher.swift in Sources */,
@@ -6596,6 +6636,7 @@
 				64D8266020E22F4300C8FC63 /* ManageAssetViewController.swift in Sources */,
 				6424B68620F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.swift in Sources */,
 				6EEA2F212164B32C005FE393 /* QAViewModel.swift in Sources */,
+				5526B52E2211247F00573576 /* ForwardListViewController.swift in Sources */,
 				640D893D20F06DFB0010D986 /* WithdrawalAssetViewModel.swift in Sources */,
 				55EF6AAA21A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
 				55AADF232202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
@@ -6854,6 +6895,7 @@
 				6EB422EF21635B0000DF75DB /* AgreementMeViewController.swift in Sources */,
 				640D88E820EE25860010D986 /* TransRecordStatus.swift in Sources */,
 				5539A4A821676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
+				5526B53622114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				6470D68920F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
 				55EF6A9821A812C6007E074A /* CreateGroupViewModel.swift in Sources */,
 				643200E820FB8CB700B11334 /* MeViewController.swift in Sources */,
@@ -6985,6 +7027,7 @@
 				64E4E4C72147A775009B556B /* ErrorLogger.swift in Sources */,
 				6446E23520FC967B00EC1E2E /* SettingsViewModel.swift in Sources */,
 				64D8263C20DFABC400C8FC63 /* DepositViewModel.swift in Sources */,
+				5526B53B22114BDB00573576 /* ForwardListViewModel.swift in Sources */,
 				640D892320F0691B0010D986 /* WithdrawalBaseViewController.swift in Sources */,
 				649E48AB20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.swift in Sources */,
 				6424B67420F5B97900AEBCAD /* TransferRecordWalletOptionViewController.swift in Sources */,
@@ -7042,6 +7085,7 @@
 				643200BF20FB1D9800B11334 /* WithdrawalCICFeeInfoViewController.swift in Sources */,
 				649732D7213F7D7C00C4D1D5 /* Model1_0_0To1_0_4.xcmappingmodel in Sources */,
 				64F07E0620D241A000A60C5C /* NSObject+NameOfClass.swift in Sources */,
+				5526B52C2211247F00573576 /* ForwardListViewController.swift in Sources */,
 				55EF6AA821A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
 				64D8266A20E23F5D00C8FC63 /* CoinSelection+Helper.swift in Sources */,
 				55AADF212202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
@@ -7300,6 +7344,7 @@
 				643200AC20FAE1DE00B11334 /* LightningTradeConfirmViewController.swift in Sources */,
 				6470D67220F304BA00EB0780 /* WithdrawalInfoOverviewViewModel.swift in Sources */,
 				64813A5520DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataClass.swift in Sources */,
+				5526B53422114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				643200E620FB8CB700B11334 /* MeViewController.swift in Sources */,
 				55EF6A9621A812C6007E074A /* CreateGroupViewModel.swift in Sources */,
 				64F07E7A20D36B4200A60C5C /* IdentitySetupViewModel.swift in Sources */,
@@ -7424,6 +7469,7 @@
 				6470D6BB20F35B9100EB0780 /* WithdrawalETHFeeInfoQuickModeViewModel.swift in Sources */,
 				6424B67520F5B97900AEBCAD /* TransferRecordWalletOptionViewController.swift in Sources */,
 				6470D66B20F2565700EB0780 /* WithdrawalBTCInfoOverviewViewController.swift in Sources */,
+				5526B53C22114BDB00573576 /* ForwardListViewModel.swift in Sources */,
 				6485002220D9110000107473 /* OWQRCodeVIewModel.swift in Sources */,
 				6485005720DA440400107473 /* KLTagFlowLayout.swift in Sources */,
 				64769B35212416C800C4AB9E /* CICTxFetcher.swift in Sources */,
@@ -7481,6 +7527,7 @@
 				649732D8213F7D7C00C4D1D5 /* Model1_0_0To1_0_4.xcmappingmodel in Sources */,
 				64D8265F20E22F4300C8FC63 /* ManageAssetViewController.swift in Sources */,
 				6424B66D20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
+				5526B52D2211247F00573576 /* ForwardListViewController.swift in Sources */,
 				64C9D45120FDD230000B0774 /* AddressBookUnitBrowseViewController.swift in Sources */,
 				55EF6AA921A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
 				55AADF222202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
@@ -7739,6 +7786,7 @@
 				64D8263520DFABB000C8FC63 /* DepositViewController.swift in Sources */,
 				64F07DAA20D2406000A60C5C /* NetworkReachabilityHandler.swift in Sources */,
 				6470D68820F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
+				5526B53522114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				643200E720FB8CB700B11334 /* MeViewController.swift in Sources */,
 				55EF6A9721A812C6007E074A /* CreateGroupViewModel.swift in Sources */,
 				64813A2C20DCA6EE00CAA4D8 /* Language+CoreDataClass.swift in Sources */,

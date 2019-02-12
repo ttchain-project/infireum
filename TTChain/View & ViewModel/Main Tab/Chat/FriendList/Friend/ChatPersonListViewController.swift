@@ -83,7 +83,7 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
                 let model = self.viewModel.friendRequestList.value[indexPath.row]
                 let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.notMyFriend, user: model)
                 let viewController = UserProfileViewController.instance(from: config)
-                self.show(viewController, sender: nil)
+                self.navigationController?.pushViewController(viewController)
             case 1:
                 let model = self.viewModel.friendsList.value[indexPath.row]
                     let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: RoomType.pvtChat, chatTitle: model.nickName, roomID: model.roomId,chatAvatar:model.avatar, uid: model.uid))
@@ -107,7 +107,6 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
         view.addSubview(statusBarView)
         
         view.backgroundColor = theme.palette.bgView_main
-        
         tabBarController?.hidesBottomBarWhenPushed = true
 
     }

@@ -506,4 +506,7 @@ struct DLS_ZH_TW: DLS {
     var message_action = "消息動作"
     
     var select_wallet_address = "請選擇錢包地址"
+    var backupChat_alert_password_mismatch = "錢包賬號與移轉備份密碼不符"
+    
+    var copy_file_url = "複製檔案網址"
 }

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 enum MessageType {
     case general
     case file
@@ -32,6 +34,8 @@ class MessageModel {
     var timestamp:Date
     var userName:String?
     var msgType:MessageType
+    var messageImage: UIImage? = nil
+    
     init(messageId: String,
     roomId: String,
     msg: String,

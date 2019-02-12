@@ -53,7 +53,7 @@ class FriendRequestInformationModel: FriendModel,ChatListPage {
     }
 }
 
-class FriendInfoModel: FriendModel {
+class FriendInfoModel: FriendModel,ChatListPage {
     var avatar: UIImage?
     
     var uid: String = ""

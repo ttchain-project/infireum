@@ -223,10 +223,10 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     }
     
     private func showStableCoinOptions() {
-        let actionSheet = UIAlertController.init(title: "Stable Coin",message: "", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController.init(title: LM.dls.stable_coin,message: "", preferredStyle: .actionSheet)
         let actionBTC = UIAlertAction.init(title: "BTC", style: .default) { _ in
 
-            if self.viewModel.btcWallet.value!.count == 0 {
+            if self.viewModel.btcWallet.value!.count == 1 {
                 self.toWalletDetail(withWallet: self.viewModel.btcWallet.value![0], source: .RSC)
 
             } else {
@@ -236,7 +236,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         
         let actionETH = UIAlertAction.init(title: "ETH", style: .default) { _ in
             
-            if self.viewModel.btcWallet.value!.count == 0 {
+            if self.viewModel.btcWallet.value!.count == 1 {
                 self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: .RSC)
             }else {
                 self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!, source: .RSC)

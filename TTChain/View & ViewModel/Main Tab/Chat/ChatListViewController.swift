@@ -25,6 +25,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         startMonitorThemeIfNeeded()
         bindViewModel()
         bindElements()
+        self.tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 40, right: 0)
     }
     
     typealias ViewModel = ChatListViewModel
@@ -88,8 +89,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
                     if isSuccess {
                         self.viewModel.getList()
                     } else {
-                        let alertController = UIAlertController(title: "钱包帐号与移转备份密码不符", message: nil, preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "好", style: .default, handler: {
+                        let alertController = UIAlertController(title: LM.dls.backupChat_alert_password_mismatch, message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: LM.dls.g_ok, style: .default, handler: {
                             _ in
                             self.showTransferAlert()
                         }))

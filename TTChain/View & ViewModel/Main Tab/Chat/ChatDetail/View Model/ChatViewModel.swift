@@ -155,16 +155,42 @@ class ChatViewModel: KLRxViewModel {
             }
         }).disposed(by: bag)
     }
+    
     func sendReceiptMessage(for walletAddress: String , identifier: String, amount: String) {
         let message = "{\"address\":\"" + walletAddress + "\",\"amount\":\"" + amount + "\",\"coinID\":\"" + identifier + "\"}"
-       
+        self.sendMessage(txt: message)
+    }
+
+    
+    func sendMessage() {
+        var string = self.input.messageText.text
+        string = string?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let trimmed = string else {
+            return
+        }
+        
+        var message = trimmed
+
+        
+        repeat {
+            self.sendMessage(txt: message)
+            if message.count > 500 {
+                message = String(message[message.index(message.startIndex, offsetBy: 500)..<message.endIndex])
+                if message.count < 500 {
+                    self.sendMessage(txt: message)
+                }
+            }
+        } while message.count > 500
+    }
+    
+    
+    func sendMessage(txt:String) {
+        
         guard let user = IMUserManager.manager.userModel.value else {
             return
         }
-        let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID,
-                                                        roomId: self.input.roomID,
-                                                        isGroup: self.input.roomType == .pvtChat ? false : true,
-                                                        msg: message)
+        
+        let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID, roomId: self.input.roomID, isGroup: self.input.roomType == .pvtChat ? false : true, msg: txt)
 
         Server.instance.sendMessage(parameters: parameter).asObservable().subscribe(onNext: { (result) in
             switch result {
@@ -172,60 +198,15 @@ class ChatViewModel: KLRxViewModel {
                 DLogError(error)
             case .success(let message):
                 DLogInfo(message)
+                self.fetchAllMessagesForPrivateChat()
+                if message.status {
+                    if self.privateChat.isPrivateChatOn.value {
+                    }
+                } else {
+                    self.blockSubject.onNext(())
+                }
             }
         }).disposed(by: bag)
-        
-    }
-    func sendMessage() {
-        var string = self.input.messageText.text
-        string = string?.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let trimmed = string else {
-            return
-        }
-        guard let user = IMUserManager.manager.userModel.value else {
-            return
-        }
-        var message = trimmed
-
-        let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID, roomId: self.input.roomID, isGroup: self.input.roomType == .pvtChat ? false : true, msg: message)
-        
-        repeat {
-            Server.instance.sendMessage(parameters: parameter).asObservable().subscribe(onNext: { (result) in
-                switch result {
-                case .failed(error: let error):
-                    DLogError(error)
-                case .success(let message):
-                    DLogInfo(message)
-                    self.fetchAllMessagesForPrivateChat()
-                    if message.status {
-                        if self.privateChat.isPrivateChatOn.value {
-                        }
-                    } else {
-                        self.blockSubject.onNext(())
-                    }
-                }
-            }).disposed(by: bag)
-            if message.count > 500 {
-                message = String(message[message.index(message.startIndex, offsetBy: 500)..<message.endIndex])
-                if message.count < 500 {
-                    Server.instance.sendChatMessage(message: message, forRoom:self.input.roomID).asObservable().subscribe(onNext: { (result) in
-                        switch result {
-                        case .failed(error: let error):
-                            DLogError(error)
-                        case .success(let message):
-                            DLogInfo(message)
-                            self.fetchAllMessagesForPrivateChat()
-
-                            if message.status {
-                                
-                            } else {
-                                self.blockSubject.onNext(())
-                            }
-                        }
-                    }).disposed(by: bag)
-                }
-            }
-        } while message.count > 500
     }
     
     private func isBlocked() {

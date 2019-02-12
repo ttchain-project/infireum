@@ -45,7 +45,13 @@ class FriendTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    
-    
+
+    func config( title: String, image:URL?) {
+        self.descriptionLabel.text = title
+        if image == nil {
+            self.avatarImageView.image = ImageUntil.drawAvatar(text: title)
+        } else {
+            self.avatarImageView.af_setImage(withURL: image!, placeholderImage: #imageLiteral(resourceName: "no_image"))
+        }
+    }
 }

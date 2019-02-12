@@ -499,5 +499,7 @@ struct DLS_EN_US: DLS {
     var message_action = "Message Action"
     
     var select_wallet_address = "Please select wallet address"
-    
+    var backupChat_alert_password_mismatch = "Wallet account does not match the backup password"
+
+    var copy_file_url = "Copy file url"
 }

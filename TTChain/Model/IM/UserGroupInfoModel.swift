@@ -24,7 +24,9 @@ class UserGroupInfoModel:ChatListPage {
     var groupIcon: UIImage? = nil
     var membersArray: [GroupMemberModel]?
     var invitedMembersArray: [GroupMemberModel]?
-    
+    lazy var roomType:RoomType = {
+        return self.isPrivate ? RoomType.group : RoomType.channel
+    }()
     init(groupID: String = "",
     groupOwnerUID: String = "",
     ownerName: String = "",

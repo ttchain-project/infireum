@@ -500,5 +500,8 @@ struct DLS_ZH_CN: DLS {
     var message_action =  "消息动作"
     
     var select_wallet_address = "请选择钱包地址"
+    var backupChat_alert_password_mismatch = "钱包账号与移转备份密码不符"
+    
+    var copy_file_url = "复制档案网址"
 
 }

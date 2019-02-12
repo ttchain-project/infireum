@@ -212,4 +212,17 @@ class OWRxNotificationCenter {
         _onFinishLaunchSync.accept(())
     }
     
+//    //MARK: - OnMessage Forward
+//    public var onMessageForward: Observable<MessageModel> {
+//
+//    }
+//
+//    private lazy var _onMessageForward: PublishRelay<(MessageModel,ChatListPage)> = {
+//        return PublishRelay.init()
+//    }()
+//
+//    public func didForwardMessage(message:MessageModel, toChat:ChatListPage) {
+//        _didInsertCoinSelection.accept(selection)
+//    }
+    
 }

@@ -94,6 +94,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
         bindViewModel()
+    
     }
     
     fileprivate var hasAuthedCamera: Bool {
@@ -202,6 +203,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     self.toImageViewer(for: messageModel)
                 }).disposed(by: chatImgCell.bag)
                 chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    messageModel.messageImage = chatImgCell.msgImageView.image
                     self.showOptionsForLongGesture(for: messageModel)
                 }).disposed(by: chatImgCell.bag)
                 
@@ -343,17 +345,29 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     func showOptionsForLongGesture(for message:MessageModel) {
+        
+        let actionVCBag = DisposeBag.init()
         let actionCopy = UIAlertAction.init(title: LM.dls.g_copy, style: .default) { (_) in
             UIPasteboard.general.string = message.msg
         }
+        
+        let actionCopyFileURL = UIAlertAction.init(title:LM.dls.copy_file_url, style: .default) { (_) in
+            UIPasteboard.general.string = message.msg
+        }
+        
         let delete = UIAlertAction.init(title:LM.dls.delete,style:.default) { (_) in
             //to Delete Message
             self.viewModel.deleteChatMessage(messageModel:message)
         }
         let cancelButton = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
-//        let forward = UIAlertAction.init(title:LM.dls.forward,style:.default) { (_) in
-//            //to forward Message
-//        }
+        let forward = UIAlertAction.init(title:LM.dls.forward,style:.default) { [unowned self] (_) in
+            let vc = ForwardListContainerViewController.init()
+            vc.config(constructor: ForwardListContainerViewController.Config(messageModel: message))
+            self.navigationController?.pushViewController(vc)
+            vc.onForwardChatToSelection.asObservable().subscribe(onNext: { (model) in
+                self.refreshChatViewForForwardedChat(withMessage: message, chatList: model)
+            }).disposed(by: vc.bag)
+        }
         
         let alertVC = UIAlertController.init(title: LM.dls.message_action, message: "", preferredStyle: .actionSheet)
         
@@ -363,7 +377,11 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         switch message.msgType {
         case .general:
             alertVC.addAction(actionCopy)
+            alertVC.addAction(forward)
             break
+        case .file:
+            alertVC.addAction(actionCopyFileURL)
+            alertVC.addAction(forward)
         default:
             break
         }
@@ -371,7 +389,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             return
         }
         alertVC.addAction(cancelButton)
-
         self.present(alertVC, animated: true, completion: nil)
     }
     
@@ -451,6 +468,54 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 
             }
         }).disposed(by: bag)
+    }
+    
+    private func refreshChatViewForForwardedChat(withMessage message:MessageModel, chatList:ChatListPage) {
+        var roomType: RoomType?
+        var chatTitle: String = ""
+        var roomId:String = ""
+        var chatAvatar: UIImage?
+        var uid: String? = nil
+        switch chatList {
+        case is CommunicationListModel:
+            let commModel = chatList as! CommunicationListModel
+            roomType = commModel.roomType
+            chatTitle = commModel.displayName
+            roomId = commModel.roomId
+            chatAvatar = commModel.avatar
+            uid = commModel.privateMessageTargetUid
+        case is FriendModel:
+            let friendModel = chatList as! FriendInfoModel
+            chatTitle = friendModel.nickName
+            roomType = .pvtChat
+            roomId = friendModel.roomId
+            chatAvatar = friendModel.avatar
+            uid = friendModel.uid
+        case is UserGroupInfoModel:
+            let groupModel = chatList as! UserGroupInfoModel
+            chatTitle = groupModel.groupName
+            roomType = groupModel.roomType
+            roomId = groupModel.imGroupId
+            chatAvatar = groupModel.groupIcon
+            uid = nil
+        default:
+            print("CommunicationListModel")
+        }
+        self.viewModel.timerSub?.dispose()
+        self.bag = DisposeBag()
+        self.config(constructor: ChatViewController.Config.init(roomType: roomType!, chatTitle: chatTitle, roomID: roomId, chatAvatar: chatAvatar, uid: uid))
+        
+        switch message.msgType {
+        case .general :
+            self.viewModel.sendMessage(txt:message.msg)
+        case .file:
+            guard let image = message.messageImage else {
+                return
+            }
+            self.viewModel.sendImageAsMessage(image: image)
+        case .receipt:
+            return
+        }
     }
 }
 
