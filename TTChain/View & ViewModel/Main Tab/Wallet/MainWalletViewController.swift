@@ -14,7 +14,7 @@ import Cartography
 final class MainWalletViewController: KLModuleViewController, KLVMVC {
     
     enum Source {
-        case BTC, ETH, RSC, AirDrop
+        case BTC, ETH, StableCoin, ListCoin
     }
     enum EntryPoint:Int {
         case MainTab = 0
@@ -234,10 +234,10 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         case .MainWallet:
             self.title = {
                 switch self.viewModel.input.source {
-                case .RSC:
-                    return "RSC"
-                case .AirDrop:
-                    return "AirDrop"
+                case .StableCoin:
+                    return lang.dls.stable_coin
+                case .ListCoin:
+                    return lang.dls.sto_coin
                 default:
                     return self.viewModel.wallet.value.name
                 }

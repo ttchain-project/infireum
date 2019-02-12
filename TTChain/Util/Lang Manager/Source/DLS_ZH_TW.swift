@@ -509,4 +509,11 @@ struct DLS_ZH_TW: DLS {
     var backupChat_alert_password_mismatch = "錢包賬號與移轉備份密碼不符"
     
     var copy_file_url = "複製檔案網址"
+    var confirm_cancel_editing = "確認取消編輯?"
+    var exit_group = "退出群組"
+    var manage_group = "管理群組"
+    var confirm_exit = "確認退出群組?"
+    var confirm_delete_group = "確認解散刪除群組?"
+    var delete_group = "刪除群組"
+    var group_member = "群組成員"
 }

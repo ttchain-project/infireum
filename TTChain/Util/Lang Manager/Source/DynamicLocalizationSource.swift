@@ -503,4 +503,11 @@ protocol DynamicLocalizationSource {
     var backupChat_alert_password_mismatch : String {get set}
     var copy_file_url : String {get set}
 
+    var confirm_cancel_editing : String {get set}
+    var exit_group : String {get set}
+    var manage_group: String {get set}
+    var confirm_exit: String {get set}
+    var confirm_delete_group: String {get set}
+    var delete_group: String {get set}
+    var group_member: String {get set}
 }

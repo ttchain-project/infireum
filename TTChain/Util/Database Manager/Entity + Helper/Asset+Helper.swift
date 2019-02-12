@@ -41,11 +41,12 @@ extension Asset {
         guard wallet.chainType == ChainType.eth.rawValue else {
             return []
         }
-        
-        let selections = CoinSelection.getAllSelections(of: wallet,
-                                                        filterIsSelected: true)
-        let assets = selections.filter { $0.coinIdentifier?.contains("_AIRDROP") == true  }.compactMap { $0.findAsset() }
-        return assets
+        return []
+
+//        let selections = CoinSelection.getAllSelections(of: wallet,
+//                                                        filterIsSelected: true)
+//        let assets = selections.filter { $0.coinIdentifier?.contains("_AIRDROP") == true  }.compactMap { $0.findAsset() }
+//        return assets
     }
     
     static func getETHAssets(forETHWallet wallet:Wallet) -> [Asset] {

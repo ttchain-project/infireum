@@ -71,12 +71,14 @@ final class GroupInformationViewModel: ViewModel {
         input = Input.init(userGroupInfoModel: userGroupInfoModel)
         output = GroupInformationViewModel.Output.init()
         concatInput()
+        self.getGroupDetails()
     }
     
     func concatInput() {
         input.userGroupInfoModelSubject.map { (userGroupInfoModel) -> ViewModelType in
             return userGroupInfoModel.groupID.isEmpty ? .create : .normal
             }.bind(to: input.typeSubject).disposed(by: disposeBag)
+        
         input.typeSubject.map({ $0 != .normal }).bind(to: output.isEditable).disposed(by: disposeBag)
         input.typeSubject.map { (type) -> ButtonType in
             switch type {
@@ -90,13 +92,28 @@ final class GroupInformationViewModel: ViewModel {
                 }
             }
             }.bind(to: output.buttonType).disposed(by: disposeBag)
+        
         input.userGroupInfoModelSubject.asDriver().drive(onNext: {
             [unowned self] userGroupInfoModel in
-            self.output.title.accept(userGroupInfoModel.groupID.isEmpty ? "创建群组" : "群组成员")
+            self.output.title.accept(userGroupInfoModel.groupID.isEmpty ? LM.dls.create_group : LM.dls.group_member)
             self.output.groupName.accept(userGroupInfoModel.groupName)
             self.output.isPrivate.accept(userGroupInfoModel.isPrivate)
             self.output.isPostable.accept(userGroupInfoModel.isPostMsg)
             self.output.introduction.accept(userGroupInfoModel.introduction)
+            
+            if let image = userGroupInfoModel.groupIcon {
+                self.output.groupImage.accept(image)
+            }else if let url = URL.init(string: userGroupInfoModel.headImg)  {
+                KLRxImageDownloader.instance.download(source: url) {
+                    result in
+                    switch result {
+                    case .failed:
+                        self.output.groupImage.accept(nil)
+                    case .success(let img):
+                        self.output.groupImage.accept(img)
+                    }
+                }
+            }
             var animatableSectionModels = [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>]()
             if let memberCellModels = userGroupInfoModel.membersArray?.map(GroupMemberCollectionViewCellModel.init) {
                 animatableSectionModels = [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: "成员", items: memberCellModels)]
@@ -105,6 +122,7 @@ final class GroupInformationViewModel: ViewModel {
             animatableSectionModels.append(AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: "正在邀请", items: inviteCellModels))
             self.output.animatableSectionModel.accept(animatableSectionModels)
         }).disposed(by: disposeBag)
+        
         input.typeSubject.subscribe(onNext: {
             [unowned self] type in
             self.output.animatableSectionModel.value.forEach({ (sectionModel) in
@@ -149,12 +167,14 @@ final class GroupInformationViewModel: ViewModel {
                 })
             }
         }).disposed(by: disposeBag)
+        
         input.addMembersSubject.subscribe(onNext: {
             [unowned self] newValue in
             let allMembers = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
             let needToAddFriends = newValue.filter({ (model) -> Bool in
                 return !allMembers.contains(where: { $0.uppercased() == model.uid.uppercased() })
             }).map(GroupMemberCollectionViewCellModel.init)
+            
             if var value = self.output.animatableSectionModel.value.first(where: { $0.model == "正在邀请" }) {
                 value.items.append(contentsOf: needToAddFriends)
                 var section = self.output.animatableSectionModel.value
@@ -163,6 +183,7 @@ final class GroupInformationViewModel: ViewModel {
                 self.output.animatableSectionModel.accept(section)
             }
         }).disposed(by: disposeBag)
+        
         input.buttonTapSubject.subscribe(onNext: {
             [unowned self] in
             switch self.output.buttonType.value {
@@ -222,7 +243,10 @@ final class GroupInformationViewModel: ViewModel {
                         Server.instance.groupMembers(parameters: parameters).asObservable().subscribe(onNext: {
                             [weak self] result in
                             guard let `self` = self else { return }
-                            self.output.dismissSubject.onCompleted()
+                            self.uploadGroupPicture(forGroupID: groupID).asObservable().subscribe(onNext: { [weak self] (result) in
+                                guard let `self` = self else { return }
+                                self.output.dismissSubject.onCompleted()
+                            }).disposed(by: self.groupMembersDisposeBag)
                         }).disposed(by: self.groupMembersDisposeBag)
                     case .failed(error: let error):
                         DLogError(error)
@@ -232,6 +256,7 @@ final class GroupInformationViewModel: ViewModel {
                 }).disposed(by: self.createGroupDisposeBag)
             }
         }).disposed(by: disposeBag)
+        
         Observable.combineLatest(output.groupName.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged(), output.animatableSectionModel, output.introduction.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged()) { [unowned self] (groupName, sectionModels, introduce) -> Bool in
             guard let groupName = groupName else { return false }
             switch self.input.typeSubject.value {
@@ -244,6 +269,7 @@ final class GroupInformationViewModel: ViewModel {
             default: return false
             }
             }.bind(to: output.bottomButtonIsEnabled).disposed(by: disposeBag)
+        
         output.animatableSectionModel.subscribe(onNext: {
             [unowned self] value in
             let type = self.input.typeSubject.value
@@ -254,15 +280,17 @@ final class GroupInformationViewModel: ViewModel {
                 })
             })
         }).disposed(by: disposeBag)
+        
         output.groupName.map({ $0?.count ?? 0}).subscribe(onNext: {
             [unowned self] count in
             self.output.nameCountHintString.onNext(count > 20 ? "字数过长 \(count)/20" : "\(count)/20")
-            self.output.nameCountHintColor.onNext(count > 20 ? UIColor.owPumpkinOrange : UIColor.lightGray)
+            self.output.nameCountHintColor.onNext(count > 20 ? UIColor.owPinkRed : UIColor.lightGray)
         }).disposed(by: disposeBag)
+        
         output.introduction.map({ $0?.count ?? 0}).subscribe(onNext: {
             [unowned self] count in
             self.output.introductionCountHintString.onNext(count > 100 ? "字数过长 \(count)/100" : "\(count)/100")
-            self.output.introductionCountHintColor.onNext(count > 100 ? UIColor.owPumpkinOrange : UIColor.lightGray)
+            self.output.introductionCountHintColor.onNext(count > 100 ? UIColor.owPinkRed : UIColor.lightGray)
         }).disposed(by: disposeBag)
     }
     
@@ -275,4 +303,14 @@ final class GroupInformationViewModel: ViewModel {
         return Server.instance.uploadHeadImg(parameters: parameter)
     }
     
+    func getGroupDetails() {
+        Server.instance.getGroupInfo(forGroupId:self.input.userGroupInfoModelSubject.value.groupID).asObservable().subscribe(onNext: { (response) in
+            switch response {
+            case .failed(error: let error):
+                print(error)
+            case .success(let model):
+                self.input.userGroupInfoModelSubject.accept(model.groupInfo)
+            }
+        }).disposed(by: disposeBag)
+    }
 }

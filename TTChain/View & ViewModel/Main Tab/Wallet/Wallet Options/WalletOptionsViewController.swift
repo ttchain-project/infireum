@@ -167,12 +167,11 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
         
         ethView.rx.klrx_tap.asDriver().drive(onNext: { _ in
-            if self.viewModel.btcWallet.value!.count == 1 {
+            if self.viewModel.ethWallet.value!.count == 1 {
                 self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: .ETH)
             }else {
                 self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!,source: .ETH)
             }
-
         }).disposed(by: bag)
         
 
@@ -182,7 +181,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
     
         listedCoinView.rx.klrx_tap.asDriver().drive(onNext: {
-//            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value!, source:.AirDrop)
+            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source:.ListCoin)
         }).disposed(by: bag)
         
         OWRxNotificationCenter.instance.walletImported.subscribe(onNext: {
@@ -227,19 +226,19 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         let actionBTC = UIAlertAction.init(title: "BTC", style: .default) { _ in
 
             if self.viewModel.btcWallet.value!.count == 1 {
-                self.toWalletDetail(withWallet: self.viewModel.btcWallet.value![0], source: .RSC)
+                self.toWalletDetail(withWallet: self.viewModel.btcWallet.value![0], source: .StableCoin)
 
             } else {
-                self.chooseWalletActionSheet(wallets: self.viewModel.btcWallet.value!, source: .RSC)
+                self.chooseWalletActionSheet(wallets: self.viewModel.btcWallet.value!, source: .StableCoin)
             }
         }
         
         let actionETH = UIAlertAction.init(title: "ETH", style: .default) { _ in
             
             if self.viewModel.btcWallet.value!.count == 1 {
-                self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: .RSC)
+                self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: .StableCoin)
             }else {
-                self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!, source: .RSC)
+                self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!, source: .StableCoin)
             }
  
         }

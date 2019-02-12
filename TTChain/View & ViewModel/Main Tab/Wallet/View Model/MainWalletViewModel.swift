@@ -118,7 +118,7 @@ class MainWalletViewModel: KLRxViewModel {
     
     private func fetchAssets() -> [Asset] {
         switch self.input.source {
-        case .RSC:
+        case .StableCoin:
             switch wallet.value.owChainType {
             case .eth:
             return Asset.getStableETHAssets(forETHWallet: self.input.wallet)
@@ -127,7 +127,7 @@ class MainWalletViewModel: KLRxViewModel {
             default:
                 return []
             }
-        case .AirDrop:
+        case .ListCoin:
             return Asset.getAirDropAssets(forETHWallet: input.wallet)
         case .ETH:
             return Asset.getETHAssets(forETHWallet: input.wallet)

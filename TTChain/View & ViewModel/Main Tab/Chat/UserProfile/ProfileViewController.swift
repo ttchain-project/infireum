@@ -10,12 +10,10 @@ import UIKit
 import RxCocoa
 import RxSwift
 import PhotosUI
-//import SKPhotoBrowser
+
 final class ProfileViewController: KLModuleViewController, KLVMVC {
     var viewModel: UserProfileViewModel!
-    
-    
-    
+        
     typealias ViewModel = UserProfileViewModel
     
     var bag: DisposeBag = DisposeBag.init()
@@ -24,25 +22,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
 
     typealias Constructor = Void
     var didUpdateProfileImage: Bool = false
-    fileprivate var hasAuthedCamera: Bool {
-        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-        switch status {
-        case .authorized, .notDetermined:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    fileprivate var hasAuthedPhotoLibrary: Bool {
-        let status = PHPhotoLibrary.authorizationStatus()
-        switch status {
-        case .authorized, .notDetermined:
-            return true
-        default:
-            return false
-        }
-    }
+
     var imUser: IMUser? = {
         guard let imUser = IMUserManager.manager.userModel.value else {
             return nil
@@ -50,7 +30,11 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         return imUser
     }()
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView! {
+        didSet {
+            profileImageView.cornerRadius = profileImageView.height/2
+        }
+    }
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -124,56 +108,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         
         
     }
-    fileprivate func displayCamera() {
-        guard hasAuthedCamera else {
-            return
-        }
-        
-        imagePicker = UIImagePickerController()
-        
-        imagePicker.delegate = self
-        
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
-        
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-    fileprivate func displayImageSource() {
-        guard hasAuthedPhotoLibrary else {
-            
-            return
-        }
-        
-        imagePicker = UIImagePickerController()
-        
-        imagePicker.delegate = self
-        
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-    fileprivate func showImgSourceActionSheet() {
-        let actionSheet = UIAlertController.init(title: "", message: nil, preferredStyle: .actionSheet)
-        
-        let camera = UIAlertAction.init(title: LM.dls.select_from_camera, style: .default) { (_) in
-            self.displayCamera()
-        }
-        
-        let gallery = UIAlertAction.init(title: LM.dls.select_from_gallery, style: .default) { (_) in
-            self.displayImageSource()
-        }
-        
-        let cancel = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
-        
-        actionSheet.addAction(camera)
-        actionSheet.addAction(gallery)
-        actionSheet.addAction(cancel)
-        
-        present(actionSheet, animated: true, completion: nil)
-    }
+
     
     func updateProfilePhoto() {
         
@@ -282,6 +217,58 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     
 }
 
+extension ProfileViewController {
+    
+    fileprivate func displayCamera() {
+        guard PhotoAuthHandler.hasAuthedCamera else {
+            return
+        }
+        
+        imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    fileprivate func displayImageSource() {
+        guard PhotoAuthHandler.hasAuthedPhotoLibrary else {
+            return
+        }
+        
+        imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    fileprivate func showImgSourceActionSheet() {
+        let actionSheet = UIAlertController.init(title: "", message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction.init(title: LM.dls.select_from_camera, style: .default) { (_) in
+            self.displayCamera()
+        }
+        
+        let gallery = UIAlertAction.init(title: LM.dls.select_from_gallery, style: .default) { (_) in
+            self.displayImageSource()
+        }
+        
+        let cancel = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+        
+        actionSheet.addAction(camera)
+        actionSheet.addAction(gallery)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+}
 
 extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

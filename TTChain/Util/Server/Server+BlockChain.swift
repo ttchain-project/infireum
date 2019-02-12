@@ -598,7 +598,7 @@
         if groupID == nil && roomId == nil {
             return RxAPIResponse.just(APIResult.failed(error: .incorrectResult("No roomID or group ID entered", "")))
         }
-        let api = GetGroupInfoAPI.init(roomID: roomId ?? "", groupID: groupID ?? "")
+        let api = GetGroupInfoAPI.init(roomID: roomId , groupID: groupID )
         return fire(router: .IM(.getGroupInfo(api)))
     }
     

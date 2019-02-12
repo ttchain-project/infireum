@@ -164,6 +164,8 @@ class ChatViewModel: KLRxViewModel {
     
     func sendMessage() {
         var string = self.input.messageText.text
+        self.input.messageText.text = ""
+        self.input.messageText.sendActions(for: .valueChanged)
         string = string?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let trimmed = string else {
             return

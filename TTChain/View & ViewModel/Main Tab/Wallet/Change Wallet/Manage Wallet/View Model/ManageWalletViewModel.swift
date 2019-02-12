@@ -46,14 +46,14 @@ class ManageWalletViewModel: KLRxViewModel {
     
     public var startExportPKey: Driver<Wallet> {
         return input.exportPKeyInput
-            .flatMapLatest {
-            [unowned self]
-            _ -> Driver<Bool> in
-                return self.isAbleToExportPKey
-                    .take(1).concat(Observable.never())
-                    .asDriver(onErrorJustReturn: false)
-            }
-            .filter { $0 }
+//            .flatMapLatest {
+//            [unowned self]
+//            _ -> Driver<Bool> in
+//                return self.isAbleToExportPKey
+//                    .take(1).concat(Observable.never())
+//                    .asDriver(onErrorJustReturn: false)
+//            }
+//            .filter { $0 }
             .map {
                 [unowned self] _ in self.input.wallet
             }

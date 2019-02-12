@@ -55,9 +55,9 @@ class ManageAssetViewModel: KLRxViewModel {
         var _coinSels = CoinSelection.getAllSelections(of: input.wallet,
                                                        filterIsSelected: false)
         switch input.source {
-        case .RSC:
+        case .StableCoin:
             _coinSels = _coinSels.filter { $0.coinIdentifier?.contains("_RSC") == true}
-        case .AirDrop:
+        case .ListCoin:
             _coinSels = _coinSels.filter { $0.coinIdentifier?.contains("_AIRDROP") == true}
         default:
             break

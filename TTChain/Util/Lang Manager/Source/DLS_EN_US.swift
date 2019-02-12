@@ -444,17 +444,17 @@ struct DLS_EN_US: DLS {
     var chat_list_title = "Chat"
     var chat_extend_item_sweep_qrcode = ""
     var chat_extend_item_add_channel = ""
-    var chat_extend_item_add_friends = ""
+    var chat_extend_item_add_friends = "Add Friends"
     var chat_extend_item_search_group = ""
     var chat_extend_item_social_envelope = ""
     var chat_extend_item_user_information = ""
     var user_profile_title = "User Profile"
     var user_profile_button_add_friend = "Add Friend"
     var user_profile_block_user = "Block User"
-    var user_profile_transfer_account = ""
-    var user_profile_alert_transfer_account_title = ""
-    var user_profile_alert_transfer_account_message = ""
-    var user_profile_placeholder_transfer_account = ""
+    var user_profile_transfer_account = "Transfer Account"
+    var user_profile_alert_transfer_account_title = "Setting transfer account password"
+    var user_profile_alert_transfer_account_message = "After setting password, you can transfer your IM account to another phone"
+    var user_profile_placeholder_transfer_account = "Input transfer account password"
     var add_friend_title = "Add Friend"
     var add_friend_alert_title = "Add Friend"
     var add_friend_alert_message = "Do you want to add as a friend."
@@ -484,7 +484,7 @@ struct DLS_EN_US: DLS {
     var chat_secret_keep_10 = "Keep 10 minutes"
     var chat_secret_keep_20 = "Keep 20 minutes"
     
-    var tab_explorer = "Explorer"
+    var tab_explorer = "Discovery"
     var tab_social = "Social"
     var tab_setting = "Setting"
     
@@ -502,4 +502,13 @@ struct DLS_EN_US: DLS {
     var backupChat_alert_password_mismatch = "Wallet account does not match the backup password"
 
     var copy_file_url = "Copy file url"
+    
+    var confirm_cancel_editing = "Do you want to cancel editing and undo changes?"
+    
+    var exit_group = "Exit Group"
+    var manage_group = "Manage Group"
+    var confirm_exit = "Are you sure you want to exit the group?"
+    var confirm_delete_group = "Are you sure you want to delete the group?"
+    var delete_group = "Delete group"
+    var group_member = "Group Member"
 }

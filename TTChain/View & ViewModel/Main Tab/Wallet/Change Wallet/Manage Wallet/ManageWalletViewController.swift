@@ -84,7 +84,7 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     private func bindViewModel() {
-        viewModel.isAbleToExportPKey.map { !$0 }.bind(to: exportPKeyBase.rx.isHidden).disposed(by: bag)
+//        viewModel.isAbleToExportPKey.map { !$0 }.bind(to: exportPKeyBase.rx.isHidden).disposed(by: bag)
         viewModel.wallet.map { $0.name }.bind(to: walletNameLabel.rx.text).disposed(by: bag)
         viewModel.wallet.map { $0.address }.bind(to: walletAddressLabel.rx.text).disposed(by: bag)
         

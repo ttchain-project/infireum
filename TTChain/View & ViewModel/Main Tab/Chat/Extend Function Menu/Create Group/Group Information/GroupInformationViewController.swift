@@ -14,11 +14,29 @@ class GroupInformationViewController: UIViewController {
     @IBOutlet weak var spacingView1: UIView!
     @IBOutlet weak var spacingView2: UIView!
     @IBOutlet weak var groupCreateImageView: UIView!
-    @IBOutlet weak var groupImageView: UIImageView!
+    @IBOutlet weak var groupImageView: UIImageView! {
+        didSet {
+//            groupImageView.image = self.viewModel.input.userGroupInfoModelSubject.value.groupIcon
+            self.viewModel.output.groupImage.bind(to: groupImageView.rx.image).disposed(by: disposeBag)
+        }
+    }
     @IBOutlet weak var privateButton: UIButton!
     @IBOutlet weak var publicButton: UIButton!
     @IBOutlet weak var managerButton: UIButton!
     @IBOutlet weak var membersButton: UIButton!
+    
+    @IBOutlet weak var groupIconButton: UIButton! {
+        didSet {
+            
+            viewModel.output.isEditable.map { !$0 }.bind(to: groupIconButton.rx.isHidden).disposed(by: disposeBag)
+
+            groupIconButton.rx.tap.subscribe(onNext: {
+                [unowned self] in
+                self.showImgSourceActionSheet()
+            }).disposed(by: disposeBag)
+        }
+    }
+
     @IBOutlet private weak var groupNameHintLabel: UILabel! {
         didSet {
             viewModel.output.nameCountHintString.bind(to: groupNameHintLabel.rx.text).disposed(by: disposeBag)
@@ -54,7 +72,11 @@ class GroupInformationViewController: UIViewController {
         didSet {
             bottomButton.rx.tap.subscribe(onNext: {
                 [unowned self] in
-                self.viewModel.output.groupImage.accept(self.groupCreateImageView.asImage())
+                if self.viewModel.output.groupImage.value != nil {
+                    self.viewModel.output.groupImage.accept(self.groupImageView.image)
+                }else {
+                    self.viewModel.output.groupImage.accept(self.groupCreateImageView.asImage())
+                }
                 self.viewModel.input.buttonTapSubject.onNext(())
             }).disposed(by: disposeBag)
         }
@@ -92,12 +114,14 @@ class GroupInformationViewController: UIViewController {
         }
     }
     
+    fileprivate var imagePicker: UIImagePickerController!
+
     private let viewModel: GroupInformationViewModel
     private let disposeBag = DisposeBag()
     private var addMembersDisposeBag = DisposeBag()
     
     private lazy var deleteGroupBarButtonItem: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(title: "删除群组", style: .plain, target: self, action: nil)
+        let barButtonItem = UIBarButtonItem(title: LM.dls.delete_group, style: .plain, target: self, action: nil)
         barButtonItem.rx.tap.subscribe(onNext: {
             [unowned self] in
             self.deleteGroup()
@@ -106,7 +130,7 @@ class GroupInformationViewController: UIViewController {
         return barButtonItem
     }()
     private lazy var cancelEditGroupBarButtonItem: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(title: "取消编辑", style: .plain, target: self, action: nil)
+        let barButtonItem = UIBarButtonItem(title: LM.dls.g_cancel, style: .plain, target: self, action: nil)
         barButtonItem.rx.tap.subscribe(onNext: {
             [unowned self] in
             self.undoGroup()
@@ -114,6 +138,8 @@ class GroupInformationViewController: UIViewController {
         barButtonItem.tintColor = UIColor.owPumpkinOrange
         return barButtonItem
     }()
+    
+    var didUpdateProfileImage:Bool = false
     
     init(viewModel: GroupInformationViewModel) {
         self.viewModel = viewModel
@@ -131,11 +157,13 @@ class GroupInformationViewController: UIViewController {
     }
     
     private func setUpRx() {
+        
         viewModel.output.isPostable.subscribe(onNext: {
             [unowned self] isPostable in
             self.managerButton.setImageForAllStates(isPostable ? #imageLiteral(resourceName: "radioButtonOff.png") : #imageLiteral(resourceName: "radioButtonOn.png"))
             self.membersButton.setImageForAllStates(isPostable ? #imageLiteral(resourceName: "radioButtonOn.png") : #imageLiteral(resourceName: "radioButtonOff.png"))
         }).disposed(by: disposeBag)
+        
         viewModel.output.isPrivate.subscribe(onNext: {
             [unowned self] isPrivate in
             self.publicButton.setImage(isPrivate ? #imageLiteral(resourceName: "radioButtonOff.png") : #imageLiteral(resourceName: "radioButtonOn.png"), for: .normal)
@@ -143,8 +171,10 @@ class GroupInformationViewController: UIViewController {
             self.privateButton.setImage(isPrivate ? #imageLiteral(resourceName: "radioButtonOn.png") : #imageLiteral(resourceName: "radioButtonOff.png"), for: .normal)
             self.privateButton.setImage(isPrivate ? #imageLiteral(resourceName: "radioButtonOnDisable.png") : #imageLiteral(resourceName: "radioButtonOffDisable.png"), for: .disabled)
         }).disposed(by: disposeBag)
+        
         viewModel.input.typeSubject.subscribe(onNext: {
             [unowned self] type in
+            
             self.publicButton.isHidden = type == .normal ? self.viewModel.output.isPrivate.value : true
             self.privateButton.isHidden = type == .normal ? !self.publicButton.isHidden : false
             self.managerButton.isHidden = type == .normal ? self.viewModel.output.isPostable.value : false
@@ -157,6 +187,7 @@ class GroupInformationViewController: UIViewController {
             self.membersButton.isEnabled = type != .normal
             self.introduceHintLabel.isHidden = type == .normal
             self.groupNameHintLabel.isHidden = type == .normal
+            
             if type == .normal {
                 self.publicButton.setImage(nil, for: .disabled)
                 self.privateButton.setImage(nil, for: .disabled)
@@ -176,37 +207,44 @@ class GroupInformationViewController: UIViewController {
                 self.navigationItem.rightBarButtonItem = nil
             }
         }).disposed(by: disposeBag)
+        
         viewModel.output.animatableSectionModel.bind(to: collectionView.rx.items(dataSource: viewModel.output.dataSource)).disposed(by: disposeBag)
+        
         viewModel.output.errorMessageSubject.subscribe(onNext: {
             [weak self] message in
             guard let `self` = self else { return }
             EZToast.present(on: self, content: message)
         }).disposed(by: disposeBag)
+        
         viewModel.output.bottomButtonIsEnabled.subscribe(onNext: {
             [unowned self] isEnabled in
             self.bottomButton.isEnabled = isEnabled
             self.bottomButton.backgroundColor = isEnabled ? UIColor.owAzure : UIColor.owSilver
         }).disposed(by: disposeBag)
+        
         viewModel.output.dismissSubject.subscribe(onCompleted: {
             [unowned self] in
             self.pop(sender: self)
         }).disposed(by: disposeBag)
+        
         viewModel.output.popToRootSubject.subscribe(onCompleted: {
             [unowned self] in
             self.popToRoot(sender: self)
         }).disposed(by: disposeBag)
+        
         viewModel.output.buttonType.subscribe(onNext: {
             [unowned self] type in
             switch type {
             case .confirm, .create: self.bottomButton.setTitleForAllStates(LM.dls.g_ok)
-            case .leave: self.bottomButton.setTitleForAllStates("退出群組")
-            case .edit: self.bottomButton.setTitleForAllStates("管理群組")
+            case .leave: self.bottomButton.setTitleForAllStates(LM.dls.exit_group)
+            case .edit: self.bottomButton.setTitleForAllStates(LM.dls.manage_group)
             }
             self.bottomButton.backgroundColor = type == .leave ? UIColor.owPumpkinOrange : UIColor.owIceCold
         }).disposed(by: disposeBag)
+        
         viewModel.output.leaveGroupActionSubject.subscribe(onNext: {
             [unowned self] action in
-            let alertController = UIAlertController(title: "确认退出群组？", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: LM.dls.confirm_exit, message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: LM.dls.g_confirm, style: .default, handler: { (_) in
                 action()
             })
@@ -215,6 +253,7 @@ class GroupInformationViewController: UIViewController {
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
         }).disposed(by: disposeBag)
+        
     }
     
     private func presentAddGroupMemberView() {
@@ -230,7 +269,7 @@ class GroupInformationViewController: UIViewController {
     }
     
     private func deleteGroup() {
-        showAlert(title: "确认解散删除群组？", message: nil, buttonTitles: [LM.dls.g_cancel, LM.dls.g_confirm]) { [unowned self] (index) in
+        showAlert(title: LM.dls.confirm_delete_group, message: nil, buttonTitles: [LM.dls.g_cancel, LM.dls.g_confirm]) { [unowned self] (index) in
             if index == 1 {
                 Server.instance.deleteGroup(parameters: DeleteGroupAPI.Parameters.init(userGroupInfoModel: self.viewModel.input.userGroupInfoModelSubject.value)).asObservable().subscribe(onNext: {
                     [weak self] result in
@@ -246,7 +285,7 @@ class GroupInformationViewController: UIViewController {
     }
     
     private func undoGroup() {
-        showAlert(title: "确认取消编辑？", message: nil, buttonTitles: [LM.dls.g_cancel, LM.dls.g_confirm]) { [unowned self] (index) in
+        showAlert(title: LM.dls.confirm_cancel_editing, message: nil, buttonTitles: [LM.dls.g_cancel, LM.dls.g_confirm]) { [unowned self] (index) in
             if index == 1 {
                 self.viewModel.input.typeSubject.accept(.normal)
                 self.viewModel.input.userGroupInfoModelSubject.accept(self.viewModel.input.userGroupInfoModelSubject.value)
@@ -267,5 +306,96 @@ class GroupInformationViewController: UIViewController {
             viewModel.output.isPostable.accept(sender == membersButton)
         case .normal: return
         }
+    }
+}
+
+
+extension GroupInformationViewController {
+    
+    fileprivate func displayCamera() {
+        guard PhotoAuthHandler.hasAuthedCamera else {
+            return
+        }
+        
+        imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    fileprivate func displayImageSource() {
+        guard PhotoAuthHandler.hasAuthedPhotoLibrary else {
+            return
+        }
+        
+        imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    fileprivate func showImgSourceActionSheet() {
+        let actionSheet = UIAlertController.init(title: "", message: nil, preferredStyle: .actionSheet)
+        
+        let camera = UIAlertAction.init(title: LM.dls.select_from_camera, style: .default) { (_) in
+            self.displayCamera()
+        }
+        
+        let gallery = UIAlertAction.init(title: LM.dls.select_from_gallery, style: .default) { (_) in
+            self.displayImageSource()
+        }
+        
+        let cancel = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+        
+        actionSheet.addAction(camera)
+        actionSheet.addAction(gallery)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+}
+
+extension GroupInformationViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
+            self.didUpdateProfileImage = true
+            self.viewModel.output.groupImage.accept(resizedImg)
+            picker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func targetSize(for originImg:UIImage) -> CGSize {
+        let originSize = originImg.size
+        enum Longer {
+            case w
+            case h
+        }
+        
+        var targetSize: CGSize = .zero
+        let longer : Longer = (originSize.width >= originSize.height) ? .w : .h
+        switch longer {
+        case .w:
+            targetSize.width = min(originSize.width, 480)
+            let compressRatio = targetSize.width / originSize.width
+            targetSize.height = originSize.height * compressRatio
+        case .h:
+            targetSize.height = min(originSize.height, 480)
+            let compressRatio = targetSize.height / originSize.height
+            targetSize.width = originSize.width * compressRatio
+        }
+        
+        return targetSize
     }
 }

@@ -451,7 +451,7 @@ struct DLS_ZH_CN: DLS {
     var user_profile_title = "个人信息"
     var user_profile_button_add_friend = "添加好友"
     var user_profile_block_user = "封锁用户"
-    var user_profile_transfer_account = "移轉帳號"
+    var user_profile_transfer_account = "移转帐号"
     var user_profile_alert_transfer_account_title = "设定移转密码"
     var user_profile_alert_transfer_account_message = "设定移转密码后即可将帐号移动至其他智慧手机"
     var user_profile_placeholder_transfer_account = "请输入移转密码"
@@ -504,4 +504,11 @@ struct DLS_ZH_CN: DLS {
     
     var copy_file_url = "复制档案网址"
 
+    var confirm_cancel_editing = "确认取消编辑?"
+    var exit_group = "退出群组"
+    var manage_group = "管理群组"
+    var confirm_exit = "确认退出群组"
+    var confirm_delete_group = "确认解散删除群组?"
+    var delete_group = "删除群组"
+    var group_member = "群组成员"
 }

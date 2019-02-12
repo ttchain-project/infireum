@@ -26,6 +26,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             [unowned self] in
             switch self.viewModel.input.roomType {
             case .group, .channel:
+                
                 guard let userGroupInfoModel = self.viewModel.groupInfoModel.value else { return }
                 let viewModel = GroupInformationViewModel(userGroupInfoModel: userGroupInfoModel)
                 let viewController = GroupInformationViewController.init(viewModel: viewModel)
@@ -96,27 +97,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         bindViewModel()
     
     }
-    
-    fileprivate var hasAuthedCamera: Bool {
-        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-        switch status {
-        case .authorized, .notDetermined:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    fileprivate var hasAuthedPhotoLibrary: Bool {
-        let status = PHPhotoLibrary.authorizationStatus()
-        switch status {
-        case .authorized, .notDetermined:
-            return true
-        default:
-            return false
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpView()
@@ -281,12 +261,12 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                 case .startSecretChat:
                                     self.toChatSecretViewController()
                                 case .addPhoto:
-                                    guard self.hasAuthedPhotoLibrary else {
+                                    guard PhotoAuthHandler.hasAuthedPhotoLibrary else {
                                         return
                                     }
                                     self.displayCamera(forSource: .photoLibrary)
                                 case .openCamera:
-                                    guard self.hasAuthedCamera else {
+                                    guard PhotoAuthHandler.hasAuthedCamera else {
                                         return
                                     }
                                     self.displayCamera(forSource: .camera)
@@ -304,9 +284,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             .asDriver()
             .drive(onNext: {[unowned self] in
                 self.viewModel.sendMessage()
-                self.keyboardView.textField.text = ""
-                self.keyboardView.textField.sendActions(for: .valueChanged)
-
             })
             .disposed(by: bag)
         
@@ -346,7 +323,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     
     func showOptionsForLongGesture(for message:MessageModel) {
         
-        let actionVCBag = DisposeBag.init()
         let actionCopy = UIAlertAction.init(title: LM.dls.g_copy, style: .default) { (_) in
             UIPasteboard.general.string = message.msg
         }
@@ -428,8 +404,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     fileprivate func displayImageSource() {
-        guard hasAuthedPhotoLibrary else {
-            
+        guard PhotoAuthHandler.hasAuthedPhotoLibrary else {
             return
         }
         imagePicker = UIImagePickerController()
