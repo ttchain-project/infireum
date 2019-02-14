@@ -238,7 +238,7 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
             )
         }
         
-        createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), toColor: theme.palette.application_main)
+        createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), toColor: theme.palette.nav_item_1)
         
         titleLabel.set(
             textColor: theme.palette.label_sub,

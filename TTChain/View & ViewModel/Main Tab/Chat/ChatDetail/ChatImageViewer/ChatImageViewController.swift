@@ -13,9 +13,22 @@ import RxSwift
 final class ChatImageViewController: KLModuleViewController, KLVMVC {
     
     func config(constructor: ChatImageViewController.Config) {
+        
         self.view.layoutIfNeeded()
         self.viewModel = ViewModel.init(input: (), output:())
-        self.imageView.af_setImage(withURL: constructor.image, placeholderImage: #imageLiteral(resourceName: "no_image"))
+        
+        
+        self.imageScrollView.setup()
+        KLRxImageDownloader.instance.download(source: constructor.image) {
+            result in
+            switch result {
+            case .failed:
+                self.imageScrollView.display(image: #imageLiteral(resourceName: "no_image"))
+            case .success(let img):
+                self.imageScrollView.display(image: img)
+            }
+        }
+//        self.imageView.af_setImage(withURL: constructor.image, placeholderImage: #imageLiteral(resourceName: "no_image"))
     }
     
     var viewModel: ChatImageViewModel!
@@ -29,8 +42,8 @@ final class ChatImageViewController: KLModuleViewController, KLVMVC {
     
     typealias ViewModel = ChatImageViewModel
     
-    @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet weak var imageScrollView: ImageScrollView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

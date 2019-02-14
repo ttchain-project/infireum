@@ -117,6 +117,10 @@ class MainWalletViewModel: KLRxViewModel {
     }
     
     private func fetchAssets() -> [Asset] {
+        //check in case the wallet is deleted, need to find a better way.
+        guard self.input.wallet.mainCoin != nil else {
+            return []
+        }
         switch self.input.source {
         case .StableCoin:
             switch wallet.value.owChainType {

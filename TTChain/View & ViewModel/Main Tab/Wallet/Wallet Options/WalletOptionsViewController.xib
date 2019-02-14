@@ -96,7 +96,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt_icon_btc" translatesAutoresizingMaskIntoConstraints="NO" id="qGi-cW-GWb">
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt_icon_btc" translatesAutoresizingMaskIntoConstraints="NO" id="qGi-cW-GWb">
                     <rect key="frame" x="80.666666666666671" y="56.666666666666657" width="50.000000000000014" height="75"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="8L2-1P-PhI"/>
@@ -159,7 +159,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt_icon_eth" translatesAutoresizingMaskIntoConstraints="NO" id="8ID-3c-TRV">
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt_icon_eth" translatesAutoresizingMaskIntoConstraints="NO" id="8ID-3c-TRV">
                     <rect key="frame" x="80.666666666666671" y="134" width="50.000000000000014" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="Di9-CZ-Pva"/>

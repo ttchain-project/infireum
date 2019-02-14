@@ -394,28 +394,12 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     fileprivate func displayCamera(forSource sourceType:UIImagePickerController.SourceType ) {
         
         imagePicker = UIImagePickerController()
-        
+        imagePicker.allowsEditing = true
         imagePicker.delegate = self
-        
-        imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
-        
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    fileprivate func displayImageSource() {
-        guard PhotoAuthHandler.hasAuthedPhotoLibrary else {
-            return
-        }
-        imagePicker = UIImagePickerController()
-        
-        imagePicker.delegate = self
-        
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        self.present(imagePicker, animated: true, completion: nil)
-    }
     
     func toUserProfileVC(forFriend friend: FriendModel) {
         
@@ -510,11 +494,16 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismiss(animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
-            self.viewModel.sendImageAsMessage(image:resizedImg)
-            picker.dismiss(animated: true, completion: nil)
+        
+        var image : UIImage!
+        if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+            image = img
+        } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            image = img
         }
+        let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
+        self.viewModel.sendImageAsMessage(image:resizedImg)
+        picker.dismiss(animated: true, completion: nil)
     }
     
     fileprivate func targetSize(for originImg:UIImage) -> CGSize {

@@ -511,4 +511,6 @@ struct DLS_EN_US: DLS {
     var confirm_delete_group = "Are you sure you want to delete the group?"
     var delete_group = "Delete group"
     var group_member = "Group Member"
+    
+    var manage_currency = "Manage Currency"
 }

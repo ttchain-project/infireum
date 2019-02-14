@@ -226,7 +226,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
 //        depositBtn.setTitleForAllStates(dls.walletOverview_btn_deposit)
-        self.manageLabel.text =  dls.walletOverview_btn_manageAsset
+        self.manageLabel.text =  dls.manage_currency
         self.assetsLabel.text = dls.manageAsset_label_myAsset
 //        switchWalletBtn.setTitleForAllStates(dls.walletOverview_btn_switchWallet)
     }

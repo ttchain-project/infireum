@@ -184,11 +184,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source:.ListCoin)
         }).disposed(by: bag)
         
-        OWRxNotificationCenter.instance.walletImported.subscribe(onNext: {
-            [unowned self] _ in
-            self.viewModel.fetchWallets()
-        })
-            .disposed(by: bag)
+       self.monitorLocalWalletsUpdate()
 
     }
 
@@ -281,8 +277,8 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         self.title = "TTChain"
-        self.stableCoinTitleLabel.text = lang.dls.stable_coin
-        self.listedCoinTitleLabel.text = lang.dls.sto_coin
+        self.stableCoinTitleLabel.text = " " + lang.dls.stable_coin
+        self.listedCoinTitleLabel.text = " " +  lang.dls.sto_coin
     }
     
     func chooseWalletActionSheet(wallets:[Wallet], source: MainWalletViewController.Source) {
@@ -307,4 +303,20 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         let nav = UINavigationController.init(rootViewController: vc)
         present(nav, animated: true, completion: nil)
     }
+    
+    private func monitorLocalWalletsUpdate() {
+        let imported = OWRxNotificationCenter.instance.walletsImported
+            .map { _ in () }
+        let deleted = OWRxNotificationCenter.instance.walletDeleted
+            .map { _ in () }
+        
+        Observable.merge(imported, deleted)
+            .subscribe(onNext: {
+                [weak self]
+                _ in
+                self?.viewModel.fetchWallets()
+            })
+            .disposed(by: bag)
+    }
+
 }

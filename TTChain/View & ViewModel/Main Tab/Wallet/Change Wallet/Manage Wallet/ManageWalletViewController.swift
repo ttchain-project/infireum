@@ -136,9 +136,10 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
         
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1,
+        changeBackBarButton(toColor: palette.nav_item_1,
                                            image: #imageLiteral(resourceName: "arrowNavBlack"),
                                            title: nil)
+
         changeNavShadowVisibility(true)
         
         walletNameLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))

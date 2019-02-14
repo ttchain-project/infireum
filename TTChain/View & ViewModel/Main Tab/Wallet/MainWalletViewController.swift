@@ -339,8 +339,8 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     @objc private func toSettings() {
-        let vc = ManageWalletViewController.navInstance(from: ManageWalletViewController.Config(wallet: viewModel.wallet.value))
-        present(vc, animated: true, completion: nil)
+        let vc = ManageWalletViewController.instance(from: ManageWalletViewController.Config(wallet: viewModel.wallet.value))
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func toQRCodeScan() {

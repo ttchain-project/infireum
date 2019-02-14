@@ -511,4 +511,5 @@ struct DLS_ZH_CN: DLS {
     var confirm_delete_group = "确认解散删除群组?"
     var delete_group = "删除群组"
     var group_member = "群组成员"
+    var manage_currency = "管理币种"
 }

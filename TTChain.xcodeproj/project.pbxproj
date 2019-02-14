@@ -199,6 +199,9 @@
 		55AADF252203020800F403C8 /* UIView+XibInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF242203020600F403C8 /* UIView+XibInstance.swift */; };
 		55AADF262203020800F403C8 /* UIView+XibInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF242203020600F403C8 /* UIView+XibInstance.swift */; };
 		55AADF272203020800F403C8 /* UIView+XibInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADF242203020600F403C8 /* UIView+XibInstance.swift */; };
+		55B5C01B2212D37D007250FA /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C01A2212D37D007250FA /* ImageScrollView.swift */; };
+		55B5C01C2212D37D007250FA /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C01A2212D37D007250FA /* ImageScrollView.swift */; };
+		55B5C01D2212D37D007250FA /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C01A2212D37D007250FA /* ImageScrollView.swift */; };
 		55BB1B40218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B41218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B42218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
@@ -1843,6 +1846,7 @@
 		55AADF1B2202D42B00F403C8 /* USDTTxFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDTTxFetcher.swift; sourceTree = "<group>"; };
 		55AADF202202DF8500F403C8 /* USDTTxHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDTTxHandler.swift; sourceTree = "<group>"; };
 		55AADF242203020600F403C8 /* UIView+XibInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibInstance.swift"; sourceTree = "<group>"; };
+		55B5C01A2212D37D007250FA /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -2742,6 +2746,21 @@
 				55AADF202202DF8500F403C8 /* USDTTxHandler.swift */,
 			);
 			path = Handler;
+			sourceTree = "<group>";
+		};
+		55B5C0192212D35E007250FA /* ImageScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				55B5C01A2212D37D007250FA /* ImageScrollView.swift */,
+			);
+			path = ImageScrollView;
+			sourceTree = "<group>";
+		};
+		55B5C01E221509C5007250FA /* HDWalletLib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HDWalletLib;
 			sourceTree = "<group>";
 		};
 		55BB1B3D218FDC410061F189 /* ExploreTab */ = {
@@ -5273,6 +5292,8 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				55B5C01E221509C5007250FA /* HDWalletLib */,
+				55B5C0192212D35E007250FA /* ImageScrollView */,
 				5526B53E22128E5400573576 /* PhotoAuth */,
 				557D4E5621E357A90073B8D8 /* SettingTabHandler */,
 				55EF6B2221A81500007E074A /* IMUserManager */,
@@ -6665,6 +6686,7 @@
 				5526B54222128E7700573576 /* PhotoAuthHandler.swift in Sources */,
 				64C9D48620FDDFF6000B0774 /* CreatetABUnitAddressViewModel.swift in Sources */,
 				648139B220DB5E4000CAA4D8 /* IdentityRestoreViewController.swift in Sources */,
+				55B5C01D2212D37D007250FA /* ImageScrollView.swift in Sources */,
 				64F07E3020D24DDD00A60C5C /* MainViewController.swift in Sources */,
 				6470D69D20F341CE00EB0780 /* WithdrawalConfirmPwdValidationViewModel.swift in Sources */,
 				55EF6A4A21A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
@@ -7115,6 +7137,7 @@
 				5526B54022128E7700573576 /* PhotoAuthHandler.swift in Sources */,
 				64813A6420DCA6EE00CAA4D8 /* CoinSelection+CoreDataProperties.swift in Sources */,
 				64B98EDA20F98EAC00C4EB11 /* LightningTransactionViewModel.swift in Sources */,
+				55B5C01B2212D37D007250FA /* ImageScrollView.swift in Sources */,
 				6470D68720F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
 				55EF6A4821A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
 				64D8263420DFABB000C8FC63 /* DepositViewController.swift in Sources */,
@@ -7558,6 +7581,7 @@
 				5526B54122128E7700573576 /* PhotoAuthHandler.swift in Sources */,
 				64F07DDD20D241A000A60C5C /* Printer.swift in Sources */,
 				64B98EDB20F98EAC00C4EB11 /* LightningTransactionViewModel.swift in Sources */,
+				55B5C01C2212D37D007250FA /* ImageScrollView.swift in Sources */,
 				64F07D2220D0E8FA00A60C5C /* AppDelegate.swift in Sources */,
 				64D8269B20E3E2AC00C8FC63 /* TransRecord+CoreDataClass.swift in Sources */,
 				55EF6A4921A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,

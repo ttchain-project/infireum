@@ -510,4 +510,6 @@ protocol DynamicLocalizationSource {
     var confirm_delete_group: String {get set}
     var delete_group: String {get set}
     var group_member: String {get set}
+    var manage_currency: String {get set}
+
 }
