@@ -104,7 +104,6 @@ extension Wallet {
                 line()
             }
         }
-        
         return wallets
     }
     

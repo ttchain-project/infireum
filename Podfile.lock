@@ -57,6 +57,10 @@ PODS:
   - GoogleUtilities/Reachability (5.2.3):
     - GoogleUtilities/Logger
   - GzipSwift (4.0.4)
+  - HDWalletKit (0.1.11):
+    - CryptoSwift (~> 0.12)
+    - scrypt (~> 2.0)
+    - secp256k1.swift (~> 0.1.4)
   - HockeySDK (5.1.2):
     - HockeySDK/DefaultLib (= 5.1.2)
   - HockeySDK/DefaultLib (5.1.2)
@@ -94,6 +98,9 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.3.0)
+  - scrypt (2.0):
+    - CryptoSwift (~> 0.11)
+  - secp256k1.swift (0.1.4)
   - SkyFloatingLabelTextField (3.5.2)
   - SwifterSwift (4.4.0):
     - SwifterSwift/AppKit (= 4.4.0)
@@ -130,6 +137,7 @@ DEPENDENCIES:
   - Flurry-iOS-SDK/FlurryAds
   - Flurry-iOS-SDK/FlurrySDK
   - GzipSwift
+  - HDWalletKit
   - HockeySDK
   - IQKeyboardManagerSwift
   - Moya/RxSwift
@@ -166,6 +174,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - GzipSwift
+    - HDWalletKit
     - HockeySDK
     - IQKeyboardManagerSwift
     - Moya
@@ -181,6 +190,8 @@ SPEC REPOS:
     - RxGesture
     - RxOptional
     - RxSwift
+    - scrypt
+    - secp256k1.swift
     - SkyFloatingLabelTextField
     - SwifterSwift
     - SwiftMoment
@@ -206,6 +217,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: fc4a4c3fe0144db9313cbf443ffe62e6b1d6268c
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
+  HDWalletKit: 2b526d84a1c573af328d73157ac1b365d8e9813c
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Moya: a725035953bc1c0eb1be505ab903984501d82440
@@ -221,6 +233,8 @@ SPEC CHECKSUMS:
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxOptional: bd32ff8ca9df4177683d56ffeb618a9d4d5d5cad
   RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
+  scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
+  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SkyFloatingLabelTextField: f0672b67cd0e86abda946c0dc3b2fe8580767dbb
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
   SwiftMoment: dc6dd27012e267819104cbb03f74ff9192dd0b42
@@ -228,6 +242,6 @@ SPEC CHECKSUMS:
   Tabman: a09f7d7aa62b231ec475ca9eb9171f7cc973a3d7
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: 9ec7b98bdc4881925314b76cd119cf11274d6bf2
+PODFILE CHECKSUM: c9f49cc01e09d9c5eb4b694d501d1e8b23538b3d
 
 COCOAPODS: 1.5.3

@@ -141,7 +141,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     
     func updateUserName() {
         guard let userName = self.userNameTextField.text, userName.count > 0 else {
-            self.showSimplePopUp(with: "Error", contents: "Name cannot be nil", cancelTitle: "Ok") { _ in
+            self.showSimplePopUp(with: "Error", contents: "Name cannot be empty", cancelTitle: "Ok") { _ in
                 self.userNameTextField.becomeFirstResponder()
             }
             return
@@ -169,7 +169,6 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
                 guard let `self` = self else { return }
                 switch result {
                 case .success: DLogDebug("set recovery key successful.")
-                EZToast.present(on: self, content: "Password set successfully")
                 case .failed(error: let error):
                     DLogError(error)
                     EZToast.present(on: self, content: error.localizedDescription)
@@ -183,8 +182,8 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             let palette = TM.palette
             let dls = LM.dls
             let alert = UIAlertController.init(
-                title: "IM Recovery Password",
-                message: "Please set a password to recover your IM account on another device",
+                title: dls.user_profile_transfer_account,
+                message: dls.user_profile_alert_transfer_account_message,
                 preferredStyle: .alert
             )
             
@@ -202,7 +201,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             
             alert.addTextField { [unowned self] (tf) in
                 tf.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
-                tf.set(placeholder:"Enter recovery password")
+                tf.set(placeholder:dls.user_profile_placeholder_transfer_account)
                 textField = tf
                 tf.rx.text.map { $0?.count ?? 0 }.map { $0 > 0 }.bind(to: confirm.rx.isEnabled).disposed(by: self.bag)
             }

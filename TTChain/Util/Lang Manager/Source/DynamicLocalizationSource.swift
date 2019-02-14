@@ -512,4 +512,8 @@ protocol DynamicLocalizationSource {
     var group_member: String {get set}
     var manage_currency: String {get set}
 
+    var create_new_wallet: String {get set}
+    var create_new_wallet_desc: String {get set}
+    var create_new_btc_wallet: String {get set}
+    var create_new_eth_wallet: String {get set}
 }

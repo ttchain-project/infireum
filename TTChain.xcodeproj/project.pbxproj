@@ -202,6 +202,9 @@
 		55B5C01B2212D37D007250FA /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C01A2212D37D007250FA /* ImageScrollView.swift */; };
 		55B5C01C2212D37D007250FA /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C01A2212D37D007250FA /* ImageScrollView.swift */; };
 		55B5C01D2212D37D007250FA /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C01A2212D37D007250FA /* ImageScrollView.swift */; };
+		55B5C02122151F25007250FA /* WalletCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C02022151F25007250FA /* WalletCreator.swift */; };
+		55B5C02222151F25007250FA /* WalletCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C02022151F25007250FA /* WalletCreator.swift */; };
+		55B5C02322151F25007250FA /* WalletCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C02022151F25007250FA /* WalletCreator.swift */; };
 		55BB1B40218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B41218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B42218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
@@ -1847,6 +1850,7 @@
 		55AADF202202DF8500F403C8 /* USDTTxHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USDTTxHandler.swift; sourceTree = "<group>"; };
 		55AADF242203020600F403C8 /* UIView+XibInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibInstance.swift"; sourceTree = "<group>"; };
 		55B5C01A2212D37D007250FA /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		55B5C02022151F25007250FA /* WalletCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreator.swift; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -2756,11 +2760,12 @@
 			path = ImageScrollView;
 			sourceTree = "<group>";
 		};
-		55B5C01E221509C5007250FA /* HDWalletLib */ = {
+		55B5C01F22151F04007250FA /* WalletCreator */ = {
 			isa = PBXGroup;
 			children = (
+				55B5C02022151F25007250FA /* WalletCreator.swift */,
 			);
-			path = HDWalletLib;
+			path = WalletCreator;
 			sourceTree = "<group>";
 		};
 		55BB1B3D218FDC410061F189 /* ExploreTab */ = {
@@ -5292,7 +5297,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				55B5C01E221509C5007250FA /* HDWalletLib */,
+				55B5C01F22151F04007250FA /* WalletCreator */,
 				55B5C0192212D35E007250FA /* ImageScrollView */,
 				5526B53E22128E5400573576 /* PhotoAuth */,
 				557D4E5621E357A90073B8D8 /* SettingTabHandler */,
@@ -6188,6 +6193,8 @@
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -6221,6 +6228,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/scrypt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6318,6 +6327,8 @@
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -6351,6 +6362,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/scrypt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6448,6 +6461,8 @@
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -6481,6 +6496,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/scrypt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6699,6 +6716,7 @@
 				64F43BAF210B4C0B00982AFD /* BTCTx.swift in Sources */,
 				648139CC20DBADC900CAA4D8 /* Constants.swift in Sources */,
 				55E730662186E534003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
+				55B5C02322151F25007250FA /* WalletCreator.swift in Sources */,
 				64D8266C20E23F5D00C8FC63 /* CoinSelection+Helper.swift in Sources */,
 				55EF6B7221A81A58007E074A /* UserGroupInfoModel.swift in Sources */,
 				55EF6A6521A812C6007E074A /* ChatViewModel.swift in Sources */,
@@ -7150,6 +7168,7 @@
 				6424B67F20F5C97000AEBCAD /* TransferRecordCoinOptionViewModel.swift in Sources */,
 				6470D64C20F1A1A100EB0780 /* WithdrawalBTCFeeInfoViewController.swift in Sources */,
 				64813AB620DCD45A00CAA4D8 /* Language+Helper.swift in Sources */,
+				55B5C02122151F25007250FA /* WalletCreator.swift in Sources */,
 				55EF6B7021A81A58007E074A /* UserGroupInfoModel.swift in Sources */,
 				645619272150DFBF001092E5 /* IdentityBackupTypeChooseViewController.swift in Sources */,
 				55EF6A6321A812C6007E074A /* ChatViewModel.swift in Sources */,
@@ -7594,6 +7613,7 @@
 				6424B68020F5C97000AEBCAD /* TransferRecordCoinOptionViewModel.swift in Sources */,
 				64F07E3C20D25ADD00A60C5C /* DatabaseManager.swift in Sources */,
 				64813A8720DCAE2600CAA4D8 /* Coin+Helper.swift in Sources */,
+				55B5C02222151F25007250FA /* WalletCreator.swift in Sources */,
 				645619282150DFBF001092E5 /* IdentityBackupTypeChooseViewController.swift in Sources */,
 				55EF6B7121A81A58007E074A /* UserGroupInfoModel.swift in Sources */,
 				645006F420F45B4E00C0FC11 /* WithdrawalConfirmETHFeeInputViewController.swift in Sources */,

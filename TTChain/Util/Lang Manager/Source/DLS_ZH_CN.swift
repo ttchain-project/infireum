@@ -512,4 +512,9 @@ struct DLS_ZH_CN: DLS {
     var delete_group = "删除群组"
     var group_member = "群组成员"
     var manage_currency = "管理币种"
+
+    var create_new_wallet = "新增钱包"
+    var create_new_wallet_desc = "选择新增钱包，将使用助记词产生新的钱包地址。"
+    var create_new_btc_wallet = "新增BTC钱包"
+    var create_new_eth_wallet = "新增ETH钱包"
 }

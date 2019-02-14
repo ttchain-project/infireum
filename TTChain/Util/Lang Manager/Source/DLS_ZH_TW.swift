@@ -518,4 +518,10 @@ struct DLS_ZH_TW: DLS {
     var group_member = "群組成員"
     
     var manage_currency = "管理幣種"
+    
+    var create_new_wallet = "新增錢包"
+    var create_new_wallet_desc = "選擇新增錢包，將使用助記詞產生新的錢包地址。"
+    var create_new_btc_wallet = "新增BTC錢包"
+    var create_new_eth_wallet = "新增ETH錢包"
+
 }

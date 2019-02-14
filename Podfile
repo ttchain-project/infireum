@@ -32,6 +32,7 @@ target 'TTChain' do
     pod 'Flurry-iOS-SDK/FlurryAds'
     pod 'GzipSwift'
     pod 'EliteFramework'
+    pod 'HDWalletKit'
   target 'TTChainTests' do
     inherit! :search_paths
     # Pods for testing
@@ -70,6 +71,7 @@ target 'TTChain_SIT' do
     pod 'Flurry-iOS-SDK/FlurryAds'
     pod 'GzipSwift'
     pod 'EliteFramework'
+    pod 'HDWalletKit'
 
 end
 
@@ -104,6 +106,7 @@ target 'TTChain_UAT' do
     pod 'Flurry-iOS-SDK/FlurryAds'
     pod 'GzipSwift'
     pod 'EliteFramework'
+    pod 'HDWalletKit'
 
 end
 

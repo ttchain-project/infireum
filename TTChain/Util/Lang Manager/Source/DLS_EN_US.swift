@@ -513,4 +513,8 @@ struct DLS_EN_US: DLS {
     var group_member = "Group Member"
     
     var manage_currency = "Manage Currency"
+    var create_new_wallet = "Create new wallet"
+    var create_new_wallet_desc = "Using mnemonics to generate new wallet"
+    var create_new_btc_wallet = "Create new BTC wallet"
+    var create_new_eth_wallet = "Create new ETH wallet"
 }

@@ -72,6 +72,7 @@ extension CoinToFiatRate {
         }
         
         let usdToFiatRate = FiatToFiatRate.get(fromFiat: usd, toFiat: fiat)?.rate
+        
         return usdRate.map {
             result -> NSDecimalNumber? in
             switch result {
