@@ -222,18 +222,17 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             return
         }
         let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uid))
-        self.navigationController?.pushViewController(vc)
+//        self.navigationController?.pushViewController(vc)
 //        let vc = xib(vc: UserIMQRCodeViewController.self)
-//        vc.config(constructor: user)
-//        let screen = UIScreen.main.bounds
-//        let width = screen.width * 0.9
-//        let height = screen.height * 0.56
-//        let form = vc.formSheetVC(
-//            size: CGSize.init(width: width,
-//                              height: height)
-//        )
-//
-//        present(form, animated: true, completion: nil)
+        let screen = UIScreen.main.bounds
+        let width = screen.width * 0.9
+        let height = screen.height * 0.56
+        let form = vc.formSheetVC(
+            size: CGSize.init(width: width,
+                              height: height)
+        )
+
+        present(form, animated: true, completion: nil)
     }
     
     @IBAction func clickTransferButton(_ sender: UIButton) {

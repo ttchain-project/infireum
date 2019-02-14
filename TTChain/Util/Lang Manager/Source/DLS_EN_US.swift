@@ -460,7 +460,7 @@ struct DLS_EN_US: DLS {
     var add_friend_alert_message = "Do you want to add as a friend."
     var add_friend_placeholder_message = "Please enter a message"
     var add_friend_alert_success = "Request sent"
-    var add_friend_placeholder_friend_id = "Enter friend Id"
+    var add_friend_placeholder_friend_id = "Scan friend QR Code"
     var friend_request_title = "Friend Request"
     var group_request_title = "Group Request"
     var friend = "Friend"
@@ -517,4 +517,6 @@ struct DLS_EN_US: DLS {
     var create_new_wallet_desc = "Using mnemonics to generate new wallet"
     var create_new_btc_wallet = "Create new BTC wallet"
     var create_new_eth_wallet = "Create new ETH wallet"
+    
+    var myQRCode = "My QR code"
 }

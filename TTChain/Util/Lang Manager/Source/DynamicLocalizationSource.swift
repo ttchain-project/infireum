@@ -516,4 +516,7 @@ protocol DynamicLocalizationSource {
     var create_new_wallet_desc: String {get set}
     var create_new_btc_wallet: String {get set}
     var create_new_eth_wallet: String {get set}
+
+    var myQRCode: String {get set}
+
 }

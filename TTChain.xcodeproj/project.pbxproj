@@ -360,12 +360,6 @@
 		55EF6AAE21A812C6007E074A /* MyInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0921A812C5007E074A /* MyInformationViewController.xib */; };
 		55EF6AAF21A812C6007E074A /* MyInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0921A812C5007E074A /* MyInformationViewController.xib */; };
 		55EF6AB021A812C6007E074A /* MyInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0921A812C5007E074A /* MyInformationViewController.xib */; };
-		55EF6AB121A812C6007E074A /* MyQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0B21A812C5007E074A /* MyQRCodeViewController.swift */; };
-		55EF6AB221A812C6007E074A /* MyQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0B21A812C5007E074A /* MyQRCodeViewController.swift */; };
-		55EF6AB321A812C6007E074A /* MyQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0B21A812C5007E074A /* MyQRCodeViewController.swift */; };
-		55EF6AB421A812C6007E074A /* MyQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0C21A812C5007E074A /* MyQRCodeViewController.xib */; };
-		55EF6AB521A812C6007E074A /* MyQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0C21A812C5007E074A /* MyQRCodeViewController.xib */; };
-		55EF6AB621A812C6007E074A /* MyQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0C21A812C5007E074A /* MyQRCodeViewController.xib */; };
 		55EF6AB721A812C6007E074A /* RedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0E21A812C5007E074A /* RedEnvelopeViewController.swift */; };
 		55EF6AB821A812C6007E074A /* RedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0E21A812C5007E074A /* RedEnvelopeViewController.swift */; };
 		55EF6AB921A812C6007E074A /* RedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0E21A812C5007E074A /* RedEnvelopeViewController.swift */; };
@@ -1904,8 +1898,6 @@
 		55EF6A0621A812C5007E074A /* InviteFriendViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendViewModel.swift; sourceTree = "<group>"; };
 		55EF6A0821A812C5007E074A /* MyInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
 		55EF6A0921A812C5007E074A /* MyInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInformationViewController.xib; sourceTree = "<group>"; };
-		55EF6A0B21A812C5007E074A /* MyQRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyQRCodeViewController.swift; sourceTree = "<group>"; };
-		55EF6A0C21A812C5007E074A /* MyQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyQRCodeViewController.xib; sourceTree = "<group>"; };
 		55EF6A0E21A812C5007E074A /* RedEnvelopeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		55EF6A0F21A812C5007E074A /* RedEnvelopeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedEnvelopeViewController.xib; sourceTree = "<group>"; };
 		55EF6A1221A812C5007E074A /* SearchGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupViewController.swift; sourceTree = "<group>"; };
@@ -2919,7 +2911,6 @@
 				55EF69F121A812C5007E074A /* Create Group */,
 				55EF6A0221A812C5007E074A /* Invite Friend */,
 				55EF6A0721A812C5007E074A /* My Information */,
-				55EF6A0A21A812C5007E074A /* My QRCode */,
 				55EF6A0D21A812C5007E074A /* Red Envelope */,
 				55EF6A1121A812C5007E074A /* Search Group */,
 				55EF6A1421A812C5007E074A /* View Model */,
@@ -2991,15 +2982,6 @@
 				55EF6A0921A812C5007E074A /* MyInformationViewController.xib */,
 			);
 			path = "My Information";
-			sourceTree = "<group>";
-		};
-		55EF6A0A21A812C5007E074A /* My QRCode */ = {
-			isa = PBXGroup;
-			children = (
-				55EF6A0B21A812C5007E074A /* MyQRCodeViewController.swift */,
-				55EF6A0C21A812C5007E074A /* MyQRCodeViewController.xib */,
-			);
-			path = "My QRCode";
 			sourceTree = "<group>";
 		};
 		55EF6A0D21A812C5007E074A /* Red Envelope */ = {
@@ -5743,7 +5725,6 @@
 				64C9D47C20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
 				64D826DA20E4CFD500C8FC63 /* SearchAssetTableViewCell.xib in Resources */,
 				5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */,
-				55EF6AB621A812C6007E074A /* MyQRCodeViewController.xib in Resources */,
 				649E485120E7D98100B217AD /* SystemWalletTableHeaderView.xib in Resources */,
 				55AADEFE21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */,
 				55EF6A9521A812C6007E074A /* SearchMemberViewController.xib in Resources */,
@@ -5950,7 +5931,6 @@
 				640D88DE20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
 				6456192A2150DFBF001092E5 /* IdentityBackupTypeChooseViewController.xib in Resources */,
 				5568384E21F5A8460006892C /* ProfileViewController.xib in Resources */,
-				55EF6AB421A812C6007E074A /* MyQRCodeViewController.xib in Resources */,
 				55787FD221F9613100A4F7D6 /* tt_splash.gif in Resources */,
 				6481398E20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.xib in Resources */,
 				55EF6B0821A812C7007E074A /* UserIMQRCodeViewController.xib in Resources */,
@@ -6104,7 +6084,6 @@
 				640D88DF20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
 				6456192B2150DFBF001092E5 /* IdentityBackupTypeChooseViewController.xib in Resources */,
 				5568384F21F5A8460006892C /* ProfileViewController.xib in Resources */,
-				55EF6AB521A812C6007E074A /* MyQRCodeViewController.xib in Resources */,
 				55787FD321F9613100A4F7D6 /* tt_splash.gif in Resources */,
 				6481398F20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.xib in Resources */,
 				55EF6B0921A812C7007E074A /* UserIMQRCodeViewController.xib in Resources */,
@@ -6839,7 +6818,6 @@
 				6470D6C720F35BD800EB0780 /* WithdrawalETHFeeInfoQuickModeViewController.swift in Sources */,
 				6473AE9821421DC1009FB8E9 /* APIWalletCreateResult.swift in Sources */,
 				64813A2D20DCA6EE00CAA4D8 /* Language+CoreDataClass.swift in Sources */,
-				55EF6AB321A812C6007E074A /* MyQRCodeViewController.swift in Sources */,
 				5539A4A221676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.swift in Sources */,
 				64F07DD220D241A000A60C5C /* WindowOrientaionLocker.swift in Sources */,
 				649E489C20ECACBA00B217AD /* PwdHintViewModel.swift in Sources */,
@@ -7291,7 +7269,6 @@
 				645D4ED1211801EB0052D0E1 /* TokenTxFetcher.swift in Sources */,
 				64C9D46F20FDDFAA000B0774 /* CreatetABUnitAddressViewController.swift in Sources */,
 				645D4E7B211151C00052D0E1 /* ETHTx.swift in Sources */,
-				55EF6AB121A812C6007E074A /* MyQRCodeViewController.swift in Sources */,
 				6485005620DA440400107473 /* KLTagFlowLayout.swift in Sources */,
 				64B2772320D55BDC004FF75B /* KLRxImageDownloader.swift in Sources */,
 				649E48C120ECF42600B217AD /* WalletPKeyQRCodeViewModel.swift in Sources */,
@@ -7736,7 +7713,6 @@
 				645D4E7C211151C00052D0E1 /* ETHTx.swift in Sources */,
 				64F07E8E20D3809800A60C5C /* Server+BlockChain.swift in Sources */,
 				64F07DD420D241A000A60C5C /* GTThemeExtensions.swift in Sources */,
-				55EF6AB221A812C6007E074A /* MyQRCodeViewController.swift in Sources */,
 				649E48BE20ECE7A700B217AD /* WalletPrivateKeyInfoViewModel.swift in Sources */,
 				648139C120DB8B7600CAA4D8 /* UINavigationBar+Shadow.swift in Sources */,
 				6473AE9721421DC1009FB8E9 /* APIWalletCreateResult.swift in Sources */,

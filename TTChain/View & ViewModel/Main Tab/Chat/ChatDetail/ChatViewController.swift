@@ -136,6 +136,10 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         tableView.register(ChatMessageTableViewCell.nib, forCellReuseIdentifier: ChatMessageTableViewCell.nameOfClass)
         tableView.register(ChatMessageImageTableViewCell.nib, forCellReuseIdentifier: ChatMessageImageTableViewCell.nameOfClass)
         tableView.register(ReceiptTableViewCell.nib, forCellReuseIdentifier: ReceiptTableViewCell.nameOfClass)
+        
+        tableView.rx.klrx_tap.drive(onNext: { _ in
+            self.view.endEditing(true)
+        }).disposed(by: bag)
     }
     
     func bindViewModel() {
@@ -182,6 +186,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 chatImgCell.msgImageView!.rx.klrx_tap.drive(onNext: { _ in
                     self.toImageViewer(for: messageModel)
                 }).disposed(by: chatImgCell.bag)
+                
                 chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
                     messageModel.messageImage = chatImgCell.msgImageView.image
                     self.showOptionsForLongGesture(for: messageModel)

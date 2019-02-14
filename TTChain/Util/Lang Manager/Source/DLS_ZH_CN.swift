@@ -460,7 +460,7 @@ struct DLS_ZH_CN: DLS {
     var add_friend_alert_message = "请输入好友验证信息"
     var add_friend_placeholder_message = ""
     var add_friend_alert_success = "已送出交友邀请"
-    var add_friend_placeholder_friend_id = "输入朋友ID"
+    var add_friend_placeholder_friend_id = "扫描好友QR Code"
     
     var friend_request_title = "交友邀请"
     var group_request_title = "群组邀请"
@@ -517,4 +517,7 @@ struct DLS_ZH_CN: DLS {
     var create_new_wallet_desc = "选择新增钱包，将使用助记词产生新的钱包地址。"
     var create_new_btc_wallet = "新增BTC钱包"
     var create_new_eth_wallet = "新增ETH钱包"
+    
+    var myQRCode = "我的QR Code"
+
 }

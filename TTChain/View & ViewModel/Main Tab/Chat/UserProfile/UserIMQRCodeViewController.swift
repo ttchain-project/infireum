@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
-   
     
     typealias ViewModel = UserQRCodeViewModel
     typealias Constructor = Config
@@ -25,6 +24,15 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var uidLabel: UILabel!
     @IBOutlet weak var uidCopyButton: UIButton!
+    @IBOutlet weak var qrcodeBase: UIView! {
+        didSet {
+            qrcodeBase.addShadow(ofColor: .owBlack20,
+                                 radius: 1,
+                                 offset: CGSize.init(width: 2, height: 4),
+                                 opacity: 1)
+
+        }
+    }
     
     var bag: DisposeBag = DisposeBag.init()
     var viewModel: UserQRCodeViewModel!
@@ -44,7 +52,8 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        self.titleLabel.text = dls.exportPKey_tab_qrcode
+//        self.titleLabel.text = dls.exportPKey_tab_qrcode
+        self.navigationItem.title = dls.myQRCode
         doneButton.setTitleForAllStates(dls.g_confirm)
     }
     
@@ -57,7 +66,7 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
         let palette = theme.palette
         titleLabel.set(textColor: palette.label_main_2,
                        font: .owMedium(size: 18))
-        titleView.backgroundColor = palette.application_main
+        titleView.backgroundColor = palette.nav_bg_clear
 
         doneButton.setPureText(color: palette.btn_bgFill_enable_text,
                                font: .owRegular(size: 14),
