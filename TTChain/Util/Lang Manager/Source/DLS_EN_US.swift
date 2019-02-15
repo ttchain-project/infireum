@@ -519,4 +519,17 @@ struct DLS_EN_US: DLS {
     var create_new_eth_wallet = "Create new ETH wallet"
     
     var myQRCode = "My QR code"
+    
+    var chat_room_has_blocked = "Chat room is blocked"
+    
+    var chat_room_receipt = "Receipt"
+    var chat_room_image = "Image"
+    var chat_room_camera = "Camera"
+    
+    var copied_successfully = "Copied sucessfully"
+    
+    var secret_chat_on = "Secret chat is open"
+    
+    var accept_request = "Accept"
+    var reject_request = "Reject"
 }

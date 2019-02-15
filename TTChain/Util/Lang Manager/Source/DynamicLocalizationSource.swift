@@ -518,5 +518,17 @@ protocol DynamicLocalizationSource {
     var create_new_eth_wallet: String {get set}
 
     var myQRCode: String {get set}
+    var chat_room_has_blocked: String {get set}
+
+    var chat_room_receipt: String {get set}
+    var chat_room_image: String {get set}
+    var chat_room_camera : String {get set}
+    
+    var copied_successfully: String {get set}
+    
+    var secret_chat_on: String {get set}
+    
+    var accept_request: String {get set}
+    var reject_request: String {get set}
 
 }

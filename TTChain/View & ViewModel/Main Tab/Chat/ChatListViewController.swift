@@ -17,7 +17,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         view.layoutIfNeeded()
         self.viewModel = ChatListViewModel.init(
             input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().map { $0 }),
-            output: ChatListViewModel.Output(selectedChat: { [unowned self] model in self.chatSelected(forModel: model) })
+            output: ChatListViewModel.Output(selectedChat: { _ in  })
         )
 //        initNavigationBarItems()
         initTableView()
@@ -120,6 +120,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
                 self.navigationController?.pushViewController(vc)
             })
             .disposed(by: bag)
+        
         self.editButton.rx.tap.asDriver()
             .drive(onNext: {
                 [unowned self] in
@@ -215,7 +216,14 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
             )
             .disposed(by: bag)
         
-        
+        tableView.rx.itemSelected.asDriver().drive(onNext: {[weak self] (indexPath) in
+            guard let `self` = self else {
+                return
+            }
+            if indexPath.section == 2 {
+                self.chatSelected(forModel:self.viewModel.communicationListArray[indexPath.row])
+                }
+            }).disposed(by: bag)
     }
     
     override func renderTheme(_ theme: Theme) {

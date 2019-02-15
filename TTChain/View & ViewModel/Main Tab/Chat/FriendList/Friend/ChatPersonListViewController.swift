@@ -89,7 +89,7 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
                     let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: RoomType.pvtChat, chatTitle: model.nickName, roomID: model.roomId,chatAvatar:model.avatar, uid: model.uid))
                     self.navigationController?.pushViewController(vc)
             default:
-                print("Err")
+                print("chat person item selected wron index")
             }
         }).disposed(by: bag)
         

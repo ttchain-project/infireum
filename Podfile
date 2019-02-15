@@ -33,6 +33,8 @@ target 'TTChain' do
     pod 'GzipSwift'
     pod 'EliteFramework'
     pod 'HDWalletKit'
+    pod 'FLAnimatedImage', '~> 1.0'
+
   target 'TTChainTests' do
     inherit! :search_paths
     # Pods for testing
@@ -72,6 +74,7 @@ target 'TTChain_SIT' do
     pod 'GzipSwift'
     pod 'EliteFramework'
     pod 'HDWalletKit'
+    pod 'FLAnimatedImage', '~> 1.0'
 
 end
 
@@ -107,6 +110,7 @@ target 'TTChain_UAT' do
     pod 'GzipSwift'
     pod 'EliteFramework'
     pod 'HDWalletKit'
+    pod 'FLAnimatedImage', '~> 1.0'
 
 end
 

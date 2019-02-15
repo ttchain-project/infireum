@@ -68,7 +68,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         self.output = output
         
         if self.input!.roomType == .pvtChat {
-            self.functions.append(FunctionModel.init(title: "密聊", image: UIImage(named: "iconSecretColor"), type: .startSecretChat)
+            self.functions.append(FunctionModel.init(title: LM.dls.chat_secret_setting, image: UIImage(named: "iconSecretColor"), type: .startSecretChat)
             )
             self.collectionView.reloadData()
         }
@@ -150,20 +150,36 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     func listenKeyboardNotification() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        return Observable
+            .from([
+                NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillShow)
+                    .map { notification -> CGFloat in
+                        (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                },
+                NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide)
+                    .map { _ -> CGFloat in
+                        0
+                }
+                ])
+            .merge().subscribe(onNext: { [weak self](height) in
+                guard let `self` = self else {
+                    return
+                }
+                self.animateInputContentView(offset: height)
+            }).disposed(by: bag)
+
     }
     
-    @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            animateInputContentView(offset: keyboardFrame.cgRectValue.height)
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: Notification) {
-        animateInputContentView(offset: 0)
-    }
-    
+//    @objc func keyboardWillShow(notification: Notification) {
+//        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+//            animateInputContentView(offset: keyboardFrame.cgRectValue.height)
+//        }
+//    }
+//
+//    @objc func keyboardWillHide(notification: Notification) {
+//        animateInputContentView(offset: 0)
+//    }
+//
     func animateInputContentView(offset: CGFloat) {
         self.setNeedsLayout()
         

@@ -67,6 +67,9 @@ class ChatListViewModel: KLRxViewModel {
         return _communicationList.asObservable()
     }
     
+    public var communicationListArray: [CommunicationListModel] {
+        return _communicationList.value
+    }
     private lazy var _communicationList: BehaviorRelay<[CommunicationListModel]> = {
         return BehaviorRelay.init(value: [])
     }()
@@ -121,7 +124,6 @@ class ChatListViewModel: KLRxViewModel {
             case .failed(error: let err):
                 print(err)
             case .success(let model):
-                print("err")
                 self._groupRequestModel.accept(model.invitationList)
             }
         }).disposed(by: bag)
@@ -148,7 +150,6 @@ class ChatListViewModel: KLRxViewModel {
             case .failed(error: let err):
                 print(err)
             case .success(let model):
-                print("err")
                 self._friendRequestModel.accept(model.personalDirectoryModel.invitationList)
             }
         }).disposed(by: bag)

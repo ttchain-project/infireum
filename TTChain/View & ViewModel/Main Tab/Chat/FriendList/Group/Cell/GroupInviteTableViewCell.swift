@@ -12,7 +12,12 @@ import RxCocoa
 
 class GroupInviteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView! {
+        didSet {
+            avatarImageView.cornerRadius = avatarImageView.height/2
+            avatarImageView.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rejectButton: UIButton!
     @IBOutlet weak var separatorView: UIView!
@@ -26,8 +31,12 @@ class GroupInviteTableViewCell: UITableViewCell {
             self.avatarImageView.image = groupRequestModel.groupIcon
             self.titleLabel.text = groupRequestModel.groupName
             
-            if groupRequestModel.groupIcon == nil {
+            let url = URL.init(string: groupRequestModel.headImg)
+            
+            if groupRequestModel.groupIcon == nil, url == nil {
                 self.avatarImageView.image = ImageUntil.drawAvatar(text: groupRequestModel.groupName)
+            } else {
+                self.avatarImageView.af_setImage(withURL: url!)
             }
         }
     }
@@ -35,8 +44,6 @@ class GroupInviteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        avatarImageView.cornerRadius = 15.0
-        avatarImageView.clipsToBounds = true
         rejectButton.layer.cornerRadius = 3.0
         acceptButton.layer.cornerRadius = 3.0
         
@@ -46,7 +53,11 @@ class GroupInviteTableViewCell: UITableViewCell {
         self.titleLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 18))
         selectionStyle = .none
         self.backgroundColor = .clear
+        
+        self.acceptButton.setTitle(LM.dls.accept_request, for: .normal)
+        self.rejectButton.setTitle(LM.dls.reject_request, for: .normal)
         self.initButton()
+        
     }
 
     func config(groupRequestModel: UserGroupInfoModel?,

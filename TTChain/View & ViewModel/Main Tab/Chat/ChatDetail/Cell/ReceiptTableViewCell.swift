@@ -51,7 +51,7 @@ class ReceiptTableViewCell: UITableViewCell {
     func setMessage(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
       
         dateLabel.text = message.timestamp.string()
-        self.messageContent.text = "Receipt"
+        self.messageContent.text = LM.dls.chat_room_receipt
         
         if message.senderId == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId {
             self.profilePicImageView.isHidden = true

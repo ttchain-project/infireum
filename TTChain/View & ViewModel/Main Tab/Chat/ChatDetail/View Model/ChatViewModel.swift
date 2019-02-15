@@ -59,7 +59,7 @@ class ChatViewModel: KLRxViewModel {
     
     var privateChat : PrivateChatSetup
     
-    let blockSubject = PublishSubject<Void>()
+    let blockSubject = PublishSubject<Bool>()
     
     required init(input: Input, output: Void) {
         self.input = input
@@ -67,6 +67,8 @@ class ChatViewModel: KLRxViewModel {
         
         if self.input.roomType != RoomType.pvtChat {
             self.getGroupDetails()
+        }else {
+            self.isBlocked()
         }
         self.timerSub = timer.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] _ in
             self.fetchAllMessagesForPrivateChat()
@@ -205,14 +207,28 @@ class ChatViewModel: KLRxViewModel {
                     if self.privateChat.isPrivateChatOn.value {
                     }
                 } else {
-                    self.blockSubject.onNext(())
+                    self.blockSubject.onNext((true))
                 }
             }
         }).disposed(by: bag)
     }
     
     private func isBlocked() {
+        guard let uid = self.input.uid else {
+            return
+        }
+        guard let user = IMUserManager.manager.userModel.value else {
+            return
+        }
         
+        Server.instance.searchUser(uid: user.uID, targetUid: uid).asObservable().subscribe(onNext: { (response) in
+            switch response {
+            case .success(let model):
+                self.blockSubject.onNext((model.isBlock))
+            case .failed(_):
+                print("Failed")
+            }
+        } ).disposed(by: bag)
     }
     
     func getPrivateChatStatus() {

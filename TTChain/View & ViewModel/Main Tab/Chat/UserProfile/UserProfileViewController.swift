@@ -40,6 +40,8 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     private var switchDisposeBag = DisposeBag()
     private var setRecoverBag = DisposeBag()
     
+    let blockStatusChanged: PublishSubject<Bool> = PublishSubject.init()
+    
     var user: FriendModel? = nil {
         didSet {
             userIconImageView.image = user?.avatar
@@ -105,7 +107,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             copyUserIdButton.rx.tap.subscribe({
                 [unowned self] _ in
                 UIPasteboard.general.string = self.userIdLabel.text
-                EZToast.present(on: self, content: "複製成功")
+                EZToast.present(on: self, content: LM.dls.copied_successfully)
             }).disposed(by: bag)
         }
     }
@@ -127,6 +129,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
                         self.blockUserSwitch.isOn = !isOn
                     case .success:
                         DLogInfo("switch block status for \(blockedUid) to \(isOn)")
+                        self.blockStatusChanged.onNext(isOn)
                     }
                 }).disposed(by: self.switchDisposeBag)
             }).disposed(by: bag)
@@ -179,7 +182,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             font: UIFont.owRegular(size: 15),
             backgroundColor: theme.palette.btn_bgFill_enable_bg
         )
-        createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "iconCommunicationQrcode"), toColor: theme.palette.application_main)
+//        createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "iconCommunicationQrcode"), toColor: theme.palette.application_main)
         self.blockUserSwitch.transform = CGAffineTransform(scaleX: 0.50, y: 0.50)
     }
     

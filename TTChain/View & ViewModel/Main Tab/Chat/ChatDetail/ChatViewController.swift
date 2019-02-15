@@ -18,7 +18,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var keyboardView: ChatKeyboardView!
     @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var blockviewHeight: NSLayoutConstraint!
+    @IBOutlet weak var blockView: UIView!
+    @IBOutlet weak var blockedLabel: UILabel!
     @IBOutlet weak var viewToHideKeyboard: UIView!
     private lazy var profileBarButtonButton: UIBarButtonItem = {
         let barButtonButton = UIBarButtonItem(image: #imageLiteral(resourceName: "iconCommunicationUserDark.png"), style: .plain, target: self, action: nil)
@@ -83,11 +85,13 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             output: ())
         
         viewModel.blockSubject.subscribe(onNext: {
-            [weak self] in
+            [weak self] status in
             guard let `self` = self else { return }
             self.keyboardView.endEditing(true)
-            self.alert(title: "对方已封锁聊天", button: "好")
-            self.keyboardView.isBlock = true
+//            self.alert(title: LM.dls.chat_room_has_blocked, button: LM.dls.g_ok)
+            self.blockviewHeight.constant = status ? 44 : 0
+            self.view.layoutIfNeeded()
+            self.keyboardView.isBlock = status
         }).disposed(by: bag)
         
         initTableView()
@@ -126,10 +130,14 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.viewToHideKeyboard.backgroundColor = palette.bgView_main
         navigationItem.rightBarButtonItems = viewModel.input.roomType == .pvtChat ? [profileBarButtonButton] : [profileBarButtonButton,qrCodeBarButton]
         navigationItem.rightBarButtonItem?.tintColor = palette.nav_item_2
+        self.blockedLabel.set(textColor: .white, font: .owMedium(size: 14))
+        self.blockView.set(backgroundColor: .owPinkRed)
+        
     }
     
     override func renderLang(_ lang: Lang) {
         self.title = self.viewModel.input.chatTitle
+        self.blockedLabel.text = lang.dls.chat_room_has_blocked
     }
     
     func initTableView() {
@@ -232,7 +240,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.viewModel.privateChat.isPrivateChatOn
             .asObservable().map { status in
                 if status {
-                    self.keyboardView.privateChatDurationTitleLabel.text = "Private Chat is on"
+                    self.keyboardView.privateChatDurationTitleLabel.text = LM.dls.secret_chat_on
                 }else {
                     self.keyboardView.privateChatDurationTitleLabel.text = ""
                 }
@@ -255,7 +263,10 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     func initKeyboardView() {
         
         keyboardView.config(input: ChatKeyboardView.Input(roomType:self.viewModel.input.roomType),
-                            output: ChatKeyboardView.Output.init(didChangeViewHeight: { (value) in
+                            output: ChatKeyboardView.Output.init(didChangeViewHeight: { [weak self] (value) in
+                                guard let `self` = self else {
+                                    return
+                                }
                                 self.view.setNeedsLayout()
                                 self.keyboardViewHeight.constant = value
                                 UIView.animate(withDuration: 0.3, animations: {
@@ -294,7 +305,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         
         keyboardView.textField.rx.controlEvent([.editingDidBegin,.editingDidEnd])
             .asObservable()
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: {[unowned self] _ in
               self.tableView.scrollToLastRow()
             })
             .disposed(by: bag)
@@ -345,7 +356,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             let vc = ForwardListContainerViewController.init()
             vc.config(constructor: ForwardListContainerViewController.Config(messageModel: message))
             self.navigationController?.pushViewController(vc)
-            vc.onForwardChatToSelection.asObservable().subscribe(onNext: { (model) in
+            vc.onForwardChatToSelection.asObservable().subscribe(onNext: { [unowned self] (model) in
                 self.refreshChatViewForForwardedChat(withMessage: message, chatList: model)
             }).disposed(by: vc.bag)
         }
@@ -418,6 +429,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         let config = UserProfileViewController.Config.init(purpose: purpose, user: friend)
         let viewController = UserProfileViewController.instance(from: config)
         self.show(viewController, sender: nil)
+        viewController.blockStatusChanged.bind(to: self.viewModel.blockSubject).disposed(by:viewController.bag)
     }
     
     private func setUpView() {

@@ -9,22 +9,28 @@
 import UIKit
 import RxSwift
 import RxCocoa
-//import RxOptional
+import FLAnimatedImage
 
 class LaunchViewController: UIViewController, Rx {
     
     var bag: DisposeBag = DisposeBag.init()
 
-    @IBOutlet weak var fromImage: UIImageView!
+    @IBOutlet weak var fromImage: FLAnimatedImageView!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.owIceCold
-        let splashGIF = UIImage.gifImageWithName("tt_splash")
-        self.fromImage.image = splashGIF
         
+        let path1 : String = Bundle.main.path(forResource: "tt_splash", ofType:"gif")!
+        let url = URL(fileURLWithPath: path1)
+        guard let gifData = try? Data(contentsOf: url) else {
+            return
+        }
 
+        let splashGIF = FLAnimatedImage.init(animatedGIFData: gifData)
+        self.fromImage.animatedImage = splashGIF
+    
     }
 
     override func didReceiveMemoryWarning() {

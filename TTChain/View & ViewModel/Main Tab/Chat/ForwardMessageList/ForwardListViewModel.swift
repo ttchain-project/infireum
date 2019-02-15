@@ -85,7 +85,6 @@ class ForwardListViewModel: KLRxViewModel {
             case .failed(error: let err):
                 print(err)
             case .success(let model):
-                print("err")
                 self._forwardList.accept(model.groupList)
             }
         }).disposed(by: bag)
@@ -100,7 +99,6 @@ class ForwardListViewModel: KLRxViewModel {
             case .failed(error: let err):
                 print(err)
             case .success(let model):
-                print("err")
                 self._forwardList.accept(model.personalDirectoryModel.friendList)
             }
         }).disposed(by: bag)

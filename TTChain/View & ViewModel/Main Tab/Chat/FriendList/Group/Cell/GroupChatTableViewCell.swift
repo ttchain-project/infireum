@@ -34,6 +34,8 @@ class GroupChatTableViewCell: UITableViewCell {
         self.titleLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 21))
         self.separatorView.backgroundColor = palette.sepline
         self.backgroundColor = .clear
+        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

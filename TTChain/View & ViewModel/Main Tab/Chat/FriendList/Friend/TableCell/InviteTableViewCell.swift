@@ -12,7 +12,12 @@ import RxCocoa
 
 class InviteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView! {
+        didSet {
+            avatarImageView.layer.cornerRadius = avatarImageView.height/2
+            avatarImageView.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var resumeLabel: UILabel!
     @IBOutlet weak var rejectButton: UIButton!
@@ -41,8 +46,6 @@ class InviteTableViewCell: UITableViewCell {
         
         rejectButton.layer.cornerRadius = 3.0
         acceptButton.layer.cornerRadius = 3.0
-        avatarImageView.layer.cornerRadius = 15.0
-        avatarImageView.clipsToBounds = true
         
         selectionStyle = .none
         
@@ -53,6 +56,10 @@ class InviteTableViewCell: UITableViewCell {
         self.nameLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 18))
         self.resumeLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 14))
         self.backgroundColor = .clear
+        
+        self.acceptButton.setTitle(LM.dls.accept_request, for: .normal)
+        self.rejectButton.setTitle(LM.dls.reject_request, for: .normal)
+
     }
 
     func config(friendRequestModel: FriendRequestInformationModel?,

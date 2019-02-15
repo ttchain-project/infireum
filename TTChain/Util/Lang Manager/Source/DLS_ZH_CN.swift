@@ -519,5 +519,17 @@ struct DLS_ZH_CN: DLS {
     var create_new_eth_wallet = "新增ETH钱包"
     
     var myQRCode = "我的QR Code"
+    var chat_room_has_blocked = "这个聊天室被封锁了"
+    
+    var chat_room_receipt = "收款"
+    var chat_room_image = "图片"
+    var chat_room_camera = "相机"
+
+    var copied_successfully = "复制成功"
+    
+    var secret_chat_on = "秘密聊天是开放的"
+    
+    var accept_request = "接受"
+    var reject_request = "拒绝"
 
 }
