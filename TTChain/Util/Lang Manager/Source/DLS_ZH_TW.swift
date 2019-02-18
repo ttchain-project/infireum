@@ -538,4 +538,7 @@ struct DLS_ZH_TW: DLS {
     var accept_request = "接受"
     var reject_request = "拒絕"
 
+    var trans_success = "轉帳成功"
+    var trans_failed = "轉帳失敗"
+
 }

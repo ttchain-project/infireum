@@ -110,7 +110,7 @@ final class TransRecordListViewController: KLModuleViewController, KLVMVC {
                         transRecord: record,
                         statusURLHandle: {
                             (url) in
-                            self.openTransRecordURL(url)
+                            self.openTxDetail(url: url, transrecord: record)
                         })
         }
         .disposed(by: bag)
@@ -189,5 +189,10 @@ final class TransRecordListViewController: KLModuleViewController, KLVMVC {
     //MARK: - Routing
     private func openTransRecordURL(_ url: URL) {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    private func openTxDetail(url:URL, transrecord:TransRecord) {
+        let vc = TransRecordDetailViewController.instance(from: TransRecordDetailViewController.Input(transRecord: transrecord,asset:self.asset, url:url.absoluteString))
+        self.navigationController?.pushViewController(vc,animated:true)
     }
 }

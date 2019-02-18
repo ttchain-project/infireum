@@ -531,4 +531,7 @@ protocol DynamicLocalizationSource {
     var accept_request: String {get set}
     var reject_request: String {get set}
 
+    var trans_success: String {get set}
+    var trans_failed: String {get set}
+
 }

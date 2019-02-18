@@ -261,8 +261,8 @@ final class GroupInformationViewModel: ViewModel {
             guard let groupName = groupName else { return false }
             switch self.input.typeSubject.value {
             case .normal: return true
-            case .edit: guard !(sectionModels.first(where: { $0.model == "正在邀请" })?.items.compactMap({ $0.input.groupMemberModel?.uid }).isEmpty ?? true) else { return false }
-            case .create: break
+            case .edit,.create: guard !(sectionModels.first(where:{ $0.model == "正在邀请" })?
+                .items.compactMap({ $0.input.groupMemberModel?.uid }).isEmpty ?? true) else { return false }
             }
             switch (groupName.count, introduce?.count ?? 0) {
             case (1...20, 0...100): return true

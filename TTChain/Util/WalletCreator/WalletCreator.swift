@@ -29,13 +29,13 @@ class WalletCreator {
             // m/44'
             let purpose = privateKey.derived(at: .hardened(44))
             
-            // m/44'/0'
-            let coinType = purpose.derived(at: .hardened(0))
+            // m/44'/0' || // m/44'/60'
+            let coinType = purpose.derived(at: .hardened(chain == ChainType.btc  ? 0 : 60))
             
-            // m/44'/0'/0'
+            // m/44'/0'/0' || // m/44'/60'/0'
             let account = coinType.derived(at: .hardened(0))
             
-            // m/44'/0'/0'/0
+            // m/44'/0'/0'/0 || // m/44'/60'/0'/0
             let change = account.derived(at: .notHardened(0))
             var pvtKeyForNewWallet: PrivateKey?
             

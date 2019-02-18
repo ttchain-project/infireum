@@ -205,6 +205,15 @@
 		55B5C02122151F25007250FA /* WalletCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C02022151F25007250FA /* WalletCreator.swift */; };
 		55B5C02222151F25007250FA /* WalletCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C02022151F25007250FA /* WalletCreator.swift */; };
 		55B5C02322151F25007250FA /* WalletCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C02022151F25007250FA /* WalletCreator.swift */; };
+		55B5C02A221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C029221A9703007250FA /* OmniExplorerURLCreator.swift */; };
+		55B5C02B221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C029221A9703007250FA /* OmniExplorerURLCreator.swift */; };
+		55B5C02C221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C029221A9703007250FA /* OmniExplorerURLCreator.swift */; };
+		55B5C034221A9D61007250FA /* TransRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C032221A9D61007250FA /* TransRecordDetailViewController.swift */; };
+		55B5C035221A9D61007250FA /* TransRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C032221A9D61007250FA /* TransRecordDetailViewController.swift */; };
+		55B5C036221A9D61007250FA /* TransRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5C032221A9D61007250FA /* TransRecordDetailViewController.swift */; };
+		55B5C037221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B5C033221A9D61007250FA /* TransRecordDetailViewController.xib */; };
+		55B5C038221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B5C033221A9D61007250FA /* TransRecordDetailViewController.xib */; };
+		55B5C039221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B5C033221A9D61007250FA /* TransRecordDetailViewController.xib */; };
 		55BB1B40218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B41218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
 		55BB1B42218FDCE70061F189 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */; };
@@ -1845,6 +1854,9 @@
 		55AADF242203020600F403C8 /* UIView+XibInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibInstance.swift"; sourceTree = "<group>"; };
 		55B5C01A2212D37D007250FA /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		55B5C02022151F25007250FA /* WalletCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreator.swift; sourceTree = "<group>"; };
+		55B5C029221A9703007250FA /* OmniExplorerURLCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniExplorerURLCreator.swift; sourceTree = "<group>"; };
+		55B5C032221A9D61007250FA /* TransRecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransRecordDetailViewController.swift; sourceTree = "<group>"; };
+		55B5C033221A9D61007250FA /* TransRecordDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransRecordDetailViewController.xib; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
 		55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -2312,14 +2324,14 @@
 		64E4E4CB2147AC93009B556B /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		64E4E4D22147B434009B556B /* LaunchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchViewController.xib; sourceTree = "<group>"; };
 		64E77DE221206BD200B0AC15 /* EtherscanUrlCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtherscanUrlCreator.swift; sourceTree = "<group>"; };
-		64F07CE420D0E4CB00A60C5C /* TTChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64F07CE420D0E4CB00A60C5C /* 甜甜圈.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "甜甜圈.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F07CE720D0E4CB00A60C5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64F07CF120D0E4CE00A60C5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64F07CF420D0E4CE00A60C5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64F07CFB20D0E4CE00A60C5C /* TTChainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTChainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		64F07D1B20D0E83200A60C5C /* TTChain SIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TTChain SIT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64F07D1B20D0E83200A60C5C /* 甜甜圈 SIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "甜甜圈 SIT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F07D1C20D0E83300A60C5C /* TTChain_UAT-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TTChain_UAT-Info.plist"; sourceTree = "<group>"; };
-		64F07D2E20D0E8FA00A60C5C /* TTChain UAT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TTChain UAT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64F07D2E20D0E8FA00A60C5C /* 甜甜圈 UAT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "甜甜圈 UAT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F07DA820D2406000A60C5C /* NetworkReachabilityHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityHandler.swift; sourceTree = "<group>"; };
 		64F07DAC20D240FF00A60C5C /* Any+ReachabilityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Any+ReachabilityMonitor.swift"; sourceTree = "<group>"; };
 		64F07DB320D2419200A60C5C /* WindowOrientaionLocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowOrientaionLocker.swift; sourceTree = "<group>"; };
@@ -2758,6 +2770,23 @@
 				55B5C02022151F25007250FA /* WalletCreator.swift */,
 			);
 			path = WalletCreator;
+			sourceTree = "<group>";
+		};
+		55B5C024221A96B0007250FA /* Omni Explorer URL Creator */ = {
+			isa = PBXGroup;
+			children = (
+				55B5C029221A9703007250FA /* OmniExplorerURLCreator.swift */,
+			);
+			path = "Omni Explorer URL Creator";
+			sourceTree = "<group>";
+		};
+		55B5C02D221A9CE3007250FA /* RecordDetail */ = {
+			isa = PBXGroup;
+			children = (
+				55B5C032221A9D61007250FA /* TransRecordDetailViewController.swift */,
+				55B5C033221A9D61007250FA /* TransRecordDetailViewController.xib */,
+			);
+			path = RecordDetail;
 			sourceTree = "<group>";
 		};
 		55BB1B3D218FDC410061F189 /* ExploreTab */ = {
@@ -3432,6 +3461,7 @@
 		640D88FC20EF5F4C0010D986 /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				55B5C02D221A9CE3007250FA /* RecordDetail */,
 				640D890520EF5F900010D986 /* Table */,
 				640D88FD20EF5F860010D986 /* TransRecordListViewController.swift */,
 				640D88FE20EF5F860010D986 /* TransRecordListViewController.xib */,
@@ -5232,10 +5262,10 @@
 		64F07CE520D0E4CB00A60C5C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				64F07CE420D0E4CB00A60C5C /* TTChain.app */,
+				64F07CE420D0E4CB00A60C5C /* 甜甜圈.app */,
 				64F07CFB20D0E4CE00A60C5C /* TTChainTests.xctest */,
-				64F07D1B20D0E83200A60C5C /* TTChain SIT.app */,
-				64F07D2E20D0E8FA00A60C5C /* TTChain UAT.app */,
+				64F07D1B20D0E83200A60C5C /* 甜甜圈 SIT.app */,
+				64F07D2E20D0E8FA00A60C5C /* 甜甜圈 UAT.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5287,6 +5317,7 @@
 				55EF6B2F21A81516007E074A /* RocketChatManager */,
 				646198B7212D04FE00432D8E /* Localization */,
 				643F9E572108423600CE70F4 /* Toast */,
+				55B5C024221A96B0007250FA /* Omni Explorer URL Creator */,
 				64E77DE121206BB500B0AC15 /* Etherscan URL Creator */,
 				640D890E20EF62A30010D986 /* Block Explorer URL Creator */,
 				64D8263F20DFB93A00C8FC63 /* QRCode Generator */,
@@ -5559,7 +5590,7 @@
 			);
 			name = TTChain;
 			productName = OfflineWallet;
-			productReference = 64F07CE420D0E4CB00A60C5C /* TTChain.app */;
+			productReference = 64F07CE420D0E4CB00A60C5C /* 甜甜圈.app */;
 			productType = "com.apple.product-type.application";
 		};
 		64F07CFA20D0E4CE00A60C5C /* TTChainTests */ = {
@@ -5598,7 +5629,7 @@
 			);
 			name = TTChain_SIT;
 			productName = OfflineWallet;
-			productReference = 64F07D1B20D0E83200A60C5C /* TTChain SIT.app */;
+			productReference = 64F07D1B20D0E83200A60C5C /* 甜甜圈 SIT.app */;
 			productType = "com.apple.product-type.application";
 		};
 		64F07D1D20D0E8FA00A60C5C /* TTChain_UAT */ = {
@@ -5618,7 +5649,7 @@
 			);
 			name = TTChain_UAT;
 			productName = OfflineWallet;
-			productReference = 64F07D2E20D0E8FA00A60C5C /* TTChain UAT.app */;
+			productReference = 64F07D2E20D0E8FA00A60C5C /* 甜甜圈 UAT.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -5764,6 +5795,7 @@
 				64D8265A20E0E1F600C8FC63 /* ChangeAssetTableViewCell.xib in Resources */,
 				6EB422F321635B8C00DF75DB /* AgreementMeViewController.xib in Resources */,
 				55EF6ADD21A812C6007E074A /* InviteTableViewCell.xib in Resources */,
+				55B5C039221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */,
 				55EF6A4D21A812C6007E074A /* PrivateChatSettingViewController.xib in Resources */,
 				5508741D21ED871E007B3B3B /* CoinMarketCollectionViewCell.xib in Resources */,
 				55EF6AFE21A812C7007E074A /* ChatGroupListViewController.xib in Resources */,
@@ -5902,6 +5934,7 @@
 				5508741321EC3291007B3B3B /* BannerCollectionViewCell.xib in Resources */,
 				6470D68A20F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.xib in Resources */,
 				55EF6A8D21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
+				55B5C037221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */,
 				6EEA2F162164B214005FE393 /* QAViewController.xib in Resources */,
 				55BB1B43218FDCE70061F189 /* ExploreViewController.xib in Resources */,
 				64B2773520D8AE0B004FF75B /* OWQRCodeViewController.xib in Resources */,
@@ -6055,6 +6088,7 @@
 				5508741421EC3291007B3B3B /* BannerCollectionViewCell.xib in Resources */,
 				6470D68B20F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.xib in Resources */,
 				55EF6A8E21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
+				55B5C038221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */,
 				6EEA2F172164B214005FE393 /* QAViewController.xib in Resources */,
 				55BB1B44218FDCE70061F189 /* ExploreViewController.xib in Resources */,
 				64B2773620D8AE0B004FF75B /* OWQRCodeViewController.xib in Resources */,
@@ -6730,11 +6764,13 @@
 				55EF6AA121A812C6007E074A /* SearchMemberViewModel.swift in Sources */,
 				64C9D4B721044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
 				64B2772920D7F04B004FF75B /* KLMoyaAPIBase.swift in Sources */,
+				55B5C02C221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */,
 				6414C146214A1C5F00E45F32 /* IdentityQRCodeContentWalletUnit.swift in Sources */,
 				55E1141221F72CF70062198B /* ChatKeyboardView.swift in Sources */,
 				64D8269F20E3E2AC00C8FC63 /* TransRecord+CoreDataProperties.swift in Sources */,
 				6EEA2F1C2164B22D005FE393 /* QAViewController.swift in Sources */,
 				6485005820DA440400107473 /* KLTagFlowLayout.swift in Sources */,
+				55B5C036221A9D61007250FA /* TransRecordDetailViewController.swift in Sources */,
 				6470D61B20F0EEBE00EB0780 /* WithdrawalAddressViewController.swift in Sources */,
 				6414C142214A1BFA00E45F32 /* IdentityQRCodeContent.swift in Sources */,
 				64769B322124151D00C4AB9E /* CICTxFilter.swift in Sources */,
@@ -7181,11 +7217,13 @@
 				645006FB20F45E0500C0FC11 /* WithdrawalConfirmETHFeeInputViewModel.swift in Sources */,
 				64C9D45820FDD55A000B0774 /* AddressBookUnitBrowseViewModel.swift in Sources */,
 				640D891520EF6A6D0010D986 /* TransRecordListViewModel.swift in Sources */,
+				55B5C02A221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */,
 				5539A4A621676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
 				55E1141021F72CF70062198B /* ChatKeyboardView.swift in Sources */,
 				64D8268920E3939400C8FC63 /* AssetSort.swift in Sources */,
 				556980542189A91C00346757 /* TransRecord+Comments.swift in Sources */,
 				64C9D4B521044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
+				55B5C034221A9D61007250FA /* TransRecordDetailViewController.swift in Sources */,
 				6414C144214A1C5F00E45F32 /* IdentityQRCodeContentWalletUnit.swift in Sources */,
 				6470D62920F1124300EB0780 /* WithdrawalFeeInfoProvider.swift in Sources */,
 				6EEA2F1A2164B22D005FE393 /* QAViewController.swift in Sources */,
@@ -7625,11 +7663,13 @@
 				55EF6AA021A812C6007E074A /* SearchMemberViewModel.swift in Sources */,
 				64C9D45920FDD55A000B0774 /* AddressBookUnitBrowseViewModel.swift in Sources */,
 				6470D62E20F1131100EB0780 /* FeeRateManager.swift in Sources */,
+				55B5C02B221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */,
 				5539A4A721676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
 				55E1141121F72CF70062198B /* ChatKeyboardView.swift in Sources */,
 				640D891B20EF6DD00010D986 /* TransRecordListTabViewController.swift in Sources */,
 				64C9D4B621044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
 				556980532189A91B00346757 /* TransRecord+Comments.swift in Sources */,
+				55B5C035221A9D61007250FA /* TransRecordDetailViewController.swift in Sources */,
 				6414C145214A1C5F00E45F32 /* IdentityQRCodeContentWalletUnit.swift in Sources */,
 				64F07E8420D36B8E00A60C5C /* KLRxViewModel.swift in Sources */,
 				6EEA2F1B2164B22D005FE393 /* QAViewController.swift in Sources */,
@@ -8015,7 +8055,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
-				PRODUCT_NAME = TTChain;
+				PRODUCT_NAME = "甜甜圈";
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain";
 				STRIP_SWIFT_SYMBOLS = NO;
@@ -8040,7 +8080,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
-				PRODUCT_NAME = TTChain;
+				PRODUCT_NAME = "甜甜圈";
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain";
 				STRIP_SWIFT_SYMBOLS = NO;
@@ -8109,7 +8149,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-SIT";
 				PRODUCT_MODULE_NAME = TTChain;
-				PRODUCT_NAME = "TTChain SIT";
+				PRODUCT_NAME = "甜甜圈 SIT";
 				PROVISIONING_PROFILE = "18ff6044-f137-45a0-a43d-e6224e26db4b";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.OfflineWallet-SIT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -8135,7 +8175,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-SIT";
 				PRODUCT_MODULE_NAME = TTChain;
-				PRODUCT_NAME = "TTChain SIT";
+				PRODUCT_NAME = "甜甜圈 SIT";
 				PROVISIONING_PROFILE = "27af3bdf-7fa1-4abd-b8ba-ba8752d2f22d";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.OfflineWallet-SIT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -8161,7 +8201,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
-				PRODUCT_NAME = "TTChain UAT";
+				PRODUCT_NAME = "甜甜圈 UAT";
 				PROVISIONING_PROFILE = "ea62f369-2c3e-4536-9abc-5bd2822faf77";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
@@ -8187,7 +8227,7 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
-				PRODUCT_NAME = "TTChain UAT";
+				PRODUCT_NAME = "甜甜圈 UAT";
 				PROVISIONING_PROFILE = "eaaef35c-9348-4f80-938b-dbb8be522513";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;

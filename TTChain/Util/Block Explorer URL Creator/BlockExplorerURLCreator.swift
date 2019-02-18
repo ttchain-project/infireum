@@ -9,7 +9,7 @@
 import UIKit
 
 class BlockExplorerURLCreator {
-    private static let base = "https://blockexplorer.com/tx/"
+    private static let base = "https://www.blockchain.com/btc/tx/"
     static func url(ofTxID id: String) -> URL {
         return URL.init(string: base + id)!
     }

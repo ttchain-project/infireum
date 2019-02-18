@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import RxSwift
 
 class TransRecordListTableViewCell: UITableViewCell {
+    var bag:DisposeBag!
     
 //    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var addrLabel: UILabel!
@@ -23,11 +25,12 @@ class TransRecordListTableViewCell: UITableViewCell {
     private var explorerURL: URL?
     
     private var transRecord: TransRecord!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
+        
 //        statusBtn.addTarget(self, action: #selector(statusBtnTapped), for: .touchUpInside)
         amtLabel.font = .owRegular(size: 18)
         self.backgroundColor = .clear
@@ -40,10 +43,12 @@ class TransRecordListTableViewCell: UITableViewCell {
     }
     
     func config(address: String, chainType: ChainType, transRecord: TransRecord, statusURLHandle: @escaping (URL) -> Void) {
+        bag = DisposeBag.init()
+
         self.transRecord = transRecord
         self.onTapStatusBtn = statusURLHandle
         //Style part
-        let dls = LM.dls
+//        let dls = LM.dls
         let palette = TM.palette
         
         addrLabel.set(textColor: palette.label_sub, font: .owRegular(size: 18))
@@ -140,16 +145,11 @@ class TransRecordListTableViewCell: UITableViewCell {
         
 //        icon.image = icon(of: address, in: transRecord)
         
-        if let txid = transRecord.txID {
-            switch chainType {
-            case .btc:
-                explorerURL = BlockExplorerURLCreator.url(ofTxID: txid)
-            case .eth:
-                explorerURL = EtherscanURLCreator.url(ofTxID: txid)
-            case .cic:
-                explorerURL = nil
-            }
-        }
+
+        
+        self.rx.klrx_tap.drive(onNext: { () in
+            self.statusBtnTapped()
+        }).disposed(by: bag)
     }
     
     func config(asset: Asset, transRecord: TransRecord, statusURLHandle: @escaping (URL) -> Void) {
@@ -157,6 +157,21 @@ class TransRecordListTableViewCell: UITableViewCell {
                chainType: asset.wallet!.owChainType,
                transRecord: transRecord,
                statusURLHandle: statusURLHandle)
+        
+        if let txid = transRecord.txID {
+            switch asset.wallet!.owChainType {
+            case .btc:
+                if asset.coinID == Coin.usdt_identifier {
+                    explorerURL = OmniExplorerCreator.url(ofTxID: txid)
+                }else {
+                    explorerURL = BlockExplorerURLCreator.url(ofTxID: txid)
+                }
+            case .eth:
+                explorerURL = EtherscanURLCreator.url(ofTxID: txid)
+            case .cic:
+                explorerURL = nil
+            }
+        }
     }
     
     @objc private func statusBtnTapped() {

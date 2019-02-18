@@ -1595,7 +1595,7 @@ struct CreateAccountAPI: KLMoyaAPIData {
             }
         }else {
             return Moya.Task.requestParameters(
-                parameters: ["encry" : true],
+                parameters: ["encry" : true,"word":"cs"],
                 encoding: JSONEncoding.default
             )
         }

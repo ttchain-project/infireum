@@ -106,17 +106,6 @@ class ImportWalletTypeChooseViewController: KLModuleViewController, Rx {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     private func toCreateWalletOptions() {
         let createBTCWallet = UIAlertAction.init(title: LM.dls.create_new_btc_wallet, style: .default) { (action) in
             self.createWallet(forChainType: .btc)
@@ -124,9 +113,11 @@ class ImportWalletTypeChooseViewController: KLModuleViewController, Rx {
         let createETHWallet = UIAlertAction.init(title: LM.dls.create_new_eth_wallet, style: .default) { (action) in
             self.createWallet(forChainType: .eth)
         }
+        let cancelOption = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
         let alertVC = UIAlertController.init(title: LM.dls.create_new_wallet, message: nil, preferredStyle: .actionSheet)
         alertVC.addAction(createBTCWallet)
         alertVC.addAction(createETHWallet)
+        alertVC.addAction(cancelOption)
         self.present(alertVC, animated: true, completion: nil)
     }
     

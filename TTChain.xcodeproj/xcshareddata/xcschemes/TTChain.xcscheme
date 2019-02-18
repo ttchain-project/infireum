@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "64F07CE320D0E4CB00A60C5C"
-               BuildableName = "TTChain.app"
+               BuildableName = "&#x751c;&#x751c;&#x5708;.app"
                BlueprintName = "TTChain"
                ReferencedContainer = "container:TTChain.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "64F07CE320D0E4CB00A60C5C"
-            BuildableName = "TTChain.app"
+            BuildableName = "&#x751c;&#x751c;&#x5708;.app"
             BlueprintName = "TTChain"
             ReferencedContainer = "container:TTChain.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "64F07CE320D0E4CB00A60C5C"
-            BuildableName = "TTChain.app"
+            BuildableName = "&#x751c;&#x751c;&#x5708;.app"
             BlueprintName = "TTChain"
             ReferencedContainer = "container:TTChain.xcodeproj">
          </BuildableReference>
@@ -113,7 +113,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "64F07CE320D0E4CB00A60C5C"
-            BuildableName = "TTChain.app"
+            BuildableName = "&#x751c;&#x751c;&#x5708;.app"
             BlueprintName = "TTChain"
             ReferencedContainer = "container:TTChain.xcodeproj">
          </BuildableReference>

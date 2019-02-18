@@ -532,4 +532,7 @@ struct DLS_EN_US: DLS {
     
     var accept_request = "Accept"
     var reject_request = "Reject"
+    
+    var trans_success = "Transaction Success"
+    var trans_failed = "Transaction Failed"
 }
