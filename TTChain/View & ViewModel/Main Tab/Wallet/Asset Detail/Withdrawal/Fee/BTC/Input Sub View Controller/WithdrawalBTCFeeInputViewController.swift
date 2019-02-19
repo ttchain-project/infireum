@@ -96,7 +96,7 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
         
         let feeStr = viewModel.satPerByte
             .map {
-                ($0?.asString(digits: 0) ?? "--") + " " + LM.dls.fee_sat_per_byte
+                ($0?.asString(digits: 8) ?? "--") + " " + "btc"//LM.dls.fee_sat_per_byte
         }
         
         feeStr.subscribe(onNext: {

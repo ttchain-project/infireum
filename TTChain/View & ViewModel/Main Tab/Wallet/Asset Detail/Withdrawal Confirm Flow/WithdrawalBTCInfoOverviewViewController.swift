@@ -91,9 +91,9 @@ final class WithdrawalBTCInfoOverviewViewController: KLModuleViewController, KLV
             .bind(to: fromWalletNameLabel.rx.text)
             .disposed(by: bag)
         
-        viewModel.feeRate.map { $0.btcToSatoshi.asString(digits: 0) }
+        viewModel.totalFee.map { $0.asString(digits: 8) }
             .map {
-                $0 + " sat/b"
+                $0 + " btc"
             }
             .bind(to: feeContentLabel.rx.text)
             .disposed(by: bag)
@@ -248,7 +248,7 @@ final class WithdrawalBTCInfoOverviewViewController: KLModuleViewController, KLV
     
     private func toUpdateFeeRate(withInfo info: WithdrawalInfo) {
         let vc = WithdrawalBTCFeeInfoViewController.instance(from: WithdrawalBTCFeeInfoViewController.Config(
-            defaultFeeOption: info.feeOption, defaultFeeRate: info.feeRate.btcToSatoshi
+            defaultFeeOption: info.feeOption, defaultFeeRate: info.feeAmt //sending fee amt instead of rate
             )
         )
         
@@ -279,7 +279,7 @@ final class WithdrawalBTCInfoOverviewViewController: KLModuleViewController, KLV
         if let top = navigationController?.topViewController as? WithdrawalBTCFeeInfoViewController {
             let result = top.viewModel.getSelectedResult()
             viewModel.changeFeeOption(result.0)
-            viewModel.changeFeeRate(result.1)
+            viewModel.changeFeeAmt(result.1)
         }
         
         navigationController?.popToViewController(self, animated: true)

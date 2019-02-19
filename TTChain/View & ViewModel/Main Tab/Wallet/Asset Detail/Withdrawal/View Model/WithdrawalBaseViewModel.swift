@@ -80,8 +80,8 @@ class WithdrawalInfoValidator {
                     feeRateName = dls.fee_eth_gas_price
                     feeUnitName = dls.fee_eth_gwei
                 case Coin.btc_identifier:
-                    feeRateName = dls.fee_sat_per_byte
-                    feeUnitName = dls.fee_sat_per_byte
+                    feeRateName = "btc"//dls.fee_sat_per_byte
+                    feeUnitName = "btc"// dls.fee_sat_per_byte
                 default:
                     //This should not happened
                     feeRateName = errorDebug(response: "手续费")
@@ -113,7 +113,7 @@ class WithdrawalInfoValidator {
             feeInfo: (rate: info.feeRate,
                       amt: info.feeAmt,
                       coin: info.feeCoin,
-                      option: info.feeOption)
+                      option: info.feeOption,totalHardCodedFee:info.totalFee)
         )
     }
     
@@ -126,7 +126,7 @@ class WithdrawalInfoValidator {
         ) -> Result {
     
         let assetAmt = asset.amount! as Decimal
-        let feeAmt = feeInfo.rate * feeInfo.amt
+        let feeAmt = (feeInfo.totalHardCodedFee != nil) ? feeInfo.totalHardCodedFee! : (feeInfo.rate * feeInfo.amt)
         let fromAddress = asset.wallet!.address!
         guard fromAddress != toAddress else {
             return .failed(.sameWalletAddresses)
@@ -195,7 +195,7 @@ class WithdrawalInfoValidator {
             asset: asset,
             withdrawalAmt: transferAmt,
             address: toAddress,
-            feeRate: feeInfo.rate, feeAmt: feeInfo.amt,
+            feeRate: feeInfo.rate, feeAmt:(feeInfo.totalHardCodedFee != nil) ? feeInfo.totalHardCodedFee! : feeInfo.amt,
             feeCoin: feeInfo.coin,
             feeOption: feeInfo.option,
             note: note
@@ -213,7 +213,11 @@ class WithdrawalInfo {
         return asset.wallet!
     }
     var feeRate: Decimal
-    var feeAmt: Decimal
+    var feeAmt: Decimal {
+        didSet {
+            print(feeAmt)
+        }
+    }
     var feeCoin: Coin
     
     var totalFee: Decimal {

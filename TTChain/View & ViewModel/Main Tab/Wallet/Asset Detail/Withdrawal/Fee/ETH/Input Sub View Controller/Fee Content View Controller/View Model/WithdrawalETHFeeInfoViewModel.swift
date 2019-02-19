@@ -34,7 +34,7 @@ class WithdrawalETHFeeInfoViewModel: KLRxViewModel, WithdrawalETFFeeInfoBase {
             option = .eth(.gasPrice(.suggest))
         }
         
-        return (rate: gp.gweiToEther, amt: g, coin: Coin.eth, option: option)
+        return (rate: gp.gweiToEther, amt: g, coin: Coin.eth, option: option,totalHardCodedFee:nil)
     }
     
     func checkValidity() -> WithdrawalFeeInfoValidity {

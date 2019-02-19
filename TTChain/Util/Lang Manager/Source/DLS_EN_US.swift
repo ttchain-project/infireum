@@ -284,7 +284,7 @@ struct DLS_EN_US: DLS {
     var withdrawal_placeholder_toAddr = "Please enter address"
     var withdrawal_label_fromAddr = "Payment address"
     var withdrawal_label_minerFee = "Miner fee"
-    var withdrawal_placeholder_custom_btc_feeRate = "Custom handling fee (sat/b)"
+    var withdrawal_placeholder_custom_btc_feeRate = "Custom handling fee (btc)"
     var withdrawal_placeholder_btc_feeRate_normal = "Normal:"
     var withdrawal_placeholder_btc_feeRate_priority = "Priority:"
     var withdrawal_label_advanced_mode = "Advanced mode"

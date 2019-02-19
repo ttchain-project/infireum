@@ -14,7 +14,7 @@ enum WithdrawalFeeInfoValidity {
 }
 
 protocol WithdrawalFeeInfoProvider {
-    typealias FeeInfo = (rate: Decimal, amt: Decimal, coin: Coin, option: FeeManager.Option?)
+    typealias FeeInfo = (rate: Decimal, amt: Decimal, coin: Coin, option: FeeManager.Option?, totalHardCodedFee:Decimal?)
     var isFeeInfoCompleted: Observable<Bool> { get }
     func getFeeInfo() -> FeeInfo?
     func checkValidity() -> WithdrawalFeeInfoValidity

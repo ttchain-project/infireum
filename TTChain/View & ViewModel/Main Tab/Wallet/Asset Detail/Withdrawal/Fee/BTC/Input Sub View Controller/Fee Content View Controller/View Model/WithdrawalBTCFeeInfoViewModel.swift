@@ -68,20 +68,26 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
     
     //Nil is possible if using manual input
     public var satPerByte: Observable<Decimal?> {
+        //is actually btc value after hard coding, and not "per byte" value
         return _satPerByte.asObservable()
     }
     
     public var regularSatPerByte: Observable<Decimal> {
+        //is actually btc value after hard coding, and not "per byte" value
+
         return _regularFeeRate.asObservable()
     }
     
     public var prioritySatPerByte: Observable<Decimal> {
+        //is actually btc value after hard coding, and not "per byte" value
+
         return _priorityFeeRate.asObservable()
     }
     
     public func getSelectedResult() -> (FeeManager.Option?, Decimal) {
         var option: FeeManager.Option?
-        let rate = _satPerByte.value!.satoshiToBTC
+        let rate = _satPerByte.value! //already in btc value
+            //.satoshiToBTC
         switch _selectedOption.value {
         case .manual:
             option = nil
@@ -90,7 +96,6 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
         case .priority:
             option = FeeManager.Option.btc(.priority)
         }
-        
         return (option, rate)
     }
     
@@ -105,6 +110,7 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
     }()
     
     private lazy var _satPerByte: BehaviorRelay<Decimal?> = {
+        
         let relay = BehaviorRelay<Decimal?>.init(value: nil)
         _selectedOption.flatMapLatest {
             [unowned self]
@@ -125,12 +131,17 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
     }()
     
     private lazy var _regularFeeRate: BehaviorRelay<Decimal> = {
-        let fee = FeeManager.getValue(fromOption: .btc(.regular))
+        //HARD-CODED for now
+        let fee = Decimal.init(3000).satoshiToBTC
+//            FeeManager.getValue(fromOption: .btc(.regular))
         return BehaviorRelay.init(value: fee)
     }()
     
     private lazy var _priorityFeeRate: BehaviorRelay<Decimal> = {
-        let fee = FeeManager.getValue(fromOption: .btc(.priority))
+        //HARD-CODED for now
+        let fee = Decimal.init(6000).satoshiToBTC
+
+//            FeeManager.getValue(fromOption: .btc(.priority))
         return BehaviorRelay.init(value: fee)
     }()
     

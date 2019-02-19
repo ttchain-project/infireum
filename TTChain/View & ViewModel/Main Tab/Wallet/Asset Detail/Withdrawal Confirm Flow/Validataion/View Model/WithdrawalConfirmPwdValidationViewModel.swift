@@ -139,7 +139,7 @@ class WithdrawalConfirmPwdValidationViewModel: KLRxViewModel {
             observer.onNext(.signing)
             switch chainType {
             case .btc:
-                self.startBTCTransferFlow(with: info, progressObserver: observer)
+                self.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: true)
             case .eth:
                 self.startETHTransferFlow(with: info, progressObserver: observer)
             default: break
@@ -152,31 +152,31 @@ class WithdrawalConfirmPwdValidationViewModel: KLRxViewModel {
 // MARK: - BTC Transfer Flow
 extension WithdrawalConfirmPwdValidationViewModel {
     private func startBTCTransferFlow(with info: WithdrawalInfo,
-                                      progressObserver observer: AnyObserver<BlockchainTransferFlowState> ) {
-        var info = info
+                                      progressObserver observer: AnyObserver<BlockchainTransferFlowState>, isCompressed:Bool ) {
+        var withdrawalInfo = info
         //TEST
 //        info.wallet.address = "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r"
-        getBTCUnspent(fromInfo: info)
+        getBTCUnspent(fromInfo: withdrawalInfo)
             .flatMap {
                 [unowned self] result -> RxAPIResponse<SignBTCTxAPIModel> in
                 switch result {
                 case .failed(error: let err):
-                    observer.onNext(
-                        .finished(.failed(error: err))
-                    )
+//                    observer.onNext(
+//                        .finished(.failed(error: err))
+//                    )
                     
                     return .just(.failed(error: err))
                 case .success(let model):
                     switch model.result {
                     case .unspents(let unspents):
-                        if info.feeCoin.identifier == Coin.usdt_identifier {
-                            return self.signUSDT(with: &info, unspents: unspents)
+                        if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
+                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isCompressed)
                         }else {
-                            return self.signBTC(with: &info, unspents: unspents)
+                            return self.signBTC(with: &withdrawalInfo, unspents: unspents, isCompressed: isCompressed)
                         }
                     case .insufficient:
-                        let digit = Int(info.feeCoin.digit)
-                        let totalFee = info.totalFee.asString(digits: digit)
+                        let digit = Int(withdrawalInfo.feeCoin.digit)
+                        let totalFee = withdrawalInfo.totalFee.asString(digits: digit)
                         let dls = LM.dls
                         let err: GTServerAPIError = GTServerAPIError.incorrectResult(
                             dls
@@ -185,7 +185,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
                                 .withdrawalConfirm_pwdVerify_error_btc_insufficient_fee_content(totalFee)
                         )
                         
-                        observer.onNext(.finished(.failed(error: err)))
+//                        observer.onNext(.finished(.failed(error: err)))
                         return .just(.failed(error: err))
                     }
                 }
@@ -194,22 +194,34 @@ extension WithdrawalConfirmPwdValidationViewModel {
                 [unowned self] result -> RxAPIResponse<BroadcastBTCTxAPIModel> in
                 switch result {
                 case .failed(error: let err):
-                    observer.onNext(
-                        .finished(.failed(error: err))
-                    )
+//                   observer.onNext(
+//                        .finished(.failed(error: err))
+//                    )
                     
                     return .just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)
-                    return self.broadcastBTC(with: model.signText, withComments: info.note ?? "")
+                    return self.broadcastBTC(with: model.signText, withComments: withdrawalInfo.note ?? "")
                 }
             }
             .subscribe(onSuccess: { (result) in
                 switch result {
                 case .failed(error: let err):
-                    observer.onNext(.finished(.failed(error: err)))
+                    if isCompressed {
+                        if case .broadcasting = self._transferState.value {
+                            line()
+                            print("Iscompressed true failed, so try with iscompressed false")
+                            line()
+                            self.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: false)
+                        }else {
+                            observer.onNext(.finished(.failed(error: err)))
+                        }
+                    }else {
+                        observer.onNext(.finished(.failed(error: err)))
+                    }
+                    
                 case .success(let model):
-                    guard let record = self.saveTxToLocal(with: model.txid, info: info) else {
+                    guard let record = self.saveTxToLocal(with: model.txid, info: withdrawalInfo) else {
                         let err: GTServerAPIError = .incorrectResult(
                             LM.dls.withdrawalConfirm_pwdVerify_error_tx_save_fail, ""
                         )
@@ -217,7 +229,6 @@ extension WithdrawalConfirmPwdValidationViewModel {
                         observer.onNext(.finished(.failed(error: err)))
                         return
                     }
-                    
                     observer.onNext(.finished(.success(record)))
                 }
             })
@@ -228,9 +239,9 @@ extension WithdrawalConfirmPwdValidationViewModel {
         return Server.instance.getBTCUnspent(fromBTCAddress: info.wallet.address!, targetAmt: (info.withdrawalAmt + info.totalFee))
     }
     
-    private func signBTC(with info: inout WithdrawalInfo, unspents: [Unspent]) -> RxAPIResponse<SignBTCTxAPIModel> {
-        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
-        info.feeAmt = Decimal.init(amt)
+    private func signBTC(with info: inout WithdrawalInfo, unspents: [Unspent],isCompressed:Bool) -> RxAPIResponse<SignBTCTxAPIModel> {
+//        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
+//        info.feeAmt = Decimal.init(amt)
         
         let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
         let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
@@ -239,11 +250,11 @@ extension WithdrawalConfirmPwdValidationViewModel {
             return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
         }
         return Server.instance.signBTCTx(pkey: info.wallet.pKey,
-                                         fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, feeBTC: info.totalFee,
+                                         fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, isCompressed: isCompressed, feeBTC: info.totalFee,
                                          unspents: unspents)
     }
     
-    private func signUSDT(with info: inout WithdrawalInfo, unspents: [Unspent]) -> RxAPIResponse<SignBTCTxAPIModel> {
+    private func signUSDT(with info: inout WithdrawalInfo, unspents: [Unspent], isCompressed:Bool) -> RxAPIResponse<SignBTCTxAPIModel> {
         let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
         info.feeAmt = Decimal.init(amt)
         
@@ -254,7 +265,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
             return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
         }
         return Server.instance.signBTCTx(pkey: info.wallet.pKey,
-                                         fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:true, feeBTC: info.totalFee,
+                                         fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:true, isCompressed: isCompressed, feeBTC: info.totalFee,
                                          unspents: unspents)
     }
     

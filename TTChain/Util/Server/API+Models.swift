@@ -319,7 +319,7 @@ struct SignBTCTxAPI: KLMoyaAPIData {
     let isUSDTTx:Bool
     let transferBTC: Decimal
     let feeBTC: Decimal
-    
+    let compressed:Bool
     let unspents: [Unspent]
     
     var authNeeded: Bool { return false }
@@ -370,7 +370,7 @@ struct SignBTCTxAPI: KLMoyaAPIData {
                     ]
                 ],
                 "unspend" : unspentParams,
-                "compressed" :  false
+                "compressed" :  compressed
             ],
             encoding: JSONEncoding.default
         )

@@ -36,7 +36,7 @@ class WithdrawalCICFeeInfoViewModel: KLRxViewModel, WithdrawalCICFeeInfoBase {
         
         let coin = Coin.getCoin(ofIdentifier: input.mainCoinID)!
         let digit = Int(coin.digit)
-        return (rate: gp.power(digit * -1), amt: g, coin: coin, option: option)
+        return (rate: gp.power(digit * -1), amt: g, coin: coin, option: option,totalHardCodedFee:nil)
     }
     
     func checkValidity() -> WithdrawalFeeInfoValidity {

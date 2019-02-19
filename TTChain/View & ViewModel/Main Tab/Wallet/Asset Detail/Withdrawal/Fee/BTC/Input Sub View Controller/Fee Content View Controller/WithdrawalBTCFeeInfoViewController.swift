@@ -54,7 +54,7 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
             output: ()
         )
         
-        manualTextField.keyboardType = .numberPad
+        manualTextField.keyboardType = .decimalPad
         
         bindViewModel()
         startMonitorLangIfNeeded()
@@ -108,9 +108,9 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
             rate -> String in
             return dls.withdrawal_placeholder_btc_feeRate_normal
                 + " "
-                + rate.asString(digits: 0)
+                + rate.asString(digits: 8)
                 + " "
-                + dls.fee_sat_per_byte
+                + "btc" //dls.fee_sat_per_byte
             }
             .bind(to: regularLabel.rx.text)
             .disposed(by: bag)
@@ -120,9 +120,9 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
             
             return dls.withdrawal_placeholder_btc_feeRate_priority
                 + " "
-                + rate.asString(digits: 0)
+                + rate.asString(digits: 8)
                 + " "
-                + dls.fee_sat_per_byte
+                + "btc" //dls.fee_sat_per_byte
             }
             .bind(to: priorityLabel.rx.text)
             .disposed(by: bag)

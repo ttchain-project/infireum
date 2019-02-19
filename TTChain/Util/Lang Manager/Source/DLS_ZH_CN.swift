@@ -284,7 +284,7 @@ struct DLS_ZH_CN: DLS {
     var withdrawal_placeholder_toAddr = "请输入地址"
     var withdrawal_label_fromAddr = "付款地址"
     var withdrawal_label_minerFee = "矿工费用"
-    var withdrawal_placeholder_custom_btc_feeRate = "自定义手续费 (sat/b)"
+    var withdrawal_placeholder_custom_btc_feeRate = "自定义手续费 (btc)"
     var withdrawal_placeholder_btc_feeRate_normal = "普通:"
     var withdrawal_placeholder_btc_feeRate_priority = "优先:"
     var withdrawal_label_advanced_mode = "高级模式"
