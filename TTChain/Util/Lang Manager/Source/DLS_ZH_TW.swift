@@ -540,5 +540,9 @@ struct DLS_ZH_TW: DLS {
 
     var trans_success = "轉帳成功"
     var trans_failed = "轉帳失敗"
-
+    
+    var group_qr_code = "集團二維碼"
+    var account = "帳號"
+    
+    var assetDetail_receive = "接收"
 }

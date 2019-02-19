@@ -116,7 +116,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
                 guard let uid = IMUserManager.manager.userModel.value?.uID else {
                     return
                 }
-                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:uid))
+                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:uid, title:LM.dls.myQRCode))
                 self.navigationController?.pushViewController(vc)
             })
             .disposed(by: bag)

@@ -56,7 +56,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        depositBtn.setTitleForAllStates(dls.assetDetail_btn_deposit)
+        depositBtn.setTitleForAllStates(dls.assetDetail_receive)
         withdrawalBtn.setTitleForAllStates(dls.assetDetail_btn_withdrawal)
     }
     

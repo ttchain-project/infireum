@@ -224,7 +224,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             #endif
             return
         }
-        let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uid))
+        let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uid, title:LM.dls.qrcode_title))
 //        self.navigationController?.pushViewController(vc)
 //        let vc = xib(vc: UserIMQRCodeViewController.self)
         let screen = UIScreen.main.bounds

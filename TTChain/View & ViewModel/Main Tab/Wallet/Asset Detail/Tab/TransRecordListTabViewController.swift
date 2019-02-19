@@ -108,7 +108,7 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
     private func items(with dls: DLS) -> [TabmanBar.Item] {
         return [dls.assetDetail_tab_total,
                 dls.assetDetail_btn_withdrawal,
-                dls.assetDetail_tab_deposit,
+                dls.assetDetail_receive,
                 dls.assetDetail_tab_fail]
             .map {
                 (name) -> TabmanBar.Item in

@@ -276,7 +276,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-        self.title = "TTChain"
+        self.title = lang.dls.tab_wallet
         self.stableCoinTitleLabel.text = " " + lang.dls.stable_coin
         self.listedCoinTitleLabel.text = " " +  lang.dls.sto_coin
     }

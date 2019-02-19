@@ -20,19 +20,21 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCircleAdd" translatesAutoresizingMaskIntoConstraints="NO" id="V7t-cS-ZMp">
-                        <rect key="frame" x="18" y="18" width="74" height="74"/>
+                        <rect key="frame" x="25" y="18" width="60" height="60"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="60" id="Sd1-HI-mgF"/>
+                            <constraint firstAttribute="width" constant="60" id="Yon-ge-Nxl"/>
                             <constraint firstAttribute="width" secondItem="V7t-cS-ZMp" secondAttribute="height" multiplier="1:1" id="cKp-4t-j0R"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgv-CK-YBN">
-                        <rect key="frame" x="0.0" y="98" width="110" height="26"/>
+                        <rect key="frame" x="0.0" y="84" width="110" height="40"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconAvatarClose36" translatesAutoresizingMaskIntoConstraints="NO" id="WFz-bK-6yO">
-                        <rect key="frame" x="83" y="18" width="18" height="18"/>
+                        <rect key="frame" x="76" y="18" width="18" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="0SD-Fp-GH1"/>
                             <constraint firstAttribute="width" constant="18" id="WK8-9b-H78"/>
@@ -42,12 +44,11 @@
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="sgv-CK-YBN" secondAttribute="trailing" id="RUz-RG-Zha"/>
-                <constraint firstAttribute="trailing" secondItem="V7t-cS-ZMp" secondAttribute="trailing" constant="18" id="bIh-Ic-hes"/>
                 <constraint firstItem="sgv-CK-YBN" firstAttribute="top" secondItem="V7t-cS-ZMp" secondAttribute="bottom" constant="6" id="bSe-Ib-4Qu"/>
-                <constraint firstItem="V7t-cS-ZMp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="dz7-kj-wIS"/>
                 <constraint firstAttribute="bottom" secondItem="sgv-CK-YBN" secondAttribute="bottom" constant="12" id="iyP-Hz-nCb"/>
                 <constraint firstItem="sgv-CK-YBN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ptH-Vt-dUr"/>
                 <constraint firstItem="V7t-cS-ZMp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="18" id="rtd-9B-bs4"/>
+                <constraint firstItem="V7t-cS-ZMp" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="tIT-9b-zYc"/>
                 <constraint firstItem="WFz-bK-6yO" firstAttribute="trailing" secondItem="V7t-cS-ZMp" secondAttribute="trailing" constant="9" id="zsY-P3-kJ4"/>
                 <constraint firstItem="WFz-bK-6yO" firstAttribute="top" secondItem="V7t-cS-ZMp" secondAttribute="top" id="zza-E4-cYa"/>
             </constraints>

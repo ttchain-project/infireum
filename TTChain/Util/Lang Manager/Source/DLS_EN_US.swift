@@ -535,4 +535,8 @@ struct DLS_EN_US: DLS {
     
     var trans_success = "Transaction Success"
     var trans_failed = "Transaction Failed"
+    
+    var group_qr_code = "Group QR Code"
+    var account = "Account"
+    var assetDetail_receive = "Receive"
 }

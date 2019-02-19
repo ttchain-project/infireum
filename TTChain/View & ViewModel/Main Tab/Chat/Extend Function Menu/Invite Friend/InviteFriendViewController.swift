@@ -129,7 +129,9 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         textField.placeholder = lang.dls.add_friend_placeholder_friend_id
-        title = lang.dls.add_friend_title
+        self.navigationItem.title = lang.dls.add_friend_title
+        self.titleLabel.text = lang.dls.account
+        self.confirmButton.setTitle(lang.dls.g_confirm, for: .normal)
     }
     
     func showStep1AlertDialog() {

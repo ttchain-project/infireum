@@ -47,7 +47,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             switch self.viewModel.input.roomType {
             case .group, .channel:
                 guard let userGroupInfoModel = self.viewModel.groupInfoModel.value else { return }
-                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:userGroupInfoModel.groupID))
+                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:userGroupInfoModel.groupID, title:LM.dls.group_qr_code))
                 self.navigationController?.pushViewController(vc)
             case .pvtChat: return
             }

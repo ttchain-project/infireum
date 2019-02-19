@@ -17,6 +17,7 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
     
     struct Config {
         let uid :String
+        let title:String
     }
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var qrCodeImageView: UIImageView!
@@ -53,7 +54,6 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
 //        self.titleLabel.text = dls.exportPKey_tab_qrcode
-        self.navigationItem.title = dls.myQRCode
         doneButton.setTitleForAllStates(dls.g_confirm)
     }
     
@@ -78,7 +78,8 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
         let output = UserQRCodeViewModel.Output()
         viewModel = ViewModel.init(input: UserQRCodeViewModel.Input.init(uid:constructor.uid), output: output)
         viewModel.output.image.bind(to: qrCodeImageView.rx.image).disposed(by: bag)
-        self.uidLabel.text = self.viewModel.uID.value        
+        self.uidLabel.text = self.viewModel.uID.value
+        self.navigationItem.title = constructor.title
         self.uidCopyButton.rx.tap.asDriver()
             .throttle(1)
             .drive(onNext: {

@@ -534,4 +534,8 @@ protocol DynamicLocalizationSource {
     var trans_success: String {get set}
     var trans_failed: String {get set}
 
+    var group_qr_code: String {get set}
+    var account: String {get set}
+    var assetDetail_receive: String {get set}
+
 }

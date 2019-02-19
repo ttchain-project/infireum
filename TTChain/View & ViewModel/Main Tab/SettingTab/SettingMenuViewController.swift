@@ -478,8 +478,8 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     }
     
     private func toExportWalletPKey() {
-        let alert = UIAlertController.init(title: "Export Wallet",
-                                           message: "Choose a wallet to export",
+        let alert = UIAlertController.init(title: LM.dls.walletManage_label_exportPKey,
+                                           message: "",
                                            preferredStyle: .actionSheet)
         
         let actionETH = UIAlertAction.init(title: "ETH",
@@ -515,9 +515,25 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
             guard let wallets = DB.instance.get(type: Wallet.self, predicate: pred, sorts: nil), wallets.count > 0 else {
                 return
             }
-            
-            let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallets[0])
-            self.navigationController?.pushViewController(vc)
+            if wallets.count == 0 {
+                let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallets[0])
+                self.navigationController?.pushViewController(vc)
+            }else {
+                let actionSheet = UIAlertController.init(title: LM.dls.select_wallet_address, message: "", preferredStyle: .actionSheet)
+                
+                for wallet in wallets {
+                    let title = (wallet.name)! + " - " + wallet.address!
+                    let action = UIAlertAction.init(title: title, style: .default) { _ in
+                        let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallet)
+                        self.navigationController?.pushViewController(vc)
+                    }
+                    actionSheet.addAction(action)
+                }
+                
+                let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+                actionSheet.addAction(cancelAction)
+                self.present(actionSheet, animated: true, completion: nil)
+            }
         default:
             print("t")
         }

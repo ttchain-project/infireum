@@ -11,7 +11,11 @@ import RxSwift
 
 class GroupMemberCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView! {
+        didSet {
+            avatarImageView.cornerRadius = avatarImageView.height/2
+        }
+    }
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var closeImageView: UIImageView!
     
@@ -33,10 +37,13 @@ class GroupMemberCollectionViewCell: UICollectionViewCell {
             viewModel.output.closeButtonIsHidden.bind(to: closeImageView.rx.isHidden).disposed(by: disposeBag)
         }
     }
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        avatarImageView.layer.cornerRadius = avatarImageView.bounds.size.height / 2
+//        avatarImageView.layer.cornerRadius = avatarImageView.bounds.size.height / 2
     }
 
 }

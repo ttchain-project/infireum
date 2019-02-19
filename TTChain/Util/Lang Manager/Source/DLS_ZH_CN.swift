@@ -535,4 +535,9 @@ struct DLS_ZH_CN: DLS {
     var trans_success = "转帐成功"
     var trans_failed = "转帐失败"
 
+    var group_qr_code = "集团二维码"
+
+    var account = "帐号"
+    var assetDetail_receive = "接收"
+
 }
