@@ -57,28 +57,32 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
             ),
             output:
             IdentityCreateViewModel.OutputSource(
-                onStartCreateIdentity: {
-                    [weak self] in
-                    guard let wSelf = self else { return }
-                    wSelf.hud.startAnimating(inView: wSelf.view)
-                    
-                },
-                onFinishCreateIdentity: {
-                    [weak self] (apiResult) in
-                    guard let wSelf = self else { return }
-                    wSelf.hud.stopAnimating()
-                    
-                    switch apiResult {
-                    case .failed(error: let err):
-                        wSelf.showAPIErrorResponsePopUp(from: err, cancelTitle: LM.dls.g_cancel)
-                    case .success(let result):
-                        wSelf.handleCreateIdentityResult(result)
-                    }
-                },
+//                onStartCreateIdentity: {
+//                    [weak self] in
+//                    guard let wSelf = self else { return }
+//                    wSelf.hud.startAnimating(inView: wSelf.view)
+//
+//                },
+//                onFinishCreateIdentity: {
+//                    [weak self] (apiResult) in
+//                    guard let wSelf = self else { return }
+//                    wSelf.hud.stopAnimating()
+//
+//                    switch apiResult {
+//                    case .failed(error: let err):
+//                        wSelf.showAPIErrorResponsePopUp(from: err, cancelTitle: LM.dls.g_cancel)
+//                    case .success(let result):
+//                        wSelf.handleCreateIdentityResult(result)
+//                    }
+//                },
                 onFinishCheckingInputValidity: {
                     [weak self] validity in
                     guard let wSelf = self else { return }
-                    wSelf.respondToFieldCheckValidityResult(validity: validity)
+                    if case .valid = validity  {
+                        self?.handleCreateIdentityResult()
+                    }else {
+                        wSelf.respondToFieldCheckValidityResult(validity: validity)
+                    }
                 },
                 onUpdateEmptyFieldsStatus: {
                     [weak self] isValid in
@@ -134,8 +138,9 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         // Dispose of any resources that can be recreated.
     }
     
-    private func handleCreateIdentityResult(_ result: ViewModel.CreateResult) {
-        let vc = BackupWalletNoteViewController.instance(source: result)
+    private func handleCreateIdentityResult() {
+        let idenitySource = self.viewModel.getIdentitySource()
+        let vc = BackupWalletNoteViewController.instance(source: idenitySource)
         navigationController?.pushViewController(vc)
     }
     

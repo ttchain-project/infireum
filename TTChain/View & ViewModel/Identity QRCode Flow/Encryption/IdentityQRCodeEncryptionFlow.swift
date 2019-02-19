@@ -104,7 +104,10 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
                         with: msg,
                         contents: desc,
                         cancelTitle: dls.g_cancel,
-                        cancelHandler: { (_) in
+                        cancelHandler: {[weak self] (_)  in
+                            guard let `self` = self else {
+                                return
+                            }
                             self.start()
                     })
                     

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import HDWalletKit
 
 class IdentityCreateViewModel: KLRxViewModel {
     typealias InputSource = Input
@@ -26,8 +27,8 @@ class IdentityCreateViewModel: KLRxViewModel {
     }
     
     struct Output {
-        let onStartCreateIdentity: () -> Void
-        let onFinishCreateIdentity: (APIResult<CreateResult>) -> Void
+//        let onStartCreateIdentity: () -> Void
+//        let onFinishCreateIdentity: (APIResult<CreateResult>) -> Void
         let onFinishCheckingInputValidity: (InputValidity) -> Void
         let onUpdateEmptyFieldsStatus: (Bool) -> Void
     }
@@ -76,33 +77,22 @@ class IdentityCreateViewModel: KLRxViewModel {
                 [unowned self] in self.checkValidity()
             }
             .map {
-                [unowned self]
-                validity -> Bool in
-                let shouldContinue: Bool
-                switch validity {
-                case .valid: shouldContinue = true
-                default: shouldContinue = false
-                }
-                
-                if !shouldContinue {
-                    self.output.onFinishCheckingInputValidity(validity)
-                }
-                
-                return shouldContinue
+                validity -> InputValidity in
+                return validity
             }
-            .filter { $0 }
-            .asObservable()
-            .flatMapLatest {
-                [unowned self]
-                _ -> RxAPIResponse<CreateResult> in
-                self.output.onStartCreateIdentity()
-                return self.createIdentity()
-            }
+//            .filter { $0 }
+//            .asObservable()
+//            .flatMapLatest {
+//                [unowned self]
+//                _ -> RxAPIResponse<CreateResult> in
+//                self.output.onStartCreateIdentity()
+//                return self.createIdentity()
+//            }
             .asObservable()
             .subscribe(onNext: {
                 [unowned self]
-                result in
-                self.output.onFinishCreateIdentity(result)
+                validity in
+                self.output.onFinishCheckingInputValidity(validity)
             })
             .disposed(by: bag)
     }
@@ -180,6 +170,9 @@ class IdentityCreateViewModel: KLRxViewModel {
         return .valid
     }
     
+    public func getIdentitySource() -> BackupWalletNoteViewController.Config {
+        return BackupWalletNoteViewController.Config(name:name.value!,pwd:pwd.value!,pwdHint:pwdHint.value!)
+    }
     //MARK: - Identity create
     private func createIdentity() -> RxAPIResponse<CreateResult> {
         guard let _name = name.value,

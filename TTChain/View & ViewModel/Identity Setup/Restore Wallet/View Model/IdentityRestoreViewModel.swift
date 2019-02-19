@@ -25,8 +25,8 @@ class IdentityRestoreViewModel: KLRxViewModel {
     }
     
     struct Output {
-        let onStartRestoreIdentity: () -> Void
-        let onFinishRestoreIdentity: (APIResult<CreateResult>) -> Void
+//        let onStartRestoreIdentity: () -> Void
+//        let onFinishRestoreIdentity: (APIResult<CreateResult>) -> Void
         let onFinishCheckingInputValidity: (InputValidity) -> Void
         let onUpdateEmptyFieldsStatus: (Bool) -> Void
     }
@@ -57,6 +57,19 @@ class IdentityRestoreViewModel: KLRxViewModel {
     private let userName: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     private let hasEmptyFields: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     
+    public func getUserName() -> String {
+        return self.userName.value ?? "Identity_Name"
+    }
+    public func getPwdString() -> String? {
+        return self.pwd.value
+    }
+    public func getPwdHintValue() -> String? {
+        return self.pwdHint.value
+    }
+    public func getMnemonicString() -> String? {
+        return self.mnemonic.value
+    }
+    
     //MARK: - functions
     required init(input: InputSource, output: OutputSource) {
         self.input = input
@@ -77,35 +90,22 @@ class IdentityRestoreViewModel: KLRxViewModel {
                 [unowned self] in self.checkValidity()
             }
             .map {
-                [unowned self]
-                validity -> Bool in
-                let shouldContinue: Bool
-                switch validity {
-                case .valid:
-                    shouldContinue = true
-                default:
-                    shouldContinue = false
-                }
-                
-                if !shouldContinue {
-                    self.output.onFinishCheckingInputValidity(validity)
-                }
-                
-                return shouldContinue
+                validity -> InputValidity in
+                return validity
             }
-            .filter { $0 }
-            .asObservable()
-            .flatMapLatest {
-                [unowned self]
-                _ -> RxAPIResponse<CreateResult> in
-                self.output.onStartRestoreIdentity()
-                return self.restoreIdentity()
-            }
+//            .filter { $0 }
+//            .asObservable()
+//            .flatMapLatest {
+//                [unowned self]
+//                _ -> RxAPIResponse<CreateResult> in
+//                self.output.onStartRestoreIdentity()
+//                return self.restoreIdentity()
+//            }
             .asObservable()
             .subscribe(onNext: {
                 [unowned self]
-                result in
-                self.output.onFinishRestoreIdentity(result)
+                validity in
+                self.output.onFinishCheckingInputValidity(validity)
             })
             .disposed(by: bag)
     }
@@ -185,7 +185,7 @@ class IdentityRestoreViewModel: KLRxViewModel {
         
         return .valid
     }
-    
+
     //MARK: - Identity create
     private func restoreIdentity() -> RxAPIResponse<CreateResult> {
         guard let _mnemonic = mnemonic.value,

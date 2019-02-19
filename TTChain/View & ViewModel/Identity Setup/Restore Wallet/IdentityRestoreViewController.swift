@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import HDWalletKit
 
 final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     
@@ -67,34 +68,38 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             ),
             output:
             IdentityRestoreViewModel.OutputSource(
-                onStartRestoreIdentity: {
-                    [weak self] in
-                    guard let wSelf = self else { return }
-                    wSelf.hud.startAnimating(inView: wSelf.navigationController!.view)
-                    
-                },
-                onFinishRestoreIdentity: {
-                    [weak self] (apiResult) in
-                    guard let wSelf = self else { return }
-                    wSelf.hud.updateType(KLHUD.HUDType.img(#imageLiteral(resourceName: "iconSpinnerAlertOk")),
-                                         text: LM.dls
-                                            .restoreIdentity_hud_restoreSuccess)
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: {
-                        wSelf.hud.stopAnimating()
-                        
-                        switch apiResult {
-                        case .failed(error: let err):
-                            wSelf.showAPIErrorResponsePopUp(from: err, cancelTitle: LM.dls.g_cancel)
-                        case .success(let result):
-                            wSelf.handleRestoreIdentityResult(result)
-                        }
-                        
-                    })
-                },
+//                onStartRestoreIdentity: {
+//                    [weak self] in
+//                    guard let wSelf = self else { return }
+//                    wSelf.hud.startAnimating(inView: wSelf.navigationController!.view)
+//
+//                },
+//                onFinishRestoreIdentity: {
+//                    [weak self] (apiResult) in
+//                    guard let wSelf = self else { return }
+//                    wSelf.hud.updateType(KLHUD.HUDType.img(#imageLiteral(resourceName: "iconSpinnerAlertOk")),
+//                                         text: LM.dls
+//                                            .restoreIdentity_hud_restoreSuccess)
+//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: {
+//                        wSelf.hud.stopAnimating()
+//
+//                        switch apiResult {
+//                        case .failed(error: let err):
+//                            wSelf.showAPIErrorResponsePopUp(from: err, cancelTitle: LM.dls.g_cancel)
+//                        case .success(let result):
+//                            wSelf.handleRestoreIdentityResult(result)
+//                        }
+//
+//                    })
+//                },
                 onFinishCheckingInputValidity: {
                     [weak self] validity in
                     guard let wSelf = self else { return }
-                    wSelf.respondToFieldCheckValidityResult(validity: validity)
+                    if case .valid = validity  {
+                        self?.handleRestoreIdentityResult()
+                    }else {
+                        wSelf.respondToFieldCheckValidityResult(validity: validity)
+                    }
                 },
                 onUpdateEmptyFieldsStatus: {
                     [weak self] isValid in
@@ -155,8 +160,22 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         // Dispose of any resources that can be recreated.
     }
     
-    private func handleRestoreIdentityResult(_ result: ViewModel.CreateResult) {
-        guard let id = Identity.create(mnemonic: result.mnemonic, name: result.name, pwd: result.pwd, hint: result.pwdHint) else {
+    private func handleRestoreIdentityResult() {
+        
+        self.hud.startAnimating(inView: self.view)
+
+        guard let pwd = self.viewModel.getPwdString(), let pwdHint = self.viewModel.getPwdHintValue(), let mnemonic = self.viewModel.getMnemonicString() else {
+            showSimplePopUp(with: LM.dls.restoreIdentity_error_create_user_fail,
+                            contents: "",
+                            cancelTitle: LM.dls.g_cancel,
+                            cancelHandler: nil)
+            self.hud.stopAnimating()
+
+            return 
+        }
+        
+        guard Identity.create(mnemonic: mnemonic, name: self.viewModel.getUserName(), pwd: pwd, hint: pwdHint) != nil else {
+            self.hud.stopAnimating()
             #if DEBUG
             fatalError()
             #else
@@ -168,32 +187,52 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             #endif
         }
         
-        let sources = result.walletsResource.map {
-            res -> (address: String, pKey: String, mnenomic: String?, isFromSystem: Bool, name: String, pwd: String, pwdHint: String, chainType: ChainType, mainCoinID: String) in
-            return (address: res.address,
-                    pKey: res.pKey,
-                    mnenomic: result.mnemonic,
-                    isFromSystem: true,
-                    name: Wallet.defaultName(ofMainCoin: res.mainCoin),
-                    pwd: result.pwd,
-                    pwdHint: result.pwdHint,
-                    chainType: res.mainCoin.owChainType,
-                    mainCoinID: res.mainCoin.walletMainCoinID!)
-        }
+        WalletCreator.createNewWallet(forChain: .btc, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint).flatMap { response -> Single<Bool> in
+            if response {
+                return WalletCreator.createNewWallet(forChain: .eth, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint)
+            }else {
+                return .error(GTServerAPIError.apiReject)
+            }
+            }.subscribe(onSuccess: {[unowned self] (status) in
+                self.hud.stopAnimating()
+                if status {
+                    self.startBackupIdentityQRCodeFlow()
+                }
+            }) { (error) in
+                self.hud.stopAnimating()
+                self.showSimplePopUp(with: LM.dls.sortMnemonic_error_create_wallet_fail,
+                                     contents: "",
+                                     cancelTitle: LM.dls.g_cancel,
+                                     cancelHandler: nil)
+                
+            }.disposed(by: bag)
         
-        guard Wallet.create(identity: id, sources: sources) != nil else {
-            #if DEBUG
-            fatalError()
-            #else
-            showSimplePopUp(with: LM.dls.restoreIdentity_error_create_wallet_fail,
-                            contents: "",
-                            cancelTitle: LM.dls.g_cancel,
-                            cancelHandler: nil)
-            return
-            #endif
-        }
-        
-        startBackupIdentityQRCodeFlow()
+//        let sources = result.walletsResource.map {
+//            res -> (address: String, pKey: String, mnenomic: String?, isFromSystem: Bool, name: String, pwd: String, pwdHint: String, chainType: ChainType, mainCoinID: String) in
+//            return (address: res.address,
+//                    pKey: res.pKey,
+//                    mnenomic: result.mnemonic,
+//                    isFromSystem: true,
+//                    name: Wallet.defaultName(ofMainCoin: res.mainCoin),
+//                    pwd: result.pwd,
+//                    pwdHint: result.pwdHint,
+//                    chainType: res.mainCoin.owChainType,
+//                    mainCoinID: res.mainCoin.walletMainCoinID!)
+//        }
+//
+//        guard Wallet.create(identity: id, sources: sources) != nil else {
+//            #if DEBUG
+//            fatalError()
+//            #else
+//            showSimplePopUp(with: LM.dls.restoreIdentity_error_create_wallet_fail,
+//                            contents: "",
+//                            cancelTitle: LM.dls.g_cancel,
+//                            cancelHandler: nil)
+//            return
+//            #endif
+//        }
+//
+//        startBackupIdentityQRCodeFlow()
     }
     
     override func renderLang(_ lang: Lang) {

@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import HDWalletKit
 
 class BackupWalletNoteViewController: KLModuleViewController {
+    
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainNoteLabel: UILabel!
@@ -16,16 +20,35 @@ class BackupWalletNoteViewController: KLModuleViewController {
     
     @IBOutlet weak var nextStepBtn: UIButton!
     
-    var result: IdentityCreateViewModel.CreateResult!
-    
-    static func instance(source: IdentityCreateViewModel.CreateResult) -> BackupWalletNoteViewController {
+    var identitySource:BackupWalletNoteViewController.Config!
+    var bag:DisposeBag = DisposeBag.init()
+    static func instance(source: BackupWalletNoteViewController.Config) -> BackupWalletNoteViewController {
         let vc = xib(vc: self)
         vc.config(source: source)
         return vc
     }
     
-    private func config(source: IdentityCreateViewModel.CreateResult) {
-        result = source
+    lazy var hud: KLHUD = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: CGSize.init(width: 100, height: 100)
+            ),
+            descText: LM.dls.createID_hud_creating,
+            spinnerColor: TM.palette.hud_spinner,
+            textColor: TM.palette.hud_text
+        )
+    }()
+    
+    struct Config {
+        var name:String
+        var pwd:String
+        var pwdHint:String
+    }
+    private func config(source: BackupWalletNoteViewController.Config) {
+//        result = source
+        identitySource = source
     }
 
     private func toMainTab() {
@@ -97,7 +120,12 @@ class BackupWalletNoteViewController: KLModuleViewController {
 
     
     private func createIdentity() {
-        guard let id = Identity.create(mnemonic: result.mnemonic, name: result.name, pwd: result.pwd, hint: result.pwdHint) else {
+        self.hud.startAnimating(inView: self.view)
+        let mnemonic = Mnemonic.create(language: .simplifiedChinese)
+        print(mnemonic)
+        guard Identity.create(mnemonic: mnemonic, name:identitySource.name , pwd: identitySource.pwd, hint: identitySource.pwdHint) != nil else {
+            self.hud.stopAnimating()
+
             #if DEBUG
             fatalError()
             #else
@@ -109,31 +137,54 @@ class BackupWalletNoteViewController: KLModuleViewController {
             #endif
         }
         
-        let sources = result.walletsResource.map {
-            res -> (address: String, pKey: String, mnenomic: String?, isFromSystem: Bool, name: String, pwd: String, pwdHint: String, chainType: ChainType, mainCoinID: String) in
-            return (address: res.address,
-                    pKey: res.pKey,
-                    mnenomic: result.mnemonic,
-                    isFromSystem: true,
-                    name: Wallet.defaultName(ofMainCoin: res.mainCoin),
-                    pwd: result.pwd,
-                    pwdHint: result.pwdHint,
-                    chainType: res.mainCoin.owChainType,
-                    mainCoinID: res.mainCoin.walletMainCoinID!)
-        }
+       
         
-        guard Wallet.create(identity: id, sources: sources) != nil else {
-            #if DEBUG
-            fatalError()
-            #else
-            showSimplePopUp(with: LM.dls.sortMnemonic_error_create_wallet_fail,
-                            contents: "",
-                            cancelTitle: LM.dls.g_cancel,
-                            cancelHandler: nil)
-            return
-            #endif
-        }
+        WalletCreator.createNewWallet(forChain: .btc, mnemonic: mnemonic, pwd: identitySource.pwd, pwdHint: identitySource.pwdHint).flatMap { response -> Single<Bool> in
+            if response {
+                return WalletCreator.createNewWallet(forChain: .eth, mnemonic: mnemonic, pwd: self.identitySource.pwd, pwdHint: self.identitySource.pwdHint)
+            }else {
+                return .error(GTServerAPIError.apiReject)
+            }
+            }.subscribe(onSuccess: { (status) in
+                self.hud.stopAnimating()
+
+                if status {
+                    self.startQRCodeBackupFlow()
+                }
+            }) { (error) in
+                self.hud.stopAnimating()
+
+                self.showSimplePopUp(with: LM.dls.sortMnemonic_error_create_wallet_fail,
+                                     contents: "",
+                                     cancelTitle: LM.dls.g_cancel,
+                                     cancelHandler: nil)
+                
+        }.disposed(by: bag)
         
-        startQRCodeBackupFlow()
+//        let sources = result.walletsResource.map {
+//            res -> (address: String, pKey: String, mnenomic: String?, isFromSystem: Bool, name: String, pwd: String, pwdHint: String, chainType: ChainType, mainCoinID: String) in
+//            return (address: res.address,
+//                    pKey: res.pKey,
+//                    mnenomic: result.mnemonic,
+//                    isFromSystem: true,
+//                    name: Wallet.defaultName(ofMainCoin: res.mainCoin),
+//                    pwd: result.pwd,
+//                    pwdHint: result.pwdHint,
+//                    chainType: res.mainCoin.owChainType,
+//                    mainCoinID: res.mainCoin.walletMainCoinID!)
+//        }
+//
+//        guard Wallet.create(identity: id, sources: sources) != nil else {
+//            #if DEBUG
+//            fatalError()
+//            #else
+//            showSimplePopUp(with: LM.dls.sortMnemonic_error_create_wallet_fail,
+//                            contents: "",
+//                            cancelTitle: LM.dls.g_cancel,
+//                            cancelHandler: nil)
+//            return
+//            #endif
+//        }
+//
     }
 }

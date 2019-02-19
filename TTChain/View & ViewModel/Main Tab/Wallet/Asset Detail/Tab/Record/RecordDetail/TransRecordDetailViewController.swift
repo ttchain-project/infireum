@@ -122,7 +122,7 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
     override func renderLang(_ lang: Lang) {
         self.amountTitleLabel.text = lang.dls.assetDetail_tab_total
         self.minorFeeTitleLabel.text  = lang.dls.ltTx_label_minerFee
-        self.paymentAddressTitleLabel.text = lang.dls.withdrawal_label_minerFee
+        self.paymentAddressTitleLabel.text = lang.dls.withdrawal_label_fromAddr
         self.recieptAddressTitleLabel.text = lang.dls.withdrawal_label_toAddr
         self.toLinkButton.setTitle(lang.dls.assetDetail_label_tx_go_check, for: .normal)
     }

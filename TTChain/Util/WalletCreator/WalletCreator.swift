@@ -24,19 +24,9 @@ class WalletCreator {
                 handler(.error(error))
                 return Disposables.create ()
             }
-            let privateKey = PrivateKey(seed: seed, coin: (chain == ChainType.btc ? .bitcoin : .ethereum))
-            // BIP44 key derivation
-            // m/44'
-            let purpose = privateKey.derived(at: .hardened(44))
             
-            // m/44'/0' || // m/44'/60'
-            let coinType = purpose.derived(at: .hardened(chain == ChainType.btc  ? 0 : 60))
+            let change = WalletCreator.createChange(seed: seed, chain: chain)
             
-            // m/44'/0'/0' || // m/44'/60'/0'
-            let account = coinType.derived(at: .hardened(0))
-            
-            // m/44'/0'/0'/0 || // m/44'/60'/0'/0
-            let change = account.derived(at: .notHardened(0))
             var pvtKeyForNewWallet: PrivateKey?
             
             for i in 0...50 {
@@ -77,8 +67,26 @@ class WalletCreator {
             
             return Disposables.create ()
         }
+    }
+    
+    static private func createChange(seed:Data , chain:ChainType) -> PrivateKey {
         
-       
+        let privateKey = PrivateKey(seed: seed, coin: (chain == ChainType.btc ? .bitcoin : .ethereum))
+        // BIP44 key derivation
+        // m/44'
+        let purpose = privateKey.derived(at: .hardened(44))
+        
+        // m/44'/0' || // m/44'/60'
+        let coinType = purpose.derived(at: .hardened(chain == ChainType.btc  ? 0 : 60))
+        
+        // m/44'/0'/0' || // m/44'/60'/0'
+        let account = coinType.derived(at: .hardened(0))
+        
+        // m/44'/0'/0'/0 || // m/44'/60'/0'/0
+        return account.derived(at: .notHardened(0))
+        
+    }
+    static func createIdetityWallet() {
         
     }
 }
