@@ -545,4 +545,9 @@ struct DLS_ZH_TW: DLS {
     var account = "帳號"
     
     var assetDetail_receive = "接收"
+    var join_group = "加入群組"
+    var alert_cant_join_pvt_group = "無法加入此群組，因為這是一個私人群組"
+    var group_join_success = "集團成功加入"
 }
+
+

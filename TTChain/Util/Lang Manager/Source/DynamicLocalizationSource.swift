@@ -537,5 +537,8 @@ protocol DynamicLocalizationSource {
     var group_qr_code: String {get set}
     var account: String {get set}
     var assetDetail_receive: String {get set}
-
+    
+    var join_group: String {get set}
+    var alert_cant_join_pvt_group: String {get set}
+    var group_join_success:String {get set}
 }

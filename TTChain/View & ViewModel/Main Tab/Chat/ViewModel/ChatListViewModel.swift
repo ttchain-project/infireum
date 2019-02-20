@@ -36,21 +36,17 @@ class ChatListViewModel: KLRxViewModel {
     }
     struct Output {
         let selectedChat:(CommunicationListModel) -> Void
+        let onJoinGroup:(String) -> Void
+        let onShowingHUD:(Bool) -> Void
     }
     
     
     var input: Input
     var output: Output
     func concatInput() {
-        self.input.chatSelected.asDriver().map { [unowned self] indexPath -> CommunicationListModel?  in
-            if indexPath.section == 2 {
-                return self._communicationList.value[indexPath.row]
-            }else {
-                return nil
-            }
-            }.filter { $0 != nil }.drive(onNext: { (model) in
-                self.output.selectedChat(model!)
-            }).disposed(by: bag)
+        self.input.chatSelected.asDriver().drive(onNext: { indexPath in
+            self.output.selectedChat(self._communicationList.value[indexPath.row])
+        }).disposed(by: bag)
     }
     
     func concatOutput() {
@@ -166,6 +162,43 @@ class ChatListViewModel: KLRxViewModel {
         }).disposed(by:bag)
     }
     
+    func joinGroup(groupID:String) {
+        
+        guard let userId = IMUserManager.manager.userModel.value?.uID else {
+            return
+        }
+        self.output.onShowingHUD(true)
+        Server.instance.getGroupInfo(forGroupId: groupID).flatMap { response -> RxAPIResponse<GroupMembersAPIModel> in
+            switch response {
+            case .success(let model):
+                if !model.groupInfo.isPrivate {
+                    
+                    let param = GroupMembersAPI.Parameters.init(groupID: groupID, members: [userId])
+                    return Server.instance.groupMembers(parameters: param)
+                }else {
+                    return RxAPIResponse.just(.failed(error:GTServerAPIError.incorrectResult("", LM.dls.alert_cant_join_pvt_group)))
+                }
+            case .failed(error: let error):
+                return RxAPIResponse.just(.failed(error: error))
+            }
+            }.subscribe(onSuccess: { (model) in
+                switch model {
+                case .failed(error:let error):
+                    self.output.onShowingHUD(false)
+
+                    self.output.onJoinGroup(error.descString)
+                case .success(let model) :
+                    self.output.onShowingHUD(false)
+                    self.output.onJoinGroup(LM.dls.group_join_success)
+                    if model.isSuccess {
+                        self.getList()
+                    }
+                }
+            }) { (error) in
+                print(error)
+                self.output.onShowingHUD(false)
+        }.disposed(by: bag)
+    }
     
 }
 

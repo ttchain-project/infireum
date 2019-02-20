@@ -16,10 +16,29 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     func config(constructor: Void) {
         view.layoutIfNeeded()
         self.viewModel = ChatListViewModel.init(
-            input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().map { $0 }),
-            output: ChatListViewModel.Output(selectedChat: { _ in  })
+            input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().filter { $0.section == 2}.map { $0 }),
+            output: ChatListViewModel.Output(selectedChat: {[weak self] model in
+                guard let `self` = self else {
+                    return
+                }
+                self.chatSelected(forModel: model)
+                }, onJoinGroup : { [weak self] message in
+                    guard let `self` = self else {
+                        return
+                    }
+                    self.showAlert(title: "", message: message)
+                },onShowingHUD: { [weak self] status in
+                    guard let `self` = self else {
+                        return
+                    }
+                    if status {
+                        self.hud.startAnimating(inView: self.view)
+                    }else {
+                        self.hud.stopAnimating()
+                    }
+            })
         )
-//        initNavigationBarItems()
+        
         initTableView()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
@@ -41,7 +60,16 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var requestListButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
-    
+   
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
     
     var bag: DisposeBag = DisposeBag()
     
@@ -156,11 +184,6 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     }
     
     func bindViewModel() {
-//        viewModel.communicationList.bind(to: tableView.rx.items(cellIdentifier: ChatHistoryTableViewCell.cellIdentifier(), cellType: ChatHistoryTableViewCell.self)) {
-//            row, record, cell in
-//            cell.config(model: record)
-//            }
-//            .disposed(by: bag)
         
         viewModel.dataSource.configureCell = {
             (datasource, tv, indexPath, model) in
@@ -216,14 +239,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
             )
             .disposed(by: bag)
         
-        tableView.rx.itemSelected.asDriver().drive(onNext: {[weak self] (indexPath) in
-            guard let `self` = self else {
-                return
-            }
-            if indexPath.section == 2 {
-                self.chatSelected(forModel:self.viewModel.communicationListArray[indexPath.row])
-                }
-            }).disposed(by: bag)
+        
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -255,9 +271,9 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         let addAction = UIAlertAction.init(title: LM.dls.user_profile_button_add_friend, style: .default) { _ in
             self.show(InviteFriendViewController.instance(), sender: self)
         }
-//        let joinGroupAction = UIAlertAction.init(title: "Join A group", style: .default) { _ in
-//
-//        }
+        let joinGroupAction = UIAlertAction.init(title: LM.dls.join_group, style: .default) { _ in
+            self.showQRCodeVCForJoinGroup()
+        }
         let createGroupAction = UIAlertAction.init(title: LM.dls.create_group, style: .default) { _ in
             let viewModel = GroupInformationViewModel()
             let viewController = GroupInformationViewController.init(viewModel: viewModel)
@@ -268,7 +284,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         }
         let vc = UIAlertController.init(title: "", message: "", preferredStyle: .actionSheet)
         vc.addAction(addAction)
-//        vc.addAction(joinGroupAction)
+        vc.addAction(joinGroupAction)
         vc.addAction(createGroupAction)
         vc.addAction(cancelAction)
         self.present(vc, animated: true, completion: nil)
@@ -279,11 +295,31 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     }
     
     func toEditProfile() {
-//        let user = IMUserManager.manager.userModel.value ?? IMUser.init(uID: String(), nickName: String(), introduction: String(), headImg: nil)
-//        let model = FriendRequestInformationModel.init(imUser: user)
-//        let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.myself, user: model)
         let viewController = ProfileViewController.instance()
         self.show(viewController, sender: nil)
+    }
+    
+    func showQRCodeVCForJoinGroup() {
+        
+        let qrCode = OWQRCodeViewController.navInstance(from: OWQRCodeViewController._Constructor(
+            purpose: .userId,
+            resultCallback: { [weak self]
+                (result, purpose, scanningType) in
+                switch result {
+                case .userId(let id):
+                    print("ID",id)
+                    guard self != nil else {
+                        return
+                    }
+                    self?.viewModel.joinGroup(groupID: id)
+                default: return
+                }
+            },
+            isTypeLocked: true
+        ))
+        
+        //            qrCodeVCNav = qrCode
+        self.present(qrCode, animated: true, completion: nil)
     }
 }
 

@@ -73,14 +73,6 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         textField.text = String()
         startMonitorLangIfNeeded()
         qrcodeButton.rx.tap.asDriver().drive(onNext: { (button) in
-            //
-            //            let viewController = OWQRCodeViewController()
-            //            viewController.navigationController?.navigationBar.backIndicatorImage = UIImage()
-            //            viewController.title = "掃碼"
-            ////            viewController.scanningType
-            //            self.show(viewController, sender: self)
-            
-            //            OWQRCodeViewController._Constructor.init(purpose: OWQRCodeViewController.Purpose.restoreIdentity, resultCallback: <#T##OWQRCodeViewController.ResultCallback##OWQRCodeViewController.ResultCallback##(OWStringValidator.ValidationResultType, OWQRCodeViewController.Purpose, OWQRCodeViewController.ScanningType) -> Void#>, isTypeLocked: <#T##Bool#>)
             let qrCode = OWQRCodeViewController.navInstance(from: OWQRCodeViewController._Constructor(
                 purpose: .userId,
                 resultCallback: { [weak self]
@@ -94,14 +86,6 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
                         self?.searchUser(text: id)
                     default: return
                     }
-                    //                    switch result {
-                    //                    case .identityQRCode(rawContent: let raw):
-                    //
-                    ////                        self.qrCodeVCNav?.dismiss(animated: true, completion: {
-                    ////                            self?.startQRCodeDecryptionFlow(withRawContent: raw)
-                    ////                        })
-                    //                    default: break
-                    //                    }
                 },
                 isTypeLocked: true
             ))

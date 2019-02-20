@@ -475,6 +475,7 @@ struct DLS_EN_US: DLS {
     var select_from_gallery = "Select From Gallery"
     
     var create_group = "Create Group"
+    var join_group = "Join a group"
     
     var chat_secret_setting = "Chat secret setting"
     var decentralize = "Decentralize"
@@ -539,4 +540,8 @@ struct DLS_EN_US: DLS {
     var group_qr_code = "Group QR Code"
     var account = "Account"
     var assetDetail_receive = "Receive"
+    
+    var alert_cant_join_pvt_group = "Can't join this group because this is a private group"
+    var group_join_success = "Group joined successfully"
+
 }

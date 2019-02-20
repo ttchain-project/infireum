@@ -45,11 +45,11 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         barButtonButton.rx.tap.subscribe(onNext: {
             [unowned self] in
             switch self.viewModel.input.roomType {
-            case .group, .channel:
+            case .channel,.group:
                 guard let userGroupInfoModel = self.viewModel.groupInfoModel.value else { return }
                 let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:userGroupInfoModel.groupID, title:LM.dls.group_qr_code))
                 self.navigationController?.pushViewController(vc)
-            case .pvtChat: return
+            default: return
             }
         }).disposed(by: bag)
         return barButtonButton
@@ -128,11 +128,11 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         tableView.backgroundColor = palette.nav_bg_clear
         changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: palette.nav_item_2, image:#imageLiteral(resourceName: "arrowNavBlack") )
         self.viewToHideKeyboard.backgroundColor = palette.bgView_main
-        navigationItem.rightBarButtonItems = viewModel.input.roomType == .pvtChat ? [profileBarButtonButton] : [profileBarButtonButton,qrCodeBarButton]
+        
+        navigationItem.rightBarButtonItems = viewModel.input.roomType == .channel ? [profileBarButtonButton,qrCodeBarButton] : [profileBarButtonButton,qrCodeBarButton]
         navigationItem.rightBarButtonItem?.tintColor = palette.nav_item_2
         self.blockedLabel.set(textColor: .white, font: .owMedium(size: 14))
         self.blockView.set(backgroundColor: .owPinkRed)
-        
     }
     
     override func renderLang(_ lang: Lang) {
