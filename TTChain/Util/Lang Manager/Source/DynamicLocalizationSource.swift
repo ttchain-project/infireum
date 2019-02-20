@@ -540,5 +540,16 @@ protocol DynamicLocalizationSource {
     
     var join_group: String {get set}
     var alert_cant_join_pvt_group: String {get set}
+    
     var group_join_success:String {get set}
+    
+    var group_name:String {get set}
+    var group_type:String {get set}
+    
+    var public_group:String {get set}
+    var private_group:String {get set}
+    var post_message:String {get set}
+    var admin_only:String {get set}
+    var all_members:String {get set}
+    var group_description:String {get set}
 }

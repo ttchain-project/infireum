@@ -21,11 +21,13 @@
                 <outlet property="groupNameFirstLabel" destination="dP3-xv-ZAh" id="Ho7-bE-8x9"/>
                 <outlet property="groupNameHintLabel" destination="o4o-yh-AuC" id="Wzn-Y0-rgK"/>
                 <outlet property="groupNameTextField" destination="h8p-pT-6Sh" id="uUq-Ms-Dsx"/>
+                <outlet property="groupTypeTitleLabel" destination="ilj-ye-S0c" id="aM7-B5-nbc"/>
                 <outlet property="introduceHintLabel" destination="Not-qa-mwT" id="7lR-nC-Op2"/>
                 <outlet property="introductTextView" destination="P69-H2-GtD" id="qDZ-e4-G6X"/>
                 <outlet property="managerButton" destination="hxM-xn-Pch" id="dXZ-JK-7Vj"/>
                 <outlet property="membersButton" destination="gRf-T5-nnW" id="f29-oj-0aj"/>
                 <outlet property="placeholderLabel" destination="L26-Si-sQE" id="dOh-rl-s7S"/>
+                <outlet property="postMessageLabel" destination="hcx-9X-bN0" id="UHg-OQ-wYM"/>
                 <outlet property="privateButton" destination="uQl-X5-F1k" id="m8m-bE-9bA"/>
                 <outlet property="publicButton" destination="xev-Ab-FOJ" id="SJp-wy-vvN"/>
                 <outlet property="spacingView1" destination="UC4-d2-PYR" id="hsU-Bz-lYs"/>

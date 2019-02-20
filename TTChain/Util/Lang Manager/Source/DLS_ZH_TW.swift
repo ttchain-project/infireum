@@ -548,6 +548,17 @@ struct DLS_ZH_TW: DLS {
     var join_group = "加入群組"
     var alert_cant_join_pvt_group = "無法加入此群組，因為這是一個私人群組"
     var group_join_success = "集團成功加入"
+    
+    var group_name = "群組名稱"
+    var group_type = "群組類型"
+    
+    var public_group = "公開群"
+    var private_group = "私密群"
+    var post_message = "張貼訊息"
+    
+    var admin_only = "僅管理員"
+    var all_members = "所有成員"
+    var group_description = "描述"
 }
 
 

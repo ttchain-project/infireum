@@ -16,27 +16,47 @@ class GroupInformationViewController: UIViewController {
     @IBOutlet weak var groupCreateImageView: UIView!
     @IBOutlet weak var groupImageView: UIImageView! {
         didSet {
-//            groupImageView.image = self.viewModel.input.userGroupInfoModelSubject.value.groupIcon
             self.viewModel.output.groupImage.bind(to: groupImageView.rx.image).disposed(by: disposeBag)
         }
     }
-    @IBOutlet weak var privateButton: UIButton!
-    @IBOutlet weak var publicButton: UIButton!
-    @IBOutlet weak var managerButton: UIButton!
-    @IBOutlet weak var membersButton: UIButton!
+    @IBOutlet weak var privateButton: UIButton! {
+        didSet {
+            self.privateButton.setTitle(LM.dls.private_group, for: .normal)
+        }
+    }
+    @IBOutlet weak var publicButton: UIButton! {
+        didSet {
+            self.publicButton.setTitle(LM.dls.public_group, for: .normal)
+        }
+    }
     
+    @IBOutlet weak var postMessageLabel: UILabel! {
+        didSet {
+            postMessageLabel.text = LM.dls.post_message
+        }
+    }
+    
+    @IBOutlet weak var managerButton: UIButton! {
+        didSet {
+            self.managerButton.setTitle(LM.dls.admin_only, for: .normal)
+        }
+    }
+    @IBOutlet weak var membersButton: UIButton! {
+        didSet {
+            self.membersButton.setTitle(LM.dls.all_members, for: .normal)
+        }
+    }
     @IBOutlet weak var groupIconButton: UIButton! {
         didSet {
             
             viewModel.output.isEditable.map { !$0 }.bind(to: groupIconButton.rx.isHidden).disposed(by: disposeBag)
-
             groupIconButton.rx.tap.subscribe(onNext: {
                 [unowned self] in
                 self.showImgSourceActionSheet()
             }).disposed(by: disposeBag)
         }
     }
-
+    
     @IBOutlet private weak var groupNameHintLabel: UILabel! {
         didSet {
             viewModel.output.nameCountHintString.bind(to: groupNameHintLabel.rx.text).disposed(by: disposeBag)
@@ -44,30 +64,43 @@ class GroupInformationViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var groupTypeTitleLabel: UILabel! {
+        didSet {
+            self.groupTypeTitleLabel.text = LM.dls.group
+        }
+    }
     @IBOutlet private weak var introduceHintLabel: UILabel! {
         didSet {
             viewModel.output.introductionCountHintColor.bind(to: introduceHintLabel.rx.textColor).disposed(by: disposeBag)
             viewModel.output.introductionCountHintString.bind(to: introduceHintLabel.rx.text).disposed(by: disposeBag)
         }
     }
+    
     @IBOutlet weak var groupNameFirstLabel: UILabel! {
         didSet { viewModel.output.groupName.map({ $0?.first?.string }).bind(to: groupNameFirstLabel.rx.text).disposed(by: disposeBag) }
     }
+    
     @IBOutlet weak var groupNameTextField: UITextField! {
         didSet {
+            groupNameTextField.placeholder = LM.dls.group_name
             (groupNameTextField.rx.text <-> viewModel.output.groupName).disposed(by: disposeBag)
             viewModel.output.isEditable.bind(to: groupNameTextField.rx.isEnabled).disposed(by: disposeBag)
         }
     }
+    
     @IBOutlet private weak var introductTextView: UITextView! {
         didSet {
             (introductTextView.rx.text <-> viewModel.output.introduction).disposed(by: disposeBag)
             viewModel.output.isEditable.bind(to: introductTextView.rx.isEditable).disposed(by: disposeBag)
         }
     }
+    
     @IBOutlet private weak var placeholderLabel: UILabel! {
-        didSet { viewModel.output.introduction.map({ !($0?.isEmpty ?? true) }).bind(to: placeholderLabel.rx.isHidden).disposed(by: disposeBag) }
+        didSet { viewModel.output.introduction.map({ !($0?.isEmpty ?? true) }).bind(to: placeholderLabel.rx.isHidden).disposed(by: disposeBag)
+            placeholderLabel.text = LM.dls.group_description
+        }
     }
+    
     @IBOutlet weak var bottomButton: UIButton! {
         didSet {
             bottomButton.rx.tap.subscribe(onNext: {
@@ -87,10 +120,12 @@ class GroupInformationViewController: UIViewController {
             collectionViewFlowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.size.width, height: 30)
         }
     }
+    
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet  {
             collectionView.register(cellType: GroupMemberCollectionViewCell.self)
             collectionView.register(reusableViewType: GroupCollectionReusableView.self)
+            
             collectionView.rx.itemSelected.subscribe(onNext: {
                 [unowned self] indexPath in
                 switch self.viewModel.input.typeSubject.value {

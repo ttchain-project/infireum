@@ -541,5 +541,16 @@ struct DLS_ZH_CN: DLS {
     var assetDetail_receive = "接收"
     var join_group = "加入群组"
     var alert_cant_join_pvt_group = "无法加入此群组，因为这是一个私人群组"
+
     var group_join_success = "集团成功加入"
+
+    var group_name = "群组名称"
+    var group_type = "群组类型"
+    var public_group = "公开群"
+    var private_group = "私密群"
+    
+    var post_message = "张贴讯息"
+    var admin_only = "仅管理员"
+    var all_members = "所有成员"
+    var group_description = "描述"
 }

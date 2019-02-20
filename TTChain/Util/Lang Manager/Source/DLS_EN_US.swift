@@ -544,4 +544,13 @@ struct DLS_EN_US: DLS {
     var alert_cant_join_pvt_group = "Can't join this group because this is a private group"
     var group_join_success = "Group joined successfully"
 
+    var group_name = "Group Name"
+    var group_type = "Group Type"
+ 
+    var public_group = "Public"
+    var private_group = "Private"
+    var post_message = "Post Message"
+    var admin_only = "Admin"
+    var all_members = "Members"
+    var group_description = "Group Description"
 }
