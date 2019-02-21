@@ -16,7 +16,8 @@ class SettingMenuCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.numberOfLines = 0
-        self.titleLabel.lineBreakMode = .byTruncatingTail
+        self.titleLabel.lineBreakMode = .byWordWrapping
+        self.titleLabel.sizeToFit()
         // Initialization code
     }
     
@@ -27,6 +28,6 @@ class SettingMenuCollectionViewCell: UICollectionViewCell {
             return
         }
         imageView.af_setImage(withURL: imageURL)
-        
+        self.titleLabel.numberOfLines = model.title.components(separatedBy: " ").count == 1 ? 1 : 0
     }
 }

@@ -552,4 +552,5 @@ protocol DynamicLocalizationSource {
     var admin_only:String {get set}
     var all_members:String {get set}
     var group_description:String {get set}
+    var show_qr_code:String {get set}
 }

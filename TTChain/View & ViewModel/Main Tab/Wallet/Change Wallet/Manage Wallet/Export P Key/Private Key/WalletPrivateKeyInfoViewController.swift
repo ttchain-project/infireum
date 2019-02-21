@@ -74,7 +74,7 @@ final class WalletPrivateKeyInfoViewController: KLModuleViewController, KLVMVC {
         viewModel.pKey.drive(pKeyLabel.rx.text).disposed(by: bag)
         viewModel.addressCopied.drive(onNext: {
             [unowned self] _ in
-            EZToast.present(on: self, content: LM.dls.g_toast_addr_copied)
+            EZToast.present(on: self, content: LM.dls.copied_successfully)
         })
             .disposed(by: bag)
     }

@@ -13,7 +13,7 @@ import HDWalletKit
 
 class WalletCreator {
     
-    static func createNewWallet(forChain chain: ChainType, mnemonic: String?, pwd:String, pwdHint:String) -> Single<Bool> {
+    static func createNewWallet(forChain chain: ChainType, mnemonic: String?, pwd:String, pwdHint:String, isSystemWallet:Bool) -> Single<Bool> {
         return Single.create { (handler) -> Disposable in
             
             //used Just for termination
@@ -51,7 +51,7 @@ class WalletCreator {
             let source = (address: pvtKeyForNewWallet!.publicKey.address,
                           pKey: pvtKeyForNewWallet!.get(),
                           mnenomic: mnemonic,
-                          isFromSystem: true,
+                          isFromSystem: isSystemWallet,
                           name: Wallet.importedWalletName(ofMainCoin: mainCoin),
                           pwd: pwd,
                           pwdHint: pwdHint,
@@ -84,9 +84,6 @@ class WalletCreator {
         
         // m/44'/0'/0'/0 || // m/44'/60'/0'/0
         return account.derived(at: .notHardened(0))
-        
-    }
-    static func createIdetityWallet() {
         
     }
 }

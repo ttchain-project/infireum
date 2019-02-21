@@ -62,7 +62,6 @@ platform :ios do
     gym(
     scheme: "TTChain_SIT",
     export_method: "ad-hoc",
-    output_directory: "./IPA/SIT",
     clean: true,
     output_directory: "./build",
 #     archive_path: "./archives",
@@ -81,8 +80,8 @@ platform :ios do
   lane :hockey_sit do
     hockey(
       api_token: "f5683183878c4c8ba39bd6e87d546f77",
-      ipa: "./build/TTChain\ SIT.ipa",
-      dsym: "./build/TTChain\ SIT.app.dSYM.zip",
+      ipa: "./build/甜甜圈\ SIT.ipa",
+      dsym: "./build/甜甜圈\ SIT.app.dSYM.zip",
       mandatory: "1",
       timeout: 6000,
       bypass_cdn: true
@@ -138,8 +137,8 @@ desc "Build adhoc .ipa [uat]"
   lane :hockey_uat do
     hockey(
       api_token: "5447c0280cae4de78d454cc3b459fa93",
-      ipa: "./build/TTChain\ UAT.ipa",
-      dsym: "./build/TTChain\ UAT.app.dSYM.zip",
+      ipa: "./build/甜甜圈\ UAT.ipa",
+      dsym: "./build/甜甜圈\ UAT.app.dSYM.zip",
       mandatory: "1",
       timeout: 6000,
       bypass_cdn: true
@@ -195,8 +194,8 @@ desc "Build adhoc .ipa [PRD]"
   lane :hockey_prd do
     hockey(
       api_token: "047608fb8217427998325536015db462",
-      ipa: "./build/TTChain.ipa",
-      dsym: "./build/TTChain.app.dSYM.zip",
+      ipa: "./build/甜甜圈.ipa",
+      dsym: "./build/甜甜圈.app.dSYM.zip",
       mandatory: "0",
       timeout: 6000,
       bypass_cdn: true

@@ -93,14 +93,14 @@ final class WalletPKeyQRCodeViewController: KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        noteTitle_scan.text = "僅供直接掃描"
-        noteTitle_safeEnv.text = "在安全環境下使用"
+        noteTitle_scan.text = dls.exportPKey_label_provide_scan_directly_only
+        noteTitle_safeEnv.text = dls.exportPKey_label_use_in_save_environment
         
         
-        noteContent_scan.text = "二維碼禁止保存、截圖、以及拍照。僅供用戶在安全環境下直接掃描來方便的導入錢包"
-        noteContent_safeEnv.text = "請在確保四周無人及無攝像頭的情況下使用。二維碼一旦被他人獲取將造成不可挽回的資產損失"
+        noteContent_scan.text = dls.exportPKey_label_provide_scan_directly_only_message
+        noteContent_safeEnv.text = dls.exportPKey_label_use_in_save_environment_message
         
-        displayBtn.setTitleForAllStates("顯示二維碼")
+        displayBtn.setTitleForAllStates(dls.show_qr_code)
     }
     
     override func renderTheme(_ theme: Theme) {

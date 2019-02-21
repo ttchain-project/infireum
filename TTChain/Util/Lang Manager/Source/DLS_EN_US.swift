@@ -553,4 +553,6 @@ struct DLS_EN_US: DLS {
     var admin_only = "Admin"
     var all_members = "Members"
     var group_description = "Group Description"
+    
+    var show_qr_code =  "Display QR code"
 }

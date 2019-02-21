@@ -264,7 +264,7 @@ class ImportWalletTypeChooseViewController: KLModuleViewController, Rx {
         
         self.hud?.startAnimating(inView: self.view)
         
-        WalletCreator.createNewWallet(forChain: chain, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint)
+        WalletCreator.createNewWallet(forChain: chain, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint, isSystemWallet:false)
             .subscribe(onSuccess: { [unowned self] (status) in
                 self.hud?.stopAnimating()
                 OWRxNotificationCenter.instance.notifyWalletsImported()

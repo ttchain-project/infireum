@@ -139,9 +139,9 @@ class BackupWalletNoteViewController: KLModuleViewController {
         
        
         
-        WalletCreator.createNewWallet(forChain: .btc, mnemonic: mnemonic, pwd: identitySource.pwd, pwdHint: identitySource.pwdHint).flatMap { response -> Single<Bool> in
+        WalletCreator.createNewWallet(forChain: .btc, mnemonic: mnemonic, pwd: identitySource.pwd, pwdHint: identitySource.pwdHint, isSystemWallet:true).flatMap { response -> Single<Bool> in
             if response {
-                return WalletCreator.createNewWallet(forChain: .eth, mnemonic: mnemonic, pwd: self.identitySource.pwd, pwdHint: self.identitySource.pwdHint)
+                return WalletCreator.createNewWallet(forChain: .eth, mnemonic: mnemonic, pwd: self.identitySource.pwd, pwdHint: self.identitySource.pwdHint, isSystemWallet:true)
             }else {
                 return .error(GTServerAPIError.apiReject)
             }

@@ -559,6 +559,7 @@ struct DLS_ZH_TW: DLS {
     var admin_only = "僅管理員"
     var all_members = "所有成員"
     var group_description = "描述"
+    var show_qr_code =  "顯示二維碼"
 }
 
 

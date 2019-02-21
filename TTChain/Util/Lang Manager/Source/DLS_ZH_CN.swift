@@ -553,4 +553,5 @@ struct DLS_ZH_CN: DLS {
     var admin_only = "仅管理员"
     var all_members = "所有成员"
     var group_description = "描述"
+    var show_qr_code =  "显示二维码"
 }

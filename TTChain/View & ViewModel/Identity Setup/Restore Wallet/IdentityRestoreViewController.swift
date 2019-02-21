@@ -187,9 +187,9 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             #endif
         }
         
-        WalletCreator.createNewWallet(forChain: .btc, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint).flatMap { response -> Single<Bool> in
+        WalletCreator.createNewWallet(forChain: .btc, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint, isSystemWallet:true).flatMap { response -> Single<Bool> in
             if response {
-                return WalletCreator.createNewWallet(forChain: .eth, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint)
+                return WalletCreator.createNewWallet(forChain: .eth, mnemonic: mnemonic, pwd: pwd, pwdHint: pwdHint, isSystemWallet:true)
             }else {
                 return .error(GTServerAPIError.apiReject)
             }
@@ -197,6 +197,11 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
                 self.hud.stopAnimating()
                 if status {
                     self.startBackupIdentityQRCodeFlow()
+                }else {
+                    self.showSimplePopUp(with: LM.dls.sortMnemonic_error_create_wallet_fail,
+                                         contents: "",
+                                         cancelTitle: LM.dls.g_cancel,
+                                         cancelHandler: nil)
                 }
             }) { (error) in
                 self.hud.stopAnimating()

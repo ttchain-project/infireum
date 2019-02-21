@@ -132,27 +132,28 @@ extension String {
 //            return .incorrectFormat(desc: "助记词格式错误，请确认是否输入正确，单词必须以英文小写输入，并且必须使用一个半形空白分开各个单词")
         }
         
-        let regexStr = "[^a-z]"
-        let regex = try! NSRegularExpression.init(pattern: regexStr,
-                                                  options: .caseInsensitive)
-        
-        for sep in seps {
-            let str = String(sep)
-            guard (str.lowercased() == str) else {
-                return .incorrectFormat(desc: LM.dls.strValidate_error_mnemonic_containUppercase(str)
-                )
-            }
-            
-            let regexCheck = regex.matches(in: str,
-                                           options: .reportCompletion,
-                                           range: NSRange.init(location: 0,
-                                                               length: str.count))
-    
-            guard str.count > 0 && regexCheck.count == 0 else {
-                return .incorrectFormat(desc: LM.dls.strValidate_error_mnemonic_invalidCharacter(str)
-                )
-            }
-        }
+        //No checks for invalid characters as we have chinese mnemonics now!!
+//        let regexStr = "[^a-z]"
+//        let regex = try! NSRegularExpression.init(pattern: regexStr,
+//                                                  options: .caseInsensitive)
+//
+//        for sep in seps {
+//            let str = String(sep)
+//            guard (str.lowercased() == str) else {
+//                return .incorrectFormat(desc: LM.dls.strValidate_error_mnemonic_containUppercase(str)
+//                )
+//            }
+//
+//            let regexCheck = regex.matches(in: str,
+//                                           options: .reportCompletion,
+//                                           range: NSRange.init(location: 0,
+//                                                               length: str.count))
+//
+//            guard str.count > 0 && regexCheck.count == 0 else {
+//                return .incorrectFormat(desc: LM.dls.strValidate_error_mnemonic_invalidCharacter(str)
+//                )
+//            }
+//        }
         
         return .valid
     }

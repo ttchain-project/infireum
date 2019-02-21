@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,8 +30,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34c-17-XfI">
-                    <rect key="frame" x="20" y="40" width="42" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34c-17-XfI">
+                    <rect key="frame" x="20" y="40" width="335" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -121,6 +121,7 @@
                 <constraint firstItem="odv-T9-FdL" firstAttribute="top" secondItem="5I3-1v-wld" secondAttribute="bottom" constant="20" id="NRA-C5-InH"/>
                 <constraint firstItem="F1H-q5-YPA" firstAttribute="top" secondItem="34c-17-XfI" secondAttribute="bottom" constant="30" id="Xnu-qR-ABA"/>
                 <constraint firstItem="34c-17-XfI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="acH-Dl-Vaj"/>
+                <constraint firstItem="34c-17-XfI" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" constant="-40" id="n1I-cG-qo1"/>
                 <constraint firstItem="odv-T9-FdL" firstAttribute="leading" secondItem="FqL-wC-9U5" secondAttribute="leading" id="uxn-eG-FuC"/>
                 <constraint firstItem="5I3-1v-wld" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="wiY-wy-89X"/>
                 <constraint firstItem="FqL-wC-9U5" firstAttribute="top" secondItem="F1H-q5-YPA" secondAttribute="bottom" constant="20" id="xRd-b1-eOz"/>
