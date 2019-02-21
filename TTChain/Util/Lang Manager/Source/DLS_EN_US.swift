@@ -268,7 +268,7 @@ struct DLS_EN_US: DLS {
     var assetDetail_tab_deposit = "Deposit"
     var assetDetail_tab_fail = "Fail"
     var assetDetail_label_tx_failed = "Failed"
-    var assetDetail_label_tx_go_check = "Go check"
+    var assetDetail_label_tx_go_check = "Go check TXID"
     func withdrawal_title(_ args: String...) -> String { return String.init(format: "%@ transfer", arguments: args) }
     var withdrawal_btn_nextstep = "Next step"
     var withdrawal_error_same_address_content = "The receipt address must not be the same as the payment address"
@@ -555,4 +555,6 @@ struct DLS_EN_US: DLS {
     var group_description = "Group Description"
     
     var show_qr_code =  "Display QR code"
+    
+    var group_member_new = "New"
 }

@@ -477,67 +477,8 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         navigationController?.present(vc, animated: true, completion: nil)
     }
     
-    private func toExportWalletPKey() {
-        let alert = UIAlertController.init(title: LM.dls.walletManage_label_exportPKey,
-                                           message: "",
-                                           preferredStyle: .actionSheet)
-        
-        let actionETH = UIAlertAction.init(title: "ETH",
-                                        style: .default,
-                                        handler: { _ in
-                                            self.handleWalletExport(forChain: .eth)
-                                            
-        })
-        let actionBTC = UIAlertAction.init(title: "BTC",
-                                        style: .default,
-                                        handler: { _ in
-                                            self.handleWalletExport(forChain: .btc)
-        })
-        
-        let actionCancel = UIAlertAction.init(title: "Cancel",
-                                        style: .cancel,
-                                        handler: { _ in
-                                            print("x")
-        })
-
-
-        alert.addAction(actionETH)
-        alert.addAction(actionBTC)
-        alert.addAction(actionCancel)
-        
-        present(alert, animated: true, completion: nil)
-    }
     
-    func handleWalletExport(forChain chain:ChainType) {
-        switch chain {
-        case .btc,.eth:
-            let pred = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: chain.rawValue))
-            guard let wallets = DB.instance.get(type: Wallet.self, predicate: pred, sorts: nil), wallets.count > 0 else {
-                return
-            }
-            if wallets.count == 1 {
-                let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallets[0])
-                self.navigationController?.pushViewController(vc)
-            }else {
-                let actionSheet = UIAlertController.init(title: LM.dls.select_wallet_address, message: "", preferredStyle: .actionSheet)
-                
-                for wallet in wallets {
-                    let title = (wallet.name)! + " - " + wallet.address!
-                    let action = UIAlertAction.init(title: title, style: .default) { _ in
-                        let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallet)
-                        self.navigationController?.pushViewController(vc)
-                    }
-                    actionSheet.addAction(action)
-                }
-                
-                let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
-                actionSheet.addAction(cancelAction)
-                self.present(actionSheet, animated: true, completion: nil)
-            }
-        default:
-            print("t")
-        }
-    }
+
     
     func sendMail() {
         if MFMailComposeViewController.canSendMail() {
@@ -623,3 +564,134 @@ extension SettingMenuViewController: UIPickerViewDelegate,UIPickerViewDataSource
         MarketTestHandler.shared.launch()
     }
 }
+
+//Export Wallet
+extension SettingMenuViewController {
+    
+    private func toExportWalletPKey() {
+        let alert = UIAlertController.init(title: LM.dls.walletManage_label_exportPKey,
+                                           message: "",
+                                           preferredStyle: .actionSheet)
+        
+        let actionETH = UIAlertAction.init(title: "ETH",
+                                           style: .default,
+                                           handler: { _ in
+                                            self.handleWalletExport(forChain: .eth)
+                                            
+        })
+        let actionBTC = UIAlertAction.init(title: "BTC",
+                                           style: .default,
+                                           handler: { _ in
+                                            self.handleWalletExport(forChain: .btc)
+        })
+        
+        let actionCancel = UIAlertAction.init(title: "Cancel",
+                                              style: .cancel,
+                                              handler: { _ in
+                                                print("x")
+        })
+        
+        
+        alert.addAction(actionETH)
+        alert.addAction(actionBTC)
+        alert.addAction(actionCancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func handleWalletExport(forChain chain:ChainType) {
+        switch chain {
+        case .btc,.eth:
+            let pred = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: chain.rawValue))
+            guard let wallets = DB.instance.get(type: Wallet.self, predicate: pred, sorts: nil), wallets.count > 0 else {
+                return
+            }
+            if wallets.count == 1 {
+                
+                self.verifyPwdForExportWallet(wallets[0]).subscribe(onNext: { (wallet,status) in
+                    if status {
+                        let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallet)
+                        self.navigationController?.pushViewController(vc)
+                    }else {
+                        self.showSimplePopUp(with: LM.dls.walletManage_error_pwd,
+                                             contents: "",
+                                             cancelTitle: LM.dls.g_confirm,
+                                             cancelHandler: nil)
+                    }
+                }).disposed(by: bag)
+                
+            }else {
+                let actionSheet = UIAlertController.init(title: LM.dls.select_wallet_address, message: "", preferredStyle: .actionSheet)
+                
+                for wallet in wallets {
+                    let title = (wallet.name)! + " - " + wallet.address!
+                    let action = UIAlertAction.init(title: title, style: .default) { _ in
+                        
+                        self.verifyPwdForExportWallet(wallet).subscribe(onNext: {[weak self] (wallet,status) in
+                            guard let `self` = self else {
+                                return
+                            }
+                            if status {
+                                let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallet)
+                                self.navigationController?.pushViewController(vc)
+                            }else {
+                                self.showSimplePopUp(with: LM.dls.walletManage_error_pwd,
+                                                     contents: "",
+                                                     cancelTitle: LM.dls.g_confirm,
+                                                     cancelHandler: nil)
+                            }
+                        }).disposed(by: self.bag)
+                    }
+                    actionSheet.addAction(action)
+                }
+                
+                let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+                actionSheet.addAction(cancelAction)
+                self.present(actionSheet, animated: true, completion: nil)
+            }
+        default:
+            print("t")
+        }
+    }
+    
+    fileprivate func verifyPwdForExportWallet(_ wallet: Wallet) -> Observable<(Wallet, Bool)> {
+        return Observable.create({ [unowned self] (observer) -> Disposable in
+            let dls = LM.dls
+            let alert = UIAlertController.init(
+                title: dls.walletManage_alert_exportPKey_title,
+                message: dls.walletManage_alert_exportPKey_content,
+                preferredStyle: .alert
+            )
+            
+            let cancel = UIAlertAction.init(title: dls.g_cancel, style: .cancel) {
+                _ in
+                observer.onCompleted()
+            }
+            
+            let confirm = UIAlertAction.init(title: dls.g_confirm, style: .default) {
+                (_) in
+                let pwd = alert.textFields![0].text!
+                let result = (wallet, wallet.isWalletPwd(rawPwd: pwd))
+                observer.onNext(result)
+                observer.onCompleted()
+            }
+            
+            alert.addTextField { [unowned self] (tf) in
+                tf.set(placeholder: dls.walletManage_alert_placeholder_exportPKey_pwd)
+                tf.rx.text
+                    .map { $0?.count ?? 0 }
+                    .map { $0 > 0 }
+                    .bind(to: confirm.rx.isEnabled)
+                    .disposed(by: self.bag)
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            return Disposables.create()
+        }).concat(Observable.never())
+    }
+}
+

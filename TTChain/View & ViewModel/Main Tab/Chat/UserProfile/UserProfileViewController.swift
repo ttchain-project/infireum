@@ -33,6 +33,8 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         self.sendRequestButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
            self.showStep1AlertDialog()
         }).disposed(by: bag)
+        
+        self.userIconImageView.cornerRadius = userIconImageView.height/2
     }
     
     typealias ViewModel = UserProfileViewModel

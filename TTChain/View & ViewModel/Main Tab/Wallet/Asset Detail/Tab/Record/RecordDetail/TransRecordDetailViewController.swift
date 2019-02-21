@@ -86,7 +86,7 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         guard let feeCoin = Coin.getCoin(ofIdentifier: transRecord.feeCoinID!) else { return }
         let feeAmt = transRecord.totalFee! as Decimal
         let feeAmtStr = feeAmt.asString(digits: Int(feeCoin.digit))
-        self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + feeCoin.inAppName!
+        self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + (feeCoin.identifier == Coin.usdt_identifier ? "BTC" :  feeCoin.inAppName!)
         
         self.toLinkButton.rx.tap.asDriver().drive(onNext: { () in
             let marketTestDummy = MarketTestTabModel.init(title: "", content: "", url: constructor.url, img: "")

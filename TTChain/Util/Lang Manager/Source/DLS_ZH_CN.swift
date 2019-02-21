@@ -268,7 +268,7 @@ struct DLS_ZH_CN: DLS {
     var assetDetail_tab_deposit = "转入"
     var assetDetail_tab_fail = "失败"
     var assetDetail_label_tx_failed = "失败"
-    var assetDetail_label_tx_go_check = "前往查看"
+    var assetDetail_label_tx_go_check = "前往查看TXID"
     func withdrawal_title(_ args: String...) -> String { return String.init(format: "%@转帐", arguments: args) }
     var withdrawal_btn_nextstep = "下一步"
     var withdrawal_error_same_address_content = "收款地址不得与付款地址相同"
@@ -554,4 +554,6 @@ struct DLS_ZH_CN: DLS {
     var all_members = "所有成员"
     var group_description = "描述"
     var show_qr_code =  "显示二维码"
+    var group_member_new = "新增"
+
 }

@@ -255,8 +255,8 @@ extension WithdrawalConfirmPwdValidationViewModel {
     }
     
     private func signUSDT(with info: inout WithdrawalInfo, unspents: [Unspent], isCompressed:Bool) -> RxAPIResponse<SignBTCTxAPIModel> {
-        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
-        info.feeAmt = Decimal.init(amt)
+//        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
+//        info.feeAmt = Decimal.init(amt)
         
         let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
         let changeBTC = totalUnspentBTC - info.totalFee

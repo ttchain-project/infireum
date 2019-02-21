@@ -11,6 +11,7 @@ import RxSwift
 import RxDataSources
 
 class GroupInformationViewController: UIViewController {
+    @IBOutlet weak var groupTypeStackView: UIStackView!
     @IBOutlet weak var spacingView1: UIView!
     @IBOutlet weak var spacingView2: UIView!
     @IBOutlet weak var groupCreateImageView: UIView!
@@ -129,7 +130,10 @@ class GroupInformationViewController: UIViewController {
             collectionView.rx.itemSelected.subscribe(onNext: {
                 [unowned self] indexPath in
                 switch self.viewModel.input.typeSubject.value {
-                case .normal: break
+                case .normal:
+                    print("s")
+                    let model = self.viewModel.input.userGroupInfoModelSubject.value.membersArray![indexPath.row]
+                    self.toUserProfileVC(forFriend: model)
                 default:
                     var sections = self.viewModel.output.animatableSectionModel.value
                     var sectionModel = sections[indexPath.section]
@@ -189,6 +193,9 @@ class GroupInformationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpRx()
+        //Hiding the public private groupselection view
+        
+        self.groupTypeStackView.isHidden = true
     }
     
     private func setUpRx() {
@@ -341,6 +348,20 @@ class GroupInformationViewController: UIViewController {
             viewModel.output.isPostable.accept(sender == membersButton)
         case .normal: return
         }
+    }
+    
+    func toUserProfileVC(forFriend friend: FriendModel) {
+        
+        var purpose : UserProfileViewController.Purpose
+        if friend is GroupMemberModel {
+            let friends = friend as! GroupMemberModel
+            purpose = friends.isFriend! ? .myFriend : .notMyFriend
+        }else {
+            purpose = .myFriend
+        }
+        let config = UserProfileViewController.Config.init(purpose: purpose, user: friend)
+        let viewController = UserProfileViewController.instance(from: config)
+        self.show(viewController, sender: nil)
     }
 }
 

@@ -553,4 +553,6 @@ protocol DynamicLocalizationSource {
     var all_members:String {get set}
     var group_description:String {get set}
     var show_qr_code:String {get set}
+    
+    var group_member_new:String {get set}
 }
