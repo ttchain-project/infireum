@@ -31,9 +31,11 @@ final class SearchMemberViewModel: ViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
+        
         input.friendInfoModels.map { (viewModels) -> [AddGroupMemeberTableViewCellModel] in
             return viewModels.map(AddGroupMemeberTableViewCellModel.init)
             }.bind(to: output.addGroupMemberTableViewCellModels).disposed(by: disposeBag)
+       
         Observable.of(input.tableViewItemSelected, input.tableViewItemDeselected).merge().subscribe(onNext: {
             [unowned self] index in
             let targetViewModel = self.output.addGroupMemberTableViewCellModels.value[index]
@@ -51,6 +53,7 @@ final class SearchMemberViewModel: ViewModel {
             }
             self.output.addGroupMemberCollectionViewCellModels.accept(value)
         }).disposed(by: disposeBag)
+       
         input.collectionViewItemSelected.subscribe(onNext: {
             [unowned self] index in
             var value = self.output.addGroupMemberCollectionViewCellModels.value
@@ -60,6 +63,7 @@ final class SearchMemberViewModel: ViewModel {
             value.remove(at: index)
             self.output.addGroupMemberCollectionViewCellModels.accept(value)
         }).disposed(by: disposeBag)
+      
         input.searchText.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged().subscribe(onNext: {
             [unowned self] text in
             var value = self.input.friendInfoModels.value
@@ -78,7 +82,9 @@ final class SearchMemberViewModel: ViewModel {
             })
             self.output.addGroupMemberTableViewCellModels.accept(tableViewCellModels)
         }).disposed(by: disposeBag)
+      
         guard let uid = IMUserManager.manager.userModel.value?.uID else { return }
+        
         Server.instance.getUserPersonalChatList(imUserId: uid).asObservable().subscribe(onNext: {
             [weak self] result in
             guard let `self` = self else { return }
@@ -88,6 +94,7 @@ final class SearchMemberViewModel: ViewModel {
                 self.input.friendInfoModels.accept(value.personalDirectoryModel.friendList)
             }
         }).disposed(by: disposeBag)
+       
         input.confirmButtonSubject.subscribe(onNext: {
             [unowned self] in
             self.output.selectedFriends.onNext(self.output.addGroupMemberCollectionViewCellModels.value.map({ $0.input.friendInfoModel }))

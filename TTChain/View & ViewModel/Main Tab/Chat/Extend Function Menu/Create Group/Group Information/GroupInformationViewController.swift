@@ -187,6 +187,16 @@ class GroupInformationViewController: UIViewController {
         return barButtonItem
     }()
     
+    private lazy var inviteUsersBarButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(title: LM.dls.group_member_invited, style: .plain, target: self, action: nil)
+        barButtonItem.rx.tap.subscribe(onNext: {
+            [unowned self] in
+            self.presentAddGroupMemberView()
+        }).disposed(by: disposeBag)
+        barButtonItem.tintColor = UIColor.owPumpkinOrange
+        return barButtonItem
+    }()
+    
     var didUpdateProfileImage:Bool = false
     
     init(viewModel: GroupInformationViewModel) {
@@ -205,6 +215,11 @@ class GroupInformationViewController: UIViewController {
         //Hiding the public private groupselection view
         
         self.groupTypeStackView.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
     }
     
     private func setUpRx() {
@@ -255,7 +270,7 @@ class GroupInformationViewController: UIViewController {
             if self.viewModel.input.userGroupInfoModelSubject.value.groupOwnerUID == IMUserManager.manager.userModel.value?.uID {
                 self.navigationItem.rightBarButtonItem = type == .edit ? self.cancelEditGroupBarButtonItem : self.deleteGroupBarButtonItem
             } else {
-                self.navigationItem.rightBarButtonItem = nil
+                self.navigationItem.rightBarButtonItem = self.inviteUsersBarButton
             }
         }).disposed(by: disposeBag)
         
@@ -305,6 +320,9 @@ class GroupInformationViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }).disposed(by: disposeBag)
         
+        viewModel.groupMembersInvitedSuccessfully.subscribe(onNext: { (_) in
+            self.showSimplePopUp(with: "", contents: LM.dls.members_invitation_successfull, cancelTitle: LM.dls.g_cancel, cancelHandler: nil)
+        }).disposed(by: disposeBag)
     }
     
     private func presentAddGroupMemberView() {
@@ -314,6 +332,9 @@ class GroupInformationViewController: UIViewController {
             [unowned self] models in
             viewController.pop(sender: self)
             self.viewModel.input.addMembersSubject.onNext(models)
+            if self.viewModel.input.userGroupInfoModelSubject.value.groupOwnerUID != IMUserManager.manager.userModel.value?.uID  {
+                self.viewModel.addMembersToGroup(friendModels: models)
+            }
             self.addMembersDisposeBag = DisposeBag()
         }).disposed(by: addMembersDisposeBag)
         show(viewController, sender: self)

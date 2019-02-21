@@ -33,12 +33,21 @@ class SearchMemberViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private lazy var confirmBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(title: LM.dls.g_confirm, style: .plain, target: self, action: nil)
-        viewModel.output.addGroupMemberCollectionViewCellModels.map({ $0.count > 0 ? LM.dls.g_ok + "( \($0.count) )" : LM.dls.g_ok }).bind(to: barButtonItem.rx.title).disposed(by: disposeBag)
-        viewModel.output.addGroupMemberCollectionViewCellModels.map({ $0.count > 0 }).bind(to: barButtonItem.rx.isEnabled).disposed(by: disposeBag)
+        
+        viewModel.output.addGroupMemberCollectionViewCellModels
+            .map({ $0.count > 0 ? LM.dls.g_ok + "( \($0.count) )" : LM.dls.g_ok })
+            .bind(to: barButtonItem.rx.title).disposed(by: disposeBag)
+        
+        viewModel.output.addGroupMemberCollectionViewCellModels
+            .map({ $0.count > 0 })
+            .bind(to: barButtonItem.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
         barButtonItem.rx.tap.subscribe(onNext: {
             [unowned self] in
             self.viewModel.input.confirmButtonSubject.onNext(())
         }).disposed(by: disposeBag)
+        
         return barButtonItem
     }()
     

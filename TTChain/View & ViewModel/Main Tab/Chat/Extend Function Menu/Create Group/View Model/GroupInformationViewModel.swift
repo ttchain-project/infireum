@@ -59,6 +59,7 @@ final class GroupInformationViewModel: ViewModel {
         let nameCountHintColor = BehaviorSubject<UIColor>(value: UIColor.black)
         let introductionCountHintString = BehaviorSubject<String>(value: String())
         let introductionCountHintColor = BehaviorSubject<UIColor>(value: UIColor.black)
+        
     }
     
     var input: Input
@@ -68,6 +69,8 @@ final class GroupInformationViewModel: ViewModel {
     private var groupMembersDisposeBag = DisposeBag()
     
     private let invitedMemberTitle = LM.dls.group_member_invited
+    
+    public let groupMembersInvitedSuccessfully :PublishSubject<Void> =  PublishSubject.init()
     
     init(userGroupInfoModel: UserGroupInfoModel? = nil) {
         input = Input.init(userGroupInfoModel: userGroupInfoModel)
@@ -293,6 +296,28 @@ final class GroupInformationViewModel: ViewModel {
             [unowned self] count in
             self.output.introductionCountHintString.onNext(count > 100 ? LM.dls.group_text_too_long(count.stringValue,100.stringValue)  : "\(count)/100")
             self.output.introductionCountHintColor.onNext(count > 100 ? UIColor.owPinkRed : UIColor.lightGray)
+        }).disposed(by: disposeBag)
+    }
+    
+    func addMembersToGroup(friendModels : [FriendModel])  {
+        let memberIDs = self.output.animatableSectionModel.value
+                        .flatMap({ $0.items })
+                        .compactMap({ $0.input.groupMemberModel?.uid })
+        
+        let groupID = self.input.userGroupInfoModelSubject.value.groupID
+        let parameters = GroupMembersAPI.Parameters.init(groupID: groupID, members: memberIDs)
+        Server.instance.groupMembers(parameters: parameters).asObservable().subscribe(onNext: {
+            [weak self] result in
+            guard let `self` = self else { return }
+            switch result {
+            case .success(let model):
+                if model.isSuccess {
+                    self.groupMembersInvitedSuccessfully.onNext(())
+                    self.getGroupDetails()
+                }
+            case .failed(error: let error):
+                print(error)
+            }
         }).disposed(by: disposeBag)
     }
     

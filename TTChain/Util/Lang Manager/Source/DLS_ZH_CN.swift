@@ -558,4 +558,5 @@ struct DLS_ZH_CN: DLS {
     var group_member_invited = "正在邀请"
     
     func group_text_too_long(_ args: String...) -> String { return String.init(format: "字数过长 (%@)/%@", arguments: args) }
+        var members_invitation_successfull = "成员邀请成功"
 }

@@ -557,4 +557,7 @@ protocol DynamicLocalizationSource {
     var group_member_new:String {get set}
     var group_member_invited:String {get set}
     func group_text_too_long(_ args: String...) -> String
+    
+    var members_invitation_successfull :String {get set}
+
 }
