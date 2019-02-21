@@ -557,4 +557,7 @@ struct DLS_EN_US: DLS {
     var show_qr_code =  "Display QR code"
     
     var group_member_new = "New"
+    var group_member_invited = "Invited"
+    
+    func group_text_too_long(_ args: String...) -> String { return String.init(format: "The text is too long (%@)/%@", arguments: args) }
 }

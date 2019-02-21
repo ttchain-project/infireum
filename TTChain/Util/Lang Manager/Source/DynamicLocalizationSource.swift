@@ -555,4 +555,6 @@ protocol DynamicLocalizationSource {
     var show_qr_code:String {get set}
     
     var group_member_new:String {get set}
+    var group_member_invited:String {get set}
+    func group_text_too_long(_ args: String...) -> String
 }

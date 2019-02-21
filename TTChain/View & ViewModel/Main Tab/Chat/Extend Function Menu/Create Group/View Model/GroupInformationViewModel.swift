@@ -67,6 +67,8 @@ final class GroupInformationViewModel: ViewModel {
     private var createGroupDisposeBag = DisposeBag()
     private var groupMembersDisposeBag = DisposeBag()
     
+    private let invitedMemberTitle = LM.dls.group_member_invited
+    
     init(userGroupInfoModel: UserGroupInfoModel? = nil) {
         input = Input.init(userGroupInfoModel: userGroupInfoModel)
         output = GroupInformationViewModel.Output.init()
@@ -116,17 +118,17 @@ final class GroupInformationViewModel: ViewModel {
             }
             var animatableSectionModels = [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>]()
             if let memberCellModels = userGroupInfoModel.membersArray?.map(GroupMemberCollectionViewCellModel.init) {
-                animatableSectionModels = [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: "成员", items: memberCellModels)]
+                animatableSectionModels = [AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: LM.dls.group_member, items: memberCellModels)]
             }
             let inviteCellModels = userGroupInfoModel.invitedMembersArray?.map(GroupMemberCollectionViewCellModel.init) ?? [GroupMemberCollectionViewCellModel.init()]
-            animatableSectionModels.append(AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: "正在邀请", items: inviteCellModels))
+            animatableSectionModels.append(AnimatableSectionModel<String, GroupMemberCollectionViewCellModel>.init(model: LM.dls.group_member_invited, items: inviteCellModels))
             self.output.animatableSectionModel.accept(animatableSectionModels)
         }).disposed(by: disposeBag)
         
         input.typeSubject.subscribe(onNext: {
             [unowned self] type in
             self.output.animatableSectionModel.value.forEach({ (sectionModel) in
-                if sectionModel.model == "正在邀请" {
+                if sectionModel.model == self.invitedMemberTitle {
                     sectionModel.items.forEach({ (viewModel) in
                         let isHidden = type == .normal || viewModel.input.groupMemberModel?.uid == IMUserManager.manager.userModel.value?.uID || viewModel.input.groupMemberModel == nil
                         viewModel.output.closeButtonIsHidden.accept(isHidden)
@@ -137,10 +139,10 @@ final class GroupInformationViewModel: ViewModel {
             case .create: return
             case .edit:
                 self.output.animatableSectionModel.value.forEach({ (sectionModel) in
-                    if sectionModel.model == "正在邀请" {
+                    if sectionModel.model == self.invitedMemberTitle {
                         if sectionModel.items.isEmpty || sectionModel.items.first?.input.groupMemberModel != nil {
                             var section = self.output.animatableSectionModel.value
-                            if var inviteSection = section.first(where: { $0.model == "正在邀请"} ) {
+                            if var inviteSection = section.first(where: { $0.model == self.invitedMemberTitle} ) {
                                 inviteSection.items.insert(GroupMemberCollectionViewCellModel(), at: 0)
                                 section.removeLast()
                                 section.append(inviteSection)
@@ -151,10 +153,10 @@ final class GroupInformationViewModel: ViewModel {
                 })
             case .normal:
                 self.output.animatableSectionModel.value.forEach({ (sectionModel) in
-                    if sectionModel.model == "正在邀请" {
+                    if sectionModel.model == self.invitedMemberTitle {
                         if sectionModel.items.first?.input.groupMemberModel == nil {
                             var section = self.output.animatableSectionModel.value
-                            if var inviteSection = section.first(where: { $0.model == "正在邀请"} ) {
+                            if var inviteSection = section.first(where: { $0.model == self.invitedMemberTitle} ) {
                                 if !inviteSection.items.isEmpty {
                                     inviteSection.items.removeFirst()
                                 }
@@ -175,7 +177,7 @@ final class GroupInformationViewModel: ViewModel {
                 return !allMembers.contains(where: { $0.uppercased() == model.uid.uppercased() })
             }).map(GroupMemberCollectionViewCellModel.init)
             
-            if var value = self.output.animatableSectionModel.value.first(where: { $0.model == "正在邀请" }) {
+            if var value = self.output.animatableSectionModel.value.first(where: { $0.model == self.invitedMemberTitle }) {
                 value.items.append(contentsOf: needToAddFriends)
                 var section = self.output.animatableSectionModel.value
                 section.removeLast()
@@ -261,7 +263,7 @@ final class GroupInformationViewModel: ViewModel {
             guard let groupName = groupName else { return false }
             switch self.input.typeSubject.value {
             case .normal: return true
-            case .edit,.create: guard !(sectionModels.first(where:{ $0.model == "正在邀请" })?
+            case .edit,.create: guard !(sectionModels.first(where:{ $0.model == self.invitedMemberTitle })?
                 .items.compactMap({ $0.input.groupMemberModel?.uid }).isEmpty ?? true) else { return false }
             }
             switch (groupName.count, introduce?.count ?? 0) {
@@ -283,13 +285,13 @@ final class GroupInformationViewModel: ViewModel {
         
         output.groupName.map({ $0?.count ?? 0}).subscribe(onNext: {
             [unowned self] count in
-            self.output.nameCountHintString.onNext(count > 20 ? "字数过长 \(count)/20" : "\(count)/20")
+            self.output.nameCountHintString.onNext(count > 20 ? LM.dls.group_text_too_long(count.stringValue,20.stringValue) : "\(count)/20")
             self.output.nameCountHintColor.onNext(count > 20 ? UIColor.owPinkRed : UIColor.lightGray)
         }).disposed(by: disposeBag)
         
         output.introduction.map({ $0?.count ?? 0}).subscribe(onNext: {
             [unowned self] count in
-            self.output.introductionCountHintString.onNext(count > 100 ? "字数过长 \(count)/100" : "\(count)/100")
+            self.output.introductionCountHintString.onNext(count > 100 ? LM.dls.group_text_too_long(count.stringValue,100.stringValue)  : "\(count)/100")
             self.output.introductionCountHintColor.onNext(count > 100 ? UIColor.owPinkRed : UIColor.lightGray)
         }).disposed(by: disposeBag)
     }

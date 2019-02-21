@@ -32,7 +32,7 @@ struct GroupMemberCollectionViewCellModel: ViewModel {
     
     init(groupMemberModel: GroupMemberModel? = nil) {
         input = Input.init(groupMemberModel: groupMemberModel)
-        output = Output.init(text: groupMemberModel?.nickName ?? "新增", avatarImage: groupMemberModel?.avatar)
+        output = Output.init(text: groupMemberModel?.nickName ?? LM.dls.group_member_new, avatarImage: groupMemberModel?.avatar)
     }
     
     init(friendInfoModel: FriendInfoModel) {

@@ -131,9 +131,18 @@ class GroupInformationViewController: UIViewController {
                 [unowned self] indexPath in
                 switch self.viewModel.input.typeSubject.value {
                 case .normal:
-                    print("s")
-                    let model = self.viewModel.input.userGroupInfoModelSubject.value.membersArray![indexPath.row]
-                    self.toUserProfileVC(forFriend: model)
+                    var model : FriendModel
+                    if indexPath.section == 0 {
+                        model = self.viewModel.input.userGroupInfoModelSubject.value.membersArray![indexPath.row]
+                    }else {
+                        model = self.viewModel.input.userGroupInfoModelSubject.value.invitedMembersArray![indexPath.row]
+                    }
+                    if model.uid == IMUserManager.manager.userModel.value?.uID {
+                        self.toProfileVC()
+                    }else {
+                        self.toUserProfileVC(forFriend: model)
+                    }
+
                 default:
                     var sections = self.viewModel.output.animatableSectionModel.value
                     var sectionModel = sections[indexPath.section]
@@ -359,8 +368,13 @@ class GroupInformationViewController: UIViewController {
         }else {
             purpose = .myFriend
         }
+       
         let config = UserProfileViewController.Config.init(purpose: purpose, user: friend)
         let viewController = UserProfileViewController.instance(from: config)
+        self.show(viewController, sender: nil)
+    }
+    func toProfileVC() {
+        let viewController = ProfileViewController.instance()
         self.show(viewController, sender: nil)
     }
 }

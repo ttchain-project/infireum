@@ -562,6 +562,10 @@ struct DLS_ZH_TW: DLS {
     var show_qr_code =  "顯示二維碼"
     
     var group_member_new = "新增"
+    var group_member_invited = "正在邀請"
+    
+    func group_text_too_long(_ args: String...) -> String { return String.init(format: "字数过长 (%@)/%@", arguments: args) }
+
 }
 
 
