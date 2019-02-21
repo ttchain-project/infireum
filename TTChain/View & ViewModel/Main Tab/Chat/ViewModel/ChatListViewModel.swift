@@ -33,6 +33,7 @@ class ChatListViewModel: KLRxViewModel {
     
     struct Input {
         let chatSelected: Driver<IndexPath>
+        let chatRefresh: Driver<Void>
     }
     struct Output {
         let selectedChat:(CommunicationListModel) -> Void
@@ -46,6 +47,10 @@ class ChatListViewModel: KLRxViewModel {
     func concatInput() {
         self.input.chatSelected.asDriver().drive(onNext: { indexPath in
             self.output.selectedChat(self._communicationList.value[indexPath.row])
+        }).disposed(by: bag)
+        
+        self.input.chatRefresh.drive(onNext: { (_) in
+            self.getList()
         }).disposed(by: bag)
     }
     
@@ -62,6 +67,14 @@ class ChatListViewModel: KLRxViewModel {
     public var communicationList: Observable<[CommunicationListModel]> {
         return _communicationList.asObservable()
     }
+    
+    public var onReceiveRecordsUpdateResponse: Observable<Void> {
+        return _onReceiveRecordsUpdateResponse.asObservable()
+    }
+    
+    private lazy var _onReceiveRecordsUpdateResponse: PublishSubject<Void> = {
+        return PublishSubject.init()
+    }()
     
     public var communicationListArray: [CommunicationListModel] {
         return _communicationList.value
@@ -98,6 +111,12 @@ class ChatListViewModel: KLRxViewModel {
         self.getCommunicationList()
         self.fetchGroupList()
         self.fetchFriendsList()
+  
+        let obs = self._communicationList.asObservable().map { _ in () }
+        Observable.merge(obs,self._groupRequestModel.asObservable().map { _ in () }, self._friendRequestModel.asObservable().map { _ in () }).subscribe(onNext: { () in
+            self._onReceiveRecordsUpdateResponse.onNext(())
+        }).disposed(by: bag)
+
     }
     
     func getCommunicationList() {

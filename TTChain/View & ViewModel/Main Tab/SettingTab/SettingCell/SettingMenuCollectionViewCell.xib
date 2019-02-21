@@ -13,21 +13,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SettingMenuCollectionViewCell" customModule="Hope_Seed" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="86" height="132"/>
+            <rect key="frame" x="0.0" y="0.0" width="72" height="132"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="86" height="132"/>
+                <rect key="frame" x="0.0" y="0.0" width="72" height="132"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="05E-6n-b3O">
-                        <rect key="frame" x="0.0" y="0.0" width="86" height="72"/>
+                        <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="05E-6n-b3O" secondAttribute="height" multiplier="1:1" id="KHk-Uy-DeT"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labellasdjflasdjf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kMB-Ow-0CM">
-                        <rect key="frame" x="2.5" y="82" width="81" height="40"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labellasdjflasdjf" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kMB-Ow-0CM">
+                        <rect key="frame" x="2.5" y="82" width="67" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="HS9-uu-UVH"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -37,18 +40,17 @@
                 <constraint firstItem="kMB-Ow-0CM" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="3gy-xE-xoq"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="width" secondItem="kMB-Ow-0CM" secondAttribute="width" constant="5" id="8Id-W7-9hn"/>
                 <constraint firstAttribute="bottom" secondItem="kMB-Ow-0CM" secondAttribute="bottom" constant="10" id="8RL-De-IW2"/>
-                <constraint firstItem="05E-6n-b3O" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JvM-oE-x6E"/>
-                <constraint firstAttribute="trailing" secondItem="05E-6n-b3O" secondAttribute="trailing" id="RHI-AK-R20"/>
+                <constraint firstItem="05E-6n-b3O" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Ad4-B6-dvM"/>
                 <constraint firstItem="05E-6n-b3O" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="TQ2-KV-ZZ1"/>
                 <constraint firstItem="kMB-Ow-0CM" firstAttribute="top" secondItem="05E-6n-b3O" secondAttribute="bottom" constant="10" id="lDA-pR-7bA"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="86" height="132"/>
+            <size key="customSize" width="72" height="132"/>
             <connections>
                 <outlet property="imageView" destination="05E-6n-b3O" id="zcb-EG-ddv"/>
                 <outlet property="titleLabel" destination="kMB-Ow-0CM" id="ajE-ZZ-nqa"/>
             </connections>
-            <point key="canvasLocation" x="163.19999999999999" y="153.82308845577214"/>
+            <point key="canvasLocation" x="152" y="153.82308845577214"/>
         </collectionViewCell>
     </objects>
 </document>

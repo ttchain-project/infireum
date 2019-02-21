@@ -15,7 +15,8 @@ class SettingMenuCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.titleLabel.numberOfLines = 0
+        self.titleLabel.lineBreakMode = .byTruncatingTail
         // Initialization code
     }
     

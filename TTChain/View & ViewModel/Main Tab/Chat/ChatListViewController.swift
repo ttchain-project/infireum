@@ -16,7 +16,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     func config(constructor: Void) {
         view.layoutIfNeeded()
         self.viewModel = ChatListViewModel.init(
-            input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().filter { $0.section == 2}.map { $0 }),
+            input: ChatListViewModel.Input(chatSelected: self.tableView.rx.itemSelected.asDriver().filter { $0.section == 2}.map { $0 }, chatRefresh: self.refresher.rx.controlEvent(.valueChanged).asDriver()),
             output: ChatListViewModel.Output(selectedChat: {[weak self] model in
                 guard let `self` = self else {
                     return
@@ -45,6 +45,11 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         bindViewModel()
         bindElements()
         self.tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 40, right: 0)
+        self.viewModel.onReceiveRecordsUpdateResponse.subscribe(onNext: { (_) in
+            if self.refresher.isRefreshing {
+                self.refresher.endRefreshing()
+            }
+        }).disposed(by: bag)
     }
     
     typealias ViewModel = ChatListViewModel
@@ -61,6 +66,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var requestListButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
    
+    private let refresher = UIRefreshControl.init()
+
     private lazy var hud = {
         return KLHUD.init(
             type: .spinner,
@@ -181,6 +188,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         tableView.register(ChatHistoryTableViewCell.nib, forCellReuseIdentifier: ChatHistoryTableViewCell.cellIdentifier())
         tableView.register(GroupInviteTableViewCell.nib, forCellReuseIdentifier: GroupInviteTableViewCell.cellIdentifier())
         tableView.register(InviteTableViewCell.nib, forCellReuseIdentifier: InviteTableViewCell.cellIdentifier())
+        tableView.addSubview(refresher)
     }
     
     func bindViewModel() {

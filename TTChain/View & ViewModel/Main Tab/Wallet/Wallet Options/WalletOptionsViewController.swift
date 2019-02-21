@@ -77,17 +77,18 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     
     private func bindViewModel() {
         
-        
-        self.viewModel.ethWallet.asObservable().subscribe(onNext: { array in
-            self.ethAddressLabel.text = array?.first?.address
-            self.stableCoinAddressLabel.text = array?.first?.address
-            self.listedCoinAddressLabel.text = array?.first?.address
-
+        self.viewModel.ethWallet.asObservable().subscribe(onNext: { wallets in
+            self.ethAddressLabel.text = wallets?.first?.address
+            self.stableCoinAddressLabel.text = wallets?.first?.address
+            self.listedCoinAddressLabel.text = wallets?.first?.address
+            self.ethTitleLabel.text = " " + (wallets?.first?.name ?? "ETH Wallet")
         }).disposed(by: bag)
         
         
-        self.viewModel.btcWallet.asObservable().subscribe(onNext: { (wallet) in
-            self.btcAddressLabel.text = wallet?.first?.address
+        self.viewModel.btcWallet.asObservable().subscribe(onNext: { (wallets) in
+            self.btcAddressLabel.text = wallets?.first?.address
+            self.btcTitleLabel.text = " " + (wallets?.first?.name ?? "BTC Wallet")
+
         }).disposed(by: bag)
         
         let totalBTC = self.viewModel.totalFiatValuesBTC.flatMapLatest { $0 }.share()
@@ -276,7 +277,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-        self.title = lang.dls.tab_wallet
+        self.navigationItem.title = lang.dls.tab_wallet
         self.stableCoinTitleLabel.text = " " + lang.dls.stable_coin
         self.listedCoinTitleLabel.text = " " +  lang.dls.sto_coin
     }
@@ -317,6 +318,11 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
                 self?.viewModel.fetchWallets()
             })
             .disposed(by: bag)
+        
+        OWRxNotificationCenter.instance.walletNameUpdate.subscribe(onNext: { (wallet) in
+            self.viewModel.fetchWallets()
+        }).disposed(by: bag)
+
     }
 
 }

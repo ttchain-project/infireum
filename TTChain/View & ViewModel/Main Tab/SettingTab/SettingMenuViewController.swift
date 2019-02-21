@@ -515,7 +515,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
             guard let wallets = DB.instance.get(type: Wallet.self, predicate: pred, sorts: nil), wallets.count > 0 else {
                 return
             }
-            if wallets.count == 0 {
+            if wallets.count == 1 {
                 let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallets[0])
                 self.navigationController?.pushViewController(vc)
             }else {
@@ -591,18 +591,18 @@ extension SettingMenuViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize.init(width: self.view.width, height: 40)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if (kind == UICollectionElementKindSectionHeader) {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexPath) as!  SettingMenuHeaderCollectionReusableView
-            headerView.setup(title:"Title")
-            headerView.backgroundColor = UIColor.gray
-            headerView.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 40)
-            return headerView
-        }else {
-            return UIView() as! UICollectionReusableView
-        }
-    }
+//
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        if (kind == UICollectionElementKindSectionHeader) {
+//            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexPath) as!  SettingMenuHeaderCollectionReusableView
+//            headerView.setup(title:"Title")
+//            headerView.backgroundColor = UIColor.gray
+//            headerView.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 40)
+//            return headerView
+//        }else {
+//            return UIView() as! UICollectionReusableView
+//        }
+//    }
     
 }
 
