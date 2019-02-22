@@ -24,8 +24,6 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     typealias ViewModel = DepositViewModel
     var viewModel: DepositViewModel!
     
-    @IBOutlet weak var noteLabel: UILabel!
-    @IBOutlet weak var walletImageView: UIImageView!
     
     @IBOutlet weak var shareQRCodeButton: UIButton!
     @IBOutlet weak var qrCodeBorderImageVew: UIImageView!
@@ -39,6 +37,8 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
 //    }()
     
 //    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var coinNameLabel: UILabel!
+    
     @IBOutlet weak var walletAddressLabel: UILabel!
     @IBOutlet weak var walletAddressCopyBtn: UIButton!
     @IBOutlet weak var qrCodeImgView: UIImageView!
@@ -115,35 +115,19 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     
     private func setupWallet(_ wallet: Wallet) {
         
-        title = wallet.mainCoin?.chainName
-        
-        switch wallet.owChainType {
-        case .btc:
-            self.walletImageView.image = #imageLiteral(resourceName: "BTCSmallIcon")
-        case .eth:
-            self.walletImageView.image = #imageLiteral(resourceName: "ETHSmallIcon")
-        default:
-            self.walletImageView.image = #imageLiteral(resourceName: "airDropSmallIcon")
-        }
-//        walletNameLabel.text = wallet.name
+        self.navigationItem.title = wallet.mainCoin?.chainName
+       
         walletAddressLabel.text = wallet.address
-//        walletAddressCopyBtn.setImage(#imageLiteral(resourceName: "btnListCopyNormal"), for: .normal)
-//        walletAddressCopyBtn.setTitle(nil, for: .normal)
+
         
-//        contentView.cornerRadius = 15
         
         let theme = TM.instance.theme.value
-//        renderGradient(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme)
-//        qrCodeTitleLabel.set(
-//            textColor: mainColor(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme),
-//            font: .owMedium(size: 18)
-//        )
         
-//        changeAssetBtn.set(
-//            color: mainColor(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme),
-//            font: UIFont.owMedium(size: 18),
-//            image: #imageLiteral(resourceName: "btnChangeAssetsNormal")
-//        )
+        changeAssetBtn.set(
+            color: mainColor(ofMainCoinID: wallet.walletMainCoinID!, inTheme: theme),
+            font: UIFont.owMedium(size: 18),
+            image: #imageLiteral(resourceName: "btnChangeAssetsNormal")
+        )
         
         walletAddressCopyBtn.rx.tap
             .asDriver()
@@ -153,24 +137,17 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
                 self.copyAddress(address: wallet.address!)
             })
             .disposed(by: bag)
-        shareQRCodeButton.rx.tap
-            .asDriver()
-            .throttle(1)
-            .drive(onNext: {
-                [unowned self] in
-                self.startSharing()
-            })
-            .disposed(by: bag)
+        
     }
     
     private func bindViewModel() {
         viewModel.qrCode.bind(to: qrCodeImgView.rx.image).disposed(by: bag)
-//        viewModel.selectedAsset
-//            .map {
-//                LM.dls.deposit_label_depositAddress($0.coin!.inAppName!)
-//            }
-//            .bind(to: qrCodeTitleLabel.rx.text)
-//            .disposed(by: bag)
+        viewModel.selectedAsset
+            .map {
+                LM.dls.deposit_label_depositAddress($0.coin!.inAppName!)
+            }
+            .bind(to: coinNameLabel.rx.text)
+            .disposed(by: bag)
     }
     
     private func bindChangeAssetDisplay() {
@@ -215,7 +192,7 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-//        changeAssetBtn.setTitleForAllStates(dls.deposit_btn_changeAsset)
+        changeAssetBtn.setTitleForAllStates(dls.deposit_btn_changeAsset)
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -232,6 +209,8 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
 //            font: .owMedium(size: 16.3)
 //        )
         
+        createRightBarButton(target: self, selector: #selector(startSharing), image: #imageLiteral(resourceName: "btnNavShareNormal"), title: nil, toColor: theme.palette.nav_item_2, shouldClear: true)
+
         walletAddressLabel.set(
             textColor: theme.palette.label_main_1,
             font: .owRegular(size: 14)
@@ -292,7 +271,7 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
         view.makeToast(LM.dls.g_toast_addr_copied)
     }
     
-    private func startSharing() {
+    @objc private func startSharing() {
         let img = screenshot()
         let activityVC = UIActivityViewController.init(activityItems: [img], applicationActivities: nil)
 
@@ -360,7 +339,7 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     private func switchLayoutOnAssetChangeable(_ changeable: Bool) {
         if !changeable {
 //            sepline.removeSubviews()
-//            changeAssetBtn.removeFromSuperview()
+            changeAssetBtn.removeFromSuperview()
 //            qrCodeToBottom.isActive = true
 //            qrCodeToSepline.isActive = false
 //        }else {

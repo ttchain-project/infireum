@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import HDWalletKit
+
 enum OWInputFieldValidateResult {
     case valid
     case incorrectFormat(desc: String)
@@ -131,6 +133,14 @@ extension String {
             return .incorrectFormat(desc: LM.dls.strValidate_error_mnemonic_12WordsAtLeast)
 //            return .incorrectFormat(desc: "助记词格式错误，请确认是否输入正确，单词必须以英文小写输入，并且必须使用一个半形空白分开各个单词")
         }
+        
+        let mnemonicSet = Set.init(words())
+        let mnemonicSuperSetForEnglish = Set.init(WordList.english.words)
+        let mnemonicSuperSetForChinese = Set.init(WordList.traditionalChinese.words)
+        if !mnemonicSet.isSubset(of: mnemonicSuperSetForEnglish), !mnemonicSet.isSubset(of: mnemonicSuperSetForChinese){
+            return .incorrectFormat(desc: LM.dls.strValidate_error_mnemonic_invalidCharacter(""))
+        }
+        
         
         //No checks for invalid characters as we have chinese mnemonics now!!
 //        let regexStr = "[^a-z]"

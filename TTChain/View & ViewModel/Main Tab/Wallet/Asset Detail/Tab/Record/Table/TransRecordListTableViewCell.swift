@@ -87,7 +87,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         
         sepline.backgroundColor = palette.sepline
         
-        
+        var transAmount = transRecord.toAmt
         //Content part
         switch transRecord.inoutRoleOfAddress(address) {
         case .none: break
@@ -99,6 +99,7 @@ class TransRecordListTableViewCell: UITableViewCell {
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
                 self.amtLabel.textColor = UIColor.owWaterBlue
+                transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
             }
         }
         
@@ -106,10 +107,8 @@ class TransRecordListTableViewCell: UITableViewCell {
             transRecord.date! as Date, withFormat: "MM/dd/yyyy HH:mm:ss"
         )
         
-//        commentsLabel.text = transRecord.remarkComment
-        
         var amtStr: String
-        if let amt = (transRecord.toAmt as Decimal?) {
+        if let amt = (transAmount as Decimal?) {
             let maxDigit: Int
             switch transRecord.owStatus {
             case .failed: maxDigit = 4

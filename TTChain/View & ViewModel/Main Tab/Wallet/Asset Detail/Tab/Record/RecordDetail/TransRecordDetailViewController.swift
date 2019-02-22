@@ -48,8 +48,22 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         let format = "MM/dd/yyyy HH:mm:ss"
         self.transactionDateLabel.text = DateFormatter.dateString(from: (transRecord.date! as Date), withFormat: format)
 
-        var amtStr: String
-        if let amt = (transRecord.toAmt as Decimal?) {
+        var amtStr: String = ""
+        var transAmount = transRecord.toAmt
+
+        switch transRecord.inoutRoleOfAddress(constructor.asset.wallet!.address!) {
+        case .none: break
+        case .some(let type):
+            switch type {
+            case .deposit:
+                amtStr = "+"
+            case .withdrawal:
+                amtStr = "-"
+                transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
+            }
+        }
+        
+        if let amt = (transAmount as Decimal?) {
             let maxDigit: Int
             switch transRecord.owStatus {
             case .failed: maxDigit = 4
@@ -61,18 +75,10 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
                     maxDigit = 18
                 }
             }
-            amtStr = amt.asString(digits: maxDigit).disguiseIfNeeded()
             if amt > 0 {
-                switch transRecord.inoutRoleOfAddress(constructor.asset.wallet!.address!) {
-                case .none: break
-                case .some(let type):
-                    switch type {
-                    case .deposit:
-                        amtStr = "+" + amtStr
-                    case .withdrawal:
-                        amtStr = "-" + amtStr
-                    }
-                }
+                amtStr = amtStr + amt.asString(digits: maxDigit).disguiseIfNeeded()
+            }else {
+                amtStr = amt.asString(digits: maxDigit).disguiseIfNeeded()
             }
         }else {
             amtStr = "--"
