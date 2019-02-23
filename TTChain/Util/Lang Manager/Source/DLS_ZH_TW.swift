@@ -566,7 +566,9 @@ struct DLS_ZH_TW: DLS {
     
     func group_text_too_long(_ args: String...) -> String { return String.init(format: "字数过长 (%@)/%@", arguments: args) }
 
-        var members_invitation_successfull = "成員邀請成功"
+    var members_invitation_successfull = "成員邀請成功"
+    
+    var transfer_all_amount = "轉出所有金額(扣除礦工費)"
 }
 
 

@@ -75,6 +75,11 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         if let defaultAmount = config.defaultAmount,let amountInDecimal = Decimal.init(string: defaultAmount) {
             assetVC.viewModel.updateAmt(amountInDecimal)
         }
+        assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
+            let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
+            let totalTransferableAmt = ((config.asset.amount ?? 0) as Decimal) - (feeInfo?.totalHardCodedFee ?? 0)
+            self.assetVC.viewModel.updateAmt(totalTransferableAmt > 0 ? totalTransferableAmt : 0)
+        }).disposed(by:bag)
         
         constrain(assetVC.view, baseScrollView) { [unowned self] (view, scroll) in
             view.top == scroll.top + 25

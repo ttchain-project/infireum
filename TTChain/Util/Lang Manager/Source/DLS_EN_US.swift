@@ -562,4 +562,5 @@ struct DLS_EN_US: DLS {
     func group_text_too_long(_ args: String...) -> String { return String.init(format: "The text is too long (%@)/%@", arguments: args) }
     
     var members_invitation_successfull = "Members invited successfully"
+    var transfer_all_amount = "Transfer all coins(exclude miner fee)"
 }

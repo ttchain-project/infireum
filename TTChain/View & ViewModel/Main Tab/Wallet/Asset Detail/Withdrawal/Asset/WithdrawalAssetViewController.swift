@@ -30,6 +30,7 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
             output: ()
         )
         
+        self.transferAllButton.isHidden = constructor.asset.wallet?.owChainType != ChainType.btc
         transferAmtTextField.keyboardType = UIKeyboardType.decimalPad
         
         bindViewModel()
@@ -38,6 +39,7 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
     }
     
     private func bindViewModel() {
+        
         transferAmtTextField.delegate = self
         
         let coin = viewModel.input.asset.coin!
@@ -85,6 +87,7 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var transferAmtTextField: UITextField!
     @IBOutlet weak var transferAmtFiatValueLabel: UILabel!
     
+    @IBOutlet weak var transferAllButton: UIButton!
     @IBOutlet weak var sepline: UIView!
     
     override func renderLang(_ lang: Lang) {
@@ -100,6 +103,9 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         availableAmtLabel.set(textColor: palette.input_text, font: .owRegular(size: 14))
         transferAmtFiatValueLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 20))
         sepline.backgroundColor = palette.sepline
+        transferAllButton.set(textColor: palette.label_main_1, font: .owMedium(size: 17), text: LM.dls.transfer_all_amount, backgroundColor: .clear)
+        
+        
     }
     
     override func viewDidLoad() {
@@ -112,18 +118,9 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    public func transferAllAmout(amount:Decimal?) {
     }
-    */
-
 }
 
 extension WithdrawalAssetViewController: UITextFieldDelegate {
