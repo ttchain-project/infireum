@@ -177,12 +177,12 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         
 
         stableCoinView.rx.klrx_tap.asDriver().drive(onNext: {
-            self.showStableCoinOptions()
+            self.showStableAndListedCoinOptions(coinOption: .StableCoin)
             
         }).disposed(by: bag)
     
         listedCoinView.rx.klrx_tap.asDriver().drive(onNext: {
-            self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source:.ListCoin)
+            self.showStableAndListedCoinOptions(coinOption: .ListCoin)
         }).disposed(by: bag)
         
        self.monitorLocalWalletsUpdate()
@@ -218,26 +218,25 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         self.present(vc, animated: true, completion: nil)
     }
     
-    private func showStableCoinOptions() {
+    private func showStableAndListedCoinOptions(coinOption:MainWalletViewController.Source) {
         let actionSheet = UIAlertController.init(title: LM.dls.stable_coin,message: "", preferredStyle: .actionSheet)
         let actionBTC = UIAlertAction.init(title: "BTC", style: .default) { _ in
 
             if self.viewModel.btcWallet.value!.count == 1 {
-                self.toWalletDetail(withWallet: self.viewModel.btcWallet.value![0], source: .StableCoin)
+                self.toWalletDetail(withWallet: self.viewModel.btcWallet.value![0], source: coinOption)
 
             } else {
-                self.chooseWalletActionSheet(wallets: self.viewModel.btcWallet.value!, source: .StableCoin)
+                self.chooseWalletActionSheet(wallets: self.viewModel.btcWallet.value!, source: coinOption)
             }
         }
         
         let actionETH = UIAlertAction.init(title: "ETH", style: .default) { _ in
             
-            if self.viewModel.btcWallet.value!.count == 1 {
-                self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: .StableCoin)
+            if self.viewModel.ethWallet.value!.count == 1 {
+                self.toWalletDetail(withWallet: self.viewModel.ethWallet.value![0], source: coinOption)
             }else {
-                self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!, source: .StableCoin)
+                self.chooseWalletActionSheet(wallets: self.viewModel.ethWallet.value!, source: coinOption)
             }
- 
         }
         let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
@@ -297,7 +296,6 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)
     }
-    
     
     @objc func importWallet() {
         let vc = xib(vc: ImportWalletTypeChooseViewController.self)
