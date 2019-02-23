@@ -60,14 +60,15 @@ class WalletOptionsViewModel:KLRxViewModel {
     private(set) var assetsForAirDrop: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
 
     func fetchWallets() {
+        let sortDescriptor = NSSortDescriptor.init(key: "isFromSystem", ascending: false)
         let predForBTC = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.btc.rawValue))
-        guard let btcWallet = DB.instance.get(type: Wallet.self, predicate: predForBTC, sorts: nil) else {
+        guard let btcWallet = DB.instance.get(type: Wallet.self, predicate: predForBTC, sorts: [sortDescriptor]) else {
             return
         }
         self.btcWallet.accept(btcWallet)
         
         let predForETH = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.eth.rawValue))
-        guard let ethWallet = DB.instance.get(type: Wallet.self, predicate: predForETH, sorts: nil) else {
+        guard let ethWallet = DB.instance.get(type: Wallet.self, predicate: predForETH, sorts: [sortDescriptor]) else {
             return
         }
         self.ethWallet.accept(ethWallet)

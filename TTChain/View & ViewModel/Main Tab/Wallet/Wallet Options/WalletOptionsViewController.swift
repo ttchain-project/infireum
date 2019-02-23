@@ -78,16 +78,19 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     private func bindViewModel() {
         
         self.viewModel.ethWallet.asObservable().subscribe(onNext: { wallets in
-            self.ethAddressLabel.text = wallets?.first?.address
-            self.stableCoinAddressLabel.text = wallets?.first?.address
-            self.listedCoinAddressLabel.text = wallets?.first?.address
-            self.ethTitleLabel.text = " " + (wallets?.first?.name ?? "ETH Wallet")
+            let sysWallet = wallets?.filter { $0.isFromSystem } .first
+            self.ethAddressLabel.text = sysWallet?.address
+            self.stableCoinAddressLabel.text = sysWallet?.address
+            self.listedCoinAddressLabel.text = sysWallet?.address
+            self.ethTitleLabel.text = " " + (sysWallet?.name ?? "ETH Wallet")
         }).disposed(by: bag)
         
         
         self.viewModel.btcWallet.asObservable().subscribe(onNext: { (wallets) in
-            self.btcAddressLabel.text = wallets?.first?.address
-            self.btcTitleLabel.text = " " + (wallets?.first?.name ?? "BTC Wallet")
+            let sysWallet = wallets?.filter { $0.isFromSystem } .first
+
+            self.btcAddressLabel.text = sysWallet?.address
+            self.btcTitleLabel.text = " " + (sysWallet?.name ?? "BTC Wallet")
 
         }).disposed(by: bag)
         
