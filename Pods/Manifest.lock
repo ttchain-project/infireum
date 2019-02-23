@@ -103,6 +103,7 @@ PODS:
     - CryptoSwift (~> 0.11)
   - secp256k1.swift (0.1.4)
   - SkyFloatingLabelTextField (3.5.2)
+  - Starscream (3.0.6)
   - SwifterSwift (4.4.0):
     - SwifterSwift/AppKit (= 4.4.0)
     - SwifterSwift/CoreGraphics (= 4.4.0)
@@ -151,6 +152,7 @@ DEPENDENCIES:
   - RxGesture
   - RxOptional
   - SkyFloatingLabelTextField
+  - Starscream (~> 3.0.2)
   - SwifterSwift
   - SwiftMoment
   - SwiftyJSON
@@ -196,6 +198,7 @@ SPEC REPOS:
     - scrypt
     - secp256k1.swift
     - SkyFloatingLabelTextField
+    - Starscream
     - SwifterSwift
     - SwiftMoment
     - SwiftyJSON
@@ -240,12 +243,13 @@ SPEC CHECKSUMS:
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SkyFloatingLabelTextField: f0672b67cd0e86abda946c0dc3b2fe8580767dbb
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
   SwiftMoment: dc6dd27012e267819104cbb03f74ff9192dd0b42
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Tabman: a09f7d7aa62b231ec475ca9eb9171f7cc973a3d7
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: 23e393185fd3dcefa851a2455c034cf2fe3c75f8
+PODFILE CHECKSUM: 9a56fb5ebe738f3bcb4c1d481456cde3ee6dd442
 
 COCOAPODS: 1.5.3

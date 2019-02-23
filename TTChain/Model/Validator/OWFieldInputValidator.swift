@@ -136,7 +136,7 @@ extension String {
         
         let mnemonicSet = Set.init(words())
         let mnemonicSuperSetForEnglish = Set.init(WordList.english.words)
-        let mnemonicSuperSetForChinese = Set.init(WordList.traditionalChinese.words)
+        let mnemonicSuperSetForChinese = Set.init(WordList.simplifiedChinese.words)
         if !mnemonicSet.isSubset(of: mnemonicSuperSetForEnglish), !mnemonicSet.isSubset(of: mnemonicSuperSetForChinese){
             return .incorrectFormat(desc: LM.dls.strValidate_error_mnemonic_invalidCharacter(""))
         }

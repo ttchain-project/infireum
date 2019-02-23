@@ -34,6 +34,7 @@ target 'TTChain' do
     pod 'EliteFramework'
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
+    pod 'Starscream', '~> 3.0.2'
 
   target 'TTChainTests' do
     inherit! :search_paths
@@ -75,6 +76,7 @@ target 'TTChain_SIT' do
     pod 'EliteFramework'
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
+    pod 'Starscream', '~> 3.0.2'
 
 end
 
@@ -111,6 +113,7 @@ target 'TTChain_UAT' do
     pod 'EliteFramework'
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
+    pod 'Starscream', '~> 3.0.2'
 
 end
 
