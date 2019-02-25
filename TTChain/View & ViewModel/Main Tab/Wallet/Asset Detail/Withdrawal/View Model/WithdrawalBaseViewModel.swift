@@ -113,8 +113,7 @@ class WithdrawalInfoValidator {
             feeInfo: (rate: info.feeRate,
                       amt: info.feeAmt,
                       coin: info.feeCoin,
-                      option: info.feeOption,totalHardCodedFee:info.totalFee)
-        )
+                      option: info.feeOption,totalHardCodedFee: info.feeCoin.identifier == Coin.btc_identifier ? info.totalFee : nil)        )
     }
     
     func validate(
