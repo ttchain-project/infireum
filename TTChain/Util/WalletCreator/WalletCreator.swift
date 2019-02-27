@@ -31,7 +31,7 @@ class WalletCreator {
             
             for i in 0...50 {
                 let firstPrivateKey = change.derived(at: .notHardened(UInt32(i)))
-                let matchedWallet = wallets.filter { $0.address == firstPrivateKey.publicKey.address }
+                let matchedWallet = wallets.filter { $0.address!.caseInsensitiveCompare(firstPrivateKey.publicKey.address) == .orderedSame}
                 if !matchedWallet.isEmpty {
                     continue
                 }

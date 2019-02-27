@@ -66,6 +66,9 @@ PODS:
     - HockeySDK/DefaultLib (= 5.1.2)
   - HockeySDK/DefaultLib (5.1.2)
   - IQKeyboardManagerSwift (6.2.0)
+  - JCore (1.2.5)
+  - JPush (3.1.1.1):
+    - JCore (~> 1.2.5)
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -143,6 +146,7 @@ DEPENDENCIES:
   - HDWalletKit
   - HockeySDK
   - IQKeyboardManagerSwift
+  - JPush (~> 3.1.1.1)
   - Moya/RxSwift
   - MZFormSheetPresentationController
   - NVActivityIndicatorView
@@ -182,6 +186,8 @@ SPEC REPOS:
     - HDWalletKit
     - HockeySDK
     - IQKeyboardManagerSwift
+    - JCore
+    - JPush
     - Moya
     - MZAppearance
     - MZFormSheetPresentationController
@@ -227,6 +233,8 @@ SPEC CHECKSUMS:
   HDWalletKit: 2b526d84a1c573af328d73157ac1b365d8e9813c
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
+  JCore: 14706de2640b25fb77dbd02332696491407f37c9
+  JPush: 25dd9013fbe106082c14f9f30a82364ee98852fb
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetPresentationController: fbfdbad31884f16fac17fbe3c44c168306cc1095
@@ -250,6 +258,6 @@ SPEC CHECKSUMS:
   Tabman: a09f7d7aa62b231ec475ca9eb9171f7cc973a3d7
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: 9a56fb5ebe738f3bcb4c1d481456cde3ee6dd442
+PODFILE CHECKSUM: e9e33cc8da498369af91fc7d54a21351a8ad58f4
 
 COCOAPODS: 1.5.3

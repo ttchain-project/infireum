@@ -18,8 +18,8 @@ class TransRecordListTableViewCell: UITableViewCell {
     @IBOutlet weak var amtLabel: UILabel!
 //    @IBOutlet weak var statusBtn: UIButton!
     @IBOutlet weak var sepline: UIView!
-//    @IBOutlet weak var commentsLabel: UILabel!
-    
+
+    @IBOutlet weak var commentsLabel: UILabel!
     //Will send the blockexplorer url.
     var onTapStatusBtn: ((URL) -> Void)?
     private var explorerURL: URL?
@@ -53,7 +53,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         
         addrLabel.set(textColor: palette.label_sub, font: .owRegular(size: 18))
         dateLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
-//        commentsLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 12))
+        commentsLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
         amtLabel.textColor = transRecord.getRecordColor(ofAddress: transRecord.fromAddress!)
         
 //        let statusDesc: String
@@ -99,14 +99,18 @@ class TransRecordListTableViewCell: UITableViewCell {
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
                 self.amtLabel.textColor = UIColor.owWaterBlue
-                transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
+                if case .btc = chainType {
+                    transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
+                }
             }
         }
         
         dateLabel.text = DateFormatter.dateString(from:
             transRecord.date! as Date, withFormat: "MM/dd/yyyy HH:mm:ss"
         )
-        
+
+        commentsLabel.text = transRecord.remarkComment
+
         var amtStr: String
         if let amt = (transAmount as Decimal?) {
             let maxDigit: Int
@@ -122,20 +126,18 @@ class TransRecordListTableViewCell: UITableViewCell {
             }
             
             amtStr = amt.asString(digits: maxDigit).disguiseIfNeeded()
-    
-            if amt > 0 {
-                switch transRecord.inoutRoleOfAddress(address) {
-                case .none: break
-                case .some(let type):
-                    switch type {
-                    case .deposit:
-                        amtStr = "↓" + amtStr
-                    case .withdrawal:
-                        amtStr = "↑" + amtStr
-                    }
+            
+            switch transRecord.inoutRoleOfAddress(address) {
+            case .none: break
+            case .some(let type):
+                switch type {
+                case .deposit:
+                    amtStr = "↓" + amtStr
+                case .withdrawal:
+                    amtStr = "↑" + amtStr
                 }
-                
             }
+            
         }else {
             amtStr = "--"
         }

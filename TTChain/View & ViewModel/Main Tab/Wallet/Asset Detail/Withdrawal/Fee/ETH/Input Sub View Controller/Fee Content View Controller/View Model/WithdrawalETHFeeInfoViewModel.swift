@@ -128,7 +128,7 @@ class WithdrawalETHFeeInfoViewModel: KLRxViewModel, WithdrawalETFFeeInfoBase {
     
     //MARK: - Private
     private lazy var _mode: BehaviorRelay<InputOption> = {
-        return BehaviorRelay.init(value: .system)
+        return BehaviorRelay.init(value: .manual)
     }()
     
     private lazy var _gasPrice: BehaviorRelay<Decimal?> = {

@@ -35,7 +35,8 @@ target 'TTChain' do
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
     pod 'Starscream', '~> 3.0.2'
-
+    pod 'JPush', '~> 3.1.1.1'
+    
   target 'TTChainTests' do
     inherit! :search_paths
     # Pods for testing
@@ -77,7 +78,8 @@ target 'TTChain_SIT' do
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
     pod 'Starscream', '~> 3.0.2'
-
+    pod 'JPush', '~> 3.1.1.1'
+    
 end
 
 target 'TTChain_UAT' do
@@ -114,7 +116,8 @@ target 'TTChain_UAT' do
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
     pod 'Starscream', '~> 3.0.2'
-
+    pod 'JPush', '~> 3.1.1.1'
+    
 end
 
 post_install do |installer|

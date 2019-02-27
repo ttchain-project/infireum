@@ -139,7 +139,8 @@ extension NumberFormatter {
         ns.numberStyle = .decimal
         ns.groupingSeparator = sep
         
-        return ns.string(from: NSNumber.init(value: fromDecimal.doubleValue))
+        return ns.string(from: NSDecimalNumber.init(decimal: fromDecimal))
+        
     }
     
     

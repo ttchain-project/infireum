@@ -109,7 +109,7 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
                                        additionalSpacing: 8,
                                        state: .normal)
         
-        self.createRightBarButton(target: self, selector: #selector(saveSetting), title: "Save", toColor: palette.label_main_2, shouldClear: true)
+        self.createRightBarButton(target: self, selector: #selector(saveSetting), title: LM.dls.ab_update_btn_save, toColor: palette.label_main_2, shouldClear: true)
     }
     
     override func renderLang(_ lang: Lang) {

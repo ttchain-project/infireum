@@ -471,7 +471,7 @@ struct DLS_EN_US: DLS {
     var media =  "Media"
     var blockchain_explorer = "BlockChain Explorer"
 
-    var select_from_camera = "Select From Camera"
+    var select_from_camera = "Camera"
     var select_from_gallery = "Select From Gallery"
     
     var create_group = "Create Group"
@@ -563,4 +563,8 @@ struct DLS_EN_US: DLS {
     
     var members_invitation_successfull = "Members invited successfully"
     var transfer_all_amount = "Transfer all coins(exclude miner fee)"
+    var invalid_mnemonic_phrase = "Invalid mnemonic phrase"
+    
+    var image_saved_success = "Image saved to album"
+
 }

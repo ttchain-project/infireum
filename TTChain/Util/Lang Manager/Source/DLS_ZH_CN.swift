@@ -535,14 +535,14 @@ struct DLS_ZH_CN: DLS {
     var trans_success = "转帐成功"
     var trans_failed = "转帐失败"
 
-    var group_qr_code = "集团二维码"
+    var group_qr_code = "群组二维码"
 
     var account = "帐号"
     var assetDetail_receive = "接收"
     var join_group = "加入群组"
     var alert_cant_join_pvt_group = "无法加入此群组，因为这是一个私人群组"
 
-    var group_join_success = "集团成功加入"
+    var group_join_success = "群组成功加入"
 
     var group_name = "群组名称"
     var group_type = "群组类型"
@@ -560,4 +560,7 @@ struct DLS_ZH_CN: DLS {
     func group_text_too_long(_ args: String...) -> String { return String.init(format: "字数过长 (%@)/%@", arguments: args) }
         var members_invitation_successfull = "成员邀请成功"
     var transfer_all_amount = "轉出所有金額(扣除礦工費)"
+    var invalid_mnemonic_phrase = "助记词不正确"
+    var image_saved_success = "图像保存到相册"
+
 }

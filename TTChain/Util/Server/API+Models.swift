@@ -113,7 +113,8 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     var method: Moya.Method { return .get }
     
     var task: Task {
-        switch asset.coin!.owChainType {
+        guard let coin = asset.coin else  { return Moya.Task.requestPlain }
+        switch coin.owChainType {
         case .cic, .btc:
             
             if asset.coinID == Coin.usdt_identifier {

@@ -85,7 +85,10 @@ extension CoinSelection {
     static func getAllSelections(of wallet: Wallet, filterIsSelected: Bool) -> [CoinSelection] {
         let pred = CoinSelection.genPredicate(fromIdentifierType: .str(keyPath: #keyPath(walletEPKey), value: wallet.encryptedPKey!))
         guard let sels = DB.instance.get(type: CoinSelection.self, predicate: pred, sorts: nil)?.filter({ (sel) -> Bool in
-            return sel.wallet!.walletMainCoinID == wallet.walletMainCoinID
+            guard let selWallet = sel.wallet else {
+                return false
+            }
+            return selWallet.walletMainCoinID == wallet.walletMainCoinID
         }) else {
             return errorDebug(response: [])
         }

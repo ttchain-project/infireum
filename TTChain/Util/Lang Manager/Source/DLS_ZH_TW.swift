@@ -541,13 +541,13 @@ struct DLS_ZH_TW: DLS {
     var trans_success = "轉帳成功"
     var trans_failed = "轉帳失敗"
     
-    var group_qr_code = "集團二維碼"
+    var group_qr_code = "群組二維碼"
     var account = "帳號"
     
     var assetDetail_receive = "接收"
     var join_group = "加入群組"
     var alert_cant_join_pvt_group = "無法加入此群組，因為這是一個私人群組"
-    var group_join_success = "集團成功加入"
+    var group_join_success = "群組成功加入"
     
     var group_name = "群組名稱"
     var group_type = "群組類型"
@@ -569,6 +569,10 @@ struct DLS_ZH_TW: DLS {
     var members_invitation_successfull = "成員邀請成功"
     
     var transfer_all_amount = "轉出所有金額(扣除礦工費)"
+
+    var invalid_mnemonic_phrase = "助記詞不正確"
+    
+    var image_saved_success = "圖像保存到相冊"
 }
 
 

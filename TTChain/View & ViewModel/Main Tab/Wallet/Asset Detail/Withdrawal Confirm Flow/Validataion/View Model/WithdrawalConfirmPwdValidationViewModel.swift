@@ -203,6 +203,32 @@ extension WithdrawalConfirmPwdValidationViewModel {
                     observer.onNext(.broadcasting)
                     return self.broadcastBTC(with: model.signText, withComments: withdrawalInfo.note ?? "")
                 }
+            }.flatMap {
+                [unowned self] result -> RxAPIResponse<(String?)> in
+                switch result {
+                case .failed(error: let err):
+                    observer.onNext(
+                        .finished(.failed(error: err))
+                    )
+                    
+                    return RxAPIResponse.just(.failed(error: err))
+                case .success(let model):
+                    observer.onNext(.broadcasting)
+                    
+                    guard let note = info.note, note.count > 0 else {
+                        return .just(.success(model.txid))
+                    }
+                    
+                    let response = self.postCommentForTransaction(for: model.txid, comment: info.note)
+                    return response.map {
+                        _result -> APIResult<(String?)>  in
+                        switch _result {
+                        //Even If the comment fails, the transaction should complete
+                        case .failed(_): return .success((model.txid))
+                        case .success(_): return .success((model.txid))
+                        }
+                    }
+                }
             }
             .subscribe(onSuccess: { (result) in
                 switch result {
@@ -220,8 +246,8 @@ extension WithdrawalConfirmPwdValidationViewModel {
                         observer.onNext(.finished(.failed(error: err)))
                     }
                     
-                case .success(let model):
-                    guard let record = self.saveTxToLocal(with: model.txid, info: withdrawalInfo) else {
+                case .success(let txId):
+                    guard let transID = txId, let record = self.saveTxToLocal(with: transID, info: info) else {
                         let err: GTServerAPIError = .incorrectResult(
                             LM.dls.withdrawalConfirm_pwdVerify_error_tx_save_fail, ""
                         )
@@ -275,6 +301,9 @@ extension WithdrawalConfirmPwdValidationViewModel {
             .broadcastBTCTx(withSignText: signText, withComments: comments)
     }
 
+    private func postCommentForTransaction(for transactionId: String, comment : String?) -> RxAPIResponse<PostCustomCommentsAPIModel> {
+        return Server.instance.postCommentsForTransaction(for: transactionId, comment: comment)
+    }
 }
 
 // MARK: - ETH Transfer Flow
@@ -309,12 +338,39 @@ extension WithdrawalConfirmPwdValidationViewModel {
                     return self.broadcastETHTx(with: model.signText,  andComments: info.note ?? "")
                 }
             }
+            .flatMap {
+                [unowned self] result -> RxAPIResponse<(String?)> in
+                switch result {
+                case .failed(error: let err):
+                    observer.onNext(
+                        .finished(.failed(error: err))
+                    )
+                    
+                    return RxAPIResponse.just(.failed(error: err))
+                case .success(let model):
+                    observer.onNext(.broadcasting)
+                    
+                    guard let note = info.note, note.count > 0 else {
+                        return .just(.success(model.txid))
+                    }
+                    
+                    let response = self.postCommentForTransaction(for: model.txid, comment: info.note)
+                    return response.map {
+                        _result -> APIResult<(String?)>  in
+                        switch _result {
+                        //Even If the comment fails, the transaction should complete
+                        case .failed(_): return .success((model.txid))
+                        case .success(_): return .success((model.txid))
+                        }
+                    }
+                }
+            }
             .subscribe(onSuccess: { (result) in
                 switch result {
                 case .failed(error: let err):
                     observer.onNext(.finished(.failed(error: err)))
-                case .success(let model):
-                    guard let record = self.saveTxToLocal(with: model.txid, info: info) else {
+                case .success(let txID):
+                     guard let transID = txID, let record = self.saveTxToLocal(with: transID, info: info) else {
                         let err: GTServerAPIError = .incorrectResult(
                             LM.dls.withdrawalConfirm_pwdVerify_error_tx_save_fail, ""
                         )

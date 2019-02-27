@@ -1841,6 +1841,7 @@
 		55787FD521F9683800A4F7D6 /* UIImageView+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+GIF.swift"; sourceTree = "<group>"; };
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
 		557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestTabModel.swift; sourceTree = "<group>"; };
+		559C4F1222262D0D009466A8 /* TTChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TTChain-Bridging-Header.h"; sourceTree = "<group>"; };
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
 		55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewController.swift; sourceTree = "<group>"; };
 		55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptRequestViewController.xib; sourceTree = "<group>"; };
@@ -4825,6 +4826,7 @@
 				640D88F720EF206A0010D986 /* TransInoutType.swift */,
 				6470D62C20F1131100EB0780 /* FeeRateManager.swift */,
 				64C614A92109BA50005B7394 /* String+PrivateMode.swift */,
+				559C4F1222262D0D009466A8 /* TTChain-Bridging-Header.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8065,6 +8067,7 @@
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain";
 				STRIP_SWIFT_SYMBOLS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -8090,6 +8093,7 @@
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain";
 				STRIP_SWIFT_SYMBOLS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -8159,6 +8163,7 @@
 				PROVISIONING_PROFILE = "18ff6044-f137-45a0-a43d-e6224e26db4b";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.OfflineWallet-SIT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -8185,6 +8190,7 @@
 				PROVISIONING_PROFILE = "27af3bdf-7fa1-4abd-b8ba-ba8752d2f22d";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.OfflineWallet-SIT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -8211,6 +8217,7 @@
 				PROVISIONING_PROFILE = "ea62f369-2c3e-4536-9abc-5bd2822faf77";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -8237,6 +8244,7 @@
 				PROVISIONING_PROFILE = "eaaef35c-9348-4f80-938b-dbb8be522513";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -65,6 +65,10 @@ extension CoinToFiatRate {
     ///   - fiat:
     /// - Returns:
     static func getRateFromServerIfPossible(coin: Coin, fiat: Fiat) -> Single<Decimal?> {
+    
+        if coin.identifier == Coin.usdt_identifier {
+            return CoinToFiatRate.getUSDTRate(for: fiat)
+        }
         
         let usdRate = Server.instance.getCoinToUSDRate(of: coin)
         guard let usd = Fiat.usd else {
@@ -97,5 +101,32 @@ extension CoinToFiatRate {
             }
         }
         .map { $0 == nil ? nil : $0! as Decimal }
+    }
+    
+    static func getUSDTRate(for fiat: Fiat) -> Single<Decimal?> {
+        let request = Server.instance.getQuotesTest()
+        var currentValue: CoinMarketModel
+        guard let usd = Fiat.usd else {
+            return errorDebug(response: Single.just(nil))
+        }
+        let usdToFiatRate = FiatToFiatRate.get(fromFiat: usd, toFiat: fiat)?.rate
+        
+        if MarketTestHandler.shared.coinMarketArray.value.count > 0 {
+             currentValue = MarketTestHandler.shared.coinMarketArray.value[0].items.filter { $0.title == "Tether" }.first as! CoinMarketModel
+            return Single.create(subscribe: { (response) -> Disposable in
+                let value = NSDecimalNumber.init(string: currentValue.price)
+                let total = usdToFiatRate?.multiplying(by: value)
+                response(.success(total! as Decimal))
+                return Disposables.create()
+            })
+        } else {
+            return request.map {
+                result -> NSDecimalNumber? in
+                let currentValue = MarketTestHandler.shared.coinMarketArray.value[0].items.filter { $0.title == "Tether" }.first as! CoinMarketModel
+                    let value = NSDecimalNumber.init(string: currentValue.price)
+                    return usdToFiatRate?.multiplying(by: value)
+                
+            }.map { $0 == nil ? nil : $0! as Decimal }
+        }
     }
 }

@@ -27,7 +27,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="365" height="297"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rkf-CJ-6AS">
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rkf-CJ-6AS">
                     <rect key="frame" x="296" y="317" width="51" height="31"/>
                     <color key="onTintColor" red="0.63921568630000003" green="0.86274509799999999" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </switch>

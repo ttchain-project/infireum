@@ -75,6 +75,10 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.refreshAllData()
+    }
     private func bindViewModel() {
         
         self.viewModel.ethWallet.asObservable().subscribe(onNext: { wallets in
@@ -189,7 +193,6 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
         
        self.monitorLocalWalletsUpdate()
-
     }
 
     func updateValue(for fiat:Fiat?, total:Decimal?) -> String{

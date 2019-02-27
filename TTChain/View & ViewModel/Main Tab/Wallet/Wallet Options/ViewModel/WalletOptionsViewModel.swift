@@ -58,7 +58,9 @@ class WalletOptionsViewModel:KLRxViewModel {
     private(set) var assetsForStableCoins: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
     private(set) var assetsForETH: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
     private(set) var assetsForAirDrop: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
-
+    private var totalBTCAssets =  [Asset]()
+    private var totalETHAssets = [Asset]()
+    
     func fetchWallets() {
         let sortDescriptor = NSSortDescriptor.init(key: "isFromSystem", ascending: false)
         let predForBTC = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.btc.rawValue))
@@ -75,15 +77,26 @@ class WalletOptionsViewModel:KLRxViewModel {
         
        
         
-        let _assetsForBTC = Asset.getBTCAssets(forBTCWallet: self.btcWallet.value![0])
-        let _assetsForETH = Asset.getETHAssets(forETHWallet: self.ethWallet.value![0])
-        var _assetsStableCoins = Asset.getStableETHAssets(forETHWallet:  self.ethWallet.value![0])
-        _assetsStableCoins.append(contentsOf: Asset.getStableBTCAssets(forBTCWallet: self.btcWallet.value![0]))
-        let _assetsForAirDrop:[Asset] = []
+        var _assetsForBTC = [Asset]()
+        var stableAssetsForBTC = [Asset]()
+
+        for wallet in self.btcWallet.value! {
+            _assetsForBTC.append(contentsOf: Asset.getBTCAssets(forBTCWallet:wallet))
+            stableAssetsForBTC.append(contentsOf: Asset.getStableBTCAssets(forBTCWallet:wallet))
+        }
         
-        self.assetsForETH = BehaviorRelay.init(value: _assetsForETH)
-        self.assetsForBTC = BehaviorRelay.init(value: _assetsForBTC)
-        self.assetsForStableCoins = BehaviorRelay.init(value: _assetsStableCoins)
+        var _assetsForETH = [Asset]()
+        var stableAssetsForETH = [Asset]()
+        for wallet in self.ethWallet.value! {
+            _assetsForETH.append(contentsOf: Asset.getETHAssets(forETHWallet:wallet))
+            stableAssetsForETH.append(contentsOf: Asset.getStableETHAssets(forETHWallet:wallet))
+        }
+        let _assetsForAirDrop:[Asset] = []
+        let _assetsForStableCoins:[Asset] = stableAssetsForETH + stableAssetsForBTC
+        
+        self.assetsForETH = BehaviorRelay.init(value: _assetsForETH + stableAssetsForETH)
+        self.assetsForBTC = BehaviorRelay.init(value: _assetsForBTC + stableAssetsForBTC)
+        self.assetsForStableCoins = BehaviorRelay.init(value: _assetsForStableCoins)
         self.assetsForAirDrop = BehaviorRelay.init(value: _assetsForAirDrop)
         self.refreshAllData()
     }

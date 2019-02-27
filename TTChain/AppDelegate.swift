@@ -12,6 +12,7 @@ import RxSwift
 import IQKeyboardManagerSwift
 import RxCocoa
 import Flurry_iOS_SDK
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         startKeyboardManaging()
         initalizeHockey()
         initializeFlurry()
+        
+        JPUSHService.register(forRemoteNotificationTypes: UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.alert.rawValue , categories: nil)
+        #if DEBUG
+        JPUSHService.setup(withOption: launchOptions, appKey: "b25aec8e6c980b346417bab6", channel: "DEV", apsForProduction: false)
+        #else
+        JPUSHService.setup(withOption: launchOptions, appKey: "b25aec8e6c980b346417bab6", channel: "Hockey", apsForProduction: true)
+        #endif
+        
         
         //This is for fixing bugs in the previous version, it's fine to comment out if this func cause any undesired side effects.
         inactiveGUCinETH()
