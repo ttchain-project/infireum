@@ -56,6 +56,7 @@ enum IMAPI :KLMoyaAPISet {
         case .uploadFile(let api): return api
         case .sendMessage(let api): return api
         case .blockUser(let api): return api
+        case .registerJiGuangPush(let api): return api
 
         }
     }
@@ -84,6 +85,8 @@ enum IMAPI :KLMoyaAPISet {
     case sendMessage(IMSendMessageAPI)
     case blockUser(BlockUserAPI)
     case getDestructMessageSetting(GetSelfDestructingStatusAPI)
+    case registerJiGuangPush(JiGuangPushSettingAPI)
+
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -1074,6 +1077,33 @@ struct BlockUserAPIModel: KLJSONMappableMoyaResponse {
     let isSuccess: Bool
     
     init(json: JSON, sourceAPI: BlockUserAPI) throws {
+        guard let response = json.bool else { throw GTServerAPIError.noData }
+        self.isSuccess = response
+    }
+}
+
+
+// MARK: - PUT /IM/member/JiguangPushSetting
+
+struct JiGuangPushSettingAPI : KLMoyaIMAPIData {
+    let registrationId: String
+    var stub: Data? { return nil}
+    var path: String { return "/IM/member/JiguangPushSetting" }
+    var method: Moya.Method { return .put }
+    var task: Task {
+        return Moya.Task.requestParameters(
+            parameters: ["uid": IMUserManager.manager.userModel.value?.uID ?? "", "deviceType": 1, "registrationId": registrationId],
+            encoding: URLEncoding.default
+        )
+    }
+}
+
+struct JiGuangPushSettingAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = JiGuangPushSettingAPI
+    
+    let isSuccess: Bool
+    
+    init(json: JSON, sourceAPI: JiGuangPushSettingAPI) throws {
         guard let response = json.bool else { throw GTServerAPIError.noData }
         self.isSuccess = response
     }

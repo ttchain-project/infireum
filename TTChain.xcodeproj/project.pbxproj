@@ -166,6 +166,9 @@
 		557D4E5C21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */; };
 		557D4E5D21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */; };
 		557D4E5E21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */; };
+		559C4F16222665A2009466A8 /* TTNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559C4F15222665A2009466A8 /* TTNotificationHandler.swift */; };
+		559C4F17222665A2009466A8 /* TTNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559C4F15222665A2009466A8 /* TTNotificationHandler.swift */; };
+		559C4F18222665A2009466A8 /* TTNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559C4F15222665A2009466A8 /* TTNotificationHandler.swift */; };
 		559CB0E2218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E3218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E4218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
@@ -1842,6 +1845,8 @@
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
 		557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestTabModel.swift; sourceTree = "<group>"; };
 		559C4F1222262D0D009466A8 /* TTChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TTChain-Bridging-Header.h"; sourceTree = "<group>"; };
+		559C4F13222652C2009466A8 /* 甜甜圈 UAT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "甜甜圈 UAT.entitlements"; sourceTree = "<group>"; };
+		559C4F15222665A2009466A8 /* TTNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTNotificationHandler.swift; sourceTree = "<group>"; };
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
 		55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewController.swift; sourceTree = "<group>"; };
 		55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptRequestViewController.xib; sourceTree = "<group>"; };
@@ -2664,6 +2669,14 @@
 				550873DB21E45809007B3B3B /* MarketTestSectionModel.swift */,
 			);
 			path = SettingTabHandler;
+			sourceTree = "<group>";
+		};
+		559C4F142226658D009466A8 /* NotificationHandler */ = {
+			isa = PBXGroup;
+			children = (
+				559C4F15222665A2009466A8 /* TTNotificationHandler.swift */,
+			);
+			path = NotificationHandler;
 			sourceTree = "<group>";
 		};
 		559CB0E0218FF8B100D7654E /* ViewModel */ = {
@@ -5254,6 +5267,7 @@
 		64F07CDB20D0E4CA00A60C5C = {
 			isa = PBXGroup;
 			children = (
+				559C4F13222652C2009466A8 /* 甜甜圈 UAT.entitlements */,
 				64F07CE620D0E4CB00A60C5C /* TTChain */,
 				64F07CE520D0E4CB00A60C5C /* Products */,
 				543D37C7E3A96EC380CB72E0 /* Pods */,
@@ -5311,6 +5325,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				559C4F142226658D009466A8 /* NotificationHandler */,
 				55B5C01F22151F04007250FA /* WalletCreator */,
 				55B5C0192212D35E007250FA /* ImageScrollView */,
 				5526B53E22128E5400573576 /* PhotoAuth */,
@@ -5670,6 +5685,13 @@
 					64F07CFA20D0E4CE00A60C5C = {
 						CreatedOnToolsVersion = 9.4;
 						TestTargetID = 64F07CE320D0E4CB00A60C5C;
+					};
+					64F07D1D20D0E8FA00A60C5C = {
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -6967,6 +6989,7 @@
 				55EF6B8121A81D43007E074A /* Any+RxLangRespondable.swift in Sources */,
 				55EF6B8421A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4421A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
+				559C4F18222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				64F07E7420D36AFE00A60C5C /* IdentitySetupViewController.swift in Sources */,
 				649732CF213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,
 				6470D61620F0E01B00EB0780 /* WithdrawalAddressViewModel.swift in Sources */,
@@ -7420,6 +7443,7 @@
 				55EF6B7F21A81D43007E074A /* Any+RxLangRespondable.swift in Sources */,
 				55EF6B8221A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4221A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
+				559C4F16222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				64B98EE020FA03BE00C4EB11 /* LightningTransRecordTableViewCell.swift in Sources */,
 				64D8267C20E339C200C8FC63 /* OfflineWallet.xcdatamodeld in Sources */,
 				64A1178B20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
@@ -7866,6 +7890,7 @@
 				55EF6B8021A81D43007E074A /* Any+RxLangRespondable.swift in Sources */,
 				55EF6B8321A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4321A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
+				559C4F17222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				64813A6B20DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataProperties.swift in Sources */,
 				640D88C020EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				649732CE213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,
@@ -8201,6 +8226,7 @@
 			baseConfigurationReference = 2D016C577E961DD6B360E8EE /* Pods-TTChain_UAT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
+				CODE_SIGN_ENTITLEMENTS = "甜甜圈 UAT.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
@@ -8228,6 +8254,7 @@
 			baseConfigurationReference = 54C0071BFAC32BE4862C30B4 /* Pods-TTChain_UAT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
+				CODE_SIGN_ENTITLEMENTS = "甜甜圈 UAT.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = BKBWK8HFB8;

@@ -124,8 +124,11 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
                 )
                 
             }
+            guard let wallet = asset.wallet, let mainCoin = wallet.mainCoin, let chainName = mainCoin.chainName else {
+                return Moya.Task.requestPlain
+            }
             return Moya.Task.requestParameters(
-                parameters: [ "token" : asset.wallet!.mainCoin!.chainName!.uppercased() ],
+                parameters: [ "token" : chainName.uppercased() ],
                 encoding: URLEncoding.default
             )
         case .eth:

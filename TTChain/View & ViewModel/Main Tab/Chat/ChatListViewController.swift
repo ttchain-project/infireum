@@ -329,6 +329,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         //            qrCodeVCNav = qrCode
         self.present(qrCode, animated: true, completion: nil)
     }
+    
+    
 }
 
 extension ChatListViewController: UIPopoverPresentationControllerDelegate {

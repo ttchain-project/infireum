@@ -42,14 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initalizeHockey()
         initializeFlurry()
         
-        JPUSHService.register(forRemoteNotificationTypes: UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.alert.rawValue , categories: nil)
-        #if DEBUG
-        JPUSHService.setup(withOption: launchOptions, appKey: "b25aec8e6c980b346417bab6", channel: "DEV", apsForProduction: false)
-        #else
-        JPUSHService.setup(withOption: launchOptions, appKey: "b25aec8e6c980b346417bab6", channel: "Hockey", apsForProduction: true)
-        #endif
-        
-        
+        self.setupNotification(for: launchOptions)
         //This is for fixing bugs in the previous version, it's fine to comment out if this func cause any undesired side effects.
         inactiveGUCinETH()
 
@@ -241,6 +234,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -368,3 +362,32 @@ extension AppDelegate {
 }
 
 
+extension AppDelegate {
+    
+    func setupNotification (for launchOptions:[UIApplicationLaunchOptionsKey: Any]?) {
+        
+        JPUSHService.register(forRemoteNotificationTypes: UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.alert.rawValue , categories: nil)
+        #if DEBUG
+        JPUSHService.setup(withOption: launchOptions, appKey: "E92a2d90fdbfa5208c433166", channel: "DEV", apsForProduction: false)
+        #else
+        JPUSHService.setup(withOption: launchOptions, appKey: "E92a2d90fdbfa5208c433166", channel: "Hockey", apsForProduction: true)
+        #endif
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+    }
+        
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        JPUSHService.registerDeviceToken(deviceToken)
+        DLogDebug("didRegisterForRemoteNotificationsWithDeviceToken")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        DLogError("didFailToRegisterForRemoteNotificationsWithError \(error)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        DLogDebug("Notification received \(userInfo)")
+        OWRxNotificationCenter.instance.notifyNotificationReceived()
+    }
+}

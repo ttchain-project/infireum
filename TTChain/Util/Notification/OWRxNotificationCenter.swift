@@ -52,7 +52,6 @@ class OWRxNotificationCenter {
         _walletDeleted.accept(wallet)
     }
     
-    
     //MARK: - Identity Clear
     private let _identityCleared: PublishRelay<Void> = PublishRelay.init()
     public var identityCleared: Observable<Void> {
@@ -210,6 +209,15 @@ class OWRxNotificationCenter {
     
     public func didFinishLaunchSync() {
         _onFinishLaunchSync.accept(())
+    }
+    
+    //MARK: - Push Notification Received
+    private let _notificationReceived: PublishRelay<Void> = PublishRelay.init()
+    public var notificationReceived: Observable<Void> {
+        return _notificationReceived.asObservable()
+    }
+    public func notifyNotificationReceived() {
+        _notificationReceived.accept(())
     }
     
 //    //MARK: - OnMessage Forward

@@ -207,9 +207,9 @@ extension WithdrawalConfirmPwdValidationViewModel {
                 [unowned self] result -> RxAPIResponse<(String?)> in
                 switch result {
                 case .failed(error: let err):
-                    observer.onNext(
-                        .finished(.failed(error: err))
-                    )
+//                    observer.onNext(
+//                        .finished(.failed(error: err))
+//                    )
                     
                     return RxAPIResponse.just(.failed(error: err))
                 case .success(let model):

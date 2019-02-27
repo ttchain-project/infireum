@@ -672,6 +672,11 @@
         return fire(router: .IM(.sendMessage(api)))
 
     }
+    
+    func registerJiGuangPush(registrationId: String) -> RxAPIResponse<JiGuangPushSettingAPIModel> {
+        let api = JiGuangPushSettingAPI(registrationId: registrationId)
+        return fire(router: .IM(.registerJiGuangPush(api)))
+    }
  }
  
  //MARK: - RocketChat -

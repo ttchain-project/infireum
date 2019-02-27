@@ -29,6 +29,7 @@ class ChatListViewModel: KLRxViewModel {
         self.input = input
         self.output = output
         self.concatInput()
+        self.listenToPushNotificationUpdate()
     }
     
     struct Input {
@@ -219,5 +220,10 @@ class ChatListViewModel: KLRxViewModel {
         }.disposed(by: bag)
     }
     
+    func listenToPushNotificationUpdate() {
+        OWRxNotificationCenter.instance.notificationReceived.subscribe(onNext: {[weak self] (_) in
+            self?.getList()
+        }).disposed(by: bag)
+    }
 }
 

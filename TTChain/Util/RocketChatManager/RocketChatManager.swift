@@ -46,6 +46,8 @@ class RocketChatManager {
                 print(model.rocketChatUserId + " auth " + model.authToken + " username " + model.username)
                 line()
                 self.rocketChatUser.accept(rocketChatModel)
+                
+                TTNotificationHandler.registerIMUserForNotification()
             }
         }).disposed(by: bag)
     }

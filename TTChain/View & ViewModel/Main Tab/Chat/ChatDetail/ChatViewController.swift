@@ -493,6 +493,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             return
         }
     }
+    
+   
 }
 
 extension UITableView {

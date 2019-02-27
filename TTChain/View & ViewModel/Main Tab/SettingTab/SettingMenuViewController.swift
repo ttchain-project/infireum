@@ -375,7 +375,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         clearHUD.startAnimating(inView: self.view)
         identity.clear()
         IMUserManager.manager.clearIMUser()
-
+        TTNotificationHandler.deregisterIMUserFromNotification()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             [unowned self] in
             self.clearHUD.updateType(KLHUD.HUDType.img(#imageLiteral(resourceName: "iconSpinnerAlertOk")),
