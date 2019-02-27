@@ -269,8 +269,8 @@ class GroupInformationViewController: UIViewController {
             }
             if self.viewModel.input.userGroupInfoModelSubject.value.groupOwnerUID == IMUserManager.manager.userModel.value?.uID {
                 self.navigationItem.rightBarButtonItem = type == .edit ? self.cancelEditGroupBarButtonItem : self.deleteGroupBarButtonItem
-            } else {
-                self.navigationItem.rightBarButtonItem = self.inviteUsersBarButton
+            } else if type == .normal {
+                 self.navigationItem.rightBarButtonItem = self.inviteUsersBarButton
             }
         }).disposed(by: disposeBag)
         
