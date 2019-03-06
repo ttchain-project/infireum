@@ -562,5 +562,5 @@ struct DLS_ZH_CN: DLS {
     var transfer_all_amount = "轉出所有金額(扣除礦工費)"
     var invalid_mnemonic_phrase = "助记词不正确"
     var image_saved_success = "图像保存到相册"
-
+    var exists = "已存在"
 }

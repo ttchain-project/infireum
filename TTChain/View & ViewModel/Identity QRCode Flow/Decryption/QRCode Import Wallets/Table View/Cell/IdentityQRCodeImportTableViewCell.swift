@@ -23,7 +23,7 @@ class IdentityQRCodeImportTableViewCell: UITableViewCell {
         nameLabel.set(textColor: palette.label_main_1,
                       font: .owRegular(size: 14))
         
-        isExistLabel.text = "已存在"
+        isExistLabel.text = dls.exists
         isExistLabel.set(textColor: palette.specific(color: .owPinkRed),
                          font: .owRegular(size: 14))
         

@@ -42,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initalizeHockey()
         initializeFlurry()
         
-        self.setupNotification(for: launchOptions)
         //This is for fixing bugs in the previous version, it's fine to comment out if this func cause any undesired side effects.
         inactiveGUCinETH()
 
@@ -114,6 +113,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DB.instance.debugWholeDatabaseCount()
         #endif
         
+        self.setupNotification(for: launchOptions)
+
         return true
     }
     
@@ -368,9 +369,9 @@ extension AppDelegate {
         
         JPUSHService.register(forRemoteNotificationTypes: UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.alert.rawValue , categories: nil)
         #if DEBUG
-        JPUSHService.setup(withOption: launchOptions, appKey: "E92a2d90fdbfa5208c433166", channel: "DEV", apsForProduction: false)
+        JPUSHService.setup(withOption: launchOptions, appKey: "b4526b7273b4bfc188148713", channel: "DEV", apsForProduction: false)
         #else
-        JPUSHService.setup(withOption: launchOptions, appKey: "E92a2d90fdbfa5208c433166", channel: "Hockey", apsForProduction: true)
+        JPUSHService.setup(withOption: launchOptions, appKey: "b4526b7273b4bfc188148713", channel: "Hockey", apsForProduction: true)
         #endif
         
         UIApplication.shared.applicationIconBadgeNumber = 0

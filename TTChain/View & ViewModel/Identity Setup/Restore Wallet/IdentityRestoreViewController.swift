@@ -104,7 +104,6 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
                 onUpdateEmptyFieldsStatus: {
                     [weak self] isValid in
                     guard let wSelf = self else { return }
-                    let palette = ThemeManager.instance.theme.value.palette
                     wSelf.importBtn.isEnabled = isValid
                 }
             )

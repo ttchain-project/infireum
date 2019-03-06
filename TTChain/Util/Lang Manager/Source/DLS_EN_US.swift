@@ -566,5 +566,5 @@ struct DLS_EN_US: DLS {
     var invalid_mnemonic_phrase = "Invalid mnemonic phrase"
     
     var image_saved_success = "Image saved to album"
-
+    var exists = "Existing"
 }

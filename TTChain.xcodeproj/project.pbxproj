@@ -157,9 +157,6 @@
 		55787FD221F9613100A4F7D6 /* tt_splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55787FD121F9612F00A4F7D6 /* tt_splash.gif */; };
 		55787FD321F9613100A4F7D6 /* tt_splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55787FD121F9612F00A4F7D6 /* tt_splash.gif */; };
 		55787FD421F9613100A4F7D6 /* tt_splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55787FD121F9612F00A4F7D6 /* tt_splash.gif */; };
-		55787FD621F9683800A4F7D6 /* UIImageView+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55787FD521F9683800A4F7D6 /* UIImageView+GIF.swift */; };
-		55787FD721F9683800A4F7D6 /* UIImageView+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55787FD521F9683800A4F7D6 /* UIImageView+GIF.swift */; };
-		55787FD821F9683800A4F7D6 /* UIImageView+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55787FD521F9683800A4F7D6 /* UIImageView+GIF.swift */; };
 		557D4E5821E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
 		557D4E5921E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
 		557D4E5A21E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
@@ -1841,12 +1838,12 @@
 		5569803B2188566F00346757 /* TTChain_SIT-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_SIT-Info.plist"; sourceTree = "<group>"; };
 		55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupInformationViewController.xib; sourceTree = "<group>"; };
 		55787FD121F9612F00A4F7D6 /* tt_splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tt_splash.gif; sourceTree = "<group>"; };
-		55787FD521F9683800A4F7D6 /* UIImageView+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+GIF.swift"; sourceTree = "<group>"; };
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
 		557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestTabModel.swift; sourceTree = "<group>"; };
 		559C4F1222262D0D009466A8 /* TTChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TTChain-Bridging-Header.h"; sourceTree = "<group>"; };
 		559C4F13222652C2009466A8 /* 甜甜圈 UAT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "甜甜圈 UAT.entitlements"; sourceTree = "<group>"; };
 		559C4F15222665A2009466A8 /* TTNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTNotificationHandler.swift; sourceTree = "<group>"; };
+		559C4F192226A9FC009466A8 /* 甜甜圈.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "甜甜圈.entitlements"; sourceTree = "<group>"; };
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
 		55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewController.swift; sourceTree = "<group>"; };
 		55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptRequestViewController.xib; sourceTree = "<group>"; };
@@ -3197,7 +3194,6 @@
 				55EF6B4121A81567007E074A /* String+Extension.swift */,
 				55EF6B4221A81567007E074A /* UIView+UIImage.swift */,
 				55E1140221F728480062198B /* Reactive+UITextView.swift */,
-				55787FD521F9683800A4F7D6 /* UIImageView+GIF.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -5289,6 +5285,7 @@
 		64F07CE620D0E4CB00A60C5C /* TTChain */ = {
 			isa = PBXGroup;
 			children = (
+				559C4F192226A9FC009466A8 /* 甜甜圈.entitlements */,
 				64F07CE720D0E4CB00A60C5C /* AppDelegate.swift */,
 				64F07CF120D0E4CE00A60C5C /* Assets.xcassets */,
 				64F07CF320D0E4CE00A60C5C /* LaunchScreen.storyboard */,
@@ -5681,6 +5678,11 @@
 				TargetAttributes = {
 					64F07CE320D0E4CB00A60C5C = {
 						CreatedOnToolsVersion = 9.4;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					64F07CFA20D0E4CE00A60C5C = {
 						CreatedOnToolsVersion = 9.4;
@@ -6717,7 +6719,6 @@
 				55E7305B2186DC4B003AE47E /* MainWalletViewController.swift in Sources */,
 				648139C820DBABC000CAA4D8 /* OWCrypter.swift in Sources */,
 				64D8264920E0D8C400C8FC63 /* ChangeAssetViewController.swift in Sources */,
-				55787FD821F9683800A4F7D6 /* UIImageView+GIF.swift in Sources */,
 				6424B63F20F4E46B00AEBCAD /* TransferRecordInfoBarCollectionViewCell.swift in Sources */,
 				64D8263620DFABB000C8FC63 /* DepositViewController.swift in Sources */,
 				649E487B20EC6FFF00B217AD /* ManageWalletViewController.swift in Sources */,
@@ -7171,7 +7172,6 @@
 				64F07E2E20D24DDD00A60C5C /* MainViewController.swift in Sources */,
 				643200CB20FB22F400B11334 /* WithdrawalChangeToAddressViewController.swift in Sources */,
 				640D88FF20EF5F860010D986 /* TransRecordListViewController.swift in Sources */,
-				55787FD621F9683800A4F7D6 /* UIImageView+GIF.swift in Sources */,
 				64083D0821103EF300DE1C31 /* TxHandler.swift in Sources */,
 				64C9D4BD21044B5C000B0774 /* WithdrawalCICFeeInputViewModel.swift in Sources */,
 				6424B62A20F4D1F200AEBCAD /* Palette.swift in Sources */,
@@ -7618,7 +7618,6 @@
 				6470D64D20F1A1A100EB0780 /* WithdrawalBTCFeeInfoViewController.swift in Sources */,
 				6470D6A820F355A400EB0780 /* WithdrawalETHFeeInputViewModel.swift in Sources */,
 				64D8268A20E3939400C8FC63 /* AssetSort.swift in Sources */,
-				55787FD721F9683800A4F7D6 /* UIImageView+GIF.swift in Sources */,
 				64083D11211052D500DE1C31 /* BTCTxFilter.swift in Sources */,
 				649E484520E7D96000B217AD /* ChangeWalletTableViewCell.swift in Sources */,
 				6481397B20DA4D1700CAA4D8 /* MnemonicHelper.swift in Sources */,
@@ -8076,6 +8075,7 @@
 			baseConfigurationReference = 67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
+				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -8088,6 +8088,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
+				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈";
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain";
@@ -8103,6 +8104,7 @@
 			baseConfigurationReference = F630B72BFE309FD5E439D675 /* Pods-TTChain.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
+				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = BKBWK8HFB8;
@@ -8114,6 +8116,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
+				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈";
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain";
@@ -8183,7 +8186,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-SIT";
-				PRODUCT_MODULE_NAME = TTChain;
+				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 SIT";
 				PROVISIONING_PROFILE = "18ff6044-f137-45a0-a43d-e6224e26db4b";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.OfflineWallet-SIT";
@@ -8210,7 +8213,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-SIT";
-				PRODUCT_MODULE_NAME = TTChain;
+				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 SIT";
 				PROVISIONING_PROFILE = "27af3bdf-7fa1-4abd-b8ba-ba8752d2f22d";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.OfflineWallet-SIT";

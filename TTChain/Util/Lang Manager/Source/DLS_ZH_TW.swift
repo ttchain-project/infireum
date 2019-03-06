@@ -573,6 +573,7 @@ struct DLS_ZH_TW: DLS {
     var invalid_mnemonic_phrase = "助記詞不正確"
     
     var image_saved_success = "圖像保存到相冊"
+    var exists = "已存在"
 }
 
 

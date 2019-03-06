@@ -38,7 +38,7 @@ class EditABUnitViewModel: KLRxViewModel {
             _name.accept(unit.name!)
             _note.accept(unit.note!)
         case .plain: break
-        case .scannedSource(addr: let addr, mainCoinID: let id):
+        case .scannedSource(addr:_, mainCoinID: _):
             break
         }
         

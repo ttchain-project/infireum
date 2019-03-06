@@ -251,8 +251,8 @@ class SearchAssetViewModel: KLRxViewModel, RxNetworkReachabilityRespondable {
         }
         
         OWRxNotificationCenter.instance.didInsertCoinSelection(sel)
-        print("Finish mark selectino of coin: \(coin.inAppName)")
-        print("The sel we get is in coin: \(sel.coin?.inAppName)")
+        print("Finish mark selectino of coin: \(coin.inAppName ?? "")")
+        print("The sel we get is in coin: \(sel.coin?.inAppName ?? "")")
         return sel
     }
     

@@ -562,5 +562,5 @@ protocol DynamicLocalizationSource {
     var transfer_all_amount:String {get set}
     var invalid_mnemonic_phrase:String {get set}
     var image_saved_success:String {get set}
-
+    var exists :String {get set}
 }
