@@ -157,6 +157,93 @@
 		55787FD221F9613100A4F7D6 /* tt_splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55787FD121F9612F00A4F7D6 /* tt_splash.gif */; };
 		55787FD321F9613100A4F7D6 /* tt_splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55787FD121F9612F00A4F7D6 /* tt_splash.gif */; };
 		55787FD421F9613100A4F7D6 /* tt_splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55787FD121F9612F00A4F7D6 /* tt_splash.gif */; };
+		557C84BC22360E3C004C2E16 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84BB22360E3B004C2E16 /* QuartzCore.framework */; };
+		557C84BE22360E71004C2E16 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84BD22360E71004C2E16 /* OpenGLES.framework */; };
+		557C84C022360E77004C2E16 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84BF22360E77004C2E16 /* CoreGraphics.framework */; };
+		557C84C222360E7E004C2E16 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84C122360E7E004C2E16 /* CoreVideo.framework */; };
+		557C84C422360E84004C2E16 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84C322360E84004C2E16 /* CoreMedia.framework */; };
+		557C84C722360E8C004C2E16 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84C522360E8B004C2E16 /* CoreAudio.framework */; };
+		557C84C822360E8C004C2E16 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84C622360E8B004C2E16 /* CoreAudioKit.framework */; };
+		557C84CA22360E97004C2E16 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84C922360E97004C2E16 /* AudioToolbox.framework */; };
+		557C84CC22360E9D004C2E16 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84CB22360E9D004C2E16 /* AVFoundation.framework */; };
+		557C84CE22360EA3004C2E16 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84CD22360EA2004C2E16 /* GLKit.framework */; };
+		557C84D022360EAE004C2E16 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84CF22360EAE004C2E16 /* CFNetwork.framework */; };
+		557C84D222360EB3004C2E16 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84D122360EB3004C2E16 /* Security.framework */; };
+		557C84D522360EBF004C2E16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84D322360EBE004C2E16 /* libsqlite3.tbd */; };
+		557C84D622360EBF004C2E16 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84D422360EBE004C2E16 /* libsqlite3.0.tbd */; };
+		557C84D922360ECD004C2E16 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84D722360ECC004C2E16 /* libicucore.tbd */; };
+		557C84DC22360F06004C2E16 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84DB22360F06004C2E16 /* libc++.tbd */; };
+		557C84F422360FD1004C2E16 /* ARDAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E122360FD1004C2E16 /* ARDAppClient.m */; };
+		557C84F522360FD1004C2E16 /* ARDAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E122360FD1004C2E16 /* ARDAppClient.m */; };
+		557C84F622360FD1004C2E16 /* ARDAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E122360FD1004C2E16 /* ARDAppClient.m */; };
+		557C84F722360FD1004C2E16 /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E322360FD1004C2E16 /* ARDMessageResponse.m */; };
+		557C84F822360FD1004C2E16 /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E322360FD1004C2E16 /* ARDMessageResponse.m */; };
+		557C84F922360FD1004C2E16 /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E322360FD1004C2E16 /* ARDMessageResponse.m */; };
+		557C84FA22360FD1004C2E16 /* ARDRegisterResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E522360FD1004C2E16 /* ARDRegisterResponse.m */; };
+		557C84FB22360FD1004C2E16 /* ARDRegisterResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E522360FD1004C2E16 /* ARDRegisterResponse.m */; };
+		557C84FC22360FD1004C2E16 /* ARDRegisterResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E522360FD1004C2E16 /* ARDRegisterResponse.m */; };
+		557C84FD22360FD1004C2E16 /* ARDSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E722360FD1004C2E16 /* ARDSignalingMessage.m */; };
+		557C84FE22360FD1004C2E16 /* ARDSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E722360FD1004C2E16 /* ARDSignalingMessage.m */; };
+		557C84FF22360FD1004C2E16 /* ARDSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E722360FD1004C2E16 /* ARDSignalingMessage.m */; };
+		557C850022360FD1004C2E16 /* ARDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E922360FD1004C2E16 /* ARDUtilities.m */; };
+		557C850122360FD1004C2E16 /* ARDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E922360FD1004C2E16 /* ARDUtilities.m */; };
+		557C850222360FD1004C2E16 /* ARDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84E922360FD1004C2E16 /* ARDUtilities.m */; };
+		557C850322360FD1004C2E16 /* ARDWebSocketChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84EB22360FD1004C2E16 /* ARDWebSocketChannel.m */; };
+		557C850422360FD1004C2E16 /* ARDWebSocketChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84EB22360FD1004C2E16 /* ARDWebSocketChannel.m */; };
+		557C850522360FD1004C2E16 /* ARDWebSocketChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84EB22360FD1004C2E16 /* ARDWebSocketChannel.m */; };
+		557C850622360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84ED22360FD1004C2E16 /* RTCICECandidate+JSON.m */; };
+		557C850722360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84ED22360FD1004C2E16 /* RTCICECandidate+JSON.m */; };
+		557C850822360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84ED22360FD1004C2E16 /* RTCICECandidate+JSON.m */; };
+		557C850922360FD1004C2E16 /* RTCICEServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84EF22360FD1004C2E16 /* RTCICEServer+JSON.m */; };
+		557C850A22360FD1004C2E16 /* RTCICEServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84EF22360FD1004C2E16 /* RTCICEServer+JSON.m */; };
+		557C850B22360FD1004C2E16 /* RTCICEServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84EF22360FD1004C2E16 /* RTCICEServer+JSON.m */; };
+		557C850C22360FD1004C2E16 /* RTCMediaConstraints+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84F122360FD1004C2E16 /* RTCMediaConstraints+JSON.m */; };
+		557C850D22360FD1004C2E16 /* RTCMediaConstraints+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84F122360FD1004C2E16 /* RTCMediaConstraints+JSON.m */; };
+		557C850E22360FD1004C2E16 /* RTCMediaConstraints+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84F122360FD1004C2E16 /* RTCMediaConstraints+JSON.m */; };
+		557C850F22360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84F322360FD1004C2E16 /* RTCSessionDescription+JSON.m */; };
+		557C851022360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84F322360FD1004C2E16 /* RTCSessionDescription+JSON.m */; };
+		557C851122360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C84F322360FD1004C2E16 /* RTCSessionDescription+JSON.m */; };
+		557C851322362F9B004C2E16 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851222362F9B004C2E16 /* AudioToolbox.framework */; };
+		557C851E22362FF6004C2E16 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851422362FF5004C2E16 /* CoreAudio.framework */; };
+		557C851F22362FF6004C2E16 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851522362FF5004C2E16 /* CoreMedia.framework */; };
+		557C852022362FF6004C2E16 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851622362FF5004C2E16 /* GLKit.framework */; };
+		557C852122362FF6004C2E16 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851722362FF5004C2E16 /* AVFoundation.framework */; };
+		557C852222362FF6004C2E16 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851822362FF5004C2E16 /* OpenGLES.framework */; };
+		557C852322362FF6004C2E16 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851922362FF6004C2E16 /* Security.framework */; };
+		557C852422362FF6004C2E16 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851A22362FF6004C2E16 /* CoreAudioKit.framework */; };
+		557C852522362FF6004C2E16 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851B22362FF6004C2E16 /* CFNetwork.framework */; };
+		557C852622362FF6004C2E16 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851C22362FF6004C2E16 /* CoreVideo.framework */; };
+		557C852722362FF6004C2E16 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851D22362FF6004C2E16 /* QuartzCore.framework */; };
+		557C852B22363023004C2E16 /* libicucore.A.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C852822363022004C2E16 /* libicucore.A.tbd */; };
+		557C852C22363023004C2E16 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C852922363022004C2E16 /* libc++.1.tbd */; };
+		557C852D22363023004C2E16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C852A22363022004C2E16 /* libsqlite3.tbd */; };
+		557C852F2236305D004C2E16 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C852E2236305D004C2E16 /* libsqlite3.0.tbd */; };
+		557C8531223630A3004C2E16 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C8530223630A3004C2E16 /* CoreGraphics.framework */; };
+		557C8532223630B5004C2E16 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851222362F9B004C2E16 /* AudioToolbox.framework */; };
+		557C8533223630B5004C2E16 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851722362FF5004C2E16 /* AVFoundation.framework */; };
+		557C8534223630B5004C2E16 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851B22362FF6004C2E16 /* CFNetwork.framework */; };
+		557C8535223630B5004C2E16 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851422362FF5004C2E16 /* CoreAudio.framework */; };
+		557C8536223630B5004C2E16 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851A22362FF6004C2E16 /* CoreAudioKit.framework */; };
+		557C8537223630B5004C2E16 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C8530223630A3004C2E16 /* CoreGraphics.framework */; };
+		557C8538223630B5004C2E16 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851522362FF5004C2E16 /* CoreMedia.framework */; };
+		557C8539223630B5004C2E16 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851C22362FF6004C2E16 /* CoreVideo.framework */; };
+		557C853A223630B5004C2E16 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851622362FF5004C2E16 /* GLKit.framework */; };
+		557C853B223630B5004C2E16 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851822362FF5004C2E16 /* OpenGLES.framework */; };
+		557C853C223630B5004C2E16 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851D22362FF6004C2E16 /* QuartzCore.framework */; };
+		557C853D223630B5004C2E16 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C851922362FF6004C2E16 /* Security.framework */; };
+		557C853E223630B9004C2E16 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C852E2236305D004C2E16 /* libsqlite3.0.tbd */; };
+		557C853F223630B9004C2E16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C852A22363022004C2E16 /* libsqlite3.tbd */; };
+		557C8542223630BC004C2E16 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C8540223630BA004C2E16 /* libc++.tbd */; };
+		557C8543223630BC004C2E16 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C8541223630BB004C2E16 /* libicucore.tbd */; };
+		557C85462236380E004C2E16 /* AudioCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C85442236380E004C2E16 /* AudioCallViewController.swift */; };
+		557C85472236380E004C2E16 /* AudioCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C85442236380E004C2E16 /* AudioCallViewController.swift */; };
+		557C85482236380E004C2E16 /* AudioCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C85442236380E004C2E16 /* AudioCallViewController.swift */; };
+		557C85492236380E004C2E16 /* AudioCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557C85452236380E004C2E16 /* AudioCallViewController.xib */; };
+		557C854A2236380E004C2E16 /* AudioCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557C85452236380E004C2E16 /* AudioCallViewController.xib */; };
+		557C854B2236380E004C2E16 /* AudioCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557C85452236380E004C2E16 /* AudioCallViewController.xib */; };
+		557C854E2236383C004C2E16 /* AudioCallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C854D2236383C004C2E16 /* AudioCallViewModel.swift */; };
+		557C854F2236383C004C2E16 /* AudioCallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C854D2236383C004C2E16 /* AudioCallViewModel.swift */; };
+		557C85502236383C004C2E16 /* AudioCallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557C854D2236383C004C2E16 /* AudioCallViewModel.swift */; };
 		557D4E5821E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
 		557D4E5921E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
 		557D4E5A21E359C50073B8D8 /* MarketTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */; };
@@ -1838,6 +1925,64 @@
 		5569803B2188566F00346757 /* TTChain_SIT-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_SIT-Info.plist"; sourceTree = "<group>"; };
 		55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupInformationViewController.xib; sourceTree = "<group>"; };
 		55787FD121F9612F00A4F7D6 /* tt_splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tt_splash.gif; sourceTree = "<group>"; };
+		557C84BB22360E3B004C2E16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		557C84BD22360E71004C2E16 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		557C84BF22360E77004C2E16 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		557C84C122360E7E004C2E16 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		557C84C322360E84004C2E16 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		557C84C522360E8B004C2E16 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		557C84C622360E8B004C2E16 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		557C84C922360E97004C2E16 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		557C84CB22360E9D004C2E16 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		557C84CD22360EA2004C2E16 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		557C84CF22360EAE004C2E16 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		557C84D122360EB3004C2E16 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		557C84D322360EBE004C2E16 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		557C84D422360EBE004C2E16 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		557C84D722360ECC004C2E16 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		557C84D822360ECD004C2E16 /* libicucore.A.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.A.tbd; path = usr/lib/libicucore.A.tbd; sourceTree = SDKROOT; };
+		557C84DB22360F06004C2E16 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		557C84E022360FD1004C2E16 /* ARDAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppClient.h; sourceTree = "<group>"; };
+		557C84E122360FD1004C2E16 /* ARDAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppClient.m; sourceTree = "<group>"; };
+		557C84E222360FD1004C2E16 /* ARDMessageResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDMessageResponse.h; sourceTree = "<group>"; };
+		557C84E322360FD1004C2E16 /* ARDMessageResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDMessageResponse.m; sourceTree = "<group>"; };
+		557C84E422360FD1004C2E16 /* ARDRegisterResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDRegisterResponse.h; sourceTree = "<group>"; };
+		557C84E522360FD1004C2E16 /* ARDRegisterResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDRegisterResponse.m; sourceTree = "<group>"; };
+		557C84E622360FD1004C2E16 /* ARDSignalingMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSignalingMessage.h; sourceTree = "<group>"; };
+		557C84E722360FD1004C2E16 /* ARDSignalingMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDSignalingMessage.m; sourceTree = "<group>"; };
+		557C84E822360FD1004C2E16 /* ARDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDUtilities.h; sourceTree = "<group>"; };
+		557C84E922360FD1004C2E16 /* ARDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDUtilities.m; sourceTree = "<group>"; };
+		557C84EA22360FD1004C2E16 /* ARDWebSocketChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDWebSocketChannel.h; sourceTree = "<group>"; };
+		557C84EB22360FD1004C2E16 /* ARDWebSocketChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDWebSocketChannel.m; sourceTree = "<group>"; };
+		557C84EC22360FD1004C2E16 /* RTCICECandidate+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCICECandidate+JSON.h"; sourceTree = "<group>"; };
+		557C84ED22360FD1004C2E16 /* RTCICECandidate+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCICECandidate+JSON.m"; sourceTree = "<group>"; };
+		557C84EE22360FD1004C2E16 /* RTCICEServer+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCICEServer+JSON.h"; sourceTree = "<group>"; };
+		557C84EF22360FD1004C2E16 /* RTCICEServer+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCICEServer+JSON.m"; sourceTree = "<group>"; };
+		557C84F022360FD1004C2E16 /* RTCMediaConstraints+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCMediaConstraints+JSON.h"; sourceTree = "<group>"; };
+		557C84F122360FD1004C2E16 /* RTCMediaConstraints+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCMediaConstraints+JSON.m"; sourceTree = "<group>"; };
+		557C84F222360FD1004C2E16 /* RTCSessionDescription+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCSessionDescription+JSON.h"; sourceTree = "<group>"; };
+		557C84F322360FD1004C2E16 /* RTCSessionDescription+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCSessionDescription+JSON.m"; sourceTree = "<group>"; };
+		557C851222362F9B004C2E16 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		557C851422362FF5004C2E16 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = DEVELOPER_DIR; };
+		557C851522362FF5004C2E16 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		557C851622362FF5004C2E16 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
+		557C851722362FF5004C2E16 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		557C851822362FF5004C2E16 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		557C851922362FF6004C2E16 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		557C851A22362FF6004C2E16 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreAudioKit.framework; sourceTree = DEVELOPER_DIR; };
+		557C851B22362FF6004C2E16 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		557C851C22362FF6004C2E16 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		557C851D22362FF6004C2E16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		557C852822363022004C2E16 /* libicucore.A.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.A.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libicucore.A.tbd; sourceTree = DEVELOPER_DIR; };
+		557C852922363022004C2E16 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.1.tbd"; sourceTree = DEVELOPER_DIR; };
+		557C852A22363022004C2E16 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+		557C852E2236305D004C2E16 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = DEVELOPER_DIR; };
+		557C8530223630A3004C2E16 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		557C8540223630BA004C2E16 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		557C8541223630BB004C2E16 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libicucore.tbd; sourceTree = DEVELOPER_DIR; };
+		557C85442236380E004C2E16 /* AudioCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallViewController.swift; sourceTree = "<group>"; };
+		557C85452236380E004C2E16 /* AudioCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioCallViewController.xib; sourceTree = "<group>"; };
+		557C854D2236383C004C2E16 /* AudioCallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCallViewModel.swift; sourceTree = "<group>"; };
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
 		557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestTabModel.swift; sourceTree = "<group>"; };
 		559C4F1222262D0D009466A8 /* TTChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TTChain-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -2411,6 +2556,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				557C84D922360ECD004C2E16 /* libicucore.tbd in Frameworks */,
+				557C84DC22360F06004C2E16 /* libc++.tbd in Frameworks */,
+				557C84D522360EBF004C2E16 /* libsqlite3.tbd in Frameworks */,
+				557C84D622360EBF004C2E16 /* libsqlite3.0.tbd in Frameworks */,
+				557C84D222360EB3004C2E16 /* Security.framework in Frameworks */,
+				557C84D022360EAE004C2E16 /* CFNetwork.framework in Frameworks */,
+				557C84CE22360EA3004C2E16 /* GLKit.framework in Frameworks */,
+				557C84CC22360E9D004C2E16 /* AVFoundation.framework in Frameworks */,
+				557C84CA22360E97004C2E16 /* AudioToolbox.framework in Frameworks */,
+				557C84C722360E8C004C2E16 /* CoreAudio.framework in Frameworks */,
+				557C84C822360E8C004C2E16 /* CoreAudioKit.framework in Frameworks */,
+				557C84C422360E84004C2E16 /* CoreMedia.framework in Frameworks */,
+				557C84C222360E7E004C2E16 /* CoreVideo.framework in Frameworks */,
+				557C84C022360E77004C2E16 /* CoreGraphics.framework in Frameworks */,
+				557C84BE22360E71004C2E16 /* OpenGLES.framework in Frameworks */,
+				557C84BC22360E3C004C2E16 /* QuartzCore.framework in Frameworks */,
 				A7346B863219A43FFA268C25 /* Pods_TTChain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2428,6 +2589,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				C88226664AFE143DE6302C05 /* Pods_TTChain_SIT.framework in Frameworks */,
+				557C8532223630B5004C2E16 /* AudioToolbox.framework in Frameworks */,
+				557C8533223630B5004C2E16 /* AVFoundation.framework in Frameworks */,
+				557C8534223630B5004C2E16 /* CFNetwork.framework in Frameworks */,
+				557C8535223630B5004C2E16 /* CoreAudio.framework in Frameworks */,
+				557C8542223630BC004C2E16 /* libc++.tbd in Frameworks */,
+				557C8543223630BC004C2E16 /* libicucore.tbd in Frameworks */,
+				557C853E223630B9004C2E16 /* libsqlite3.0.tbd in Frameworks */,
+				557C853F223630B9004C2E16 /* libsqlite3.tbd in Frameworks */,
+				557C8536223630B5004C2E16 /* CoreAudioKit.framework in Frameworks */,
+				557C8537223630B5004C2E16 /* CoreGraphics.framework in Frameworks */,
+				557C8538223630B5004C2E16 /* CoreMedia.framework in Frameworks */,
+				557C8539223630B5004C2E16 /* CoreVideo.framework in Frameworks */,
+				557C853A223630B5004C2E16 /* GLKit.framework in Frameworks */,
+				557C853B223630B5004C2E16 /* OpenGLES.framework in Frameworks */,
+				557C853C223630B5004C2E16 /* QuartzCore.framework in Frameworks */,
+				557C853D223630B5004C2E16 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2435,6 +2612,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				557C852B22363023004C2E16 /* libicucore.A.tbd in Frameworks */,
+				557C852C22363023004C2E16 /* libc++.1.tbd in Frameworks */,
+				557C852F2236305D004C2E16 /* libsqlite3.0.tbd in Frameworks */,
+				557C852D22363023004C2E16 /* libsqlite3.tbd in Frameworks */,
+				557C8531223630A3004C2E16 /* CoreGraphics.framework in Frameworks */,
+				557C851322362F9B004C2E16 /* AudioToolbox.framework in Frameworks */,
+				557C852122362FF6004C2E16 /* AVFoundation.framework in Frameworks */,
+				557C852522362FF6004C2E16 /* CFNetwork.framework in Frameworks */,
+				557C851E22362FF6004C2E16 /* CoreAudio.framework in Frameworks */,
+				557C852422362FF6004C2E16 /* CoreAudioKit.framework in Frameworks */,
+				557C851F22362FF6004C2E16 /* CoreMedia.framework in Frameworks */,
+				557C852622362FF6004C2E16 /* CoreVideo.framework in Frameworks */,
+				557C852022362FF6004C2E16 /* GLKit.framework in Frameworks */,
+				557C852222362FF6004C2E16 /* OpenGLES.framework in Frameworks */,
+				557C852722362FF6004C2E16 /* QuartzCore.framework in Frameworks */,
+				557C852322362FF6004C2E16 /* Security.framework in Frameworks */,
 				DE16130347B09765C3DF284F /* Pods_TTChain_UAT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2656,6 +2849,59 @@
 				555A45B422057FA0004A713A /* ChatImageViewModel.swift */,
 			);
 			path = ChatImageViewer;
+			sourceTree = "<group>";
+		};
+		557C8494223209AE004C2E16 /* AudioCall */ = {
+			isa = PBXGroup;
+			children = (
+				557C854C2236381D004C2E16 /* ViewModel */,
+				557C85442236380E004C2E16 /* AudioCallViewController.swift */,
+				557C85452236380E004C2E16 /* AudioCallViewController.xib */,
+			);
+			path = AudioCall;
+			sourceTree = "<group>";
+		};
+		557C84DE22360FBE004C2E16 /* AppRtc */ = {
+			isa = PBXGroup;
+			children = (
+				557C84DF22360FD1004C2E16 /* Lib */,
+			);
+			path = AppRtc;
+			sourceTree = "<group>";
+		};
+		557C84DF22360FD1004C2E16 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				557C84E022360FD1004C2E16 /* ARDAppClient.h */,
+				557C84E122360FD1004C2E16 /* ARDAppClient.m */,
+				557C84E222360FD1004C2E16 /* ARDMessageResponse.h */,
+				557C84E322360FD1004C2E16 /* ARDMessageResponse.m */,
+				557C84E422360FD1004C2E16 /* ARDRegisterResponse.h */,
+				557C84E522360FD1004C2E16 /* ARDRegisterResponse.m */,
+				557C84E622360FD1004C2E16 /* ARDSignalingMessage.h */,
+				557C84E722360FD1004C2E16 /* ARDSignalingMessage.m */,
+				557C84E822360FD1004C2E16 /* ARDUtilities.h */,
+				557C84E922360FD1004C2E16 /* ARDUtilities.m */,
+				557C84EA22360FD1004C2E16 /* ARDWebSocketChannel.h */,
+				557C84EB22360FD1004C2E16 /* ARDWebSocketChannel.m */,
+				557C84EC22360FD1004C2E16 /* RTCICECandidate+JSON.h */,
+				557C84ED22360FD1004C2E16 /* RTCICECandidate+JSON.m */,
+				557C84EE22360FD1004C2E16 /* RTCICEServer+JSON.h */,
+				557C84EF22360FD1004C2E16 /* RTCICEServer+JSON.m */,
+				557C84F022360FD1004C2E16 /* RTCMediaConstraints+JSON.h */,
+				557C84F122360FD1004C2E16 /* RTCMediaConstraints+JSON.m */,
+				557C84F222360FD1004C2E16 /* RTCSessionDescription+JSON.h */,
+				557C84F322360FD1004C2E16 /* RTCSessionDescription+JSON.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		557C854C2236381D004C2E16 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				557C854D2236383C004C2E16 /* AudioCallViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		557D4E5621E357A90073B8D8 /* SettingTabHandler */ = {
@@ -5322,6 +5568,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				557C84DE22360FBE004C2E16 /* AppRtc */,
 				559C4F142226658D009466A8 /* NotificationHandler */,
 				55B5C01F22151F04007250FA /* WalletCreator */,
 				55B5C0192212D35E007250FA /* ImageScrollView */,
@@ -5427,6 +5674,7 @@
 		64F07E2B20D24D4B00A60C5C /* View & ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				557C8494223209AE004C2E16 /* AudioCall */,
 				55EF6B1B21A814E8007E074A /* UIRepresentableCell.swift */,
 				55EF6B1A21A814E7007E074A /* ViewModel.swift */,
 				64E4E4D22147B434009B556B /* LaunchViewController.xib */,
@@ -5576,6 +5824,41 @@
 		ACB257C6DF28BDACFD2CF161 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				557C8540223630BA004C2E16 /* libc++.tbd */,
+				557C8541223630BB004C2E16 /* libicucore.tbd */,
+				557C8530223630A3004C2E16 /* CoreGraphics.framework */,
+				557C852E2236305D004C2E16 /* libsqlite3.0.tbd */,
+				557C852922363022004C2E16 /* libc++.1.tbd */,
+				557C852822363022004C2E16 /* libicucore.A.tbd */,
+				557C852A22363022004C2E16 /* libsqlite3.tbd */,
+				557C851722362FF5004C2E16 /* AVFoundation.framework */,
+				557C851B22362FF6004C2E16 /* CFNetwork.framework */,
+				557C851422362FF5004C2E16 /* CoreAudio.framework */,
+				557C851A22362FF6004C2E16 /* CoreAudioKit.framework */,
+				557C851522362FF5004C2E16 /* CoreMedia.framework */,
+				557C851C22362FF6004C2E16 /* CoreVideo.framework */,
+				557C851622362FF5004C2E16 /* GLKit.framework */,
+				557C851822362FF5004C2E16 /* OpenGLES.framework */,
+				557C851D22362FF6004C2E16 /* QuartzCore.framework */,
+				557C851922362FF6004C2E16 /* Security.framework */,
+				557C851222362F9B004C2E16 /* AudioToolbox.framework */,
+				557C84DB22360F06004C2E16 /* libc++.tbd */,
+				557C84D822360ECD004C2E16 /* libicucore.A.tbd */,
+				557C84D722360ECC004C2E16 /* libicucore.tbd */,
+				557C84D422360EBE004C2E16 /* libsqlite3.0.tbd */,
+				557C84D322360EBE004C2E16 /* libsqlite3.tbd */,
+				557C84D122360EB3004C2E16 /* Security.framework */,
+				557C84CF22360EAE004C2E16 /* CFNetwork.framework */,
+				557C84CD22360EA2004C2E16 /* GLKit.framework */,
+				557C84CB22360E9D004C2E16 /* AVFoundation.framework */,
+				557C84C922360E97004C2E16 /* AudioToolbox.framework */,
+				557C84C522360E8B004C2E16 /* CoreAudio.framework */,
+				557C84C622360E8B004C2E16 /* CoreAudioKit.framework */,
+				557C84C322360E84004C2E16 /* CoreMedia.framework */,
+				557C84C122360E7E004C2E16 /* CoreVideo.framework */,
+				557C84BF22360E77004C2E16 /* CoreGraphics.framework */,
+				557C84BD22360E71004C2E16 /* OpenGLES.framework */,
+				557C84BB22360E3B004C2E16 /* QuartzCore.framework */,
 				DF77B36DAA70E2215A57E527 /* Pods_TTChain.framework */,
 				70D90461CD25AEC5F8E54E9C /* Pods_TTChainTests.framework */,
 				7699245C91FCFBF8FEDEA586 /* Pods_TTChain_SIT.framework */,
@@ -5844,6 +6127,7 @@
 				6470D6D220F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.xib in Resources */,
 				55F70E5221F999D000B5ED75 /* AssetDetailViewController.xib in Resources */,
 				640D892820F0691B0010D986 /* WithdrawalBaseViewController.xib in Resources */,
+				557C854B2236380E004C2E16 /* AudioCallViewController.xib in Resources */,
 				55BB1B45218FDCE70061F189 /* ExploreViewController.xib in Resources */,
 				64C9D4BA21044AFF000B0774 /* WithdrawalCICFeeInputViewController.xib in Resources */,
 				6424B65520F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.xib in Resources */,
@@ -6025,6 +6309,7 @@
 				640D891D20EF6DD00010D986 /* TransRecordListTabViewController.xib in Resources */,
 				64813AE420DE241500CAA4D8 /* MainTabBarViewController.xib in Resources */,
 				55E113FC21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */,
+				557C85492236380E004C2E16 /* AudioCallViewController.xib in Resources */,
 				6424B69320F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.xib in Resources */,
 				649E48AE20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.xib in Resources */,
 				55F70E5021F999D000B5ED75 /* AssetDetailViewController.xib in Resources */,
@@ -6179,6 +6464,7 @@
 				640D891E20EF6DD00010D986 /* TransRecordListTabViewController.xib in Resources */,
 				64813AE520DE241500CAA4D8 /* MainTabBarViewController.xib in Resources */,
 				55E113FD21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */,
+				557C854A2236380E004C2E16 /* AudioCallViewController.xib in Resources */,
 				6424B69420F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.xib in Resources */,
 				649E48AF20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.xib in Resources */,
 				55F70E5121F999D000B5ED75 /* AssetDetailViewController.xib in Resources */,
@@ -6227,6 +6513,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMoment/SwiftMoment.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
@@ -6264,6 +6551,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMoment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
@@ -6365,6 +6653,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMoment/SwiftMoment.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
@@ -6402,6 +6691,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMoment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
@@ -6503,6 +6793,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMoment/SwiftMoment.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
@@ -6540,6 +6831,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMoment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
@@ -6593,6 +6885,7 @@
 				5508743021EDD628007B3B3B /* ExploreDetailWebViewController.swift in Sources */,
 				64D826C020E3E53600C8FC63 /* Identity+CoreDataClass.swift in Sources */,
 				64813AC920DCEE7900CAA4D8 /* CoinToFiatRate+Helper.swift in Sources */,
+				557C84FF22360FD1004C2E16 /* ARDSignalingMessage.m in Sources */,
 				6424B68D20F5CEAB00AEBCAD /* TransferRecordStatusOptionViewModel.swift in Sources */,
 				55E1140521F728480062198B /* Reactive+UITextView.swift in Sources */,
 				6470D6CF20F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.swift in Sources */,
@@ -6663,9 +6956,11 @@
 				64813A6920DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataClass.swift in Sources */,
 				64C9D47920FDDFBB000B0774 /* UpdatetABUnitAddressViewController.swift in Sources */,
 				64813ACE20DD071F00CAA4D8 /* MainWalletOverviewViewController.swift in Sources */,
+				557C84FC22360FD1004C2E16 /* ARDRegisterResponse.m in Sources */,
 				55E7307F21880FC8003AE47E /* WalletOptionsViewModel.swift in Sources */,
 				649732DE213FF38E00C4D1D5 /* MainCoinTypeStorage.swift in Sources */,
 				649732D5213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataProperties.swift in Sources */,
+				557C850222360FD1004C2E16 /* ARDUtilities.m in Sources */,
 				55AADEFB21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				64813A3C20DCA6EE00CAA4D8 /* SubAddress+CoreDataProperties.swift in Sources */,
 				55EF6B2E21A81500007E074A /* LocalIMUser.swift in Sources */,
@@ -6748,6 +7043,7 @@
 				64F07E1A20D241A000A60C5C /* ServerAPIErrorHandler.swift in Sources */,
 				6485002720D9340F00107473 /* UIView+FastUISetup.swift in Sources */,
 				55E730692186E564003AE47E /* CommentsModel.swift in Sources */,
+				557C851122360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
 				64F07E2620D241A000A60C5C /* KLTextField.swift in Sources */,
 				55EF6A8021A812C6007E074A /* AddGroupMemberTableViewCell.swift in Sources */,
 				5526B54222128E7700573576 /* PhotoAuthHandler.swift in Sources */,
@@ -6757,6 +7053,7 @@
 				64F07E3020D24DDD00A60C5C /* MainViewController.swift in Sources */,
 				6470D69D20F341CE00EB0780 /* WithdrawalConfirmPwdValidationViewModel.swift in Sources */,
 				55EF6A4A21A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
+				557C85482236380E004C2E16 /* AudioCallViewController.swift in Sources */,
 				643200D520FB230500B11334 /* WithdrawalChangeToAddressViewModel.swift in Sources */,
 				6424B68120F5C97000AEBCAD /* TransferRecordCoinOptionViewModel.swift in Sources */,
 				64D8263E20DFABC400C8FC63 /* DepositViewModel.swift in Sources */,
@@ -6794,6 +7091,7 @@
 				55EF6B6321A81A58007E074A /* FriendInfoModel.swift in Sources */,
 				55EF6AA121A812C6007E074A /* SearchMemberViewModel.swift in Sources */,
 				64C9D4B721044AFF000B0774 /* WithdrawalCICFeeInputViewController.swift in Sources */,
+				557C85502236383C004C2E16 /* AudioCallViewModel.swift in Sources */,
 				64B2772920D7F04B004FF75B /* KLMoyaAPIBase.swift in Sources */,
 				55B5C02C221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */,
 				6414C146214A1C5F00E45F32 /* IdentityQRCodeContentWalletUnit.swift in Sources */,
@@ -6821,6 +7119,7 @@
 				559CB0E4218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */,
 				64B98EB120F8B90C00C4EB11 /* LightningTransRecord+Helper.swift in Sources */,
 				55EF6B1321A812C7007E074A /* UserProfileViewModel.swift in Sources */,
+				557C84F922360FD1004C2E16 /* ARDMessageResponse.m in Sources */,
 				645D4ECE2117F92C0052D0E1 /* TokenTxFilter.swift in Sources */,
 				649732CC213F7D2B00C4D1D5 /* Coin+CoreDataClass.swift in Sources */,
 				64F07CE820D0E4CB00A60C5C /* AppDelegate.swift in Sources */,
@@ -6860,6 +7159,8 @@
 				648139C220DB8B7600CAA4D8 /* UINavigationBar+Shadow.swift in Sources */,
 				64813A6C20DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataProperties.swift in Sources */,
 				64F07E0220D241A000A60C5C /* UITableViewCell+CellIdentifier.swift in Sources */,
+				557C84F622360FD1004C2E16 /* ARDAppClient.m in Sources */,
+				557C850822360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64083D1A21106F8B00DE1C31 /* BTCTxHandler.swift in Sources */,
 				64A1179220D5372C00797C2C /* ChainType.swift in Sources */,
 				55EF6B7621A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
@@ -6953,6 +7254,7 @@
 				6481397C20DA4D1700CAA4D8 /* MnemonicHelper.swift in Sources */,
 				64F07DAB20D2406000A60C5C /* NetworkReachabilityHandler.swift in Sources */,
 				55EF6A8C21A812C6007E074A /* GroupMemberCollectionViewCell.swift in Sources */,
+				557C850E22360FD1004C2E16 /* RTCMediaConstraints+JSON.m in Sources */,
 				55EF6A6821A812C6007E074A /* ChatListViewController.swift in Sources */,
 				55EF6B2B21A81500007E074A /* IMUserManager.swift in Sources */,
 				6424B65220F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.swift in Sources */,
@@ -6968,6 +7270,7 @@
 				55EF6A6E21A812C6007E074A /* ChatNavigationController.swift in Sources */,
 				645D4EDB21197C4E0052D0E1 /* OWFieldInputValidator.swift in Sources */,
 				64769B2A2123FFFE00C4AB9E /* CICTx.swift in Sources */,
+				557C850522360FD1004C2E16 /* ARDWebSocketChannel.m in Sources */,
 				55EF6A3E21A812C6007E074A /* ChatHistoryTableViewCell.swift in Sources */,
 				649732B7213F763800C4D1D5 /* Wallet+CoreDataProperties.swift in Sources */,
 				64F07E0B20D241A000A60C5C /* UIViewController+Nib.swift in Sources */,
@@ -7000,6 +7303,7 @@
 				55EF6A5F21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */,
 				6EB422EF21635B0000DF75DB /* AgreementMeViewController.swift in Sources */,
 				640D88E820EE25860010D986 /* TransRecordStatus.swift in Sources */,
+				557C850B22360FD1004C2E16 /* RTCICEServer+JSON.m in Sources */,
 				5539A4A821676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
 				5526B53622114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				6470D68920F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
@@ -7046,6 +7350,7 @@
 				5508742E21EDD627007B3B3B /* ExploreDetailWebViewController.swift in Sources */,
 				64F07E4020D269A300A60C5C /* NSManagedObject+IdentifiablePredication.swift in Sources */,
 				64813A5820DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataProperties.swift in Sources */,
+				557C84FD22360FD1004C2E16 /* ARDSignalingMessage.m in Sources */,
 				64F07E0C20D241A000A60C5C /* UIViewController+QuickAlertPopUp.swift in Sources */,
 				55E1140321F728480062198B /* Reactive+UITextView.swift in Sources */,
 				6424B68B20F5CEAB00AEBCAD /* TransferRecordStatusOptionViewModel.swift in Sources */,
@@ -7116,9 +7421,11 @@
 				64F07E1B20D241A000A60C5C /* NVActivityExtension.swift in Sources */,
 				64E4E4CF2147AC94009B556B /* LaunchViewController.swift in Sources */,
 				64083D1421105E3900DE1C31 /* BTCTxFetcher.swift in Sources */,
+				557C84FA22360FD1004C2E16 /* ARDRegisterResponse.m in Sources */,
 				6470D67820F32B7700EB0780 /* WithdrawalConfirmChangeWalletViewModel.swift in Sources */,
 				64F07E1520D241A000A60C5C /* UIApplication+Top.swift in Sources */,
 				649732DC213FF38E00C4D1D5 /* MainCoinTypeStorage.swift in Sources */,
+				557C850022360FD1004C2E16 /* ARDUtilities.m in Sources */,
 				55AADEF921FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				649732D3213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataProperties.swift in Sources */,
 				64813A7E20DCADEB00CAA4D8 /* Asset+Helper.swift in Sources */,
@@ -7201,6 +7508,7 @@
 				64F07DDC20D241A000A60C5C /* Printer.swift in Sources */,
 				6424B68420F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.swift in Sources */,
 				6424B69820F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
+				557C850F22360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
 				55EF6A7E21A812C6007E074A /* AddGroupMemberTableViewCell.swift in Sources */,
 				5539A48821676F8C00A59ACC /* IdentityQRCodeDecryptionFlow.swift in Sources */,
 				5526B54022128E7700573576 /* PhotoAuthHandler.swift in Sources */,
@@ -7210,6 +7518,7 @@
 				6470D68720F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
 				55EF6A4821A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
 				64D8263420DFABB000C8FC63 /* DepositViewController.swift in Sources */,
+				557C85462236380E004C2E16 /* AudioCallViewController.swift in Sources */,
 				649E48C620ECF43800B217AD /* WalletPKeyQRCodeViewController.swift in Sources */,
 				64C9D48420FDDFF6000B0774 /* CreatetABUnitAddressViewModel.swift in Sources */,
 				640D88D520EDD6660010D986 /* ImportChainTypeChooseViewModel.swift in Sources */,
@@ -7247,6 +7556,7 @@
 				55EF6A9F21A812C6007E074A /* SearchMemberViewModel.swift in Sources */,
 				645006FB20F45E0500C0FC11 /* WithdrawalConfirmETHFeeInputViewModel.swift in Sources */,
 				64C9D45820FDD55A000B0774 /* AddressBookUnitBrowseViewModel.swift in Sources */,
+				557C854E2236383C004C2E16 /* AudioCallViewModel.swift in Sources */,
 				640D891520EF6A6D0010D986 /* TransRecordListViewModel.swift in Sources */,
 				55B5C02A221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */,
 				5539A4A621676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
@@ -7274,6 +7584,7 @@
 				64D8269A20E3E2AC00C8FC63 /* TransRecord+CoreDataClass.swift in Sources */,
 				55EF6B1121A812C7007E074A /* UserProfileViewModel.swift in Sources */,
 				6470D6AF20F35B1000EB0780 /* WithdrawalETHFeeInfoViewController.swift in Sources */,
+				557C84F722360FD1004C2E16 /* ARDMessageResponse.m in Sources */,
 				640D893B20F06DFB0010D986 /* WithdrawalAssetViewModel.swift in Sources */,
 				64F07DE820D241A000A60C5C /* UIImage+Sizing.swift in Sources */,
 				64B98EAF20F8B90C00C4EB11 /* LightningTransRecord+Helper.swift in Sources */,
@@ -7313,6 +7624,8 @@
 				64813AE120DE241500CAA4D8 /* MainTabBarViewController.swift in Sources */,
 				6470D61920F0EEBE00EB0780 /* WithdrawalAddressViewController.swift in Sources */,
 				5539A4A021676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.swift in Sources */,
+				557C84F422360FD1004C2E16 /* ARDAppClient.m in Sources */,
+				557C850622360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64F43BA9210B259700982AFD /* Unspent.swift in Sources */,
 				55EF6B7421A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
 				64C9D4B021042F6F000B0774 /* LocalAuthViewModel.swift in Sources */,
@@ -7406,6 +7719,7 @@
 				643200C420FB1E0400B11334 /* WithdrawalCICFeeInfoViewModel.swift in Sources */,
 				64B98EAB20F8B6B200C4EB11 /* CoinRate+Helper.swift in Sources */,
 				55EF6A8A21A812C6007E074A /* GroupMemberCollectionViewCell.swift in Sources */,
+				557C850C22360FD1004C2E16 /* RTCMediaConstraints+JSON.m in Sources */,
 				55EF6A6621A812C6007E074A /* ChatListViewController.swift in Sources */,
 				55EF6B2921A81500007E074A /* IMUserManager.swift in Sources */,
 				64F07E3620D2538C00A60C5C /* KLModuleViewController.swift in Sources */,
@@ -7421,6 +7735,7 @@
 				55EF6A6C21A812C6007E074A /* ChatNavigationController.swift in Sources */,
 				64C9D46720FDDE78000B0774 /* EditABUnitViewController.swift in Sources */,
 				6470D6A020F3550700EB0780 /* WithdrawalETHFeeInputViewController.swift in Sources */,
+				557C850322360FD1004C2E16 /* ARDWebSocketChannel.m in Sources */,
 				55EF6A3C21A812C6007E074A /* ChatHistoryTableViewCell.swift in Sources */,
 				64F07DA920D2406000A60C5C /* NetworkReachabilityHandler.swift in Sources */,
 				6424B6AA20F5F7B800AEBCAD /* TransferRecordsListViewController.swift in Sources */,
@@ -7453,6 +7768,7 @@
 				55EF6A5D21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */,
 				643200AC20FAE1DE00B11334 /* LightningTradeConfirmViewController.swift in Sources */,
 				6470D67220F304BA00EB0780 /* WithdrawalInfoOverviewViewModel.swift in Sources */,
+				557C850922360FD1004C2E16 /* RTCICEServer+JSON.m in Sources */,
 				64813A5520DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataClass.swift in Sources */,
 				5526B53422114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				643200E620FB8CB700B11334 /* MeViewController.swift in Sources */,
@@ -7492,6 +7808,7 @@
 				5508742F21EDD628007B3B3B /* ExploreDetailWebViewController.swift in Sources */,
 				64D80D6321364B50004DAC09 /* APISensitiveDataCrypter.swift in Sources */,
 				648139C720DBABC000CAA4D8 /* OWCrypter.swift in Sources */,
+				557C84FE22360FD1004C2E16 /* ARDSignalingMessage.m in Sources */,
 				6424B68C20F5CEAB00AEBCAD /* TransferRecordStatusOptionViewModel.swift in Sources */,
 				55E1140421F728480062198B /* Reactive+UITextView.swift in Sources */,
 				6470D6CE20F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.swift in Sources */,
@@ -7562,9 +7879,11 @@
 				64813AA320DCB18F00CAA4D8 /* Asset+CoreDataProperties.swift in Sources */,
 				640D893720F069F80010D986 /* WithdrawalChildVCProtocol.swift in Sources */,
 				64C9D47820FDDFBB000B0774 /* UpdatetABUnitAddressViewController.swift in Sources */,
+				557C84FB22360FD1004C2E16 /* ARDRegisterResponse.m in Sources */,
 				649732DD213FF38E00C4D1D5 /* MainCoinTypeStorage.swift in Sources */,
 				649732D4213F7D2B00C4D1D5 /* AddressBookUnit+CoreDataProperties.swift in Sources */,
 				649E48B720ECE79600B217AD /* WalletPrivateKeyInfoViewController.swift in Sources */,
+				557C850122360FD1004C2E16 /* ARDUtilities.m in Sources */,
 				55AADEFA21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */,
 				64813A7720DCA6EE00CAA4D8 /* CoinRate+CoreDataProperties.swift in Sources */,
 				55EF6B2D21A81500007E074A /* LocalIMUser.swift in Sources */,
@@ -7647,6 +7966,7 @@
 				640D891120EF62C40010D986 /* BlockExplorerURLCreator.swift in Sources */,
 				6424B69920F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
 				64D8264220DFB94D00C8FC63 /* QRCodeGenerator.swift in Sources */,
+				557C851022360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
 				5539A48921676F8C00A59ACC /* IdentityQRCodeDecryptionFlow.swift in Sources */,
 				55EF6A7F21A812C6007E074A /* AddGroupMemberTableViewCell.swift in Sources */,
 				5526B54122128E7700573576 /* PhotoAuthHandler.swift in Sources */,
@@ -7656,6 +7976,7 @@
 				64F07D2220D0E8FA00A60C5C /* AppDelegate.swift in Sources */,
 				64D8269B20E3E2AC00C8FC63 /* TransRecord+CoreDataClass.swift in Sources */,
 				55EF6A4921A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
+				557C85472236380E004C2E16 /* AudioCallViewController.swift in Sources */,
 				64D8262F20DFA0BB00C8FC63 /* WalletRefreshControl.swift in Sources */,
 				64C9D48520FDDFF6000B0774 /* CreatetABUnitAddressViewModel.swift in Sources */,
 				6470D61020F091C400EB0780 /* WithdrawalBaseViewModel.swift in Sources */,
@@ -7693,6 +8014,7 @@
 				55EF6B6221A81A58007E074A /* FriendInfoModel.swift in Sources */,
 				55EF6AA021A812C6007E074A /* SearchMemberViewModel.swift in Sources */,
 				64C9D45920FDD55A000B0774 /* AddressBookUnitBrowseViewModel.swift in Sources */,
+				557C854F2236383C004C2E16 /* AudioCallViewModel.swift in Sources */,
 				6470D62E20F1131100EB0780 /* FeeRateManager.swift in Sources */,
 				55B5C02B221A9703007250FA /* OmniExplorerURLCreator.swift in Sources */,
 				5539A4A721676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
@@ -7720,6 +8042,7 @@
 				559CB0E3218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */,
 				64B2772E20D8A296004FF75B /* OWQRCodeBaseViewController.swift in Sources */,
 				55EF6B1221A812C7007E074A /* UserProfileViewModel.swift in Sources */,
+				557C84F822360FD1004C2E16 /* ARDMessageResponse.m in Sources */,
 				6470D69420F341BC00EB0780 /* WithdrawalConfirmPwdValidationViewController.swift in Sources */,
 				6481397620DA4AF100CAA4D8 /* OWMnemonicViewModel.swift in Sources */,
 				64B98EB020F8B90C00C4EB11 /* LightningTransRecord+Helper.swift in Sources */,
@@ -7759,6 +8082,8 @@
 				64F43BAA210B259700982AFD /* Unspent.swift in Sources */,
 				5539A4A121676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.swift in Sources */,
 				64C9D4B121042F6F000B0774 /* LocalAuthViewModel.swift in Sources */,
+				557C84F522360FD1004C2E16 /* ARDAppClient.m in Sources */,
+				557C850722360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64813A4120DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataProperties.swift in Sources */,
 				55EF6B7521A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
 				64813A6820DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataClass.swift in Sources */,
@@ -7852,6 +8177,7 @@
 				64813A6220DCA6EE00CAA4D8 /* CoinSelection+CoreDataClass.swift in Sources */,
 				64F07E8020D36B8700A60C5C /* KLViewModel.swift in Sources */,
 				55EF6A8B21A812C6007E074A /* GroupMemberCollectionViewCell.swift in Sources */,
+				557C850D22360FD1004C2E16 /* RTCMediaConstraints+JSON.m in Sources */,
 				55EF6A6721A812C6007E074A /* ChatListViewController.swift in Sources */,
 				55EF6B2A21A81500007E074A /* IMUserManager.swift in Sources */,
 				64D8266720E22F5800C8FC63 /* ManageAssetViewModel.swift in Sources */,
@@ -7867,6 +8193,7 @@
 				55EF6A6D21A812C6007E074A /* ChatNavigationController.swift in Sources */,
 				640D88CE20EDD6540010D986 /* ImportChainTypeChooseViewController.swift in Sources */,
 				6424B6AB20F5F7B800AEBCAD /* TransferRecordsListViewController.swift in Sources */,
+				557C850422360FD1004C2E16 /* ARDWebSocketChannel.m in Sources */,
 				55EF6A3D21A812C6007E074A /* ChatHistoryTableViewCell.swift in Sources */,
 				64F07E3720D2538C00A60C5C /* KLModuleViewController.swift in Sources */,
 				645D4EDA21197C4E0052D0E1 /* OWFieldInputValidator.swift in Sources */,
@@ -7899,6 +8226,7 @@
 				55EF6A5E21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */,
 				64D8263520DFABB000C8FC63 /* DepositViewController.swift in Sources */,
 				64F07DAA20D2406000A60C5C /* NetworkReachabilityHandler.swift in Sources */,
+				557C850A22360FD1004C2E16 /* RTCICEServer+JSON.m in Sources */,
 				6470D68820F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
 				5526B53522114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				643200E720FB8CB700B11334 /* MeViewController.swift in Sources */,
@@ -8184,7 +8512,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT";
+				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-SIT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 SIT";
@@ -8211,7 +8539,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT";
+				OTHER_SWIFT_FLAGS = "-DDEBUG -DSIT $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.OfflineWallet-SIT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 SIT";
@@ -8239,7 +8567,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT";
+				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 UAT";
@@ -8267,7 +8595,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT";
+				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 UAT";

@@ -35,7 +35,7 @@ platform :ios do
     type: "development", 
     force: true,
     force_for_new_devices: true,
-    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    git_url: "ssh://git@125.227.132.130:10022/iOS/Match.git",
     app_identifier: "com.gib.TTChain-SIT",
     team_id: "BKBWK8HFB8"
     )
@@ -49,7 +49,7 @@ platform :ios do
     type: "adhoc", 
     force: true,
     force_for_new_devices: true,
-    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    git_url: "ssh://git@125.227.132.130:10022/iOS/Match.git",
     app_identifier: "com.gib.TTChain-SIT",
     team_id: "BKBWK8HFB8"
     )
@@ -94,7 +94,7 @@ platform :ios do
     type: "development", 
     force: true,
     force_for_new_devices: true,
-    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    git_url: "ssh://git@125.227.132.130:10022/iOS/Match.git",
     app_identifier: "com.gib.TTChain-UAT",
     team_id: "BKBWK8HFB8"
     )
@@ -106,7 +106,7 @@ platform :ios do
     type: "adhoc", 
     force: true,
     force_for_new_devices: true,
-    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    git_url: "ssh://git@125.227.132.130:10022/iOS/Match.git",
     app_identifier: "com.gib.TTChain-UAT",
     team_id: "BKBWK8HFB8"
     )
@@ -151,7 +151,7 @@ desc "Build adhoc .ipa [uat]"
     type: "development", 
     force: true,
     force_for_new_devices: true,
-    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    git_url: "ssh://git@125.227.132.130:10022/iOS/Match.git",
     app_identifier: "com.gib.TTChain",
     team_id: "BKBWK8HFB8"
     )
@@ -163,7 +163,7 @@ desc "Build adhoc .ipa [uat]"
     type: "adhoc", 
     force: true,
     force_for_new_devices: true,
-    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    git_url: "ssh://git@125.227.132.130:10022/iOS/Match.git",
     app_identifier: "com.gib.TTChain",
     team_id: "BKBWK8HFB8"
     )
@@ -206,7 +206,7 @@ desc "Build adhoc .ipa [PRD]"
     match(
     type: "appstore", 
     force_for_new_devices: true,
-    git_url: "ssh://git@125.227.132.130:10022/KeithLee/GIBAppleLicense.git",
+    git_url: "ssh://git@125.227.132.130:10022/iOS/Match.git",
     app_identifier: "com.gib.TTChain",
     team_id: "BKBWK8HFB8"
     )

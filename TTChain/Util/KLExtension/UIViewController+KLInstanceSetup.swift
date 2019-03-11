@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 protocol KLInstanceSetupViewController {
     associatedtype Constructor
     static func instance(from constructor: Constructor) -> Self

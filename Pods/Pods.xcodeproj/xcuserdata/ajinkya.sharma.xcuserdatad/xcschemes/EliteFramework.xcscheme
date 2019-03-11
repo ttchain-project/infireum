@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "01B5935C0D26CFB12F80E8CF76C07CDB"
+               BlueprintIdentifier = "BF21F170D904F39D628673736BFD94E3"
+               BuildableName = "EliteFramework.framework"
                BlueprintName = "EliteFramework"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "EliteFramework.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

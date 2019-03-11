@@ -19,12 +19,18 @@ struct Tokens{
         }
         return imUser.uID
     }
-    static func getAuthTokenAndRocketChatUserID() -> (String,String) {
+    static func getAuthToken() -> String {
         
         guard let rocketChatUser = RocketChatManager.manager.rocketChatUser.value else {
-            return ("","")
+            return ""
         }
-        return (rocketChatUser.authToken,rocketChatUser.rocketChatUserId)
+        return rocketChatUser.authToken
+    }
+    static func getRocketChatUserID() -> String {
+        guard let rocketChatUser = RocketChatManager.manager.rocketChatUser.value else {
+            return ""
+        }
+        return rocketChatUser.rocketChatUserId
     }
 }
 
@@ -464,9 +470,8 @@ struct RespondFriendRequestAPI : KLMoyaIMAPIData {
     var path: String {return "/IM/friendship/\(invitationId)" }
     var method: Moya.Method { return .put }
     var task: Task {
-        let authTokens = Tokens.getAuthTokenAndRocketChatUserID()
         return Moya.Task.requestParameters(
-            parameters: [ "inviteeUID": Tokens.getUID(),"accept":accept, "authToken":authTokens.0, "rocketChatUserId":authTokens.1 ],
+            parameters: [ "inviteeUID": Tokens.getUID(),"accept":accept, "authToken":Tokens.getAuthToken(), "rocketChatUserId":Tokens.getRocketChatUserID() ],
             encoding: JSONEncoding.default
         )
     }
@@ -496,9 +501,8 @@ struct RespondGroupRequestAPI : KLMoyaIMAPIData {
     var path: String {return "/IM/GroupInviteReply" }
     var method: Moya.Method { return .post }
     var task: Task {
-        let authTokens = Tokens.getAuthTokenAndRocketChatUserID()
         return Moya.Task.requestParameters(
-            parameters: [ "groupID": groupID,"uid":Tokens.getUID(),"status":groupAction.rawValue, "authToken":authTokens.0, "rocketChatUserId":authTokens.1 ],
+            parameters: [ "groupID": groupID,"uid":Tokens.getUID(),"status":groupAction.rawValue, "authToken":Tokens.getAuthToken(), "rocketChatUserId":Tokens.getRocketChatUserID() ],
             encoding: JSONEncoding.default
         )
     }
@@ -526,9 +530,8 @@ struct GetAllCommunicationsAPI : KLMoyaIMAPIData {
     var path: String {return "/IM/communications" }
     var method: Moya.Method { return .get }
     var task: Task {
-        let rocketChatUser = Tokens.getAuthTokenAndRocketChatUserID()
         return Moya.Task.requestParameters(
-            parameters: [ "uid":Tokens.getUID(), "authToken":rocketChatUser.0, "rocketChatUserId":rocketChatUser.1 ],
+            parameters: [ "uid":Tokens.getUID(), "authToken":Tokens.getAuthToken(), "rocketChatUserId":Tokens.getRocketChatUserID() ],
             encoding: URLEncoding.default
         )
     }
@@ -856,8 +859,8 @@ struct UploadFileAPI: KLMoyaIMAPIData {
              MultipartFormData.init(provider: .data(parameters.uid.data(using: .utf8)!), name: "uid"),
              MultipartFormData.init(provider: .data(parameters.roomId.data(using: .utf8)!), name: "roomId"),
              MultipartFormData.init(provider: .data("image".data(using: .utf8)!), name: "fileType"),
-             MultipartFormData.init(provider: .data(Tokens.getAuthTokenAndRocketChatUserID().0.data(using: .utf8)!), name: "authToken"),
-             MultipartFormData.init(provider: .data(Tokens.getAuthTokenAndRocketChatUserID().1.data(using: .utf8)!), name: "rocketChatUserId")
+             MultipartFormData.init(provider: .data(Tokens.getAuthToken().data(using: .utf8)!), name: "authToken"),
+             MultipartFormData.init(provider: .data(Tokens.getRocketChatUserID().data(using: .utf8)!), name: "rocketChatUserId")
         ]
         return .uploadMultipart(multiPartData)}
     
@@ -894,10 +897,10 @@ struct IMSendMessageAPI:KLMoyaIMAPIData {
     var task: Task {
         
         var dict = parameters.asDictionary()
-        dict["authToken"] = Tokens.getAuthTokenAndRocketChatUserID().0
-        dict["rocketChatUserId"] = Tokens.getAuthTokenAndRocketChatUserID().1
+        dict["authToken"] = Tokens.getAuthToken()
+        dict["rocketChatUserId"] = Tokens.getRocketChatUserID()
         return Moya.Task.requestParameters(
-            parameters: dict,
+            parameters: ["authToken":Tokens.getAuthToken(), "rocketChatUserId":Tokens.getRocketChatUserID()],
             encoding: JSONEncoding.default
         )
     }
@@ -1109,6 +1112,36 @@ struct JiGuangPushSettingAPIModel: KLJSONMappableMoyaResponse {
     }
 }
 
+//POST /IM/CallVideo
+struct InAppCallApi:KLMoyaIMAPIData {
+    
+    struct Parameter:Paramenter {
+        enum CallType:String,Codable {
+            case audio = "audio"
+            case video = "video"
+        }
+        
+        let uid:String
+        let type:CallType
+        let roomId:String
+        let isGroup:Bool
+    }
+    var path: String {
+        return "/IM/CallVideo"
+    }
+    
+    var method: Moya.Method {
+        return .post
+    }
+    
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: [:], encoding: JSONEncoding.default)
+    }
+    
+    var stub: Data?
+    
+    
+}
 
 //MARK: - ROCKETCHAT API AND MODELS
 
