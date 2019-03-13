@@ -11,9 +11,10 @@ import RxSwift
 import RxCocoa
 
 class AudioCallViewModel: KLRxViewModel {
-   
+    
     struct Input {
-        
+        let roomId:String
+        let roomType:RoomType
     }
     
     struct Output {
@@ -39,5 +40,11 @@ class AudioCallViewModel: KLRxViewModel {
     func concatOutput() {
         
     }
-
+    
+    func initiateCall() {
+        AVCallHandler.handler.initiateAudioCall(forRoomId: self.input.roomId)
+    }
+    func joinCall(forStreamId streamId:String)  {
+        AVCallHandler.handler.acceptCall(forStreamId: streamId)
+    }
 }

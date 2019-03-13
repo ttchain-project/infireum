@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import SwiftyJSON
 
 class TTNotificationHandler {
   
@@ -51,5 +52,52 @@ class TTNotificationHandler {
                 }
             }, onError: nil).disposed(by: TTNotificationHandler.shared.bag)
         }
+    }
+    
+    func parseNotification(userInfo:[AnyHashable : Any]) {
+     
+        OWRxNotificationCenter.instance.notifyNotificationReceived()
+
+        guard let apsDict = userInfo["aps"] as? [String:Any], let alert = apsDict["alert"] as? [String:Any],let messageBody = alert["body"] as? String else {
+            return
+        }
+        var headImgURL:URL
+        let headImg = userInfo["headImg"] as! String
+        headImgURL = URL.init(string: headImg)!
+        
+        var callTitle :String = ""
+        if userInfo["roomName"] as? String != nil {
+            callTitle = userInfo["roomName"] as! String
+        }
+        
+        guard let messageData = messageBody.data(using: .utf8),let dict = try! JSONSerialization.jsonObject(with: messageData, options: []) as? [String: Any] else{
+            return
+        }
+        
+        guard let callMessageModel = CallMessageModel.init(json: dict) else {
+            return
+        }
+         let rootVC = UIApplication.shared.keyWindow?.rootViewController
+        //Show Incoming Call if not already in call
+            let incomingCallVC = IncomingCallViewController.instance(from: IncomingCallViewController.Config(callModel: callMessageModel, headImage: headImgURL, callTitle: callTitle, didReceiveCall: {
+                result in
+                if result {
+                    self.connectCall(forRoom: callMessageModel.roomId, calleeName: callTitle, streamId: callMessageModel.streamId)
+                    
+                } else {
+                    
+                }
+                
+            }))
+        
+        
+            rootVC?.present(incomingCallVC, animated: true, completion: nil)
+    }
+    
+    private func connectCall(forRoom roomId:String, calleeName:String, streamId:String) {
+        let config = AudioCallViewController.Config.init(roomId: roomId, calleeName: calleeName, roomType: .pvtChat, callAction: CallAction.joinCall, streamId: streamId)
+        let audioCallVC = AudioCallViewController.instance(from: config)
+        let rootVC = UIApplication.shared.keyWindow?.rootViewController
+        rootVC?.present(audioCallVC, animated: true, completion: nil)
     }
 }

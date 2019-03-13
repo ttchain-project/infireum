@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IncomingCallViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="acceptCall" destination="3pO-6o-tey" id="DUq-9x-SSX"/>
+                <outlet property="callMessageLabel" destination="sBu-Av-F7X" id="7YJ-Tp-pfz"/>
+                <outlet property="callTitleLabel" destination="d7D-yA-DXC" id="deB-vm-IP9"/>
+                <outlet property="declineCall" destination="Oq8-8C-LSr" id="vpl-1V-R0y"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7D-yA-DXC">
+                    <rect key="frame" x="20" y="60" width="335" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBu-Av-F7X">
+                    <rect key="frame" x="166.5" y="106" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pO-6o-tey">
+                    <rect key="frame" x="257.5" y="557" width="60" height="60"/>
+                    <state key="normal" image="iconCallAnswer"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oq8-8C-LSr">
+                    <rect key="frame" x="57.5" y="557" width="60" height="60"/>
+                    <state key="normal" image="iconCallRefuse"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="sBu-Av-F7X" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XE8-rA-F7H"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Oq8-8C-LSr" secondAttribute="bottom" constant="50" id="YPO-qO-Omq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="d7D-yA-DXC" secondAttribute="trailing" constant="20" id="ZmL-Nv-hmD"/>
+                <constraint firstItem="Oq8-8C-LSr" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" constant="-100" id="a9a-hs-mKE"/>
+                <constraint firstItem="3pO-6o-tey" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" constant="100" id="bXN-GA-Eej"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="3pO-6o-tey" secondAttribute="bottom" constant="50" id="uvk-Nw-SbO"/>
+                <constraint firstItem="sBu-Av-F7X" firstAttribute="top" secondItem="d7D-yA-DXC" secondAttribute="bottom" constant="25" id="v3l-Fe-7Cu"/>
+                <constraint firstItem="d7D-yA-DXC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="v7M-H4-tEw"/>
+                <constraint firstItem="d7D-yA-DXC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="zyE-AC-kXn"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconCallAnswer" width="60" height="60"/>
+        <image name="iconCallRefuse" width="60" height="60"/>
+    </resources>
+</document>

@@ -167,7 +167,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             }
             
             switch messageModel.msgType {
-            case .general:
+            case .general,.audioCall(_):
                 let chatCell = tv.dequeueReusableCell(withIdentifier: ChatMessageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageTableViewCell
                 
                 chatCell.config(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
@@ -178,6 +178,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 })
                 
                 chatCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    if case .audioCall = messageModel.msgType {
+                        return
+                    }
                     self.showOptionsForLongGesture(for: messageModel)
                 }).disposed(by: chatCell.bag)
                 cell = chatCell
@@ -288,6 +291,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                     self.displayCamera(forSource: .camera)
                                 case .addReceipt:
                                     self.toAddReciept()
+                                case .makeAudioCall:
+                                    self.makeAudioCall()
                                 default:
                                     print("Pending implementation")
                                 }
@@ -489,11 +494,17 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 return
             }
             self.viewModel.sendImageAsMessage(image: image)
-        case .receipt:
+        case .receipt,.audioCall(_):
             return
         }
     }
     
+    func makeAudioCall() {
+        let config = AudioCallViewController.Config.init(roomId: self.viewModel.input.roomID, calleeName: self.viewModel.input.chatTitle, roomType: .pvtChat, callAction: CallAction.startCall,streamId: nil)
+        
+        let audioCallVC = AudioCallViewController.instance(from: config)
+        self.present(audioCallVC, animated: true, completion: nil)
+    }
    
 }
 
