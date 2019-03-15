@@ -19,12 +19,18 @@ struct Tokens{
         }
         return imUser.uID
     }
-    static func getAuthTokenAndRocketChatUserID() -> (String,String) {
+    static func getAuthToken() -> String {
         
         guard let rocketChatUser = RocketChatManager.manager.rocketChatUser.value else {
-            return ("","")
+            return ""
         }
-        return (rocketChatUser.authToken,rocketChatUser.rocketChatUserId)
+        return rocketChatUser.authToken
+    }
+    static func getRocketChatUserID() -> String {
+        guard let rocketChatUser = RocketChatManager.manager.rocketChatUser.value else {
+            return ""
+        }
+        return rocketChatUser.rocketChatUserId
     }
 }
 
@@ -57,7 +63,7 @@ enum IMAPI :KLMoyaAPISet {
         case .sendMessage(let api): return api
         case .blockUser(let api): return api
         case .registerJiGuangPush(let api): return api
-
+        case .inAppCall(let api): return api
         }
     }
     case preLogin(PreLoginAPI)
@@ -86,7 +92,7 @@ enum IMAPI :KLMoyaAPISet {
     case blockUser(BlockUserAPI)
     case getDestructMessageSetting(GetSelfDestructingStatusAPI)
     case registerJiGuangPush(JiGuangPushSettingAPI)
-
+    case inAppCall(InAppCallApi)
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -464,9 +470,8 @@ struct RespondFriendRequestAPI : KLMoyaIMAPIData {
     var path: String {return "/IM/friendship/\(invitationId)" }
     var method: Moya.Method { return .put }
     var task: Task {
-        let authTokens = Tokens.getAuthTokenAndRocketChatUserID()
         return Moya.Task.requestParameters(
-            parameters: [ "inviteeUID": Tokens.getUID(),"accept":accept, "authToken":authTokens.0, "rocketChatUserId":authTokens.1 ],
+            parameters: [ "inviteeUID": Tokens.getUID(),"accept":accept, "authToken":Tokens.getAuthToken(), "rocketChatUserId":Tokens.getRocketChatUserID() ],
             encoding: JSONEncoding.default
         )
     }
@@ -496,9 +501,8 @@ struct RespondGroupRequestAPI : KLMoyaIMAPIData {
     var path: String {return "/IM/GroupInviteReply" }
     var method: Moya.Method { return .post }
     var task: Task {
-        let authTokens = Tokens.getAuthTokenAndRocketChatUserID()
         return Moya.Task.requestParameters(
-            parameters: [ "groupID": groupID,"uid":Tokens.getUID(),"status":groupAction.rawValue, "authToken":authTokens.0, "rocketChatUserId":authTokens.1 ],
+            parameters: [ "groupID": groupID,"uid":Tokens.getUID(),"status":groupAction.rawValue, "authToken":Tokens.getAuthToken(), "rocketChatUserId":Tokens.getRocketChatUserID() ],
             encoding: JSONEncoding.default
         )
     }
@@ -526,9 +530,8 @@ struct GetAllCommunicationsAPI : KLMoyaIMAPIData {
     var path: String {return "/IM/communications" }
     var method: Moya.Method { return .get }
     var task: Task {
-        let rocketChatUser = Tokens.getAuthTokenAndRocketChatUserID()
         return Moya.Task.requestParameters(
-            parameters: [ "uid":Tokens.getUID(), "authToken":rocketChatUser.0, "rocketChatUserId":rocketChatUser.1 ],
+            parameters: [ "uid":Tokens.getUID(), "authToken":Tokens.getAuthToken(), "rocketChatUserId":Tokens.getRocketChatUserID() ],
             encoding: URLEncoding.default
         )
     }
@@ -856,8 +859,8 @@ struct UploadFileAPI: KLMoyaIMAPIData {
              MultipartFormData.init(provider: .data(parameters.uid.data(using: .utf8)!), name: "uid"),
              MultipartFormData.init(provider: .data(parameters.roomId.data(using: .utf8)!), name: "roomId"),
              MultipartFormData.init(provider: .data("image".data(using: .utf8)!), name: "fileType"),
-             MultipartFormData.init(provider: .data(Tokens.getAuthTokenAndRocketChatUserID().0.data(using: .utf8)!), name: "authToken"),
-             MultipartFormData.init(provider: .data(Tokens.getAuthTokenAndRocketChatUserID().1.data(using: .utf8)!), name: "rocketChatUserId")
+             MultipartFormData.init(provider: .data(Tokens.getAuthToken().data(using: .utf8)!), name: "authToken"),
+             MultipartFormData.init(provider: .data(Tokens.getRocketChatUserID().data(using: .utf8)!), name: "rocketChatUserId")
         ]
         return .uploadMultipart(multiPartData)}
     
@@ -894,8 +897,8 @@ struct IMSendMessageAPI:KLMoyaIMAPIData {
     var task: Task {
         
         var dict = parameters.asDictionary()
-        dict["authToken"] = Tokens.getAuthTokenAndRocketChatUserID().0
-        dict["rocketChatUserId"] = Tokens.getAuthTokenAndRocketChatUserID().1
+        dict["authToken"] = Tokens.getAuthToken()
+        dict["rocketChatUserId"] = Tokens.getRocketChatUserID()
         return Moya.Task.requestParameters(
             parameters: dict,
             encoding: JSONEncoding.default
@@ -1109,6 +1112,55 @@ struct JiGuangPushSettingAPIModel: KLJSONMappableMoyaResponse {
     }
 }
 
+//POST /IM/CallVideo
+struct InAppCallApi:KLMoyaIMAPIData {
+    
+    struct Parameter:Paramenter {
+        
+        let type:CallType
+        let roomId:String
+        let isGroup:Bool
+        let isConnect:Bool
+        var streamId: String? = nil
+        private let uid = Tokens.getUID()
+        private let rocketChatUserId = Tokens.getRocketChatUserID()
+        private let authToken = Tokens.getAuthToken()
+        
+    }
+    
+    let parameter: InAppCallApi.Parameter
+    
+    var path: String {
+        return "/IM/CallVideo"
+    }
+    
+    var method: Moya.Method {
+        return .post
+    }
+    
+    var task: Task {
+        
+        return Moya.Task.requestParameters(parameters: parameter.asDictionary(), encoding: JSONEncoding.default)
+    }
+    
+    var stub: Data? {
+        return nil
+    }
+}
+
+
+struct InAppCallApiModel:KLJSONMappableMoyaResponse {
+    
+    let streamId:String
+    init(json: JSON, sourceAPI: InAppCallApi) throws {
+        guard let streamId = json["streamId"].string else {
+            throw GTServerAPIError.noData
+        }
+        self.streamId = streamId
+    }
+    
+    typealias API = InAppCallApi
+}
 
 //MARK: - ROCKETCHAT API AND MODELS
 
@@ -1261,54 +1313,7 @@ struct  GetRocketChatMessageHistoryAPIModel:KLJSONMappableMoyaResponse {
             throw GTServerAPIError.incorrectResult("", json["error"].string ?? "")
         }
         self.messageArray = messagesJSON.compactMap({ (jsonDict)  in
-            guard let msgID = jsonDict["_id"].string,
-                let roomId = jsonDict["rid"].string,
-                let timeStampString = jsonDict["ts"].string,
-                let userDict = jsonDict["u"].dictionary,
-                let userId = userDict["_id"]?.string,
-                let name = userDict["name"]?.string,
-                let userName = userDict["username"]?.string
-                else {
-                    return nil
-            }
-            
-            let msgType = jsonDict["msgType"].string ?? "general"
-            var messageType : MessageType = {
-                switch msgType {
-                case "file":
-                    return .file
-                default:
-                    return .general
-                }
-            }()
-            
-            var msg:String = ""
-            if case .file = messageType {
-                if let url = jsonDict["msg"].string  {
-                    if let data = url.data(using: .utf8) {
-                        let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                        if dict != nil, dict!["fileUrl"] != nil {
-                            msg = dict!["fileUrl"] as! String
-                        }
-                    }
-                }
-            }else {
-                msg = jsonDict["msg"].string ?? ""
-                if msg.contains("address"),msg.contains("amount"),msg.contains("coinID") {
-                    if let url = jsonDict["msg"].string  {
-                        if let data = url.data(using: .utf8) {
-                            let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                            if dict != nil, dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
-                                messageType = .receipt(messageDict: dict as! [String : String])
-                            }
-                        }
-                    }
-                }
-            }
-            
-            let date = DateFormatter.date(from: timeStampString, withFormat: C.IMDateFormat.dateFormatForIM)
-            let messageModel = MessageModel.init(messageId: msgID, roomId: roomId, msg: msg, senderId:userId, senderName:name, timestamp: date!, messageType: messageType, userName:userName)
-            return messageModel
+           return MessageModel.init(messageResponse: jsonDict)
         })
         
     }

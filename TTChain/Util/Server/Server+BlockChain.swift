@@ -672,10 +672,17 @@
         return fire(router: .IM(.sendMessage(api)))
 
     }
-    
+    //MARK: PUT /IM/member/JiguangPushSetting
     func registerJiGuangPush(registrationId: String) -> RxAPIResponse<JiGuangPushSettingAPIModel> {
         let api = JiGuangPushSettingAPI(registrationId: registrationId)
         return fire(router: .IM(.registerJiGuangPush(api)))
+    }
+    
+    //MARK: POST /IM/CallVideo
+    func initiateInAppCall(parameter: InAppCallApi.Parameter) -> RxAPIResponse<InAppCallApiModel> {
+        let api = InAppCallApi.init(parameter: parameter)
+        return fire(router: .IM(.inAppCall(api)))
+
     }
  }
  

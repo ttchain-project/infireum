@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AudioCallViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="callImageView" destination="uI1-B4-fBm" id="0oe-h8-VJ1"/>
+                <outlet property="callTitleLabel" destination="8qu-hS-Ezo" id="m8K-IH-L9Q"/>
+                <outlet property="endCallButton" destination="yfs-IB-bBU" id="4hZ-nw-eOa"/>
+                <outlet property="muteCallButton" destination="kf0-Sb-c7w" id="ZAt-mX-PWn"/>
+                <outlet property="speakerButton" destination="KoQ-AL-ygo" id="qzw-az-di0"/>
+                <outlet property="timerLabel" destination="cBh-t3-3F8" id="pti-bV-aCk"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qu-hS-Ezo">
+                    <rect key="frame" x="20" y="70" width="335" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uI1-B4-fBm">
+                    <rect key="frame" x="142.5" y="140" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="uI1-B4-fBm" secondAttribute="height" multiplier="1:1" id="Fkp-XT-bRy"/>
+                        <constraint firstAttribute="height" constant="90" id="pV8-xk-8j0"/>
+                    </constraints>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SXW-Iy-3Yu">
+                    <rect key="frame" x="47" y="547" width="281" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf0-Sb-c7w">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                            <state key="normal" image="iconCallMute"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfs-IB-bBU">
+                            <rect key="frame" x="110.5" y="0.0" width="60" height="60"/>
+                            <state key="normal" image="iconCallCancel"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KoQ-AL-ygo">
+                            <rect key="frame" x="221" y="0.0" width="60" height="60"/>
+                            <state key="normal" image="iconCallSpeaker"/>
+                        </button>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBh-t3-3F8">
+                    <rect key="frame" x="166.5" y="98" width="42" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="SXW-Iy-3Yu" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.75" id="9Jg-qx-2yp"/>
+                <constraint firstItem="8qu-hS-Ezo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BXa-Sh-1vp"/>
+                <constraint firstItem="8qu-hS-Ezo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="Irc-H6-4LZ"/>
+                <constraint firstItem="cBh-t3-3F8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="J45-Hd-v9D"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8qu-hS-Ezo" secondAttribute="trailing" constant="20" id="JqI-fL-BIu"/>
+                <constraint firstItem="uI1-B4-fBm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YIZ-gI-V5c"/>
+                <constraint firstItem="uI1-B4-fBm" firstAttribute="top" secondItem="cBh-t3-3F8" secondAttribute="bottom" constant="21.5" id="bcg-vq-8NV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SXW-Iy-3Yu" secondAttribute="bottom" constant="60" id="gEe-KH-clq"/>
+                <constraint firstItem="SXW-Iy-3Yu" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="gbM-GV-VGQ"/>
+                <constraint firstItem="cBh-t3-3F8" firstAttribute="top" secondItem="8qu-hS-Ezo" secondAttribute="bottom" constant="7.5" id="qgE-ha-5BK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconCallCancel" width="60" height="60"/>
+        <image name="iconCallMute" width="60" height="60"/>
+        <image name="iconCallSpeaker" width="60" height="60"/>
+    </resources>
+</document>

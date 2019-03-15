@@ -68,7 +68,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         self.output = output
         
         if self.input!.roomType == .pvtChat {
-            self.functions.append(FunctionModel.init(title: LM.dls.chat_secret_setting, image: UIImage(named: "iconSecretColor"), type: .startSecretChat)
+            self.functions.append(contentsOf:[FunctionModel.init(title: LM.dls.chat_secret_setting, image: UIImage(named: "iconSecretColor"), type: .startSecretChat),
+                                  FunctionModel.init(title: "Audio Call", image: #imageLiteral(resourceName: "iconCallColor"), type: .makeAudioCall)]
             )
             self.collectionView.reloadData()
         }
@@ -82,11 +83,10 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     var functions: [FunctionModel] = [
-        FunctionModel.init(title: LM.dls.chat_room_image, image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
-                                      FunctionModel.init(title: LM.dls.select_from_camera, image: UIImage(named: "iconCameraColor"), type: .openCamera),
+                                      FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
+                                      FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
                                       
-                                       FunctionModel.init(title: LM.dls.chat_room_receipt, image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt)
-   
+                                       FunctionModel.init(title: "Receipt", image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt)
 ]
     
     

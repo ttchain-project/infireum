@@ -69,6 +69,7 @@ PODS:
   - JCore (1.2.5)
   - JPush (3.1.1.1):
     - JCore (~> 1.2.5)
+  - libjingle_peerconnection (11177.2.0)
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -106,6 +107,7 @@ PODS:
     - CryptoSwift (~> 0.11)
   - secp256k1.swift (0.1.4)
   - SkyFloatingLabelTextField (3.5.2)
+  - SocketRocket (0.5.1)
   - Starscream (3.0.6)
   - SwifterSwift (4.4.0):
     - SwifterSwift/AppKit (= 4.4.0)
@@ -147,6 +149,7 @@ DEPENDENCIES:
   - HockeySDK
   - IQKeyboardManagerSwift
   - JPush (~> 3.1.1.1)
+  - libjingle_peerconnection
   - Moya/RxSwift
   - MZFormSheetPresentationController
   - NVActivityIndicatorView
@@ -156,6 +159,7 @@ DEPENDENCIES:
   - RxGesture
   - RxOptional
   - SkyFloatingLabelTextField
+  - SocketRocket
   - Starscream (~> 3.0.2)
   - SwifterSwift
   - SwiftMoment
@@ -188,6 +192,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - JCore
     - JPush
+    - libjingle_peerconnection
     - Moya
     - MZAppearance
     - MZFormSheetPresentationController
@@ -204,6 +209,7 @@ SPEC REPOS:
     - scrypt
     - secp256k1.swift
     - SkyFloatingLabelTextField
+    - SocketRocket
     - Starscream
     - SwifterSwift
     - SwiftMoment
@@ -235,6 +241,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   JCore: 14706de2640b25fb77dbd02332696491407f37c9
   JPush: 25dd9013fbe106082c14f9f30a82364ee98852fb
+  libjingle_peerconnection: 3458f646ddd61f08a9f3a0c43fb01fff5c165eb8
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
   MZFormSheetPresentationController: fbfdbad31884f16fac17fbe3c44c168306cc1095
@@ -251,6 +258,7 @@ SPEC CHECKSUMS:
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SkyFloatingLabelTextField: f0672b67cd0e86abda946c0dc3b2fe8580767dbb
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
   SwiftMoment: dc6dd27012e267819104cbb03f74ff9192dd0b42
@@ -258,6 +266,6 @@ SPEC CHECKSUMS:
   Tabman: a09f7d7aa62b231ec475ca9eb9171f7cc973a3d7
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: e9e33cc8da498369af91fc7d54a21351a8ad58f4
+PODFILE CHECKSUM: f56b942d5f2d6982d25b92218caa949472f60952
 
 COCOAPODS: 1.5.3

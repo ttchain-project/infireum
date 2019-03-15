@@ -10,5 +10,8 @@
 #define TTChain_Bridging_Header_h
 
 #import "JPushService.h"
+#import <libjingle_peerconnection/RTCEAGLVideoView.h>
+#import "ARDAppClient.h"
+#import "RTCPeerConnectionFactory.h"
 
 #endif /* TTChain_Bridging_Header_h */

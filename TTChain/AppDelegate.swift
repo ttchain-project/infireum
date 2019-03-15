@@ -389,6 +389,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DLogDebug("Notification received \(userInfo)")
-        OWRxNotificationCenter.instance.notifyNotificationReceived()
+        TTNotificationHandler.shared.parseNotification(userInfo: userInfo)
     }
 }
