@@ -315,9 +315,12 @@ didReceiveMessage:(ARDSignalingMessage *)message {
               (unsigned long)stream.audioTracks.count);
         if (stream.videoTracks.count) {
             RTCVideoTrack *videoTrack = stream.videoTracks[0];
-            [_delegate appClient:self didReceiveRemoteVideoTrack:videoTrack];
-            if (_isSpeakerEnabled) [self enableSpeaker]; //Use the "handsfree" speaker instead of the ear speaker.
-            
+            [self->_delegate appClient:self didReceiveRemoteVideoTrack:videoTrack];
+            if (self->_isSpeakerEnabled) [self enableSpeaker]; //Use the "handsfree" speaker instead of the ear speaker.
+        }
+        if (stream.audioTracks.count) {
+            RTCAudioTrack *audioTrack = stream.audioTracks[0];
+            [self->_delegate appClient:self didReceiveRemoteAudioTrack:audioTrack];
         }
     });
 }

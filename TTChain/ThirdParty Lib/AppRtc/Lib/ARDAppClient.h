@@ -28,7 +28,7 @@
 #import <Foundation/Foundation.h>
 
 #import "RTCVideoTrack.h"
-
+#import "RTCAudioTrack.h"
 
 typedef NS_ENUM(NSInteger, ARDAppClientState) {
   // Disconnected from servers.
@@ -50,6 +50,9 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 
 - (void)appClient:(ARDAppClient *)client
     didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
+
+- (void)appClient:(ARDAppClient *)client
+didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack;
 
 - (void)appClient:(ARDAppClient *)client
          didError:(NSError *)error;
