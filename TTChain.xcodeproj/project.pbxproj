@@ -8625,7 +8625,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 UAT";
 				PROVISIONING_PROFILE = "ea62f369-2c3e-4536-9abc-5bd2822faf77";
@@ -8654,7 +8654,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG -DUAT $(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gib.TTChain;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gib.TTChain-UAT";
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 UAT";
 				PROVISIONING_PROFILE = "eaaef35c-9348-4f80-938b-dbb8be522513";
