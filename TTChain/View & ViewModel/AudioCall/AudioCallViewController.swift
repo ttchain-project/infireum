@@ -35,7 +35,10 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
 
     func config(constructor: AudioCallViewController.Config) {
         self.view.layoutIfNeeded()
-        self.viewModel = AudioCallViewModel.init(input: AudioCallViewModel.Input.init(roomId: constructor.roomId, roomType: constructor.roomType), output:AudioCallViewModel.Output())
+        self.viewModel = AudioCallViewModel.init(input: AudioCallViewModel.Input.init(roomId: constructor.roomId,
+                                                                                      roomType: constructor.roomType,
+                                                                                      endCallAction: self.endCallButton.rx.tap.asDriver()),
+                                                 output:AudioCallViewModel.Output())
         self.startMonitorLangIfNeeded()
         self.startMonitorThemeIfNeeded()
         switch constructor.callAction {
@@ -93,20 +96,20 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
             }
             
             switch callStatus {
-
-            case .connected?:
-                print("start timer")
+                
             case .disconnected?:
                 self.dismiss(animated: true, completion: nil)
+            case .otherClientConnected?:
+                self.viewModel.timerBag = nil
+            //Start Timer here
             default:
                 print("a")
             }
         }).disposed(by: bag)
         
-        self.endCallButton.rx.tap.subscribe(onNext: {
-            AVCallHandler.handler.endCall()
+        self.viewModel.didEndCall.subscribe(onNext: {
             self.dismiss(animated: true, completion: nil)
-        }).disposed(by: bag)
+        }).disposed(by:bag)
         
         self.muteCallButton.rx.tap.subscribe(onNext: {
             self.muteCallButton.isSelected = !self.muteCallButton.isSelected

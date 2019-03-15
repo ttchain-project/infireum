@@ -21,6 +21,7 @@ enum CallStatus {
     case ringing
     case incoming
     case connected
+    case otherClientConnected
     case disconnected
 }
 
@@ -81,6 +82,8 @@ class AVCallHandler : NSObject{
         self.updateCallStatus()
 
         if case .connected? = self._currentCallStatus.value {
+            self.disconnectCall()
+        }else if case .otherClientConnected? = self._currentCallStatus.value {
             self.disconnectCall()
         }
     }
@@ -245,6 +248,11 @@ extension AVCallHandler:ARDAppClientDelegate {
         DLogDebug("Received REMOTE Video Track")
     }
     
+    func appClient(_ client: ARDAppClient!, didReceiveRemoteAudioTrack remoteAudioTrack: RTCAudioTrack!) {
+        DLogDebug("Received REMOTE Audio Track")
+        self._currentCallStatus.accept(.otherClientConnected)
+    }
+    
     func appClient(_ client: ARDAppClient!, didError error: Error!) {
         DLogError("Error in Call - \(error!)")
     }
@@ -254,9 +262,19 @@ extension AVCallHandler:ARDAppClientDelegate {
 extension AVCallHandler {
     
     func showIncomingCall(forCallMessage callMessageModel:CallMessageModel, calleeName:String) {
+       
+        let streamComponent = callMessageModel.streamId.components(separatedBy: "_")
+        
+        guard streamComponent.count > 0  else {
+            return
+        }
+        let timestamp = streamComponent[1]
+
+        if Date().timeIntervalSince(Date.init(unixTimestamp: timestamp.doubleValue)) > 60 {
+            return
+        }
         
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
-
         let incomingCallVC = IncomingCallViewController.instance(from: IncomingCallViewController.Config(callModel: callMessageModel, headImage: nil, callTitle: calleeName, didReceiveCall: {
             result in
             if result {
