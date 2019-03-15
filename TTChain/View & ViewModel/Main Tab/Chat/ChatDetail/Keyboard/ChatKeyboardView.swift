@@ -82,10 +82,10 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     var functions: [FunctionModel] = [
-                                      FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
-                                      FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
+        FunctionModel.init(title: LM.dls.chat_room_image, image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
+                                      FunctionModel.init(title: LM.dls.select_from_camera, image: UIImage(named: "iconCameraColor"), type: .openCamera),
                                       
-                                       FunctionModel.init(title: "Receipt", image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt)
+                                       FunctionModel.init(title: LM.dls.chat_room_receipt, image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt)
    
 ]
     

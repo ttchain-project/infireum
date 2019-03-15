@@ -63,8 +63,8 @@ class ReceiptRequestViewModel: KLRxViewModel {
         guard let ethWallet = DB.instance.get(type: Wallet.self, predicate: predForETH, sorts: nil) else {
             return
         }
-        self.wallet = [btcWallet[0],ethWallet[0]]
-        
+        self.wallet.append(contentsOf: btcWallet)
+        self.wallet.append(contentsOf: ethWallet)
         self.selectedWallet.asObservable().filter { $0 != nil }.map { wallet in
             return Coin.getAllCoins(of: ChainType(rawValue: wallet!.chainType)!)
         }.bind(to: self.coins).disposed(by: bag)

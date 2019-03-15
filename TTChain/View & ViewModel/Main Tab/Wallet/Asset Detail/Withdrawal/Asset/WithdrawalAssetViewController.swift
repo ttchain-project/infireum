@@ -30,7 +30,7 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
             output: ()
         )
         
-        self.transferAllButton.isHidden = constructor.asset.wallet?.owChainType != ChainType.btc
+//        self.transferAllButton.isHidden = constructor.asset.wallet?.owChainType != ChainType.btc
         transferAmtTextField.keyboardType = UIKeyboardType.decimalPad
         
         bindViewModel()

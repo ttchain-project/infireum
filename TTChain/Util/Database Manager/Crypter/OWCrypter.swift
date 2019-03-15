@@ -136,7 +136,7 @@ struct OWDatabaseEntityCrypter {
     ///   - pKey:
     ///   - ePwd:
     /// - Returns:
-    private static func encryptPrivateKey(_ pKey: String, ePwd: String) -> String? {
+    public static func encryptPrivateKey(_ pKey: String, ePwd: String) -> String? {
         return encrypt(source: pKey, key: ePwd)
     }
     

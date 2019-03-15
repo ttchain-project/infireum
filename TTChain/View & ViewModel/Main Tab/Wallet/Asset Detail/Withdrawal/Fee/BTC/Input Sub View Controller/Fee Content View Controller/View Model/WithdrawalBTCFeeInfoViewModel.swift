@@ -46,7 +46,7 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
             property: input.manualRateStrInout,
             relay: _manualFeeRate,
             toVariable: { str in Decimal.init(string: str ?? "") },
-            toProperty: { rate in rate?.asString(digits: 0) }
+            toProperty: { rate in rate?.asString(digits: 8) }
         )
         .disposed(by: bag)
         

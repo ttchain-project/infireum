@@ -312,10 +312,14 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     private func monitorLocalWalletsUpdate() {
         let imported = OWRxNotificationCenter.instance.walletsImported
             .map { _ in () }
+        let singleWalletImported = OWRxNotificationCenter.instance.walletImported
+            .map { _ in () }
         let deleted = OWRxNotificationCenter.instance.walletDeleted
             .map { _ in () }
+        let walletNameChange = OWRxNotificationCenter.instance.walletNameUpdate
+            .map { _ in () }
         
-        Observable.merge(imported, deleted)
+        Observable.merge(imported, deleted, singleWalletImported, walletNameChange)
             .subscribe(onNext: {
                 [weak self]
                 _ in
@@ -323,9 +327,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
             })
             .disposed(by: bag)
         
-        OWRxNotificationCenter.instance.walletNameUpdate.subscribe(onNext: { (wallet) in
-            self.viewModel.fetchWallets()
-        }).disposed(by: bag)
+        
 
     }
 

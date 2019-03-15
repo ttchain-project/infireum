@@ -69,6 +69,8 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
                 self.updateProfilePhoto()
             } else if self.imUser!.nickName != self.userNameTextField.text {
                 self.updateUserName()
+            }else {
+                self.navigationController?.popViewController(animated: true)
             }
         }).disposed(by: bag)
         

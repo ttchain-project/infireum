@@ -75,8 +75,8 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
-        self.title = "Add Receipt"
-        confirmButton.setTitle("Confirm", for: .normal)
+        self.title = lang.dls.chat_room_receipt
+        confirmButton.setTitle(lang.dls.g_confirm, for: .normal)
     }
 }
 
@@ -115,8 +115,12 @@ extension ReceiptRequestViewController: UIPickerViewDelegate,UIPickerViewDataSou
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            self.viewModel.selectedCoin.accept(nil)
             self.viewModel.selectedWallet.accept(self.viewModel.wallet[row])
+            pickerView.selectRow(0, inComponent: 1, animated: true)
+            guard let coins = self.viewModel.coins.value else {
+                return
+            }
+            self.viewModel.selectedCoin.accept(coins[0])
             pickerView.reloadAllComponents()
         case 1:
             guard let coins = self.viewModel.coins.value else {

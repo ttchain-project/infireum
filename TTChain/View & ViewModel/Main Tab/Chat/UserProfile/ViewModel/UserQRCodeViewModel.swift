@@ -39,7 +39,11 @@ final class UserQRCodeViewModel: KLRxViewModel {
     func concatInput() {
         self.uID.map({ text -> UIImage? in
             guard let text = text else { return nil }
-            return UIImage.init(ciImage: QRCodeGenerator.generateQRCode(from: text)!)
+            let transform = CGAffineTransform(scaleX: 2, y: 2)
+            guard let image = QRCodeGenerator.generateQRCode(from: text)?.transformed(by: transform) else {
+                return nil
+            }
+            return UIImage.init(ciImage: image)
         }).bind(to: output.image).disposed(by: bag)
     }
     

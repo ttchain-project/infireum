@@ -20,7 +20,7 @@ class QRCodeGenerator {
             
             filter.setValue(data, forKey: "inputMessage")
             colorFilter.setValue(filter.outputImage, forKey: "inputImage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            let transform = CGAffineTransform(scaleX: 4, y: 4)
             colorFilter.setValue(CIColor(red: 0, green: 0, blue: 0), forKey: "inputColor0") // Foreground
             colorFilter.setValue(CIColor(red: 1, green: 1, blue: 1), forKey: "inputColor1") // background
             if let output = colorFilter.outputImage?.transformed(by: transform) {

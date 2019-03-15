@@ -66,6 +66,8 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
         let palette = theme.palette
         titleLabel.set(textColor: palette.label_main_2,
                        font: .owMedium(size: 18))
+        uidLabel.set(textColor: .black,
+                     font: .owMedium(size:12 ))
         titleView.backgroundColor = palette.nav_bg_clear
 
         doneButton.setPureText(color: palette.btn_bgFill_enable_text,

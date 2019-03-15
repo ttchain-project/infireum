@@ -59,6 +59,10 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
         bindViewModel()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
+        
+        viewModel.satPerByte.asObservable().subscribe(onNext:{ val in
+            print(val)
+        }).disposed(by:bag)
     }
     
     var preferedHeight: CGFloat {

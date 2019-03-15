@@ -213,7 +213,10 @@ extension TransRecord {
     }
     
     static func getAllRecords(ofAsset asset: Asset) -> [TransRecord]? {
-        guard let walletRecs = getAllRecords(ofWallet: asset.wallet!) else {
+        guard let wallet = asset.wallet else {
+           return []
+        }
+        guard let walletRecs = getAllRecords(ofWallet: wallet) else {
             return errorDebug(response: [])
         }
         

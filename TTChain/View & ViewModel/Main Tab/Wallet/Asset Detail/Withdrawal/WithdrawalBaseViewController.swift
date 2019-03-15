@@ -77,7 +77,9 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         }
         assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
             let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
-            let totalTransferableAmt = ((config.asset.amount ?? 0) as Decimal) - (feeInfo?.totalHardCodedFee ?? 0)
+            
+            let fee = config.asset.wallet!.chainType == ChainType.btc.rawValue ? feeInfo?.totalHardCodedFee : 0
+            let totalTransferableAmt = ((config.asset.amount ?? 0) as Decimal) - fee!
             self.assetVC.viewModel.updateAmt(totalTransferableAmt > 0 ? totalTransferableAmt : 0)
         }).disposed(by:bag)
         
@@ -136,8 +138,10 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             addChildViewController(feeVC)
             feeVC.didMove(toParentViewController: self)
             self.feeVC = feeVC
+            
             isInfoDisplayed = feeVC.viewModel.isInfoDisplayed
             baseScrollView.addSubview(feeVC.view)
+            
 //            return
         case .cic:
             //This shuold not happen
@@ -166,7 +170,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             let height = self.remarkNoteVC.preferedHeight
             remark.height == height
         }
-        let group = constrain(remarkNoteVC.view, addressVC.view, baseScrollView) { [unowned self] (remark, address, scroll) in
+        let group = constrain(remarkNoteVC.view, addressVC.view, baseScrollView) {  (remark, address, scroll) in
             remark.top == address.bottom + 56 + 12
         }
         isInfoDisplayed.subscribe(onNext: {

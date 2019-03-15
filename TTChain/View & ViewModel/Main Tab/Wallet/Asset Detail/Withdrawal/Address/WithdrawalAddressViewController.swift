@@ -105,7 +105,7 @@ final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalC
         addrTextField.sepline.backgroundColor = palette.sepline
         
         fromAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        fromWalletBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 17))
+        fromWalletBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 17))
         fromAddrLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
     }
 
