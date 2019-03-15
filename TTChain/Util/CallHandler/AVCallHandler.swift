@@ -62,6 +62,7 @@ class AVCallHandler : NSObject{
         self.callDetails = CallDetails.init(currentCallRoomId: roomId, currentCallType: CallType.audio,currentCallStreamId: nil)
         self.initiateCall()
     }
+    
     func initiateVideoCall(forRoomId roomId:String) {
         guard self.callDetails == nil else {
             return
@@ -70,47 +71,35 @@ class AVCallHandler : NSObject{
         self.initiateCall()
     }
     
-    func cancelCall() {
-        
-        guard let callDetails = self.callDetails else {
-            return
-        }
-        
-        if case .connected? = self._currentCallStatus.value {
+    func endCall() {
+       
+        if case .incoming? = self._currentCallStatus.value {
             self.disconnectCall()
             return
         }
         
-        let parameter = InAppCallApi.Parameter.init(type: callDetails.currentCallType,
-                                                    roomId: callDetails.currentCallRoomId ,
-                                                    isGroup: false,
-                                                    isConnect: false)
-        
-        let initiateCall = Server.instance.initiateInAppCall(parameter: parameter)
-        
-        initiateCall.asObservable().subscribe(onNext: {[weak self] (result) in
-            switch result {
-            case .success(let model):
-                DLogDebug("Call Stream Id \(model.streamId)")
-                guard let `self` = self else {
-                    return
-                }
-                self.callDetails = nil
-                self._currentCallStatus.accept(nil)
-            case .failed(error: let error):
-                DLogError("Call Initiate Error \(error.descString) ")
-            }
-        }).disposed(by: bag)
+        self.updateCallStatus()
+
+        if case .connected? = self._currentCallStatus.value {
+            self.disconnectCall()
+        }
     }
     
-    func acceptCall(forStreamId streamId:String) {
-        
-       
-        self.createARDAppClient()
-        guard let client = self.client else {
+    func startIncomingCall(callMessageModel:CallMessageModel) {
+        guard self.callDetails == nil else {
             return
         }
-        client.connectToRoom(withId: streamId,
+        self.callDetails = CallDetails.init(currentCallRoomId: callMessageModel.roomId, currentCallType: callMessageModel.type, currentCallStreamId: callMessageModel.streamId)
+        self._currentCallStatus.accept(.incoming)
+    }
+    
+    func acceptCall() {
+        
+        self.createARDAppClient()
+        guard let client = self.client, self.callDetails != nil else {
+            return
+        }
+        client.connectToRoom(withId: self.callDetails?.currentCallStreamId,
                              forVideoCall:false ,
                              options: [:])
     }
@@ -126,7 +115,8 @@ class AVCallHandler : NSObject{
         let parameter = InAppCallApi.Parameter.init(type: callDetails.currentCallType,
                                                     roomId: callDetails.currentCallRoomId ,
                                                     isGroup: false,
-                                                    isConnect: true)
+                                                    isConnect: true,
+                                                    streamId:nil)
         
         let initiateCall = Server.instance.initiateInAppCall(parameter: parameter)
         
@@ -147,11 +137,11 @@ class AVCallHandler : NSObject{
     }
     
     private func disconnectCall() {
+        self._currentCallStatus.accept(.disconnected)
         guard self.client != nil else {
             return
         }
         self.client?.disconnect()
-        self.callDetails = nil
     }
     
     private func startCall() {
@@ -167,23 +157,80 @@ class AVCallHandler : NSObject{
                              options: [:])
         
     }
+    
+    func updateCallStatus() {
+        
+        guard let callDetails = self.callDetails else {
+            return
+        }
+        
+        let parameter = InAppCallApi.Parameter.init(type:.audio,
+                                                    roomId: callDetails.currentCallRoomId,
+                                                    isGroup: false,
+                                                    isConnect: false,
+                                                    streamId:callDetails.currentCallStreamId)
+        
+        let callStatusAPI = Server.instance.initiateInAppCall(parameter: parameter)
+        
+        callStatusAPI.asObservable().subscribe(onNext: {[weak self] (result) in
+            guard let `self` = self else {
+                return
+            }
+            switch result {
+            case .success(let model):
+                DLogDebug("Call Disconnected for Stream Id \(model.streamId)")
+                self._currentCallStatus.accept(nil)
+                self.callDetails = nil
+            case .failed(error: let error):
+                DLogError("Call Disconnection Error \(error.descString) ")
+                self._currentCallStatus.accept(nil)
+                self.callDetails = nil
+            }
+        }).disposed(by: bag)
+    }
+    
     private func createARDAppClient() {
         self.client = ARDAppClient.init(delegate: self)
         self.client?.serverHostUrl = SERVER_HOST_URL
+    }
+    
+    public func muteCall(shouldMute:Bool) {
+        guard self.client != nil else{
+            return
+        }
+        if shouldMute {
+            self.client?.muteAudioIn()
+        }else {
+            self.client?.unmuteAudioIn()
+        }
+    }
+    
+    public func speakerOn(shouldOn:Bool) {
+        guard self.client != nil else{
+            return
+        }
+        if shouldOn {
+            self.client?.enableSpeaker()
+        }else {
+            self.client?.disableSpeaker()
+        }
     }
 }
 
 extension AVCallHandler:ARDAppClientDelegate {
     func appClient(_ client: ARDAppClient!, didChange state: ARDAppClientState) {
-        DLogInfo("ADRAppClient Status Update - \(state)")
         switch (state) {
         case ARDAppClientState.connected:
             self._currentCallStatus.accept(.connected)
+            DLogInfo("ADRAppClient Status Update - connected")
+
             break
         case ARDAppClientState.connecting:
+            DLogInfo("ADRAppClient Status Update - connecting")
             break
         case ARDAppClientState.disconnected:
             self._currentCallStatus.accept(.disconnected)
+            DLogInfo("ADRAppClient Status Update - disconnected")
             self.callDetails = nil
             break
         }
@@ -201,8 +248,33 @@ extension AVCallHandler:ARDAppClientDelegate {
     func appClient(_ client: ARDAppClient!, didError error: Error!) {
         DLogError("Error in Call - \(error!)")
     }
+}
+
+
+extension AVCallHandler {
     
+    func showIncomingCall(forCallMessage callMessageModel:CallMessageModel, calleeName:String) {
+        
+        let rootVC = UIApplication.shared.keyWindow?.rootViewController
+
+        let incomingCallVC = IncomingCallViewController.instance(from: IncomingCallViewController.Config(callModel: callMessageModel, headImage: nil, callTitle: calleeName, didReceiveCall: {
+            result in
+            if result {
+                self.connectCall(forRoom: callMessageModel.roomId, calleeName: calleeName, streamId: callMessageModel.streamId)
+                
+            } else {
+                AVCallHandler.handler.endCall()
+            }
+            
+        }))
+        
+        rootVC?.present(incomingCallVC, animated: true, completion: nil)
+    }
     
-    
-    
+    private func connectCall(forRoom roomId:String, calleeName:String, streamId:String) {
+        let config = AudioCallViewController.Config.init(roomId: roomId, calleeName: calleeName, roomType: .pvtChat, callAction: CallAction.joinCall, streamId: streamId)
+        let audioCallVC = AudioCallViewController.instance(from: config)
+        let rootVC = UIApplication.shared.keyWindow?.rootViewController
+        rootVC?.present(audioCallVC, animated: true, completion: nil)
+    }
 }

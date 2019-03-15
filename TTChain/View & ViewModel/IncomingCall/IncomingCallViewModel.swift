@@ -36,6 +36,6 @@ class IncomingCallViewModel:KLRxViewModel {
     required init(input: InputSource, output: OutputSource) {
         self.input = input
         self.output = output
+        AVCallHandler.handler.startIncomingCall(callMessageModel: input.callModel)
     }
-    
 }

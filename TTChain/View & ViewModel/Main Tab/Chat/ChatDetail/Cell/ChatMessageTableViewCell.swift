@@ -62,7 +62,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -83,9 +83,9 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         self.rightDateLabel.text = message.timestamp.string()
         self.rightSpeakerContentView.isHidden = false
         self.leftSpeakerContentView.isHidden = true
-
+        
     }
-   
+    
     private func configForLeft(message:MessageModel,leftImage: UIImage?) {
         self.leftMessageLabel.text = message.msg
         self.leftDateLabel.text = message.timestamp.string()
@@ -95,5 +95,4 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         self.leftSpeakerContentView.isHidden = false
         self.senderNameLabel.text = message.senderName
     }
-    
 }

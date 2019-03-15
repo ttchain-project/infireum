@@ -74,6 +74,11 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
         self.callTitleLabel.text = ""
     }
     override func renderTheme(_ theme: Theme) {
+        self.muteCallButton.setImage(#imageLiteral(resourceName: "iconCallMute"), for: .normal)
+        self.muteCallButton.setImage(#imageLiteral(resourceName: "iconCallMuteOn"), for: .selected)
+        
+        self.speakerButton.setImage(#imageLiteral(resourceName: "iconCallSpeaker"), for: .normal)
+        self.speakerButton.setImage(#imageLiteral(resourceName: "iconCallSpeakerOn.png"), for: .selected)
         
     }
     func bindUI() {
@@ -87,22 +92,31 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
                 self.speakerButton.isEnabled = true
             }
             
-//            switch callStatus {
-//            case nil:
-//
-//            case .dialing?:
-//
-//            case .connected?:
-//
-//            default:
-//
-//            }
+            switch callStatus {
+
+            case .connected?:
+                print("start timer")
+            case .disconnected?:
+                self.dismiss(animated: true, completion: nil)
+            default:
+                print("a")
+            }
         }).disposed(by: bag)
         
         self.endCallButton.rx.tap.subscribe(onNext: {
-            [unowned self] in
-            AVCallHandler.handler.cancelCall()
+            AVCallHandler.handler.endCall()
             self.dismiss(animated: true, completion: nil)
         }).disposed(by: bag)
+        
+        self.muteCallButton.rx.tap.subscribe(onNext: {
+            self.muteCallButton.isSelected = !self.muteCallButton.isSelected
+            AVCallHandler.handler.muteCall(shouldMute: self.muteCallButton.isSelected)
+        }).disposed(by: bag)
+        
+        self.speakerButton.rx.tap.subscribe(onNext: {
+            self.speakerButton.isSelected = !self.speakerButton.isSelected
+            AVCallHandler.handler.speakerOn(shouldOn: self.speakerButton.isSelected)
+        }).disposed(by: bag)
+        
     }
 }

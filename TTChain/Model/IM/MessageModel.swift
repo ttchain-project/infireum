@@ -91,7 +91,7 @@ class MessageModel {
                     }
                 }
                 return .file
-            case "audio":
+            case "audio","video":
                 if let url = messageResponse["msg"].string  {
                     if let data = url.data(using: .utf8) {
                         let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -156,6 +156,7 @@ struct CallMessageModel: Codable {
     let type:CallType
     let isConnect:Bool
     
+
     init?(json: [String: Any]) {
         do {
             self = try JSONDecoder().decode(CallMessageModel.self, from: json.jsonData()!)

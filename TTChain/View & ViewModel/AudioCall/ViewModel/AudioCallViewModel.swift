@@ -45,6 +45,6 @@ class AudioCallViewModel: KLRxViewModel {
         AVCallHandler.handler.initiateAudioCall(forRoomId: self.input.roomId)
     }
     func joinCall(forStreamId streamId:String)  {
-        AVCallHandler.handler.acceptCall(forStreamId: streamId)
+        AVCallHandler.handler.acceptCall()
     }
 }

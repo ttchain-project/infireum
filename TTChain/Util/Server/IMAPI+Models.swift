@@ -1121,7 +1121,7 @@ struct InAppCallApi:KLMoyaIMAPIData {
         let roomId:String
         let isGroup:Bool
         let isConnect:Bool
-        
+        var streamId: String? = nil
         private let uid = Tokens.getUID()
         private let rocketChatUserId = Tokens.getRocketChatUserID()
         private let authToken = Tokens.getAuthToken()

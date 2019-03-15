@@ -22,7 +22,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     
     struct Config {
         let callModel:CallMessageModel
-        let headImage:URL
+        let headImage:URL?
         let callTitle:String
         let didReceiveCall: (Bool) -> Void
     }
@@ -65,6 +65,12 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
             self.dismiss(animated: false, completion: {
                 self.didAcceptCall!(true)
             })
+        }).disposed(by: bag)
+        
+        AVCallHandler.handler.currentCallingStatus.asObservable().subscribe(onNext: { (status) in
+            if case .disconnected? = status {
+                self.dismiss(animated: true, completion: nil)
+            }
         }).disposed(by: bag)
     }
 }
