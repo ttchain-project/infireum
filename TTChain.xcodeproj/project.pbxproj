@@ -8629,7 +8629,7 @@
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 UAT";
 				PROVISIONING_PROFILE = "ea62f369-2c3e-4536-9abc-5bd2822faf77";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -8658,7 +8658,7 @@
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = "甜甜圈 UAT";
 				PROVISIONING_PROFILE = "eaaef35c-9348-4f80-938b-dbb8be522513";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gib.TTChain-UAT";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

@@ -66,10 +66,10 @@ platform :ios do
     output_directory: "./build",
 #     archive_path: "./archives",
     include_symbols: true,
-    include_bitcode: false,
+    include_bitcode: true,
     export_options: {
-        compileBitcode: false,
-        uploadBitcode: false
+        compileBitcode: true,
+        uploadBitcode: true
       }
     )
 
@@ -123,10 +123,10 @@ desc "Build adhoc .ipa [uat]"
     output_directory: "./build",
 #     archive_path: "./archives",
     include_symbols: true,
-    include_bitcode: false,
+    include_bitcode: true,
     export_options: {
-        compileBitcode: false,
-        uploadBitcode: false
+        compileBitcode: true,
+        uploadBitcode: true
       }
     )
 
@@ -180,10 +180,10 @@ desc "Build adhoc .ipa [PRD]"
     output_directory: "./build",
 #     archive_path: "./archives",
     include_symbols: true,
-    include_bitcode: false,
+    include_bitcode: true,
     export_options: {
-        compileBitcode: false,
-        uploadBitcode: false
+        compileBitcode: true,
+        uploadBitcode: true
       }
     )
 
