@@ -17,6 +17,7 @@
                 <outlet property="endCallButton" destination="yfs-IB-bBU" id="4hZ-nw-eOa"/>
                 <outlet property="muteCallButton" destination="kf0-Sb-c7w" id="ZAt-mX-PWn"/>
                 <outlet property="speakerButton" destination="KoQ-AL-ygo" id="qzw-az-di0"/>
+                <outlet property="timerLabel" destination="cBh-t3-3F8" id="pti-bV-aCk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uI1-B4-fBm">
-                    <rect key="frame" x="142.5" y="120.5" width="90" height="90"/>
+                    <rect key="frame" x="142.5" y="140" width="90" height="90"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="uI1-B4-fBm" secondAttribute="height" multiplier="1:1" id="Fkp-XT-bRy"/>
                         <constraint firstAttribute="height" constant="90" id="pV8-xk-8j0"/>
@@ -55,17 +56,25 @@
                         </button>
                     </subviews>
                 </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBh-t3-3F8">
+                    <rect key="frame" x="166.5" y="98" width="42" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="uI1-B4-fBm" firstAttribute="top" secondItem="8qu-hS-Ezo" secondAttribute="bottom" constant="30" id="6nj-Ho-wRr"/>
                 <constraint firstItem="SXW-Iy-3Yu" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.75" id="9Jg-qx-2yp"/>
                 <constraint firstItem="8qu-hS-Ezo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BXa-Sh-1vp"/>
                 <constraint firstItem="8qu-hS-Ezo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="Irc-H6-4LZ"/>
+                <constraint firstItem="cBh-t3-3F8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="J45-Hd-v9D"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8qu-hS-Ezo" secondAttribute="trailing" constant="20" id="JqI-fL-BIu"/>
                 <constraint firstItem="uI1-B4-fBm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YIZ-gI-V5c"/>
+                <constraint firstItem="uI1-B4-fBm" firstAttribute="top" secondItem="cBh-t3-3F8" secondAttribute="bottom" constant="21.5" id="bcg-vq-8NV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SXW-Iy-3Yu" secondAttribute="bottom" constant="60" id="gEe-KH-clq"/>
                 <constraint firstItem="SXW-Iy-3Yu" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="gbM-GV-VGQ"/>
+                <constraint firstItem="cBh-t3-3F8" firstAttribute="top" secondItem="8qu-hS-Ezo" secondAttribute="bottom" constant="7.5" id="qgE-ha-5BK"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

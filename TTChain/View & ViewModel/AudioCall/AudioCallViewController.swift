@@ -68,6 +68,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
     @IBOutlet weak var muteCallButton: UIButton!
     @IBOutlet weak var endCallButton: UIButton!
     @IBOutlet weak var speakerButton: UIButton!
+    @IBOutlet weak var timerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +76,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         self.callTitleLabel.text = ""
+        self.timerLabel.text = ""
     }
     override func renderTheme(_ theme: Theme) {
         self.muteCallButton.setImage(#imageLiteral(resourceName: "iconCallMute"), for: .normal)
@@ -83,31 +85,15 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
         self.speakerButton.setImage(#imageLiteral(resourceName: "iconCallSpeaker"), for: .normal)
         self.speakerButton.setImage(#imageLiteral(resourceName: "iconCallSpeakerOn.png"), for: .selected)
         
+        self.callTitleLabel.set(textColor: .gray, font: .owMedium(size: 24))
+        self.timerLabel.set(textColor: .red, font: .owRegular(size:12))
+        
     }
     func bindUI() {
-        AVCallHandler.handler.currentCallingStatus.asObservable().subscribe(onNext: { (callStatus) in
-           
-            if callStatus == nil {
-                self.muteCallButton.isEnabled = false
-                self.speakerButton.isEnabled = false
-            }else {
-                self.muteCallButton.isEnabled = true
-                self.speakerButton.isEnabled = true
-            }
-            
-            switch callStatus {
-                
-            case .disconnected?:
-                self.dismiss(animated: true, completion: nil)
-            case .otherClientConnected?:
-                self.viewModel.timerBag = nil
-            //Start Timer here
-            default:
-                print("a")
-            }
-        }).disposed(by: bag)
         
         self.viewModel.didEndCall.subscribe(onNext: {
+            self.viewModel.callTimerBag = nil
+            self.viewModel.disconnectTimerBag = nil
             self.dismiss(animated: true, completion: nil)
         }).disposed(by:bag)
         
@@ -121,5 +107,6 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
             AVCallHandler.handler.speakerOn(shouldOn: self.speakerButton.isSelected)
         }).disposed(by: bag)
         
+        self.viewModel.totalCallTime.bind(to: self.timerLabel.rx.text).disposed(by: bag)
     }
 }
