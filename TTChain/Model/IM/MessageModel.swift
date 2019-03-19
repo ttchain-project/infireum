@@ -13,15 +13,15 @@ import SwiftyJSON
 enum MessageType {
     case general
     case file
+    case voiceMessage
     case receipt(messageDict : [String:String])
     case audioCall (messageDetails : CallMessageModel)
     var messageDict:[String:String] {
         switch  self {
-        case .general, .file,.audioCall(_):
-            return [:]
         case .receipt(messageDict: let dict):
             return dict
-        
+        default:
+           return [:]
         }
     }
     var callMessage:CallMessageModel? {
@@ -89,6 +89,12 @@ class MessageModel {
                             rawMessage = dict!["fileUrl"] as! String
                         }
                     }
+                }
+                guard let url = URL.init(string: rawMessage) else {
+                    return .file
+                }
+                if url.pathExtension == "3gp" || url.pathExtension == "3gpp" {
+                    return .voiceMessage
                 }
                 return .file
             case "audio","video":

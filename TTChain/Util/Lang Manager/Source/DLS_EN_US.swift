@@ -567,4 +567,12 @@ struct DLS_EN_US: DLS {
     
     var image_saved_success = "Image saved to album"
     var exists = "Existing"
+    
+    var access_denied_mic = "You have denied access to mic. Please go to setting and give access to mic to perform this functionality."
+    
+    var recording_failed = "Recording Failed"
+    
+    var record_audio_start_button = "Press to record audio"
+    var record_audio_stop_to_send_button = "Release to send audio"
+
 }

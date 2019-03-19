@@ -12,6 +12,7 @@ import RxCocoa
 import RxDataSources
 import IQKeyboardManagerSwift
 import PhotosUI
+import AVFoundation
 
 final class ChatViewController: KLModuleViewController, KLVMVC {
 
@@ -60,6 +61,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     var viewModel: ChatViewModel!
     var bag: DisposeBag = DisposeBag()
     var imagePicker: UIImagePickerController!
+    
+    var player:AVPlayer?
     
     struct Config {
         var roomType:RoomType
@@ -117,6 +120,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.shared.enable = IQKeyboardManagerEnableStatus
+        self.player = nil
     }
 
     override func renderTheme(_ theme: Theme) {
@@ -185,7 +189,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 }).disposed(by: chatCell.bag)
                 cell = chatCell
                 
-            case .file:
+            case .file,.voiceMessage:
                 let chatImgCell = tv.dequeueReusableCell(withIdentifier: ChatMessageImageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageImageTableViewCell
                 
                 chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
@@ -195,7 +199,11 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     self.toUserProfileVC(forFriend: friendModel)
                 })
                 chatImgCell.msgImageView!.rx.klrx_tap.drive(onNext: { _ in
-                    self.toImageViewer(for: messageModel)
+                    if case.file = messageModel.msgType {
+                        self.toImageViewer(for: messageModel)
+                    }else {
+                        self.playAudio(messageModel: messageModel)
+                    }
                 }).disposed(by: chatImgCell.bag)
                 
                 chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
@@ -296,6 +304,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                 default:
                                     print("Pending implementation")
                                 }
+                                }, onVoiceMessageSuccess: { [unowned self] data in
+                                    self.viewModel.sendVoiceMessage(data: data)
                             }))
         
         keyboardView
@@ -396,6 +406,25 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         let vc = ChatImageViewController.instance(from: ChatImageViewController.Config(image: url))
         self.show(vc, sender: nil)
     }
+    
+    func playAudio(messageModel:MessageModel) {
+        guard let url = URL.init(string: messageModel.msg) else {
+            return
+        }
+        self.player = nil
+        do {
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch let error{
+            print(error)
+        }
+        let playerItem = AVPlayerItem(url: url)
+        self.player = AVPlayer(playerItem:playerItem)
+        player!.volume = 1.0
+        player!.play()
+    }
+    
     func toTransferByReceipt(dict : [String:String]) {
         guard let coinId = dict["coinID"], let address = dict["address"], let amount = dict["amount"] else {
             return
@@ -494,7 +523,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 return
             }
             self.viewModel.sendImageAsMessage(image: image)
-        case .receipt,.audioCall(_):
+        case .receipt,.audioCall(_),.voiceMessage:
             return
         }
     }

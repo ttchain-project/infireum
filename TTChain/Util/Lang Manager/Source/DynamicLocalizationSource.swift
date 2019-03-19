@@ -563,4 +563,10 @@ protocol DynamicLocalizationSource {
     var invalid_mnemonic_phrase:String {get set}
     var image_saved_success:String {get set}
     var exists :String {get set}
+    
+    var access_denied_mic:String {get set}
+    var recording_failed:String {get set}
+    
+    var record_audio_start_button:String {get set}
+    var record_audio_stop_to_send_button:String {get set}
 }

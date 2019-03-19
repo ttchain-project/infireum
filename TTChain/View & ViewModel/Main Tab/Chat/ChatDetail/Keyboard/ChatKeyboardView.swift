@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AVFoundation
 
 class FunctionModel {
     var title: String = ""
@@ -33,6 +34,9 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet weak var blockView: UIView! {
         didSet { blockView.isHidden = !isBlock }
     }
+    @IBOutlet weak var recorderKeyboardSwitchButton: UIButton!
+    
+    @IBOutlet weak var recordAudioButton: UIButton!
     
     @IBOutlet weak var privateChatBannerView: UIView!
     @IBOutlet weak var privateChatDurationTitleLabel: UILabel!
@@ -54,7 +58,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     struct Output {
         var didChangeViewHeight: (CGFloat) -> Void
         var onSelectChatFunction:(FunctionModel) -> Void
-
+        var onVoiceMessageSuccess:(Data) -> Void
     }
     
     var input: Input? = nil
@@ -102,6 +106,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     var bag: DisposeBag = DisposeBag()
     
+    var recorder: AVAudioRecorder?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -109,6 +115,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         initTextField()
         initMoreButton()
         initCollectionView()
+        configRecorderButton()
+        setupRecordAudioButton()
         listenKeyboardNotification()
         self.initPvtChatBanner()
     }
@@ -180,6 +188,45 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
 //        animateInputContentView(offset: 0)
 //    }
 //
+    
+    func configRecorderButton() {
+        
+        self.recorderKeyboardSwitchButton.rx.tap.asDriver().drive(onNext: { _ in
+            self.recorderKeyboardSwitchButton.isSelected = !self.recorderKeyboardSwitchButton.isSelected
+            self.textField.isHidden = self.recorderKeyboardSwitchButton.isSelected
+            self.recordAudioButton.isHidden = !self.recorderKeyboardSwitchButton.isSelected
+            if self.recorderKeyboardSwitchButton.isSelected {
+                self.prepareRecording()
+            }
+        }).disposed(by: bag)
+        
+    }
+    
+    func setupRecordAudioButton() {
+        self.recordAudioButton.isHidden = true
+        self.recordAudioButton.cornerRadius = self.recordAudioButton.height/2
+        self.recordAudioButton.borderColor = .black
+        self.recordAudioButton.borderWidth = 0.5
+        self.recordAudioButton.setTitleColor(.black, for: .normal)
+        self.recordAudioButton.setTitle(LM.dls.record_audio_start_button, for: .normal)
+        self.recordAudioButton.setTitle(LM.dls.record_audio_stop_to_send_button, for: .highlighted)
+        
+        self.recordAudioButton.rx.controlEvent([.touchDown]).subscribe(onNext: { _ in
+            self.startRecording()
+        }).disposed(by: bag)
+
+        self.recordAudioButton.rx.controlEvent([.touchUpInside]).subscribe(onNext: { _ in
+            DLogInfo("End Recording")
+            self.finishRecording(success: true)
+        }).disposed(by: bag)
+        
+        self.recordAudioButton.rx.controlEvent([.touchCancel]).subscribe(onNext: { _ in
+            DLogInfo("Cancel Recording")
+            self.finishRecording(success: false)
+        }).disposed(by: bag)
+        
+    }
+    
     func animateInputContentView(offset: CGFloat) {
         self.setNeedsLayout()
         
@@ -192,6 +239,96 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         self.output?.didChangeViewHeight(inputContentViewHeight + inputContentViewBottomOffset)
     }
     
+    func prepareRecording() {
+        
+        let recordingSession = AVAudioSession.sharedInstance()
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryRecord)
+            try recordingSession.setActive(true)
+            switch recordingSession.recordPermission(){
+            case .undetermined:
+                recordingSession.requestRecordPermission() { [unowned self] allowed in
+                    DispatchQueue.main.async {
+                        if allowed {
+                            //Start Recording
+                            self.recordAudioButton.isEnabled = true
+                        } else {
+                            self.recordAudioButton.isEnabled = false
+                        }
+                    }
+                }
+            case .granted:
+                DLogInfo("start recording")
+            case .denied:
+                self.superview?.viewContainingController()!.showSimplePopUp(
+                    with: "",
+                    contents: LM.dls.access_denied_mic,
+                    cancelTitle: LM.dls.g_confirm,
+                    cancelHandler: nil
+                )
+            }
+        } catch {
+            
+        }
+    }
+    
+    var audioPlayer : AVAudioPlayer?
+
+    func getAudioFilePath() -> URL {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let audioFileName = documentsPath.appendingPathComponent("AudioFileRecoding11.3gpp")
+        let audioFilePath = URL.init(fileURLWithPath: audioFileName)
+        return audioFilePath
+    }
+    func startRecording() {
+        DLogInfo("Start Recording")
+
+        let audioFilePath = self.getAudioFilePath()
+        DLogInfo("File at \(FileManager.default.fileExists(atPath: audioFilePath.absoluteString))")
+        do {
+            try FileManager.default.removeItem(at: audioFilePath)
+        } catch let error as NSError {
+            print("Error: \(error.domain)")
+        }
+        
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue,
+            AVAudioFileTypeKey:Int(kAudioFile3GPType)
+        ]
+        
+        do {
+            recorder = try AVAudioRecorder(url: audioFilePath, settings: settings)
+            recorder!.delegate = self
+            recorder!.record()
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+    
+    func finishRecording(success:Bool) {
+        recorder?.stop()
+        recorder = nil
+        if success {
+            DLogInfo("Success")
+            let filePath = self.getAudioFilePath().absoluteString
+            DLogInfo(filePath)
+            guard let data = try? Data.init(contentsOf: self.getAudioFilePath()) else {
+                return
+            }
+            self.output?.onVoiceMessageSuccess(data)
+        } else {
+            self.superview?.viewContainingController()!.showSimplePopUp(
+                with: "",
+                contents: LM.dls.recording_failed,
+                cancelTitle: LM.dls.g_ok,
+                cancelHandler: nil
+            )
+            
+        }
+    }
     //
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = 0.25 * UIScreen.main.bounds.size.width
@@ -219,4 +356,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
        
             self.output?.onSelectChatFunction(self.functions[indexPath.row])
         }
+}
+
+extension ChatKeyboardView: AVAudioRecorderDelegate,AVAudioPlayerDelegate {
+    
 }

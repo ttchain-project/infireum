@@ -123,28 +123,28 @@ class OWQRCodeDecoder {
         return validateFlow
     }
     
-    func combineJSONsToSingleJSON(jsonString: [String]) -> [String:Any]? {
-        
-        if let data = jsonString[0].data(using: .utf8),
-            let json = try? JSON.init(data: data),
-            json.dictionary != nil {
-            var updatedJson = json
-            jsonString.dropFirst().forEach { jsonRaw in
-                if let jsonData = jsonRaw.data(using: .utf8),
-                    let jsonFromData = try? JSON.init(data: jsonData),
-                    jsonFromData.dictionary != nil {
-                    if let walletsArray = jsonFromData.dictionary?["content"]?["system"]["wallets"], walletsArray.count > 0 {
-                        var existingWallets = updatedJson.dictionary
-//                        existingWallets.append(walletsArray)
-                    }
-                }
-                
-            }
-            
-        }
-        
-        return [:]
-    }
+//    func combineJSONsToSingleJSON(jsonString: [String]) -> [String:Any]? {
+//
+//        if let data = jsonString[0].data(using: .utf8),
+//            let json = try? JSON.init(data: data),
+//            json.dictionary != nil {
+//            var updatedJson = json
+//            jsonString.dropFirst().forEach { jsonRaw in
+//                if let jsonData = jsonRaw.data(using: .utf8),
+//                    let jsonFromData = try? JSON.init(data: jsonData),
+//                    jsonFromData.dictionary != nil {
+//                    if let walletsArray = jsonFromData.dictionary?["content"]?["system"]["wallets"], walletsArray.count > 0 {
+//                        var existingWallets = updatedJson.dictionary
+////                        existingWallets.append(walletsArray)
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//        return [:]
+//    }
 }
 
  

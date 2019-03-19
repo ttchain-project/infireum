@@ -845,6 +845,7 @@ struct UploadFileAPI: KLMoyaIMAPIData {
         var isGroup: Bool
         var image : Data
         var roomId:String
+        var fileName:String
     }
     let parameters: Parameters
     
@@ -854,11 +855,11 @@ struct UploadFileAPI: KLMoyaIMAPIData {
     
     var task: Task {
         let multiPartData : [MultipartFormData] =
-            [MultipartFormData.init(provider: .data(parameters.image), name: "file", fileName: "file.jpeg", mimeType:"image/jpeg"),
+            [MultipartFormData.init(provider: .data(parameters.image), name: "file", fileName: parameters.fileName, mimeType:"*/*"),
              MultipartFormData.init(provider: .data(parameters.isGroup.string.data(using: .utf8)!), name: "isGroup"),
              MultipartFormData.init(provider: .data(parameters.uid.data(using: .utf8)!), name: "uid"),
              MultipartFormData.init(provider: .data(parameters.roomId.data(using: .utf8)!), name: "roomId"),
-             MultipartFormData.init(provider: .data("image".data(using: .utf8)!), name: "fileType"),
+             MultipartFormData.init(provider: .data("file".data(using: .utf8)!), name: "fileType"),
              MultipartFormData.init(provider: .data(Tokens.getAuthToken().data(using: .utf8)!), name: "authToken"),
              MultipartFormData.init(provider: .data(Tokens.getRocketChatUserID().data(using: .utf8)!), name: "rocketChatUserId")
         ]

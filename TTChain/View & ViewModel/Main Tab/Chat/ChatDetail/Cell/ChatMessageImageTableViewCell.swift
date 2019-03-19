@@ -56,6 +56,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
             self.senderConstraint.isActive = true
             self.receiverConstraint.isActive = false
             self.senderNameLabel.text = ""
+            self.msgImageView.backgroundColor = UIColor.init(red: 137, green: 216, blue: 128)
+            
         }else {
             self.profilePics.isHidden = false
             self.dateLabel.textAlignment = .left
@@ -63,7 +65,7 @@ class ChatMessageImageTableViewCell: UITableViewCell {
             self.receiverConstraint.isActive = true
             self.profilePics.image = leftImage ?? #imageLiteral(resourceName: "no_image")
             self.senderNameLabel.text = message.senderName
-
+            
         }
         self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)
@@ -72,6 +74,11 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         guard let url = URL.init(string: message.msg) else {
             return
         }
-        self.msgImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "no_image"))
+        if case .voiceMessage = message.msgType {
+            self.msgImageView.image = #imageLiteral(resourceName: "voice_message_icon")
+        }else {
+            self.msgImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "no_image"))
+        }
+
     }
 }

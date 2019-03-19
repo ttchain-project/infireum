@@ -563,4 +563,10 @@ struct DLS_ZH_CN: DLS {
     var invalid_mnemonic_phrase = "助记词不正确"
     var image_saved_success = "图像保存到相册"
     var exists = "已存在"
+    
+    var access_denied_mic = "您已拒绝访问麦克风。 转到“设置”并提供对麦克风的访问以执行此功能。"
+    var recording_failed = "录音失败"
+    
+    var record_audio_start_button = "按可录制音频"
+    var record_audio_stop_to_send_button = "释放按钮发送音频"
 }

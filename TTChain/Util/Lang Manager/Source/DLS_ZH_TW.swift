@@ -574,6 +574,13 @@ struct DLS_ZH_TW: DLS {
     
     var image_saved_success = "圖像保存到相冊"
     var exists = "已存在"
+    
+    var access_denied_mic = "您已拒絕訪問麥克風。 轉到“設置”並提供對麥克風的訪問以執行此功能。"
+    var recording_failed = "錄音失敗"
+    
+    var record_audio_start_button = "按可錄製音頻"
+    var record_audio_stop_to_send_button = "釋放按鈕發送音頻"
+
 }
 
 

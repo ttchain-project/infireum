@@ -142,10 +142,25 @@ class ChatViewModel: KLRxViewModel {
     }
     
     func sendImageAsMessage(image:UIImage) {
-        guard let user = IMUserManager.manager.userModel.value,let imgData = UIImageJPEGRepresentation(image, 0.5) else {
+        guard let imgData = UIImageJPEGRepresentation(image, 0.5) else {
             return
         }
-        let param = UploadFileAPI.Parameters.init(uid: user.uID, isGroup: self.input.roomType == .pvtChat ? false : true, image: imgData, roomId: self.input.roomID)
+       self.sendDataAsMessage(data: imgData,fileName: "image.jpeg")
+    }
+    
+    func sendVoiceMessage(data:Data) {
+        self.sendDataAsMessage(data: data,fileName: "audioRecording.3gpp")
+    }
+    
+    func sendDataAsMessage(data:Data, fileName:String) {
+        guard let user = IMUserManager.manager.userModel.value else {
+            return
+        }
+        let param = UploadFileAPI.Parameters.init(uid: user.uID,
+                                                  isGroup: self.input.roomType == .pvtChat ? false : true,
+                                                  image: data,roomId: self.input.roomID,
+                                                  fileName:fileName)
+        
         Server.instance.uploadFile(parameters:param).asObservable().subscribe(onNext: { (result) in
             switch result {
             case .failed(error: let error):
@@ -153,7 +168,7 @@ class ChatViewModel: KLRxViewModel {
             case .success(let message):
                 DLogInfo(message)
                 self.fetchAllMessagesForPrivateChat()
-
+                
             }
         }).disposed(by: bag)
     }
