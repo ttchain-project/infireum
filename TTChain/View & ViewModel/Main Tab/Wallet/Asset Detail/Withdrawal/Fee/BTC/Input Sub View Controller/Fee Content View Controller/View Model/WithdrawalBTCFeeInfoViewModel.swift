@@ -42,14 +42,15 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
     }
     
     func concatInput() {
-        twoWayBind(
-            property: input.manualRateStrInout,
-            relay: _manualFeeRate,
-            toVariable: { str in Decimal.init(string: str ?? "") },
-            toProperty: { rate in rate?.asString(digits: 8) }
-        )
-        .disposed(by: bag)
-        
+//        twoWayBind(
+//            property: input.manualRateStrInout,
+//            relay: _manualFeeRate,
+//            toVariable: { str in Decimal.init(string: str ?? "") },
+//            toProperty: { rate in rate?.asString(digits: 8) }
+//        )
+//        .disposed(by: bag)
+        (input.manualRateStrInout <-> _manualFeeRate).disposed(by: bag)
+
         input.typeSelectInput.drive(_selectedOption).disposed(by: bag)
     }
     
@@ -117,7 +118,9 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
             option -> Observable<Decimal?> in
             switch option {
             case .manual:
-                return self._manualFeeRate.asObservable()
+                return self._manualFeeRate.asObservable().map {
+                    Decimal.init(string: $0 ?? "")
+                }
             case .priority:
                 return self._priorityFeeRate.asObservable().map { Optional.init($0) }
             case .regular:
@@ -145,8 +148,8 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
         return BehaviorRelay.init(value: fee)
     }()
     
-    private lazy var _manualFeeRate: BehaviorRelay<Decimal?> = {
-        return BehaviorRelay.init(value: input.feeDefault.defaultFeeRate)
+    private lazy var _manualFeeRate: BehaviorRelay<String?> = {
+        return BehaviorRelay.init(value: (input.feeDefault.defaultFeeRate ?? 0).asString(digits: 8))
     }()
     
     
@@ -182,5 +185,10 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
         //SHUOLD NOT ENTER NON-BTC TYPE
         default: return errorDebug(response: .manual)
         }
+    }
+    
+    func updateManualFee(fee:Decimal) {
+        self._manualFeeRate.accept(fee.asString(digits: 8))
+        self._satPerByte.accept(fee)
     }
 }

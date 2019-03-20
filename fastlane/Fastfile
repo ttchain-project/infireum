@@ -122,11 +122,11 @@ desc "Build adhoc .ipa [uat]"
     clean: true,
     output_directory: "./build",
 #     archive_path: "./archives",
-    include_symbols: true,
-    include_bitcode: true,
+    include_symbols: false,
+    include_bitcode: false,
     export_options: {
-        compileBitcode: true,
-        uploadBitcode: true
+        compileBitcode: false,
+        uploadBitcode: false
       }
     )
 

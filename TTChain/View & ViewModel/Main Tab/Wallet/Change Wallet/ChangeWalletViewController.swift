@@ -16,6 +16,7 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
     struct Config {
         /// If this asset is provided, only wallets has this asset would be able to selected.
         let assetSupportLimit: Asset?
+        let currentSelectedAsset:Asset?
     }
     
     typealias ViewModel = ChangeWalletViewModel
@@ -24,15 +25,31 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
     var viewModel: ChangeWalletViewModel!
     var bag: DisposeBag = DisposeBag.init()
     
-    @IBOutlet weak var dismissBtn: UIButton!
+    @IBOutlet weak var backButton: UIButton! {
+        didSet {
+            backButton.rx.tap.asDriver().drive(onNext: {
+                self.dismiss(animated: true, completion: nil)
+            }).disposed(by:bag)
+        }
+        
+    }
+    //    @IBOutlet weak var dismissBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var onWalletSelect: Observable<Wallet> {
         return viewModel.onWalletSelect
     }
     
+    var onAssetSelected:Observable<Asset> {
+        return viewModel.onAssetSelected
+
+    }
+    private var selectedAsset:Asset?
+    
     func config(constructor: Config) {
         view.layoutIfNeeded()
+        self.selectedAsset = constructor.currentSelectedAsset!
+
         configTableView()
         
         viewModel = ViewModel.init(
@@ -43,34 +60,45 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
             output: ()
         )
         
-        viewModel.datasource.configureCell = {
-            [unowned self]
-            source, tv, idxPath, wallet -> UITableViewCell in
-            //TODO: Config cell with wallet
-            let cell = tv.dequeueReusableCell(withIdentifier: ChangeWalletTableViewCell.cellIdentifier()) as! ChangeWalletTableViewCell
-            cell.config(
-                wallet: wallet,
-                onAddrTap: {
-                    [unowned self] in
-                    self.copiedAddr(ofWallet: wallet)
-                },
-                onSettingsTap: {
-                    [unowned self] in
-                    self.toSettings(withWallet: wallet)
-                },
-               isNetworkReachable: NetworkReachabilityHandler.instance.reachable.value.hasNetwork,
-               isAbleToSelect: self.viewModel.isAbleToSelectWallet(wallet)
-            )
+//        viewModel.datasource.configureCell = {
+//            [unowned self]
+//            source, tv, idxPath, wallet -> UITableViewCell in
+//            //TODO: Config cell with wallet
+//            let cell = tv.dequeueReusableCell(withIdentifier: ChangeWalletTableViewCell.cellIdentifier()) as! ChangeWalletTableViewCell
+//            cell.config(
+//                wallet: wallet,
+//                onAddrTap: {
+//                    [unowned self] in
+//                    self.copiedAddr(ofWallet: wallet)
+//                },
+//                onSettingsTap: {
+//                    [unowned self] in
+//                    self.toSettings(withWallet: wallet)
+//                },
+//               isNetworkReachable: NetworkReachabilityHandler.instance.reachable.value.hasNetwork,
+//               isAbleToSelect: self.viewModel.isAbleToSelectWallet(wallet)
+//            )
+//
+//            return cell
+//        }
+//
+//        viewModel
+//            .sectionModelSources
+//            .bind(to: tableView.rx.items(
+//                dataSource: viewModel.datasource)
+//            )
+//            .disposed(by: bag)
+        
+        self.viewModel.assets.bind(to:self.tableView.rx.items) {
+            tv,row,asset in
+            var cell: SelectWalletTableViewCell
+            cell = tv.dequeueReusableCell(withIdentifier: SelectWalletTableViewCell.cellIdentifier()) as! SelectWalletTableViewCell
+            cell.setData(walletName: asset.wallet!.name!, coinName: asset.coin!.inAppName!, walletAmount: asset.amount!.decimalValue.asString(digits: 4), isSelected: asset.walletEPKey == self.selectedAsset!.walletEPKey)
+            
+                    cell.contentView.alpha = self.viewModel.isAbleToSelectWallet(withAsset: asset) ? 1 : 0.4
             
             return cell
-        }
-        
-        viewModel
-            .sectionModelSources
-            .bind(to: tableView.rx.items(
-                dataSource: viewModel.datasource)
-            )
-            .disposed(by: bag)
+        }.disposed(by: bag)
         
         setupUI()
         bindUI()
@@ -93,22 +121,22 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
     
     private func configTableView() {
         tableView.delegate = self
-        tableView.register(SystemWalletTableHeaderView.nib, forHeaderFooterViewReuseIdentifier: SystemWalletTableHeaderView.nameOfClass)
-        tableView.register(ImportedWalletTableHeaderView.nib, forHeaderFooterViewReuseIdentifier: ImportedWalletTableHeaderView.nameOfClass)
-        tableView.register(ChangeWalletTableViewCell.nib, forCellReuseIdentifier: ChangeWalletTableViewCell.cellIdentifier())
+//        tableView.register(SystemWalletTableHeaderView.nib, forHeaderFooterViewReuseIdentifier: SystemWalletTableHeaderView.nameOfClass)
+//        tableView.register(ImportedWalletTableHeaderView.nib, forHeaderFooterViewReuseIdentifier: ImportedWalletTableHeaderView.nameOfClass)
+        tableView.register(SelectWalletTableViewCell.nib, forCellReuseIdentifier: SelectWalletTableViewCell.cellIdentifier())
         tableView.separatorStyle = .none
     }
     
     private func setupUI() {
-        dismissBtn.rx.enableCircleSided().disposed(by: bag)
+//        dismissBtn.rx.enableCircleSided().disposed(by: bag)
     }
     
     private func bindUI() {
-        dismissBtn.rx.tap.asDriver()
-            .drive(onNext: {
-                [unowned self] in self.dismiss(animated: true, completion: nil)
-            })
-            .disposed(by: bag)
+//        dismissBtn.rx.tap.asDriver()
+//            .drive(onNext: {
+//                [unowned self] in self.dismiss(animated: true, completion: nil)
+//            })
+//            .disposed(by: bag)
     }
     
 //    override func renderLang(_ lang: Lang) {
@@ -116,11 +144,11 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
 //    }
     
     override func renderTheme(_ theme: Theme) {
-        dismissBtn.setPureImage(
-            color: theme.palette.btn_borderFill_enable_text,
-            image: #imageLiteral(resourceName: "imgNavHopeseedlogo"),
-            borderInfo: (color: theme.palette.specific(color: .owMarineBlue), width: 1)
-        )
+//        dismissBtn.setPureImage(
+//            color: theme.palette.btn_borderFill_enable_text,
+//            image: #imageLiteral(resourceName: "imgNavHopeseedlogo"),
+//            borderInfo: (color: theme.palette.specific(color: .owMarineBlue), width: 1)
+//        )
     }
     
     private func observeWalletUpdateFromNotificationCenter() {
@@ -178,35 +206,35 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
 }
 
 extension ChangeWalletViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.001
-    }
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 0.001
+//    }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == viewModel.systemWalletSection {
+//            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: SystemWalletTableHeaderView.nameOfClass) as! SystemWalletTableHeaderView
+//
+//            return view
+//        }else if section == viewModel.importedWalletSection {
+//            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ImportedWalletTableHeaderView.nameOfClass) as! ImportedWalletTableHeaderView
+//
+//            view.config(onCreate: {
+//                [unowned self] in
+//                self.toImportWallet()
+//            })
+//
+//            return view
+//        }else {
+//            return nil
+//        }
+//    }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == viewModel.systemWalletSection {
-            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: SystemWalletTableHeaderView.nameOfClass) as! SystemWalletTableHeaderView
-            
-            return view
-        }else if section == viewModel.importedWalletSection {
-            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ImportedWalletTableHeaderView.nameOfClass) as! ImportedWalletTableHeaderView
-            
-            view.config(onCreate: {
-                [unowned self] in
-                self.toImportWallet()
-            })
-            
-            return view
-        }else {
-            return nil
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
-    }
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return nil
+//    }
 }
 

@@ -29,6 +29,8 @@
 	<string>$(PRODUCT_NAME) will like to use your mobile camera to scan qrcode or upload required certificate photos.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID / Touch ID to Identify User</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) will use Microphone to make calls and send voice messages</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>$(PRODUCT_NAME) will use your photo library to choose photos to upload.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

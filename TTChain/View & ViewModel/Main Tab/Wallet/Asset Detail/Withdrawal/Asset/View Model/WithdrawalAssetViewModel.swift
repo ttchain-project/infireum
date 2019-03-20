@@ -14,6 +14,7 @@ protocol WithdrawalAssetInfoProvider {
     var hasAmt: Observable<Bool> { get }
     func checkAmtValidity() -> WithdrawalAssetValidity
     func getTransferAmt() -> Decimal?
+    func updateAsset(asset:Asset)
 }
 
 enum WithdrawalAssetValidity {
@@ -35,6 +36,9 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
     var input: WithdrawalAssetViewModel.Input
     var output: Void
     var bag: DisposeBag = DisposeBag.init()
+    private lazy var _asset: BehaviorRelay<Asset> = {
+        return BehaviorRelay.init(value: self.input.asset)
+    }()
     
     required init(input: InputSource, output: OutputSource) {
         self.input = input
@@ -58,6 +62,10 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
         }
         .bind(to: _transferAmt)
         .disposed(by: bag)
+        
+        self._asset.map {
+            ($0.amount! as Decimal)
+            }.bind(to: self._assetAvailableAmt).disposed(by: bag)
     }
     
     //MARK: - Public
@@ -92,6 +100,7 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
         //In here I don't add the update logic.
         let relay = BehaviorRelay.init(value: input.asset.amount! as Decimal)
         return relay
+        
     }()
     
     private lazy var _fiat: BehaviorRelay<Fiat> = {
@@ -136,5 +145,13 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
     public func updateAmt(_ amt: Decimal) {
         _transferAmt.accept(amt)
         _transferAmtStr.accept(amt.asString(digits: 8))
+    }
+    public func transferAll(withFee fee:Decimal) {
+        let amt = self._assetAvailableAmt.value - fee
+        self.updateAmt(amt)
+    }
+    
+    public func updateAsset(asset: Asset) {
+        self._asset.accept(asset)
     }
 }

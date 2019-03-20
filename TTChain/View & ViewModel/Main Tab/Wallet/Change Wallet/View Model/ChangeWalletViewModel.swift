@@ -44,21 +44,39 @@ class ChangeWalletViewModel: KLRxViewModel, RxNetworkReachabilityRespondable {
     
     let systemWalletSection: Int = 0
     let importedWalletSection: Int = 1
+    private(set) lazy var assets: BehaviorRelay<[Asset]> = {
+        return BehaviorRelay.init(value: [])
+    }()
     
     lazy var onWalletSelect: Observable<Wallet> = {
         return input.walletSelectIdxPathInput.debug("Select Wallet: Row selected").asObservable().flatMapLatest {
             [unowned self] idxPath -> Observable<Wallet> in
-            let source: Observable<[Wallet]>
-            if idxPath.section == self.systemWalletSection  {
-                source = self.systemWallets.asObservable()
-            }else {
-                source = self.importedWallets.asObservable()
-            }
+//            if idxPath.section == self.systemWalletSection  {
+//                source = self.systemWallets.asObservable()
+//            }else {
+//                source = self.importedWallets.asObservable()
+//            }
             
-            return source
+            return self.assets
                 .map { $0[idxPath.row] }
                 .filter {
-                    [unowned self] in self.isAbleToSelectWallet($0)
+                    [unowned self] in self.isAbleToSelectWallet(withAsset:$0)
+                }.map {
+                    $0.wallet!
+                }
+                .debug("Select Wallet: Event Sent to view controller")
+                .take(1)
+                .concat(Observable.never())
+        }
+    }()
+    
+    lazy var onAssetSelected: Observable<Asset> = {
+        return input.walletSelectIdxPathInput.debug("Select Wallet: Row selected").asObservable().flatMapLatest {
+            [unowned self] idxPath -> Observable<Asset> in
+            return self.assets
+                .map { $0[idxPath.row] }
+                .filter {
+                    [unowned self] in self.isAbleToSelectWallet(withAsset:$0)
                 }
                 .debug("Select Wallet: Event Sent to view controller")
                 .take(1)
@@ -137,24 +155,33 @@ class ChangeWalletViewModel: KLRxViewModel, RxNetworkReachabilityRespondable {
     }
     
     func refreshWallets() {
-        guard let wallets = DB.instance.get(type: Wallet.self, predicate: nil, sorts: nil) else {
+        
+//        guard let wallets = DB.instance.get(type: Wallet.self, predicate: nil, sorts: nil) else {
+//            return errorDebug(response: ())
+//        }
+        let predicate = Asset.genPredicate(fromIdentifierType: .str(keyPath: #keyPath(Asset.coinID), value: (self.input.assetSupportLimit?.coinID)!))
+      
+        guard let assets = DB.instance.get(type: Asset.self, predicate: predicate, sorts: nil) else {
             return errorDebug(response: ())
         }
         
-        var sysWallets: [Wallet] = []
-        var impWallets: [Wallet] = []
-        for wallet in wallets {
-            wallet.isFromSystem ? sysWallets.append(wallet) : impWallets.append(wallet)
-        }
-        
-        systemWallets.accept(sysWallets.sorted { $0.name! <= $1.name! })
-        importedWallets.accept(impWallets.sorted { $0.name! <= $1.name! })
+//        var sysWallets: [Wallet] = []
+//        var impWallets: [Wallet] = []
+//
+        self.assets.accept(assets.sorted { $0.wallet!.name! <= $1.wallet!.name!  } )
+//        systemWallets.accept(wallets.sorted { $0.name! <= $1.name! })
+//        importedWallets.accept(impWallets.sorted { $0.name! <= $1.name! })
+    }
+    
+    public func isAbleToSelectWallet(withAsset asset:Asset) -> Bool {
+        return (asset.amount! as Decimal) != 0
     }
     
     //MARK: - Helper
     public func isAbleToSelectWallet(_ wallet: Wallet) -> Bool {
         guard let assetLimit = input.assetSupportLimit else { return true }
         guard let assets = wallet.assets?.array as? [Asset] else { return false }
+        
         return assets.contains(where: { (asset) -> Bool in
             asset.coinID == assetLimit.coinID
         })

@@ -77,10 +77,8 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         }
         assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
             let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
-            
             let fee = config.asset.wallet!.chainType == ChainType.btc.rawValue ? feeInfo?.totalHardCodedFee : 0
-            let totalTransferableAmt = ((config.asset.amount ?? 0) as Decimal) - fee!
-            self.assetVC.viewModel.updateAmt(totalTransferableAmt > 0 ? totalTransferableAmt : 0)
+            self.assetVC.viewModel.transferAll(withFee:fee!)
         }).disposed(by:bag)
         
         constrain(assetVC.view, baseScrollView) { [unowned self] (view, scroll) in
@@ -336,29 +334,30 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
 
     private func toSelectWallet() {
         //TODO: Instance should has chainType, and asset type input to filtered out unwanted wallets.
-        let vc = ChangeWalletViewController.instance(from: ChangeWalletViewController.Constructor(assetSupportLimit: viewModel.input.asset)
+        let vc = ChangeWalletViewController.instance(from: ChangeWalletViewController.Constructor(assetSupportLimit: viewModel.input.asset,currentSelectedAsset:self.viewModel.input.asset)
         )
-        vc.onWalletSelect.take(1).subscribe(onNext: {
+        vc.onAssetSelected.take(1).subscribe(onNext: {
             [unowned self]
-            wallet in
+            asset in
             vc.dismissRoot(sender: nil)
-            if let assets = wallet.assets?.array as? [Asset] {
-                let targetID = self.viewModel.input.asset.coinID!
-                let targetAsset: Asset
-                
-                if let idx = assets.index(where: { $0.coinID! == targetID }) {
-                    targetAsset = assets[idx]
-                }else {
-                    //if no cuurent asset found in the wallet, create a new one, with unselected state
-                    guard let newAsset = wallet.createNewAsset(ofCoin: self.viewModel.input.asset.coin!) else {
-                        return errorDebug(response: ())
-                    }
-                    
-                    targetAsset = newAsset
-                }
-                
-                self.viewModel.input.addressProvider.changeFromAsset(targetAsset)
-            }
+            //            if let assets = wallet.assets?.array as? [Asset] {
+            //                let targetID = self.viewModel.input.asset.coinID!
+            //                let targetAsset: Asset
+            //
+            //                if let idx = assets.index(where: { $0.coinID! == targetID }) {
+            //                    targetAsset = assets[idx]
+            //                }else {
+            //                    //if no cuurent asset found in the wallet, create a new one, with unselected state
+            //                    guard let newAsset = wallet.createNewAsset(ofCoin: self.viewModel.input.asset.coin!) else {
+            //                        return errorDebug(response: ())
+            //                    }
+            //
+            //                    targetAsset = newAsset
+            //                }
+            //
+            self.viewModel.input.addressProvider.changeFromAsset(asset)
+            self.viewModel.input.amtProvider.updateAsset(asset: asset)
+            //            }
         })
         .disposed(by: bag)
         

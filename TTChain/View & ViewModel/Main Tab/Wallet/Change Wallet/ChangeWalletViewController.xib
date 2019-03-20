@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeWalletViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
-                <outlet property="dismissBtn" destination="0EX-P6-9q4" id="0zV-QJ-x8t"/>
+                <outlet property="backButton" destination="tS1-pu-SL4" id="lw4-CW-vKF"/>
                 <outlet property="tableView" destination="1bg-WU-gJ9" id="uK7-AC-tIL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,26 +22,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0EX-P6-9q4">
-                    <rect key="frame" x="140" y="40" width="94" height="30"/>
-                    <inset key="contentEdgeInsets" minX="20" minY="4" maxX="20" maxY="4"/>
-                    <state key="normal" title="Button"/>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1bg-WU-gJ9">
-                    <rect key="frame" x="0.0" y="90" width="375" height="577"/>
+                    <rect key="frame" x="0.0" y="126" width="375" height="541"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tS1-pu-SL4">
+                    <rect key="frame" x="20" y="74" width="29" height="32"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="0.0"/>
+                    <state key="normal" image="arrowNavBlack"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="0EX-P6-9q4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="6z1-N7-BQQ"/>
+                <constraint firstItem="tS1-pu-SL4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Pcc-7N-Bn5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1bg-WU-gJ9" secondAttribute="bottom" id="VAt-bt-a4Y"/>
-                <constraint firstItem="1bg-WU-gJ9" firstAttribute="top" secondItem="0EX-P6-9q4" secondAttribute="bottom" constant="20" id="iX1-Vh-Ktg"/>
                 <constraint firstItem="1bg-WU-gJ9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kK2-5o-o6W"/>
-                <constraint firstItem="0EX-P6-9q4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="nnt-BG-bev"/>
+                <constraint firstItem="1bg-WU-gJ9" firstAttribute="top" secondItem="tS1-pu-SL4" secondAttribute="bottom" constant="20" id="qNq-A5-gne"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1bg-WU-gJ9" secondAttribute="trailing" id="sT3-sG-nvj"/>
+                <constraint firstItem="tS1-pu-SL4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="ukG-eI-73u"/>
             </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
     </objects>
+    <resources>
+        <image name="arrowNavBlack" width="9" height="15.5"/>
+    </resources>
 </document>

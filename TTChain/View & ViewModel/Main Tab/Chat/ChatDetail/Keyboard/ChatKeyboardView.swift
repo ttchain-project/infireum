@@ -301,11 +301,15 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         
         do {
             recorder = try AVAudioRecorder(url: audioFilePath, settings: settings)
-            recorder!.delegate = self
-            recorder!.record()
+            
         } catch {
             finishRecording(success: false)
         }
+        guard let recorder = self.recorder else {
+            return
+        }
+        recorder.delegate = self
+        recorder.record()
     }
     
     func finishRecording(success:Bool) {
