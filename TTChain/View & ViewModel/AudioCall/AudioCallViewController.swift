@@ -86,7 +86,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
         self.speakerButton.setImage(#imageLiteral(resourceName: "iconCallSpeakerOn.png"), for: .selected)
         
         self.callTitleLabel.set(textColor: .gray, font: .owMedium(size: 24))
-        self.timerLabel.set(textColor: .red, font: .owRegular(size:12))
+        self.timerLabel.set(textColor: .lightGray, font: .owRegular(size:20))
         
     }
     func bindUI() {

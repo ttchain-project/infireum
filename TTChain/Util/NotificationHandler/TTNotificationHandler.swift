@@ -81,7 +81,7 @@ class TTNotificationHandler {
         }
         //Show Incoming Call if not already in call
         if !callMessageModel.isConnect {
-            AVCallHandler.handler.endCall()
+            AVCallHandler.handler.otherUserCancelledCall()
             return
         }
         

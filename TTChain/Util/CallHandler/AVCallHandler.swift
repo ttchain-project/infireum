@@ -74,18 +74,12 @@ class AVCallHandler : NSObject{
     
     func endCall() {
        
-        if case .incoming? = self._currentCallStatus.value {
-            self.disconnectCall()
-            return
-        }
-        
-        self.updateCallStatus()
-
-        if case .connected? = self._currentCallStatus.value {
-            self.disconnectCall()
-        }else if case .otherClientConnected? = self._currentCallStatus.value {
-            self.disconnectCall()
-        }
+        self.updateCallStatusToEndCall()
+        self.disconnectCall()
+    }
+    
+    func otherUserCancelledCall() {
+        self.disconnectCall()
     }
     
     func startIncomingCall(callMessageModel:CallMessageModel) {
@@ -161,7 +155,7 @@ class AVCallHandler : NSObject{
         
     }
     
-    func updateCallStatus() {
+    func updateCallStatusToEndCall() {
         
         guard let callDetails = self.callDetails else {
             return
@@ -279,7 +273,6 @@ extension AVCallHandler {
             result in
             if result {
                 self.connectCall(forRoom: callMessageModel.roomId, calleeName: calleeName, streamId: callMessageModel.streamId)
-                
             } else {
                 AVCallHandler.handler.endCall()
             }
@@ -293,6 +286,6 @@ extension AVCallHandler {
         let config = AudioCallViewController.Config.init(roomId: roomId, calleeName: calleeName, roomType: .pvtChat, callAction: CallAction.joinCall, streamId: streamId)
         let audioCallVC = AudioCallViewController.instance(from: config)
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
-        rootVC?.present(audioCallVC, animated: true, completion: nil)
+        rootVC?.present(audioCallVC, animated: false, completion: nil)
     }
 }

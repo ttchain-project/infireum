@@ -31,7 +31,7 @@ class AudioCallViewModel: KLRxViewModel {
     private var disconnectTimer: Observable<Int>!
     
     var callTimer:Observable<Int>!
-    var callTimerBag: DisposeBag! = DisposeBag()
+    var callTimerBag: DisposeBag!
     
     required init(input: InputSource, output: OutputSource) {
         self.input = input
@@ -96,16 +96,12 @@ class AudioCallViewModel: KLRxViewModel {
     }
     
     func beginCallTime() {
+        
         self.callTimer = Observable<Int>.interval(1.0, scheduler: MainScheduler.instance)
-            
+        self.callTimerBag = DisposeBag.init()
         self.callTimer.map({ time in
             let duration = Duration.init(value: time)
-            if duration.hours.int > 0 {
-               return "\(duration.hours.int):\(duration.minutes.int):\(duration.seconds.int)"
-            }else {
-                DLogInfo("\(time.minutes):\(time.seconds)")
-               return "\(duration.minutes.int):\(duration.seconds.int)"
-            }
+            return String(format:"%02i:%02i:%02i",duration.hours.int,duration.minutes.int,duration.seconds.int)
         }).subscribe(onNext:{ timeInString in
             self.totalCallTime.accept(timeInString)
         }).disposed(by:self.callTimerBag)
