@@ -64,6 +64,7 @@ enum IMAPI :KLMoyaAPISet {
         case .blockUser(let api): return api
         case .registerJiGuangPush(let api): return api
         case .inAppCall(let api): return api
+        case .createRedEnvelope(let api): return api
         }
     }
     case preLogin(PreLoginAPI)
@@ -93,6 +94,7 @@ enum IMAPI :KLMoyaAPISet {
     case getDestructMessageSetting(GetSelfDestructingStatusAPI)
     case registerJiGuangPush(JiGuangPushSettingAPI)
     case inAppCall(InAppCallApi)
+    case createRedEnvelope(CreateRedEnvelopeAPI)
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -1161,6 +1163,44 @@ struct InAppCallApiModel:KLJSONMappableMoyaResponse {
     }
     
     typealias API = InAppCallApi
+}
+
+
+
+struct CreateRedEnvelopeAPI : KLMoyaIMAPIData {
+    var stub: Data? {return nil}
+    
+    struct Parameters: Paramenter {
+        let senderUID = Tokens.getUID()
+        let authToken = Tokens.getAuthToken()
+        let rocketChatUserId = Tokens.getRocketChatUserID()
+        let senderAddress: String
+        let identifier: String
+        let amount: Decimal
+        let message: String?
+        let roomId: String
+        let expireMinute: Int
+        let limitCount: Int?
+        let type: RedEnvelopeType?
+    }
+    
+    let parameters: Parameters
+    var path: String { return parameters.limitCount == nil ? "IM/RedEnvelope/Create" : "IM/RedEnvelope/CreateGroup" }
+    var method: Moya.Method { return .post }
+    var task: Task { return .requestParameters(parameters: parameters.asDictionary(),
+                                               encoding: JSONEncoding.default) }
+
+}
+
+struct CreateRedEnvelopeAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = CreateRedEnvelopeAPI
+    let status : Bool
+    init(json: JSON, sourceAPI: API) throws {
+        guard let status = json.bool else {
+            throw GTServerAPIError.noData
+        }
+        self.status = status
+    }
 }
 
 //MARK: - ROCKETCHAT API AND MODELS

@@ -684,6 +684,12 @@
         return fire(router: .IM(.inAppCall(api)))
 
     }
+    
+    //MARK: POST /IM/CreateEnvelope
+    func createRedEnvelope(parameter: CreateRedEnvelopeAPI.Parameters) -> RxAPIResponse<CreateRedEnvelopeAPIModel> {
+        let api = CreateRedEnvelopeAPI.init(parameter: parameter)
+        return fire(router: .IM(.createRedEnvelope(api)))
+    }
  }
  
  //MARK: - RocketChat -

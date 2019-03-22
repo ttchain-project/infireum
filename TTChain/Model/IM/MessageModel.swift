@@ -174,3 +174,10 @@ struct CallMessageModel: Codable {
 }
 
 
+enum RedEnvelopeType: Int, Codable {
+    case normal = 0, group, lucky
+}
+
+enum RedEnvelopeStatus: Int, Codable {
+    case waitReceive = 1, waitSend, done
+}
