@@ -155,7 +155,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     func bindViewModel() {
-
+        
         viewModel.messages.distinctUntilChanged().bind(to: tableView.rx.items) {
             [unowned self]
             tv,row,messageModel in
@@ -588,3 +588,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         return targetSize
     }
 }
+
+
+

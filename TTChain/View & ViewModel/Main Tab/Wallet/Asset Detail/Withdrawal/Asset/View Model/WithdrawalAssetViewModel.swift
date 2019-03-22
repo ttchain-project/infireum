@@ -146,9 +146,27 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
         _transferAmt.accept(amt)
         _transferAmtStr.accept(amt.asString(digits: 8))
     }
-    public func transferAll(withFee fee:Decimal) {
-        let amt = self._assetAvailableAmt.value - fee
-        self.updateAmt(amt)
+    public func transferAll(withFee feeInfo:WithdrawalFeeInfoProvider.FeeInfo?) {
+     
+        let fee =  { () -> Decimal? in
+            switch input.asset.wallet!.owChainType {
+            case .btc:
+                return feeInfo?.totalHardCodedFee
+            case .eth:
+                guard let feeInfo = feeInfo else {
+                    return 0
+                }
+                if input.asset.coinID == Coin.eth_identifier {
+                    return feeInfo.amt * feeInfo.rate
+                } else {
+                    return 0
+                }
+            default:
+                return 0
+            }
+        }()
+        let amt = self._assetAvailableAmt.value - (fee ?? 0)
+        self.updateAmt(amt >= 0 ? amt : 0)
     }
     
     public func updateAsset(asset: Asset) {

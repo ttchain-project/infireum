@@ -119,8 +119,6 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         // Dispose of any resources that can be recreated.
     }
 
-    public func transferAllAmout(amount:Decimal?) {
-    }
 }
 
 extension WithdrawalAssetViewController: UITextFieldDelegate {

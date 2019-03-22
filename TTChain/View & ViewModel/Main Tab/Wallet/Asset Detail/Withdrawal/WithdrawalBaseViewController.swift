@@ -77,8 +77,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         }
         assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
             let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
-            let fee = config.asset.wallet!.chainType == ChainType.btc.rawValue ? feeInfo?.totalHardCodedFee : 0
-            self.assetVC.viewModel.transferAll(withFee:fee!)
+            self.assetVC.viewModel.transferAll(withFee:feeInfo)
         }).disposed(by:bag)
         
         constrain(assetVC.view, baseScrollView) { [unowned self] (view, scroll) in

@@ -171,7 +171,7 @@ desc "Build adhoc .ipa [uat]"
 
 desc "Build adhoc .ipa [PRD]"
   lane :adhoc_prd do
-    match_prd_adhoc
+    # match_prd_adhoc
 #    increment_build_number
     gym(
     scheme: "TTChain",
