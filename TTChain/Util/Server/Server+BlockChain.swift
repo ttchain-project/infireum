@@ -687,7 +687,7 @@
     
     //MARK: POST /IM/CreateEnvelope
     func createRedEnvelope(parameter: CreateRedEnvelopeAPI.Parameters) -> RxAPIResponse<CreateRedEnvelopeAPIModel> {
-        let api = CreateRedEnvelopeAPI.init(parameter: parameter)
+        let api = CreateRedEnvelopeAPI.init(parameters: parameter)
         return fire(router: .IM(.createRedEnvelope(api)))
     }
  }

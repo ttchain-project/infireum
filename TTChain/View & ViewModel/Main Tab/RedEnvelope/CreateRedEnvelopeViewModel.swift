@@ -16,7 +16,8 @@ final class CreateRedEnvelopeViewModel: ViewModel {
     }
 
     struct Input {
-        let walletCoinRelay = BehaviorRelay<Asset?>(value: nil)
+        let walletRelay = BehaviorRelay<Wallet?>(value: nil)
+        let walletCoinRelay = BehaviorRelay<Coin?>(value: nil)
         let amountRelay = BehaviorRelay<String?>(value: nil)
         let messageRelay = BehaviorRelay<String?>(value: nil)
         let typeRelay = BehaviorRelay<RedEnvelopeType?>(value: nil)
@@ -50,6 +51,19 @@ final class CreateRedEnvelopeViewModel: ViewModel {
     var output: Output
     let disposeBag = DisposeBag()
 
+    lazy var wallets : [Wallet] = {
+        //        let predForBTC = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.btc.rawValue))
+        guard let wallets = DB.instance.get(type: Wallet.self, predicate: nil, sorts: nil) else {
+            return []
+        }
+        return wallets
+    }()
+    
+    lazy var coins : BehaviorRelay<[Coin]?> = {
+        let coins = Coin.getAllCoins(of: ChainType(rawValue: wallets[0].chainType)!)
+        return BehaviorRelay.init(value: coins)
+    }()
+    
     init(type: CreateType, roomIdentifier: String, memberCount: Int) {
         input = Input()
         output = Output()
@@ -61,7 +75,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
         setUpMinutes()
         setUpWalletCoin()
         input.closeTapSubject.bind(to: output.dismissSubject).disposed(by: disposeBag)
-        output.membersCountSubject.onNext("This group has \(memberCount) members")
+        output.membersCountSubject.onNext("(The number of members is \(memberCount))")
         Observable.combineLatest(input.walletCoinRelay, input.amountRelay, input.limitCountRelay, input.messageRelay)
             .map { walletCoin, amount, limitCount, message -> Bool in
                 guard walletCoin != nil else { return false }
@@ -77,18 +91,23 @@ final class CreateRedEnvelopeViewModel: ViewModel {
             }, onError: nil,
                onCompleted: nil,
                onDisposed: nil).disposed(by: disposeBag)
+        
         setUpFee()
+        
+        self.input.walletRelay.asObservable().filter { $0 != nil }.map { wallet in
+            return Coin.getAllCoins(of: ChainType(rawValue: wallet!.chainType)!)
+            }.bind(to: self.coins).disposed(by: disposeBag)
     }
     
     private func setUpFee() {
         input.walletCoinRelay.subscribe(onNext: { [unowned self] assetCoin in
             let fee =  { () -> Decimal? in
-                switch assetCoin!.wallet!.owChainType {
-                case .btc:
+                switch assetCoin?.owChainType {
+                case .btc?:
                     return FeeManager.getValue(fromOption: .btc(.priority))
-                case .eth:
+                case .eth?:
                     
-                    if assetCoin!.coinID == Coin.eth_identifier {
+                    if assetCoin?.identifier == Coin.eth_identifier {
                         return FeeManager.getValue(fromOption: .eth(.gasPrice(.systemMax)))
                     } else {
                         return 0
@@ -106,15 +125,20 @@ final class CreateRedEnvelopeViewModel: ViewModel {
     
     private func setUpWalletCoin() {
         input.walletCoinRelay.map { asset -> String? in
-            if let asset = asset,
-                let walletName = asset.wallet?.name,
-                let name = asset.coin?.inAppName {
-                return "\(walletName) \(name)"
+            if let coin = asset,
+                let name = coin.inAppName {
+                return "\(name)"
             } else {
                 return "Please select"
             }
             }.bind(to: output.walletCoinTitleSubject).disposed(by: disposeBag)
-        input.walletCoinRelay.map { $0?.amount?.decimalValue.asString(digits: 4) }.bind(to: output.balanceSubject).disposed(by: disposeBag)
+        
+        input.walletCoinRelay.map { coin in
+            guard let coin = coin,let wallet = self.input.walletRelay.value, let asset = wallet.getAsset(of: coin) else {
+                return ""
+            }
+            return "Balance : " + asset.amount!.decimalValue.asString(digits:8)
+            }.bind(to: output.balanceSubject).disposed(by: disposeBag)
     }
 
     private func setUpMinutes() {
@@ -145,17 +169,17 @@ final class CreateRedEnvelopeViewModel: ViewModel {
             }, onError: nil,
                onCompleted: nil,
                onDisposed: nil).disposed(by: disposeBag)
-        input.typeRelay.map { [unowned self] type -> NSAttributedString? in
-            if let type = type {
-                return self.attributeString(type: type)
-            } else {
-                return nil
-            }
-            }.bind(to: output.typeAttributeTitleSubject).disposed(by: disposeBag)
+//        input.typeRelay.map { [unowned self] type -> NSAttributedString? in
+//            if let type = type {
+//                return self.attributeString(type: type)
+//            } else {
+//                return nil
+//            }
+//            }.bind(to: output.typeAttributeTitleSubject).disposed(by: disposeBag)
     }
 
-    private func attributeString(type: RedEnvelopeType) -> NSMutableAttributedString? {
-        var attributedString: NSMutableAttributedString
+//    private func attributeString(type: RedEnvelopeType) -> NSMutableAttributedString? {
+//        var attributedString: NSMutableAttributedString
 //        switch type {
 //        case .lucky:
 //            attributedString = NSMutableAttributedString(string: "目前为普通红包，改为拼手气红包", attributes: [
@@ -173,12 +197,12 @@ final class CreateRedEnvelopeViewModel: ViewModel {
 //                                          range: NSRange(location: 11, length: 4))
 //        case .normal: return nil
 //        }
-        return attributedString
-    }
+//        return attributedString
+//    }
 
     private func create(roomIdentifier: String) {
-        guard let address = input.walletCoinRelay.value?.wallet?.address,
-            let identifier = input.walletCoinRelay.value?.coinID,
+        guard let address = input.walletRelay.value?.address,
+            let identifier = input.walletCoinRelay.value?.identifier,
             let amount = Decimal(string: input.amountRelay.value ?? String()) else { return }
         let minutes = output.expiredMinutesRelay.value
         let parameters = CreateRedEnvelopeAPI.Parameters(senderAddress: address,

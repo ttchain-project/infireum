@@ -47,6 +47,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         case openCamera = 1
         case startSecretChat = 2
         case addReceipt
+        case redEnv
         case makeAudioCall
         case makeVideoCall
     }
@@ -86,11 +87,11 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         return inputContentViewBottomConstraint?.constant ?? 0
     }
     
-    var functions: [FunctionModel] = [
+    var functions: [FunctionModel] = [FunctionModel.init(title: "Receipt", image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt),
                                       FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
                                       FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
+                                      FunctionModel.init(title: "Red Env", image: UIImage(named: "iconEnvelopeColor"), type: .redEnv)
                                       
-                                       FunctionModel.init(title: "Receipt", image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt)
 ]
     
     
