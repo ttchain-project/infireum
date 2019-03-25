@@ -149,7 +149,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         tableView.register(ChatMessageImageTableViewCell.nib, forCellReuseIdentifier: ChatMessageImageTableViewCell.nameOfClass)
         tableView.register(ReceiptTableViewCell.nib, forCellReuseIdentifier: ReceiptTableViewCell.nameOfClass)
         tableView.register(RedEnvTableViewCell.nib, forCellReuseIdentifier: RedEnvTableViewCell.nameOfClass)
-
+        tableView.register(RceiveRedEnvelopeTableViewCell.nib, forCellReuseIdentifier: RceiveRedEnvelopeTableViewCell.nameOfClass)
+        
         tableView.rx.klrx_tap.drive(onNext: { _ in
             self.view.endEditing(true)
         }).disposed(by: bag)
@@ -236,7 +237,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 }).disposed(by: receiptCell.bag)
                 
                 cell = receiptCell
-            case .redEnv:
+            case .createRedEnvelope:
                 let redEnvCell = tv.dequeueReusableCell(withIdentifier: RedEnvTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! RedEnvTableViewCell
                 
                 redEnvCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
@@ -259,7 +260,13 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 }).disposed(by: redEnvCell.bag)
                 
                 cell = redEnvCell
+            case .receiveRedEnvelope:
+                print("a")
+                let rcvRedEnvCell = tv.dequeueReusableCell(withIdentifier: RceiveRedEnvelopeTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! RceiveRedEnvelopeTableViewCell
+                rcvRedEnvCell.config(message: messageModel)
+                cell = rcvRedEnvCell
             }
+            
             return cell
         }.disposed(by: bag)
         
@@ -566,7 +573,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 return
             }
             self.viewModel.sendImageAsMessage(image: image)
-        case .receipt,.audioCall(_),.voiceMessage,.redEnv(_):
+        default:
             return
         }
     }

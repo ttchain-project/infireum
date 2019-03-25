@@ -16,7 +16,8 @@ enum MessageType {
     case voiceMessage
     case receipt(messageDict : [String:String])
     case audioCall (messageDetails : CallMessageModel)
-    case redEnv(redEnvId: String)
+    case createRedEnvelope (messageDetails: RedEnvelope)
+    case receiveRedEnvelope (messageDetails: RedEnvelope)
     
     var messageDict:[String:String] {
         switch  self {
@@ -34,14 +35,17 @@ enum MessageType {
             return nil
         }
     }
-    var redEnvId: String? {
+    var redEnvelopeMessage: RedEnvelope? {
         switch self {
-        case .redEnv(redEnvId: let id):
-            return id
+        case .createRedEnvelope(messageDetails:let model):
+            return model
+        case .receiveRedEnvelope(messageDetails:let model):
+            return model
         default:
             return nil
         }
     }
+    
 }
 
 class MessageModel {
@@ -108,14 +112,29 @@ class MessageModel {
                 }
                 return .file
             case "audio","video":
-                if let url = messageResponse["msg"].string  {
-                    if let data = url.data(using: .utf8) {
+                if let content = messageResponse["msg"].string  {
+                    if let data = content.data(using: .utf8) {
                         let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                         guard let audioMessageModel = CallMessageModel.init(json: dict!) else {
                             return .general
                         }
                         rawMessage = audioMessageModel.message
                         return MessageType.audioCall(messageDetails: audioMessageModel)
+                    }
+                }
+                fallthrough
+            case "create_red_envelope","receive_red_envelope":
+                if let content = messageResponse["msg"].string  {
+                    guard let data = content.data(using: .utf8) ,
+                        var result = try? JSONDecoder().decode(RedEnvelope.self, from: data) else {
+                            return .general
+                    }
+                    rawMessage = result.message
+                    if msgType == "create_red_envelope" {
+                        result.senderUID = userId
+                        return .createRedEnvelope(messageDetails:result)
+                    }else {
+                        return .receiveRedEnvelope(messageDetails:result)
                     }
                 }
                 fallthrough
@@ -126,11 +145,7 @@ class MessageModel {
                     }
                         if dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
                             return .receipt(messageDict: dict as! [String : String])
-                        } else if let redEnvId = dict!["redEnvelopeId"] as? String, let message = dict!["message"] as? String {
-                            rawMessage = message
-                            return .redEnv(redEnvId:redEnvId)
                         }
-                    
                 }
                 return .general
             }
@@ -181,6 +196,19 @@ struct CallMessageModel: Codable {
             DLogError("Call Message Cannot be decoded")
             return nil
         }
+    }
+}
+
+
+struct RedEnvelope: Decodable {
+    let identifier: String
+    let message: String
+    var senderUID: String?
+    let receiveUID: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case identifier = "redEnvelopeId"
+        case message, senderUID, receiveUID
     }
 }
 

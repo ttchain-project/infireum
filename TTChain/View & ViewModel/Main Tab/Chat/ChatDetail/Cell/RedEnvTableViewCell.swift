@@ -34,7 +34,6 @@ class RedEnvTableViewCell: UITableViewCell {
         self.bgView.setGradientColor(color1:color1, color2: color2)
     }
     
-    @IBOutlet weak var gradientView: UIView!
     var bag :DisposeBag = DisposeBag.init()
     @IBOutlet var senderConstraint: NSLayoutConstraint!
     @IBOutlet var receiverConstraint: NSLayoutConstraint!
@@ -59,7 +58,7 @@ class RedEnvTableViewCell: UITableViewCell {
         dateLabel.text = message.timestamp.string()
         self.messageContent.text = message.msg
         
-        if message.senderId == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId {
+        if message.isUserSender() {
             self.profilePicImageView.isHidden = true
             self.dateLabel.textAlignment = .right
             self.senderConstraint.isActive = false

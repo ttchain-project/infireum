@@ -67,7 +67,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     }
     
     func config(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
-        if message.senderId == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId {
+        if message.isUserSender() {
             self.configForSender(message: message)
         }else {
             self.configForLeft(message: message, leftImage: leftImage)

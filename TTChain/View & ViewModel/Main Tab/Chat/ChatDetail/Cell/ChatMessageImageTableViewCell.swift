@@ -50,7 +50,7 @@ class ChatMessageImageTableViewCell: UITableViewCell {
     
     func setMessage(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
         dateLabel.text = message.timestamp.string()
-        if message.senderId == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId {
+        if message.isUserSender() {
             self.profilePics.isHidden = true
             self.dateLabel.textAlignment = .right
             self.senderConstraint.isActive = true

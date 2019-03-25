@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="74" id="KGk-i7-Jjw" customClass="RceiveRedEnvelopeTableViewCell" customModule="Hope_Seed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="73.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9oW-JL-shh">
+                        <rect key="frame" x="138.5" y="10" width="43" height="53.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="J95-ou-n1E">
+                                <rect key="frame" x="6" y="3" width="31" height="47.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLA-B1-3GT">
+                                        <rect key="frame" x="0.0" y="0.0" width="31" height="11"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHb-H8-2Ju">
+                                        <rect key="frame" x="0.0" y="15" width="31" height="32.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="J95-ou-n1E" firstAttribute="leading" secondItem="9oW-JL-shh" secondAttribute="leading" constant="6" id="Oca-HI-Egh"/>
+                            <constraint firstAttribute="trailing" secondItem="J95-ou-n1E" secondAttribute="trailing" constant="6" id="b2F-3o-DZY"/>
+                            <constraint firstItem="J95-ou-n1E" firstAttribute="top" secondItem="9oW-JL-shh" secondAttribute="top" constant="3" id="gaQ-vp-NA4"/>
+                            <constraint firstAttribute="bottom" secondItem="J95-ou-n1E" secondAttribute="bottom" constant="3" id="xxh-nA-iZS"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="9oW-JL-shh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ehH-eV-DMH"/>
+                    <constraint firstItem="9oW-JL-shh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fVL-Ec-yd9"/>
+                    <constraint firstAttribute="bottom" secondItem="9oW-JL-shh" secondAttribute="bottom" constant="10" id="lSj-sE-Ta4"/>
+                    <constraint firstItem="9oW-JL-shh" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="uD2-EC-j9i"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="XLA-B1-3GT" id="1l3-DD-nPW"/>
+                <outlet property="receiveRedEnvelopeStatusLabel" destination="GHb-H8-2Ju" id="ACT-mV-RA0"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="131.33433283358323"/>
+        </tableViewCell>
+    </objects>
+</document>

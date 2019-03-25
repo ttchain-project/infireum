@@ -53,7 +53,7 @@ class ReceiptTableViewCell: UITableViewCell {
         dateLabel.text = message.timestamp.string()
         self.messageContent.text = LM.dls.chat_room_receipt
         
-        if message.senderId == RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId {
+        if message.isUserSender() {
             self.profilePicImageView.isHidden = true
             self.dateLabel.textAlignment = .right
             self.senderConstraint.isActive = false

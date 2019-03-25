@@ -160,6 +160,12 @@
 		555E4A422248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */; };
 		555E4A432248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */; };
 		555E4A442248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */; };
+		555E4A5F2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A5D2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift */; };
+		555E4A602248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A5D2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift */; };
+		555E4A612248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A5D2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift */; };
+		555E4A622248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */; };
+		555E4A632248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */; };
+		555E4A642248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */; };
 		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
@@ -1968,6 +1974,8 @@
 		555A45B422057FA0004A713A /* ChatImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewModel.swift; sourceTree = "<group>"; };
 		555E4A3D2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedEnvTableViewCell.swift; sourceTree = "<group>"; };
 		555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedEnvTableViewCell.xib; sourceTree = "<group>"; };
+		555E4A5D2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RceiveRedEnvelopeTableViewCell.swift; sourceTree = "<group>"; };
+		555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RceiveRedEnvelopeTableViewCell.xib; sourceTree = "<group>"; };
 		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
@@ -3028,6 +3036,8 @@
 		55AADF0422004E6000F403C8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				555E4A5D2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift */,
+				555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */,
 				55EF69DA21A812C5007E074A /* ChatMessageTableViewCell.swift */,
 				55EF69DB21A812C5007E074A /* ChatMessageTableViewCell.xib */,
 				55F70E4721F986E400B5ED75 /* ChatMessageImageTableViewCell.swift */,
@@ -6138,6 +6148,7 @@
 				55AADF0C22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */,
 				64D8266320E22F4300C8FC63 /* ManageAssetViewController.xib in Resources */,
 				645619232150D339001092E5 /* ImportWalletTypeChooseViewController.xib in Resources */,
+				555E4A642248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
 				5569803D2188566F00346757 /* TTChain_SIT-Info.plist in Resources */,
 				55EF6AC221A812C6007E074A /* SearchGroupViewController.xib in Resources */,
 				64C9D4DC21044ECF000B0774 /* WithdrawalCICFeeInfoAdvModeViewController.xib in Resources */,
@@ -6335,6 +6346,7 @@
 				64B2773520D8AE0B004FF75B /* OWQRCodeViewController.xib in Resources */,
 				6485003720DA006900107473 /* IdentityCreateViewController.xib in Resources */,
 				55EF6AD521A812C6007E074A /* FriendTableViewCell.xib in Resources */,
+				555E4A622248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
 				640D893120F069BF0010D986 /* WithdrawalAssetViewController.xib in Resources */,
 				64B98EE320FA03BE00C4EB11 /* LightningTransRecordTableViewCell.xib in Resources */,
 				55EF6A8121A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
@@ -6493,6 +6505,7 @@
 				64B2773620D8AE0B004FF75B /* OWQRCodeViewController.xib in Resources */,
 				6485003820DA006900107473 /* IdentityCreateViewController.xib in Resources */,
 				55EF6AD621A812C6007E074A /* FriendTableViewCell.xib in Resources */,
+				555E4A632248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
 				640D893220F069BF0010D986 /* WithdrawalAssetViewController.xib in Resources */,
 				64B98EE420FA03BE00C4EB11 /* LightningTransRecordTableViewCell.xib in Resources */,
 				55EF6A8221A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
@@ -6987,6 +7000,7 @@
 				640D88FA20EF206A0010D986 /* TransInoutType.swift in Sources */,
 				649E489420ECAC4900B217AD /* PwdHintViewController.swift in Sources */,
 				64C9D4C621044D3E000B0774 /* WithdrawalCICFeeInfoModeBase.swift in Sources */,
+				555E4A612248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift in Sources */,
 				64C9D43D20FDC52B000B0774 /* AddressbookTableViewCell.swift in Sources */,
 				55EF6ACB21A812C6007E074A /* ExtensionFunctionViewModel.swift in Sources */,
 				64F07E4220D269A300A60C5C /* NSManagedObject+IdentifiablePredication.swift in Sources */,
@@ -7458,6 +7472,7 @@
 				5539A48B21676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewController.swift in Sources */,
 				645006F320F45B4E00C0FC11 /* WithdrawalConfirmETHFeeInputViewController.swift in Sources */,
 				6424B62320F4CBC500AEBCAD /* MultiSelectDataSourceManager.swift in Sources */,
+				555E4A5F2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift in Sources */,
 				64813A8620DCAE2600CAA4D8 /* Coin+Helper.swift in Sources */,
 				55EF6AC921A812C6007E074A /* ExtensionFunctionViewModel.swift in Sources */,
 				640D88CD20EDD6540010D986 /* ImportChainTypeChooseViewController.swift in Sources */,
@@ -7922,6 +7937,7 @@
 				640D88F920EF206A0010D986 /* TransInoutType.swift in Sources */,
 				64813AA020DCB18F00CAA4D8 /* Asset+CoreDataClass.swift in Sources */,
 				64F07E0D20D241A000A60C5C /* UIViewController+QuickAlertPopUp.swift in Sources */,
+				555E4A602248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift in Sources */,
 				64C9D4C521044D3E000B0774 /* WithdrawalCICFeeInfoModeBase.swift in Sources */,
 				55EF6ACA21A812C6007E074A /* ExtensionFunctionViewModel.swift in Sources */,
 				64C9D43C20FDC52B000B0774 /* AddressbookTableViewCell.swift in Sources */,
