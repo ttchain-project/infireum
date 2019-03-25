@@ -148,7 +148,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         tableView.register(ChatMessageTableViewCell.nib, forCellReuseIdentifier: ChatMessageTableViewCell.nameOfClass)
         tableView.register(ChatMessageImageTableViewCell.nib, forCellReuseIdentifier: ChatMessageImageTableViewCell.nameOfClass)
         tableView.register(ReceiptTableViewCell.nib, forCellReuseIdentifier: ReceiptTableViewCell.nameOfClass)
-        
+        tableView.register(RedEnvTableViewCell.nib, forCellReuseIdentifier: RedEnvTableViewCell.nameOfClass)
+
         tableView.rx.klrx_tap.drive(onNext: { _ in
             self.view.endEditing(true)
         }).disposed(by: bag)
@@ -235,6 +236,29 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 }).disposed(by: receiptCell.bag)
                 
                 cell = receiptCell
+            case .redEnv:
+                let redEnvCell = tv.dequeueReusableCell(withIdentifier: RedEnvTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! RedEnvTableViewCell
+                
+                redEnvCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
+                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                        return
+                    }
+                    self.toUserProfileVC(forFriend: friendModel)
+                })
+                
+                redEnvCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    self.showOptionsForLongGesture(for: messageModel)
+                }).disposed(by: redEnvCell.bag)
+                
+                redEnvCell.bgView.rx.klrx_tap.asDriver().drive(onNext: { [weak self] _ in
+                    guard let `self` = self else {
+                        return
+                    }
+                    let dict = messageModel.msgType.messageDict
+                    self.toTransferByReceipt(dict:dict)
+                }).disposed(by: redEnvCell.bag)
+                
+                cell = redEnvCell
             }
             return cell
         }.disposed(by: bag)
@@ -542,7 +566,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 return
             }
             self.viewModel.sendImageAsMessage(image: image)
-        case .receipt,.audioCall(_),.voiceMessage:
+        case .receipt,.audioCall(_),.voiceMessage,.redEnv(_):
             return
         }
     }

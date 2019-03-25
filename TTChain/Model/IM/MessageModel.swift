@@ -16,6 +16,8 @@ enum MessageType {
     case voiceMessage
     case receipt(messageDict : [String:String])
     case audioCall (messageDetails : CallMessageModel)
+    case redEnv(redEnvId: String)
+    
     var messageDict:[String:String] {
         switch  self {
         case .receipt(messageDict: let dict):
@@ -28,6 +30,14 @@ enum MessageType {
         switch self {
         case .audioCall(messageDetails:let model):
             return model
+        default:
+            return nil
+        }
+    }
+    var redEnvId: String? {
+        switch self {
+        case .redEnv(redEnvId: let id):
+            return id
         default:
             return nil
         }
@@ -110,16 +120,17 @@ class MessageModel {
                 }
                 fallthrough
             default:
-                rawMessage = messageResponse["msg"].string ?? ""
-                if rawMessage.contains("address"),rawMessage.contains("amount"),rawMessage.contains("coinID") {
-                    if let url = messageResponse["msg"].string  {
-                        if let data = url.data(using: .utf8) {
-                            let dict :[String:Any]? = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                            if dict != nil, dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
-                                return .receipt(messageDict: dict as! [String : String])
-                            }
-                        }
+                if let data = rawMessage.data(using: .utf8) {
+                    guard let dict :[String:Any]? = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                        return .general
                     }
+                        if dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
+                            return .receipt(messageDict: dict as! [String : String])
+                        } else if let redEnvId = dict!["redEnvelopeId"] as? String, let message = dict!["message"] as? String {
+                            rawMessage = message
+                            return .redEnv(redEnvId:redEnvId)
+                        }
+                    
                 }
                 return .general
             }

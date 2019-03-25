@@ -154,6 +154,12 @@
 		555A45B522057FA0004A713A /* ChatImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45B422057FA0004A713A /* ChatImageViewModel.swift */; };
 		555A45B622057FA0004A713A /* ChatImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45B422057FA0004A713A /* ChatImageViewModel.swift */; };
 		555A45B722057FA0004A713A /* ChatImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A45B422057FA0004A713A /* ChatImageViewModel.swift */; };
+		555E4A3F2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A3D2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift */; };
+		555E4A402248BCAB00C7CAD5 /* RedEnvTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A3D2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift */; };
+		555E4A412248BCAB00C7CAD5 /* RedEnvTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A3D2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift */; };
+		555E4A422248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */; };
+		555E4A432248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */; };
+		555E4A442248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */; };
 		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
@@ -1960,6 +1966,8 @@
 		555A45AC22057F35004A713A /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		555A45AD22057F35004A713A /* ChatImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageViewController.xib; sourceTree = "<group>"; };
 		555A45B422057FA0004A713A /* ChatImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewModel.swift; sourceTree = "<group>"; };
+		555E4A3D2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedEnvTableViewCell.swift; sourceTree = "<group>"; };
+		555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedEnvTableViewCell.xib; sourceTree = "<group>"; };
 		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
@@ -3026,6 +3034,8 @@
 				55F70E4821F986E400B5ED75 /* ChatMessageImageTableViewCell.xib */,
 				55AADF0522004ED900F403C8 /* ReceiptTableViewCell.swift */,
 				55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */,
+				555E4A3D2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift */,
+				555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6119,6 +6129,7 @@
 				55EF6B1021A812C7007E074A /* UserProfileViewController.xib in Resources */,
 				6424B64D20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.xib in Resources */,
 				554D2D022244CE6A0004CA09 /* CreateRedEnvelopeViewController.xib in Resources */,
+				555E4A442248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */,
 				6446E23220FC966800EC1E2E /* SettingsViewController.xib in Resources */,
 				55EF6AF821A812C7007E074A /* GroupInviteTableViewCell.xib in Resources */,
 				643200EB20FB8CB700B11334 /* MeViewController.xib in Resources */,
@@ -6366,6 +6377,7 @@
 				5539A4A321676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib in Resources */,
 				64C9D44B20FDC8C6000B0774 /* AddressBookViewController.xib in Resources */,
 				55EF6ACF21A812C6007E074A /* ChatPersonListViewController.xib in Resources */,
+				555E4A422248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */,
 				55EF6A7B21A812C6007E074A /* AddGroupMemberCollectionViewCell.xib in Resources */,
 				649E485720E7D99200B217AD /* ImportedWalletTableHeaderView.xib in Resources */,
 				649E48B920ECE79600B217AD /* WalletPrivateKeyInfoViewController.xib in Resources */,
@@ -6523,6 +6535,7 @@
 				5539A4A421676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib in Resources */,
 				64C9D44C20FDC8C6000B0774 /* AddressBookViewController.xib in Resources */,
 				55EF6AD021A812C6007E074A /* ChatPersonListViewController.xib in Resources */,
+				555E4A432248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */,
 				55EF6A7C21A812C6007E074A /* AddGroupMemberCollectionViewCell.xib in Resources */,
 				649E485820E7D99200B217AD /* ImportedWalletTableHeaderView.xib in Resources */,
 				649E48BA20ECE79600B217AD /* WalletPrivateKeyInfoViewController.xib in Resources */,
@@ -7343,6 +7356,7 @@
 				6481398D20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.swift in Sources */,
 				640D88C120EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				55AADF272203020800F403C8 /* UIView+XibInstance.swift in Sources */,
+				555E4A412248BCAB00C7CAD5 /* RedEnvTableViewCell.swift in Sources */,
 				55EF6B9021A81D43007E074A /* DynamicLocalizationSource.swift in Sources */,
 				6424B6AC20F5F7B800AEBCAD /* TransferRecordsListViewController.swift in Sources */,
 				640D890120EF5F860010D986 /* TransRecordListViewController.swift in Sources */,
@@ -7813,6 +7827,7 @@
 				553ACEE521649CB7002C59AB /* AgreementMeViewController.swift in Sources */,
 				6470D69B20F341CE00EB0780 /* WithdrawalConfirmPwdValidationViewModel.swift in Sources */,
 				55AADF252203020800F403C8 /* UIView+XibInstance.swift in Sources */,
+				555E4A3F2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift in Sources */,
 				55EF6B8E21A81D43007E074A /* DynamicLocalizationSource.swift in Sources */,
 				64F07E0F20D241A000A60C5C /* String+Util.swift in Sources */,
 				6424B65020F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.swift in Sources */,
@@ -8276,6 +8291,7 @@
 				64813A3E20DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataClass.swift in Sources */,
 				6424B65120F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.swift in Sources */,
 				55AADF262203020800F403C8 /* UIView+XibInstance.swift in Sources */,
+				555E4A402248BCAB00C7CAD5 /* RedEnvTableViewCell.swift in Sources */,
 				55EF6B8F21A81D43007E074A /* DynamicLocalizationSource.swift in Sources */,
 				64C9D46820FDDE78000B0774 /* EditABUnitViewController.swift in Sources */,
 				64F07E5020D2A1DD00A60C5C /* Any+RxThemeRespondable.swift in Sources */,

@@ -22,9 +22,9 @@ extension UIView {
         }
     }
     
-    func setGradientColor() {
+    func setGradientColor(color1: CGColor? = (UIColor.init(hexString: "b8d4ea", transparency: 1)?.cgColor), color2: CGColor? = (UIColor.init(hexString: "f3cdbf", transparency: 1)?.cgColor)) {
         let gradient = CAGradientLayer()
-        gradient.colors = [(UIColor.init(hexString: "b8d4ea", transparency: 1)?.cgColor)!,(UIColor.init(hexString: "f3cdbf", transparency: 1)?.cgColor)!]
+        gradient.colors = [color1!,color2!]
         let frame = self.bounds
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: frame.size.height)
         self.layer.insertSublayer(gradient, at: 0)
