@@ -267,4 +267,26 @@ class ChatViewModel: KLRxViewModel {
             }
         }).disposed(by: bag)
     }
+    
+    func redEnvelopeAction(forRedEnvId redEnvId:String, navigateTo toViewController:@escaping (UIViewController) -> ()) {
+        let parameter = RedEnvelopeInfoAPI.Parameters.init(redEnvelopeId: redEnvId)
+        Server.instance.getRedEnvelopeInfo(parameter: parameter).asObservable().subscribe(onNext: { (response) in
+            switch response {
+            case .success(let model):
+                let info = model.redEnvelopeInfo
+                
+                let viewModel = RedEvelopeInfoViewModel.init(identifier: redEnvId, information: info)
+                let vc = ReceiveRedEnvelopeViewController.init(viewModel: viewModel)
+               
+                viewModel.output.actionSubject.subscribe(onNext: { (_) in
+                    vc.dismiss(animated: true, completion: nil)
+                }).disposed(by: viewModel.disposeBag)
+                
+                toViewController(vc)
+                
+            case .failed(error:let error):
+                print(error)
+            }
+        }).disposed(by: bag)
+    }
 }

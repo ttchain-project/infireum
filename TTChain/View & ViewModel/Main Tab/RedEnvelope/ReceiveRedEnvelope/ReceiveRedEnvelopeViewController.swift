@@ -12,19 +12,71 @@ class ReceiveRedEnvelopeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let color1 = UIColor(red:254,green: 135,blue: 98)?.cgColor
+        let color2 = UIColor(red:230,green: 75,blue: 75)?.cgColor
+        self.gradientView.setGradientColor(color1:color1, color2: color2)
         // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var gradientView: UIView!
+    
+    @IBOutlet weak var redEnveloperSenderNameLabel: UILabel! {
+        didSet {
+            redEnveloperSenderNameLabel.font = .owMedium(size:16)
+            redEnveloperSenderNameLabel.textColor = .owWhite
+            redEnveloperSenderNameLabel.text = viewModel.output.title
+        }
     }
-    */
-
+    
+    @IBOutlet weak var redEnvelopeMessageLabel: UILabel! {
+        didSet {
+            redEnvelopeMessageLabel.font = .owMedium(size:18)
+            redEnvelopeMessageLabel.textColor = .owWhite
+            redEnvelopeMessageLabel.text = viewModel.output.message
+            viewModel.output.isReceiveButtonHiddenSubject.map { $0 == false }
+                .bind(to: redEnvelopeMessageLabel.rx.isHidden).disposed(by: viewModel.disposeBag)
+        }
+    }
+    
+    @IBOutlet weak var redEvelopeStatusLabel: UILabel! {
+        didSet {
+            redEvelopeStatusLabel.textColor = .owWhite
+            redEvelopeStatusLabel.font = .owMedium(size:14)
+            redEvelopeStatusLabel.text = viewModel.output.status
+        }
+    }
+    @IBOutlet weak var acceptButton: UIButton! {
+        didSet {
+            acceptButton.cornerRadius = acceptButton.height/2
+            acceptButton.backgroundColor = UIColor.init(red: 230, green: 75, blue: 75)
+            acceptButton.setTitle("Accept", for: .normal)
+            acceptButton.setTitleColor(UIColor.white, for: .normal)
+            acceptButton.rx.tap.bind(to: viewModel.input.receiveTapSubject).disposed(by: viewModel.disposeBag)
+            viewModel.output.isReceiveButtonHiddenSubject.bind(to: acceptButton.rx.isHidden)
+                .disposed(by: viewModel.disposeBag)
+        }
+    }
+    
+    @IBOutlet weak var laterButton: UIButton! {
+        didSet {
+            laterButton.cornerRadius = laterButton.height/2
+            laterButton.borderColor = UIColor.owSilver
+            laterButton.setTitle("Dismiss", for: .normal)
+            laterButton.setTitleColor(UIColor.owSilver, for: .normal)
+            laterButton.borderWidth = 1
+            laterButton.rx.tap.bind(to: viewModel.input.closeTapSubject).disposed(by: viewModel.disposeBag)
+        }
+    }
+    
+    @IBOutlet weak var settingLabel: UILabel!
+    
+    private let viewModel: RedEvelopeInfoViewModel
+    
+    init(viewModel: RedEvelopeInfoViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: ReceiveRedEnvelopeViewController.className, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

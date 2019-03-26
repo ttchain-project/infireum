@@ -30,7 +30,6 @@ class RedEnvTableViewCell: UITableViewCell {
        
         let color1 = UIColor(red:254,green: 135,blue: 98)?.cgColor
         let color2 = UIColor(red:230,green: 75,blue: 75)?.cgColor
-//            self.gradientView.setGradientColor(color1:color1, color2: color2)
         self.bgView.setGradientColor(color1:color1, color2: color2)
     }
     

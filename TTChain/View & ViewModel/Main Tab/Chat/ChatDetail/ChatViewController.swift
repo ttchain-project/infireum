@@ -106,7 +106,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUpView()
         setUpScrennShotDetection()
     }
     
@@ -255,8 +254,10 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     guard let `self` = self else {
                         return
                     }
-                    let dict = messageModel.msgType.messageDict
-                    self.toTransferByReceipt(dict:dict)
+                    guard let redEnvMessage = messageModel.msgType.redEnvelopeMessage,!messageModel.isUserSender() else {
+                        return
+                    }
+                    self.toReceiveRedEnvelope(forMessage: redEnvMessage)
                 }).disposed(by: redEnvCell.bag)
                 
                 cell = redEnvCell
@@ -264,6 +265,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 print("a")
                 let rcvRedEnvCell = tv.dequeueReusableCell(withIdentifier: RceiveRedEnvelopeTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! RceiveRedEnvelopeTableViewCell
                 rcvRedEnvCell.config(message: messageModel)
+                
                 cell = rcvRedEnvCell
             }
             
@@ -516,10 +518,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         viewController.blockStatusChanged.bind(to: self.viewModel.blockSubject).disposed(by:viewController.bag)
     }
     
-    private func setUpView() {
-        
-    }
-    
     private func setUpScrennShotDetection() {
         NotificationCenter.default.rx.notification(Notification.Name.UIApplicationUserDidTakeScreenshot).subscribe(onNext: {
             [unowned self] _ in
@@ -584,7 +582,14 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         let audioCallVC = AudioCallViewController.instance(from: config)
         self.present(audioCallVC, animated: true, completion: nil)
     }
-   
+
+    func toReceiveRedEnvelope(forMessage message: RedEnvelope) {
+        self.viewModel.redEnvelopeAction(forRedEnvId: message.identifier) {[weak self] (vc) in
+            self?.present(vc, animated: true, completion: {
+                
+            })
+        }
+    }
 }
 
 extension UITableView {

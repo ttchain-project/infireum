@@ -690,6 +690,16 @@
         let api = CreateRedEnvelopeAPI.init(parameters: parameter)
         return fire(router: .IM(.createRedEnvelope(api)))
     }
+    
+    func getRedEnvelopeInfo(parameter: RedEnvelopeInfoAPI.Parameters) -> RxAPIResponse<RedEnvelopeInfoAPIModel> {
+        let api = RedEnvelopeInfoAPI.init(parameters: parameter)
+        return fire(router: .IM(.redEnvelopeInfo(api)))
+    }
+    
+    func acceptRedEvelope(parameter: AcceptRedEnvelopeAPI.Parameters) ->RxAPIResponse<AcceptRedEnvelopeAPIModel> {
+        let api = AcceptRedEnvelopeAPI.init(parameters: parameter)
+        return fire(router: .IM(.acceptRedEnvelope(api)))
+    }
  }
  
  //MARK: - RocketChat -

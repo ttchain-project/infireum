@@ -65,6 +65,8 @@ enum IMAPI :KLMoyaAPISet {
         case .registerJiGuangPush(let api): return api
         case .inAppCall(let api): return api
         case .createRedEnvelope(let api): return api
+        case .redEnvelopeInfo(let api):return api
+        case .acceptRedEnvelope(let api):return api
         }
     }
     case preLogin(PreLoginAPI)
@@ -95,6 +97,8 @@ enum IMAPI :KLMoyaAPISet {
     case registerJiGuangPush(JiGuangPushSettingAPI)
     case inAppCall(InAppCallApi)
     case createRedEnvelope(CreateRedEnvelopeAPI)
+    case redEnvelopeInfo(RedEnvelopeInfoAPI)
+    case acceptRedEnvelope(AcceptRedEnvelopeAPI)
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -1132,20 +1136,15 @@ struct InAppCallApi:KLMoyaIMAPIData {
     }
     
     let parameter: InAppCallApi.Parameter
-    
     var path: String {
         return "/IM/CallVideo"
     }
-    
     var method: Moya.Method {
         return .post
     }
-    
     var task: Task {
-        
         return Moya.Task.requestParameters(parameters: parameter.asDictionary(), encoding: JSONEncoding.default)
     }
-    
     var stub: Data? {
         return nil
     }
@@ -1194,6 +1193,66 @@ struct CreateRedEnvelopeAPI : KLMoyaIMAPIData {
 
 struct CreateRedEnvelopeAPIModel: KLJSONMappableMoyaResponse {
     typealias API = CreateRedEnvelopeAPI
+    let status : Bool
+    init(json: JSON, sourceAPI: API) throws {
+        guard let status = json.bool else {
+            throw GTServerAPIError.noData
+        }
+        self.status = status
+    }
+}
+
+struct RedEnvelopeInfoAPI:KLMoyaIMAPIData {
+    var path: String {
+        return "IM/RedEnvelope/InfoLog"
+    }
+    
+    var method: Moya.Method { return .get }
+
+    var task: Task { return .requestParameters(parameters: parameters.asDictionary(),
+                                               encoding: URLEncoding.default) }
+    let parameters: Parameters
+
+    var stub: Data? {return nil}
+    
+    struct Parameters: Paramenter {
+        let uid: String = Tokens.getUID()
+        let redEnvelopeId: String
+    }
+}
+
+struct RedEnvelopeInfoAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = RedEnvelopeInfoAPI
+    let redEnvelopeInfo : RedEvelopeInfoModel
+    init(json: JSON, sourceAPI: API) throws {
+        
+        let decode = JSONDecoder()
+        guard let info = try? decode.decode(RedEvelopeInfoModel.self, from: json.rawData()) else {
+            throw GTServerAPIError.noData
+        }
+        self.redEnvelopeInfo = info
+    }
+}
+
+struct AcceptRedEnvelopeAPI: KLMoyaIMAPIData {
+    struct Parameters: Paramenter {
+        let receiveUID = Tokens.getUID()
+        let redEnvelopeId: String
+        let receiveAddress: String
+        let authToken = Tokens.getAuthToken()
+        let rocketChatUserId = Tokens.getRocketChatUserID()
+    }
+    let parameters: Parameters
+    var path: String { return "IM/RedEnvelope/Receive" }
+    var method: Moya.Method { return .put }
+    var task: Task { return .requestParameters(parameters: parameters.asDictionary(),
+                                               encoding: JSONEncoding.default) }
+    var stub: Data? {return nil}
+
+}
+
+struct AcceptRedEnvelopeAPIModel:KLJSONMappableMoyaResponse {
+    typealias API = AcceptRedEnvelopeAPI
     let status : Bool
     init(json: JSON, sourceAPI: API) throws {
         guard let status = json.bool else {
