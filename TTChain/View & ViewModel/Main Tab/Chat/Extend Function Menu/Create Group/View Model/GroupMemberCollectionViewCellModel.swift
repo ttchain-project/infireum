@@ -21,24 +21,24 @@ struct GroupMemberCollectionViewCellModel: ViewModel {
     
     struct Output {
         let text: String
-        let avatarImage: UIImage?
+        let avatarImage: String?
         let closeButtonIsHidden = BehaviorRelay<Bool>(value: false)
     }
     
-    init(text: String, avatarImge: UIImage?) {
+    init(text: String, avatarImge: String?) {
         input = Input.init(groupMemberModel: nil)
         output = Output.init(text: text, avatarImage: avatarImge)
     }
     
     init(groupMemberModel: GroupMemberModel? = nil) {
         input = Input.init(groupMemberModel: groupMemberModel)
-        output = Output.init(text: groupMemberModel?.nickName ?? LM.dls.group_member_new, avatarImage: groupMemberModel?.avatar)
+        output = Output.init(text: groupMemberModel?.nickName ?? LM.dls.group_member_new, avatarImage: groupMemberModel?.avatarUrl)
     }
     
     init(friendInfoModel: FriendInfoModel) {
-        let groupMemberModel = GroupMemberModel.init(uid: friendInfoModel.uid, nickName: friendInfoModel.nickName, headImg: friendInfoModel.avatar?.base64EncodedString ?? String(), status: 0)
+        let groupMemberModel = GroupMemberModel.init(uid: friendInfoModel.uid, nickName: friendInfoModel.nickName, headImg: friendInfoModel.avatarUrl ?? String(), status: 0)
         input = Input.init(groupMemberModel: groupMemberModel)
-        output = Output.init(text: groupMemberModel.nickName, avatarImage: friendInfoModel.avatar)
+        output = Output.init(text: groupMemberModel.nickName, avatarImage: friendInfoModel.avatarUrl)
     }
 }
 
@@ -63,12 +63,12 @@ struct AddGroupMemberCollectinoViewCellModel: ViewModel {
     }
     
     struct Output {
-        let avatarImage: UIImage?
+        let avatarImage: String?
     }
     
     init(friendInfoModel: FriendInfoModel) {
         input = Input.init(friendInfoModel: friendInfoModel)
-        output = Output.init(avatarImage: friendInfoModel.avatar)
+        output = Output.init(avatarImage: friendInfoModel.avatarUrl)
     }
 }
 
@@ -82,12 +82,12 @@ struct AddGroupMemeberTableViewCellModel: ViewModel {
     
     struct Output {
         let nickname: String
-        let avatarImage: UIImage?
+        let avatarImage: String?
         let isSelected = BehaviorRelay<Bool>(value: false)
     }
     
     init(friendInfoModel: FriendInfoModel) {
         input = Input.init(friendInfoModel: friendInfoModel)
-        output = Output.init(nickname: friendInfoModel.nickName, avatarImage: friendInfoModel.avatar)
+        output = Output.init(nickname: friendInfoModel.nickName, avatarImage: friendInfoModel.avatarUrl)
     }
 }

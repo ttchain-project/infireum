@@ -53,7 +53,7 @@ class RedEnvTableViewCell: UITableViewCell {
         bag = DisposeBag.init()
     }
     
-    func setMessage(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
+    func setMessage(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
         
         dateLabel.text = message.timestamp.string()
         self.messageContent.text = message.msg
@@ -69,7 +69,8 @@ class RedEnvTableViewCell: UITableViewCell {
             self.dateLabel.textAlignment = .left
             self.senderConstraint.isActive = true
             self.receiverConstraint.isActive = false
-            self.profilePicImageView.image = leftImage ?? #imageLiteral(resourceName: "no_image")
+            self.profilePicImageView.setProfileImage(image: leftImage, tempName: message.senderName)
+
             self.senderNameLabel.text = message.senderName
             
         }

@@ -180,6 +180,7 @@ final class GroupInformationViewModel: ViewModel {
                 return !allMembers.contains(where: { $0.uppercased() == model.uid.uppercased() })
             }).map(GroupMemberCollectionViewCellModel.init)
             
+
             if var value = self.output.animatableSectionModel.value.first(where: { $0.model == self.invitedMemberTitle }) {
                 value.items.append(contentsOf: needToAddFriends)
                 var section = self.output.animatableSectionModel.value

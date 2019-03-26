@@ -46,7 +46,9 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     
     var user: FriendModel? = nil {
         didSet {
-            userIconImageView.image = user?.avatar
+            
+            self.userIconImageView.setProfileImage(image: user?.avatarUrl, tempName: user?.nickName)
+            
             userIdLabel.text = user?.uid
             if let groupMember = user as? GroupMemberModel {
                 blockUserSwitch.isOn = groupMember.isBlocked ?? false
@@ -60,8 +62,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
                         guard let url = URL.init(string: value.headImg) else {
                             return
                         }
-                        self.userIconImageView.af_setImage(withURL: url)
-                        
+                        self.userIconImageView.setProfileImage(image: value.headImg, tempName: value.nickName)
                     }
                 }).disposed(by: bag)
             } else {

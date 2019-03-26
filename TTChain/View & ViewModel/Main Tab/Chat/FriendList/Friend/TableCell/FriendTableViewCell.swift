@@ -19,13 +19,9 @@ class FriendTableViewCell: UITableViewCell {
             guard let friendModel = friendModel else {
                 return
             }
-            self.avatarImageView.image = friendModel.avatar
-            if friendModel.avatar == nil, friendModel.avatarUrl == nil {
-                self.avatarImageView.image = ImageUntil.drawAvatar(text: friendModel.nickName)
-            } else {
-                self.avatarImageView.af_setImage(withURL: friendModel.avatarUrl!)
-            }
             self.descriptionLabel.text = friendModel.nickName
+
+            self.avatarImageView.setProfileImage(image: friendModel.avatarUrl, tempName: friendModel.nickName)
         }
     }
     
@@ -46,12 +42,8 @@ class FriendTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func config( title: String, image:URL?) {
+    func config( title: String, image:String?) {
         self.descriptionLabel.text = title
-        if image == nil {
-            self.avatarImageView.image = ImageUntil.drawAvatar(text: title)
-        } else {
-            self.avatarImageView.af_setImage(withURL: image!, placeholderImage: #imageLiteral(resourceName: "no_image"))
-        }
+        self.avatarImageView.setProfileImage(image: image, tempName: title)
     }
 }

@@ -24,7 +24,7 @@ class ChatViewModel: KLRxViewModel {
         var roomType:RoomType
         var chatTitle:String
         var roomID:String
-        var chatAvatar:UIImage?
+        var chatAvatar:String?
         var messageText:UITextField
         var uid: String?
     }
@@ -55,7 +55,7 @@ class ChatViewModel: KLRxViewModel {
         return BehaviorRelay.init(value: nil)
     }()
     
-    public var memberAvatarMapping: [String:UIImage] = [:]
+    public var memberAvatarMapping: [String:String?] = [:]
     
     var privateChat : PrivateChatSetup
     
@@ -79,7 +79,7 @@ class ChatViewModel: KLRxViewModel {
                 return
             }
             for member in (model?.membersArray!)! {
-                self.memberAvatarMapping[member.uid] = member.avatar
+                self.memberAvatarMapping[member.uid] = member.avatarUrl
             }
             self.shouldRefreshCellsForDataUpdate.onNext(())
         }).disposed(by: bag)
@@ -108,8 +108,7 @@ class ChatViewModel: KLRxViewModel {
             }
             return groupMemberModel
         case .pvtChat:
-            let model = FriendInfoModel.init(uid: memberId, nickName: self.input.chatTitle, roomId: self.input.roomID, headhShotImgString: "")
-            model.avatar = self.input.chatAvatar
+            let model = FriendInfoModel.init(uid: memberId, nickName: self.input.chatTitle, roomId: self.input.roomID, headhShotImgString: self.input.chatAvatar ?? "")
             return model
         }
     }

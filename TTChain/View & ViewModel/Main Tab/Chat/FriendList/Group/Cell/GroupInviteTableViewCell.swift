@@ -30,14 +30,7 @@ class GroupInviteTableViewCell: UITableViewCell {
         didSet {
             self.avatarImageView.image = groupRequestModel.groupIcon
             self.titleLabel.text = groupRequestModel.groupName
-            
-            let url = URL.init(string: groupRequestModel.headImg)
-            
-            if groupRequestModel.groupIcon == nil, url == nil {
-                self.avatarImageView.image = ImageUntil.drawAvatar(text: groupRequestModel.groupName)
-            } else {
-                self.avatarImageView.af_setImage(withURL: url!)
-            }
+            self.avatarImageView.setProfileImage(image: groupRequestModel.headImg, tempName: groupRequestModel.groupName)
         }
     }
     

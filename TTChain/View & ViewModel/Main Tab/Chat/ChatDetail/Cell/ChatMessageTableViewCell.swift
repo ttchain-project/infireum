@@ -66,7 +66,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         // Configure the view for the selected state
     }
     
-    func config(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
+    func config(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
         if message.isUserSender() {
             self.configForSender(message: message)
         }else {
@@ -86,11 +86,11 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         
     }
     
-    private func configForLeft(message:MessageModel,leftImage: UIImage?) {
+    private func configForLeft(message:MessageModel,leftImage: String?) {
         self.leftMessageLabel.text = message.msg
         self.leftDateLabel.text = message.timestamp.string()
-        self.leftAvatarImageView.image = leftImage ?? #imageLiteral(resourceName: "no_image")
-        
+        self.leftAvatarImageView.setProfileImage(image: leftImage, tempName: message.senderName)
+
         self.rightSpeakerContentView.isHidden = true
         self.leftSpeakerContentView.isHidden = false
         self.senderNameLabel.text = message.senderName

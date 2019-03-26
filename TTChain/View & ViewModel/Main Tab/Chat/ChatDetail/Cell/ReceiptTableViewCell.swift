@@ -28,6 +28,7 @@ class ReceiptTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         self.profilePicImageView.cornerRadius = 20.0
         self.bgView.cornerRadius = 5.0
+        
     }
     
     var bag :DisposeBag = DisposeBag.init()
@@ -48,7 +49,7 @@ class ReceiptTableViewCell: UITableViewCell {
         bag = DisposeBag.init()
     }
     
-    func setMessage(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
+    func setMessage(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
       
         dateLabel.text = message.timestamp.string()
         self.messageContent.text = LM.dls.chat_room_receipt
@@ -64,7 +65,7 @@ class ReceiptTableViewCell: UITableViewCell {
             self.dateLabel.textAlignment = .left
             self.senderConstraint.isActive = true
             self.receiverConstraint.isActive = false
-            self.profilePicImageView.image = leftImage ?? #imageLiteral(resourceName: "no_image")
+            self.profilePicImageView.setProfileImage(image: leftImage,tempName:message.senderName)
             self.senderNameLabel.text = message.senderName
             
         }

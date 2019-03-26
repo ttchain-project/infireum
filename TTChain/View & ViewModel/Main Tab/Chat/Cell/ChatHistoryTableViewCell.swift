@@ -31,7 +31,8 @@ class ChatHistoryTableViewCell: UITableViewCell {
     }
     
     func config(model: CommunicationListModel) {
-        self.coverImageView.af_setImage(withURL: URL.init(string:model.img)!)
+        
+        self.coverImageView.setProfileImage(image: model.img, tempName: model.displayName)
         self.titleLabel.text = model.displayName
         self.descriptionLabel.text = model.lastMessage
         self.countLabel.isHidden = true

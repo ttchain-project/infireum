@@ -33,18 +33,18 @@ enum RoomType : String {
 class CommunicationListModel:ChatListPage {
     var roomId:String
     var displayName:String
-    var img: String
-    lazy var avatar : UIImage = {
-        guard self.img.count > 0 else {
-            return #imageLiteral(resourceName: "userPresetS")
-        }
-        var image : UIImage?
-        if let url = URL.init(string: self.img),  let data = try? Data.init(contentsOf: url) {
-            image = UIImage.init(data: data)
-        }
-        return image ?? #imageLiteral(resourceName: "userPresetS")
-        
-    }()
+    var img: String?
+//    lazy var avatar : UIImage = {
+//        guard self.img.count > 0 else {
+//            return #imageLiteral(resourceName: "userPresetS")
+//        }
+//        var image : UIImage?
+//        if let url = URL.init(string: self.img),  let data = try? Data.init(contentsOf: url) {
+//            image = UIImage.init(data: data)
+//        }
+//        return image ?? #imageLiteral(resourceName: "userPresetS")
+//
+//    }()
     
     var lastMessage : String
     var roomType: RoomType

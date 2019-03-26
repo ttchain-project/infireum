@@ -26,7 +26,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
     struct Config {
         let roomId:String
         let calleeName:String
-        let calleeImage:URL? = nil
+        let calleeImage:String? = nil
         let roomType:RoomType
         let callAction:CallAction
         var streamId:String? = nil
@@ -61,7 +61,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
             self.callImageView.image = #imageLiteral(resourceName: "userAvatarDefault01180")
             return
         }
-        self.callImageView.af_setImage(withURL: constructor.calleeImage!)
+        self.callImageView.setProfileImage(image: constructor.calleeImage, tempName: nil)
     }
     @IBOutlet weak var callTitleLabel: UILabel!
     @IBOutlet weak var callImageView: UIImageView!

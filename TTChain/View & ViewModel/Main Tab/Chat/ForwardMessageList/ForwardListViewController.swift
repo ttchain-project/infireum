@@ -64,13 +64,13 @@ final class ForwardListViewController: KLModuleViewController, KLVMVC {
             switch model {
             case is CommunicationListModel:
                 let commModel = model as! CommunicationListModel
-                cell.config(title: commModel.displayName, image: URL.init(string:commModel.img)!)
+                cell.config(title: commModel.displayName, image:commModel.img)
             case is FriendModel:
                 let friendModel = model as! FriendInfoModel
                 cell.config(title: friendModel.nickName, image: friendModel.avatarUrl)
             case is UserGroupInfoModel:
                 let groupModel = model as! UserGroupInfoModel
-                cell.config(title: groupModel.groupName, image: URL.init(string:groupModel.headImg)!)
+                cell.config(title: groupModel.groupName, image: groupModel.headImg)
             default:
                 print("CommunicationListModel")
             }

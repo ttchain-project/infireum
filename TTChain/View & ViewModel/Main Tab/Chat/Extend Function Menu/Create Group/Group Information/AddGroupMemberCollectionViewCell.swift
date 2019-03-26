@@ -14,7 +14,8 @@ class AddGroupMemberCollectionViewCell: UICollectionViewCell {
     var viewModel: AddGroupMemberCollectinoViewCellModel? {
         didSet {
             guard let viewModel = viewModel else { return }
-            avatarImageView.image = viewModel.output.avatarImage
+            avatarImageView.setProfileImage(image: viewModel.output.avatarImage,tempName:viewModel.input.friendInfoModel.nickName)
+
         }
     }
 }

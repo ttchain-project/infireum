@@ -21,7 +21,7 @@ class AddGroupMemberTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else { return }
             disposeBag = DisposeBag()
             nicknameLabel.text = viewModel.output.nickname
-            avatarImageView.image = viewModel.output.avatarImage
+            avatarImageView.setProfileImage(image: viewModel.output.avatarImage, tempName: viewModel.output.nickname)
             viewModel.output.isSelected.map({ $0 ? #imageLiteral(resourceName: "radioButtonOn.png") : #imageLiteral(resourceName: "radioButtonOff.png") }).bind(to: selectedImageView.rx.image).disposed(by: disposeBag)
         }
     }

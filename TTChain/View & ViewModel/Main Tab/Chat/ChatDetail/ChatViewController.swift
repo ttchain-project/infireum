@@ -68,7 +68,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         var roomType:RoomType
         var chatTitle:String
         var roomID:String
-        var chatAvatar:UIImage?
+        var chatAvatar:String?
         var uid: String?
     }
     
@@ -163,11 +163,11 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             tv,row,messageModel in
             
             var cell: UITableViewCell
-            var leftImage: UIImage?
+            var leftImage: String?
             
             switch self.viewModel.input.roomType {
             case .group,.channel:
-                leftImage = self.viewModel.memberAvatarMapping[messageModel.userName ?? ""]
+                leftImage = self.viewModel.memberAvatarMapping[messageModel.userName ?? ""] ?? ""
             case .pvtChat:
                 leftImage = self.viewModel.input.chatAvatar
             }
@@ -534,7 +534,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         var roomType: RoomType?
         var chatTitle: String = ""
         var roomId:String = ""
-        var chatAvatar: UIImage?
+        var chatAvatar: String?
         var uid: String? = nil
         switch chatList {
         case is CommunicationListModel:
@@ -542,21 +542,21 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             roomType = commModel.roomType
             chatTitle = commModel.displayName
             roomId = commModel.roomId
-            chatAvatar = commModel.avatar
+            chatAvatar = commModel.img
             uid = commModel.privateMessageTargetUid
         case is FriendModel:
             let friendModel = chatList as! FriendInfoModel
             chatTitle = friendModel.nickName
             roomType = .pvtChat
             roomId = friendModel.roomId
-            chatAvatar = friendModel.avatar
+            chatAvatar = friendModel.avatarUrl
             uid = friendModel.uid
         case is UserGroupInfoModel:
             let groupModel = chatList as! UserGroupInfoModel
             chatTitle = groupModel.groupName
             roomType = groupModel.roomType
             roomId = groupModel.imGroupId
-            chatAvatar = groupModel.groupIcon
+            chatAvatar = groupModel.headImg
             uid = nil
         default:
             print("CommunicationListModel")

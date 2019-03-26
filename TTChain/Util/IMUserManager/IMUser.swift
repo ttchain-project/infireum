@@ -21,12 +21,13 @@ class IMUser:IMUserMappable {
     var nickName:String?
     var introduction: String?
     var headImg: UIImage?
-    
+    var headImgUrl:String? = nil
     init(uID:String, nickName: String, introduction: String, headImg: String?) {
         self.uID = uID
         self.nickName = nickName
         self.introduction = introduction
         var image : UIImage?
+        self.headImgUrl = headImg
         if headImg != nil, let url = URL.init(string: headImg!), let data = try? Data.init(contentsOf: url) {
             image = UIImage.init(data: data)
         }

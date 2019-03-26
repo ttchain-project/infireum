@@ -43,12 +43,13 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         self.msgImageView.layer.borderColor = UIColor.white.cgColor
         dateLabel.set(textColor: .gray, font: .owMedium(size: 14))
         senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 16))
+        profilePics.layer.cornerRadius = 20
 
         self.backgroundColor = .clear
         self.selectionStyle = .none
     }
     
-    func setMessage(forMessage message:MessageModel, leftImage: UIImage?, leftImageAction:@escaping ((String) -> Void)) {
+    func setMessage(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
         dateLabel.text = message.timestamp.string()
         if message.isUserSender() {
             self.profilePics.isHidden = true
@@ -63,7 +64,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
             self.dateLabel.textAlignment = .left
             self.senderConstraint.isActive = false
             self.receiverConstraint.isActive = true
-            self.profilePics.image = leftImage ?? #imageLiteral(resourceName: "no_image")
+            self.profilePics.setProfileImage(image: leftImage, tempName: message.senderName)
+
             self.senderNameLabel.text = message.senderName
             
         }

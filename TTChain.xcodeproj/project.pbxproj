@@ -166,6 +166,15 @@
 		555E4A622248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */; };
 		555E4A632248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */; };
 		555E4A642248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */; };
+		555E4A692249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A672249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift */; };
+		555E4A6A2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A672249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift */; };
+		555E4A6B2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A672249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift */; };
+		555E4A6C2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A682249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib */; };
+		555E4A6D2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A682249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib */; };
+		555E4A6E2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A682249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib */; };
+		555E4A702249D46400C7CAD5 /* UIImageView+ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A6F2249D46400C7CAD5 /* UIImageView+ProfileImage.swift */; };
+		555E4A712249D46400C7CAD5 /* UIImageView+ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A6F2249D46400C7CAD5 /* UIImageView+ProfileImage.swift */; };
+		555E4A722249D46400C7CAD5 /* UIImageView+ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A6F2249D46400C7CAD5 /* UIImageView+ProfileImage.swift */; };
 		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
@@ -1976,6 +1985,9 @@
 		555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedEnvTableViewCell.xib; sourceTree = "<group>"; };
 		555E4A5D2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RceiveRedEnvelopeTableViewCell.swift; sourceTree = "<group>"; };
 		555E4A5E2248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RceiveRedEnvelopeTableViewCell.xib; sourceTree = "<group>"; };
+		555E4A672249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveRedEnvelopeViewController.swift; sourceTree = "<group>"; };
+		555E4A682249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveRedEnvelopeViewController.xib; sourceTree = "<group>"; };
+		555E4A6F2249D46400C7CAD5 /* UIImageView+ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ProfileImage.swift"; sourceTree = "<group>"; };
 		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
@@ -2903,9 +2915,8 @@
 		554D2CFA2244CE3F0004CA09 /* RedEnvelope */ = {
 			isa = PBXGroup;
 			children = (
-				554D2D032244F67B0004CA09 /* CreateRedEnvelopeViewModel.swift */,
-				554D2CFB2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift */,
-				554D2CFC2244CE6A0004CA09 /* CreateRedEnvelopeViewController.xib */,
+				555E4A662249CA1600C7CAD5 /* ReceiveRedEnvelope */,
+				555E4A652249C9FD00C7CAD5 /* CreateRedEnvelope */,
 			);
 			path = RedEnvelope;
 			sourceTree = "<group>";
@@ -2918,6 +2929,25 @@
 				555A45B422057FA0004A713A /* ChatImageViewModel.swift */,
 			);
 			path = ChatImageViewer;
+			sourceTree = "<group>";
+		};
+		555E4A652249C9FD00C7CAD5 /* CreateRedEnvelope */ = {
+			isa = PBXGroup;
+			children = (
+				554D2D032244F67B0004CA09 /* CreateRedEnvelopeViewModel.swift */,
+				554D2CFB2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift */,
+				554D2CFC2244CE6A0004CA09 /* CreateRedEnvelopeViewController.xib */,
+			);
+			path = CreateRedEnvelope;
+			sourceTree = "<group>";
+		};
+		555E4A662249CA1600C7CAD5 /* ReceiveRedEnvelope */ = {
+			isa = PBXGroup;
+			children = (
+				555E4A672249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift */,
+				555E4A682249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib */,
+			);
+			path = ReceiveRedEnvelope;
 			sourceTree = "<group>";
 		};
 		557C8494223209AE004C2E16 /* AudioCall */ = {
@@ -5744,6 +5774,7 @@
 				64813A9120DCAFCE00CAA4D8 /* KLDebugHelper.swift */,
 				6470D61F20F0FEFA00EB0780 /* UIButton+Position.swift */,
 				553ACEE021646024002C59AB /* UIImageView+CrispQRCodeImage.swift */,
+				555E4A6F2249D46400C7CAD5 /* UIImageView+ProfileImage.swift */,
 			);
 			path = KLExtension;
 			sourceTree = "<group>";
@@ -6243,6 +6274,7 @@
 				64813AE620DE241500CAA4D8 /* MainTabBarViewController.xib in Resources */,
 				6424B69520F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.xib in Resources */,
 				649E48B020ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.xib in Resources */,
+				555E4A6E2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */,
 				55EF6AEC21A812C7007E074A /* FriendsListViewController.xib in Resources */,
 				5539A49921676F8C00A59ACC /* IdentityQRCodeImportViewController.xib in Resources */,
 				64813AD120DD071F00CAA4D8 /* MainWalletOverviewViewController.xib in Resources */,
@@ -6285,6 +6317,7 @@
 				64F07E7520D36AFE00A60C5C /* IdentitySetupViewController.xib in Resources */,
 				55EF6AEA21A812C7007E074A /* FriendsListViewController.xib in Resources */,
 				55E730712186E580003AE47E /* WithdrawalRemarksViewController.xib in Resources */,
+				555E4A6C2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */,
 				5508740021E5A398007B3B3B /* SettingMenuHeaderCollectionReusableView.xib in Resources */,
 				554D2D002244CE6A0004CA09 /* CreateRedEnvelopeViewController.xib in Resources */,
 				64772555212D1643005E75FE /* Localizable.strings in Resources */,
@@ -6444,6 +6477,7 @@
 				64F07E7620D36AFE00A60C5C /* IdentitySetupViewController.xib in Resources */,
 				55EF6AEB21A812C7007E074A /* FriendsListViewController.xib in Resources */,
 				55E7306F2186E57F003AE47E /* WithdrawalRemarksViewController.xib in Resources */,
+				555E4A6D2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */,
 				5508740121E5A398007B3B3B /* SettingMenuHeaderCollectionReusableView.xib in Resources */,
 				554D2D012244CE6A0004CA09 /* CreateRedEnvelopeViewController.xib in Resources */,
 				64772556212D1643005E75FE /* Localizable.strings in Resources */,
@@ -7137,6 +7171,7 @@
 				6EEA2F212164B32C005FE393 /* QAViewModel.swift in Sources */,
 				5526B52E2211247F00573576 /* ForwardListViewController.swift in Sources */,
 				640D893D20F06DFB0010D986 /* WithdrawalAssetViewModel.swift in Sources */,
+				555E4A6B2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift in Sources */,
 				55EF6AAA21A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
 				55AADF232202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
 				6424B69A20F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
@@ -7156,6 +7191,7 @@
 				648139B220DB5E4000CAA4D8 /* IdentityRestoreViewController.swift in Sources */,
 				55B5C01D2212D37D007250FA /* ImageScrollView.swift in Sources */,
 				64F07E3020D24DDD00A60C5C /* MainViewController.swift in Sources */,
+				555E4A722249D46400C7CAD5 /* UIImageView+ProfileImage.swift in Sources */,
 				6470D69D20F341CE00EB0780 /* WithdrawalConfirmPwdValidationViewModel.swift in Sources */,
 				55EF6A4A21A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
 				557C85482236380E004C2E16 /* AudioCallViewController.swift in Sources */,
@@ -7609,6 +7645,7 @@
 				64F07E0620D241A000A60C5C /* NSObject+NameOfClass.swift in Sources */,
 				5526B52C2211247F00573576 /* ForwardListViewController.swift in Sources */,
 				55EF6AA821A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
+				555E4A692249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift in Sources */,
 				64D8266A20E23F5D00C8FC63 /* CoinSelection+Helper.swift in Sources */,
 				55AADF212202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
 				6424B66C20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
@@ -7628,6 +7665,7 @@
 				64B98EDA20F98EAC00C4EB11 /* LightningTransactionViewModel.swift in Sources */,
 				55B5C01B2212D37D007250FA /* ImageScrollView.swift in Sources */,
 				6470D68720F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
+				555E4A702249D46400C7CAD5 /* UIImageView+ProfileImage.swift in Sources */,
 				55EF6A4821A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
 				64D8263420DFABB000C8FC63 /* DepositViewController.swift in Sources */,
 				557C85462236380E004C2E16 /* AudioCallViewController.swift in Sources */,
@@ -8074,6 +8112,7 @@
 				6424B66D20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
 				5526B52D2211247F00573576 /* ForwardListViewController.swift in Sources */,
 				64C9D45120FDD230000B0774 /* AddressBookUnitBrowseViewController.swift in Sources */,
+				555E4A6A2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.swift in Sources */,
 				55EF6AA921A812C6007E074A /* InviteFriendViewModel.swift in Sources */,
 				55AADF222202DF8500F403C8 /* USDTTxHandler.swift in Sources */,
 				6424B64920F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.swift in Sources */,
@@ -8093,6 +8132,7 @@
 				64B98EDB20F98EAC00C4EB11 /* LightningTransactionViewModel.swift in Sources */,
 				55B5C01C2212D37D007250FA /* ImageScrollView.swift in Sources */,
 				64F07D2220D0E8FA00A60C5C /* AppDelegate.swift in Sources */,
+				555E4A712249D46400C7CAD5 /* UIImageView+ProfileImage.swift in Sources */,
 				64D8269B20E3E2AC00C8FC63 /* TransRecord+CoreDataClass.swift in Sources */,
 				55EF6A4921A812C6007E074A /* PrivateChatSettingViewController.swift in Sources */,
 				557C85472236380E004C2E16 /* AudioCallViewController.swift in Sources */,
