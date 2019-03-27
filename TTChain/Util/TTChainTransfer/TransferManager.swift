@@ -1,171 +1,40 @@
 //
-//  WithdrawalConfirmPwdValidationViewModel.swift
-//  OfflineWallet
+//  TransferManager.swift
+//  TTChain
 //
-//  Created by Keith Lee on 2018/7/9.
-//  Copyright © 2018年 gib. All rights reserved.
+//  Created by Ajinkya Sharma on 2019/3/27.
+//  Copyright © 2019 gib. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RxSwift
 import RxCocoa
 
-enum PwdValidateResult {
-    case valid
-    case invalid
+
+enum BlockchainTransferFlowState {
+    /// This is the default state, to notify the view layer the transfer is not happened yet.
+    case waitingUserActivate
+    case signing
+    case broadcasting
+    /// Whether success or not will return this state, and send in the request result.
+    case finished(RxAPIResponse<TransRecord>.E)
 }
 
-//enum BlockchainTransferFlowState {
-//    /// This is the default state, to notify the view layer the transfer is not happened yet.
-//    case waitingUserActivate
-//    case signing
-//    case broadcasting
-//    /// Whether success or not will return this state, and send in the request result.
-//    case finished(RxAPIResponse<TransRecord>.E)
-//}
-
-class WithdrawalConfirmPwdValidationViewModel: KLRxViewModel {
-    struct Input {
-        let info: WithdrawalInfo
-        let pwdInout: ControlProperty<String?>
-        let confirmInput: Driver<Void>
-        let changePwdVisibleInput: Driver<Void>
-    }
+class TransferManager {
     
-    typealias InputSource = Input
-    typealias OutputSource = Void
-    var input: WithdrawalConfirmPwdValidationViewModel.Input
-    var output: Void
-    var bag: DisposeBag = DisposeBag.init()
-    
-    required init(input: InputSource, output: OutputSource) {
-        self.input = input
-        self.output = output
-        self.concatInput()
-        self.concatOutput()
-    }
-    
-    func concatInput() {
-        (input.pwdInout <-> _pwd).disposed(by: bag)
-        input.changePwdVisibleInput.map {
-            [unowned self] in !self._isPwdVisible.value
-        }
-        .drive(_isPwdVisible)
-        .disposed(by: bag)
-        
-        input.confirmInput
-            .asObservable()
-            .flatMapLatest {
-                [unowned self] in self.checkPwdIsValid()
-            }
-            .filter {
-                [unowned self]
-                isPwdValid in
-                if isPwdValid {
-                    return true
-                }else {
-                    self._onDetectInvalidPwdBeforeTranfer.accept(())
-                    return false
-                }
-            }
-            .flatMapLatest {
-                [unowned self] _ in
-                self.startTransfer().asObservable().concat(Observable.never())
-            }
-//            .debug("pass result")
-            .bind(to: _transferState)
-            .disposed(by: bag)
-//            .subscribe(onNext: {
-//                [unowned self]
-//                result in
-//                self._transferState.accept(.finished(result))
-//            })
-//            .disposed(by: bag)
-    }
-    
-    func concatOutput() {
-        
-    }
-    
-    //MARK: - Public
-    public var hasPwd: Observable<Bool> {
-        return _pwd.map { ($0 ?? "").count > 0 }
-    }
-    
-    public var isPwdVisible: Observable<Bool> {
-        return _isPwdVisible.asObservable()
-    }
-    
-    //MARK: - Private
-    private lazy var _pwd: BehaviorRelay<String?> = {
-        return BehaviorRelay.init(value: nil)
-    }()
-    
-    private lazy var _isPwdVisible: BehaviorRelay<Bool> = {
-       return BehaviorRelay.init(value: false)
-    }()
-    
-    
-    //MARK: - Blockchain Transfer Flow Notifier
-    private func checkPwdIsValid() -> Observable<Bool> {
-        guard let _rawPwd = _pwd.value else { return Observable.just(false) }
-        let isValid = input.info.asset.wallet!.isWalletPwd(rawPwd: _rawPwd)
-        return Observable.just(isValid)
-    }
-    
-    public var onDetectInvalidPwdBeforeTranfer: Observable<Void> {
-        return _onDetectInvalidPwdBeforeTranfer.asObservable()
-    }
-    
-    private lazy var _onDetectInvalidPwdBeforeTranfer: PublishRelay<Void> = {
-        return PublishRelay.init()
-    }()
-    
-    public var transferState: Observable<BlockchainTransferFlowState> {
-        return _transferState.asObservable()
-    }
-    
-    private lazy var _transferState: BehaviorRelay<BlockchainTransferFlowState> = {
-        return BehaviorRelay.init(value: .waitingUserActivate)
-    }()
-    
-    /// This is the main transfer happen
-    ///
-    /// - Returns:
-    private func startTransfer() -> Observable<BlockchainTransferFlowState> {
-        let info = input.info
-        let chainType = info.wallet.owChainType
-        return Observable.create({  (observer) -> Disposable in
-            observer.onNext(.signing)
-            switch chainType {
-            case .btc:
-                TransferManager.manager.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: true)
-//                self.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: true)
-            case .eth:
-                TransferManager.manager.startETHTransferFlow(with: info, progressObserver: observer)
-            default: break
-            }
-            return Disposables.create()
-        })
-    }
+    static let manager = TransferManager.init()
+    let bag = DisposeBag.init()
 }
-
-// MARK: - BTC Transfer Flow
-extension WithdrawalConfirmPwdValidationViewModel {
-    private func startBTCTransferFlow(with info: WithdrawalInfo,
+extension TransferManager {
+    func startBTCTransferFlow(with info: WithdrawalInfo,
                                       progressObserver observer: AnyObserver<BlockchainTransferFlowState>, isCompressed:Bool ) {
         var withdrawalInfo = info
-        //TEST
-//        info.wallet.address = "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r"
+        
         getBTCUnspent(fromInfo: withdrawalInfo)
             .flatMap {
                 [unowned self] result -> RxAPIResponse<SignBTCTxAPIModel> in
                 switch result {
                 case .failed(error: let err):
-//                    observer.onNext(
-//                        .finished(.failed(error: err))
-//                    )
-                    
                     return .just(.failed(error: err))
                 case .success(let model):
                     switch model.result {
@@ -185,8 +54,6 @@ extension WithdrawalConfirmPwdValidationViewModel {
                             dls
                                 .withdrawalConfirm_pwdVerify_error_btc_insufficient_fee_content(totalFee)
                         )
-                        
-//                        observer.onNext(.finished(.failed(error: err)))
                         return .just(.failed(error: err))
                     }
                 }
@@ -195,9 +62,6 @@ extension WithdrawalConfirmPwdValidationViewModel {
                 [unowned self] result -> RxAPIResponse<BroadcastBTCTxAPIModel> in
                 switch result {
                 case .failed(error: let err):
-//                   observer.onNext(
-//                        .finished(.failed(error: err))
-//                    )
                     
                     return .just(.failed(error: err))
                 case .success(let model):
@@ -208,10 +72,6 @@ extension WithdrawalConfirmPwdValidationViewModel {
                 [unowned self] result -> RxAPIResponse<(String?)> in
                 switch result {
                 case .failed(error: let err):
-//                    observer.onNext(
-//                        .finished(.failed(error: err))
-//                    )
-                    
                     return RxAPIResponse.just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)
@@ -235,14 +95,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
                 switch result {
                 case .failed(error: let err):
                     if isCompressed {
-                        if case .broadcasting = self._transferState.value {
-                            line()
-                            print("Iscompressed true failed, so try with iscompressed false")
-                            line()
-                            self.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: false)
-                        }else {
-                            observer.onNext(.finished(.failed(error: err)))
-                        }
+                        self.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: false)
                     }else {
                         observer.onNext(.finished(.failed(error: err)))
                     }
@@ -252,7 +105,6 @@ extension WithdrawalConfirmPwdValidationViewModel {
                         let err: GTServerAPIError = .incorrectResult(
                             LM.dls.withdrawalConfirm_pwdVerify_error_tx_save_fail, ""
                         )
-                        
                         observer.onNext(.finished(.failed(error: err)))
                         return
                     }
@@ -267,8 +119,8 @@ extension WithdrawalConfirmPwdValidationViewModel {
     }
     
     private func signBTC(with info: inout WithdrawalInfo, unspents: [Unspent],isCompressed:Bool) -> RxAPIResponse<SignBTCTxAPIModel> {
-//        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
-//        info.feeAmt = Decimal.init(amt)
+        //        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
+        //        info.feeAmt = Decimal.init(amt)
         
         let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
         let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
@@ -282,8 +134,8 @@ extension WithdrawalConfirmPwdValidationViewModel {
     }
     
     private func signUSDT(with info: inout WithdrawalInfo, unspents: [Unspent], isCompressed:Bool) -> RxAPIResponse<SignBTCTxAPIModel> {
-//        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
-//        info.feeAmt = Decimal.init(amt)
+        //        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
+        //        info.feeAmt = Decimal.init(amt)
         
         let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
         let changeBTC = totalUnspentBTC - info.totalFee
@@ -301,15 +153,15 @@ extension WithdrawalConfirmPwdValidationViewModel {
             .instance
             .broadcastBTCTx(withSignText: signText, withComments: comments)
     }
-
+    
     private func postCommentForTransaction(for transactionId: String, comment : String?) -> RxAPIResponse<PostCustomCommentsAPIModel> {
         return Server.instance.postCommentsForTransaction(for: transactionId, comment: comment)
     }
+    
 }
 
-// MARK: - ETH Transfer Flow
-extension WithdrawalConfirmPwdValidationViewModel {
-    private func startETHTransferFlow(with info: WithdrawalInfo,
+extension TransferManager {
+    func startETHTransferFlow(with info: WithdrawalInfo,
                                       progressObserver observer: AnyObserver<BlockchainTransferFlowState> ) {
         getETHNonce(fromInfo: info)
             .flatMap {
@@ -371,7 +223,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
                 case .failed(error: let err):
                     observer.onNext(.finished(.failed(error: err)))
                 case .success(let txID):
-                     guard let transID = txID, let record = self.saveTxToLocal(with: transID, info: info) else {
+                    guard let transID = txID, let record = self.saveTxToLocal(with: transID, info: info) else {
                         let err: GTServerAPIError = .incorrectResult(
                             LM.dls.withdrawalConfirm_pwdVerify_error_tx_save_fail, ""
                         )
@@ -394,12 +246,12 @@ extension WithdrawalConfirmPwdValidationViewModel {
         let digitExp = Int(info.asset.coin!.digit)
         let unitAmt = info.withdrawalAmt * pow(10, digitExp)
         return Server.instance.signETHTx(pkey: info.wallet.pKey,
-                                  nonce: nonce,
-                                  gasPriceInWei: info.feeRate.etherToWei,
-                                  gasLimit: Int(info.feeAmt.doubleValue),
-                                  toETHAddress: info.address,
-                                  transferToken: info.asset.coin!,
-                                  transferValueInTokenUnit: unitAmt)
+                                         nonce: nonce,
+                                         gasPriceInWei: info.feeRate.etherToWei,
+                                         gasLimit: Int(info.feeAmt.doubleValue),
+                                         toETHAddress: info.address,
+                                         transferToken: info.asset.coin!,
+                                         transferValueInTokenUnit: unitAmt)
     }
     
     private func broadcastETHTx(with signText: String ,andComments comments: String) -> RxAPIResponse<BroadcastETHTxAPIModel> {
@@ -408,7 +260,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
     
     private func saveTxToLocal(with txid: String, info: WithdrawalInfo) -> TransRecord? {
         let record = DB.instance.create(type: TransRecord.self, setup: { (rec) in
-//            rec.inoutID = TransInoutType.withdrawal.rawValue
+            //            rec.inoutID = TransInoutType.withdrawal.rawValue
             rec.date = Date() as NSDate
             rec.feeAmt = info.feeAmt as NSDecimalNumber
             rec.feeCoinID = info.feeCoin.identifier!
@@ -416,7 +268,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
             rec.fromAddress = info.wallet.address!
             rec.fromAmt = info.withdrawalAmt as NSDecimalNumber
             rec.fromCoinID = info.asset.coinID!
-    
+            
             rec.status = TransRecordStatus.success.rawValue
             rec.syncDate = Date() as NSDate
             rec.toAddress = info.address
@@ -424,7 +276,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
             rec.toCoinID = info.asset.coinID!
             rec.totalFee = info.totalFee as NSDecimalNumber
             rec.txID = txid
-
+            
             rec.addToCoins(info.asset.coin!)
             info.asset.coin!.addToTransRecords(rec)
         })

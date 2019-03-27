@@ -7,22 +7,32 @@
 //
 
 import UIKit
+import RxSwift
 
 class RceiveRedEnvelopeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var receiveRedEnvelopeStatusLabel: UILabel!
-    
+    var bag: DisposeBag = DisposeBag.init()
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        dateLabel.set(textColor: .black, font: .owMedium(size: 14))
+        dateLabel.set(textColor: .black, font: .owMedium(size: 12))
         
-        self.receiveRedEnvelopeStatusLabel.set(textColor: .black, font: .owMedium(size: 16))
+        self.receiveRedEnvelopeStatusLabel.set(textColor: .black, font: .owMedium(size: 14))
         self.backgroundColor = .clear
         self.selectionStyle = .none
         // Initialization code
     }
 
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.bag = DisposeBag.init()
+    }
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

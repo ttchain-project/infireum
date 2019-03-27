@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension UIImageView {
     func setProfileImage(image : String?, tempName:String?) {

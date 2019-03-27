@@ -268,19 +268,37 @@ class ChatViewModel: KLRxViewModel {
         }).disposed(by: bag)
     }
     
-    func redEnvelopeAction(forRedEnvId redEnvId:String, navigateTo toViewController:@escaping (UIViewController) -> ()) {
-        let parameter = RedEnvelopeInfoAPI.Parameters.init(redEnvelopeId: redEnvId)
+    func redEnvelopeAction(forRedEnvId redEnvMessage:RedEnvelope, navigateTo toViewController:@escaping (UIViewController) -> ()) {
+        let parameter = RedEnvelopeInfoAPI.Parameters.init(redEnvelopeId: redEnvMessage.identifier)
         Server.instance.getRedEnvelopeInfo(parameter: parameter).asObservable().subscribe(onNext: { (response) in
             switch response {
             case .success(let model):
                 let info = model.redEnvelopeInfo
-                
-                let viewModel = RedEvelopeInfoViewModel.init(identifier: redEnvId, information: info)
-                let vc = ReceiveRedEnvelopeViewController.init(viewModel: viewModel)
-               
-                viewModel.output.actionSubject.subscribe(onNext: { (_) in
-                    vc.dismiss(animated: true, completion: nil)
-                }).disposed(by: viewModel.disposeBag)
+                var vc:UIViewController!
+                if [Tokens.getUID(),Tokens.getRocketChatUserID()].contains(redEnvMessage.senderUID) {
+                    let viewModel = RedEnvelopeDetailViewModel.init(identifier: redEnvMessage.identifier, information: info)
+                    
+                    let redEnvVC = RedEnvelopeDetailViewController.init(viewModel: viewModel)
+                    
+                   vc = UINavigationController.init(rootViewController: redEnvVC)
+                    viewModel.output.actionSubject.subscribe(onNext: { (action) in
+                        switch action {
+                        case .dismiss:
+                            vc.dismiss(animated: true, completion: nil)
+                        case .history:
+                            print("No Action for now")
+                        }
+                    }).disposed(by: viewModel.disposeBag)
+                    
+                }else {
+                    
+                    let viewModel = RedEvelopeInfoViewModel.init(identifier: redEnvMessage.identifier, information: info)
+                    vc = ReceiveRedEnvelopeViewController.init(viewModel: viewModel)
+                    
+                    viewModel.output.actionSubject.subscribe(onNext: { (_) in
+                        vc.dismiss(animated: true, completion: nil)
+                    }).disposed(by: viewModel.disposeBag)
+                }
                 
                 toViewController(vc)
                 

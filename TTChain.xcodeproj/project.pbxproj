@@ -181,6 +181,36 @@
 		555E4A792249FD3700C7CAD5 /* RedEvelopeInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A782249FD3700C7CAD5 /* RedEvelopeInfoViewModel.swift */; };
 		555E4A7A2249FD3700C7CAD5 /* RedEvelopeInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A782249FD3700C7CAD5 /* RedEvelopeInfoViewModel.swift */; };
 		555E4A7B2249FD3700C7CAD5 /* RedEvelopeInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A782249FD3700C7CAD5 /* RedEvelopeInfoViewModel.swift */; };
+		555E4A7F224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A7D224A46E200C7CAD5 /* RedEnvelopeDetailViewController.swift */; };
+		555E4A80224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A7D224A46E200C7CAD5 /* RedEnvelopeDetailViewController.swift */; };
+		555E4A81224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A7D224A46E200C7CAD5 /* RedEnvelopeDetailViewController.swift */; };
+		555E4A82224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A7E224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib */; };
+		555E4A83224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A7E224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib */; };
+		555E4A84224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A7E224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib */; };
+		555E4A89224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A85224A472700C7CAD5 /* RedEnvelopeDetailView.xib */; };
+		555E4A8A224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A85224A472700C7CAD5 /* RedEnvelopeDetailView.xib */; };
+		555E4A8B224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A85224A472700C7CAD5 /* RedEnvelopeDetailView.xib */; };
+		555E4A8C224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A86224A472700C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib */; };
+		555E4A8D224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A86224A472700C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib */; };
+		555E4A8E224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555E4A86224A472700C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib */; };
+		555E4A8F224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A87224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift */; };
+		555E4A90224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A87224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift */; };
+		555E4A91224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A87224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift */; };
+		555E4A92224A472800C7CAD5 /* RedEnvelopeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A88224A472800C7CAD5 /* RedEnvelopeDetailView.swift */; };
+		555E4A93224A472800C7CAD5 /* RedEnvelopeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A88224A472800C7CAD5 /* RedEnvelopeDetailView.swift */; };
+		555E4A94224A472800C7CAD5 /* RedEnvelopeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A88224A472800C7CAD5 /* RedEnvelopeDetailView.swift */; };
+		555E4A97224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A95224A477E00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift */; };
+		555E4A98224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A95224A477E00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift */; };
+		555E4A99224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A95224A477E00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift */; };
+		555E4A9A224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A96224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift */; };
+		555E4A9B224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A96224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift */; };
+		555E4A9C224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A96224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift */; };
+		555E4A9E224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A9D224A482A00C7CAD5 /* Reactive+UITableView.swift */; };
+		555E4A9F224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A9D224A482A00C7CAD5 /* Reactive+UITableView.swift */; };
+		555E4AA0224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4A9D224A482A00C7CAD5 /* Reactive+UITableView.swift */; };
+		555E4AA3224B510000C7CAD5 /* TransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4AA2224B510000C7CAD5 /* TransferManager.swift */; };
+		555E4AA4224B510000C7CAD5 /* TransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4AA2224B510000C7CAD5 /* TransferManager.swift */; };
+		555E4AA5224B510000C7CAD5 /* TransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4AA2224B510000C7CAD5 /* TransferManager.swift */; };
 		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
@@ -1996,6 +2026,16 @@
 		555E4A6F2249D46400C7CAD5 /* UIImageView+ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ProfileImage.swift"; sourceTree = "<group>"; };
 		555E4A742249F6BE00C7CAD5 /* RedEvelopeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedEvelopeInfoModel.swift; sourceTree = "<group>"; };
 		555E4A782249FD3700C7CAD5 /* RedEvelopeInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedEvelopeInfoViewModel.swift; sourceTree = "<group>"; };
+		555E4A7D224A46E200C7CAD5 /* RedEnvelopeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedEnvelopeDetailViewController.swift; sourceTree = "<group>"; };
+		555E4A7E224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedEnvelopeDetailViewController.xib; sourceTree = "<group>"; };
+		555E4A85224A472700C7CAD5 /* RedEnvelopeDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RedEnvelopeDetailView.xib; sourceTree = "<group>"; };
+		555E4A86224A472700C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiveRedEnvelopeTableViewCell.xib; sourceTree = "<group>"; };
+		555E4A87224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveRedEnvelopeTableViewCell.swift; sourceTree = "<group>"; };
+		555E4A88224A472800C7CAD5 /* RedEnvelopeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedEnvelopeDetailView.swift; sourceTree = "<group>"; };
+		555E4A95224A477E00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveRedEnvelopeTableViewCellModel.swift; sourceTree = "<group>"; };
+		555E4A96224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedEnvelopeDetailViewModel.swift; sourceTree = "<group>"; };
+		555E4A9D224A482A00C7CAD5 /* Reactive+UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reactive+UITableView.swift"; sourceTree = "<group>"; };
+		555E4AA2224B510000C7CAD5 /* TransferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferManager.swift; sourceTree = "<group>"; };
 		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
@@ -2971,8 +3011,24 @@
 		555E4A7C224A327B00C7CAD5 /* CheckRedEnvelope */ = {
 			isa = PBXGroup;
 			children = (
+				555E4A95224A477E00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift */,
+				555E4A96224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift */,
+				555E4A87224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift */,
+				555E4A86224A472700C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib */,
+				555E4A88224A472800C7CAD5 /* RedEnvelopeDetailView.swift */,
+				555E4A85224A472700C7CAD5 /* RedEnvelopeDetailView.xib */,
+				555E4A7D224A46E200C7CAD5 /* RedEnvelopeDetailViewController.swift */,
+				555E4A7E224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib */,
 			);
 			path = CheckRedEnvelope;
+			sourceTree = "<group>";
+		};
+		555E4AA1224B508900C7CAD5 /* TTChainTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				555E4AA2224B510000C7CAD5 /* TransferManager.swift */,
+			);
+			path = TTChainTransfer;
 			sourceTree = "<group>";
 		};
 		557C8494223209AE004C2E16 /* AudioCall */ = {
@@ -3574,6 +3630,7 @@
 				55EF6B3E21A81567007E074A /* Image */,
 				55EF6B4021A81567007E074A /* Paramenter.swift */,
 				55EF6B4121A81567007E074A /* String+Extension.swift */,
+				555E4A9D224A482A00C7CAD5 /* Reactive+UITableView.swift */,
 				55EF6B4221A81567007E074A /* UIView+UIImage.swift */,
 				55E1140221F728480062198B /* Reactive+UITextView.swift */,
 			);
@@ -5709,6 +5766,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				555E4AA1224B508900C7CAD5 /* TTChainTransfer */,
 				557C85522236700C004C2E16 /* CallHandler */,
 				559C4F142226658D009466A8 /* NotificationHandler */,
 				55B5C01F22151F04007250FA /* WalletCreator */,
@@ -6175,6 +6233,7 @@
 				55EF6AF221A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B6AF20F5F7B800AEBCAD /* TransferRecordsListViewController.xib in Resources */,
 				64F07E7720D36AFE00A60C5C /* IdentitySetupViewController.xib in Resources */,
+				555E4A8E224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */,
 				5508743321EDD628007B3B3B /* ExploreDetailWebViewController.xib in Resources */,
 				64772557212D1643005E75FE /* Localizable.strings in Resources */,
 				550873F521E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib in Resources */,
@@ -6185,6 +6244,7 @@
 				649E483720E7CED900B217AD /* ChangeWalletViewController.xib in Resources */,
 				55E730672186E534003AE47E /* WithdrawalRemarksViewController.xib in Resources */,
 				64C9D45520FDD230000B0774 /* AddressBookUnitBrowseViewController.xib in Resources */,
+				555E4A84224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6E020F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				55EF6A7721A812C6007E074A /* ChatExtendFunctionMenuViewController.xib in Resources */,
 				55EF6A8F21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
@@ -6300,6 +6360,7 @@
 				64813AE620DE241500CAA4D8 /* MainTabBarViewController.xib in Resources */,
 				6424B69520F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.xib in Resources */,
 				649E48B020ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.xib in Resources */,
+				555E4A8B224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */,
 				555E4A6E2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */,
 				55EF6AEC21A812C7007E074A /* FriendsListViewController.xib in Resources */,
 				5539A49921676F8C00A59ACC /* IdentityQRCodeImportViewController.xib in Resources */,
@@ -6382,6 +6443,7 @@
 				645619212150D339001092E5 /* ImportWalletTypeChooseViewController.xib in Resources */,
 				64C9D4DA21044ECF000B0774 /* WithdrawalCICFeeInfoAdvModeViewController.xib in Resources */,
 				550873F321E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib in Resources */,
+				555E4A82224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A320F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
 				55EF6AAE21A812C6007E074A /* MyInformationViewController.xib in Resources */,
 				64C9D47A20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
@@ -6403,6 +6465,7 @@
 				6EEA2F162164B214005FE393 /* QAViewController.xib in Resources */,
 				55BB1B43218FDCE70061F189 /* ExploreViewController.xib in Resources */,
 				64B2773520D8AE0B004FF75B /* OWQRCodeViewController.xib in Resources */,
+				555E4A89224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */,
 				6485003720DA006900107473 /* IdentityCreateViewController.xib in Resources */,
 				55EF6AD521A812C6007E074A /* FriendTableViewCell.xib in Resources */,
 				555E4A622248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
@@ -6472,6 +6535,7 @@
 				64813ACF20DD071F00CAA4D8 /* MainWalletOverviewViewController.xib in Resources */,
 				64C9D49320FDF5AA000B0774 /* DeletetABUnitAddressViewController.xib in Resources */,
 				6470D6C820F35BD800EB0780 /* WithdrawalETHFeeInfoQuickModeViewController.xib in Resources */,
+				555E4A8C224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */,
 				55EF6AE421A812C7007E074A /* FriendListContainerViewController.xib in Resources */,
 				55EF6A4521A812C6007E074A /* ChatMessageTableViewCell.xib in Resources */,
 				6424B67720F5B97900AEBCAD /* TransferRecordWalletOptionViewController.xib in Resources */,
@@ -6542,6 +6606,7 @@
 				645619222150D339001092E5 /* ImportWalletTypeChooseViewController.xib in Resources */,
 				64C9D4DB21044ECF000B0774 /* WithdrawalCICFeeInfoAdvModeViewController.xib in Resources */,
 				550873F421E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib in Resources */,
+				555E4A83224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A420F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
 				55EF6AAF21A812C6007E074A /* MyInformationViewController.xib in Resources */,
 				64C9D47B20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
@@ -6563,6 +6628,7 @@
 				6EEA2F172164B214005FE393 /* QAViewController.xib in Resources */,
 				55BB1B44218FDCE70061F189 /* ExploreViewController.xib in Resources */,
 				64B2773620D8AE0B004FF75B /* OWQRCodeViewController.xib in Resources */,
+				555E4A8A224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */,
 				6485003820DA006900107473 /* IdentityCreateViewController.xib in Resources */,
 				55EF6AD621A812C6007E074A /* FriendTableViewCell.xib in Resources */,
 				555E4A632248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
@@ -6632,6 +6698,7 @@
 				64813AD020DD071F00CAA4D8 /* MainWalletOverviewViewController.xib in Resources */,
 				64C9D49420FDF5AA000B0774 /* DeletetABUnitAddressViewController.xib in Resources */,
 				6470D6C920F35BD800EB0780 /* WithdrawalETHFeeInfoQuickModeViewController.xib in Resources */,
+				555E4A8D224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */,
 				55EF6AE521A812C7007E074A /* FriendListContainerViewController.xib in Resources */,
 				55EF6A4621A812C6007E074A /* ChatMessageTableViewCell.xib in Resources */,
 				6424B67820F5B97900AEBCAD /* TransferRecordWalletOptionViewController.xib in Resources */,
@@ -7172,6 +7239,7 @@
 				6470D6A920F355A400EB0780 /* WithdrawalETHFeeInputViewModel.swift in Sources */,
 				6485002320D9110000107473 /* OWQRCodeVIewModel.swift in Sources */,
 				64083D12211052D500DE1C31 /* BTCTxFilter.swift in Sources */,
+				555E4A99224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */,
 				64F07E8520D36B8E00A60C5C /* KLRxViewModel.swift in Sources */,
 				55EF6B2121A814E8007E074A /* UIRepresentableCell.swift in Sources */,
 				6485003E20DA009A00107473 /* IdentityCreateViewModel.swift in Sources */,
@@ -7185,14 +7253,17 @@
 				643200BC20FB1D9400B11334 /* WithdrawalCICFeeInfoViewController.swift in Sources */,
 				5508743721EDD978007B3B3B /* ExploreDetailWebViewModel.swift in Sources */,
 				55EF6AE921A812C7007E074A /* FriendsListViewController.swift in Sources */,
+				555E4A94224A472800C7CAD5 /* RedEnvelopeDetailView.swift in Sources */,
 				64F07DDB20D241A000A60C5C /* GTTypeDefs.swift in Sources */,
 				6470D67420F304BA00EB0780 /* WithdrawalInfoOverviewViewModel.swift in Sources */,
 				64D826D720E4CFD500C8FC63 /* SearchAssetTableViewCell.swift in Sources */,
 				640D88DD20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.swift in Sources */,
 				649732D9213F7D7C00C4D1D5 /* Model1_0_0To1_0_4.xcmappingmodel in Sources */,
 				6424B66E20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
+				555E4AA0224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */,
 				64C9D45220FDD230000B0774 /* AddressBookUnitBrowseViewController.swift in Sources */,
 				6424B64A20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.swift in Sources */,
+				555E4A81224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */,
 				64D8266020E22F4300C8FC63 /* ManageAssetViewController.swift in Sources */,
 				6424B68620F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.swift in Sources */,
 				6EEA2F212164B32C005FE393 /* QAViewModel.swift in Sources */,
@@ -7309,6 +7380,7 @@
 				64F07E7C20D36B4200A60C5C /* IdentitySetupViewModel.swift in Sources */,
 				55EF6B4821A81567007E074A /* Image+Until.swift in Sources */,
 				64F07E9220D3809800A60C5C /* API+Models.swift in Sources */,
+				555E4A9C224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */,
 				64083D0621101E2F00DE1C31 /* TxFetcher.swift in Sources */,
 				648139E020DC977800CAA4D8 /* MainWalletViewModel.swift in Sources */,
 				64B2772020D55A05004FF75B /* FiatToFiatRate+Helper.swift in Sources */,
@@ -7383,6 +7455,7 @@
 				55EF6B4B21A81567007E074A /* Paramenter.swift in Sources */,
 				55EF6AF521A812C7007E074A /* GroupInviteTableViewCell.swift in Sources */,
 				5539A49621676F8C00A59ACC /* IdentityQRCodeImportViewController.swift in Sources */,
+				555E4A91224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */,
 				64C9D44A20FDC8C6000B0774 /* AddressBookViewController.swift in Sources */,
 				64F07DE720D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
 				649E48BF20ECE7A700B217AD /* WalletPrivateKeyInfoViewModel.swift in Sources */,
@@ -7472,6 +7545,7 @@
 				64F07DE120D241A000A60C5C /* String+Localization.swift in Sources */,
 				643200AE20FAE1DE00B11334 /* LightningTradeConfirmViewController.swift in Sources */,
 				6485001020D8DFE100107473 /* OWStringValidator.swift in Sources */,
+				555E4AA5224B510000C7CAD5 /* TransferManager.swift in Sources */,
 				55EF6A5F21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */,
 				6EB422EF21635B0000DF75DB /* AgreementMeViewController.swift in Sources */,
 				640D88E820EE25860010D986 /* TransRecordStatus.swift in Sources */,
@@ -7648,6 +7722,7 @@
 				5539A49A21676F8C00A59ACC /* IdentityQRCodeImportTableViewCell.swift in Sources */,
 				55E7306D2186E57A003AE47E /* WIthdrawalRemarkViewModel.swift in Sources */,
 				64F07E2420D241A000A60C5C /* KLTextField.swift in Sources */,
+				555E4A97224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */,
 				64D8266620E22F5800C8FC63 /* ManageAssetViewModel.swift in Sources */,
 				640D88EC20EF0D890010D986 /* AssetDetailViewController.swift in Sources */,
 				55EF6B1F21A814E8007E074A /* UIRepresentableCell.swift in Sources */,
@@ -7661,14 +7736,17 @@
 				64D826A020E3E2AC00C8FC63 /* LightningTransRecord+CoreDataClass.swift in Sources */,
 				5508743521EDD978007B3B3B /* ExploreDetailWebViewModel.swift in Sources */,
 				64083D10211052D500DE1C31 /* BTCTxFilter.swift in Sources */,
+				555E4A92224A472800C7CAD5 /* RedEnvelopeDetailView.swift in Sources */,
 				55EF6AE721A812C7007E074A /* FriendsListViewController.swift in Sources */,
 				5539A49121676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewModel.swift in Sources */,
 				6470D6D520F3649D00EB0780 /* WithdrawalETFFeeInfoModeBase.swift in Sources */,
 				6470D62D20F1131100EB0780 /* FeeRateManager.swift in Sources */,
 				6424B63D20F4E46B00AEBCAD /* TransferRecordInfoBarCollectionViewCell.swift in Sources */,
 				64F07E2120D241A000A60C5C /* UITextField+PlaceholderColors.swift in Sources */,
+				555E4A9E224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */,
 				6470D63920F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,
 				64769B382124192E00C4AB9E /* CICTxHandler.swift in Sources */,
+				555E4A7F224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */,
 				643200BF20FB1D9800B11334 /* WithdrawalCICFeeInfoViewController.swift in Sources */,
 				649732D7213F7D7C00C4D1D5 /* Model1_0_0To1_0_4.xcmappingmodel in Sources */,
 				64F07E0620D241A000A60C5C /* NSObject+NameOfClass.swift in Sources */,
@@ -7785,6 +7863,7 @@
 				55EF6B4621A81567007E074A /* Image+Until.swift in Sources */,
 				648139DE20DC977800CAA4D8 /* MainWalletViewModel.swift in Sources */,
 				6481396D20DA496000CAA4D8 /* OWMnemonicWordCollectionViewCell.swift in Sources */,
+				555E4A9A224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */,
 				648139B820DB5E6500CAA4D8 /* IdentityRestoreViewModel.swift in Sources */,
 				6470D6BE20F35B9D00EB0780 /* WithdrawalETHFeeInfoAdvModeViewModel.swift in Sources */,
 				6485002F20D9FF0500107473 /* OWInputTextField.swift in Sources */,
@@ -7859,6 +7938,7 @@
 				55EF6B4921A81567007E074A /* Paramenter.swift in Sources */,
 				55EF6AF321A812C7007E074A /* GroupInviteTableViewCell.swift in Sources */,
 				6470D67E20F32B9500EB0780 /* WithdrawalConfirmChangeWalletViewController.swift in Sources */,
+				555E4A8F224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */,
 				64813A3A20DCA6EE00CAA4D8 /* SubAddress+CoreDataProperties.swift in Sources */,
 				6481397A20DA4D1700CAA4D8 /* MnemonicHelper.swift in Sources */,
 				64D826A320E3E2AC00C8FC63 /* LightningTransRecord+CoreDataProperties.swift in Sources */,
@@ -7948,6 +8028,7 @@
 				649732CD213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,
 				64F07E4420D26D6400A60C5C /* DataModeExtensionl+IdentifiablePredication.swift in Sources */,
 				64813A3D20DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataClass.swift in Sources */,
+				555E4AA3224B510000C7CAD5 /* TransferManager.swift in Sources */,
 				55EF6A5D21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */,
 				643200AC20FAE1DE00B11334 /* LightningTradeConfirmViewController.swift in Sources */,
 				6470D67220F304BA00EB0780 /* WithdrawalInfoOverviewViewModel.swift in Sources */,
@@ -8117,6 +8198,7 @@
 				55E7306C2186E57A003AE47E /* WIthdrawalRemarkViewModel.swift in Sources */,
 				643200CC20FB22F400B11334 /* WithdrawalChangeToAddressViewController.swift in Sources */,
 				6470D64120F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.swift in Sources */,
+				555E4A98224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */,
 				64083D0921103EF300DE1C31 /* TxHandler.swift in Sources */,
 				55EF6B2021A814E8007E074A /* UIRepresentableCell.swift in Sources */,
 				64C9D4BE21044B5C000B0774 /* WithdrawalCICFeeInputViewModel.swift in Sources */,
@@ -8130,14 +8212,17 @@
 				5539A49221676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewModel.swift in Sources */,
 				5508743621EDD978007B3B3B /* ExploreDetailWebViewModel.swift in Sources */,
 				55EF6AE821A812C7007E074A /* FriendsListViewController.swift in Sources */,
+				555E4A93224A472800C7CAD5 /* RedEnvelopeDetailView.swift in Sources */,
 				64F07E2220D241A000A60C5C /* UITextField+PlaceholderColors.swift in Sources */,
 				6424B63E20F4E46B00AEBCAD /* TransferRecordInfoBarCollectionViewCell.swift in Sources */,
 				64F07E0720D241A000A60C5C /* NSObject+NameOfClass.swift in Sources */,
 				649E487A20EC6FFF00B217AD /* ManageWalletViewController.swift in Sources */,
 				64769B392124192E00C4AB9E /* CICTxHandler.swift in Sources */,
 				643200BE20FB1D9800B11334 /* WithdrawalCICFeeInfoViewController.swift in Sources */,
+				555E4A9F224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */,
 				640D88E320EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
 				6470D67320F304BA00EB0780 /* WithdrawalInfoOverviewViewModel.swift in Sources */,
+				555E4A80224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */,
 				649732D8213F7D7C00C4D1D5 /* Model1_0_0To1_0_4.xcmappingmodel in Sources */,
 				64D8265F20E22F4300C8FC63 /* ManageAssetViewController.swift in Sources */,
 				6424B66D20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
@@ -8254,6 +8339,7 @@
 				55EF6B4721A81567007E074A /* Image+Until.swift in Sources */,
 				649E483B20E7CEED00B217AD /* ChangeWalletViewModel.swift in Sources */,
 				64F07E2920D241A500A60C5C /* KLRx.swift in Sources */,
+				555E4A9B224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */,
 				64D826BF20E3E53600C8FC63 /* Identity+CoreDataClass.swift in Sources */,
 				64D826A420E3E2AC00C8FC63 /* LightningTransRecord+CoreDataProperties.swift in Sources */,
 				64083D0521101E2F00DE1C31 /* TxFetcher.swift in Sources */,
@@ -8328,6 +8414,7 @@
 				55EF6B4A21A81567007E074A /* Paramenter.swift in Sources */,
 				55EF6AF421A812C7007E074A /* GroupInviteTableViewCell.swift in Sources */,
 				640D88D620EDD6660010D986 /* ImportChainTypeChooseViewModel.swift in Sources */,
+				555E4A90224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */,
 				648139B920DB5E6500CAA4D8 /* IdentityRestoreViewModel.swift in Sources */,
 				64A1179120D5372C00797C2C /* ChainType.swift in Sources */,
 				6470D6DC20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.swift in Sources */,
@@ -8417,6 +8504,7 @@
 				64F07E1020D241A000A60C5C /* String+Util.swift in Sources */,
 				649E48AC20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.swift in Sources */,
 				643200AD20FAE1DE00B11334 /* LightningTradeConfirmViewController.swift in Sources */,
+				555E4AA4224B510000C7CAD5 /* TransferManager.swift in Sources */,
 				55EF6A5E21A812C6007E074A /* KeyboardFunctionCollectionViewCell.swift in Sources */,
 				64D8263520DFABB000C8FC63 /* DepositViewController.swift in Sources */,
 				64F07DAA20D2406000A60C5C /* NetworkReachabilityHandler.swift in Sources */,

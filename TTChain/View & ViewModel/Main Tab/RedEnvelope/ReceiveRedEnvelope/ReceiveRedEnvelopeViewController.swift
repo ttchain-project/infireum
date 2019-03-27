@@ -74,6 +74,7 @@ class ReceiveRedEnvelopeViewController: UIViewController {
     init(viewModel: RedEvelopeInfoViewModel) {
         self.viewModel = viewModel
         super.init(nibName: ReceiveRedEnvelopeViewController.className, bundle: nil)
+        viewModel.output.messageSubject.bind(to: rx.message).disposed(by: viewModel.disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {

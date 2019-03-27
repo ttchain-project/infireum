@@ -228,6 +228,7 @@ class CreateRedEnvelopeViewController: UIViewController {
     init(viewModel: CreateRedEnvelopeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: CreateRedEnvelopeViewController.className, bundle: nil)
+        viewModel.output.messageSubject.bind(to: rx.message).disposed(by: viewModel.disposeBag)
 
     }
     

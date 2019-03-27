@@ -700,6 +700,11 @@
         let api = AcceptRedEnvelopeAPI.init(parameters: parameter)
         return fire(router: .IM(.acceptRedEnvelope(api)))
     }
+    
+    func promiseRedEvelopeSent(parameter:PromiseRedEnvelopeSentAPI.Parameters) ->RxAPIResponse<PromiseRedEnvelopeSentAPIModel> {
+        let api = PromiseRedEnvelopeSentAPI.init(parameters: parameter)
+        return fire(router: .IM(.promiseRedEnvelopeSent(api)))
+    }
  }
  
  //MARK: - RocketChat -

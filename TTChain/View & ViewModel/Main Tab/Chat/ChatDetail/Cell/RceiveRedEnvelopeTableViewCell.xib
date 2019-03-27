@@ -31,7 +31,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHb-H8-2Ju">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHb-H8-2Ju">
                                         <rect key="frame" x="0.0" y="15" width="31" height="32.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,12 +57,14 @@
                 <constraints>
                     <constraint firstItem="9oW-JL-shh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ehH-eV-DMH"/>
                     <constraint firstItem="9oW-JL-shh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fVL-Ec-yd9"/>
+                    <constraint firstItem="9oW-JL-shh" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" constant="-20" id="hVc-mr-DWD"/>
                     <constraint firstAttribute="bottom" secondItem="9oW-JL-shh" secondAttribute="bottom" constant="10" id="lSj-sE-Ta4"/>
                     <constraint firstItem="9oW-JL-shh" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="uD2-EC-j9i"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bgView" destination="9oW-JL-shh" id="xee-aC-E8A"/>
                 <outlet property="dateLabel" destination="XLA-B1-3GT" id="1l3-DD-nPW"/>
                 <outlet property="receiveRedEnvelopeStatusLabel" destination="GHb-H8-2Ju" id="ACT-mV-RA0"/>
             </connections>

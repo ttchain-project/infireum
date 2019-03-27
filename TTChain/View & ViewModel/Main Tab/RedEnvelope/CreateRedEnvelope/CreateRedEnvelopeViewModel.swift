@@ -51,13 +51,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
     var output: Output
     let disposeBag = DisposeBag()
 
-    lazy var wallets : [Wallet] = {
-        //        let predForBTC = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.btc.rawValue))
-        guard let wallets = DB.instance.get(type: Wallet.self, predicate: nil, sorts: nil) else {
-            return []
-        }
-        return wallets
-    }()
+    var wallets = [Wallet]()
     
     lazy var coins : BehaviorRelay<[Coin]?> = {
         let coins = Coin.getAllCoins(of: ChainType(rawValue: wallets[0].chainType)!)
@@ -70,10 +64,13 @@ final class CreateRedEnvelopeViewModel: ViewModel {
         output.isTypeButtonHiddenSubject.onNext(type == .normal)
         output.isCountViewHiddenSubject.onNext(type == .normal)
         input.typeRelay.accept(type == .normal ? nil : .group)
+        self.wallets = DB.instance.get(type: Wallet.self, predicate: nil, sorts: nil) ?? []
+        self.input.walletRelay.accept(wallets.count > 0 ? wallets[0] : nil)
         setUpType()
         setUpMessage()
         setUpMinutes()
         setUpWalletCoin()
+        
         input.closeTapSubject.bind(to: output.dismissSubject).disposed(by: disposeBag)
         output.membersCountSubject.onNext("(The number of members is \(memberCount))")
         Observable.combineLatest(input.walletCoinRelay, input.amountRelay, input.limitCountRelay, input.messageRelay)
@@ -104,11 +101,11 @@ final class CreateRedEnvelopeViewModel: ViewModel {
             let fee =  { () -> Decimal? in
                 switch assetCoin?.owChainType {
                 case .btc?:
-                    return FeeManager.getValue(fromOption: .btc(.priority))
+                    return FeeManager.getValue(fromOption: .btc(.regular))
                 case .eth?:
                     
                     if assetCoin?.identifier == Coin.eth_identifier {
-                        return FeeManager.getValue(fromOption: .eth(.gasPrice(.systemMax)))
+                        return FeeManager.getValue(fromOption: .eth(.gasPrice(.suggest)))
                     } else {
                         return 0
                     }
@@ -224,7 +221,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
                     self?.output.dismissSubject.onNext(())
                 }
             case .failed(let error):
-                self?.output.messageSubject.onNext(error.localizedDescription)
+                self?.output.messageSubject.onNext(error.descString)
             }
         }).disposed(by: disposeBag)
         

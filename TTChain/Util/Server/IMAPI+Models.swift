@@ -67,6 +67,7 @@ enum IMAPI :KLMoyaAPISet {
         case .createRedEnvelope(let api): return api
         case .redEnvelopeInfo(let api):return api
         case .acceptRedEnvelope(let api):return api
+        case .promiseRedEnvelopeSent(let api):return api
         }
     }
     case preLogin(PreLoginAPI)
@@ -99,6 +100,7 @@ enum IMAPI :KLMoyaAPISet {
     case createRedEnvelope(CreateRedEnvelopeAPI)
     case redEnvelopeInfo(RedEnvelopeInfoAPI)
     case acceptRedEnvelope(AcceptRedEnvelopeAPI)
+    case promiseRedEnvelopeSent(PromiseRedEnvelopeSentAPI)
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -1261,6 +1263,38 @@ struct AcceptRedEnvelopeAPIModel:KLJSONMappableMoyaResponse {
         self.status = status
     }
 }
+
+
+struct PromiseRedEnvelopeSentAPI: KLMoyaIMAPIData {
+    var path: String {return "IM/RedEnvelope/PromiseSend"}
+    
+    var method: Moya.Method { return .put }
+    var task: Task { return .requestParameters(parameters: parameters.asDictionary(),
+                                               encoding: JSONEncoding.default) }
+    
+    var stub: Data? {return nil}
+    
+    struct Parameters: Paramenter {
+        let senderUID = Tokens.getUID()
+        let redEnvelopeId: String
+        let members: [String]
+    }
+    
+    let parameters:Parameters
+}
+
+struct PromiseRedEnvelopeSentAPIModel:KLJSONMappableMoyaResponse {
+    
+    typealias API = PromiseRedEnvelopeSentAPI
+    let status : Bool
+    init(json: JSON, sourceAPI: API) throws {
+        guard let status = json.bool else {
+            throw GTServerAPIError.noData
+        }
+        self.status = status
+    }
+}
+
 
 //MARK: - ROCKETCHAT API AND MODELS
 

@@ -246,25 +246,30 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     self.toUserProfileVC(forFriend: friendModel)
                 })
                 
-                redEnvCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
-                    self.showOptionsForLongGesture(for: messageModel)
-                }).disposed(by: redEnvCell.bag)
-                
                 redEnvCell.bgView.rx.klrx_tap.asDriver().drive(onNext: { [weak self] _ in
                     guard let `self` = self else {
                         return
                     }
-                    guard let redEnvMessage = messageModel.msgType.redEnvelopeMessage,!messageModel.isUserSender() else {
+                    guard let redEnvMessage = messageModel.msgType.redEnvelopeMessage else {
                         return
                     }
-                    self.toReceiveRedEnvelope(forMessage: redEnvMessage)
+                    self.toRedEnvelope(forMessage: redEnvMessage)
                 }).disposed(by: redEnvCell.bag)
                 
                 cell = redEnvCell
             case .receiveRedEnvelope:
-                print("a")
                 let rcvRedEnvCell = tv.dequeueReusableCell(withIdentifier: RceiveRedEnvelopeTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! RceiveRedEnvelopeTableViewCell
                 rcvRedEnvCell.config(message: messageModel)
+                
+                rcvRedEnvCell.bgView.rx.klrx_tap.asDriver().drive(onNext: { [weak self] _ in
+                    guard let `self` = self else {
+                        return
+                    }
+                    guard let redEnvMessage = messageModel.msgType.redEnvelopeMessage, redEnvMessage.senderUID == Tokens.getUID() else {
+                        return
+                    }
+                    self.toRedEnvelope(forMessage: redEnvMessage)
+                }).disposed(by: rcvRedEnvCell.bag)
                 
                 cell = rcvRedEnvCell
             }
@@ -583,8 +588,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.present(audioCallVC, animated: true, completion: nil)
     }
 
-    func toReceiveRedEnvelope(forMessage message: RedEnvelope) {
-        self.viewModel.redEnvelopeAction(forRedEnvId: message.identifier) {[weak self] (vc) in
+    func toRedEnvelope(forMessage message: RedEnvelope) {
+        self.viewModel.redEnvelopeAction(forRedEnvId: message) {[weak self] (vc) in
+           
             self?.present(vc, animated: true, completion: {
                 
             })

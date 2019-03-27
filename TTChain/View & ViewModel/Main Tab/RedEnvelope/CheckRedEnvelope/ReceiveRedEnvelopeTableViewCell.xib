@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="89" id="KGk-i7-Jjw" customClass="ReceiveRedEnvelopeTableViewCell" customModule="Hope_Seed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="88.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t6F-5P-QzW">
+                        <rect key="frame" x="18" y="18" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="DcG-Ib-nlA"/>
+                            <constraint firstAttribute="width" constant="30" id="U86-hU-dqF"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="selena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZB-O4-aPJ">
+                        <rect key="frame" x="60" y="18" width="161.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="2018年10月4日 下午4:21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wM-sf-m9U">
+                        <rect key="frame" x="60" y="39" width="212" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="塞钱完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8f-rr-aga">
+                        <rect key="frame" x="60" y="56.5" width="49.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0000001" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQ4-Fg-AEo">
+                        <rect key="frame" x="227.5" y="18" width="74.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Va-ys-DIl">
+                        <rect key="frame" x="278" y="39" width="24" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="x8f-rr-aga" firstAttribute="top" secondItem="8wM-sf-m9U" secondAttribute="bottom" constant="3" id="DF1-8O-A8X"/>
+                    <constraint firstItem="wZB-O4-aPJ" firstAttribute="leading" secondItem="t6F-5P-QzW" secondAttribute="trailing" constant="12" id="FF3-er-9pl"/>
+                    <constraint firstItem="8wM-sf-m9U" firstAttribute="top" secondItem="wZB-O4-aPJ" secondAttribute="bottom" constant="3" id="GUj-zn-4Cy"/>
+                    <constraint firstItem="8wM-sf-m9U" firstAttribute="leading" secondItem="wZB-O4-aPJ" secondAttribute="leading" id="HIY-u1-Wx0"/>
+                    <constraint firstItem="wZB-O4-aPJ" firstAttribute="top" secondItem="t6F-5P-QzW" secondAttribute="top" id="N4G-sp-i6f"/>
+                    <constraint firstItem="t6F-5P-QzW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="Nef-2N-63k"/>
+                    <constraint firstAttribute="trailing" secondItem="LQ4-Fg-AEo" secondAttribute="trailing" constant="18" id="Nze-jL-kSc"/>
+                    <constraint firstItem="x8f-rr-aga" firstAttribute="leading" secondItem="8wM-sf-m9U" secondAttribute="leading" id="ZYW-7H-QYR"/>
+                    <constraint firstItem="LQ4-Fg-AEo" firstAttribute="leading" secondItem="wZB-O4-aPJ" secondAttribute="trailing" constant="6" id="ZeU-Lf-gvv"/>
+                    <constraint firstItem="0Va-ys-DIl" firstAttribute="trailing" secondItem="LQ4-Fg-AEo" secondAttribute="trailing" id="emR-er-V0x"/>
+                    <constraint firstItem="0Va-ys-DIl" firstAttribute="leading" secondItem="8wM-sf-m9U" secondAttribute="trailing" constant="6" id="gN1-LD-fx9"/>
+                    <constraint firstItem="t6F-5P-QzW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="mga-eU-B6O"/>
+                    <constraint firstItem="0Va-ys-DIl" firstAttribute="centerY" secondItem="8wM-sf-m9U" secondAttribute="centerY" id="oCS-u9-QvI"/>
+                    <constraint firstItem="LQ4-Fg-AEo" firstAttribute="centerY" secondItem="wZB-O4-aPJ" secondAttribute="centerY" id="vee-xq-S1p"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="amountLabel" destination="LQ4-Fg-AEo" id="aLt-SA-m0g"/>
+                <outlet property="avatarImageView" destination="t6F-5P-QzW" id="1tI-j9-JjX"/>
+                <outlet property="coinDisplayNameLabel" destination="0Va-ys-DIl" id="RBp-Ra-Cvz"/>
+                <outlet property="statusLabel" destination="x8f-rr-aga" id="9M8-OE-Zkx"/>
+                <outlet property="timeLabel" destination="8wM-sf-m9U" id="SJU-Qi-eiu"/>
+                <outlet property="titleLabel" destination="wZB-O4-aPJ" id="m0A-5l-cO6"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="174.06296851574214"/>
+        </tableViewCell>
+    </objects>
+</document>
