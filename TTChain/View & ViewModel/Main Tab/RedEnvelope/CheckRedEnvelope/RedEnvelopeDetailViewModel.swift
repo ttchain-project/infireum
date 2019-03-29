@@ -47,6 +47,7 @@ final class RedEnvelopeDetailViewModel: ViewModel {
         let cellModelsSubject = BehaviorSubject<[CellModel]>(value: [CellModel]())
         let enterPasswordAlertSubject = PublishSubject<String>()
         let continueAlertSubject = PublishSubject<String>()
+        let hudAnimationStatus = PublishSubject<Bool>()
     }
 
     var input: Input
@@ -57,14 +58,12 @@ final class RedEnvelopeDetailViewModel: ViewModel {
 
     init(identifier: String, information: Information) {
         input = Input(informationRelay: BehaviorRelay<Information>(value: information))
-        let isSender = information.info.uid == Tokens.getUID()
-        let sender = isSender ? "我发送" : information.info.senderName
-        let title = sender + "的红包"
+        let title = information.info.uid == Tokens.getUID() ? LM.dls.red_evn_send_by_me : LM.dls.red_env_sent_by_sender(information.info.senderName)
         let displayName = Coin.getCoin(ofIdentifier: information.info.identifier)?.inAppName
         output = Output(imageString: information.info.headImg.medium,
                         title: title,
                         message: information.info.message,
-                        expiredString: information.info.isExpired ? "可领取时间到期了" : nil,
+                        expiredString: information.info.isExpired ? LM.dls.red_env_expired : nil,
                         isLuckyHidden: information.info.type != .lucky,
                         amount: NSNumber(value: information.info.totalAmount).decimalValue.description,
                         coinDisplayName: displayName)
@@ -86,7 +85,7 @@ final class RedEnvelopeDetailViewModel: ViewModel {
                 self.needsToEnterPassword = false
                 self.input.sendTapSubject.onNext(())
             } else {
-                self.output.messageSubject.onNext("wrongPassword".localized())
+                self.output.messageSubject.onNext(LM.dls.withdrawalConfirm_pwdVerify_error_pwd_is_wrong)
             }
             }, onError: nil,
                onCompleted: nil,
@@ -94,7 +93,7 @@ final class RedEnvelopeDetailViewModel: ViewModel {
     }
 
     private func setUpInformation() {
-        input.informationRelay.map { "\($0.info.receiveCount) / \($0.info.totalCount) 已領取" }
+        input.informationRelay.map { LM.dls.red_env_amount_received("\($0.info.receiveCount)","\($0.info.totalCount)") }
             .bind(to: output.contentSubject).disposed(by: disposeBag)
         input.informationRelay.map { RedEnvelopeDetailViewModel.status(information: $0) }
             .bind(to: output.statusSubject).disposed(by: disposeBag)
@@ -110,7 +109,6 @@ final class RedEnvelopeDetailViewModel: ViewModel {
 
     private func send(identifier: String) {
         guard let member = input.informationRelay.value.members.first(where: { $0.isDone == false }) else { return }
-        var displayString: String = ""
         let information = input.informationRelay.value
         guard let coin = Coin.getCoin(ofIdentifier: information.info.identifier), let wallet = Wallet.getWallet(ofAddress: information.info.senderAddress, mainCoinID: coin.walletMainCoinID!) ,let asset = wallet.getAsset(of: coin) else {
             return
@@ -129,8 +127,6 @@ final class RedEnvelopeDetailViewModel: ViewModel {
         default:
             print("None")
         }
-        
-        displayString = "(另外收取单笔矿工费\(member.receiveAmount) \(coin.inAppName!))"
 
         switch WithdrawalInfoValidator().validate(asset: asset,
                                                   transferAmt: NSNumber(value: member.receiveAmount).decimalValue,
@@ -138,13 +134,11 @@ final class RedEnvelopeDetailViewModel: ViewModel {
                                                   note: nil, feeInfo: feeInfo!) {
         case .success(let info):
             print("is valid")
-            
-                        if self.needsToEnterPassword {
-                            self.output.enterPasswordAlertSubject.onNext("您将塞钱入红包，请输入钱包密码" + displayString)
-                        } else {
-                            self.transferAmount(forIdentifier:identifier, withWithdrawalInfo: info, andMember: member)
-                        }
-
+            if self.needsToEnterPassword {
+                self.output.enterPasswordAlertSubject.onNext(LM.dls.red_env_transfer_alert_message("\(info.totalFee)",coin.inAppName!))
+            } else {
+                self.transferAmount(forIdentifier:identifier, withWithdrawalInfo: info, andMember: member)
+            }
         case .failed(let error):
             output.messageSubject.onNext(error.localizedFailedDesciption)
         }
@@ -152,14 +146,19 @@ final class RedEnvelopeDetailViewModel: ViewModel {
     
     private func transferAmount(forIdentifier identifier:String,withWithdrawalInfo info:WithdrawalInfo, andMember member: Information.Member) {
         let chainType = info.wallet.owChainType
+        self.output.hudAnimationStatus.onNext(true)
+return
         Observable<BlockchainTransferFlowState>.create({  (observer) -> Disposable in
             observer.onNext(.signing)
+            self.output.hudAnimationStatus.onNext(true)
             switch chainType {
             case .btc:
                 TransferManager.manager.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: true)
             case .eth:
                 TransferManager.manager.startETHTransferFlow(with: info, progressObserver: observer)
-            default: break
+            default:
+                self.output.hudAnimationStatus.onNext(false)
+                break
             }
             return Disposables.create()
         }).subscribe(onNext: { (state) in
@@ -167,6 +166,7 @@ final class RedEnvelopeDetailViewModel: ViewModel {
             case .finished(let result):
                 switch result {
                 case .failed(error: let err):
+                    self.output.hudAnimationStatus.onNext(false)
                     self.output.messageSubject.onNext(err.descString)
                 case .success(let record):
                     OWRxNotificationCenter.instance.transferRecordCreated(record)
@@ -187,6 +187,7 @@ final class RedEnvelopeDetailViewModel: ViewModel {
                     self.sendCompleted(identifier: identifier, member: member)
                 }
             case .failed(error: let error):
+                self.output.hudAnimationStatus.onNext(false)
                 self.output.messageSubject.onNext(error.descString)
             }
         }).disposed(by: disposeBag)
@@ -199,14 +200,15 @@ final class RedEnvelopeDetailViewModel: ViewModel {
         Server.instance.getRedEnvelopeInfo(parameter: parameter).asObservable().subscribe(onNext: { (response) in
             switch response {
             case .failed(error: let error):
+                self.output.hudAnimationStatus.onNext(false)
                 self.output.messageSubject.onNext(error.descString)
             case .success(let model):
                 self.input.informationRelay.accept(model.redEnvelopeInfo)
-                let text = "塞钱给 \(member.nickName) 已完成，是否继续塞钱？"
+                self.output.hudAnimationStatus.onNext(false)
                 if model.redEnvelopeInfo.members.contains(where: { $0.isDone == false }) {
-                    self.output.continueAlertSubject.onNext(text)
+                    self.output.continueAlertSubject.onNext(LM.dls.red_env_money_sent_already_message(member.nickName))
                 } else {
-                    self.output.messageSubject.onNext("塞钱给 \(member.nickName) 已完成")
+                    self.output.messageSubject.onNext(LM.dls.red_env_money_sent_to_user_message(member.nickName))
                 }
             }
         }).disposed(by: disposeBag)
@@ -227,13 +229,13 @@ final class RedEnvelopeDetailViewModel: ViewModel {
     private static func status(information: Information) -> String? {
         if information.info.uid == Tokens.getUID() {
             switch information.info.status {
-            case .done: return "塞钱完成"
-            case .waitReceive: return "等待領取紅包"
+            case .done: return LM.dls.red_env_money_sent
+            case .waitReceive: return LM.dls.red_env_waiting_to_send
             case .waitSend: return nil
             }
         } else {
             if let member = information.members.first(where: { $0.uid == Tokens.getUID() }) {
-                return member.isDone ? "恭喜，红包钱入帐了" : "等待 \(information.info.senderName) 塞钱进红包"
+                return member.isDone ? LM.dls.red_env_send_sent_successfully : LM.dls.red_env_status_waiting_for_money(information.info.senderName)
             } else {
                 return nil
             }

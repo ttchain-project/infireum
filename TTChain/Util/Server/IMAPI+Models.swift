@@ -68,6 +68,8 @@ enum IMAPI :KLMoyaAPISet {
         case .redEnvelopeInfo(let api):return api
         case .acceptRedEnvelope(let api):return api
         case .promiseRedEnvelopeSent(let api):return api
+        case .sendRedEnvelopeHistory(let api):return api
+        case .receiveRedEnvelopeHistory(let api):return api
         }
     }
     case preLogin(PreLoginAPI)
@@ -101,6 +103,8 @@ enum IMAPI :KLMoyaAPISet {
     case redEnvelopeInfo(RedEnvelopeInfoAPI)
     case acceptRedEnvelope(AcceptRedEnvelopeAPI)
     case promiseRedEnvelopeSent(PromiseRedEnvelopeSentAPI)
+    case sendRedEnvelopeHistory(SendRedEnvelopeHistoryAPI)
+    case receiveRedEnvelopeHistory(ReceiveRedEnvelopeHistoryAPI)
 }
 
 //MARK: - POST /IM/PreLogin -
@@ -1295,6 +1299,86 @@ struct PromiseRedEnvelopeSentAPIModel:KLJSONMappableMoyaResponse {
     }
 }
 
+
+struct ReceiveRedEnvelopeHistoryAPI:KLMoyaIMAPIData {
+    var stub: Data? {return nil}
+    
+    struct Parameters: Paramenter {
+        let uid = Tokens.getUID()
+        let pageNow = 1
+        let pageSize = 50
+        let sortType = "time"
+        let isDescending = "true"
+    }
+    
+    let parameters: Parameters
+    var path: String { return "IM/RedEnvelope/ReceiveHistory" }
+    var method: Moya.Method { return .get }
+    var task: Task { return .requestParameters(parameters: parameters.asDictionary(),
+                                               encoding: JSONEncoding.default) }
+
+}
+
+struct ReceiveRedEnvelopeHistoryAPIModel: KLJSONMappableMoyaResponse {
+   typealias API = ReceiveRedEnvelopeHistoryAPI
+    let receiveHistoryArray: [ReceiveRedEnvelopeHistoryModel]
+    
+    init(json: JSON, sourceAPI: API) throws {
+        
+        let decode = JSONDecoder()
+        guard let response = json.array
+            else {
+                throw GTServerAPIError.noData
+        }
+        self.receiveHistoryArray = response.compactMap({ (json) -> ReceiveRedEnvelopeHistoryModel? in
+            guard let info = try? decode.decode(ReceiveRedEnvelopeHistoryModel.self, from: json.rawData()) else {
+                return nil
+            }
+            return info
+        })
+    }
+}
+
+
+
+struct SendRedEnvelopeHistoryAPI:KLMoyaIMAPIData {
+    var stub: Data? {return nil}
+    
+    struct Parameters: Paramenter {
+        let uid = Tokens.getUID()
+        let pageNow = 1
+        let pageSize = 50
+        let sortType = "time"
+        let isDescending = "true"
+    }
+    
+    let parameters: Parameters
+    var path: String { return "IM/RedEnvelope/SendingHistory" }
+    var method: Moya.Method { return .get }
+    var task: Task { return .requestParameters(parameters: parameters.asDictionary(),
+                                               encoding: JSONEncoding.default) }
+    
+}
+
+struct SendRedEnvelopeHistoryAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = SendRedEnvelopeHistoryAPI
+    let sendHistoryArray: [SendRedEnvelopeHistoryModel]
+    
+    init(json: JSON, sourceAPI: API) throws {
+        
+        let decode = JSONDecoder()
+        guard let response = json.array
+            else {
+                throw GTServerAPIError.noData
+        }
+        self.sendHistoryArray = response.compactMap({ (json) -> SendRedEnvelopeHistoryModel? in
+            guard let info = try? decode.decode(SendRedEnvelopeHistoryModel.self, from: json.rawData()) else {
+                return nil
+            }
+            return info
+        })
+    }
+}
 
 //MARK: - ROCKETCHAT API AND MODELS
 

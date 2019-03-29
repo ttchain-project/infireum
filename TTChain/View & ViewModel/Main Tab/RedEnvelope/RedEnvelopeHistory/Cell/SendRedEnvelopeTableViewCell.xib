@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="KGk-i7-Jjw" customClass="SendRedEnvelopeTableViewCell" customModule="Hope_Seed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="286" height="68.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apl-rd-Cza">
+                        <rect key="frame" x="18" y="18" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                        <color key="textColor" name="purplishGrey"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="塞钱进红包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJD-cy-wJZ">
+                        <rect key="frame" x="224.5" y="18" width="61.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                        <color key="textColor" name="purplishGrey"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="2.222000 2.222000 2.222000 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="hMg-bz-sLv">
+                        <rect key="frame" x="18" y="37" width="191.5" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="塞钱进红包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLf-ao-1jD">
+                        <rect key="frame" x="209.5" y="37" width="76.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="apl-rd-Cza" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="CWp-vG-YtJ"/>
+                    <constraint firstAttribute="trailing" secondItem="MJD-cy-wJZ" secondAttribute="trailing" id="IMP-Vd-seC"/>
+                    <constraint firstItem="MJD-cy-wJZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="Ond-xI-khQ"/>
+                    <constraint firstItem="hMg-bz-sLv" firstAttribute="top" secondItem="apl-rd-Cza" secondAttribute="bottom" constant="4.5" id="ejq-Rk-C45"/>
+                    <constraint firstItem="hMg-bz-sLv" firstAttribute="leading" secondItem="apl-rd-Cza" secondAttribute="leading" id="joj-RQ-AZW"/>
+                    <constraint firstItem="SLf-ao-1jD" firstAttribute="top" secondItem="MJD-cy-wJZ" secondAttribute="bottom" constant="4.5" id="pZF-iw-l2P"/>
+                    <constraint firstItem="apl-rd-Cza" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="t9u-eA-bWY"/>
+                    <constraint firstItem="SLf-ao-1jD" firstAttribute="leading" secondItem="hMg-bz-sLv" secondAttribute="trailing" id="ul1-vs-XT8"/>
+                    <constraint firstItem="SLf-ao-1jD" firstAttribute="trailing" secondItem="MJD-cy-wJZ" secondAttribute="trailing" id="veN-xy-duu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="amountLabel" destination="hMg-bz-sLv" id="7uQ-zv-iSs"/>
+                <outlet property="paidTimeLabel" destination="SLf-ao-1jD" id="khM-Xm-PVc"/>
+                <outlet property="titleLabel" destination="apl-rd-Cza" id="F42-r5-W65"/>
+            </connections>
+            <point key="canvasLocation" x="52.799999999999997" y="67.466266866566727"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="purplishGrey">
+            <color red="0.40392156862745099" green="0.396078431372549" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

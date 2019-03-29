@@ -41,12 +41,12 @@ class RedEvelopeInfoViewModel: ViewModel {
         let isEmpty = information.info.totalCount == information.info.receiveCount
         var isAlreadyClaimed:Bool = false
         
-        var status:String? = information.info.isExpired ? "手慢了，红包过期了" :
-            isEmpty ? "手慢了，红包被抢光了" : "未领取"
+        var status:String? = information.info.isExpired ? LM.dls.red_env_receive_expired_message :
+            isEmpty ? LM.dls.red_env_receive_no_remaining_envelopes : LM.dls.red_env_receive_status_not_yet_received
         
         if (information.members.filter{ $0.uid == Tokens.getUID() }).first != nil {
             isAlreadyClaimed = true
-            status = "已领取"
+            status = LM.dls.red_env_receive_status_received
         }
         
         output = Output(imageString: information.info.headImg.medium,

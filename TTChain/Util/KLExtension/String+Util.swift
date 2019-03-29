@@ -62,3 +62,12 @@ extension Int {
     var toBinaryString: String { return String(self, radix: 2) }
     var toHexaString:   String { return String(self, radix: 16) }
 }
+
+extension String {
+    var convertToDateString: String {
+        guard let date = DateFormatter.date(from: self, withFormat: C.IMDateFormat.dateFormatForIM) else {
+            return ""
+        }
+        return date.string()
+    }
+}

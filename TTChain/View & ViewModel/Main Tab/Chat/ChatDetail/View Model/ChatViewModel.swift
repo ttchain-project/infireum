@@ -286,7 +286,7 @@ class ChatViewModel: KLRxViewModel {
                         case .dismiss:
                             vc.dismiss(animated: true, completion: nil)
                         case .history:
-                            print("No Action for now")
+                            print("History")
                         }
                     }).disposed(by: viewModel.disposeBag)
                     
@@ -307,4 +307,5 @@ class ChatViewModel: KLRxViewModel {
             }
         }).disposed(by: bag)
     }
+    
 }

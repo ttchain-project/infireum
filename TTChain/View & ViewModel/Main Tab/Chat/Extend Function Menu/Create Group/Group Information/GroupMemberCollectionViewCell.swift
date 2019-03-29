@@ -28,7 +28,11 @@ class GroupMemberCollectionViewCell: UICollectionViewCell {
             if viewModel.input.groupMemberModel != nil {
                 avatarImageView.setProfileImage(image: viewModel.output.avatarImage, tempName: viewModel.output.text)
             } else {
-                avatarImageView.setProfileImage(image: viewModel.output.avatarImage, tempName: viewModel.output.text)
+                if viewModel.output.avatarImage != nil {
+                    avatarImageView.setProfileImage(image: viewModel.output.avatarImage, tempName: nil)
+                } else {
+                    avatarImageView.image = #imageLiteral(resourceName: "iconCircleAdd.png")
+                }
             }
             viewModel.output.closeButtonIsHidden.bind(to: closeImageView.rx.isHidden).disposed(by: disposeBag)
         }

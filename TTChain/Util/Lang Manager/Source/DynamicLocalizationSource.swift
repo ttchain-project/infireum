@@ -569,4 +569,50 @@ protocol DynamicLocalizationSource {
     
     var record_audio_start_button:String {get set}
     var record_audio_stop_to_send_button:String {get set}
+    
+    var red_env_send_currency:String {get set}
+    var red_env_send_balance:String {get set}
+    var red_env_send_total_amount:String {get set}
+    var red_env_send_enter_amount:String {get set}
+    var red_env_send_number_title:String {get set}
+    func red_env_send_number_of_members(_ args: String...) -> String
+    var red_env_send_number_of_red_env:String {get set}
+    var red_env_send_dist_rule:String {get set}
+    var red_env_send_divide:String {get set}
+    var red_env_send_random:String {get set}
+    var red_env_send_comment:String {get set}
+    var red_env_comment_placeholder:String {get set}
+    var red_env_send_notice_one:String {get set}
+    var red_env_send_notice_two:String {get set}
+    var red_env_send_time_limit:String {get set}
+    var red_env_send_reservationTime:String {get set}
+    var red_env_send_day:String {get set}
+    var red_env_send_hour:String {get set}
+    var red_env_send_minute:String {get set}
+    var red_env_send_infinite:String {get set}
+    var red_env_send_please_select:String {get set}
+    var red_env_money_sent:String {get set}
+    var red_env_waiting_to_send:String {get set}
+    func red_env_amount_received(_ args: String...) -> String
+    func red_env_transfer_alert_message(_ args :String ...) -> String
+
+    var red_env_send_sent_successfully :String {get set}
+    func red_env_status_waiting_for_money(_ args:String ...) -> String
+    var red_evn_send_by_me :String {get set}
+    func red_env_sent_by_sender(_ args:String ...) -> String 
+    var red_env_expired :String {get set}
+
+    func red_env_money_sent_already_message(_ args:String ...) -> String
+    func red_env_money_sent_to_user_message(_ args:String ...) -> String
+
+    var view_red_envelope:String {get set}
+    var red_env_view_record:String {get set}
+    var red_env_view_record_substring:String {get set}
+    var red_env_receive_expired_message:String {get set}
+    var red_env_receive_no_remaining_envelopes:String {get set}
+    var red_env_receive_status_not_yet_received:String {get set}
+    var red_env_receive_status_received:String {get set}
+    var red_env_send_confirm_transfer:String {get set}
+    var red_env_send_records:String {get set}
+
 }

@@ -12,13 +12,17 @@ class ReceiveRedEnvelopeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let color1 = UIColor(red:254,green: 135,blue: 98)?.cgColor
-        let color2 = UIColor(red:230,green: 75,blue: 75)?.cgColor
-        self.gradientView.setGradientColor(color1:color1, color2: color2)
         // Do any additional setup after loading the view.
     }
     @IBOutlet weak var gradientView: UIView!
     
+    override func viewDidLayoutSubviews() {
+         super.viewDidLayoutSubviews()
+        let color1 = UIColor(red:254,green: 135,blue: 98)?.cgColor
+        let color2 = UIColor(red:230,green: 75,blue: 75)?.cgColor
+        self.gradientView.setGradientColor(color1:color1, color2: color2)
+
+    }
     @IBOutlet weak var redEnveloperSenderNameLabel: UILabel! {
         didSet {
             redEnveloperSenderNameLabel.font = .owMedium(size:16)

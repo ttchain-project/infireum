@@ -44,7 +44,7 @@ class RedEnvelopeDetailViewController: UIViewController {
     }
     private lazy var titleView: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
-        label.text = "checkRedEnvelope".localized()
+        label.text = LM.dls.view_red_envelope
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -65,18 +65,32 @@ class RedEnvelopeDetailViewController: UIViewController {
     private lazy var footerButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width / 2, height: 46))
         button.backgroundColor = .white
-        let attributedString = NSMutableAttributedString(string: "查看 红包纪录", attributes: [
+        let attributedString = NSMutableAttributedString(string: LM.dls.red_env_view_record, attributes: [
             .font: UIFont.systemFont(ofSize: 12),
             .foregroundColor: UIColor.owAzure])
+        let subStringRange = LM.dls.red_env_view_record.range(of: LM.dls.red_env_view_record_substring)
         attributedString.addAttribute(.foregroundColor,
                                       value: UIColor.owCharcoalGrey,
-                                      range: NSRange(location: 0, length: 2))
+                                      range: NSRange(subStringRange!,in:LM.dls.red_env_view_record))
         button.setAttributedTitle(attributedString, for: .normal)
+        DLogInfo(button.currentAttributedTitle)
         button.rx.tap.bind(to: viewModel.input.historyTapSubject).disposed(by: viewModel.disposeBag)
         return button
     }()
+    
     private let viewModel: RedEnvelopeDetailViewModel
 
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
+    
     init(viewModel: RedEnvelopeDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: RedEnvelopeDetailViewController.className, bundle: nil)
@@ -91,6 +105,14 @@ class RedEnvelopeDetailViewController: UIViewController {
            onCompleted: nil,
            onDisposed: nil).disposed(by: viewModel.disposeBag)
         viewModel.output.messageSubject.bind(to: rx.message).disposed(by: viewModel.disposeBag)
+        
+        viewModel.output.hudAnimationStatus.subscribe(onNext: { [unowned self] status in
+            if status {
+                self.hud.startAnimating(inView: self.view)
+            }else {
+                self.hud.stopAnimating()
+            }
+        }).disposed(by:viewModel.disposeBag)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -118,18 +140,18 @@ class RedEnvelopeDetailViewController: UIViewController {
     }
 
     private func presentEnterPasswordAlert(_ text: String) {
-        let alertController = UIAlertController(title: "确认塞钱进红包",
+        let alertController = UIAlertController(title: LM.dls.red_env_send_confirm_transfer,
                                                 message: text,
                                                 preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "enterPassword".localized()
+            textField.placeholder = LM.dls.qrCodeImport_alert_input_pwd
         }
-        let okAlertAction = UIAlertAction(title: "confirm".localized(),
+        let okAlertAction = UIAlertAction(title: LM.dls.g_confirm,
                                           style: .default) { [unowned alertController, unowned self] _ in
             guard let password = alertController.textFields?.first?.text else { return }
             self.viewModel.input.enterPasswordSubject.onNext(password)
         }
-        let cancelAlertAction = UIAlertAction(title: "cancel".localized(), style: .cancel)
+        let cancelAlertAction = UIAlertAction(title: LM.dls.g_cancel, style: .cancel)
         alertController.addAction(cancelAlertAction)
         alertController.addAction(okAlertAction)
         present(alertController, animated: true, completion: nil)
@@ -139,10 +161,10 @@ class RedEnvelopeDetailViewController: UIViewController {
         let alertController = UIAlertController(title: nil,
                                                 message: text,
                                                 preferredStyle: .alert)
-        let okAlertAction = UIAlertAction(title: "confirm".localized(), style: .default) { [unowned self] _ in
+        let okAlertAction = UIAlertAction(title: LM.dls.g_confirm, style: .default) { [unowned self] _ in
             self.viewModel.input.sendTapSubject.onNext(())
         }
-        let cancelAlertAction = UIAlertAction(title: "cancel".localized(), style: .cancel)
+        let cancelAlertAction = UIAlertAction(title: LM.dls.g_cancel, style: .cancel)
         alertController.addAction(cancelAlertAction)
         alertController.addAction(okAlertAction)
         present(alertController, animated: true, completion: nil)

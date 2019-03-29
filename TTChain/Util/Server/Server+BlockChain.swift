@@ -705,6 +705,16 @@
         let api = PromiseRedEnvelopeSentAPI.init(parameters: parameter)
         return fire(router: .IM(.promiseRedEnvelopeSent(api)))
     }
+    
+    func sendRedEnvelopeHistory(parameter:SendRedEnvelopeHistoryAPI.Parameters) ->RxAPIResponse<SendRedEnvelopeHistoryAPIModel> {
+        let api = SendRedEnvelopeHistoryAPI.init(parameters: parameter)
+        return fire(router: .IM(.sendRedEnvelopeHistory(api)))
+    }
+    
+    func receiveRedEnvelopeHistory(parameter:ReceiveRedEnvelopeHistoryAPI.Parameters) ->RxAPIResponse<ReceiveRedEnvelopeHistoryAPIModel> {
+        let api = ReceiveRedEnvelopeHistoryAPI.init(parameters: parameter)
+        return fire(router: .IM(.receiveRedEnvelopeHistory(api)))
+    }
  }
  
  //MARK: - RocketChat -

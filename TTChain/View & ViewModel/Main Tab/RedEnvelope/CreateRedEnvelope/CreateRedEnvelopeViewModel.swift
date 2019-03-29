@@ -31,10 +31,10 @@ final class CreateRedEnvelopeViewModel: ViewModel {
     }
 
     struct Output {
-        let walletCoinTitleSubject = BehaviorSubject<String?>(value: "Please select")
+        let walletCoinTitleSubject = BehaviorSubject<String?>(value: LM.dls.red_env_send_please_select)
         let balanceSubject = BehaviorSubject<String?>(value: nil)
         let feeSubject = BehaviorSubject<String?>(value: nil)
-        let membersCountSubject = BehaviorSubject<String?>(value: nil)
+        let membersCountSubject = BehaviorSubject<NSAttributedString?>(value: nil)
         let messageSubject = PublishSubject<String>()
         let dismissSubject = PublishSubject<Void>()
         let isTypeButtonHiddenSubject = BehaviorSubject<Bool>(value: false)
@@ -43,7 +43,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
         let countColorSubject = BehaviorSubject<UIColor>(value: UIColor.gray)
         let isCountViewHiddenSubject = BehaviorSubject<Bool>(value: false)
         let expiredMinutesRelay = BehaviorRelay<Int>(value: 0)
-        let expiredSubject = BehaviorSubject<String>(value: "Infinite")
+        let expiredSubject = BehaviorSubject<String>(value: LM.dls.red_env_send_infinite)
         let isSendButtonEnabledSubject = BehaviorSubject<Bool>(value: false)
     }
 
@@ -66,13 +66,11 @@ final class CreateRedEnvelopeViewModel: ViewModel {
         input.typeRelay.accept(type == .normal ? nil : .group)
         self.wallets = DB.instance.get(type: Wallet.self, predicate: nil, sorts: nil) ?? []
         self.input.walletRelay.accept(wallets.count > 0 ? wallets[0] : nil)
-        setUpType()
+        setUpMemberCount(memberCount)
         setUpMessage()
         setUpMinutes()
         setUpWalletCoin()
-        
         input.closeTapSubject.bind(to: output.dismissSubject).disposed(by: disposeBag)
-        output.membersCountSubject.onNext("(The number of members is \(memberCount))")
         Observable.combineLatest(input.walletCoinRelay, input.amountRelay, input.limitCountRelay, input.messageRelay)
             .map { walletCoin, amount, limitCount, message -> Bool in
                 guard walletCoin != nil else { return false }
@@ -126,7 +124,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
                 let name = coin.inAppName {
                 return "\(name)"
             } else {
-                return "Please select"
+                return LM.dls.red_env_send_please_select
             }
             }.bind(to: output.walletCoinTitleSubject).disposed(by: disposeBag)
         
@@ -134,7 +132,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
             guard let coin = coin,let wallet = self.input.walletRelay.value, let asset = wallet.getAsset(of: coin) else {
                 return ""
             }
-            return "Balance : " + asset.amount!.decimalValue.asString(digits:8)
+            return LM.dls.withdrawal_label_assetAmt(asset.amount!.decimalValue.asString(digits:8),"")
             }.bind(to: output.balanceSubject).disposed(by: disposeBag)
     }
 
@@ -146,9 +144,9 @@ final class CreateRedEnvelopeViewModel: ViewModel {
         Observable.combineLatest(input.expiredDaySubject, input.expiredHourSubject, input.expiredMinuteSubject)
             .map { day, hour, minute -> String in
                 if day == 0, hour == 0, minute == 0 {
-                    return "Infinite"
+                    return LM.dls.red_env_send_infinite
                 } else {
-                    return "\(day) 天 \(hour) 小時 \(minute) 分鐘"
+                    return "\(day) \(LM.dls.red_env_send_day) \(hour) \(LM.dls.red_env_send_hour) \(minute) \(LM.dls.red_env_send_minute)"
                 }
             }.bind(to: output.expiredSubject).disposed(by: disposeBag)
     }
@@ -160,44 +158,19 @@ final class CreateRedEnvelopeViewModel: ViewModel {
             .bind(to: output.countColorSubject).disposed(by: disposeBag)
     }
 
-    private func setUpType() {
-        input.typeTapSubject.subscribe(onNext: { [unowned self] in
-            self.input.typeRelay.accept(self.input.typeRelay.value == .group ? .lucky : .group)
-            }, onError: nil,
-               onCompleted: nil,
-               onDisposed: nil).disposed(by: disposeBag)
-//        input.typeRelay.map { [unowned self] type -> NSAttributedString? in
-//            if let type = type {
-//                return self.attributeString(type: type)
-//            } else {
-//                return nil
-//            }
-//            }.bind(to: output.typeAttributeTitleSubject).disposed(by: disposeBag)
+    private func setUpMemberCount(_ count:Int) {
+        let numberOfMembersString = LM.dls.red_env_send_number_title
+        let memberCountString = LM.dls.red_env_send_number_of_members("\(count)")
+        let finalString = numberOfMembersString + " " + memberCountString
+        let substringRange = finalString.range(of: memberCountString)
+        let range = NSRange(substringRange!,in:finalString)
+        let attribute = NSMutableAttributedString.init(string: finalString)
+        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.gray , range: range)
+        output.membersCountSubject.onNext(attribute)
     }
 
-//    private func attributeString(type: RedEnvelopeType) -> NSMutableAttributedString? {
-//        var attributedString: NSMutableAttributedString
-//        switch type {
-//        case .lucky:
-//            attributedString = NSMutableAttributedString(string: "目前为普通红包，改为拼手气红包", attributes: [
-//                .font: UIFont.systemFont(ofSize: 9),
-//                .foregroundColor: UIColor.brown])
-//            attributedString.addAttribute(.foregroundColor,
-//                                          value: UIColor.azure,
-//                                          range: NSRange(location: 10, length: 5))
-//        case .group:
-//            attributedString = NSMutableAttributedString(string: "目前为拼手气红包，改为普通红包", attributes: [
-//                .font: UIFont.systemFont(ofSize: 9),
-//                .foregroundColor: UIColor.brownGrey])
-//            attributedString.addAttribute(.foregroundColor,
-//                                          value: UIColor.azure,
-//                                          range: NSRange(location: 11, length: 4))
-//        case .normal: return nil
-//        }
-//        return attributedString
-//    }
-
     private func create(roomIdentifier: String) {
+        self.output.isSendButtonEnabledSubject.onNext(false)
         guard let address = input.walletRelay.value?.address,
             let identifier = input.walletCoinRelay.value?.identifier,
             let amount = Decimal(string: input.amountRelay.value ?? String()) else { return }
@@ -212,6 +185,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
                                                                             type: input.typeRelay.value)
         
         Server.instance.createRedEnvelope(parameter:parameters).asObservable().subscribe(onNext: { [weak self] response in
+            self?.output.isSendButtonEnabledSubject.onNext(true)
             guard self != nil else {
                 return
             }
@@ -222,6 +196,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
                 }
             case .failed(let error):
                 self?.output.messageSubject.onNext(error.descString)
+                self?.output.dismissSubject.onNext(())
             }
         }).disposed(by: disposeBag)
         

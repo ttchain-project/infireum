@@ -1,6 +1,7 @@
 import Foundation
 
 struct DLS_EN_US: DLS {
+    
     var g_ok = "Ok"
     var g_cancel = "Cancel"
     var g_loading = "Loading, please wait."
@@ -574,5 +575,65 @@ struct DLS_EN_US: DLS {
     
     var record_audio_start_button = "Press to record audio"
     var record_audio_stop_to_send_button = "Release to send audio"
+
+    var red_env_send_balance: String = "Balance"
+    
+    var red_env_send_total_amount: String = "Total Amount"
+    
+    var red_env_send_enter_amount: String = "Enter Amount"
+    
+    var red_env_send_number_title = "Number "
+    func red_env_send_number_of_members(_ args: String...) -> String { return String.init(format: "(%@ members in the group)", arguments: args) }
+    
+    var red_env_send_number_of_red_env: String  = "Number of Red Envelopes"
+    
+    var red_env_send_dist_rule: String = "Distribution Rule"
+    
+    var red_env_send_divide: String = "Divide"
+    
+    var red_env_send_random: String = "Random"
+    
+    var red_env_send_comment: String = "Comment"
+    var red_env_comment_placeholder: String = "Write some auspicious words on the red envelope!"
+    var red_env_send_notice_one: String = " *Notice that every transaction would charge miner fee"
+    
+    var red_env_send_notice_two: String = "*If receiver do not retrieve red envelopes by the time limit, the remain amount will automatically send back to sender"
+    
+    var red_env_send_currency: String = "Currency"
+    
+    var red_env_send_time_limit:String = "Time Limit"
+    var red_env_send_reservationTime:String = "Reservation Time"
+    
+    var red_env_send_day = "day"
+    var red_env_send_hour = "hour"
+    var red_env_send_minute = "minutes"
+    var red_env_send_infinite = "Infinite"
+    
+    var red_env_send_please_select = "Please select"
+    var red_env_money_sent:String = "Money Sent"
+    var red_env_waiting_to_send:String = "Waiting to send"
+    func red_env_amount_received(_ args:String ...) -> String {return String.init(format: "%@/%@ received",arguments: args) }
+    func red_env_transfer_alert_message(_ args :String ...) -> String {return String.init(format: "You will insert the money into the red envelope, please enter the wallet password (additional miner fee %@%@)", arguments: args)}
+    
+    var red_env_send_sent_successfully = "Congratulations, the red envelope is credited"
+    func red_env_status_waiting_for_money(_ args:String ...) -> String {return String.init(format: "Waiting for %@ to put money in red envelope", arguments: args)}
+    var red_evn_send_by_me = "I sent the Red Envelope"
+    func red_env_sent_by_sender(_ args:String ...) -> String {return String.init(format: "%@'s Red Envelope", arguments: args)}
+    var red_env_expired = "Available time expired"
+    func red_env_money_sent_already_message(_ args:String ...) -> String {return String.init(format: "Already sent money in red envelope to %@. Do you want to give more lucky money", arguments: args)}
+    func red_env_money_sent_to_user_message(_ args:String ...) -> String {return String.init(format: "Money sent to %@", arguments: args)}
+
+    var view_red_envelope:String = "View Red Envelope"
+    
+    var red_env_view_record:String = "View Red Envelope record"
+    var red_env_view_record_substring:String = "View"
+
+    var red_env_receive_expired_message:String = "You are too late! Red envelope has expired."
+    var red_env_receive_no_remaining_envelopes:String = "You are too late! There are no red envelopes remaining."
+    var red_env_receive_status_not_yet_received:String  = "Not yet received"
+    var red_env_receive_status_received:String  = "Already received"
+    var red_env_send_confirm_transfer:String = "Confirm red envelope transfer"
+
+    var red_env_send_records:String = "Red envelope sent records"
 
 }

@@ -23,7 +23,6 @@
                 <outlet property="expirationTimeLabel" destination="Ev2-6H-KCY" id="WBg-pK-zMU"/>
                 <outlet property="expirationTimeSelectionButton" destination="ASS-fi-7jK" id="RHp-l0-UkL"/>
                 <outlet property="expirationTimeTitleLabel" destination="M0V-YX-hV7" id="fLh-3q-uEd"/>
-                <outlet property="groupMemberCountLabel" destination="nhJ-F9-g9F" id="U55-3v-gY8"/>
                 <outlet property="infoMessageLabelOne" destination="anE-zb-4qL" id="Nfb-zi-Rfh"/>
                 <outlet property="infoMessageLabelTwo" destination="bih-Z6-IhH" id="YWB-qc-A2r"/>
                 <outlet property="messageCountLabel" destination="SdR-1U-tBy" id="QHM-kF-qUX"/>
@@ -193,19 +192,13 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MZw-pj-2Ov" userLabel="NoOfReceivers">
                                     <rect key="frame" x="0.0" y="213.66666666666671" width="335" height="101.33333333333334"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eM1-YQ-G1w">
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eM1-YQ-G1w">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="20.333333333333332"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9I-Fm-I1N">
-                                                    <rect key="frame" x="0.0" y="0.0" width="41.666666666666664" height="20.333333333333332"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Number of people " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9I-Fm-I1N">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="20.333333333333332"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhJ-F9-g9F">
-                                                    <rect key="frame" x="46.666666666666657" y="0.0" width="288.33333333333337" height="20.333333333333332"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.49406129121780396" green="0.49415010213851929" blue="0.49405562877655029" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

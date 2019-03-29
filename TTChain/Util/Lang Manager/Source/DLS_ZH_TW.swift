@@ -1,6 +1,8 @@
 import Foundation
 
 struct DLS_ZH_TW: DLS {
+    
+    
     var g_ok = "確定"
     var g_cancel = "取消"
     var g_loading = "載入中，請稍等"
@@ -580,6 +582,64 @@ struct DLS_ZH_TW: DLS {
     
     var record_audio_start_button = "按可錄製音頻"
     var record_audio_stop_to_send_button = "釋放按鈕發送音頻"
+
+    var red_env_send_balance: String = "餘額"
+    
+    var red_env_send_total_amount: String = "總金額"
+    
+    var red_env_send_enter_amount: String = "請輸入發送紅包的總金額"
+    
+    var red_env_send_number_title = "數量 "
+    func red_env_send_number_of_members(_ args: String...) -> String { return String.init(format: "數量 (該社群成員人數 %@)", arguments: args) }
+    
+    var red_env_send_number_of_red_env: String  = "請輸入發送紅包的數量"
+    
+    var red_env_send_dist_rule: String = "領取規則"
+    
+    var red_env_send_divide: String = "均分"
+    
+    var red_env_send_random: String = "隨機"
+    
+    var red_env_send_comment: String = "留言"
+    var red_env_comment_placeholder: String = "在紅包上寫些吉祥話吧！"
+    
+    var red_env_send_notice_one: String = "請留意所有交易皆須扣除的礦工費用"
+    
+    var red_env_send_notice_two: String = "紅包發送後，如超過時限仍未被領取，將會自動退回金額"
+    
+    var red_env_send_currency: String = "發送幣種"
+    var red_env_send_time_limit:String = "領取時限"
+    var red_env_send_reservationTime:String = "預約發送"
+
+    var red_env_send_day = "天"
+    var red_env_send_hour = "小時"
+    var red_env_send_minute = "分鐘"
+    var red_env_send_infinite = "無窮"
+    
+    var red_env_send_please_select = "請選擇"
+
+    var red_env_money_sent:String = "塞錢完成"
+    var red_env_waiting_to_send:String = "等待塞錢進紅包"
+    func red_env_amount_received(_ args:String ...) -> String {return String.init(format: "%@/%@ 已領取",arguments: args) }
+    func red_env_transfer_alert_message(_ args :String ...) -> String {return String.init(format: "您將塞錢入紅包，請輸入錢包密碼 (另外收取單筆礦工費 %@%@)", arguments: args)}
+    var red_env_send_sent_successfully = "恭喜,紅包錢入賬了"
+    func red_env_status_waiting_for_money(_ args:String ...) -> String {return String.init(format: "等待 %@ 塞錢進紅包", arguments: args)}
+    var red_evn_send_by_me = "我發送的紅包"
+    func red_env_sent_by_sender(_ args:String ...) -> String {return String.init(format: "%@的紅包", arguments: args)}
+    var red_env_expired = "可領取時間到期了"
+    func red_env_money_sent_already_message(_ args:String ...) -> String {return String.init(format: "塞錢給%@已完成，是否繼續塞錢？", arguments: args)}
+    func red_env_money_sent_to_user_message(_ args:String ...) -> String {return String.init(format: "塞錢給%@已完成", arguments: args)}
+    
+    var view_red_envelope:String = "查看紅包"
+    var red_env_view_record:String = "查看紅包記錄"
+    var red_env_view_record_substring:String = "查看"
+
+    var red_env_receive_expired_message:String = "手慢了，紅包過期了"
+    var red_env_receive_no_remaining_envelopes:String = "手慢了，紅包被搶光了"
+    var red_env_receive_status_not_yet_received:String  = "未領取"
+    var red_env_receive_status_received:String  = "已領取"
+    var red_env_send_confirm_transfer:String = "確認塞錢進紅包"
+    var red_env_send_records:String = "紅包發送紀錄"
 
 }
 

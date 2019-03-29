@@ -35,13 +35,13 @@ class CreateRedEnvelopeViewController: UIViewController {
     
     @IBOutlet weak var amountToTransferTitleLabel: UILabel! {
         didSet {
-            amountToTransferTitleLabel.text = "Amount"
+            amountToTransferTitleLabel.text = LM.dls.red_env_send_enter_amount
         }
     }
     @IBOutlet weak var amountTransferTextField: UITextField! {
         didSet {
             amountTransferTextField.rx.text.bind(to: viewModel.input.amountRelay).disposed(by: viewModel.disposeBag)
-            amountTransferTextField.placeholder = "請輸入發送紅包的總金額"
+            amountTransferTextField.placeholder = LM.dls.red_env_send_enter_amount
         }
     }
     
@@ -52,35 +52,35 @@ class CreateRedEnvelopeViewController: UIViewController {
     }
     @IBOutlet weak var numberOfPeopleTitleLabel: UILabel! {
         didSet {
-            numberOfPeopleTitleLabel.text = "Number of people"
+            viewModel.output.membersCountSubject.bind(to: numberOfPeopleTitleLabel.rx.attributedText).disposed(by: viewModel.disposeBag)
         }
     }
-    @IBOutlet weak var groupMemberCountLabel: UILabel! {
-        didSet {
-            viewModel.output.membersCountSubject.bind(to: groupMemberCountLabel.rx.text).disposed(by: viewModel.disposeBag)
-        }
-    }
+//    @IBOutlet weak var groupMemberCountLabel: UILabel! {
+//        didSet {
+//            viewModel.output.membersCountSubject.bind(to: groupMemberCountLabel.rx.text).disposed(by: viewModel.disposeBag)
+//        }
+//    }
     @IBOutlet weak var numberOfPeopleTextField: UITextField! {
         didSet {
             numberOfPeopleTextField.rx.text.orEmpty.map { Int($0) }
                 .bind(to: viewModel.input.limitCountRelay).disposed(by: viewModel.disposeBag)
-            numberOfPeopleTextField.placeholder = "請輸入發送紅包的數量"
+            numberOfPeopleTextField.placeholder = LM.dls.red_env_send_number_of_red_env
         }
     }
     @IBOutlet weak var distributionTypeTitleLabel: UILabel! {
         didSet {
-            distributionTypeTitleLabel.text = "Distribution Type"
+            distributionTypeTitleLabel.text = LM.dls.red_env_send_dist_rule
         }
     }
     
     @IBOutlet weak var equalDistributionLabal: UILabel! {
         didSet {
-            equalDistributionLabal.text = "Equal Distribution"
+            equalDistributionLabal.text = LM.dls.red_env_send_divide
         }
     }
     @IBOutlet weak var randomDisrtibutionLabel: UILabel! {
         didSet {
-            randomDisrtibutionLabel.text = "Random Distribution"
+            randomDisrtibutionLabel.text = LM.dls.red_env_send_random
         }
     }
     @IBOutlet weak var equalDistributionButton: UIButton! {
@@ -88,7 +88,7 @@ class CreateRedEnvelopeViewController: UIViewController {
             equalDistributionButton.rx.tap.asDriver().drive(onNext: {
                 self.randomDistributionButton.isSelected = false
                 self.equalDistributionButton.isSelected = true
-                self.viewModel.input.typeTapSubject.onNext(())
+                self.viewModel.input.typeRelay.accept(.group)
             }).disposed(by:viewModel.disposeBag)
             
         }
@@ -98,7 +98,7 @@ class CreateRedEnvelopeViewController: UIViewController {
             randomDistributionButton.rx.tap.asDriver().drive( onNext:{
                 self.equalDistributionButton.isSelected = false
                 self.randomDistributionButton.isSelected = true
-                self.viewModel.input.typeTapSubject.onNext(())
+                self.viewModel.input.typeRelay.accept(.lucky)
 
             }).disposed(by:viewModel.disposeBag)
         }
@@ -108,7 +108,7 @@ class CreateRedEnvelopeViewController: UIViewController {
     
     @IBOutlet weak var expirationTimeTitleLabel : UILabel! {
         didSet {
-            expirationTimeTitleLabel.text = "Expiration Time"
+            expirationTimeTitleLabel.text = LM.dls.red_env_send_time_limit
         }
     }
     
@@ -129,12 +129,13 @@ class CreateRedEnvelopeViewController: UIViewController {
     
     @IBOutlet weak var messageTitleLabel: UILabel! {
         didSet {
-            messageTitleLabel.text = "Message"
+            messageTitleLabel.text = LM.dls.red_env_send_comment
         }
     }
     @IBOutlet weak var messageTextView: KLPlaceholderTextView! {
         didSet{
             messageTextView.rx.text.bind(to: viewModel.input.messageRelay).disposed(by: viewModel.disposeBag)
+            messageTextView.placeholder = LM.dls.red_env_comment_placeholder
         }
     }
     @IBOutlet weak var messageCountLabel: UILabel! {
@@ -148,11 +149,13 @@ class CreateRedEnvelopeViewController: UIViewController {
     @IBOutlet weak var infoMessageLabelOne: UILabel! {
         didSet {
             infoMessageLabelOne.textColor = .owIceCold
+            infoMessageLabelOne.text = LM.dls.red_env_send_notice_one
         }
     }
     @IBOutlet weak var infoMessageLabelTwo: UILabel! {
         didSet {
             infoMessageLabelTwo.textColor = .owIceCold
+            infoMessageLabelTwo.text = LM.dls.red_env_send_notice_two
         }
     }
     
@@ -163,7 +166,7 @@ class CreateRedEnvelopeViewController: UIViewController {
                 .disposed(by: viewModel.disposeBag)
             sendButton.cornerRadius = sendButton.height/2
             sendButton.backgroundColor = UIColor.init(red:246, green:181,blue: 95)
-            sendButton.setTitle("確認", for: .normal)
+            sendButton.setTitle(LM.dls.g_confirm, for: .normal)
         }
     }
     
@@ -274,9 +277,9 @@ extension CreateRedEnvelopeViewController: UIPickerViewDelegate {
     
     private func timePickerViewTitle(row: Int, component: Int) -> String? {
         switch component {
-        case 0: return "\(row) 天"
-        case 1: return "\(row) 小時"
-        case 2: return "\(row) 分鐘"
+        case 0: return "\(row)" + LM.dls.red_env_send_day
+        case 1: return "\(row)" + LM.dls.red_env_send_hour
+        case 2: return "\(row)" + LM.dls.red_env_send_minute
         default: return nil
         }
     }

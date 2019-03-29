@@ -38,7 +38,7 @@ final class ReceiveRedEnvelopeTableViewCellModel: ViewModel {
         output = Output(imageString: member.imageString?.medium,
                         title: member.nickName,
                         timestamp: date?.string(),
-                        status: member.isDone ? "塞钱完成" : "等待塞钱进红包",
+                        status: member.isDone ? LM.dls.red_env_money_sent : LM.dls.red_env_waiting_to_send,
                         amount: NSNumber(value: member.receiveAmount).decimalValue.description,
                         coinDisplayName: displayName)
     }

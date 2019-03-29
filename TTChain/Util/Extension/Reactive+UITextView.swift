@@ -17,3 +17,11 @@ extension Reactive where Base : UITextView {
         }
     }
 }
+
+extension Reactive where Base: UIButton {
+    func titleColor(for controlState: UIControl.State = []) -> Binder<UIColor> {
+        return Binder(base) { button, value in
+            button.setTitleColor(value, for: controlState)
+        }
+    }
+}

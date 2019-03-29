@@ -483,6 +483,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     func toCreateRedEnv() {
+        
+        let cordinator = RedEnvelopeCordinator.init()
+        
         var type: CreateRedEnvelopeViewModel.CreateType = .normal
         var memberCount : Int = 0
         if self.viewModel.input.roomType != .pvtChat {
@@ -490,12 +493,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             memberCount = self.viewModel.groupInfoModel.value?.membersArray?.count ?? 0
         }
         
-        let viewModel = CreateRedEnvelopeViewModel.init(type: type, roomIdentifier: self.viewModel.input.roomID, memberCount: memberCount)
-        let vc = CreateRedEnvelopeViewController.init(viewModel: viewModel)
-        self.navigationController?.pushViewController(vc,animated:true)
-        viewModel.output.dismissSubject.subscribe(onNext: { _ in
-            vc.pop(sender: nil)
-        }).disposed(by: bag)
+        cordinator.showCreateRedEnvelope(memberCount: memberCount, type: type, identifier: self.viewModel.input.roomID, presenterVC: self)
+        
     }
     
     fileprivate func displayCamera(forSource sourceType:UIImagePickerController.SourceType ) {
@@ -589,12 +588,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
 
     func toRedEnvelope(forMessage message: RedEnvelope) {
-        self.viewModel.redEnvelopeAction(forRedEnvId: message) {[weak self] (vc) in
-           
-            self?.present(vc, animated: true, completion: {
-                
-            })
-        }
+        let cordinator = RedEnvelopeCordinator.init()
+        cordinator.redEnvelopeAction(forRedEnvId: message, onNavVC: self)
     }
 }
 
