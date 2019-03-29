@@ -73,7 +73,6 @@ class RedEnvelopeDetailViewController: UIViewController {
                                       value: UIColor.owCharcoalGrey,
                                       range: NSRange(subStringRange!,in:LM.dls.red_env_view_record))
         button.setAttributedTitle(attributedString, for: .normal)
-        DLogInfo(button.currentAttributedTitle)
         button.rx.tap.bind(to: viewModel.input.historyTapSubject).disposed(by: viewModel.disposeBag)
         return button
     }()

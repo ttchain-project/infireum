@@ -30,6 +30,8 @@ class RedEvelopeInfoViewModel: ViewModel {
         let status: String?
         let actionSubject = PublishSubject<Action>()
         let messageSubject = PublishSubject<String>()
+        let animateHUDSubject = PublishSubject<Bool>()
+
     }
     
     var input: Input
@@ -73,8 +75,12 @@ class RedEvelopeInfoViewModel: ViewModel {
         let wallet = Wallet.getWallets(ofMainCoinID: coin.walletMainCoinID!)
         
         let parameter = AcceptRedEnvelopeAPI.Parameters.init(redEnvelopeId: identifier, receiveAddress: wallet[0].address!)
-        
+        self.output.animateHUDSubject.onNext(true)
+
         Server.instance.acceptRedEvelope(parameter: parameter).asObservable().subscribe(onNext: {[weak self] response in
+          
+            self?.output.animateHUDSubject.onNext(false)
+
             switch response {
             case .success(let model):
                 if model.status {

@@ -31,6 +31,16 @@ class ReceiveRedEnvelopeViewController: UIViewController {
         }
     }
     
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
     @IBOutlet weak var redEnvelopeMessageLabel: UILabel! {
         didSet {
             redEnvelopeMessageLabel.font = .owMedium(size:18)
@@ -79,6 +89,13 @@ class ReceiveRedEnvelopeViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: ReceiveRedEnvelopeViewController.className, bundle: nil)
         viewModel.output.messageSubject.bind(to: rx.message).disposed(by: viewModel.disposeBag)
+        viewModel.output.animateHUDSubject.subscribe(onNext: { [weak self] status in
+            if status {
+                self?.hud.startAnimating(inView: self?.view)
+            }else {
+                self?.hud.stopAnimating()
+            }
+        }).disposed(by:viewModel.disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {

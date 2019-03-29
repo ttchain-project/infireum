@@ -45,6 +45,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
         let expiredMinutesRelay = BehaviorRelay<Int>(value: 0)
         let expiredSubject = BehaviorSubject<String>(value: LM.dls.red_env_send_infinite)
         let isSendButtonEnabledSubject = BehaviorSubject<Bool>(value: false)
+        let animateHUDSubject = PublishSubject<Bool>()
     }
 
     var input: Input
@@ -184,7 +185,9 @@ final class CreateRedEnvelopeViewModel: ViewModel {
                                                                             limitCount: input.limitCountRelay.value,
                                                                             type: input.typeRelay.value)
         
+        self.output.animateHUDSubject.onNext(true)
         Server.instance.createRedEnvelope(parameter:parameters).asObservable().subscribe(onNext: { [weak self] response in
+            self?.output.animateHUDSubject.onNext(false)
             self?.output.isSendButtonEnabledSubject.onNext(true)
             guard self != nil else {
                 return

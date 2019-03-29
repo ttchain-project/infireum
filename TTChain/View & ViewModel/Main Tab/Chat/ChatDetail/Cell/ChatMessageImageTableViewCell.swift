@@ -41,8 +41,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         
         self.msgImageView.layer.borderWidth = 5.0
         self.msgImageView.layer.borderColor = UIColor.white.cgColor
-        dateLabel.set(textColor: .gray, font: .owMedium(size: 14))
-        senderNameLabel.set(textColor: .gray, font: .owDemiBold(size: 16))
+        dateLabel.set(textColor: .black, font: .owMedium(size: 14))
+        senderNameLabel.set(textColor: .black, font: .owDemiBold(size: 16))
         profilePics.layer.cornerRadius = 20
 
         self.backgroundColor = .clear

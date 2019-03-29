@@ -170,6 +170,16 @@ class CreateRedEnvelopeViewController: UIViewController {
         }
     }
     
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -232,6 +242,13 @@ class CreateRedEnvelopeViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: CreateRedEnvelopeViewController.className, bundle: nil)
         viewModel.output.messageSubject.bind(to: rx.message).disposed(by: viewModel.disposeBag)
+        viewModel.output.animateHUDSubject.subscribe(onNext: { [weak self] status in
+            if status {
+                self?.hud.startAnimating(inView: self?.view)
+            }else {
+                self?.hud.stopAnimating()
+            }
+        }).disposed(by:viewModel.disposeBag)
 
     }
     

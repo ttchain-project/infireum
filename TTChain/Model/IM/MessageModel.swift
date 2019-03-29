@@ -86,7 +86,7 @@ class MessageModel {
         var rawMessage = messageResponse["msg"].string ?? ""
         
         let timestampDict = messageResponse["ts"]
-        let timeStampString = timestampDict["$date"].string ?? ""
+        let timeStampString = timestampDict["$date"].string ?? (messageResponse["ts"].string ?? "")
         
         let userDict = messageResponse["u"]
         let userId = userDict["_id"].string ?? ""

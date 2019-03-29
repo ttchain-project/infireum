@@ -48,7 +48,7 @@ extension KLInstanceSetupViewController where Self: UIViewController, Constructo
 extension Reactive where Base: UIViewController {
     var message: Binder<String> {
         return Binder(base) { viewController, value in
-            viewController.showSimplePopUp(with: "", contents: value, cancelTitle: LM.dls.g_cancel, cancelHandler: nil)
+            viewController.showSimplePopUp(with: "", contents: value, cancelTitle: LM.dls.g_ok, cancelHandler: nil)
         }
     }
 }
