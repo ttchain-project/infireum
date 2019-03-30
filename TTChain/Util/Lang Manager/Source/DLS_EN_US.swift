@@ -635,5 +635,7 @@ struct DLS_EN_US: DLS {
     var red_env_send_confirm_transfer:String = "Confirm red envelope transfer"
 
     var red_env_send_records:String = "Red envelope sent records"
-
+    
+    var receipt_receiving_currency:String = "Receiving Currency"
+    var receiving_amount:String = "Collection Amount"
 }

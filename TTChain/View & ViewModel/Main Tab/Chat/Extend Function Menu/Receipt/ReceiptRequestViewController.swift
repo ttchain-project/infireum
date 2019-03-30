@@ -29,7 +29,7 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
                 self.coinSelected.accept((self.viewModel.selectedWallet.value!.address!, self.viewModel.selectedCoin.value!.identifier!, self.viewModel.getAmt()))
                 self.navigationController?.popViewController(animated: true)
             }else {
-                self.showAlert(title: "Alert", message: "Please select coin and enter amount")
+                self.showAlert(title: "", message: "Please select coin and enter amount")
             }
         }).disposed(by: bag)
         self.receiptAmounTextField.delegate = self
@@ -77,6 +77,9 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
         self.title = lang.dls.chat_room_receipt
         confirmButton.setTitle(lang.dls.g_confirm, for: .normal)
+        coinTitleLabel.text = LM.dls.receipt_receiving_currency
+        receiptAmountLabel.text = LM.dls.receiving_amount
+        coinNameTextField.placeholder = LM.dls.red_env_send_please_select
     }
 }
 

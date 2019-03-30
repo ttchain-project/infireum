@@ -628,4 +628,6 @@ struct DLS_ZH_CN: DLS {
     var red_env_send_confirm_transfer:String = "确认塞钱进红包"
     var red_env_send_records:String = "红包发送纪录"
 
+    var receipt_receiving_currency:String = "收款币别"
+    var receiving_amount:String = "收款金额"
 }

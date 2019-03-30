@@ -615,4 +615,7 @@ protocol DynamicLocalizationSource {
     var red_env_send_confirm_transfer:String {get set}
     var red_env_send_records:String {get set}
 
+    var receipt_receiving_currency:String{get set}
+    var receiving_amount:String {get set}
+
 }

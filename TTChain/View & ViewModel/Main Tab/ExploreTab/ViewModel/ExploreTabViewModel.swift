@@ -19,6 +19,7 @@ class ExploreTabViewModel: KLRxViewModel {
     
     struct Output {
         let selectedModel:(MarketTest) -> Void
+        let scrollToNextOptions:() -> Void
     }
     required init(input: Input, output: Output) {
         self.input = input
@@ -49,6 +50,10 @@ class ExploreTabViewModel: KLRxViewModel {
             }
             
         } ).disposed(by: bag)
+        
+        self.timerSub = timer.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] _ in
+            self.output.scrollToNextOptions()
+        })
     }
     
     func concatOutput() {
@@ -57,6 +62,10 @@ class ExploreTabViewModel: KLRxViewModel {
     typealias InputSource = Input
     typealias OutputSource = Output
     var bag: DisposeBag = DisposeBag.init()
+    
+    lazy var timer : Observable<NSInteger> = { return Observable<NSInteger>.interval(3, scheduler: SerialDispatchQueueScheduler(qos: .background)) }()
+    
+    var timerSub: Disposable?
 
     lazy var exploreOptionsDataSource: RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel> = {
         let source = RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel>.init(configureCell: { (source, tv, idxPath, model) -> UICollectionViewCell in

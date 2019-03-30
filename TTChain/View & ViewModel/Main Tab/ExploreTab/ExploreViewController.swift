@@ -23,6 +23,8 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
                 }else {
                     self.handleShortcutNavigation(model: model as! MarketTestTabModel)
                 }
+            }, scrollToNextOptions: {
+                self.scrollToNextCell()
             }))
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
@@ -250,6 +252,17 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
        
         let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .channel, chatTitle: model.title, roomID: model.content, chatAvatar: model.img,uid:nil))
         show(vc, sender: self)
+    }
+    
+    func scrollToNextCell() {
+        let items = MarketTestHandler.shared.bannerArray.value.first?.items.count ?? 0
+        guard let currentIndexPath = self.bannerCollectionView.indexPathsForVisibleItems.first else {
+            return
+        }
+        let nextRow = currentIndexPath.row == (items - 1) ? 0 : currentIndexPath.row + 1
+        let nextIndexPath = IndexPath.init(item: nextRow, section: 0)
+        self.bannerCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
+        
     }
 }
 
