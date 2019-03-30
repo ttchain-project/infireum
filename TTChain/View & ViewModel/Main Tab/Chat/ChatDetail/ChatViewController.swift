@@ -149,6 +149,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         tableView.register(ReceiptTableViewCell.nib, forCellReuseIdentifier: ReceiptTableViewCell.nameOfClass)
         tableView.register(RedEnvTableViewCell.nib, forCellReuseIdentifier: RedEnvTableViewCell.nameOfClass)
         tableView.register(RceiveRedEnvelopeTableViewCell.nib, forCellReuseIdentifier: RceiveRedEnvelopeTableViewCell.nameOfClass)
+        tableView.register(UnknownFileTableViewCell.nib, forCellReuseIdentifier: UnknownFileTableViewCell.nameOfClass)
         
         tableView.rx.klrx_tap.drive(onNext: { _ in
             self.view.endEditing(true)
@@ -191,6 +192,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 cell = chatCell
                 
             case .file,.voiceMessage:
+                
                 let chatImgCell = tv.dequeueReusableCell(withIdentifier: ChatMessageImageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageImageTableViewCell
                 
                 chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
@@ -200,7 +202,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     self.toUserProfileVC(forFriend: friendModel)
                 })
                 chatImgCell.msgImageView!.rx.klrx_tap.drive(onNext: { _ in
-                    if case.file = messageModel.msgType {
+                    if case .image = messageModel.msgType {
                         self.toImageViewer(for: messageModel)
                     }else {
                         self.playAudio(messageModel: messageModel)
@@ -213,6 +215,24 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 }).disposed(by: chatImgCell.bag)
                 
                 cell = chatImgCell
+                
+            case .image :
+                
+                let chatImgCell = tv.dequeueReusableCell(withIdentifier: UnknownFileTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! UnknownFileTableViewCell
+                
+                chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
+                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                        return
+                    }
+                    self.toUserProfileVC(forFriend: friendModel)
+                })
+                chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    messageModel.messageImage = chatImgCell.msgImageView.image
+                    self.showOptionsForLongGesture(for: messageModel)
+                }).disposed(by: chatImgCell.bag)
+                
+                cell = chatImgCell
+                
             case .receipt :
                 let receiptCell = tv.dequeueReusableCell(withIdentifier: ReceiptTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ReceiptTableViewCell
                 
@@ -428,6 +448,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             break
         case .file:
             alertVC.addAction(actionCopyFileURL)
+        case .image:
+            alertVC.addAction(actionCopy)
             alertVC.addAction(forward)
         default:
             break

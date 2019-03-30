@@ -86,6 +86,10 @@
 		5526B54022128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
 		5526B54122128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
 		5526B54222128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
+		55340305224F227A007F355D /* UnknownFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55340303224F227A007F355D /* UnknownFileTableViewCell.swift */; };
+		55340306224F227A007F355D /* UnknownFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55340304224F227A007F355D /* UnknownFileTableViewCell.xib */; };
+		55340307224F227E007F355D /* UnknownFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55340303224F227A007F355D /* UnknownFileTableViewCell.swift */; };
+		55340308224F227F007F355D /* UnknownFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55340303224F227A007F355D /* UnknownFileTableViewCell.swift */; };
 		5539A46F21676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */; };
 		5539A47021676F0300A59ACC /* IdentityQRCodeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */; };
 		5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */; };
@@ -2050,6 +2054,8 @@
 		5526B53322114BB100573576 /* ForwardListContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwardListContainerViewController.xib; sourceTree = "<group>"; };
 		5526B53A22114BDB00573576 /* ForwardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardListViewModel.swift; sourceTree = "<group>"; };
 		5526B53F22128E7700573576 /* PhotoAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthHandler.swift; sourceTree = "<group>"; };
+		55340303224F227A007F355D /* UnknownFileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownFileTableViewCell.swift; sourceTree = "<group>"; };
+		55340304224F227A007F355D /* UnknownFileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnknownFileTableViewCell.xib; sourceTree = "<group>"; };
 		5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeEncryptionFlow.swift; sourceTree = "<group>"; };
 		5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeContentViewController.swift; sourceTree = "<group>"; };
 		5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeContentViewController.xib; sourceTree = "<group>"; };
@@ -3275,6 +3281,8 @@
 				55AADF0622004ED900F403C8 /* ReceiptTableViewCell.xib */,
 				555E4A3D2248BCAB00C7CAD5 /* RedEnvTableViewCell.swift */,
 				555E4A3E2248BCAB00C7CAD5 /* RedEnvTableViewCell.xib */,
+				55340303224F227A007F355D /* UnknownFileTableViewCell.swift */,
+				55340304224F227A007F355D /* UnknownFileTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6349,6 +6357,7 @@
 				55E7305C2186DC4B003AE47E /* MainWalletViewController.xib in Resources */,
 				64C9D46C20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
 				64F07E3320D24DDD00A60C5C /* MainViewController.xib in Resources */,
+				55340306224F227A007F355D /* UnknownFileTableViewCell.xib in Resources */,
 				55EF6AF221A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B6AF20F5F7B800AEBCAD /* TransferRecordsListViewController.xib in Resources */,
 				64F07E7720D36AFE00A60C5C /* IdentitySetupViewController.xib in Resources */,
@@ -7455,6 +7464,7 @@
 				64C9D49F20FDFA23000B0774 /* EditABUnitViewModel.swift in Sources */,
 				64F07E2320D241A000A60C5C /* UITextField+PlaceholderColors.swift in Sources */,
 				55EF6ADA21A812C6007E074A /* InviteTableViewCell.swift in Sources */,
+				55340305224F227A007F355D /* UnknownFileTableViewCell.swift in Sources */,
 				64D8265120E0D8D600C8FC63 /* ChangeAssetViewModel.swift in Sources */,
 				6424B69220F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.swift in Sources */,
 				5539A48A21676F8C00A59ACC /* IdentityQRCodeDecryptionFlow.swift in Sources */,
@@ -7951,6 +7961,7 @@
 				64F07D0F20D0E83200A60C5C /* AppDelegate.swift in Sources */,
 				64F43BAD210B4C0B00982AFD /* BTCTx.swift in Sources */,
 				648139CA20DBADC900CAA4D8 /* Constants.swift in Sources */,
+				55340307224F227E007F355D /* UnknownFileTableViewCell.swift in Sources */,
 				55EF6AD821A812C6007E074A /* InviteTableViewCell.swift in Sources */,
 				640D88DB20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.swift in Sources */,
 				64C9D49D20FDFA23000B0774 /* EditABUnitViewModel.swift in Sources */,
@@ -8440,6 +8451,7 @@
 				55EF6B5F21A81A58007E074A /* CommunicationListModel.swift in Sources */,
 				64F43BAE210B4C0B00982AFD /* BTCTx.swift in Sources */,
 				64F07DAE20D240FF00A60C5C /* Any+ReachabilityMonitor.swift in Sources */,
+				55340308224F227F007F355D /* UnknownFileTableViewCell.swift in Sources */,
 				55EF6AD921A812C6007E074A /* InviteTableViewCell.swift in Sources */,
 				640D88DC20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.swift in Sources */,
 				64C9D49E20FDFA23000B0774 /* EditABUnitViewModel.swift in Sources */,

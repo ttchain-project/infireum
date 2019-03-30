@@ -13,6 +13,7 @@ import SwiftyJSON
 enum MessageType {
     case general
     case file
+    case image
     case voiceMessage
     case receipt(messageDict : [String:String])
     case audioCall (messageDetails : CallMessageModel)
@@ -109,6 +110,9 @@ class MessageModel {
                 }
                 if url.pathExtension == "3gp" || url.pathExtension == "3gpp" {
                     return .voiceMessage
+                }
+                if ["jpg","jpeg","png"].contains(url.pathExtension) {
+                    return .image
                 }
                 return .file
             case "audio","video":

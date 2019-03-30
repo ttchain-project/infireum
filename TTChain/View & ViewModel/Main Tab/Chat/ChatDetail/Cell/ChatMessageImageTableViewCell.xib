@@ -63,11 +63,13 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="dateLabel" destination="dus-Yw-CTb" id="ZCb-yJ-TPo"/>
+                <outlet property="heightConstraint" destination="gVc-Oo-Lti" id="11F-lE-1AQ"/>
                 <outlet property="msgImageView" destination="blz-tX-4G0" id="lqy-oO-tNI"/>
                 <outlet property="profilePics" destination="HAd-jb-DrP" id="SGd-Mt-USO"/>
                 <outlet property="receiverConstraint" destination="1vD-iD-ob9" id="Mfs-y3-3fJ"/>
                 <outlet property="senderConstraint" destination="Eey-zt-v2U" id="0sF-r2-Hw2"/>
                 <outlet property="senderNameLabel" destination="Dm8-pG-23B" id="Mia-Fp-pgX"/>
+                <outlet property="widthConstraint" destination="XEN-nh-nxA" id="aY9-hw-49r"/>
             </connections>
             <point key="canvasLocation" x="265.60000000000002" y="241.07946026986508"/>
         </tableViewCell>

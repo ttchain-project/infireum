@@ -1,16 +1,15 @@
 //
-//  ChatMessageImageTableViewCell.swift
+//  UnknownFileTableViewCell.swift
 //  TTChain
 //
-//  Created by Ajinkya Sharma on 2019/1/24.
+//  Created by Ajinkya Sharma on 2019/3/30.
 //  Copyright © 2019 gib. All rights reserved.
 //
 
 import UIKit
-import RxCocoa
 import RxSwift
 
-class ChatMessageImageTableViewCell: UITableViewCell {
+class UnknownFileTableViewCell: UITableViewCell {
 
     var bag: DisposeBag = DisposeBag.init()
     @IBOutlet weak var profilePics: UIImageView!
@@ -20,13 +19,14 @@ class ChatMessageImageTableViewCell: UITableViewCell {
     @IBOutlet var senderConstraint: NSLayoutConstraint!
     @IBOutlet var receiverConstraint: NSLayoutConstraint!
     
-    @IBOutlet var heightConstraint: NSLayoutConstraint!
-    @IBOutlet var widthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var fileNameLabel: UILabel!
+    @IBOutlet weak var bgView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.setup()
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,12 +42,10 @@ class ChatMessageImageTableViewCell: UITableViewCell {
     
     func setup() {
         
-        self.msgImageView.layer.borderWidth = 5.0
-        self.msgImageView.layer.borderColor = UIColor.white.cgColor
         dateLabel.set(textColor: .black, font: .owMedium(size: 14))
         senderNameLabel.set(textColor: .black, font: .owDemiBold(size: 16))
         profilePics.layer.cornerRadius = 20
-
+        
         self.backgroundColor = .clear
         self.selectionStyle = .none
     }
@@ -57,18 +55,18 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         if message.isUserSender() {
             self.profilePics.isHidden = true
             self.dateLabel.textAlignment = .right
-            self.senderConstraint.isActive = true
-            self.receiverConstraint.isActive = false
+//            self.senderConstraint.isActive = true
+//            self.receiverConstraint.isActive = false
             self.senderNameLabel.text = ""
-            self.msgImageView.backgroundColor = UIColor.init(red: 137, green: 216, blue: 128)
+            self.bgView.backgroundColor = UIColor.init(red: 137, green: 216, blue: 128)
             
         }else {
             self.profilePics.isHidden = false
             self.dateLabel.textAlignment = .left
-            self.senderConstraint.isActive = false
-            self.receiverConstraint.isActive = true
+//            self.senderConstraint.isActive = false
+//            self.receiverConstraint.isActive = true
             self.profilePics.setProfileImage(image: leftImage, tempName: message.senderName)
-
+            
             self.senderNameLabel.text = message.senderName
             
         }
@@ -79,15 +77,7 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         guard let url = URL.init(string: message.msg) else {
             return
         }
-        if case .voiceMessage = message.msgType {
-            self.msgImageView.image = #imageLiteral(resourceName: "voice_message_icon")
-            self.heightConstraint.constant = 48
-            self.widthConstraint.constant = 48
-        }else {
-            self.msgImageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "no_image"))
-            self.heightConstraint.constant = 150
-            self.widthConstraint.constant = 150
+            self.msgImageView.image = #imageLiteral(resourceName: "unknown_file")
+            self.fileNameLabel.text = url.lastPathComponent
         }
-
-    }
 }
