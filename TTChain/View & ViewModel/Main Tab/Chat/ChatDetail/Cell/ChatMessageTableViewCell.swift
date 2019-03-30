@@ -26,6 +26,8 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     @IBOutlet weak var senderNameLabel: UILabel!
     @IBOutlet weak var rightDateLabel: UILabel!
     @IBOutlet weak var profilePicBtn: UIButton!
+    @IBOutlet weak var selectMessageButton: UIButton!
+    @IBOutlet weak var selectMessageButtonWidth: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,6 +61,9 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         
         leftMessageLabel.set(textColor: .black,font :.owRegular(size: 18))
         rightMessageLabel.set(textColor: .black,font :.owRegular(size: 18))
+        
+        self.selectMessageButtonWidth.constant = 0
+
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -67,6 +72,7 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     }
     
     func config(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
+        self.selectMessageButtonWidth.constant = 0
         if message.isUserSender() {
             self.configForSender(message: message)
         }else {
@@ -94,5 +100,18 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         self.rightSpeakerContentView.isHidden = true
         self.leftSpeakerContentView.isHidden = false
         self.senderNameLabel.text = message.senderName
+    }
+    
+    func setDataForForwarSelection(message:MessageModel, leftImage: String?,messageSelected:@escaping ((MessageModel) -> Void)) {
+        self.selectMessageButton.isSelected = message.isMessageSelected
+        self.selectMessageButton.rx.tap.asDriver().drive(onNext: { _ in
+            self.selectMessageButton.isSelected = !self.selectMessageButton.isSelected
+            messageSelected(message)
+        }).disposed(by: bag)
+        self.config(forMessage: message, leftImage: leftImage) { (_) in
+            
+        }
+       
+        self.selectMessageButtonWidth.constant = 36
     }
 }

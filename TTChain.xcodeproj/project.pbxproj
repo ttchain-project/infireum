@@ -86,6 +86,15 @@
 		5526B54022128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
 		5526B54122128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
 		5526B54222128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
+		553402F9224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
+		553402FA224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
+		553402FB224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
+		553402FC224E105A007F355D /* ForwarMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553402F8224E105A007F355D /* ForwarMessageViewController.xib */; };
+		553402FD224E105A007F355D /* ForwarMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553402F8224E105A007F355D /* ForwarMessageViewController.xib */; };
+		553402FE224E105A007F355D /* ForwarMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553402F8224E105A007F355D /* ForwarMessageViewController.xib */; };
+		55340300224E123C007F355D /* ForwarMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402FF224E123C007F355D /* ForwarMessageViewModel.swift */; };
+		55340301224E123C007F355D /* ForwarMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402FF224E123C007F355D /* ForwarMessageViewModel.swift */; };
+		55340302224E123C007F355D /* ForwarMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402FF224E123C007F355D /* ForwarMessageViewModel.swift */; };
 		55340305224F227A007F355D /* UnknownFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55340303224F227A007F355D /* UnknownFileTableViewCell.swift */; };
 		55340306224F227A007F355D /* UnknownFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55340304224F227A007F355D /* UnknownFileTableViewCell.xib */; };
 		55340307224F227E007F355D /* UnknownFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55340303224F227A007F355D /* UnknownFileTableViewCell.swift */; };
@@ -2054,6 +2063,9 @@
 		5526B53322114BB100573576 /* ForwardListContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwardListContainerViewController.xib; sourceTree = "<group>"; };
 		5526B53A22114BDB00573576 /* ForwardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardListViewModel.swift; sourceTree = "<group>"; };
 		5526B53F22128E7700573576 /* PhotoAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthHandler.swift; sourceTree = "<group>"; };
+		553402F7224E105A007F355D /* ForwarMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwarMessageViewController.swift; sourceTree = "<group>"; };
+		553402F8224E105A007F355D /* ForwarMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwarMessageViewController.xib; sourceTree = "<group>"; };
+		553402FF224E123C007F355D /* ForwarMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwarMessageViewModel.swift; sourceTree = "<group>"; };
 		55340303224F227A007F355D /* UnknownFileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownFileTableViewCell.swift; sourceTree = "<group>"; };
 		55340304224F227A007F355D /* UnknownFileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnknownFileTableViewCell.xib; sourceTree = "<group>"; };
 		5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeEncryptionFlow.swift; sourceTree = "<group>"; };
@@ -2941,6 +2953,16 @@
 			path = PhotoAuth;
 			sourceTree = "<group>";
 		};
+		553402F6224E103A007F355D /* ForwardMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				553402F7224E105A007F355D /* ForwarMessageViewController.swift */,
+				553402F8224E105A007F355D /* ForwarMessageViewController.xib */,
+				553402FF224E123C007F355D /* ForwarMessageViewModel.swift */,
+			);
+			path = ForwardMessageView;
+			sourceTree = "<group>";
+		};
 		5539A46821676F0300A59ACC /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
@@ -3441,6 +3463,7 @@
 		55EF69D421A812C5007E074A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				553402F6224E103A007F355D /* ForwardMessageView */,
 				55EF69D521A812C5007E074A /* Cell */,
 				55EF69D821A812C5007E074A /* ChatDetail */,
 				55EF69EA21A812C5007E074A /* ChatListViewController.swift */,
@@ -6346,6 +6369,7 @@
 				5508742621EDC6EF007B3B3B /* ExploreDetailCollectionViewController.xib in Resources */,
 				55EF6A5621A812C6007E074A /* ChatViewController.xib in Resources */,
 				64D8263920DFABB000C8FC63 /* DepositViewController.xib in Resources */,
+				553402FE224E105A007F355D /* ForwarMessageViewController.xib in Resources */,
 				64D8264C20E0D8C400C8FC63 /* ChangeAssetViewController.xib in Resources */,
 				64F07CF520D0E4CE00A60C5C /* LaunchScreen.storyboard in Resources */,
 				6470D65120F1A1A200EB0780 /* WithdrawalBTCFeeInfoViewController.xib in Resources */,
@@ -6559,6 +6583,7 @@
 				6470D64320F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
 				55E1141321F72CF70062198B /* ChatKeyboardView.xib in Resources */,
 				555E4AAE224CB7E800C7CAD5 /* RedEnvelopeHistoryViewController.xib in Resources */,
+				553402FC224E105A007F355D /* ForwarMessageViewController.xib in Resources */,
 				6424B64B20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.xib in Resources */,
 				6446E23020FC966800EC1E2E /* SettingsViewController.xib in Resources */,
 				55EF6A3F21A812C6007E074A /* ChatHistoryTableViewCell.xib in Resources */,
@@ -6728,6 +6753,7 @@
 				6470D64420F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
 				55E1141421F72CF70062198B /* ChatKeyboardView.xib in Resources */,
 				555E4AAF224CB7E800C7CAD5 /* RedEnvelopeHistoryViewController.xib in Resources */,
+				553402FD224E105A007F355D /* ForwarMessageViewController.xib in Resources */,
 				6424B64C20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.xib in Resources */,
 				6446E23120FC966800EC1E2E /* SettingsViewController.xib in Resources */,
 				55EF6A4021A812C6007E074A /* ChatHistoryTableViewCell.xib in Resources */,
@@ -7560,6 +7586,7 @@
 				557C850822360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64083D1A21106F8B00DE1C31 /* BTCTxHandler.swift in Sources */,
 				64A1179220D5372C00797C2C /* ChainType.swift in Sources */,
+				55340302224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				55EF6B7621A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
 				64C9D4A42101BF53000B0774 /* OWQRCodeParser.swift in Sources */,
 				55EF6B0D21A812C7007E074A /* UserProfileViewController.swift in Sources */,
@@ -7591,6 +7618,7 @@
 				64813A2D20DCA6EE00CAA4D8 /* Language+CoreDataClass.swift in Sources */,
 				5539A4A221676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.swift in Sources */,
 				64F07DD220D241A000A60C5C /* WindowOrientaionLocker.swift in Sources */,
+				553402FB224E105A007F355D /* ForwarMessageViewController.swift in Sources */,
 				649E489C20ECACBA00B217AD /* PwdHintViewModel.swift in Sources */,
 				555E4AC4224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.swift in Sources */,
 				64B98ED420F98E9B00C4EB11 /* LightningTransactionViewController.swift in Sources */,
@@ -8057,6 +8085,7 @@
 				557C850622360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64F43BA9210B259700982AFD /* Unspent.swift in Sources */,
 				55EF6B7421A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
+				55340300224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				64C9D4B021042F6F000B0774 /* LocalAuthViewModel.swift in Sources */,
 				55EF6B0B21A812C7007E074A /* UserProfileViewController.swift in Sources */,
 				64813A7A20DCADD500CAA4D8 /* Identity+Helper.swift in Sources */,
@@ -8088,6 +8117,7 @@
 				645D4E7B211151C00052D0E1 /* ETHTx.swift in Sources */,
 				6485005620DA440400107473 /* KLTagFlowLayout.swift in Sources */,
 				64B2772320D55BDC004FF75B /* KLRxImageDownloader.swift in Sources */,
+				553402F9224E105A007F355D /* ForwarMessageViewController.swift in Sources */,
 				649E48C120ECF42600B217AD /* WalletPKeyQRCodeViewModel.swift in Sources */,
 				555E4AC2224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.swift in Sources */,
 				6473AE9621421DC1009FB8E9 /* APIWalletCreateResult.swift in Sources */,
@@ -8547,6 +8577,7 @@
 				557C850722360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64813A4120DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataProperties.swift in Sources */,
 				55EF6B7521A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
+				55340301224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				64813A6820DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataClass.swift in Sources */,
 				55EF6B0C21A812C7007E074A /* UserProfileViewController.swift in Sources */,
 				640D890920EF5FA10010D986 /* TransRecordListTableViewCell.swift in Sources */,
@@ -8578,6 +8609,7 @@
 				64F07DD420D241A000A60C5C /* GTThemeExtensions.swift in Sources */,
 				649E48BE20ECE7A700B217AD /* WalletPrivateKeyInfoViewModel.swift in Sources */,
 				648139C120DB8B7600CAA4D8 /* UINavigationBar+Shadow.swift in Sources */,
+				553402FA224E105A007F355D /* ForwarMessageViewController.swift in Sources */,
 				6473AE9721421DC1009FB8E9 /* APIWalletCreateResult.swift in Sources */,
 				555E4AC3224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.swift in Sources */,
 				640D88ED20EF0D890010D986 /* AssetDetailViewController.swift in Sources */,

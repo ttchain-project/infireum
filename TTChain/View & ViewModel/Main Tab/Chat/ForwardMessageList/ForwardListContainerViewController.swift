@@ -102,7 +102,6 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
         let vc = vcs[index]
         vc.onForwardChatToSelection.asObservable().subscribe(onNext: { (model) in
             self.forwardChatToSelection.accept(model)
-            self.navigationController?.popViewController(animated: true)
         }).disposed(by: vc.bag)
     }
 }

@@ -45,12 +45,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7f7-Rp-jJv">
+                        <rect key="frame" x="232" y="75.5" width="36" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="Paz-Wd-Sgs"/>
+                            <constraint firstAttribute="width" constant="36" id="q1Q-vd-Kgn"/>
+                        </constraints>
+                        <state key="normal" image="checkbox_unselected"/>
+                        <state key="selected" image="checkbox_selected"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="blz-tX-4G0" firstAttribute="leading" secondItem="HAd-jb-DrP" secondAttribute="trailing" constant="12" id="1vD-iD-ob9"/>
                     <constraint firstItem="Dm8-pG-23B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3.5" id="4Rl-cM-VNy"/>
+                    <constraint firstAttribute="trailing" secondItem="7f7-Rp-jJv" secondAttribute="trailing" constant="20" id="6f4-Gb-NVM"/>
                     <constraint firstItem="dus-Yw-CTb" firstAttribute="centerY" secondItem="Dm8-pG-23B" secondAttribute="centerY" id="DcD-s4-4b4"/>
-                    <constraint firstAttribute="trailing" secondItem="blz-tX-4G0" secondAttribute="trailing" constant="20" id="Eey-zt-v2U"/>
+                    <constraint firstItem="7f7-Rp-jJv" firstAttribute="leading" secondItem="blz-tX-4G0" secondAttribute="trailing" constant="10" id="Eey-zt-v2U"/>
                     <constraint firstItem="HAd-jb-DrP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="HHg-Ob-A1o"/>
                     <constraint firstItem="dus-Yw-CTb" firstAttribute="leading" secondItem="Dm8-pG-23B" secondAttribute="trailing" constant="2" id="Jvz-nW-xgS"/>
                     <constraint firstAttribute="bottom" secondItem="blz-tX-4G0" secondAttribute="bottom" constant="10" id="Kkf-QZ-l9D"/>
@@ -58,6 +68,7 @@
                     <constraint firstItem="HAd-jb-DrP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="aYc-WD-hLA"/>
                     <constraint firstAttribute="trailing" secondItem="dus-Yw-CTb" secondAttribute="trailing" constant="10" id="m9u-c0-RXl"/>
                     <constraint firstItem="blz-tX-4G0" firstAttribute="top" secondItem="Dm8-pG-23B" secondAttribute="bottom" constant="20" id="rZ9-g2-8aV"/>
+                    <constraint firstItem="7f7-Rp-jJv" firstAttribute="top" secondItem="blz-tX-4G0" secondAttribute="top" id="tuF-MK-yMO"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -67,6 +78,8 @@
                 <outlet property="msgImageView" destination="blz-tX-4G0" id="lqy-oO-tNI"/>
                 <outlet property="profilePics" destination="HAd-jb-DrP" id="SGd-Mt-USO"/>
                 <outlet property="receiverConstraint" destination="1vD-iD-ob9" id="Mfs-y3-3fJ"/>
+                <outlet property="selectMessageButton" destination="7f7-Rp-jJv" id="yyc-PY-sHh"/>
+                <outlet property="selectMessageButtonWidth" destination="q1Q-vd-Kgn" id="jAn-X4-MXZ"/>
                 <outlet property="senderConstraint" destination="Eey-zt-v2U" id="0sF-r2-Hw2"/>
                 <outlet property="senderNameLabel" destination="Dm8-pG-23B" id="Mia-Fp-pgX"/>
                 <outlet property="widthConstraint" destination="XEN-nh-nxA" id="aY9-hw-49r"/>
@@ -74,4 +87,8 @@
             <point key="canvasLocation" x="265.60000000000002" y="241.07946026986508"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="checkbox_selected" width="48" height="48"/>
+        <image name="checkbox_unselected" width="48" height="48"/>
+    </resources>
 </document>

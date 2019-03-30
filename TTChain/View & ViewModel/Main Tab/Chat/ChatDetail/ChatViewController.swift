@@ -109,6 +109,16 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         setUpScrennShotDetection()
     }
     
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -426,11 +436,11 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         }
         let cancelButton = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
         let forward = UIAlertAction.init(title:LM.dls.forward,style:.default) { [unowned self] (_) in
-            let vc = ForwardListContainerViewController.init()
-            vc.config(constructor: ForwardListContainerViewController.Config(messageModel: message))
+            let config = ForwarMessageViewController.Config.init(messages: self.viewModel.chatMessages, roomId: self.viewModel.input.roomID, avatarImage: self.viewModel.input.chatAvatar, memberAvatarMapping: self.viewModel.memberAvatarMapping)
+            let vc = ForwarMessageViewController.instance(from: config)
             self.navigationController?.pushViewController(vc)
-            vc.onForwardChatToSelection.asObservable().subscribe(onNext: { [unowned self] (model) in
-                self.refreshChatViewForForwardedChat(withMessage: message, chatList: model)
+            vc.onForwardMessagesSelection.asObservable().subscribe(onNext: { [unowned self] (model,messages) in
+                self.refreshChatViewForForwardedChat(withMessage: messages, chatList: model)
             }).disposed(by: vc.bag)
         }
         
@@ -552,7 +562,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
     }
     
-    private func refreshChatViewForForwardedChat(withMessage message:MessageModel, chatList:ChatListPage) {
+    private func refreshChatViewForForwardedChat(withMessage messages:[MessageModel], chatList:ChatListPage) {
         var roomType: RoomType?
         var chatTitle: String = ""
         var roomId:String = ""
@@ -587,17 +597,23 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.bag = DisposeBag()
         self.config(constructor: ChatViewController.Config.init(roomType: roomType!, chatTitle: chatTitle, roomID: roomId, chatAvatar: chatAvatar, uid: uid))
         
-        switch message.msgType {
-        case .general :
-            self.viewModel.sendMessage(txt:message.msg)
-        case .file:
-            guard let image = message.messageImage else {
+//        self.hud.startAnimating(inView: self.view)
+        for message in messages {
+            
+            switch message.msgType {
+            case .general :
+                self.viewModel.sendMessage(txt:message.msg)
+            case .image:
+                guard let image = message.messageImage else {
+                    return
+                }
+                self.viewModel.sendImageAsMessage(image: image)
+            
+            default:
                 return
             }
-            self.viewModel.sendImageAsMessage(image: image)
-        default:
-            return
         }
+//        self.hud.stopAnimating()
     }
     
     func makeAudioCall() {

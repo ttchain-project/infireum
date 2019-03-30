@@ -44,6 +44,10 @@ class ChatViewModel: KLRxViewModel {
         return _messages.asObservable().share()
     }
     
+    public var chatMessages:[MessageModel] {
+        return  _messages.value
+    }
+    
     public var shouldScrollToBottom: PublishSubject<Void> = PublishSubject.init()
     public var shouldRefreshCellsForDataUpdate: PublishSubject<Void> = PublishSubject.init()
     var bag: DisposeBag = DisposeBag()
