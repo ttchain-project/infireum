@@ -265,10 +265,18 @@ final class GroupInformationViewModel: ViewModel {
         
         Observable.combineLatest(output.groupName.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged(), output.animatableSectionModel, output.introduction.throttle(0.3, scheduler: MainScheduler.instance).distinctUntilChanged()) { [unowned self] (groupName, sectionModels, introduce) -> Bool in
             guard let groupName = groupName else { return false }
+            
             switch self.input.typeSubject.value {
             case .normal: return true
-            case .edit,.create: guard !(sectionModels.first(where:{ $0.model == self.invitedMemberTitle })?
-                .items.compactMap({ $0.input.groupMemberModel?.uid }).isEmpty ?? true) else { return false }
+            case .create:
+                guard !(sectionModels.first(where:{ $0.model == self.invitedMemberTitle })?
+                .items.compactMap({
+                    $0.input.groupMemberModel?.uid }).isEmpty ?? true) else { return false }
+                
+            case .edit:
+                guard !(sectionModels.first(where:{ $0.model == LM.dls.group_member })?
+                    .items.compactMap({
+                        $0.input.groupMemberModel?.uid }).isEmpty ?? true) else { return false }
             }
             switch (groupName.count, introduce?.count ?? 0) {
             case (1...20, 0...100): return true

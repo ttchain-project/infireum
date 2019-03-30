@@ -191,7 +191,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 }).disposed(by: chatCell.bag)
                 cell = chatCell
                 
-            case .file,.voiceMessage:
+            case .image,.voiceMessage:
                 
                 let chatImgCell = tv.dequeueReusableCell(withIdentifier: ChatMessageImageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageImageTableViewCell
                 
@@ -216,22 +216,20 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 
                 cell = chatImgCell
                 
-            case .image :
-                
-                let chatImgCell = tv.dequeueReusableCell(withIdentifier: UnknownFileTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! UnknownFileTableViewCell
-                
-                chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
+            case .file :
+                let unknownFileCell = tv.dequeueReusableCell(withIdentifier: UnknownFileTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! UnknownFileTableViewCell
+                unknownFileCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
                     guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
                         return
                     }
                     self.toUserProfileVC(forFriend: friendModel)
                 })
-                chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
-                    messageModel.messageImage = chatImgCell.msgImageView.image
+                unknownFileCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    messageModel.messageImage = unknownFileCell.msgImageView.image
                     self.showOptionsForLongGesture(for: messageModel)
-                }).disposed(by: chatImgCell.bag)
+                }).disposed(by: unknownFileCell.bag)
                 
-                cell = chatImgCell
+                cell = unknownFileCell
                 
             case .receipt :
                 let receiptCell = tv.dequeueReusableCell(withIdentifier: ReceiptTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ReceiptTableViewCell
