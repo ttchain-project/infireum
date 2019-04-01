@@ -23,10 +23,14 @@ class ChatMessageImageTableViewCell: UITableViewCell {
     @IBOutlet var heightConstraint: NSLayoutConstraint!
     @IBOutlet var widthConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var selectMessageButton: UIButton!
+    @IBOutlet weak var selectMessageButtonWidth: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.setup()
+        self.selectMessageButtonWidth.constant = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,6 +57,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
     }
     
     func setMessage(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
+        self.selectMessageButtonWidth.constant = 0
+
         dateLabel.text = message.timestamp.string()
         if message.isUserSender() {
             self.profilePics.isHidden = true
@@ -88,6 +94,20 @@ class ChatMessageImageTableViewCell: UITableViewCell {
             self.heightConstraint.constant = 150
             self.widthConstraint.constant = 150
         }
-
+    }
+    
+    func setDataForForwarSelection(message:MessageModel, leftImage: String?,messageSelected:@escaping ((MessageModel) -> Void)) {
+        
+        self.selectMessageButton.isSelected = message.isMessageSelected
+        
+        self.selectMessageButton.rx.tap.asDriver().drive(onNext: { _ in
+            self.selectMessageButton.isSelected = !self.selectMessageButton.isSelected
+            messageSelected(message)
+        }).disposed(by: bag)
+        
+        self.setMessage(forMessage: message, leftImage: leftImage) { (_) in
+            
+        }
+        self.selectMessageButtonWidth.constant = 36
     }
 }

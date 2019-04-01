@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import Alamofire
 import RxSwift
 
 class KLRxImageDownloader {
@@ -42,3 +43,38 @@ class KLRxImageDownloader {
     }
 }
 
+
+
+class FileDownloader {
+    static let instance = FileDownloader.init()
+    
+    private let bag = DisposeBag.init()
+
+    func download(source: URL, onComplete: @escaping (APIResult<Data>) -> Void) {
+        let single = RxAPIResponse<Data>.create {
+            observer in
+            let req = URLRequest.init(url: source)
+            let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+            
+            Alamofire.download(req, to: destination).downloadProgress { (progress) in
+                
+                }.response { (response) in
+                    let url = response.destinationURL
+                    guard let file = try? Data.init(contentsOf: url!) else {
+                        observer(.success(APIResult.failed(error: .noData)))
+                        return
+                    }
+                    observer(.success(APIResult.success(file)))
+
+            }
+            return Disposables.create()
+        }
+
+        single.subscribe(onSuccess: { (result) in
+            switch result {
+            case .failed(error: let err): onComplete(.failed(error: err))
+            case .success(let data): onComplete(.success(data))
+            }
+        }).disposed(by: bag)
+    }
+}

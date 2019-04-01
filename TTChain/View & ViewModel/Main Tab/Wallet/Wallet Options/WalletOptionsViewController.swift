@@ -288,6 +288,7 @@ final class WalletOptionsViewController:KLModuleViewController, KLVMVC {
     }
     
     func chooseWalletActionSheet(wallets:[Wallet], source: MainWalletViewController.Source) {
+    
         let actionSheet = UIAlertController.init(title: LM.dls.select_wallet_address, message: "", preferredStyle: .actionSheet)
         
         for wallet in wallets {
