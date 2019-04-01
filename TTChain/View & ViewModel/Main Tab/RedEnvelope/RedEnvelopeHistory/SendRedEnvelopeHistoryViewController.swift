@@ -14,17 +14,27 @@ class SendRedEnvelopeHistoryViewController: UIViewController {
         didSet {
             viewModel.output.isDoneLabelHiddenSubject.bind(to: isDoneLabel.rx.isHidden)
                 .disposed(by: viewModel.disposeBag)
+            isDoneLabel.text = LM.dls.red_env_history_money_transfered
         }
     }
+    
+    @IBOutlet private weak var isWaitingForCollection: UILabel! {
+        didSet {
+            isWaitingForCollection.text = LM.dls.red_env_history_waiting_for_collection
+        }
+    }
+    
     @IBOutlet private weak var isWaitingLabel: UILabel! {
         didSet {
             viewModel.output.isWaitingLabelHiddenSubject.bind(to: isWaitingLabel.rx.isHidden)
                 .disposed(by: viewModel.disposeBag)
+            isWaitingLabel.text = LM.dls.red_env_history_waiting_for_money
         }
     }
     @IBOutlet private weak var progressImageView: UIImageView! {
         didSet {
             viewModel.output.imageSubject.bind(to: progressImageView.rx.image).disposed(by: viewModel.disposeBag)
+            
         }
     }
     @IBOutlet private weak var tableView: UITableView! {

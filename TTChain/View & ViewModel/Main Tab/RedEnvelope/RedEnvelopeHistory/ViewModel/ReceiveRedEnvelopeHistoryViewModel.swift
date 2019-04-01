@@ -71,10 +71,10 @@ final class ReceiveRedEnvelopeHistoryViewModel: ViewModel {
 
     private func setUpInformation(_ information: Information, member: Information.Member) {
         if member.uid == Tokens.getUID() {
-            output.statusSubject.onNext(member.isDone ? "恭喜，红包钱入帐了" : "等待塞钱进红包")
+            output.statusSubject.onNext(member.isDone ? LM.dls.red_env_send_sent_successfully : LM.dls.red_env_status_waiting_for_money(member.nickName))
             output.senderNameSubject.onNext(information.info.senderName)
         } else {
-            output.statusSubject.onNext(member.isDone ? "塞钱成功" : "等待塞钱进红包")
+            output.statusSubject.onNext(member.isDone ? LM.dls.red_env_history_money_transfered : LM.dls.red_env_status_waiting_for_money(member.nickName))
             output.isSenderNameHiddenSubject.onNext(true)
             output.toSubject.onNext("To \(member.nickName)")
         }

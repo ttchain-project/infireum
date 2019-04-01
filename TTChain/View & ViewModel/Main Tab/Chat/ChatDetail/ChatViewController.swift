@@ -607,59 +607,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.bag = DisposeBag()
         self.config(constructor: ChatViewController.Config.init(roomType: roomType!, chatTitle: chatTitle, roomID: roomId, chatAvatar: chatAvatar, uid: uid))
         
-//        self.hud.startAnimating(inView: self.view)
-        for message in messages {
-            switch message.msgType {
-            case .general :
-                self.viewModel.sendMessage(txt:message.msg)
-            case .image:
-                if let url = URL.init(string:message.msg) {
-                    KLRxImageDownloader.instance.download(source: url) {[weak self] (result) in
-                        guard let `self` = self else {
-                            return
-                        }
-                        switch result {
-                        case .failed:
-                            break
-                        case .success(let img):
-                            self.viewModel.sendImageAsMessage(image: img)
-                        }
-                    }
-                }
-                continue
-            case .file:
-                if let url = URL.init(string: message.msg) {
-                    FileDownloader.instance.download(source: url) {[weak self] (result) in
-                        guard let `self` = self else {
-                            return
-                        }
-                        switch result {
-                        case .failed:
-                            break
-                        case .success(let data):
-                            self.viewModel.sendDataAsMessage(data: data, fileName:"file.\(url.lastPathComponent)")
-                        }
-                    }
-                }
-            case .voiceMessage:
-                if let url = URL.init(string: message.msg) {
-                    FileDownloader.instance.download(source: url) {[weak self] (result) in
-                        guard let `self` = self else {
-                            return
-                        }
-                        switch result {
-                        case .failed:
-                            break
-                        case .success(let data):
-                            self.viewModel.sendVoiceMessage(data: data)
-                        }
-                    }
-                }
-            default:
-                continue
-            }
-        }
-//        self.hud.stopAnimating()
+        self.viewModel.sendForwardedMessages(messages:messages)
     }
     
     func makeAudioCall() {

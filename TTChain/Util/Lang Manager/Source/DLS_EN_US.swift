@@ -638,10 +638,28 @@ struct DLS_EN_US: DLS {
     var red_env_send_confirm_transfer:String = "Confirm red envelope transfer"
 
     var red_env_send_records:String = "Red envelope sent records"
+    var red_env_history_receive:String = "Receive Records"
+    var red_env_history_sent:String = "Sent Records"
+    
+    var red_evn_history_title:String = "Red envelope record"
+    
+    var red_env_history_waiting_for_collection:String = "Waiting for Collection"
+    var red_env_history_waiting_for_money:String  = "Waiting for Transfer"
+    var red_env_history_money_transfered:String  = "Transfer complete"
+    
+    
     
     var receipt_receiving_currency:String = "Receiving Currency"
     var receiving_amount:String = "Collection Amount"
     
     var receive_red_env_no_wallet_found = "Can't find a wallet that supports this coin"
     var profile_edit_empty_name_error = "Please enter a valid name"
+    
+    var red_env_history_from_title:String = "From"
+    var red_env_history_create_time_title:String = "Red Envelope Create Time"
+    var red_env_history_receive_time_title:String = "Red Envelope Received Time"
+    var red_env_history_deposit_time_title:String = "Red Envelope Deposit Time"
+    
+    
+    
 }

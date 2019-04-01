@@ -634,6 +634,21 @@ struct DLS_ZH_CN: DLS {
     var receipt_receiving_currency:String = "收款币别"
     var receiving_amount:String = "收款金额"
     
+    var red_env_history_receive:String = "领取记录"
+    var red_env_history_sent:String = "发送记录"
+    var red_evn_history_title:String = "红包记录"
+    
+    var red_env_history_waiting_for_collection:String = "等待领取"
+    var red_env_history_waiting_for_money:String  = "等待塞钱"
+    var red_env_history_money_transfered:String  = "塞钱成功"
+
+    
     var receive_red_env_no_wallet_found = "找不到支持这枚硬币的钱包"
     var profile_edit_empty_name_error = "请输入有效的名字"
+
+    var red_env_history_from_title:String = "从"
+    var red_env_history_create_time_title:String = "送出红包时间"
+    var red_env_history_receive_time_title:String = "接收红包时间"
+    var red_env_history_deposit_time_title:String = "红包拨款时间"
+
 }

@@ -14,6 +14,7 @@ final class SendRedEnvelopeHistoryView: UIView {
         didSet {
             viewModel.output.amountContentSubject.bind(to: amountContentLabel.rx.text)
             .disposed(by: viewModel.disposeBag)
+            
         }
     }
     @IBOutlet private weak var amountLabel: UILabel! {
@@ -31,6 +32,7 @@ final class SendRedEnvelopeHistoryView: UIView {
         didSet {
             sendButton.rx.tap.bind(to: viewModel.input.sendTapSubject).disposed(by: viewModel.disposeBag)
             viewModel.output.isSendButtonHiddenRelay.bind(to: sendButton.rx.isHidden).disposed(by: viewModel.disposeBag)
+            sendButton.setTitle(LM.dls.red_env_send_confirm_transfer, for: .normal)
         }
     }
     @IBOutlet private weak var createTimeLabel: UILabel! {

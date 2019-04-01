@@ -645,11 +645,25 @@ struct DLS_ZH_TW: DLS {
     var red_env_send_confirm_transfer:String = "確認塞錢進紅包"
     var red_env_send_records:String = "紅包發送紀錄"
 
+    var red_env_history_receive:String = "領取記錄"
+    var red_env_history_sent:String = "發送記錄"
+    var red_evn_history_title:String = "紅包記錄"
+    
+    var red_env_history_waiting_for_collection:String = "等待領取"
+    var red_env_history_waiting_for_money:String  = "等待塞錢"
+    var red_env_history_money_transfered:String  = "塞錢成功"
+
+    
     var receipt_receiving_currency:String = "收款币别"
     var receiving_amount:String = "收款金額"
     var receive_red_env_no_wallet_found = "找不到支持這枚硬幣的錢包"
     
     var profile_edit_empty_name_error = "請輸入有效的名字"
+    var red_env_history_from_title:String = "從"
+    var red_env_history_create_time_title:String = "送出紅包時間"
+    var red_env_history_receive_time_title:String = "接收紅包時間"
+    var red_env_history_deposit_time_title:String = "紅包撥款時間"
+
 }
 
 

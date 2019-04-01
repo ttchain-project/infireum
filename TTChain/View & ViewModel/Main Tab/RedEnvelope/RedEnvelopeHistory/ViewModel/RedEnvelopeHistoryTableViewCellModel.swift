@@ -28,10 +28,10 @@ final class RedEnvelopeHistoryTableViewCellModel: ViewModel {
         let amount: String
         var statusString: String {
             switch status {
-            case .waitPaid, .waitSend: return "等待塞钱"
-            case .received: return "领取成功"
-            case .waitReceive: return "等待领取"
-            case .sent: return "塞钱完毕"
+            case .waitPaid, .waitSend: return LM.dls.red_env_waiting_to_send
+            case .received: return LM.dls.red_env_receive_status_received
+            case .waitReceive: return LM.dls.red_env_waiting_to_send
+            case .sent: return LM.dls.red_env_history_money_transfered
             }
         }
         let status: Status

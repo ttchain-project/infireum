@@ -621,7 +621,20 @@ protocol DynamicLocalizationSource {
 
     var receipt_receiving_currency:String{get set}
     var receiving_amount:String {get set}
+    var red_evn_history_title:String {get set}
 
+    var red_env_history_receive:String {get set}
+    var red_env_history_sent:String {get set}
+    
+    var red_env_history_waiting_for_collection:String {get set}
+    var red_env_history_waiting_for_money:String {get set}
+    var red_env_history_money_transfered:String {get set}
+    
     var receive_red_env_no_wallet_found:String {get set}
     var profile_edit_empty_name_error:String {get set}
+    var red_env_history_from_title:String {get set}
+    var red_env_history_create_time_title:String {get set}
+    var red_env_history_receive_time_title:String {get set}
+    var red_env_history_deposit_time_title:String {get set}
+
 }

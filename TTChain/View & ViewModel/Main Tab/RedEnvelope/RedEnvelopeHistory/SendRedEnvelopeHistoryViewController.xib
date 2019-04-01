@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendRedEnvelopeHistoryViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
                 <outlet property="isDoneLabel" destination="OGS-ct-M6F" id="N7e-1N-a4b"/>
+                <outlet property="isWaitingForCollection" destination="v4c-Hp-ct1" id="hPD-WQ-e5v"/>
                 <outlet property="isWaitingLabel" destination="ksn-Oo-hUJ" id="JWH-XF-IBf"/>
                 <outlet property="progressImageView" destination="5l8-x6-n3x" id="hzK-F1-fv1"/>
                 <outlet property="tableView" destination="S6R-jF-org" id="Jt5-ph-37v"/>
@@ -37,20 +38,20 @@
                                 <constraint firstAttribute="height" constant="24" id="rDd-IN-4as"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待领取" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4c-Hp-ct1">
-                            <rect key="frame" x="18" y="40" width="61.5" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting For Collection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4c-Hp-ct1">
+                            <rect key="frame" x="18" y="40" width="101.5" height="36"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <color key="textColor" name="purplishGrey"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="塞钱成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGS-ct-M6F">
-                            <rect key="frame" x="295.5" y="40" width="61.5" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Successfully transfered" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGS-ct-M6F">
+                            <rect key="frame" x="255.5" y="40" width="101.5" height="36"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <color key="textColor" name="purplishGrey"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待塞钱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksn-Oo-hUJ">
-                            <rect key="frame" x="157" y="40" width="61.5" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waiting for money" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksn-Oo-hUJ">
+                            <rect key="frame" x="136.5" y="40" width="102" height="36"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <color key="textColor" name="purplishGrey"/>
                             <nil key="highlightedColor"/>
@@ -60,11 +61,14 @@
                     <constraints>
                         <constraint firstItem="OGS-ct-M6F" firstAttribute="centerY" secondItem="v4c-Hp-ct1" secondAttribute="centerY" id="0WG-hn-nqa"/>
                         <constraint firstAttribute="bottom" secondItem="dMb-C8-km4" secondAttribute="bottom" id="4gF-XF-w3x"/>
+                        <constraint firstItem="OGS-ct-M6F" firstAttribute="width" secondItem="5l8-x6-n3x" secondAttribute="width" multiplier="0.3" id="6gt-sT-am1"/>
                         <constraint firstItem="ksn-Oo-hUJ" firstAttribute="centerY" secondItem="v4c-Hp-ct1" secondAttribute="centerY" id="92P-cU-UVb"/>
                         <constraint firstItem="v4c-Hp-ct1" firstAttribute="leading" secondItem="5l8-x6-n3x" secondAttribute="leading" id="B8v-So-DEW"/>
                         <constraint firstItem="5l8-x6-n3x" firstAttribute="top" secondItem="nbw-cp-4Yy" secondAttribute="top" constant="7" id="KlQ-fR-tGm"/>
                         <constraint firstItem="5l8-x6-n3x" firstAttribute="leading" secondItem="nbw-cp-4Yy" secondAttribute="leading" constant="18" id="LTq-ko-DAY"/>
                         <constraint firstAttribute="height" constant="69" id="Mh9-ut-J5e"/>
+                        <constraint firstItem="v4c-Hp-ct1" firstAttribute="width" secondItem="5l8-x6-n3x" secondAttribute="width" multiplier="0.3" id="OPy-F6-mlW"/>
+                        <constraint firstItem="ksn-Oo-hUJ" firstAttribute="width" secondItem="5l8-x6-n3x" secondAttribute="width" multiplier="0.3" id="Sd3-Lo-w3c"/>
                         <constraint firstItem="ksn-Oo-hUJ" firstAttribute="centerX" secondItem="dMb-C8-km4" secondAttribute="centerX" id="ejX-5B-LM9"/>
                         <constraint firstItem="OGS-ct-M6F" firstAttribute="trailing" secondItem="5l8-x6-n3x" secondAttribute="trailing" id="hJe-84-nFL"/>
                         <constraint firstItem="dMb-C8-km4" firstAttribute="leading" secondItem="nbw-cp-4Yy" secondAttribute="leading" id="u2U-V9-SE2"/>

@@ -57,6 +57,7 @@ class FriendRequestInformationModel: FriendModel,ChatListPage {
     }
 }
 
+
 class FriendInfoModel: FriendModel,ChatListPage {
     var avatarUrl: String?
     
@@ -69,19 +70,5 @@ class FriendInfoModel: FriendModel,ChatListPage {
         self.nickName = nickName
         self.roomId = roomId
         self.avatarUrl = headhShotImgString
-
-//            guard let url = URL.init(string: headhShotImgString) else {
-//                return
-//            }
-//            KLRxImageDownloader.instance.download(source: url) {
-//                result in
-//                switch result {
-//                case .failed: warning("Cannot download img from url \(headhShotImgString)")
-//                case .success(let img):
-//                    self.avatar  = img
-//                }
-//            }
-        }
+    }
 }
-
-

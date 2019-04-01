@@ -26,6 +26,7 @@ class RedEnvelopeHistoryViewController: UIViewController {
             sendButton.rx.tap.bind(to: viewModel.input.sendTapSubject).disposed(by: viewModel.disposeBag)
             viewModel.output.sendButtonColorSubject.bind(to: sendButton.rx.titleColor(for: .normal))
                 .disposed(by: viewModel.disposeBag)
+            sendButton.setTitle(LM.dls.red_env_history_sent, for: .normal)
         }
     }
     @IBOutlet private weak var receiveButton: UIButton! {
@@ -33,6 +34,7 @@ class RedEnvelopeHistoryViewController: UIViewController {
             receiveButton.rx.tap.bind(to: viewModel.input.receiveTapSubject).disposed(by: viewModel.disposeBag)
             viewModel.output.receiveButtonColorSubject.bind(to: receiveButton.rx.titleColor(for: .normal))
                 .disposed(by: viewModel.disposeBag)
+            receiveButton.setTitle(LM.dls.red_env_history_receive, for: .normal)
         }
     }
     @IBOutlet private weak var underLineView: UIView!
@@ -82,7 +84,7 @@ class RedEnvelopeHistoryViewController: UIViewController {
     }
 
     private func setUpView() {
-        title = "红包纪录"
+        title = LM.dls.red_evn_history_title
 //        setUpBackBarButtonItem()
         viewModel.output.isReceivedRelay.skip(1).subscribe(onNext: { [unowned self] isReceived in
             if self.underLineConstraint != nil {

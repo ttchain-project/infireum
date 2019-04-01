@@ -183,6 +183,60 @@ class ChatViewModel: KLRxViewModel {
         self.sendMessage(txt: message)
     }
 
+    func sendForwardedMessages(messages:[MessageModel]) {
+        
+        for message in messages {
+            switch message.msgType {
+            case .general :
+                self.sendMessage(txt:message.msg)
+            case .image:
+                if let url = URL.init(string:message.msg) {
+                    KLRxImageDownloader.instance.download(source: url) {[weak self] (result) in
+                        guard let `self` = self else {
+                            return
+                        }
+                        switch result {
+                        case .failed:
+                            break
+                        case .success(let img):
+                            self.sendImageAsMessage(image: img)
+                        }
+                    }
+                }
+                continue
+            case .file:
+                if let url = URL.init(string: message.msg) {
+                    FileDownloader.instance.download(source: url) {[weak self] (result) in
+                        guard let `self` = self else {
+                            return
+                        }
+                        switch result {
+                        case .failed:
+                            break
+                        case .success(let data):
+                            self.sendDataAsMessage(data: data, fileName:"file.\(url.lastPathComponent)")
+                        }
+                    }
+                }
+            case .voiceMessage:
+                if let url = URL.init(string: message.msg) {
+                    FileDownloader.instance.download(source: url) {[weak self] (result) in
+                        guard let `self` = self else {
+                            return
+                        }
+                        switch result {
+                        case .failed:
+                            break
+                        case .success(let data):
+                            self.sendVoiceMessage(data: data)
+                        }
+                    }
+                }
+            default:
+                continue
+            }
+        }
+    }
     
     func sendMessage() {
         var string = self.input.messageText.text

@@ -13,13 +13,44 @@ class ReceiveRedEnvelopeHistoryViewController: UIViewController {
         didSet {
             viewModel.output.isDoneLabelHiddenSubject.bind(to: isDoneLabel.rx.isHidden)
                 .disposed(by: viewModel.disposeBag)
+            isDoneLabel.text = LM.dls.red_env_history_money_transfered
         }
     }
+    
+    @IBOutlet weak var waitingForMoneyLabel: UILabel! {
+        didSet {
+            waitingForMoneyLabel.text = LM.dls.red_env_history_waiting_for_money
+        }
+    }
+    
     @IBOutlet private weak var contentLabel: UILabel! {
         didSet {
             viewModel.output.statusSubject.bind(to: contentLabel.rx.text).disposed(by: viewModel.disposeBag)
+            contentLabel.text = LM.dls.red_env_send_sent_successfully
         }
     }
+    @IBOutlet weak var senderNameTitleLabel: UILabel!
+    @IBOutlet weak var toAddressTitleLabel: UILabel! {
+        didSet {
+            toAddressTitleLabel.text = LM.dls.withdrawal_label_toAddr
+        }
+    }
+    @IBOutlet weak var createTimeTitleLabel: UILabel! {
+        didSet {
+            createTimeTitleLabel.text = LM.dls.red_env_history_create_time_title
+        }
+    }
+    @IBOutlet weak var receiveTimeTitleLabel: UILabel! {
+        didSet {
+            receiveTimeTitleLabel.text = LM.dls.red_env_history_receive_time_title
+        }
+    }
+    @IBOutlet weak var depositTimeTitleLabel: UILabel! {
+        didSet {
+            depositTimeTitleLabel.text = LM.dls.red_env_history_deposit_time_title
+        }
+    }
+    
     @IBOutlet private weak var senderNameLabel: UILabel! {
         didSet {
             viewModel.output.senderNameSubject.bind(to: senderNameLabel.rx.text).disposed(by: viewModel.disposeBag)
@@ -89,7 +120,7 @@ class ReceiveRedEnvelopeHistoryViewController: UIViewController {
     }
 
     private func setUpView() {
-        title = "红包领取纪录"
+        title = LM.dls.red_env_history_sent
         if viewModel.output.hasCloseBarButton {
             navigationItem.rightBarButtonItem = closeBarButtonItem
         }
