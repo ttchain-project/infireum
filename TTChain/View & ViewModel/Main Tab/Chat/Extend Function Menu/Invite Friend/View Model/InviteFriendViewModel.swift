@@ -34,22 +34,4 @@ class InviteFriendViewModel: KLRxViewModel {
     func concatInput() { }
     
     func concatOutput() { }
-    
-    
-    
-//    func invite(person: Person, successed: (String) -> Void, failed: (String) -> Void) {
-//        let status: Bool = true
-//
-//        // to do something
-//
-//        status ? successed("已送出交友邀请") : failed("错误提示讯息")
-//    }
-    
-//    func invite(person: Person, result: (_ status: Bool, _ message: String) -> Void) {
-//        let status: Bool = true
-//        
-//        // to do something
-//        
-//        result(status, status ? "Invite is successed" : "Invite is failed")
-//    }
 }

@@ -74,7 +74,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         
         if self.input!.roomType == .pvtChat {
             self.functions.append(contentsOf:[FunctionModel.init(title: LM.dls.chat_secret_setting, image: UIImage(named: "iconSecretColor"), type: .startSecretChat),
-                                  FunctionModel.init(title: "Audio Call", image: #imageLiteral(resourceName: "iconCallColor"), type: .makeAudioCall)]
+                                  FunctionModel.init(title: LM.dls.chat_room_audio_call, image: #imageLiteral(resourceName: "iconCallColor"), type: .makeAudioCall)]
             )
             self.collectionView.reloadData()
         }
@@ -88,9 +88,9 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     var functions: [FunctionModel] = [FunctionModel.init(title: LM.dls.chat_room_receipt, image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt),
-                                      FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
-                                      FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
-                                      FunctionModel.init(title: "Red Env", image: UIImage(named: "iconEnvelopeColor"), type: .redEnv)
+                                      FunctionModel.init(title: LM.dls.chat_room_image, image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
+                                      FunctionModel.init(title: LM.dls.chat_room_camera, image: UIImage(named: "iconCameraColor"), type: .openCamera),
+                                      FunctionModel.init(title: LM.dls.chat_room_red_env, image: UIImage(named: "iconEnvelopeColor"), type: .redEnv)
                                       
 ]
     
@@ -102,7 +102,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
      FunctionModel.init(title: "影片", image: UIImage(named: "iconFilmColor"), type: .addVideo),
      FunctionModel.init(title: "紅包", image: UIImage(named: "iconEnvelopeColor"), type: .addRedEnvelope),
      FunctionModel.init(title: "通話", image: UIImage(named: "iconCallColor"), type: .makeAudioCall),
-     FunctionModel.init(title: "視訊", image: UIImage(named: "iconVideoColor"), type: .makeVideoCall),
+     FunctionModel.init(title: LM.dls.chat_room_video_call, image: UIImage(named: "iconVideoColor"), type: .makeVideoCall),
  */
     
     var bag: DisposeBag = DisposeBag()

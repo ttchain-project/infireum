@@ -65,7 +65,7 @@ class AudioCallViewModel: KLRxViewModel {
                 self.beginCallTime()
             //Start Timer here
             default:
-                print("a")
+                DLogInfo("\(callStatus.debugDescription)")
             }
         }).disposed(by: bag)
     }

@@ -143,7 +143,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     
     func updateUserName() {
         guard let userName = self.userNameTextField.text, userName.count > 0 else {
-            self.showSimplePopUp(with: "Error", contents: "Name cannot be empty", cancelTitle: "Ok") { _ in
+            self.showSimplePopUp(with: "", contents: LM.dls.profile_edit_empty_name_error, cancelTitle: LM.dls.g_ok) { _ in
                 self.userNameTextField.becomeFirstResponder()
             }
             return

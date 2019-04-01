@@ -298,10 +298,6 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         self.present(vc, animated: true, completion: nil)
     }
     
-    func toSearchFriendList() {
-        self.show(SearchGroupViewController.instance(), sender: self)
-    }
-    
     func toEditProfile() {
         let viewController = ProfileViewController.instance()
         self.show(viewController, sender: nil)

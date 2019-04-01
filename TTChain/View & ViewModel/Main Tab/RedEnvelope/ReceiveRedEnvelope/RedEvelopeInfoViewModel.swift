@@ -68,7 +68,7 @@ class RedEvelopeInfoViewModel: ViewModel {
     private func receive(identifier: String, information: RedEvelopeInfoModel) {
         
         guard let coin = Coin.getCoin(ofIdentifier: information.info.identifier) else {
-            self.output.messageSubject.onNext("No wallet supporting this coin found")
+            self.output.messageSubject.onNext(LM.dls.receive_red_env_no_wallet_found)
             return
         }
         
@@ -86,11 +86,11 @@ class RedEvelopeInfoViewModel: ViewModel {
                 if model.status {
                     self?.output.actionSubject.onNext(.received)
                 }else {
-                    self?.output.messageSubject.onNext("Failed")
+                    self?.output.messageSubject.onNext(LM.dls.g_something_went_wrong)
                 }
             case .failed(let error):
                 print(error)
-                self?.output.messageSubject.onNext(error.localizedDescription)
+                self?.output.messageSubject.onNext(error.descString)
             }
         }).disposed(by:disposeBag)
     }

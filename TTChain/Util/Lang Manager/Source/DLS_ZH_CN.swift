@@ -14,6 +14,7 @@ struct DLS_ZH_CN: DLS {
     var g_edit = "编辑"
     var g_next = "下一步"
     var g_error_exit = "是否确认要离开？"
+    var g_something_went_wrong = "有些不对劲。 请再试一次。"
     var g_error_networkIssue = "网路发生问题，请再试一次"
     var g_error_networkTimeout = "连线已逾时，请重新尝试"
     var g_error_emptyform = "请输入"
@@ -525,7 +526,9 @@ struct DLS_ZH_CN: DLS {
     var chat_room_receipt = "收款"
     var chat_room_image = "图片"
     var chat_room_camera = "相机"
-
+    var chat_room_audio_call = "音频通话"
+    var chat_room_video_call = "视频电话"
+    var chat_room_red_env = "红信封"
     var copied_successfully = "复制成功"
     
     var secret_chat_on = "秘密聊天是开放的"
@@ -630,4 +633,7 @@ struct DLS_ZH_CN: DLS {
 
     var receipt_receiving_currency:String = "收款币别"
     var receiving_amount:String = "收款金额"
+    
+    var receive_red_env_no_wallet_found = "找不到支持这枚硬币的钱包"
+    var profile_edit_empty_name_error = "请输入有效的名字"
 }

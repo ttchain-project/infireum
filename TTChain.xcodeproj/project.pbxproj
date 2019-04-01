@@ -574,9 +574,6 @@
 		55EF6A9321A812C6007E074A /* SearchMemberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69FC21A812C5007E074A /* SearchMemberViewController.xib */; };
 		55EF6A9421A812C6007E074A /* SearchMemberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69FC21A812C5007E074A /* SearchMemberViewController.xib */; };
 		55EF6A9521A812C6007E074A /* SearchMemberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF69FC21A812C5007E074A /* SearchMemberViewController.xib */; };
-		55EF6A9621A812C6007E074A /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69FE21A812C5007E074A /* CreateGroupViewModel.swift */; };
-		55EF6A9721A812C6007E074A /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69FE21A812C5007E074A /* CreateGroupViewModel.swift */; };
-		55EF6A9821A812C6007E074A /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69FE21A812C5007E074A /* CreateGroupViewModel.swift */; };
 		55EF6A9921A812C6007E074A /* GroupInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69FF21A812C5007E074A /* GroupInformationViewModel.swift */; };
 		55EF6A9A21A812C6007E074A /* GroupInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69FF21A812C5007E074A /* GroupInformationViewModel.swift */; };
 		55EF6A9B21A812C6007E074A /* GroupInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF69FF21A812C5007E074A /* GroupInformationViewModel.swift */; };
@@ -595,18 +592,6 @@
 		55EF6AA821A812C6007E074A /* InviteFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0621A812C5007E074A /* InviteFriendViewModel.swift */; };
 		55EF6AA921A812C6007E074A /* InviteFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0621A812C5007E074A /* InviteFriendViewModel.swift */; };
 		55EF6AAA21A812C6007E074A /* InviteFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0621A812C5007E074A /* InviteFriendViewModel.swift */; };
-		55EF6AAB21A812C6007E074A /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0821A812C5007E074A /* MyInformationViewController.swift */; };
-		55EF6AAC21A812C6007E074A /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0821A812C5007E074A /* MyInformationViewController.swift */; };
-		55EF6AAD21A812C6007E074A /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A0821A812C5007E074A /* MyInformationViewController.swift */; };
-		55EF6AAE21A812C6007E074A /* MyInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0921A812C5007E074A /* MyInformationViewController.xib */; };
-		55EF6AAF21A812C6007E074A /* MyInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0921A812C5007E074A /* MyInformationViewController.xib */; };
-		55EF6AB021A812C6007E074A /* MyInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A0921A812C5007E074A /* MyInformationViewController.xib */; };
-		55EF6ABD21A812C6007E074A /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A1221A812C5007E074A /* SearchGroupViewController.swift */; };
-		55EF6ABE21A812C6007E074A /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A1221A812C5007E074A /* SearchGroupViewController.swift */; };
-		55EF6ABF21A812C6007E074A /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A1221A812C5007E074A /* SearchGroupViewController.swift */; };
-		55EF6AC021A812C6007E074A /* SearchGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A1321A812C5007E074A /* SearchGroupViewController.xib */; };
-		55EF6AC121A812C6007E074A /* SearchGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A1321A812C5007E074A /* SearchGroupViewController.xib */; };
-		55EF6AC221A812C6007E074A /* SearchGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EF6A1321A812C5007E074A /* SearchGroupViewController.xib */; };
 		55EF6AC321A812C6007E074A /* ExtendFunctionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A1521A812C5007E074A /* ExtendFunctionTableViewCell.swift */; };
 		55EF6AC421A812C6007E074A /* ExtendFunctionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A1521A812C5007E074A /* ExtendFunctionTableViewCell.swift */; };
 		55EF6AC521A812C6007E074A /* ExtendFunctionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EF6A1521A812C5007E074A /* ExtendFunctionTableViewCell.swift */; };
@@ -2252,17 +2237,12 @@
 		55EF69FA21A812C5007E074A /* GroupMemberCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupMemberCollectionViewCell.xib; sourceTree = "<group>"; };
 		55EF69FB21A812C5007E074A /* SearchMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMemberViewController.swift; sourceTree = "<group>"; };
 		55EF69FC21A812C5007E074A /* SearchMemberViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMemberViewController.xib; sourceTree = "<group>"; };
-		55EF69FE21A812C5007E074A /* CreateGroupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewModel.swift; sourceTree = "<group>"; };
 		55EF69FF21A812C5007E074A /* GroupInformationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInformationViewModel.swift; sourceTree = "<group>"; };
 		55EF6A0021A812C5007E074A /* GroupMemberCollectionViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		55EF6A0121A812C5007E074A /* SearchMemberViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMemberViewModel.swift; sourceTree = "<group>"; };
 		55EF6A0321A812C5007E074A /* InviteFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendViewController.swift; sourceTree = "<group>"; };
 		55EF6A0421A812C5007E074A /* InviteFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendViewController.xib; sourceTree = "<group>"; };
 		55EF6A0621A812C5007E074A /* InviteFriendViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendViewModel.swift; sourceTree = "<group>"; };
-		55EF6A0821A812C5007E074A /* MyInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
-		55EF6A0921A812C5007E074A /* MyInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInformationViewController.xib; sourceTree = "<group>"; };
-		55EF6A1221A812C5007E074A /* SearchGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupViewController.swift; sourceTree = "<group>"; };
-		55EF6A1321A812C5007E074A /* SearchGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchGroupViewController.xib; sourceTree = "<group>"; };
 		55EF6A1521A812C5007E074A /* ExtendFunctionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendFunctionTableViewCell.swift; sourceTree = "<group>"; };
 		55EF6A1621A812C5007E074A /* ExtendFunctionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExtendFunctionTableViewCell.xib; sourceTree = "<group>"; };
 		55EF6A1721A812C5007E074A /* ExtensionFunctionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFunctionViewModel.swift; sourceTree = "<group>"; };
@@ -3532,8 +3512,6 @@
 				55EF69F021A812C5007E074A /* ChatExtendFunctionMenuViewController.xib */,
 				55EF69F121A812C5007E074A /* Create Group */,
 				55EF6A0221A812C5007E074A /* Invite Friend */,
-				55EF6A0721A812C5007E074A /* My Information */,
-				55EF6A1121A812C5007E074A /* Search Group */,
 				55EF6A1421A812C5007E074A /* View Model */,
 			);
 			path = "Extend Function Menu";
@@ -3570,7 +3548,6 @@
 		55EF69FD21A812C5007E074A /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				55EF69FE21A812C5007E074A /* CreateGroupViewModel.swift */,
 				55EF69FF21A812C5007E074A /* GroupInformationViewModel.swift */,
 				55EF6A0021A812C5007E074A /* GroupMemberCollectionViewCellModel.swift */,
 				55EF6A0121A812C5007E074A /* SearchMemberViewModel.swift */,
@@ -3594,24 +3571,6 @@
 				55EF6A0621A812C5007E074A /* InviteFriendViewModel.swift */,
 			);
 			path = "View Model";
-			sourceTree = "<group>";
-		};
-		55EF6A0721A812C5007E074A /* My Information */ = {
-			isa = PBXGroup;
-			children = (
-				55EF6A0821A812C5007E074A /* MyInformationViewController.swift */,
-				55EF6A0921A812C5007E074A /* MyInformationViewController.xib */,
-			);
-			path = "My Information";
-			sourceTree = "<group>";
-		};
-		55EF6A1121A812C5007E074A /* Search Group */ = {
-			isa = PBXGroup;
-			children = (
-				55EF6A1221A812C5007E074A /* SearchGroupViewController.swift */,
-				55EF6A1321A812C5007E074A /* SearchGroupViewController.xib */,
-			);
-			path = "Search Group";
 			sourceTree = "<group>";
 		};
 		55EF6A1421A812C5007E074A /* View Model */ = {
@@ -6397,7 +6356,6 @@
 				555E4A642248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
 				5569803D2188566F00346757 /* TTChain_SIT-Info.plist in Resources */,
 				555E4AC7224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.xib in Resources */,
-				55EF6AC221A812C6007E074A /* SearchGroupViewController.xib in Resources */,
 				64C9D4DC21044ECF000B0774 /* WithdrawalCICFeeInfoAdvModeViewController.xib in Resources */,
 				6470D6A520F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
 				64C9D47C20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
@@ -6476,7 +6434,6 @@
 				6424B65520F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.xib in Resources */,
 				64C9D44D20FDC8C6000B0774 /* AddressBookViewController.xib in Resources */,
 				55EF6A4721A812C6007E074A /* ChatMessageTableViewCell.xib in Resources */,
-				55EF6AB021A812C6007E074A /* MyInformationViewController.xib in Resources */,
 				649E485920E7D99200B217AD /* ImportedWalletTableHeaderView.xib in Resources */,
 				649E48BB20ECE79600B217AD /* WalletPrivateKeyInfoViewController.xib in Resources */,
 				64D826CC20E4C66B00C8FC63 /* SearchAssetViewController.xib in Resources */,
@@ -6554,7 +6511,6 @@
 				6424B68720F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200C120FB1DA100B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
 				6470D69620F341BC00EB0780 /* WithdrawalConfirmPwdValidationViewController.xib in Resources */,
-				55EF6AC021A812C6007E074A /* SearchGroupViewController.xib in Resources */,
 				6470D61C20F0EEBE00EB0780 /* WithdrawalAddressViewController.xib in Resources */,
 				6470D64320F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
 				55E1141321F72CF70062198B /* ChatKeyboardView.xib in Resources */,
@@ -6582,7 +6538,6 @@
 				555E4ABC224CB99900C7CAD5 /* RedEnvelopeHistoryTableViewCell.xib in Resources */,
 				555E4A82224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A320F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
-				55EF6AAE21A812C6007E074A /* MyInformationViewController.xib in Resources */,
 				64C9D47A20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
 				5539A4AF2167704E00A59ACC /* IdentityQRCodeContentViewController.xib in Resources */,
 				64D826D820E4CFD500C8FC63 /* SearchAssetTableViewCell.xib in Resources */,
@@ -6723,7 +6678,6 @@
 				6424B68820F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200C020FB1DA000B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
 				6470D69720F341BC00EB0780 /* WithdrawalConfirmPwdValidationViewController.xib in Resources */,
-				55EF6AC121A812C6007E074A /* SearchGroupViewController.xib in Resources */,
 				6470D61D20F0EEBE00EB0780 /* WithdrawalAddressViewController.xib in Resources */,
 				6470D64420F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
 				55E1141421F72CF70062198B /* ChatKeyboardView.xib in Resources */,
@@ -6751,7 +6705,6 @@
 				555E4ABD224CB99900C7CAD5 /* RedEnvelopeHistoryTableViewCell.xib in Resources */,
 				555E4A83224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A420F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
-				55EF6AAF21A812C6007E074A /* MyInformationViewController.xib in Resources */,
 				64C9D47B20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
 				5539A4AC2167704D00A59ACC /* IdentityQRCodeContentViewController.xib in Resources */,
 				64D826D920E4CFD500C8FC63 /* SearchAssetTableViewCell.xib in Resources */,
@@ -7309,7 +7262,6 @@
 				55EF6A7421A812C6007E074A /* ChatExtendFunctionMenuViewController.swift in Sources */,
 				64C9D44520FDC7D0000B0774 /* AddressBookViewModel.swift in Sources */,
 				64F07DED20D241A000A60C5C /* GTThemeStyle.swift in Sources */,
-				55EF6ABF21A812C6007E074A /* SearchGroupViewController.swift in Sources */,
 				550873E521E49753007B3B3B /* SettingMenuViewController.swift in Sources */,
 				6424B66920F5B1D600AEBCAD /* TransferRecordChainTypeOptionViewModel.swift in Sources */,
 				643200F120FBA74E00B11334 /* IdentityViewController.swift in Sources */,
@@ -7651,7 +7603,6 @@
 				64F07E3820D2538C00A60C5C /* KLModuleViewController.swift in Sources */,
 				55EF6A8621A812C6007E074A /* GroupInformationViewController.swift in Sources */,
 				64813A6320DCA6EE00CAA4D8 /* CoinSelection+CoreDataClass.swift in Sources */,
-				55EF6AAD21A812C6007E074A /* MyInformationViewController.swift in Sources */,
 				64F07E1120D241A000A60C5C /* String+Util.swift in Sources */,
 				6481397C20DA4D1700CAA4D8 /* MnemonicHelper.swift in Sources */,
 				64F07DAB20D2406000A60C5C /* NetworkReachabilityHandler.swift in Sources */,
@@ -7712,7 +7663,6 @@
 				5539A4A821676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift in Sources */,
 				5526B53622114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				6470D68920F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
-				55EF6A9821A812C6007E074A /* CreateGroupViewModel.swift in Sources */,
 				643200E820FB8CB700B11334 /* MeViewController.swift in Sources */,
 				64B2772520D55BDC004FF75B /* KLRxImageDownloader.swift in Sources */,
 				55EF6A5021A812C6007E074A /* PrivateChatSettingViewModel.swift in Sources */,
@@ -7808,7 +7758,6 @@
 				6414C148214A1D2000E45F32 /* IdentityQRCodeEncryptedContent.swift in Sources */,
 				649E48B620ECE79600B217AD /* WalletPrivateKeyInfoViewController.swift in Sources */,
 				550873E321E49753007B3B3B /* SettingMenuViewController.swift in Sources */,
-				55EF6ABD21A812C6007E074A /* SearchGroupViewController.swift in Sources */,
 				643200D920FB51E600B11334 /* WithdrawalLightningPwdValidationViewController.swift in Sources */,
 				640D88C720EDBAAA0010D986 /* ImportWalletViaPrivateKeyViewModel.swift in Sources */,
 				557D4E5821E359C50073B8D8 /* MarketTestHandler.swift in Sources */,
@@ -8148,7 +8097,6 @@
 				64D826CF20E4C6A000C8FC63 /* SearchAssetViewModel.swift in Sources */,
 				55EF6A8421A812C6007E074A /* GroupInformationViewController.swift in Sources */,
 				6485002120D9110000107473 /* OWQRCodeVIewModel.swift in Sources */,
-				55EF6AAB21A812C6007E074A /* MyInformationViewController.swift in Sources */,
 				64CFD3C62134204F00A04727 /* LightningTransMatchInfoPackager.swift in Sources */,
 				643200C420FB1E0400B11334 /* WithdrawalCICFeeInfoViewModel.swift in Sources */,
 				64B98EAB20F8B6B200C4EB11 /* CoinRate+Helper.swift in Sources */,
@@ -8209,7 +8157,6 @@
 				64813A5520DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataClass.swift in Sources */,
 				5526B53422114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				643200E620FB8CB700B11334 /* MeViewController.swift in Sources */,
-				55EF6A9621A812C6007E074A /* CreateGroupViewModel.swift in Sources */,
 				64F07E7A20D36B4200A60C5C /* IdentitySetupViewModel.swift in Sources */,
 				64C9D47F20FDDFE8000B0774 /* UpdatetABUnitAddressViewModel.swift in Sources */,
 				55EF6A4E21A812C6007E074A /* PrivateChatSettingViewModel.swift in Sources */,
@@ -8298,7 +8245,6 @@
 				643200DA20FB51E600B11334 /* WithdrawalLightningPwdValidationViewController.swift in Sources */,
 				64D8264820E0D8C400C8FC63 /* ChangeAssetViewController.swift in Sources */,
 				550873E421E49753007B3B3B /* SettingMenuViewController.swift in Sources */,
-				55EF6ABE21A812C6007E074A /* SearchGroupViewController.swift in Sources */,
 				64C9D44420FDC7D0000B0774 /* AddressBookViewModel.swift in Sources */,
 				64F07E1F20D241A000A60C5C /* KLInsetLabel.swift in Sources */,
 				557D4E5921E359C50073B8D8 /* MarketTestHandler.swift in Sources */,
@@ -8638,7 +8584,6 @@
 				64CFD3C72134204F00A04727 /* LightningTransMatchInfoPackager.swift in Sources */,
 				55EF6A8521A812C6007E074A /* GroupInformationViewController.swift in Sources */,
 				64B98EAC20F8B6B200C4EB11 /* CoinRate+Helper.swift in Sources */,
-				55EF6AAC21A812C6007E074A /* MyInformationViewController.swift in Sources */,
 				64F07DEF20D241A000A60C5C /* UILabel+Gradient.swift in Sources */,
 				64813A6220DCA6EE00CAA4D8 /* CoinSelection+CoreDataClass.swift in Sources */,
 				64F07E8020D36B8700A60C5C /* KLViewModel.swift in Sources */,
@@ -8699,7 +8644,6 @@
 				6470D68820F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.swift in Sources */,
 				5526B53522114BB100573576 /* ForwardListContainerViewController.swift in Sources */,
 				643200E720FB8CB700B11334 /* MeViewController.swift in Sources */,
-				55EF6A9721A812C6007E074A /* CreateGroupViewModel.swift in Sources */,
 				64813A2C20DCA6EE00CAA4D8 /* Language+CoreDataClass.swift in Sources */,
 				64C9D48020FDDFE8000B0774 /* UpdatetABUnitAddressViewModel.swift in Sources */,
 				55EF6A4F21A812C6007E074A /* PrivateChatSettingViewModel.swift in Sources */,

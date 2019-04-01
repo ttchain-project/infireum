@@ -62,7 +62,7 @@ class ReceiveRedEnvelopeViewController: UIViewController {
         didSet {
             acceptButton.cornerRadius = acceptButton.height/2
             acceptButton.backgroundColor = UIColor.init(red: 230, green: 75, blue: 75)
-            acceptButton.setTitle("Accept", for: .normal)
+            acceptButton.setTitle(LM.dls.accept_request, for: .normal)
             acceptButton.setTitleColor(UIColor.white, for: .normal)
             acceptButton.rx.tap.bind(to: viewModel.input.receiveTapSubject).disposed(by: viewModel.disposeBag)
             viewModel.output.isReceiveButtonHiddenSubject.bind(to: acceptButton.rx.isHidden)
@@ -74,7 +74,7 @@ class ReceiveRedEnvelopeViewController: UIViewController {
         didSet {
             laterButton.cornerRadius = laterButton.height/2
             laterButton.borderColor = UIColor.owSilver
-            laterButton.setTitle("Dismiss", for: .normal)
+            laterButton.setTitle(LM.dls.g_close, for: .normal)
             laterButton.setTitleColor(UIColor.owSilver, for: .normal)
             laterButton.borderWidth = 1
             laterButton.rx.tap.bind(to: viewModel.input.closeTapSubject).disposed(by: viewModel.disposeBag)

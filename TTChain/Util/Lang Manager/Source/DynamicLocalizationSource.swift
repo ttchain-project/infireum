@@ -14,6 +14,7 @@ protocol DynamicLocalizationSource {
     var g_edit: String { get set }
     var g_next: String { get set }
     var g_error_exit: String { get set }
+    var g_something_went_wrong: String { get set }
     var g_error_networkIssue: String { get set }
     var g_error_networkTimeout: String { get set }
     var g_error_emptyform: String { get set }
@@ -523,6 +524,9 @@ protocol DynamicLocalizationSource {
     var chat_room_receipt: String {get set}
     var chat_room_image: String {get set}
     var chat_room_camera : String {get set}
+    var chat_room_audio_call : String {get set}
+    var chat_room_video_call: String {get set}
+    var chat_room_red_env: String {get set}
     
     var copied_successfully: String {get set}
     
@@ -618,4 +622,6 @@ protocol DynamicLocalizationSource {
     var receipt_receiving_currency:String{get set}
     var receiving_amount:String {get set}
 
+    var receive_red_env_no_wallet_found:String {get set}
+    var profile_edit_empty_name_error:String {get set}
 }

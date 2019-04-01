@@ -61,8 +61,8 @@ final class ReceiveRedEnvelopeHistoryViewModel: ViewModel {
         let parameter =  RedEnvelopeInfoAPI.Parameters.init(redEnvelopeId: identifier)
         Server.instance.getRedEnvelopeInfo(parameter: parameter).asObservable().subscribe(onNext: { (result) in
             switch result {
-            case .failed(error: _):
-                DLogError("error")
+            case .failed(error: let error):
+                DLogError(error.descString)
             case .success(let model):
                 self.input.informationSubject.onNext(model.redEnvelopeInfo)
             }

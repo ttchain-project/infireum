@@ -14,6 +14,7 @@ struct DLS_EN_US: DLS {
     var g_edit = "Edit"
     var g_next = "Next"
     var g_error_exit = "Are you sure you want to leave?"
+    var g_something_went_wrong = "Something went wrong. Please try again."
     var g_error_networkIssue = "Network connection failed, please try again"
     var g_error_networkTimeout = "Connection has expired, please try again"
     var g_error_emptyform = "Please enter"
@@ -527,7 +528,9 @@ struct DLS_EN_US: DLS {
     var chat_room_receipt = "Receipt"
     var chat_room_image = "Image"
     var chat_room_camera = "Camera"
-    
+    var chat_room_audio_call = "Audio Call"
+    var chat_room_video_call = "Video Call"
+    var chat_room_red_env = "Red Env"
     var copied_successfully = "Copied sucessfully"
     
     var secret_chat_on = "Secret chat is open"
@@ -638,4 +641,7 @@ struct DLS_EN_US: DLS {
     
     var receipt_receiving_currency:String = "Receiving Currency"
     var receiving_amount:String = "Collection Amount"
+    
+    var receive_red_env_no_wallet_found = "Can't find a wallet that supports this coin"
+    var profile_edit_empty_name_error = "Please enter a valid name"
 }
