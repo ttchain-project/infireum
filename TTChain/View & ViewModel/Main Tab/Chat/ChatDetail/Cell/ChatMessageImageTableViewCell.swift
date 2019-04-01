@@ -57,6 +57,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
     }
     
     func setMessage(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
+        self.selectMessageButtonWidth.constant = 0
+
         dateLabel.text = message.timestamp.string()
         if message.isUserSender() {
             self.profilePics.isHidden = true
@@ -106,6 +108,6 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         self.setMessage(forMessage: message, leftImage: leftImage) { (_) in
             
         }
-        self.selectMessageButtonWidth.constant = 48
+        self.selectMessageButtonWidth.constant = 36
     }
 }

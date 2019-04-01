@@ -148,6 +148,8 @@ class ChatViewModel: KLRxViewModel {
         guard let imgData = UIImageJPEGRepresentation(image, 0.5) else {
             return
         }
+        DLogInfo("Trying to send Image message \(image)")
+
        self.sendDataAsMessage(data: imgData,fileName: "image.jpeg")
     }
     
@@ -213,13 +215,14 @@ class ChatViewModel: KLRxViewModel {
         }
         
         let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID, roomId: self.input.roomID, isGroup: self.input.roomType == .pvtChat ? false : true, msg: txt)
+        DLogInfo("Trying to send message \(parameter.msg)")
 
         Server.instance.sendMessage(parameters: parameter).asObservable().subscribe(onNext: { (result) in
             switch result {
             case .failed(error: let error):
                 DLogError(error)
             case .success(let message):
-                DLogInfo(message)
+                DLogInfo("Message sent successfully \(parameter.msg) \(message.status)")
                 self.fetchAllMessagesForPrivateChat()
                 if message.status {
                     if self.privateChat.isPrivateChatOn.value {

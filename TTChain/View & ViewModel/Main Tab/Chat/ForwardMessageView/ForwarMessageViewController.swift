@@ -42,11 +42,8 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
     
     var viewModel: ForwarMessageViewModel!
     
-    private let forwardMessagesSelected : PublishRelay<(ChatListPage,[MessageModel])> = PublishRelay.init()
-    
-    var onForwardMessagesSelection : Observable<(ChatListPage,[MessageModel])> {
-        return forwardMessagesSelected.asObservable()
-    }
+    typealias ResultCallback = (ChatListPage,[MessageModel]) -> Void
+    var onForwardMessagesSelection: ResultCallback?
     
     typealias ViewModel = ForwarMessageViewModel
     
@@ -54,7 +51,7 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
         self.view.layoutIfNeeded()
         self.navigationItem.title = "Select Messages"
         self.viewModel = ForwarMessageViewModel.init(input: ForwarMessageViewModel.InputSource.init(messages: constructor.messages, roomId: constructor.roomId, avatarImage: constructor.avatarImage,memberAvatarMapping:constructor.memberAvatarMapping), output: ForwarMessageViewModel.OutputSource())
-        
+        self.onForwardMessagesSelection = constructor.forwardMessagesSelected
         self.initTableView()
         self.bindViewModel()
         self.confirmButton.backgroundColor = .owIceCold
@@ -64,10 +61,9 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
             vc.config(constructor: ForwardListContainerViewController.Config(messageModel: self.viewModel.input.messages[0]))
             self.navigationController?.pushViewController(vc)
             vc.onForwardChatToSelection.asObservable().subscribe(onNext: { [unowned self] (model) in
-                let selected = self.viewModel.input.messages.filter { $0.isMessageSelected == true }
-                self.navigationController?.popViewController(animated: false)
-                self.forwardMessagesSelected.accept((model, selected))
-                self.navigationController?.popViewController(animated: false)
+                let selectedMessages = self.viewModel.input.messages.filter { $0.isMessageSelected == true }
+                self.onForwardMessagesSelection!(model,selectedMessages)
+                self.dismiss(animated: false, completion: nil)
             }).disposed(by: vc.bag)
         }).disposed(by: bag)
         
@@ -80,6 +76,7 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
         let roomId:String
         let avatarImage:String?
         var memberAvatarMapping: [String:String?]? = nil
+        let forwardMessagesSelected: ResultCallback
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -119,11 +116,6 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
                 
                 chatCell.setDataForForwarSelection(message: messageModel, leftImage: leftImage, messageSelected: { (model) in
                     model.isMessageSelected = !model.isMessageSelected
-//                    if let index = self.viewModel.selectedMessages.index(of:model) {
-//                        self.viewModel.selectedMessages.remove(at: index)
-//                    }else {
-//                        self.viewModel.selectedMessages.append(model)
-//                    }
                 })
                 
                 cell = chatCell
@@ -134,21 +126,17 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
                 chatImgCell.setDataForForwarSelection(message: messageModel, leftImage: leftImage, messageSelected: { (model) in
                     
                     model.isMessageSelected = !model.isMessageSelected
-
-//                    if let index = self.viewModel.selectedMessages.index(of:model) {
-//                        self.viewModel.selectedMessages.remove(at: index)
-//                    }else {
-//                        self.viewModel.selectedMessages.append(model)
-//                    }
                 })
                 
                 cell = chatImgCell
             case .voiceMessage:
-                let chatImgCell = tv.dequeueReusableCell(withIdentifier: ChatMessageImageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageImageTableViewCell
+                let voiceMessageCell = tv.dequeueReusableCell(withIdentifier: ChatMessageImageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageImageTableViewCell
                 
-                chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: {_ in ()})
+                voiceMessageCell.setDataForForwarSelection(message: messageModel, leftImage: leftImage, messageSelected: { (model) in
+                    model.isMessageSelected = !model.isMessageSelected
+                })
                 
-                cell = chatImgCell
+                cell = voiceMessageCell
             case .receipt :
                 let receiptCell = tv.dequeueReusableCell(withIdentifier: ReceiptTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ReceiptTableViewCell
                 

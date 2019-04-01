@@ -435,13 +435,21 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             self.viewModel.deleteChatMessage(messageModel:message)
         }
         let cancelButton = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+        
         let forward = UIAlertAction.init(title:LM.dls.forward,style:.default) { [unowned self] (_) in
-            let config = ForwarMessageViewController.Config.init(messages: self.viewModel.chatMessages, roomId: self.viewModel.input.roomID, avatarImage: self.viewModel.input.chatAvatar, memberAvatarMapping: self.viewModel.memberAvatarMapping)
-            let vc = ForwarMessageViewController.instance(from: config)
-            self.navigationController?.pushViewController(vc)
-            vc.onForwardMessagesSelection.asObservable().subscribe(onNext: { [unowned self] (model,messages) in
-                self.refreshChatViewForForwardedChat(withMessage: messages, chatList: model)
-            }).disposed(by: vc.bag)
+            let config = ForwarMessageViewController.Config.init(messages: self.viewModel.chatMessages,
+                                                                 roomId: self.viewModel.input.roomID,
+                                                                 avatarImage: self.viewModel.input.chatAvatar,
+                                                                 memberAvatarMapping: self.viewModel.memberAvatarMapping,
+                                                                 forwardMessagesSelected: { [weak self] chatListModel, messages in
+                                                                    guard let `self` = self else {
+                                                                        return
+                                                                    }
+                                                                    self.refreshChatViewForForwardedChat(withMessage: messages, chatList: chatListModel)
+            })
+            
+            let vc = ForwarMessageViewController.navInstance(from: config)
+            self.present(vc, animated: false, completion: nil)
         }
         
         let alertVC = UIAlertController.init(title: LM.dls.message_action, message: "", preferredStyle: .actionSheet)
@@ -456,6 +464,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             break
         case .file:
             alertVC.addAction(actionCopyFileURL)
+        case .voiceMessage:
+            alertVC.addAction(forward)
         case .image:
             alertVC.addAction(actionCopy)
             alertVC.addAction(forward)
@@ -599,18 +609,54 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         
 //        self.hud.startAnimating(inView: self.view)
         for message in messages {
-            
             switch message.msgType {
             case .general :
                 self.viewModel.sendMessage(txt:message.msg)
             case .image:
-                guard let image = message.messageImage else {
-                    return
+                if let url = URL.init(string:message.msg) {
+                    KLRxImageDownloader.instance.download(source: url) {[weak self] (result) in
+                        guard let `self` = self else {
+                            return
+                        }
+                        switch result {
+                        case .failed:
+                            break
+                        case .success(let img):
+                            self.viewModel.sendImageAsMessage(image: img)
+                        }
+                    }
                 }
-                self.viewModel.sendImageAsMessage(image: image)
-            
+                continue
+            case .file:
+                if let url = URL.init(string: message.msg) {
+                    FileDownloader.instance.download(source: url) {[weak self] (result) in
+                        guard let `self` = self else {
+                            return
+                        }
+                        switch result {
+                        case .failed:
+                            break
+                        case .success(let data):
+                            self.viewModel.sendDataAsMessage(data: data, fileName:"file.\(url.lastPathComponent)")
+                        }
+                    }
+                }
+            case .voiceMessage:
+                if let url = URL.init(string: message.msg) {
+                    FileDownloader.instance.download(source: url) {[weak self] (result) in
+                        guard let `self` = self else {
+                            return
+                        }
+                        switch result {
+                        case .failed:
+                            break
+                        case .success(let data):
+                            self.viewModel.sendVoiceMessage(data: data)
+                        }
+                    }
+                }
             default:
-                return
+                continue
             }
         }
 //        self.hud.stopAnimating()
