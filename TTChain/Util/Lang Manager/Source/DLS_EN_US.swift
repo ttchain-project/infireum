@@ -660,6 +660,7 @@ struct DLS_EN_US: DLS {
     var red_env_history_receive_time_title:String = "Red Envelope Received Time"
     var red_env_history_deposit_time_title:String = "Red Envelope Deposit Time"
     
-    
+    var chat_keyboard_placeholder:String = "Write something here"
+    var chat_recovery_password_successful:String = "Password set successfully"
     
 }

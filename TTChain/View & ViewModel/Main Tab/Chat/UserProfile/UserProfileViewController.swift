@@ -128,7 +128,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
                     guard let `self` = self else { return }
                     switch result {
                     case .failed(error: let error):
-                        EZToast.present(on: self, content: error.localizedDescription)
+                        EZToast.present(on: self, content: error.descString)
                         self.blockUserSwitch.isOn = !isOn
                     case .success:
                         DLogInfo("switch block status for \(blockedUid) to \(isOn)")
@@ -257,7 +257,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
                 case .success: DLogDebug("set recovery key successful.")
                 case .failed(error: let error):
                     DLogError(error)
-                    EZToast.present(on: self, content: error.localizedDescription)
+                    EZToast.present(on: self, content: error.descString)
                 }
             }).disposed(by: self.setRecoverBag)
         }))
@@ -292,7 +292,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             })
             case .failed(error: let error):
                 
-                EZToast.present(on: self, content: error.localizedDescription)
+                EZToast.present(on: self, content: error.descString)
             }
         }).disposed(by: bag)
     }

@@ -651,4 +651,6 @@ struct DLS_ZH_CN: DLS {
     var red_env_history_receive_time_title:String = "接收红包时间"
     var red_env_history_deposit_time_title:String = "红包拨款时间"
 
+    var chat_keyboard_placeholder:String = "在这里写点东西"
+    var chat_recovery_password_successful:String = "密码设置成功"
 }

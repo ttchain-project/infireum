@@ -49,7 +49,7 @@ class IMUserManager {
                     self?.authenticateUser()
                 }
             case .failed(let error):
-                DLogError(error.localizedDescription)
+                DLogError(error)
             }
         }).disposed(by: bag)
     }
@@ -104,7 +104,7 @@ class IMUserManager {
                 self.userLoginStatus.accept(.userExists)
                 self.saveIMUser()
             case .failed(error: let error):
-                DLogError(error.localizedDescription)
+                DLogError(error)
             }
         }).disposed(by: getUserDataBag)
     }
@@ -199,20 +199,5 @@ class IMUserManager {
         return Server.instance.sendFriendRequestAPI(inviterUserID: myselfRocketChatUID, inviteeUserID: friendRocketChatUID, invitationMessage: welcomeMessage)
     }
     
-    //    func respondToFriendRequest(accept: Bool, invitationID: String, complete: @escaping (_ result: Bool) -> Void) {
-    //        guard let imUID = self.userModel.value?.uID,
-    //              let authToken = RocketChatManager.manager.rocketChatUser.value?.authToken,
-    //              let rocketChatUserId = RocketChatManager.manager.rocketChatUser.value?.rocketChatUserId else {
-    //                complete(false)
-    //                return
-    //        }
-    //
-    //        Server
-    //            .instance
-    //            .respondToFriendRequestAPI(inviteeUserID: imUID, invitationId: invitationID, accept: accept, authToken: authToken, rocketChatUserId: rocketChatUserId)
-    //            .asObservable()
-    //            .subscribe(onNext: { (result) in
-    //            print(result)
-    //        }).disposed(by: bag)
-    //    }
+    
 }

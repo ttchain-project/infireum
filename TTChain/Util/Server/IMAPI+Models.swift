@@ -1392,6 +1392,7 @@ enum RocketChatAPI: KLMoyaAPISet {
         case .sendChatMessage(let api): return api
         case .joinPublicGroupRocketChat(let api): return api
         case .deleteMessage(let api):return api
+        case .deleteChatHistory (let api):return api
         }
     }
     case rocketChatLogin(RocketChatLoginAPI)
@@ -1400,6 +1401,7 @@ enum RocketChatAPI: KLMoyaAPISet {
     case groupChatHistory(GetRocketChatGroupMessageHistoryAPI)
     case joinPublicGroupRocketChat(JoinPubliGroupRocketChatAPI)
     case deleteMessage(DeleteChatMessageAPI)
+    case deleteChatHistory(DeleteChatHistoryAPI)
 }
 
 //MARK: - /api/v1/login
@@ -1689,5 +1691,44 @@ struct  DeleteChatMessageAPIModel:KLJSONMappableMoyaResponse {
         if json["_id"].string == sourceAPI.msgID {
             print(sourceAPI.msgID)
         }
+    }
+}
+
+
+struct DeleteChatHistoryAPI:KLMoyaRocketChatAPIData {
+    var rocketChatAuthNeeded: Bool {return false}
+    
+    let parameter : Parameter
+  
+    struct Parameter:Paramenter {
+        let roomId:String
+        let latest:String = "2020-09-30T13:42:25.304Z"
+        let oldest:String = "2018-09-30T13:42:25.304Z"
+    }
+    var headers: [String : String]? {return ["X-Auth-Token":"5GnhnZQQUmDtw3NrJjgaDKL_nLyn69b-M4kb8vCHiuB","X-User-Id":"PaeuSQobQwNzcS6jy"]}
+    var path: String {return "/api/v1/rooms.cleanHistory"}
+    
+    var method: Moya.Method { return .post }
+    
+    var task: Task {
+        return Moya.Task.requestParameters(
+            parameters: parameter.asDictionary(),
+            encoding: JSONEncoding.default
+        )
+    }
+    
+    var stub: Data? {return nil}
+}
+
+struct DeleteChatHistoryAPIModel:KLJSONMappableMoyaResponse {
+    typealias API = DeleteChatHistoryAPI
+    
+    let status :Bool
+    
+    init(json: JSON, sourceAPI: DeleteChatHistoryAPI) throws {
+        guard let status = json["success"].bool else {
+            throw GTServerAPIError.noData
+        }
+        self.status = status
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ChatHistoryTableViewCell: UITableViewCell {
 
@@ -16,12 +17,18 @@ class ChatHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     
+    var disposeBag = DisposeBag()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
         backgroundColor = .clear
         self.coverImageView.cornerRadius = coverImageView.frame.height/2
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

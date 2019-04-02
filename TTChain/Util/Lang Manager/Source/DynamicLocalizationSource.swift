@@ -637,4 +637,7 @@ protocol DynamicLocalizationSource {
     var red_env_history_receive_time_title:String {get set}
     var red_env_history_deposit_time_title:String {get set}
 
+    var chat_keyboard_placeholder:String {get set}
+    var chat_recovery_password_successful:String {get set}
+
 }

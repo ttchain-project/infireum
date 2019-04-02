@@ -29,7 +29,7 @@ class TTNotificationHandler {
                 case .success(_): DLogDebug("success regist")
                 case .failed(error:let error):
                     DLogError(error)
-                    DLogError(error.localizedDescription)
+                    DLogError(error)
                 }
             }, onError: nil).disposed(by: TTNotificationHandler.shared.bag)
         }
@@ -48,7 +48,7 @@ class TTNotificationHandler {
                 case .success(_): DLogDebug("success Deregister")
                 case .failed(error:let error):
                     DLogError(error)
-                    DLogError(error.localizedDescription)
+                    DLogError(error)
                 }
             }, onError: nil).disposed(by: TTNotificationHandler.shared.bag)
         }

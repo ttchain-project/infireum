@@ -27,7 +27,11 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textField: UITextField! {
+        didSet {
+            textField.placeholder = LM.dls.chat_keyboard_placeholder
+        }
+    }
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var inputContentView: UIView!
     @IBOutlet weak var inputContentViewBottomConstraint: NSLayoutConstraint!

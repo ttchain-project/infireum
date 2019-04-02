@@ -234,6 +234,11 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
                 }
                 let chatListModel = model as! CommunicationListModel
                 cell.config(model: chatListModel)
+                cell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                    if chatListModel.roomType == .pvtChat {
+                        self.showDeletePopUp(forChat: chatListModel)
+                    }
+                }).disposed(by: cell.disposeBag)
                 return cell
             default:
                 return UITableViewCell()
@@ -246,7 +251,6 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
                 dataSource: viewModel.dataSource)
             )
             .disposed(by: bag)
-        
         
     }
     
@@ -296,6 +300,30 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         vc.addAction(createGroupAction)
         vc.addAction(cancelAction)
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func showDeletePopUp(forChat chat: CommunicationListModel) {
+        let alert = UIAlertController.init(title: "Delete Chat", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
+        let actionYes = UIAlertAction.init(title: "Yes", style: .default) {[weak self] _ in
+            guard let `self` = self else {
+                return
+            }
+            let parameter = DeleteChatHistoryAPI.Parameter.init(roomId: chat.roomId)
+            Server.instance.deleteChatHistory(parameter: parameter).asObservable().subscribe(onNext: { result in
+                switch result {
+                case .failed(error: let error):
+                    DLogError(error)
+                case .success(let model):
+                    if model.status {
+                        self.viewModel.getCommunicationList()
+                    }
+                }
+            }).disposed(by:self.bag)
+        }
+        let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+        alert.addAction(actionYes)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func toEditProfile() {

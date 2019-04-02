@@ -170,10 +170,12 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
                 [weak self] result in
                 guard let `self` = self else { return }
                 switch result {
-                case .success: DLogDebug("set recovery key successful.")
+                case .success:
+                    DLogDebug("set recovery key successful.")
+                    EZToast.present(on: self, content: LM.dls.chat_recovery_password_successful)
                 case .failed(error: let error):
                     DLogError(error)
-                    EZToast.present(on: self, content: error.localizedDescription)
+                    EZToast.present(on: self, content: error.descString)
                 }
             }).disposed(by:self.bag)
         }).disposed(by: bag)

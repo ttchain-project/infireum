@@ -85,6 +85,7 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         guard let url = URL.init(string: message.msg) else {
             return
         }
+        self.msgImageView.image = #imageLiteral(resourceName: "no_image")
         if case .voiceMessage = message.msgType {
             self.msgImageView.image = #imageLiteral(resourceName: "voice_message_icon")
             self.heightConstraint.constant = 48

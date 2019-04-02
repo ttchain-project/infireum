@@ -349,7 +349,7 @@ class GroupInformationViewController: UIViewController {
                     case .success: self?.popToRoot(sender: self)
                     case .failed(error: let error):
                         guard let `self` = self else { return }
-                        EZToast.present(on: self, content: error.localizedDescription)
+                        EZToast.present(on: self, content: error.descString)
                     }
                 }).disposed(by: self.disposeBag)
             }

@@ -214,7 +214,7 @@ final class GroupInformationViewModel: ViewModel {
                         }).disposed(by: self.groupMembersDisposeBag)
                     case .failed(error: let error):
                         DLogError(error)
-                        self.output.errorMessageSubject.onNext(error.localizedDescription)
+                        self.output.errorMessageSubject.onNext(error.descString)
                     }
                     self.createGroupDisposeBag = DisposeBag()
                 }).disposed(by: self.createGroupDisposeBag)
@@ -229,7 +229,7 @@ final class GroupInformationViewModel: ViewModel {
                         case .success: self.output.popToRootSubject.onCompleted()
                         case .failed(error: let error):
                             DLogError(error)
-                            self.output.errorMessageSubject.onNext(error.localizedDescription)
+                            self.output.errorMessageSubject.onNext(error.descString)
                         }
                     }).disposed(by: self.disposeBag)
                 }
@@ -256,7 +256,7 @@ final class GroupInformationViewModel: ViewModel {
                         }).disposed(by: self.groupMembersDisposeBag)
                     case .failed(error: let error):
                         DLogError(error)
-                        self.output.errorMessageSubject.onNext(error.localizedDescription)
+                        self.output.errorMessageSubject.onNext(error.descString)
                     }
                     self.createGroupDisposeBag = DisposeBag()
                 }).disposed(by: self.createGroupDisposeBag)

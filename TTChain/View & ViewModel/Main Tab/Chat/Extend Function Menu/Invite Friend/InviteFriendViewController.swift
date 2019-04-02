@@ -61,7 +61,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
                 self.userNameLabel.text = value.imUser.nickName
                 self.confirmButton.isEnabled = !(value.isFriend || value.isBlock)
                 self.confirmButton.backgroundColor = self.confirmButton.isEnabled ? UIColor.owAzure : UIColor.owSilver
-            case .failed(error: let error): EZToast.present(on: self, content: error.localizedDescription)
+            case .failed(error: let error): EZToast.present(on: self, content: error.descString)
             }
         }).disposed(by: searchUserBag)
     }
@@ -155,7 +155,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
                         })
                     }
                 default:
-                    EZToast.present(on: self, content: error.localizedDescription)
+                    EZToast.present(on: self, content: error.descString)
                 }
             }
         }).disposed(by: inviteBag)

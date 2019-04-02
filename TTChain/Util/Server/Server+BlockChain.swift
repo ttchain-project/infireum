@@ -747,6 +747,10 @@
         let api = DeleteChatMessageAPI.init(roomID: roomID, msgID: messageId)
         return fire(router: .rocketChat(.deleteMessage(api)))
     }
+    func deleteChatHistory(parameter:DeleteChatHistoryAPI.Parameter) ->  RxAPIResponse<DeleteChatHistoryAPIModel> {
+        let api = DeleteChatHistoryAPI.init(parameter: parameter)
+        return fire(router: .rocketChat(.deleteChatHistory(api)))
+    }
  }
  
  
