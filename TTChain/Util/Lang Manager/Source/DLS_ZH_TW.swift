@@ -666,6 +666,10 @@ struct DLS_ZH_TW: DLS {
 
     var chat_keyboard_placeholder:String = "在這裡寫點東西"
     var chat_recovery_password_successful:String = "密碼設置成功"
+    
+    var chat_history_delete_chat_title:String = "刪除聊天"
+    var chat_history_delete_chat_message:String = "您確定要刪除此聊天中的所有郵件嗎？"
+
 
 }
 

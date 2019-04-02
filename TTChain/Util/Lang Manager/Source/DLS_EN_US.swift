@@ -663,4 +663,7 @@ struct DLS_EN_US: DLS {
     var chat_keyboard_placeholder:String = "Write something here"
     var chat_recovery_password_successful:String = "Password set successfully"
     
+    var chat_history_delete_chat_title:String = "Delete Chat"
+    var chat_history_delete_chat_message:String = "Are you sure you want to delete all messages from this chat?"
+    
 }

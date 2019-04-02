@@ -640,4 +640,6 @@ protocol DynamicLocalizationSource {
     var chat_keyboard_placeholder:String {get set}
     var chat_recovery_password_successful:String {get set}
 
+    var chat_history_delete_chat_title:String {get set}
+    var chat_history_delete_chat_message:String {get set}
 }

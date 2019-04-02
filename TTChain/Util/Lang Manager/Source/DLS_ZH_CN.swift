@@ -653,4 +653,8 @@ struct DLS_ZH_CN: DLS {
 
     var chat_keyboard_placeholder:String = "在这里写点东西"
     var chat_recovery_password_successful:String = "密码设置成功"
+    
+    var chat_history_delete_chat_title:String = "删除聊天"
+    var chat_history_delete_chat_message:String = "您确定要删除此聊天中的所有邮件吗？"
+
 }

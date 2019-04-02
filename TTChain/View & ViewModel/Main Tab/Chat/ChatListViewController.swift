@@ -303,8 +303,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     }
     
     func showDeletePopUp(forChat chat: CommunicationListModel) {
-        let alert = UIAlertController.init(title: "Delete Chat", message: "Are you sure you want to delete all messages?", preferredStyle: .alert)
-        let actionYes = UIAlertAction.init(title: "Yes", style: .default) {[weak self] _ in
+        let alert = UIAlertController.init(title: LM.dls.chat_history_delete_chat_title, message: LM.dls.chat_history_delete_chat_message, preferredStyle: .alert)
+        let actionYes = UIAlertAction.init(title: LM.dls.g_confirm, style: .default) {[weak self] _ in
             guard let `self` = self else {
                 return
             }

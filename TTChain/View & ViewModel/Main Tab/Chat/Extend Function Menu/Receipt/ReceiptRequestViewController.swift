@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import IQKeyboardManagerSwift
 
 final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
     
@@ -33,6 +34,8 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
             }
         }).disposed(by: bag)
         self.receiptAmounTextField.delegate = self
+        
+        self.coinNameTextField.addDoneOnKeyboardWithTarget(self, action: #selector(doneButtonClicked))
     }
     
     typealias Constructor = Void
@@ -68,8 +71,9 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
         receiptAmounTextField.placeHolderColor = theme.palette.input_placeholder
 
         coinNameTextField.textColor = theme.palette.input_text
-        coinNameTextField.placeHolderColor = theme.palette.input_placeholder
-        
+        coinNameTextField.placeHolderColor = UIColor.gray
+        receiptAmounTextField.placeHolderColor = UIColor.gray
+
         confirmButton.set(textColor: theme.palette.btn_bgFill_enable_text,
                           backgroundColor: theme.palette.btn_bgFill_enable_bg )
     }
@@ -80,6 +84,19 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
         coinTitleLabel.text = LM.dls.receipt_receiving_currency
         receiptAmountLabel.text = LM.dls.receiving_amount
         coinNameTextField.placeholder = LM.dls.red_env_send_please_select
+        receiptAmounTextField.placeholder = LM.dls.withdrawal_placeholder_withdrawalAmt
+    }
+    
+    @objc func doneButtonClicked() {
+        let index = self.coinPickerView.selectedRow(inComponent: 1)
+        guard let coins = self.viewModel.coins.value else {
+            return
+        }
+        guard let selectedCoin = coins.count > index ? coins[index] : nil else {
+            return
+        }
+        self.viewModel.selectedCoin.accept(selectedCoin)
+        self.view.endEditing(true)
     }
 }
 
@@ -120,16 +137,16 @@ extension ReceiptRequestViewController: UIPickerViewDelegate,UIPickerViewDataSou
         case 0:
             self.viewModel.selectedWallet.accept(self.viewModel.wallet[row])
             pickerView.selectRow(0, inComponent: 1, animated: true)
-            guard let coins = self.viewModel.coins.value else {
-                return
-            }
-            self.viewModel.selectedCoin.accept(coins[0])
+//            guard let coins = self.viewModel.coins.value else {
+//                return
+//            }
+//            self.viewModel.selectedCoin.accept(coins[0])
             pickerView.reloadAllComponents()
-        case 1:
-            guard let coins = self.viewModel.coins.value else {
-                return
-            }
-            self.viewModel.selectedCoin.accept(coins[row])
+//        case 1:
+//            guard let coins = self.viewModel.coins.value else {
+//                return
+//            }
+//            self.viewModel.selectedCoin.accept(coins[row])
             
         default:
             return
