@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoCropperViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="TuK-VK-52j" id="nis-jP-Ank"/>
+                <outlet property="imageScrollView" destination="aVK-e8-jqc" id="wjO-TR-fEu"/>
+                <outlet property="useCroppedImageButton" destination="mjY-QG-SgJ" id="Omv-DQ-jre"/>
+                <outlet property="useImageButton" destination="jZq-Gi-crQ" id="dse-Fw-m43"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TuK-VK-52j">
+                    <rect key="frame" x="20" y="40" width="335" height="557"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVK-e8-jqc" customClass="ImageScrollView" customModule="Hope_Seed" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="557"/>
+                        </scrollView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="aVK-e8-jqc" secondAttribute="trailing" id="7pb-9O-IO3"/>
+                        <constraint firstItem="aVK-e8-jqc" firstAttribute="top" secondItem="TuK-VK-52j" secondAttribute="top" id="jt7-aG-IGf"/>
+                        <constraint firstItem="aVK-e8-jqc" firstAttribute="leading" secondItem="TuK-VK-52j" secondAttribute="leading" id="p7f-I0-3Ui"/>
+                        <constraint firstAttribute="bottom" secondItem="aVK-e8-jqc" secondAttribute="bottom" id="yUS-1p-YKQ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MSi-qY-rKC">
+                    <rect key="frame" x="20" y="617" width="335" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZq-Gi-crQ">
+                            <rect key="frame" x="0.0" y="0.0" width="157.5" height="40"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjY-QG-SgJ">
+                            <rect key="frame" x="177.5" y="0.0" width="157.5" height="40"/>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="h9O-EQ-CxM"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="TuK-VK-52j" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BuZ-sN-lyi"/>
+                <constraint firstItem="MSi-qY-rKC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="NOL-nJ-CP6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MSi-qY-rKC" secondAttribute="trailing" constant="20" id="erw-Je-eam"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="MSi-qY-rKC" secondAttribute="bottom" constant="10" id="fWc-VS-FXH"/>
+                <constraint firstItem="MSi-qY-rKC" firstAttribute="top" secondItem="TuK-VK-52j" secondAttribute="bottom" constant="20" id="sIP-lt-tbh"/>
+                <constraint firstItem="TuK-VK-52j" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="tSg-6y-93b"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TuK-VK-52j" secondAttribute="trailing" constant="20" id="wZK-xv-hCH"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

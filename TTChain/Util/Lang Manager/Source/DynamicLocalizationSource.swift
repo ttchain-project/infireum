@@ -644,4 +644,7 @@ protocol DynamicLocalizationSource {
     var chat_history_delete_chat_message:String {get set}
     
     var receipt_request_error_string:String {get set}
+    
+    var use_edited_image_title:String {get set}
+    var use_original_image_title:String {get set}
 }

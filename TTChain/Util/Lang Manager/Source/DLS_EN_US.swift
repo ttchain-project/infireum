@@ -667,4 +667,7 @@ struct DLS_EN_US: DLS {
     var chat_history_delete_chat_message:String = "Are you sure you want to delete all messages from this chat?"
 
     var receipt_request_error_string:String = "Please select a coin and enter the amount"
+    
+    var use_edited_image_title:String = "Use edited image"
+    var use_original_image_title:String = "Use original image"
 }

@@ -452,6 +452,12 @@
 		55BB1B43218FDCE70061F189 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */; };
 		55BB1B44218FDCE70061F189 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */; };
 		55BB1B45218FDCE70061F189 /* ExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */; };
+		55D4C7CF2253656B005F3BEF /* PhotoCropperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D4C7CD2253656B005F3BEF /* PhotoCropperViewController.swift */; };
+		55D4C7D02253656B005F3BEF /* PhotoCropperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D4C7CD2253656B005F3BEF /* PhotoCropperViewController.swift */; };
+		55D4C7D12253656B005F3BEF /* PhotoCropperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D4C7CD2253656B005F3BEF /* PhotoCropperViewController.swift */; };
+		55D4C7D22253656B005F3BEF /* PhotoCropperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D4C7CE2253656B005F3BEF /* PhotoCropperViewController.xib */; };
+		55D4C7D32253656B005F3BEF /* PhotoCropperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D4C7CE2253656B005F3BEF /* PhotoCropperViewController.xib */; };
+		55D4C7D42253656B005F3BEF /* PhotoCropperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D4C7CE2253656B005F3BEF /* PhotoCropperViewController.xib */; };
 		55D7D1B72238B02E00309A22 /* IncomingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D1B52238B02E00309A22 /* IncomingCallViewController.swift */; };
 		55D7D1B82238B02E00309A22 /* IncomingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D1B52238B02E00309A22 /* IncomingCallViewController.swift */; };
 		55D7D1B92238B02E00309A22 /* IncomingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D1B52238B02E00309A22 /* IncomingCallViewController.swift */; };
@@ -2204,6 +2210,8 @@
 		55B5C033221A9D61007250FA /* TransRecordDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransRecordDetailViewController.xib; sourceTree = "<group>"; };
 		55BB1B3E218FDCE70061F189 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExploreViewController.xib; sourceTree = "<group>"; };
+		55D4C7CD2253656B005F3BEF /* PhotoCropperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCropperViewController.swift; sourceTree = "<group>"; };
+		55D4C7CE2253656B005F3BEF /* PhotoCropperViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCropperViewController.xib; sourceTree = "<group>"; };
 		55D7D1B52238B02E00309A22 /* IncomingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallViewController.swift; sourceTree = "<group>"; };
 		55D7D1B62238B02E00309A22 /* IncomingCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingCallViewController.xib; sourceTree = "<group>"; };
 		55D7D1BD2238F8C000309A22 /* IncomingCallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallViewModel.swift; sourceTree = "<group>"; };
@@ -3384,6 +3392,15 @@
 				55BB1B3F218FDCE70061F189 /* ExploreViewController.xib */,
 			);
 			path = ExploreTab;
+			sourceTree = "<group>";
+		};
+		55D4C7CC2253654E005F3BEF /* PhotoCropper */ = {
+			isa = PBXGroup;
+			children = (
+				55D4C7CD2253656B005F3BEF /* PhotoCropperViewController.swift */,
+				55D4C7CE2253656B005F3BEF /* PhotoCropperViewController.xib */,
+			);
+			path = PhotoCropper;
 			sourceTree = "<group>";
 		};
 		55D7D1B42238B01300309A22 /* IncomingCall */ = {
@@ -5874,6 +5891,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				55D4C7CC2253654E005F3BEF /* PhotoCropper */,
 				555E4AA1224B508900C7CAD5 /* TTChainTransfer */,
 				557C85522236700C004C2E16 /* CallHandler */,
 				559C4F142226658D009466A8 /* NotificationHandler */,
@@ -6475,6 +6493,7 @@
 				64813AE620DE241500CAA4D8 /* MainTabBarViewController.xib in Resources */,
 				6424B69520F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.xib in Resources */,
 				649E48B020ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.xib in Resources */,
+				55D4C7D42253656B005F3BEF /* PhotoCropperViewController.xib in Resources */,
 				555E4A8B224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */,
 				555E4A6E2249CA4C00C7CAD5 /* ReceiveRedEnvelopeViewController.xib in Resources */,
 				55EF6AEC21A812C7007E074A /* FriendsListViewController.xib in Resources */,
@@ -6632,6 +6651,7 @@
 				555E4A422248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */,
 				55EF6A7B21A812C6007E074A /* AddGroupMemberCollectionViewCell.xib in Resources */,
 				649E485720E7D99200B217AD /* ImportedWalletTableHeaderView.xib in Resources */,
+				55D4C7D22253656B005F3BEF /* PhotoCropperViewController.xib in Resources */,
 				649E48B920ECE79600B217AD /* WalletPrivateKeyInfoViewController.xib in Resources */,
 				555E4AF1224CEC8100C7CAD5 /* ReceiveRedEnvelopeHistoryViewController.xib in Resources */,
 				5539A48E21676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewController.xib in Resources */,
@@ -6800,6 +6820,7 @@
 				555E4A432248BCAB00C7CAD5 /* RedEnvTableViewCell.xib in Resources */,
 				55EF6A7C21A812C6007E074A /* AddGroupMemberCollectionViewCell.xib in Resources */,
 				649E485820E7D99200B217AD /* ImportedWalletTableHeaderView.xib in Resources */,
+				55D4C7D32253656B005F3BEF /* PhotoCropperViewController.xib in Resources */,
 				649E48BA20ECE79600B217AD /* WalletPrivateKeyInfoViewController.xib in Resources */,
 				555E4AF2224CEC8100C7CAD5 /* ReceiveRedEnvelopeHistoryViewController.xib in Resources */,
 				5539A48F21676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewController.xib in Resources */,
@@ -7526,6 +7547,7 @@
 				64F07DE420D241A000A60C5C /* UIViewController+Visible.swift in Sources */,
 				649E48C820ECF43800B217AD /* WalletPKeyQRCodeViewController.swift in Sources */,
 				64813AA120DCB18F00CAA4D8 /* Asset+CoreDataClass.swift in Sources */,
+				55D4C7D12253656B005F3BEF /* PhotoCropperViewController.swift in Sources */,
 				6470D6B820F35B2B00EB0780 /* WithdrawalETHFeeInfoViewModel.swift in Sources */,
 				55EF6A5321A812C6007E074A /* ChatViewController.swift in Sources */,
 				64F43BAB210B259700982AFD /* Unspent.swift in Sources */,
@@ -8022,6 +8044,7 @@
 				64C614AA2109BA50005B7394 /* String+PrivateMode.swift in Sources */,
 				640D891A20EF6DD00010D986 /* TransRecordListTabViewController.swift in Sources */,
 				64E77DE321206BD200B0AC15 /* EtherscanUrlCreator.swift in Sources */,
+				55D4C7CF2253656B005F3BEF /* PhotoCropperViewController.swift in Sources */,
 				55EF6A5121A812C6007E074A /* ChatViewController.swift in Sources */,
 				6424B62720F4CFAA00AEBCAD /* TransferRecordsOptionsSelectBase.swift in Sources */,
 				64D8264120DFB94D00C8FC63 /* QRCodeGenerator.swift in Sources */,
@@ -8511,6 +8534,7 @@
 				64E77DE421206BD200B0AC15 /* EtherscanUrlCreator.swift in Sources */,
 				6485002A20D9F28700107473 /* UIViewController+KLInstanceSetup.swift in Sources */,
 				64F07DF220D241A000A60C5C /* Formatter+QuickGen.swift in Sources */,
+				55D4C7D02253656B005F3BEF /* PhotoCropperViewController.swift in Sources */,
 				55EF6A5221A812C6007E074A /* ChatViewController.swift in Sources */,
 				64F07DD120D241A000A60C5C /* WindowOrientaionLocker.swift in Sources */,
 				64B2771F20D55A05004FF75B /* FiatToFiatRate+Helper.swift in Sources */,

@@ -658,4 +658,8 @@ struct DLS_ZH_CN: DLS {
     var chat_history_delete_chat_message:String = "您确定要删除此聊天中的所有邮件吗？"
     
     var receipt_request_error_string:String = "请选择一个硬币并输入金额"
+    
+    var use_edited_image_title:String = "使用编辑过的图像"
+    var use_original_image_title:String = "使用原始图像"
+
 }

@@ -540,9 +540,10 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     fileprivate func displayCamera(forSource sourceType:UIImagePickerController.SourceType ) {
         
         imagePicker = UIImagePickerController()
-        imagePicker.allowsEditing = true
         imagePicker.delegate = self
         imagePicker.sourceType = sourceType
+        imagePicker.allowsEditing = false
+
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -640,38 +641,16 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        var image : UIImage!
-        if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
-            image = img
-        } else if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            image = img
-        }
-        let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
-        self.viewModel.sendImageAsMessage(image:resizedImg)
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    fileprivate func targetSize(for originImg:UIImage) -> CGSize {
-        let originSize = originImg.size
-        enum Longer {
-            case w
-            case h
+        guard let img = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            picker.dismiss(animated: true, completion: nil)
+            return
         }
         
-        var targetSize: CGSize = .zero
-        let longer : Longer = (originSize.width >= originSize.height) ? .w : .h
-        switch longer {
-        case .w:
-            targetSize.width = min(originSize.width, 480)
-            let compressRatio = targetSize.width / originSize.width
-            targetSize.height = originSize.height * compressRatio
-        case .h:
-            targetSize.height = min(originSize.height, 480)
-            let compressRatio = targetSize.height / originSize.height
-            targetSize.width = originSize.width * compressRatio
+        let viewController = PhotoCropperViewController.init(withImage: img) { (image) in
+            self.viewModel.sendImageAsMessage(image:image)
+            picker.dismiss(animated: true, completion: nil)
         }
-        
-        return targetSize
+        picker.pushViewController(viewController)
     }
 }
 
