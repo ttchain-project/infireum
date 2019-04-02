@@ -255,7 +255,6 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
                 recordingSession.requestRecordPermission() { [unowned self] allowed in
                     DispatchQueue.main.async {
                         if allowed {
-                            //Start Recording
                             self.recordAudioButton.isEnabled = true
                         } else {
                             self.recordAudioButton.isEnabled = false
@@ -280,11 +279,11 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     var audioPlayer : AVAudioPlayer?
 
     func getAudioFilePath() -> URL {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let audioFileName = documentsPath.appendingPathComponent("AudioFileRecoding11.3gpp")
+        let audioFileName = NSTemporaryDirectory().appendingPathComponent("AudioFileRecoding11.3gpp")
         let audioFilePath = URL.init(fileURLWithPath: audioFileName)
         return audioFilePath
     }
+    
     func startRecording() {
         DLogInfo("Start Recording")
 
