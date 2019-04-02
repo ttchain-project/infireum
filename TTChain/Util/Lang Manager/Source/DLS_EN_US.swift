@@ -665,5 +665,6 @@ struct DLS_EN_US: DLS {
     
     var chat_history_delete_chat_title:String = "Delete Chat"
     var chat_history_delete_chat_message:String = "Are you sure you want to delete all messages from this chat?"
-    
+
+    var receipt_request_error_string:String = "Please select a coin and enter the amount"
 }

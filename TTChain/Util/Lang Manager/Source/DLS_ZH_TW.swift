@@ -670,7 +670,7 @@ struct DLS_ZH_TW: DLS {
     var chat_history_delete_chat_title:String = "刪除聊天"
     var chat_history_delete_chat_message:String = "您確定要刪除此聊天中的所有郵件嗎？"
 
-
+    var receipt_request_error_string:String = "請選擇一個硬幣並輸入金額"
 }
 
 

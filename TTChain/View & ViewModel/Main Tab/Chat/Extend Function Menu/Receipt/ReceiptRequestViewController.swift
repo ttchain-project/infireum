@@ -30,12 +30,11 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
                 self.coinSelected.accept((self.viewModel.selectedWallet.value!.address!, self.viewModel.selectedCoin.value!.identifier!, self.viewModel.getAmt()))
                 self.navigationController?.popViewController(animated: true)
             }else {
-                self.showAlert(title: "", message: "Please select coin and enter amount")
+                self.showAlert(title: "", message: LM.dls.receipt_request_error_string)
             }
         }).disposed(by: bag)
         self.receiptAmounTextField.delegate = self
-        
-        self.coinNameTextField.addDoneOnKeyboardWithTarget(self, action: #selector(doneButtonClicked))
+        self.coinNameTextField.addDoneOnKeyboardWithTarget(self, action: #selector(doneButtonClicked),titleText:LM.dls.g_confirm)
     }
     
     typealias Constructor = Void
