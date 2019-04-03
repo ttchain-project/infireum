@@ -83,12 +83,14 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     
     var base: APIBaseEndPointType {
         let urlString: String
-        //        switch asset.coin!.owChainType {
-        //        case .btc:
-        //            urlString = C.BlockchainAPI.BlockExplorer.apiBase
-        //        case .eth, .cic:
-        urlString = C.BlockchainAPI.urlStr_32000
-        //        }
+        switch (asset.coin!.owChainType,asset.coin?.identifier) {
+        case (.btc,Coin.btc_identifier):
+            urlString = C.BlockchainAPI.BlockExplorer.apiBase
+        case (.btc,Coin.usdt_identifier):
+            urlString = "https://api.omniexplorer.info"
+        default:
+            urlString = C.BlockchainAPI.urlStr_32000
+        }
         
         let url = URL.init(string: urlString)!
         return .custom(url: url)
@@ -99,38 +101,39 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     var langDepended: Bool { return false }
     
     var path: String {
-        //        switch asset.coin!.owChainType {
-        //        case .cic, .eth:
-        guard let wallet = asset.wallet,let  address = wallet.address else {
-            return ""
+        switch (asset.coin!.owChainType,asset.coinID) {
+        case (.btc,Coin.btc_identifier):
+            return "/addr/\(asset.wallet!.address!)/balance"
+        case (.btc,Coin.usdt_identifier):
+            return "/v1/address/addr/"
+        default:
+            guard let wallet = asset.wallet,let  address = wallet.address else {
+                return ""
+            }
+            return "/topChain/getBalance_app/\(address)"
         }
-        return "/topChain/getBalance_app/\(address)"
-        //        case .btc:
-        //            return "/addr/\(asset.wallet!.address!)"
-        //        }
     }
     
-    var method: Moya.Method { return .get }
+    var method: Moya.Method { return asset.coin?.identifier == Coin.usdt_identifier ? .post : .get }
     
     var task: Task {
         guard let coin = asset.coin else  { return Moya.Task.requestPlain }
         switch coin.owChainType {
-        case .cic, .btc:
+        case .btc:
             
-            if asset.coinID == Coin.usdt_identifier {
-                return Moya.Task.requestParameters(
-                    parameters: [ "token" : "USDT" ],
-                    encoding: URLEncoding.default
-                )
-                
-            }
-            guard let wallet = asset.wallet, let mainCoin = wallet.mainCoin, let chainName = mainCoin.chainName else {
+            guard let wallet = asset.wallet, let address = wallet.address else {
                 return Moya.Task.requestPlain
             }
-            return Moya.Task.requestParameters(
-                parameters: [ "token" : chainName.uppercased() ],
-                encoding: URLEncoding.default
-            )
+            
+            if asset.coinID == Coin.usdt_identifier {
+                let multiPartData : [MultipartFormData] =
+                    [MultipartFormData.init(provider: .data(address.data(using: .utf8)!), name: "addr"),
+                     ]
+                return .uploadMultipart(multiPartData)
+            }
+            
+            return Moya.Task.requestPlain
+
         case .eth:
             var params = [ "token" : "ETH" ]
             if let contract = asset.coin?.contract, contract.count > 0 {
@@ -141,8 +144,9 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
                 parameters: params,
                 encoding: URLEncoding.default
             )
-            //        case .btc:
-            //            return Moya.Task.requestPlain
+            
+        default:
+             return Moya.Task.requestPlain
         }
     }
     
@@ -156,10 +160,26 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
         
         switch sourceAPI.asset.wallet!.owChainType {
         case .btc:
-            guard let balanceString = json["balance"].string, let balance = Decimal.init(string: balanceString) else {
-                throw GTServerAPIError.noData
+            if sourceAPI.asset.coinID == Coin.usdt_identifier {
+                guard let balanceArray = json["balance"].array else {
+                    throw GTServerAPIError.noData
+                }
+                    if let balance = (balanceArray.filter {
+                        $0["symbol"].string == "SP31"
+                }.compactMap {
+                    return $0["value"]
+                        }.first?.string) {
+                        self.balanceInCoin = Decimal.init(string: balance)?.satoshiToBTC ?? 0
+                    }else {
+                        self.balanceInCoin = 0
+                }
+            }else {
+                guard let balance = json.number else {
+                    throw GTServerAPIError.noData
+                }
+                self.balanceInCoin = balance.decimalValue.satoshiToBTC
             }
-            self.balanceInCoin = balance.satoshiToBTC
+           
         case .eth:
             guard let smallestUnitBalanceStr = json["balance"].string,
                 let smallestUnitBalance = Decimal.init(string: smallestUnitBalanceStr) else {

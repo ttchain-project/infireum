@@ -122,6 +122,7 @@ struct Constants {
             }
         }
         
+        
         struct ChainSo {
             static var apiBase: String {
                 return "https://chain.so/api/v2"
