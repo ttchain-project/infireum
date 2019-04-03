@@ -29,10 +29,11 @@ class IncomingCallViewModel:KLRxViewModel {
     
     struct Input {
         let callModel:CallMessageModel
+        let strin : UILabel
     }
     
     lazy var timer : Observable<NSInteger> = { return Observable<NSInteger>.interval(0.7, scheduler: SerialDispatchQueueScheduler(qos: .background)) }()
-        
+    var timerBag:Disposable!
     var input: IncomingCallViewModel.Input
     var output: Void
     var vibrationBag:DisposeBag! = DisposeBag()
@@ -40,9 +41,13 @@ class IncomingCallViewModel:KLRxViewModel {
     required init(input: InputSource, output: OutputSource) {
         self.input = input
         self.output = output
-        AVCallHandler.handler.startIncomingCall(callMessageModel: input.callModel)
-        timer.observeOn(MainScheduler.instance).subscribe(onNext: {  _ in
+        
+        self.timerBag = Observable<NSInteger>.interval(0.7, scheduler: SerialDispatchQueueScheduler(qos: .background)).observeOn(MainScheduler.instance).subscribe(onNext: {  intVal in
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-        }).disposed(by: vibrationBag)
+        })
+        
+        AVCallHandler.handler.startIncomingCall(callMessageModel: input.callModel)
+       
+        
     }
 }

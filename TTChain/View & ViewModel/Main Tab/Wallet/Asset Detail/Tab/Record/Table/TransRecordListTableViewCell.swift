@@ -105,6 +105,10 @@ class TransRecordListTableViewCell: UITableViewCell {
             }
         }
         
+        if transRecord.block == 0 {
+            self.amtLabel.textColor = UIColor.owPumpkinOrange
+        }
+        
         dateLabel.text = DateFormatter.dateString(from:
             transRecord.date! as Date, withFormat: "MM/dd/yyyy HH:mm:ss"
         )

@@ -28,6 +28,7 @@ class SettingMenuCollectionViewCell: UICollectionViewCell {
             return
         }
         imageView.af_setImage(withURL: imageURL)
-        self.titleLabel.numberOfLines = model.title.components(separatedBy: " ").count == 1 ? 1 : 0
+        let title = model.title.replacingOccurrences(of: "\n", with: " ")
+        self.titleLabel.numberOfLines = title.components(separatedBy: " ").count == 1 ? 1 : 0
     }
 }

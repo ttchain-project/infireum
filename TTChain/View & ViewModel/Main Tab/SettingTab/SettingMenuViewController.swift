@@ -520,14 +520,14 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
 
 extension SettingMenuViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.width - 80)/4
-        let height = width + 30
-        let size = CGSize.init(width: width, height: height)
+        let width = (UIScreen.main.bounds.width - 60)/4
+        let height = width + 40
+        let size = CGSize.init(width: width, height: height > 130 ? height : 130)
         return size
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 5, left: 20, bottom: 5, right: 20)
+        return UIEdgeInsets.init(top: 5, left: 10, bottom: 5, right: 10)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize.init(width: self.view.width, height: 40)

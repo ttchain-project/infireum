@@ -30,7 +30,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     
 
     private lazy var walletItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "WalletIcon"), selectedImage: #imageLiteral(resourceName: "WalletIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "wallet1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "wallet2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
 
         return item
@@ -54,7 +54,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     }
     
     private lazy var chatItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "chatIcon"), selectedImage: #imageLiteral(resourceName: "chatIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "chat1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "chat2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         
         return item
@@ -67,7 +67,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return exploreNav?.viewControllers[0] as? ExploreViewController
     }
     private lazy var exploreItem: UITabBarItem = {
-            let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "profileIcon"), selectedImage: #imageLiteral(resourceName: "profileIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+            let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "find1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "find2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
@@ -78,7 +78,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return settingNav?.viewControllers[0] as? SettingMenuViewController
     }
     private lazy var settingItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "settings"), selectedImage: #imageLiteral(resourceName: "settings").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "setup1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "setup2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
@@ -135,7 +135,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         //        }
         //        observeLightningSwitchWithCoin()
 //        self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
-        self.tabBar.backgroundColor = UIColor.init(red: 163, green: 220, blue: 212)
+        self.tabBar.backgroundColor = UIColor.init(red: 157, green: 216, blue: 210)
         self.view.backgroundColor = .owCharcoalGrey
     }
 

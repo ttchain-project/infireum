@@ -23,7 +23,7 @@ class BTCTxHandler: TxHandler {
     var offset: Int = 20
     
     var asset: Asset
-    var address: String { return asset.wallet!.address! }
+    var address: String { return asset.wallet?.address ?? "" }
     
     var start: Int = 0
     var end: Int = 20

@@ -129,6 +129,9 @@ class ChatViewModel: KLRxViewModel {
                 if (prevCount != chatHistory.messageArray.count) {
                     self.shouldScrollToBottom.onNext(())
                 }
+                if (self._messages.value.last != chatHistory.messageArray.first) {
+                    self.shouldScrollToBottom.onNext(())
+                }
             }
         }).disposed(by: bag)
     }

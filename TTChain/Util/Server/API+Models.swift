@@ -101,15 +101,16 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     var langDepended: Bool { return false }
     
     var path: String {
+        
+        guard let wallet = asset.wallet,let address = wallet.address else {
+            return ""
+        }
         switch (asset.coin!.owChainType,asset.coinID) {
         case (.btc,Coin.btc_identifier):
-            return "/addr/\(asset.wallet!.address!)/balance"
+            return "/addr/\(address)/balance"
         case (.btc,Coin.usdt_identifier):
             return "/v1/address/addr/"
         default:
-            guard let wallet = asset.wallet,let  address = wallet.address else {
-                return ""
-            }
             return "/topChain/getBalance_app/\(address)"
         }
     }
@@ -158,7 +159,7 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
     let balanceInCoin: Decimal
     init(json: JSON, sourceAPI: API) throws {
         
-        switch sourceAPI.asset.wallet!.owChainType {
+        switch sourceAPI.asset.coin!.owChainType {
         case .btc:
             if sourceAPI.asset.coinID == Coin.usdt_identifier {
                 guard let balanceArray = json["balance"].array else {

@@ -75,8 +75,6 @@ class WalletOptionsViewModel:KLRxViewModel {
         }
         self.ethWallet.accept(ethWallet)
         
-       
-        
         var _assetsForBTC = [Asset]()
         var stableAssetsForBTC = [Asset]()
 

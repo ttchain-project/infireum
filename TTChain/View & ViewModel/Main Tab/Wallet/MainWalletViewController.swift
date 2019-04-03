@@ -313,6 +313,9 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     private func handleAssetSelect(_ asset: Asset, ofWallet wallet: Wallet) {
+        if asset.wallet == nil {
+            asset.wallet = wallet
+        }
         let vc = AssetDetailViewController.navInstance(
             from: AssetDetailViewController.Config(asset: asset)
         )

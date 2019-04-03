@@ -15,6 +15,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     
     var viewModel: IncomingCallViewModel!
     
+    @IBOutlet weak var testLabel: UILabel!
     typealias ViewModel = IncomingCallViewModel
     
     var bag: DisposeBag = DisposeBag.init()
@@ -32,7 +33,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     
     func config(constructor: IncomingCallViewController.Config) {
         self.view.layoutIfNeeded()
-        self.viewModel = IncomingCallViewModel.init(input: IncomingCallViewModel.InputSource(callModel: constructor.callModel), output: ())
+        self.viewModel = IncomingCallViewModel.init(input: IncomingCallViewModel.InputSource(callModel: constructor.callModel,strin:self.testLabel), output: ())
         
         self.callTitleLabel.text = constructor.callTitle
         self.callMessageLabel.text = constructor.callModel.message
@@ -52,11 +53,11 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
   
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel.vibrationBag = nil
     }
     func bindUI() {
         self.declineCall.rx.tap.subscribe(onNext: {
             [unowned self] in
+            self.viewModel.timerBag.dispose()
 
             self.dismiss(animated: false, completion: {
                 self.didAcceptCall!(false)
@@ -66,6 +67,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
         
         self.acceptCall.rx.tap.subscribe(onNext: {
             [unowned self] in
+            self.viewModel.timerBag.dispose()
             self.dismiss(animated: false, completion: {
                 self.didAcceptCall!(true)
             })
@@ -73,6 +75,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
         
         AVCallHandler.handler.currentCallingStatus.asObservable().subscribe(onNext: { (status) in
             if case .disconnected? = status {
+                self.viewModel.timerBag.dispose()
                 self.dismiss(animated: true, completion: nil)
             }
         }).disposed(by: bag)

@@ -269,8 +269,11 @@ extension AVCallHandler {
         }
         
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
-        let incomingCallVC = IncomingCallViewController.instance(from: IncomingCallViewController.Config(callModel: callMessageModel, headImage: nil, callTitle: calleeName, didReceiveCall: {
+        let incomingCallVC = IncomingCallViewController.instance(from: IncomingCallViewController.Config(callModel: callMessageModel, headImage: nil, callTitle: calleeName, didReceiveCall: { [weak self]
             result in
+            guard let `self` = self else {
+                return
+            }
             if result {
                 self.connectCall(forRoom: callMessageModel.roomId, calleeName: calleeName, streamId: callMessageModel.streamId)
             } else {
