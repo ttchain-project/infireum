@@ -54,6 +54,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         case redEnv
         case makeAudioCall
         case makeVideoCall
+        case sendDocument
     }
     
     struct Input {
@@ -94,7 +95,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     var functions: [FunctionModel] = [FunctionModel.init(title: LM.dls.chat_room_receipt, image: UIImage(named: "iconEnvelopeColor"), type: .addReceipt),
                                       FunctionModel.init(title: LM.dls.chat_room_image, image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
                                       FunctionModel.init(title: LM.dls.chat_room_camera, image: UIImage(named: "iconCameraColor"), type: .openCamera),
-                                      FunctionModel.init(title: LM.dls.chat_room_red_env, image: UIImage(named: "iconEnvelopeColor"), type: .redEnv)
+                                      FunctionModel.init(title: LM.dls.chat_room_red_env, image: UIImage(named: "iconEnvelopeColor"), type: .redEnv),
+                                      FunctionModel.init(title: LM.dls.send_file_title, image: UIImage(named: "iconFileColor"), type: .sendDocument)
                                       
 ]
     

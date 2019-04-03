@@ -505,7 +505,7 @@ struct DLS_ZH_CN: DLS {
     var backupChat_alert_password_mismatch = "钱包账号与移转备份密码不符"
     
     var copy_file_url = "复制档案网址"
-
+    var send_file_title = "档案"
     var confirm_cancel_editing = "确认取消编辑?"
     var exit_group = "退出群组"
     var manage_group = "管理群组"

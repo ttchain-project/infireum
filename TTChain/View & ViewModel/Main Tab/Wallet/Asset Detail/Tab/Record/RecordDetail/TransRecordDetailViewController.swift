@@ -97,8 +97,10 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + (feeCoin.identifier == Coin.usdt_identifier ? "BTC" :  feeCoin.inAppName!)
         
         self.toLinkButton.rx.tap.asDriver().drive(onNext: { () in
-            let marketTestDummy = MarketTestTabModel.init(title: "", content: "", url: constructor.url, img: "")
-            let vc = ExploreDetailWebViewController.instance(from: ExploreDetailWebViewController.Config(model: marketTestDummy))
+            guard let url = URL.init(string: constructor.url) else {
+                return
+            }
+            let vc = ExploreDetailWebViewController.instance(from: ExploreDetailWebViewController.Config(model: nil,url:url))
             self.navigationController?.pushViewController(vc,animated:true)
         }).disposed(by: bag)
         

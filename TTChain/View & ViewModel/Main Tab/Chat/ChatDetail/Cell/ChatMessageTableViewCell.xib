@@ -48,9 +48,9 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpN-hO-Bkl">
-                                <rect key="frame" x="50" y="2" width="42" height="15"/>
+                                <rect key="frame" x="50" y="2" width="42" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="Qy7-D9-kSQ"/>
+                                    <constraint firstAttribute="height" constant="17" id="Qy7-D9-kSQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -60,9 +60,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5t-bv-iKL">
-                                <rect key="frame" x="94" y="2" width="42" height="15"/>
+                                <rect key="frame" x="94" y="2" width="42" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="348-qS-M5e"/>
+                                    <constraint firstAttribute="height" constant="17" id="348-qS-M5e"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -72,7 +72,7 @@
                         <color key="backgroundColor" red="0.90980392160000001" green="0.3294117647" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="CpN-hO-Bkl" firstAttribute="top" secondItem="Grf-6Z-CL5" secondAttribute="top" constant="2" id="0mY-1D-Mod"/>
-                            <constraint firstItem="CpV-1f-J3K" firstAttribute="top" secondItem="CpN-hO-Bkl" secondAttribute="bottom" constant="9" id="AD2-md-Ocf"/>
+                            <constraint firstItem="CpV-1f-J3K" firstAttribute="top" secondItem="CpN-hO-Bkl" secondAttribute="bottom" constant="7" id="AD2-md-Ocf"/>
                             <constraint firstItem="VHu-Kn-s8y" firstAttribute="top" secondItem="tD0-Me-dBQ" secondAttribute="top" id="CLy-Bi-eEg"/>
                             <constraint firstItem="C5t-bv-iKL" firstAttribute="centerY" secondItem="CpN-hO-Bkl" secondAttribute="centerY" id="D1l-LX-xZ4"/>
                             <constraint firstItem="VHu-Kn-s8y" firstAttribute="bottom" secondItem="tD0-Me-dBQ" secondAttribute="bottom" id="MEB-Jo-C0X"/>

@@ -503,7 +503,7 @@ protocol DynamicLocalizationSource {
     var select_wallet_address : String {get set}
     var backupChat_alert_password_mismatch : String {get set}
     var copy_file_url : String {get set}
-
+    var send_file_title : String {get set}
     var confirm_cancel_editing : String {get set}
     var exit_group : String {get set}
     var manage_group: String {get set}

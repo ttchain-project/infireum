@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AudioToolbox
 
 final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     
@@ -46,10 +47,13 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
-
+  
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.vibrationBag = nil
+    }
     func bindUI() {
         self.declineCall.rx.tap.subscribe(onNext: {
             [unowned self] in

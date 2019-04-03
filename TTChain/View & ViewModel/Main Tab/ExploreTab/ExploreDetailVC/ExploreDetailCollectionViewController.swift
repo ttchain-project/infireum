@@ -68,7 +68,7 @@ final class ExploreDetailCollectionViewController: KLModuleViewController, KLVMV
             }else if settingModel is MarketTestTabModel {
                 let model = settingModel as! MarketTestTabModel
                 if model.isExternalLink {
-                    let vc = ExploreDetailWebViewController.navInstance(from: ExploreDetailWebViewController.Config(model:model))
+                    let vc = ExploreDetailWebViewController.navInstance(from: ExploreDetailWebViewController.Config(model:model,url:nil))
                     self.present(vc, animated: true, completion: nil)
                 }
             }

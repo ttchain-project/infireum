@@ -14,7 +14,8 @@ import RxSwift
 final class ExploreDetailWebViewController: KLModuleViewController, KLVMVC {
     
     struct Config {
-        let model:MarketTest
+        let model:MarketTest?
+        let url:URL?
     }
     var viewModel: ExploreDetailWebViewModel!
     
@@ -22,20 +23,23 @@ final class ExploreDetailWebViewController: KLModuleViewController, KLVMVC {
         self.view.setNeedsLayout()
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
-        self.title = constructor.model.title
-        guard let url = constructor.model.url else {
-            return
-        }
-        if url.scheme == "app" {
-            let key = url.absoluteString.replacingOccurrences(of: "app://", with: "")
-            if key == SettingKeyEnum.MarketTool.rawValue {
-                self.handleMarketToolData()
+        self.title = constructor.model?.title ?? ""
+        if let url = constructor.model?.url {
+            if url.scheme == "app" {
+                let key = url.absoluteString.replacingOccurrences(of: "app://", with: "")
+                if key == SettingKeyEnum.MarketTool.rawValue {
+                    self.handleMarketToolData()
+                }
+            }else {
+                self.webview.load(URLRequest.init(url: url))
             }
         }else {
-            self.webview.load(URLRequest.init(url: url))
-
+            guard let url = constructor.url else {
+                return
+            }
+            self.webview.load(URLRequest.init(url:url))
+            
         }
-        
     }
     
     typealias ViewModel = ExploreDetailWebViewModel
@@ -50,7 +54,11 @@ final class ExploreDetailWebViewController: KLModuleViewController, KLVMVC {
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        
+        if self.navigationController?.viewControllers.count == 1 {
+            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        }
+        
     }
     
     override func renderLang(_ lang: Lang) {

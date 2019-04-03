@@ -66,9 +66,7 @@ class UnknownFileTableViewCell: UITableViewCell {
 //            self.senderConstraint.isActive = false
 //            self.receiverConstraint.isActive = true
             self.profilePics.setProfileImage(image: leftImage, tempName: message.senderName)
-            
             self.senderNameLabel.text = message.senderName
-            
         }
         self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)
@@ -77,7 +75,7 @@ class UnknownFileTableViewCell: UITableViewCell {
         guard let url = URL.init(string: message.msg) else {
             return
         }
-            self.msgImageView.image = #imageLiteral(resourceName: "unknown_file")
+            self.msgImageView.image = #imageLiteral(resourceName: "iconFileColor")
             self.fileNameLabel.text = url.lastPathComponent
         }
 }

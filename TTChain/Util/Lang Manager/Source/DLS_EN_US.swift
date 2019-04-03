@@ -505,7 +505,7 @@ struct DLS_EN_US: DLS {
     var backupChat_alert_password_mismatch = "Wallet account does not match the backup password"
 
     var copy_file_url = "Copy file url"
-    
+    var send_file_title = "File"
     var confirm_cancel_editing = "Do you want to cancel editing and undo changes?"
     
     var exit_group = "Exit Group"

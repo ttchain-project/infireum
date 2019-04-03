@@ -230,7 +230,7 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
     
     func handleShortcutNavigation(model:MarketTestTabModel) {
         if model.isExternalLink {
-            let vc = ExploreDetailWebViewController.navInstance(from: ExploreDetailWebViewController.Config(model:model))
+            let vc = ExploreDetailWebViewController.navInstance(from: ExploreDetailWebViewController.Config(model:model, url: nil))
             self.present(vc, animated: true, completion: nil)
         }else {
             guard let url = model.url else {
@@ -239,7 +239,7 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
             if url.scheme == "app" {
                 let key = url.absoluteString.replacingOccurrences(of: "app://", with: "")
                 if key == SettingKeyEnum.MarketTool.rawValue {
-                    let vc = ExploreDetailWebViewController.navInstance(from: ExploreDetailWebViewController.Config(model:model))
+                    let vc = ExploreDetailWebViewController.navInstance(from: ExploreDetailWebViewController.Config(model:model, url: nil))
                     self.present(vc, animated: true, completion: nil)
                 }else {
                     let vc = ExploreDetailCollectionViewController.navInstance(from: ExploreDetailCollectionViewController.Config(marketModel:model))

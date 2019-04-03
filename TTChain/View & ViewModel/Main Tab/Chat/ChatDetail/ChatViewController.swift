@@ -13,6 +13,7 @@ import RxDataSources
 import IQKeyboardManagerSwift
 import PhotosUI
 import AVFoundation
+import CoreServices.UTCoreTypes
 
 final class ChatViewController: KLModuleViewController, KLVMVC {
 
@@ -106,7 +107,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpScrennShotDetection()
     }
     
     private lazy var hud = {
@@ -238,7 +238,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     messageModel.messageImage = unknownFileCell.msgImageView.image
                     self.showOptionsForLongGesture(for: messageModel)
                 }).disposed(by: unknownFileCell.bag)
-                
+                unknownFileCell.msgImageView.rx.klrx_tap.asDriver().drive(onNext: { (_) in
+                    self.toFileViewer(messageModel: messageModel)
+                }).disposed(by: unknownFileCell.bag)
                 cell = unknownFileCell
                 
             case .receipt :
@@ -369,6 +371,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                     self.makeAudioCall()
                                 case .redEnv:
                                     self.toCreateRedEnv()
+                                case .sendDocument:
+                                    DLogInfo("SEndFIle")
+                                    self.openDocumentViewer()
                                 default:
                                     print("Pending implementation")
                                 }
@@ -547,6 +552,14 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.present(imagePicker, animated: true, completion: nil)
     }
     
+    fileprivate func openDocumentViewer() {
+        let importMenu = UIDocumentPickerViewController.init(documentTypes: [String(kUTTypePDF),String(kUTTypeImage)], in: .import)
+        importMenu.delegate = self
+        importMenu.allowsMultipleSelection = false
+        importMenu.modalPresentationStyle = .formSheet
+        present(importMenu, animated: true, completion: nil)
+    }
+    
     
     func toUserProfileVC(forFriend friend: FriendModel) {
         
@@ -563,14 +576,12 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         viewController.blockStatusChanged.bind(to: self.viewModel.blockSubject).disposed(by:viewController.bag)
     }
     
-    private func setUpScrennShotDetection() {
-        NotificationCenter.default.rx.notification(Notification.Name.UIApplicationUserDidTakeScreenshot).subscribe(onNext: {
-            [unowned self] _ in
-            if self.viewModel.privateChat.isPrivateChatOn.value {
-                DLogInfo("User Capture screen with private chat.")
-                
-            }
-        }).disposed(by: bag)
+    func toFileViewer(messageModel:MessageModel) {
+        guard let fileURL = URL.init(string: messageModel.msg) else {
+            return
+        }
+        let vc = ExploreDetailWebViewController.instance(from: ExploreDetailWebViewController.Config(model:nil,url:fileURL))
+        self.navigationController?.pushViewController(vc)
     }
     
     private func refreshChatViewForForwardedChat(withMessage messages:[MessageModel], chatList:ChatListPage) {
@@ -654,5 +665,25 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
-
-
+extension ChatViewController: UIDocumentPickerDelegate {
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        if FileManager.default.fileExists(atPath: url.path) {
+            do {
+                let data = try Data(contentsOf: url)
+                if ["jpeg","jpg","png"].contains(url.pathExtension) {
+                    if let image = UIImage.init(data: data)  {
+                        self.viewModel.sendImageAsMessage(image: image)
+                    }
+                }else {
+                    self.viewModel.sendDataAsMessage(data: data, fileName: "\(url.lastPathComponent)")
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+    }
+}
