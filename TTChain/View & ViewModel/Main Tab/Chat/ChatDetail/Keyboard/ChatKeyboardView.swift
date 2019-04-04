@@ -288,11 +288,12 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     func startRecording() {
         DLogInfo("Start Recording")
-
+        
         let audioFilePath = self.getAudioFilePath()
         DLogInfo("File at \(FileManager.default.fileExists(atPath: audioFilePath.absoluteString))")
         do {
             try FileManager.default.removeItem(at: audioFilePath)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryRecord)
         } catch let error as NSError {
             print("Error: \(error.domain)")
         }

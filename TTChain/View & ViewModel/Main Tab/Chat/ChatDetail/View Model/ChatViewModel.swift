@@ -157,6 +157,7 @@ class ChatViewModel: KLRxViewModel {
     }
     
     func sendVoiceMessage(data:Data) {
+        DLogDebug("\(data.count)")
         self.sendDataAsMessage(data: data,fileName: "audioRecording.3gpp")
     }
     

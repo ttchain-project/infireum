@@ -661,5 +661,9 @@ struct DLS_ZH_CN: DLS {
     
     var use_edited_image_title:String = "使用编辑过的图像"
     var use_original_image_title:String = "使用原始图像"
-
+    var create_red_env_title:String = "创建一个红包"
+    
+    var voice_message_string:String = "語音"
+    var image_message_string:String = "圖片"
+    var call_message_string:String = "通話"
 }

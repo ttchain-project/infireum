@@ -647,4 +647,10 @@ protocol DynamicLocalizationSource {
     
     var use_edited_image_title:String {get set}
     var use_original_image_title:String {get set}
+    
+    var create_red_env_title:String {get set}
+
+    var voice_message_string:String {get set}
+    var image_message_string:String {get set}
+    var call_message_string:String {get set}
 }

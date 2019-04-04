@@ -171,10 +171,25 @@ final class CreateRedEnvelopeViewModel: ViewModel {
     }
 
     private func create(roomIdentifier: String) {
-        self.output.isSendButtonEnabledSubject.onNext(false)
+        
+       
+        
         guard let address = input.walletRelay.value?.address,
             let identifier = input.walletCoinRelay.value?.identifier,
             let amount = Decimal(string: input.amountRelay.value ?? String()) else { return }
+        
+        guard let coin = input.walletCoinRelay.value, let wallet = self.input.walletRelay.value, let asset = wallet.getAsset(of: coin) else {
+            return
+        }
+        if let assetAmt = asset.amount?.decimalValue,amount > assetAmt {
+            self.output.messageSubject.onNext(LM.dls.withdrawal_error_asset_insuffient_content(
+                assetAmt.asString(digits: 8),
+                coin.inAppName!,
+                amount.asString(digits: 8),
+                coin.inAppName!
+            ))
+            return
+        }
         let minutes = output.expiredMinutesRelay.value
         let parameters = CreateRedEnvelopeAPI.Parameters(senderAddress: address,
                                                                             identifier: identifier,
@@ -186,7 +201,8 @@ final class CreateRedEnvelopeViewModel: ViewModel {
                                                                             type: input.typeRelay.value)
         
         self.output.animateHUDSubject.onNext(true)
-        Server.instance.createRedEnvelope(parameter:parameters).asObservable().subscribe(onNext: { [weak self] response in
+        self.output.isSendButtonEnabledSubject.onNext(false)
+ Server.instance.createRedEnvelope(parameter:parameters).asObservable().subscribe(onNext: { [weak self] response in
             self?.output.animateHUDSubject.onNext(false)
             self?.output.isSendButtonEnabledSubject.onNext(true)
             guard self != nil else {

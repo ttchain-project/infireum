@@ -41,7 +41,7 @@ class ChatHistoryTableViewCell: UITableViewCell {
         
         self.coverImageView.setProfileImage(image: model.img, tempName: model.displayName)
         self.titleLabel.text = model.displayName
-        self.descriptionLabel.text = model.lastMessage
+        self.descriptionLabel.text = model.customLastMessage ?? model.lastMessage
         self.countLabel.isHidden = true
         self.dateLabel.text = self.getDateFromString(dateString: model.updateTime)
     }

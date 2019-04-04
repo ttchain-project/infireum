@@ -35,6 +35,17 @@ class CommunicationListModel:ChatListPage {
     var displayName:String
     var img: String?
     var lastMessage : String
+    lazy var customLastMessage :String? = {
+        if self.lastMessage.contains(".3gp")  {
+            return LM.dls.voice_message_string
+        } else if self.lastMessage.contains(".jpeg") ||  self.lastMessage.contains(".jpg") || self.lastMessage.contains(".png") {
+            return LM.dls.image_message_string
+        }else if self.lastMessage.contains("音频通话") {
+            return LM.dls.call_message_string
+        }
+
+        return nil
+    }()
     var roomType: RoomType
     var updateTime: String
     var privateMessageTargetUid: String?

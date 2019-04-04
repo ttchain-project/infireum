@@ -47,7 +47,5 @@ class IncomingCallViewModel:KLRxViewModel {
         })
         
         AVCallHandler.handler.startIncomingCall(callMessageModel: input.callModel)
-       
-        
     }
 }

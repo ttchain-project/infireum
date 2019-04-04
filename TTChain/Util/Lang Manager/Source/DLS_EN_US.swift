@@ -670,4 +670,9 @@ struct DLS_EN_US: DLS {
     
     var use_edited_image_title:String = "Use edited image"
     var use_original_image_title:String = "Use original image"
+    var create_red_env_title:String = "Create Red Envelope"
+    
+    var voice_message_string:String = "Voice"
+    var image_message_string:String = "Image"
+    var call_message_string:String = "Voice Call"
 }

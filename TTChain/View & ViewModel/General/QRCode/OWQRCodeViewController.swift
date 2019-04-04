@@ -521,7 +521,17 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
         hud?.startAnimating(inView: self.view)
         
         DispatchQueue.global().async {
-            guard let firstResult = scanner.detectQRCodeMsgContents(img)?.first else {
+            var firstResult : String?
+            if self._scanningType.value == .userId {
+                
+                firstResult = scanner.detectForuserId(img)?.first
+                
+            } else {
+                
+                firstResult = scanner.detectQRCodeMsgContents(img)?.first
+            }
+            
+            guard firstResult != nil else {
                 DispatchQueue.main.async {
                     self.hud?.stopAnimating()
                     self.hud = nil
@@ -533,7 +543,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
             DispatchQueue.main.async {
                 self.hud?.stopAnimating()
                 self.hud = nil
-                self.findQRCode(content: firstResult)
+                self.findQRCode(content: firstResult!)
             }
         }
         

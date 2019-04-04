@@ -42,6 +42,7 @@ class CreateRedEnvelopeViewController: UIViewController {
         didSet {
             amountTransferTextField.rx.text.bind(to: viewModel.input.amountRelay).disposed(by: viewModel.disposeBag)
             amountTransferTextField.placeholder = LM.dls.red_env_send_enter_amount
+            
         }
     }
     
@@ -185,10 +186,9 @@ class CreateRedEnvelopeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         viewModel.output.isTypeButtonHiddenSubject.bind(to: distributionTypeStackView.rx.isHidden).disposed(by: viewModel.disposeBag)
-        
+        changeBackBarButton(toColor:Theme.default.palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
         self.scheduleStackView.isHidden = true
-        navigationItem.rightBarButtonItem = closeBarButtonItem
-
+        self.navigationItem.title = LM.dls.create_red_env_title
     }
     
     
@@ -355,6 +355,84 @@ extension CreateRedEnvelopeViewController: UIPickerViewDataSource {
             }
         } else {
             return 0
+        }
+    }
+}
+
+
+extension CreateRedEnvelopeViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //Always enable delete
+        if textField != self.amountTransferTextField {
+            return true
+        }
+        if string == "" { return true }
+        let newCharacters = CharacterSet.init(charactersIn: string)
+        let isNumber = CharacterSet.decimalDigits.isSuperset(of: newCharacters)
+        let isDot = (string == ".")
+        let isDotAllowed = isTextFieldAllowDot(textField)
+        
+        guard (isDot && isDotAllowed) || isNumber else { return false }
+        let str = textField.text! as NSString
+        let finalStr = str.replacingCharacters(in: range, with: string)
+        
+        let isRegexCheckPassed: Bool
+        let sepParts = finalStr.components(separatedBy: ".")
+        
+        if sepParts.count == 1 {
+            //Means the final str doesn't contain dot
+            isRegexCheckPassed = !isDot
+        }
+        else {
+            //The final str has dot
+            //if finalStr is pure "." return false
+            if finalStr == "."  { isRegexCheckPassed = false }
+                //sepParts should only has 2 elements.
+            else if sepParts.count != 2  { isRegexCheckPassed = false }
+                //sepParts has no values
+            else if sepParts.last == nil { isRegexCheckPassed = false }
+            else {
+                //This will pass.
+                let digitPart = sepParts.last!
+                let maxDigit: Int = 8
+                isRegexCheckPassed = (digitPart.count) <= maxDigit
+            }
+        }
+        
+        guard isRegexCheckPassed else { return false }
+        //Now we check the string is valid, try to truncated undesired string if exists.
+        let zeroPrefixTruncedStr = truncatedUndesiredZeroPrefixNumericString(from: finalStr)
+        if zeroPrefixTruncedStr == finalStr {
+            return true
+        }else {
+            textField.text = zeroPrefixTruncedStr
+            textField.sendActions(for: .valueChanged)
+            return false
+        }
+    }
+    
+    
+    private func isTextFieldAllowDot(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    private func truncatedUndesiredZeroPrefixNumericString(from str: String) -> String {
+        guard str.count > 1 else {
+            //Avoid trunc "0"
+            return str
+        }
+        
+        if str.hasPrefix("0") && !str.hasPrefix("0.") {
+            //this mean the numric string is sth like "01", "01.22"
+            var truncatedStr = str
+            while truncatedStr.hasPrefix("0") && !truncatedStr.hasPrefix("0.") && truncatedStr.count > 1 {
+                truncatedStr.removeFirst()
+            }
+            
+            return truncatedStr
+        }else {
+            return str
         }
     }
 }
