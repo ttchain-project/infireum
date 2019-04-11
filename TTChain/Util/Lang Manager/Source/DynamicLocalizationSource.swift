@@ -653,4 +653,10 @@ protocol DynamicLocalizationSource {
     var voice_message_string:String {get set}
     var image_message_string:String {get set}
     var call_message_string:String {get set}
+    var receipt_message_string:String {get set}
+
+    var download_file_title:String {get set}
+    var file_download_successful_message:String {get set}
+    
+
 }

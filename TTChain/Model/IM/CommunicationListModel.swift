@@ -42,6 +42,8 @@ class CommunicationListModel:ChatListPage {
             return LM.dls.image_message_string
         }else if self.lastMessage.contains("音频通话") {
             return LM.dls.call_message_string
+        }else if self.lastMessage.starts(with: "{\"address\":\"") || self.lastMessage.starts(with:"{\"coinID\":") {
+            return LM.dls.receipt_message_string
         }
 
         return nil

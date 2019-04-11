@@ -435,6 +435,17 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             UIPasteboard.general.string = message.msg
         }
         
+        let downloadAction = UIAlertAction.init(title:LM.dls.download_file_title, style: .default) { (_) in
+            guard let url = URL.init(string:message.msg) else {
+                return
+            }
+            FileDownloader.instance.download(source:url , onComplete: { [weak self] (result) in
+                if let `self` = self {
+                    EZToast.present(on: self, content: LM.dls.file_download_successful_message)
+                }
+            })
+            
+        }
         let delete = UIAlertAction.init(title:LM.dls.delete,style:.default) { (_) in
             //to Delete Message
             self.viewModel.deleteChatMessage(messageModel:message)
@@ -469,6 +480,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             break
         case .file:
             alertVC.addAction(actionCopyFileURL)
+            alertVC.addAction(downloadAction)
         case .voiceMessage:
             alertVC.addAction(forward)
         case .image:
@@ -623,7 +635,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     func makeAudioCall() {
-        let config = AudioCallViewController.Config.init(roomId: self.viewModel.input.roomID, calleeName: self.viewModel.input.chatTitle, roomType: .pvtChat, callAction: CallAction.startCall,streamId: nil)
+        let config = AudioCallViewController.Config.init(roomId: self.viewModel.input.roomID, calleeName: self.viewModel.input.chatTitle,calleeImage:self.viewModel.input.chatAvatar, roomType: .pvtChat, callAction: CallAction.startCall,streamId: nil)
         
         let audioCallVC = AudioCallViewController.instance(from: config)
         self.present(audioCallVC, animated: true, completion: nil)

@@ -91,6 +91,7 @@ class BackupWalletMnemonicDisplayViewController: KLModuleViewController {
             font: UIFont.owRegular(size: 14),
             backgroundColor: theme.palette.btn_bgFill_enable_bg
         )
+        
     }
     
     override func renderLang(_ lang: Lang) {
@@ -107,22 +108,26 @@ class BackupWalletMnemonicDisplayViewController: KLModuleViewController {
                 NSAttributedStringKey.font : UIFont.owRegular(size: 14)
             ]
         )
-        
-        nextStepBtn.setTitleForAllStates(dls.g_next)
+        if case .backupIdentity? = self.source {
+            nextStepBtn.setTitleForAllStates(dls.g_copy)
+
+        }else {
+            nextStepBtn.setTitleForAllStates(dls.g_next)
+
+        }
     }
 
     @IBAction func nextStep(_ sender: UIButton) {
-        let vc = BackupWalletMnemonicVerifyViewController.instance(source: source)
-        navigationController?.pushViewController(vc)
-    }
-    /*
-    // MARK: - Navigation
+        
+        if case .backupIdentity? = self.source {
+            UIPasteboard.general.string = self.source.mnemonic
+            EZToast.present(on: self, content: LM.dls.copied_successfully)
+        }else {
+            let vc = BackupWalletMnemonicVerifyViewController.instance(source: source)
+            navigationController?.pushViewController(vc)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        }
     }
-    */
+
 
 }

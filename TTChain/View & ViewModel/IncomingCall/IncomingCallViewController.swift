@@ -24,7 +24,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     
     struct Config {
         let callModel:CallMessageModel
-        let headImage:URL?
+        let headImage:String?
         let callTitle:String
         let didReceiveCall: (Bool) -> Void
     }
@@ -39,12 +39,20 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
         self.callMessageLabel.text = constructor.callModel.message
         self.didAcceptCall = constructor.didReceiveCall
         self.bindUI()
+
+        guard let url = constructor.headImage else {
+            self.profileImageView.image = #imageLiteral(resourceName: "userAvatarDefault01180")
+            return
+        }
+        
+        self.profileImageView.setProfileImage(image: url, tempName: constructor.callTitle)
     }
     
     @IBOutlet weak var callTitleLabel: UILabel!
     @IBOutlet weak var callMessageLabel: UILabel!
     @IBOutlet weak var declineCall: UIButton!
     @IBOutlet weak var acceptCall: UIButton!
+    @IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,10 +81,15 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
             })
         }).disposed(by: bag)
         
-        AVCallHandler.handler.currentCallingStatus.asObservable().subscribe(onNext: { (status) in
+        AVCallHandler.handler.currentCallingStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            guard let `self` = self else {
+                return
+            }
             if case .disconnected? = status {
                 self.viewModel.timerBag.dispose()
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    self.didAcceptCall = nil
+                })
             }
         }).disposed(by: bag)
     }

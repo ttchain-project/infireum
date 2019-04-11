@@ -99,14 +99,15 @@ class TransRecordListTableViewCell: UITableViewCell {
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
                 self.amtLabel.textColor = UIColor.owWaterBlue
-                if case .btc = chainType {
-                    transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
-                }
             }
         }
         
         if transRecord.block == 0 {
             self.amtLabel.textColor = UIColor.owPumpkinOrange
+        }else {
+            if transRecord.fromCoinID == Coin.btc_identifier {
+                transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
+            }
         }
         
         dateLabel.text = DateFormatter.dateString(from:

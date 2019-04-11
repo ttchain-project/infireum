@@ -122,7 +122,7 @@ class MessageModel {
                         guard let audioMessageModel = CallMessageModel.init(json: dict!) else {
                             return .general
                         }
-                        rawMessage = audioMessageModel.message
+                        rawMessage = audioMessageModel.message ?? ""
                         return MessageType.audioCall(messageDetails: audioMessageModel)
                     }
                 }
@@ -185,19 +185,20 @@ extension MessageModel {
 
 
 struct CallMessageModel: Codable {
-    let uid: String
+    let uid: String?
     let roomId: String
-    let streamId:String
-    let message:String
+    let streamId:String?
+    var message:String?
     let type:CallType
     let isConnect:Bool
-    
+    let headImg:String?
+    let roomName:String?
 
     init?(json: [String: Any]) {
         do {
             self = try JSONDecoder().decode(CallMessageModel.self, from: json.jsonData()!)
-        } catch {
-            DLogError("Call Message Cannot be decoded")
+        } catch let error as NSError {
+            DLogError("Call Message Cannot be decoded \(error)")
             return nil
         }
     }

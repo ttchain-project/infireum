@@ -63,8 +63,8 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biJ-gZ-h82">
-                                    <rect key="frame" x="129" y="272.5" width="42" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biJ-gZ-h82">
+                                    <rect key="frame" x="20" y="273" width="260" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -85,6 +85,7 @@
                                 <constraint firstItem="h3d-lU-Zjc" firstAttribute="centerX" secondItem="YDt-G2-zWe" secondAttribute="centerX" id="q9d-t7-byR"/>
                                 <constraint firstItem="biJ-gZ-h82" firstAttribute="centerX" secondItem="YDt-G2-zWe" secondAttribute="centerX" id="qGd-LX-EDl"/>
                                 <constraint firstItem="Xe7-Kd-vFO" firstAttribute="width" secondItem="YDt-G2-zWe" secondAttribute="width" multiplier="0.8" id="tZp-KV-IfB"/>
+                                <constraint firstItem="biJ-gZ-h82" firstAttribute="width" secondItem="IOt-dg-QFF" secondAttribute="width" constant="-30" id="u5y-lI-UGg"/>
                                 <constraint firstItem="Xe7-Kd-vFO" firstAttribute="top" secondItem="Vi0-l8-9Oz" secondAttribute="bottom" constant="20" id="ztT-tn-0tg"/>
                             </constraints>
                         </view>

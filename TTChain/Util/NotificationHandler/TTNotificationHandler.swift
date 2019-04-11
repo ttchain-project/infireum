@@ -58,34 +58,24 @@ class TTNotificationHandler {
      
         OWRxNotificationCenter.instance.notifyNotificationReceived()
 
-        guard let apsDict = userInfo["aps"] as? [String:Any], let alert = apsDict["alert"] as? [String:Any],let messageBody = alert["body"] as? String else {
+        guard let messageDict = userInfo["msg_content"] as? [String:Any] else {
             return
         }
-        
-        guard let messageData = messageBody.data(using: .utf8),let dict = try? JSONSerialization.jsonObject(with: messageData, options: []) as? [String: Any] else{
+
+        guard var callMessageModel = CallMessageModel.init(json: messageDict) else {
             return
         }
-        
-        guard let callMessageModel = CallMessageModel.init(json: dict!) else {
-            return
+        if let aps =  userInfo["aps"] as? [String:Any], let alert = aps["alert"] as? [String:String], let message = alert["body"] {
+            callMessageModel.message = message
         }
-        
-//        var headImgURL:URL?
-//        if let headImg = userInfo["headImg"] as? String {
-//            headImgURL = URL.init(string: headImg)!
-//        }
-        
-        var callTitle :String = ""
-        if userInfo["roomName"] as? String != nil {
-            callTitle = userInfo["roomName"] as! String
-        }
+
         //Show Incoming Call if not already in call
         if !callMessageModel.isConnect {
             AVCallHandler.handler.otherUserCancelledCall()
             return
         }
         
-        AVCallHandler.handler.showIncomingCall(forCallMessage: callMessageModel, calleeName: callTitle)
+        AVCallHandler.handler.showIncomingCall(forCallMessage: callMessageModel, calleeName: callMessageModel.roomName ?? "")
 
     }
     

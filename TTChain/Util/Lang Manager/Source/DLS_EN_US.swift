@@ -675,4 +675,9 @@ struct DLS_EN_US: DLS {
     var voice_message_string:String = "Voice"
     var image_message_string:String = "Image"
     var call_message_string:String = "Voice Call"
+    var receipt_message_string:String = "Receipt"
+    
+    var download_file_title:String = "Download File"
+    var file_download_successful_message:String = "File Downloaded successfully"
+    
 }

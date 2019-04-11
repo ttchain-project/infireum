@@ -72,10 +72,11 @@ class UnknownFileTableViewCell: UITableViewCell {
             leftImageAction(message.messageId)
         }).disposed(by: bag)
         
-        guard let url = URL.init(string: message.msg) else {
-            return
+        if let url = URL.init(string: message.msg)  {
+            self.fileNameLabel.text = url.lastPathComponent
+        }else {
+            self.fileNameLabel.text = message.msg
         }
             self.msgImageView.image = #imageLiteral(resourceName: "iconFileColor")
-            self.fileNameLabel.text = url.lastPathComponent
         }
 }

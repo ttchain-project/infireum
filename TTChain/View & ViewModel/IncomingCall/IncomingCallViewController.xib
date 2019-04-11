@@ -16,6 +16,7 @@
                 <outlet property="callMessageLabel" destination="sBu-Av-F7X" id="7YJ-Tp-pfz"/>
                 <outlet property="callTitleLabel" destination="d7D-yA-DXC" id="deB-vm-IP9"/>
                 <outlet property="declineCall" destination="Oq8-8C-LSr" id="vpl-1V-R0y"/>
+                <outlet property="profileImageView" destination="5NY-HG-Qp3" id="wYo-uT-wbo"/>
                 <outlet property="testLabel" destination="abl-Cp-1QP" id="egF-1d-YGD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -52,9 +53,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5NY-HG-Qp3">
+                    <rect key="frame" x="142.5" y="157" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="5NY-HG-Qp3" secondAttribute="height" multiplier="1:1" id="WjM-cw-Vh8"/>
+                        <constraint firstAttribute="height" constant="90" id="pV6-os-XZ9"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="5NY-HG-Qp3" firstAttribute="top" secondItem="sBu-Av-F7X" secondAttribute="bottom" constant="30" id="1Xa-Gm-Rc6"/>
+                <constraint firstItem="5NY-HG-Qp3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Bfg-1A-VC9"/>
                 <constraint firstItem="sBu-Av-F7X" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XE8-rA-F7H"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Oq8-8C-LSr" secondAttribute="bottom" constant="50" id="YPO-qO-Omq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="d7D-yA-DXC" secondAttribute="trailing" constant="20" id="ZmL-Nv-hmD"/>

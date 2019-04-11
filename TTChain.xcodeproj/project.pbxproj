@@ -6293,6 +6293,9 @@
 					64F07CE320D0E4CB00A60C5C = {
 						CreatedOnToolsVersion = 9.4;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -6302,8 +6305,18 @@
 						CreatedOnToolsVersion = 9.4;
 						TestTargetID = 64F07CE320D0E4CB00A60C5C;
 					};
+					64F07D0A20D0E83200A60C5C = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					64F07D1D20D0E8FA00A60C5C = {
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};

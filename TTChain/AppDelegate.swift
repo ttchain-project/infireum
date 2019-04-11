@@ -367,7 +367,7 @@ extension AppDelegate {
     
     func setupNotification (for launchOptions:[UIApplicationLaunchOptionsKey: Any]?) {
         
-        JPUSHService.register(forRemoteNotificationTypes: UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.alert.rawValue , categories: nil)
+        JPUSHService.register(forRemoteNotificationTypes: UNAuthorizationOptions.sound.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.alert.rawValue , categories: nil)
         #if DEBUG
         JPUSHService.setup(withOption: launchOptions, appKey: "b4526b7273b4bfc188148713", channel: "DEV", apsForProduction: false)
         #else
@@ -380,6 +380,7 @@ extension AppDelegate {
         
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         JPUSHService.registerDeviceToken(deviceToken)
+        
         DLogDebug("didRegisterForRemoteNotificationsWithDeviceToken")
     }
     

@@ -26,7 +26,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
     struct Config {
         let roomId:String
         let calleeName:String
-        let calleeImage:String? = nil
+        var calleeImage:String? = nil
         let roomType:RoomType
         let callAction:CallAction
         var streamId:String? = nil

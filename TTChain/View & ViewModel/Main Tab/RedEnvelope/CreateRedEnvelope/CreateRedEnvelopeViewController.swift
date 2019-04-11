@@ -12,7 +12,11 @@ import RxSwift
 
 class CreateRedEnvelopeViewController: UIViewController {
 
-    @IBOutlet weak var coinTypeTitleLabel: UILabel!
+    @IBOutlet weak var coinTypeTitleLabel: UILabel! {
+        didSet {
+            coinTypeTitleLabel.text = LM.dls.red_env_send_currency
+        }
+    }
     @IBOutlet weak var selectedCoinNameLabel: UILabel! {
         didSet {
             viewModel.output.walletCoinTitleSubject.bind(to: selectedCoinNameLabel.rx.text)

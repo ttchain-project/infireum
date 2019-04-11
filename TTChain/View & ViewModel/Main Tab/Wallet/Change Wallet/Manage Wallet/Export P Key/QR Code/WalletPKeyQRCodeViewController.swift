@@ -71,7 +71,8 @@ final class WalletPKeyQRCodeViewController: KLModuleViewController, KLVMVC {
     }
     
     private func bindViewModel() {
-        viewModel.pKeyQRCode.drive(qrCode.rx.image).disposed(by: bag)
+//        viewModel.pKeyQRCode.drive(qrCode.rx.image).disposed(by: bag)
+        self.qrCode.createCrispQRCodeImage(from: QRCodeGenerator.generateQRCode(from: self.viewModel.input.privateKey)!)
     }
     
     private func bindView() {

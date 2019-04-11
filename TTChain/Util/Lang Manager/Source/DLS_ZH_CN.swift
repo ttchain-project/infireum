@@ -528,7 +528,7 @@ struct DLS_ZH_CN: DLS {
     var chat_room_camera = "相机"
     var chat_room_audio_call = "音频通话"
     var chat_room_video_call = "视频电话"
-    var chat_room_red_env = "红信封"
+    var chat_room_red_env = "紅包"
     var copied_successfully = "复制成功"
     
     var secret_chat_on = "秘密聊天是开放的"
@@ -655,7 +655,7 @@ struct DLS_ZH_CN: DLS {
     var chat_recovery_password_successful:String = "密码设置成功"
     
     var chat_history_delete_chat_title:String = "删除聊天"
-    var chat_history_delete_chat_message:String = "您确定要删除此聊天中的所有邮件吗？"
+    var chat_history_delete_chat_message:String = "您确定要删除此聊天中的所有讯息吗？"
     
     var receipt_request_error_string:String = "请选择一个硬币并输入金额"
     
@@ -666,4 +666,9 @@ struct DLS_ZH_CN: DLS {
     var voice_message_string:String = "語音"
     var image_message_string:String = "圖片"
     var call_message_string:String = "通話"
+    var receipt_message_string:String = "已发送收款讯息"
+    
+    var download_file_title:String = "下载"
+    var file_download_successful_message:String = "档案下载成功"
+
 }

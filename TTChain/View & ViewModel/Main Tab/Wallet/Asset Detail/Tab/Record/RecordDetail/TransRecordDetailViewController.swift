@@ -60,7 +60,9 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
             case .withdrawal:
                 amtStr = "-"
                 if constructor.asset.wallet?.walletMainCoinID == Coin.btc_identifier {
-                    transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
+                    if transRecord.block != 0 {
+                        transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
+                    }
                 }
             }
         }

@@ -32,7 +32,6 @@ class IncomingCallViewModel:KLRxViewModel {
         let strin : UILabel
     }
     
-    lazy var timer : Observable<NSInteger> = { return Observable<NSInteger>.interval(0.7, scheduler: SerialDispatchQueueScheduler(qos: .background)) }()
     var timerBag:Disposable!
     var input: IncomingCallViewModel.Input
     var output: Void

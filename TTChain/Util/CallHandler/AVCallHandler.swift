@@ -52,6 +52,8 @@ class AVCallHandler : NSObject{
     }
     private var client:ARDAppClient?
     
+    private var incomingVC : IncomingCallViewController?
+    
     override init() {
         self.bag = DisposeBag.init()
     }
@@ -135,6 +137,7 @@ class AVCallHandler : NSObject{
     
     private func disconnectCall() {
         self._currentCallStatus.accept(.disconnected)
+        self._currentCallStatus.accept(nil)
         guard self.client != nil else {
             return
         }
@@ -227,6 +230,8 @@ extension AVCallHandler:ARDAppClientDelegate {
             break
         case ARDAppClientState.disconnected:
             self._currentCallStatus.accept(.disconnected)
+            self._currentCallStatus.accept(nil)
+
             DLogInfo("ADRAppClient Status Update - disconnected")
             self.callDetails = nil
             break
@@ -245,6 +250,7 @@ extension AVCallHandler:ARDAppClientDelegate {
     func appClient(_ client: ARDAppClient!, didReceiveRemoteAudioTrack remoteAudioTrack: RTCAudioTrack!) {
         DLogDebug("Received REMOTE Audio Track")
         self._currentCallStatus.accept(.otherClientConnected)
+
     }
     
     func appClient(_ client: ARDAppClient!, didError error: Error!) {
@@ -256,8 +262,11 @@ extension AVCallHandler:ARDAppClientDelegate {
 extension AVCallHandler {
     
     func showIncomingCall(forCallMessage callMessageModel:CallMessageModel, calleeName:String) {
-       
-        let streamComponent = callMessageModel.streamId.components(separatedBy: "_")
+        guard let streamId = callMessageModel.streamId else {
+            DLogError("Cant show incoming call because no stream id")
+            return
+        }
+        let streamComponent = streamId.components(separatedBy: "_")
         
         guard streamComponent.count > 0  else {
             return
@@ -269,13 +278,13 @@ extension AVCallHandler {
         }
         
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
-        let incomingCallVC = IncomingCallViewController.instance(from: IncomingCallViewController.Config(callModel: callMessageModel, headImage: nil, callTitle: calleeName, didReceiveCall: { [weak self]
+        let incomingCallVC = IncomingCallViewController.instance(from: IncomingCallViewController.Config(callModel: callMessageModel, headImage: callMessageModel.headImg, callTitle: calleeName, didReceiveCall: { [weak self]
             result in
             guard let `self` = self else {
                 return
             }
             if result {
-                self.connectCall(forRoom: callMessageModel.roomId, calleeName: calleeName, streamId: callMessageModel.streamId)
+                self.connectCall(forCallModel: callMessageModel, calleeName: calleeName )
             } else {
                 AVCallHandler.handler.endCall()
             }
@@ -285,8 +294,8 @@ extension AVCallHandler {
         rootVC?.present(incomingCallVC, animated: true, completion: nil)
     }
     
-    private func connectCall(forRoom roomId:String, calleeName:String, streamId:String) {
-        let config = AudioCallViewController.Config.init(roomId: roomId, calleeName: calleeName, roomType: .pvtChat, callAction: CallAction.joinCall, streamId: streamId)
+    private func connectCall(forCallModel callModel:CallMessageModel, calleeName:String) {
+        let config = AudioCallViewController.Config.init(roomId: callModel.roomId, calleeName: calleeName,calleeImage: callModel.headImg, roomType: .pvtChat, callAction: CallAction.joinCall, streamId: callModel.streamId)
         let audioCallVC = AudioCallViewController.instance(from: config)
         let rootVC = UIApplication.shared.keyWindow?.rootViewController
         rootVC?.present(audioCallVC, animated: false, completion: nil)

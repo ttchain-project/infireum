@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="235.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="blz-tX-4G0">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="blz-tX-4G0">
                         <rect key="frame" x="72" y="75.5" width="150" height="150"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="XEN-nh-nxA"/>
@@ -32,6 +32,11 @@
                             <constraint firstAttribute="height" constant="40" id="Ibo-T7-lvE"/>
                             <constraint firstAttribute="width" constant="40" id="oSz-dH-hJH"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="jaskdjf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm8-pG-23B">
                         <rect key="frame" x="70" y="14.5" width="49.5" height="41"/>
