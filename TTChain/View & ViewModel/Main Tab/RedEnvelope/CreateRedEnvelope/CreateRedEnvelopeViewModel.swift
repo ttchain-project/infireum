@@ -202,7 +202,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
         
         self.output.animateHUDSubject.onNext(true)
         self.output.isSendButtonEnabledSubject.onNext(false)
- Server.instance.createRedEnvelope(parameter:parameters).asObservable().subscribe(onNext: { [weak self] response in
+        Server.instance.createRedEnvelope(parameter:parameters).asObservable().subscribe(onNext: { [weak self] response in
             self?.output.animateHUDSubject.onNext(false)
             self?.output.isSendButtonEnabledSubject.onNext(true)
             guard self != nil else {

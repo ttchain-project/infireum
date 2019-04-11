@@ -28,7 +28,6 @@ class GroupInviteTableViewCell: UITableViewCell {
     
     var groupRequestModel: UserGroupInfoModel = UserGroupInfoModel() {
         didSet {
-            self.avatarImageView.image = groupRequestModel.groupIcon
             self.titleLabel.text = groupRequestModel.groupName
             self.avatarImageView.setProfileImage(image: groupRequestModel.headImg, tempName: groupRequestModel.groupName)
         }

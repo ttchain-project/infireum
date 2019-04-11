@@ -16,13 +16,11 @@ class GroupChatTableViewCell: UITableViewCell {
     
     var groupModel: UserGroupInfoModel = UserGroupInfoModel() {
         didSet {
-            self.avatarImageView.image = groupModel.groupIcon
             self.titleLabel.text = groupModel.groupName
-
-            if groupModel.groupIcon == nil {
-                self.avatarImageView.image = ImageUntil.drawAvatar(text: groupModel.groupName)
-            }
+            self.avatarImageView.setProfileImage(image: groupModel.headImg, tempName: groupModel.groupName)
+            
         }
+        
     }
     
     override func awakeFromNib() {

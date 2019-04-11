@@ -59,7 +59,8 @@ final class GroupInformationViewModel: ViewModel {
         let nameCountHintColor = BehaviorSubject<UIColor>(value: UIColor.black)
         let introductionCountHintString = BehaviorSubject<String>(value: String())
         let introductionCountHintColor = BehaviorSubject<UIColor>(value: UIColor.black)
-        
+        let animateHUDSubject = PublishSubject<Bool>()
+
     }
     
     var input: Input
@@ -197,6 +198,8 @@ final class GroupInformationViewModel: ViewModel {
                 guard let groupName = self.output.groupName.value else { fatalError("groupName should not be nil.") }
                 let memberIDs = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
                 let parameters = CreateGroupAPI.Parameters.init(isPrivate: self.output.isPrivate.value, groupName: groupName, isPostMsg: self.output.isPostable.value, introduction: self.output.introduction.value ?? String())
+                
+                self.output.animateHUDSubject.onNext(true)
                 Server.instance.createGroup(parameters: parameters).asObservable().subscribe(onNext: {
                     [weak self] result in
                     guard let `self` = self else { return }
@@ -209,11 +212,13 @@ final class GroupInformationViewModel: ViewModel {
                             guard let `self` = self else { return }
                             self.uploadGroupPicture(forGroupID: value.groupID).asObservable().subscribe(onNext: { [weak self] (result) in
                                  guard let `self` = self else { return }
+                                self.output.animateHUDSubject.onNext(false)
                                 self.output.dismissSubject.onCompleted()
                             }).disposed(by: self.groupMembersDisposeBag)
                         }).disposed(by: self.groupMembersDisposeBag)
                     case .failed(error: let error):
                         DLogError(error)
+                        self.output.animateHUDSubject.onNext(false)
                         self.output.errorMessageSubject.onNext(error.descString)
                     }
                     self.createGroupDisposeBag = DisposeBag()
@@ -222,13 +227,17 @@ final class GroupInformationViewModel: ViewModel {
                 self.output.leaveGroupActionSubject.onNext {
                     [unowned self] in
                     let groupID = self.input.userGroupInfoModelSubject.value.groupID
+                    self.output.animateHUDSubject.onNext(true)
                     Server.instance.respondToGroupRequestAPI(groupID: groupID, groupAction: GroupAction.reject).asObservable().subscribe(onNext: {
                         [weak self] result in
                         guard let `self` = self else { return }
                         switch result {
-                        case .success: self.output.popToRootSubject.onCompleted()
+                        case .success:
+                            self.output.animateHUDSubject.onNext(false)
+                            self.output.popToRootSubject.onCompleted()
                         case .failed(error: let error):
                             DLogError(error)
+                            self.output.animateHUDSubject.onNext(false)
                             self.output.errorMessageSubject.onNext(error.descString)
                         }
                     }).disposed(by: self.disposeBag)
@@ -239,6 +248,7 @@ final class GroupInformationViewModel: ViewModel {
                 let groupID = self.input.userGroupInfoModelSubject.value.groupID
                 let memberIDs = self.output.animatableSectionModel.value.flatMap({ $0.items }).compactMap({ $0.input.groupMemberModel?.uid })
                 let parameters = UpdateGroupAPI.Parameters.init(groupID: groupID, groupName: groupName, isPostMsg: self.output.isPostable.value, introduction: self.output.introduction.value ?? String())
+                self.output.animateHUDSubject.onNext(true)
                 Server.instance.updateGroup(parameters: parameters).asObservable().subscribe(onNext: {
                     [weak self] result in
                     guard let `self` = self else { return }
@@ -251,11 +261,13 @@ final class GroupInformationViewModel: ViewModel {
                             guard let `self` = self else { return }
                             self.uploadGroupPicture(forGroupID: groupID).asObservable().subscribe(onNext: { [weak self] (result) in
                                 guard let `self` = self else { return }
+                                self.output.animateHUDSubject.onNext(false)
                                 self.output.dismissSubject.onCompleted()
                             }).disposed(by: self.groupMembersDisposeBag)
                         }).disposed(by: self.groupMembersDisposeBag)
                     case .failed(error: let error):
                         DLogError(error)
+                        self.output.animateHUDSubject.onNext(false)
                         self.output.errorMessageSubject.onNext(error.descString)
                     }
                     self.createGroupDisposeBag = DisposeBag()
@@ -314,6 +326,9 @@ final class GroupInformationViewModel: ViewModel {
                         .compactMap({ $0.input.groupMemberModel?.uid })
         
         let groupID = self.input.userGroupInfoModelSubject.value.groupID
+        if groupID.count == 0 {
+            return
+        }
         let parameters = GroupMembersAPI.Parameters.init(groupID: groupID, members: memberIDs)
         Server.instance.groupMembers(parameters: parameters).asObservable().subscribe(onNext: {
             [weak self] result in

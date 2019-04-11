@@ -162,6 +162,17 @@ class GroupInformationViewController: UIViewController {
         }
     }
     
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
+    
     fileprivate var imagePicker: UIImagePickerController!
 
     private let viewModel: GroupInformationViewModel
@@ -223,6 +234,14 @@ class GroupInformationViewController: UIViewController {
     }
     
     private func setUpRx() {
+        
+        viewModel.output.animateHUDSubject.subscribe(onNext: { [weak self] status in
+            if status {
+                self?.hud.startAnimating(inView: self?.view)
+            }else {
+                self?.hud.stopAnimating()
+            }
+        }).disposed(by:disposeBag)
         
         viewModel.output.isPostable.subscribe(onNext: {
             [unowned self] isPostable in
