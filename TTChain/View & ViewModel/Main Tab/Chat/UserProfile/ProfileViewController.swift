@@ -48,11 +48,13 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         self.startMonitorThemeIfNeeded()
         
         self.userNameTextField.text = imUser?.nickName
-        if let img = imUser?.headImg  {
-            self.profileImageView.image = img
-
+        if let img = imUser?.headImgUrl  {
+            self.profileImageView.setProfileImage(image: img, tempName: imUser?.nickName)
+        }else {
+            self.profileImageView.image = imUser?.headImg ?? ImageUntil.drawAvatar(text: (imUser?.nickName)!)
         }
-        
+
+
         editProfileButton.rx.tap.asDriver().drive(onNext: { _ in
             self.showImgSourceActionSheet()
         }).disposed(by: bag)
@@ -114,18 +116,21 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     
     func updateProfilePhoto() {
         
-        guard let image = self.profileImageView.image else {
-            return
-        }
-        let parameter = UploadHeadImageAPI.Parameters.init(personalOrGroupId:imUser!.uID , isGroup: false, image: UIImageJPEGRepresentation(image, 0.5)!)
+        let image = self.profileImageView.image?.updateImageOrientionUpSide() ?? self.profileImageView.image
         
-        Server.instance.uploadHeadImg(parameters: parameter).asObservable().subscribe(onNext: { (result) in
+        let parameter = UploadHeadImageAPI.Parameters.init(personalOrGroupId:imUser!.uID , isGroup: false, image: UIImageJPEGRepresentation(image!, 0.5)!)
+        
+        Server.instance.uploadHeadImg(parameters: parameter).asObservable().subscribe(onNext: {[weak self] (result) in
+            guard let `self` = self else {
+                return
+            }
             switch result {
             case .success(let model):
                 
-                if let url = URL.init(string: model.image), let data = try? Data.init(contentsOf: url) {
-                    IMUserManager.manager.userModel.value!.headImg = UIImage.init(data: data)
-                }
+//                if let url = URL.init(string: model.image), let data = try? Data.init(contentsOf: url) {
+                    IMUserManager.manager.userModel.value!.headImg = self.profileImageView.image
+                    IMUserManager.manager.userModel.value!.headImgUrl = model.image
+//                }
                 LocalIMUser.updateLocalIMUser()
                 
                 if self.imUser!.nickName != self.userNameTextField.text {
@@ -279,9 +284,9 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
+//            let resizedImg = image.scaleImage(toSize: targetSize(for: image))!
             self.didUpdateProfileImage = true
-            self.profileImageView.image = resizedImg
+            self.profileImageView.image = image
             picker.dismiss(animated: true, completion: nil)
         }
     }
@@ -307,5 +312,24 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
         }
         
         return targetSize
+    }
+}
+
+
+extension UIImage {
+    
+    func updateImageOrientionUpSide() -> UIImage? {
+        if self.imageOrientation == .up {
+            return self
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        if let normalizedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return normalizedImage
+        }
+        UIGraphicsEndImageContext()
+        return nil
     }
 }

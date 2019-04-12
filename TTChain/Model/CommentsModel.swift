@@ -11,8 +11,12 @@ import Foundation
 class CommentsModel {
     var txID : String
     var comment: String
-    init(txID: String, comment: String) {
+    var toIdentifier:String
+    var toAddress:String
+    init(txID: String, comment: String,toIdentifier:String,toAddress:String) {
         self.txID = txID
         self.comment = comment
+        self.toIdentifier = toIdentifier
+        self.toAddress = toAddress
     }
 }

@@ -238,7 +238,8 @@ extension WithdrawalLightningPwdValidationViewModel {
     }
     
     private func postCommentForTransaction(for transactionId: String, comment : String?) -> RxAPIResponse<PostCustomCommentsAPIModel> {
-        return Server.instance.postCommentsForTransaction(for: transactionId, comment: comment)
+        let parameter = PostCustomCommentsAPI.Parameter.init(comments: comment ?? "", txID: transactionId, toIdentifier: "", toAddress: "")
+        return Server.instance.postCommentsForTransaction(parameter:parameter)
     }
 }
 

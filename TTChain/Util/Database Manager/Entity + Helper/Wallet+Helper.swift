@@ -36,7 +36,6 @@ extension Wallet {
         guard let wallets = DB.instance.get(type: Wallet.self, predicate: pred, sorts: nil), !wallets.isEmpty else {
             return []
         }
-        
         return wallets
     }
     
@@ -47,10 +46,12 @@ extension Wallet {
     static func getWallet(ofAddress addr: String, mainCoinID: String) -> Wallet? {
         let wallets = getWallets(ofMainCoinID: mainCoinID)
         guard let idx = wallets.index(where: { (w) -> Bool in
-            return w.address == addr
+            return w.address!.caseInsensitiveCompare(addr) == .orderedSame
         }) else { return nil }
         
-        return wallets[idx]
+        let wallet = wallets[idx]
+//        wallet.address = wallet.address?.lowercased()
+        return wallet
     }
     
     static func create(
@@ -67,7 +68,7 @@ extension Wallet {
                     return errorDebug(response: ())
                 }
                 
-                wallet.address = source.address
+                wallet.address = source.address.lowercased()
                 wallet.encryptedPKey = epKey
                 var encryptedMnemonic: String?
                 if let _mne = source.mnenomic {

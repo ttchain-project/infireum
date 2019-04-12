@@ -694,10 +694,10 @@ struct GetCustomCommentsAPIModel: KLJSONMappableMoyaResponse {
         }
         let commentModelList = comments.compactMap { dict -> CommentsModel? in
             guard let txID = dict["txID"].string,
-                let comment = dict["comments"].string else {
+                let comment = dict["comments"].string,let toIdentifier = dict["toIdentifier"].string,let toAddress = dict["toAddress"].string else {
                     return nil
             }
-            let commentModel = CommentsModel(txID: txID, comment: comment)
+            let commentModel = CommentsModel(txID: txID, comment: comment, toIdentifier: toIdentifier,toAddress:toAddress)
             return commentModel
         }
         self.comments = commentModelList
@@ -707,8 +707,13 @@ struct GetCustomCommentsAPIModel: KLJSONMappableMoyaResponse {
 //MARK: - POST /CustomComments Post Comments for CIC and GUC
 struct PostCustomCommentsAPI: KLMoyaAPIData  {
     
-    let comment : String?
-    let txID : String
+    struct Parameter:Paramenter {
+        let comments : String?
+        let txID : String
+        let toIdentifier:String
+        let toAddress:String
+    }
+    let parameter:Parameter
     
     var path: String {return "/CustomComment"}
     
@@ -721,7 +726,7 @@ struct PostCustomCommentsAPI: KLMoyaAPIData  {
     
     var task: Task {
         return Moya.Task.requestParameters(
-            parameters: [ "txID" : txID, "comments": comment ?? ""],
+            parameters: parameter.asDictionary(),
             encoding: JSONEncoding.default
         )
     }

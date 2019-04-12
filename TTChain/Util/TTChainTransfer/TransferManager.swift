@@ -80,7 +80,7 @@ extension TransferManager {
                         return .just(.success(model.txid))
                     }
                     
-                    let response = self.postCommentForTransaction(for: model.txid, comment: info.note)
+                    let response = self.postCommentForTransaction(for: model.txid, comment: info.note, toIdentifier: info.asset.coinID!,toAddress:info.address)
                     return response.map {
                         _result -> APIResult<(String?)>  in
                         switch _result {
@@ -154,8 +154,9 @@ extension TransferManager {
             .broadcastBTCTx(withSignText: signText, withComments: comments)
     }
     
-    private func postCommentForTransaction(for transactionId: String, comment : String?) -> RxAPIResponse<PostCustomCommentsAPIModel> {
-        return Server.instance.postCommentsForTransaction(for: transactionId, comment: comment)
+    private func postCommentForTransaction(for transactionId: String, comment : String?,toIdentifier:String,toAddress:String) -> RxAPIResponse<PostCustomCommentsAPIModel> {
+        let parameter = PostCustomCommentsAPI.Parameter.init(comments: comment ?? "", txID: transactionId, toIdentifier: toIdentifier, toAddress: toAddress)
+        return Server.instance.postCommentsForTransaction(parameter:parameter)
     }
     
 }
@@ -207,7 +208,7 @@ extension TransferManager {
                         return .just(.success(model.txid))
                     }
                     
-                    let response = self.postCommentForTransaction(for: model.txid, comment: info.note)
+                    let response = self.postCommentForTransaction(for: model.txid, comment: info.note, toIdentifier: info.asset.coinID!,toAddress:info.address)
                     return response.map {
                         _result -> APIResult<(String?)>  in
                         switch _result {

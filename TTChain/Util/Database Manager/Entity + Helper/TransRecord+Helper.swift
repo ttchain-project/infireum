@@ -156,8 +156,8 @@ extension TransRecord {
 //MARK: - Helper
 extension TransRecord {
     func inoutRoleOfAddress(_ addr: String) -> TransInoutType? {
-        if addr == fromAddress { return .withdrawal }
-        else if addr == toAddress { return .deposit }
+        if addr.caseInsensitiveCompare(fromAddress ?? "") == .orderedSame { return .withdrawal }
+        else if addr.caseInsensitiveCompare(toAddress ?? "") == .orderedSame { return .deposit }
         else { return nil }
     }
     
@@ -214,7 +214,7 @@ extension TransRecord {
     
     static func getAllRecords(ofAsset asset: Asset) -> [TransRecord]? {
         guard let wallet = asset.wallet else {
-           return []
+            return errorDebug(response: [])
         }
         guard let walletRecs = getAllRecords(ofWallet: wallet) else {
             return errorDebug(response: [])

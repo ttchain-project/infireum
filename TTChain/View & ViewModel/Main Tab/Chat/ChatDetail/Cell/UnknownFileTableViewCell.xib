@@ -25,6 +25,11 @@
                             <constraint firstAttribute="width" constant="40" id="KRf-iA-nap"/>
                             <constraint firstAttribute="height" constant="40" id="Y7U-Mt-ZZ2"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="jaskdjf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPi-qf-9sj">
                         <rect key="frame" x="66" y="21" width="49.5" height="20.5"/>

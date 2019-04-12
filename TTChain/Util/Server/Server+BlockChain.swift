@@ -408,8 +408,8 @@
     }
     
     //MARK: - POST /CustomComments -
-    func postCommentsForTransaction(for transactionId: String, comment: String?) -> RxAPIResponse<PostCustomCommentsAPIModel> {
-        let api = PostCustomCommentsAPI.init(comment: comment, txID: transactionId)
+    func postCommentsForTransaction(parameter:PostCustomCommentsAPI.Parameter) -> RxAPIResponse<PostCustomCommentsAPIModel> {
+        let api = PostCustomCommentsAPI.init(parameter: parameter)
         return fire(router: .helper(.postCustomComment(api)))
     }
     

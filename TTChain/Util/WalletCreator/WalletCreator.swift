@@ -48,7 +48,7 @@ class WalletCreator {
 
             }
             
-            let source = (address: pvtKeyForNewWallet!.publicKey.address,
+            let source = (address: pvtKeyForNewWallet!.publicKey.address.lowercased(),
                           pKey: pvtKeyForNewWallet!.get(),
                           mnenomic: mnemonic,
                           isFromSystem: isSystemWallet,

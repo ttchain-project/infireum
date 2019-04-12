@@ -309,7 +309,7 @@ struct GetUserDataAPIModel:KLJSONMappableMoyaResponse {
                 throw GTServerAPIError.noData
         }
         let headImg = json["headImg"].dictionary
-        let headImgM = headImg?["medium"]?.string ?? ""
+        let headImgM = headImg?["original"]?.string ?? ""
 
         self.nickName = nickName
         self.introduction = introduction
@@ -842,7 +842,7 @@ struct UploadHeadImageAPIModel:KLJSONMappableMoyaResponse {
     typealias API = UploadHeadImageAPI
     let image :String
     init(json: JSON, sourceAPI: UploadHeadImageAPI) throws {
-        guard let mediumImg = json["medium"].string else {
+        guard let mediumImg = json["original"].string else {
             throw GTServerAPIError.noData
         }
         self.image = mediumImg
