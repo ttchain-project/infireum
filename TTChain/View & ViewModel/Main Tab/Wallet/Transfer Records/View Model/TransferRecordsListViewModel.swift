@@ -236,8 +236,8 @@ class TransferRecordsListViewModel: KLRxViewModel {
     
     private func btc_syncRecord(btcAsset: Asset, reset: Bool) {
         //First, check if the handler if set properly. if nil or has diff asset handler, create a new one, once the handler loading callback is called, filter the result by checking the wallet address to prevent updating records of other wallets.
-        guard let handler = btc_handler,
-            handler.asset.wallet?.address == btcAsset.wallet?.address else {
+        guard let handler = btc_handler,let handlerAddress = handler.asset.wallet?.address, let btcAddress = btcAsset.wallet?.address,
+            handlerAddress.caseInsensitiveCompare(btcAddress) == .orderedSame else {
                 btc_handler = BTCTxHandler.init(asset: btcAsset, filter: BTCTxFilter())
                 recordsBindingDisposable?.dispose()
                 recordsBindingDisposable = btc_handler.records.bind(to: _records)
@@ -253,7 +253,7 @@ class TransferRecordsListViewModel: KLRxViewModel {
             .filter {
                 [unowned self] _ -> Bool in
                 guard let currentHandler = self.btc_handler else { return false }
-                return currentHandler.asset.wallet?.address == handler.asset.wallet?.address
+                return currentHandler.asset.wallet?.address?.caseInsensitiveCompare(handlerAddress) == .orderedSame
             }
             .subscribe(
                 onSuccess: { [unowned self] (result) in
@@ -275,7 +275,7 @@ class TransferRecordsListViewModel: KLRxViewModel {
             case Coin.eth_identifier:
                 //Means user targets for eth asset records.
                 guard let handler = eth_handler,
-                    handler.asset.wallet!.address! == specificAsset.wallet?.address else {
+                    handler.asset.wallet!.address!.caseInsensitiveCompare(specificAsset.wallet!.address!) == .orderedSame else {
                         eth_handler = ETHTxHandler.init(asset: specificAsset, filter: ETHTxFilter())
                         recordsBindingDisposable?.dispose()
                         recordsBindingDisposable = eth_handler.records.bind(to: _records)
@@ -306,7 +306,7 @@ class TransferRecordsListViewModel: KLRxViewModel {
                 //So it's not ETH, must be ERC-20.
                 //Need to check
                 guard let handler = token_handler,
-                    handler.wallet.address == specificAsset.wallet?.address else {
+                    handler.wallet.address?.caseInsensitiveCompare(specificAsset.wallet!.address!) == .orderedSame else {
                         token_handler = TokenTxHandler.init(specificAsset: specificAsset, filter: TokenTxFilter())
                         recordsBindingDisposable?.dispose()
                         recordsBindingDisposable = token_handler.records.bind(to: _records)
@@ -323,7 +323,7 @@ class TransferRecordsListViewModel: KLRxViewModel {
                     .filter {
                         [unowned self] _ -> Bool in
                         guard let currentHandler = self.token_handler else { return false }
-                        return currentHandler.wallet.address == handler.wallet.address
+                        return currentHandler.wallet.address!.caseInsensitiveCompare(handler.wallet.address!) == .orderedSame
                     }
                     .subscribe(
                         onSuccess: { [unowned self] (result) in
@@ -359,7 +359,7 @@ class TransferRecordsListViewModel: KLRxViewModel {
                 .filter {
                     [unowned self] _ -> Bool in
                     guard let currentHandler = self.token_handler else { return false }
-                    return currentHandler.wallet.address == handler.wallet.address
+                    return currentHandler.wallet.address!.caseInsensitiveCompare(handler.wallet.address!) == .orderedSame
                 }
                 .subscribe(
                     onSuccess: { [unowned self] (result) in

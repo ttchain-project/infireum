@@ -19,13 +19,12 @@ class WalletCreator {
             //used Just for termination
             let error: GTServerAPIError = .apiReject
             
-            let seed = Mnemonic.createSeed(mnemonic: mnemonic!)
             guard let wallets = Identity.singleton!.wallets?.array as? [Wallet] else {
                 handler(.error(error))
                 return Disposables.create ()
             }
-            
-            let change = WalletCreator.createChange(seed: seed, chain: chain)
+
+            let change = WalletCreator.getChange(forMnemonic: mnemonic!, chain: chain)
             
             var pvtKeyForNewWallet: PrivateKey?
             
@@ -48,7 +47,7 @@ class WalletCreator {
 
             }
             
-            let source = (address: pvtKeyForNewWallet!.publicKey.address.lowercased(),
+            let source = (address: pvtKeyForNewWallet!.publicKey.address,
                           pKey: pvtKeyForNewWallet!.get(),
                           mnenomic: mnemonic,
                           isFromSystem: isSystemWallet,
@@ -65,7 +64,7 @@ class WalletCreator {
             }
             handler(.success(true))
             
-            return Disposables.create ()
+            return Disposables.create()
         }
     }
     
@@ -84,6 +83,18 @@ class WalletCreator {
         
         // m/44'/0'/0'/0 || // m/44'/60'/0'/0
         return account.derived(at: .notHardened(0))
-        
     }
+    
+    static func getChange(forMnemonic mnemonic:String, chain:ChainType) -> PrivateKey {
+        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
+        let change = WalletCreator.createChange(seed: seed, chain: chain)
+        return change
+    }
+    
+    static func generatePvtKeyAndAddress(mnemonic:String, chain:ChainType) -> (String,String) {
+        let change = WalletCreator.getChange(forMnemonic: mnemonic, chain: chain)
+        let firstPrivateKey = change.derived(at: .notHardened(UInt32(0)))
+        return (firstPrivateKey.get(),firstPrivateKey.publicKey.address)
+    }
+    
 }

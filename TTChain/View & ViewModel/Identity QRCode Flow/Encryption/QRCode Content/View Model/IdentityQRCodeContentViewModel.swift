@@ -58,12 +58,6 @@ class IdentityQRCodeContentViewModel: KLRxViewModel {
                 return Disposables.create()
             }
             
-            /*
-             //TODO: Switch this for multiple QRCodes.
-             if let qrCodeRawTextContent = wSelf.input.infoContent.generateMultipleQRCodeContent(withPwd: wSelf.input.pwd) {
-             if let qrCode = QRCodeGenerator.generateMegaQRCodeCombine(for: qrCodeRawTextContent) {
-             */
-            
             if let qrCodeRawTextContent = wSelf.input.infoContent.generateQRCodeContent(withPwd: wSelf.input.pwd) {
                 DispatchQueue.main.async {
                     if let qrCode = QRCodeGenerator.gZipAndgenerateQRCode(from: qrCodeRawTextContent) {

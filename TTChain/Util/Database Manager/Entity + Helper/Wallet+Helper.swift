@@ -68,7 +68,7 @@ extension Wallet {
                     return errorDebug(response: ())
                 }
                 
-                wallet.address = source.address.lowercased()
+                wallet.address = source.address
                 wallet.encryptedPKey = epKey
                 var encryptedMnemonic: String?
                 if let _mne = source.mnenomic {

@@ -55,7 +55,7 @@ struct BTCTx {
     
     func outAmtOfAddress(_ addr: String) -> Decimal {
         return vouts
-            .filter { $0.addr == addr }
+            .filter { $0.addr.caseInsensitiveCompare(addr) == .orderedSame }
             .map {
                 $0.btc
             }
@@ -64,7 +64,7 @@ struct BTCTx {
     
     func inAmtOfAddress(_ addr: String) -> Decimal {
         return vins
-            .filter { $0.addr == addr }
+            .filter { $0.addr.caseInsensitiveCompare(addr) == .orderedSame }
             .map {
                 $0.btc
             }
@@ -82,7 +82,7 @@ struct BTCTx {
 
 extension Sequence where Element == BTCTx.TxUnit {
     func extractAddrList(except exceptAddress: String) -> [String] {
-        let addrList = filter { $0.addr != exceptAddress }.map { $0.addr }
+        let addrList = filter { $0.addr.caseInsensitiveCompare(exceptAddress) != .orderedSame }.map { $0.addr }
         let set = NSOrderedSet.init(array: addrList)
         return set.array as! [String]
     }

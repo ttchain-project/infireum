@@ -135,11 +135,13 @@ class IMUserManager {
         }
         
         Server.instance.recoverIMUser(withUserId: userID, andDeviceID: deviceId, recoveryPassword: password).asObservable().subscribe(onNext: { [weak self] (result) in
+            guard let `self` = self else {
+                return
+            }
             switch result {
             case .success(let model):
                 print(model)
-                self?.userLoginStatus.accept(model.status)
-                
+                self.userLoginStatus.accept(model.status)
                 switch model.status {
                 case .deviceIDNotMatched:
                     handle(false)
@@ -147,9 +149,9 @@ class IMUserManager {
                     handle(false)
                 case .userExists:
                     let userModel = IMUser.init(uID: model.uID, nickName: user.name ?? "", introduction: "", headImg: nil)
-                    self?.userModel = BehaviorRelay.init(value: userModel)
-                    self?.shouldLoginToRocketChat.onNext(())
-                    self?.saveIMUser()
+                    self.userModel = BehaviorRelay.init(value: userModel)
+                    self.shouldLoginToRocketChat.onNext(())
+                    self.saveIMUser()
                     handle(true)
                 }
             case .failed(error: let err):

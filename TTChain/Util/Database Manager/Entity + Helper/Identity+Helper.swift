@@ -116,7 +116,7 @@ extension Identity {
     func getWallet(ofAddress addr: String, type: ChainType) -> Wallet? {
         guard let wallets = wallets?.array as? [Wallet] else { return nil }
         guard let idx = wallets.index(where: { (w) -> Bool in
-            return w.address == addr && w.owChainType == type
+            return (w.address!.caseInsensitiveCompare(addr) == .orderedSame) && w.owChainType == type
         }) else { return nil }
         
         return wallets[idx]

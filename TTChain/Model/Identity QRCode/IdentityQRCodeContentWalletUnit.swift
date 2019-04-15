@@ -8,9 +8,9 @@
 
 import Foundation
 import SwiftyJSON
+import HDWalletKit
 
 class IdentityQRCodeContentWalletUnit: Codable {
-    
     
     var mainCoinID: String
     var name: String
@@ -39,21 +39,37 @@ class IdentityQRCodeContentWalletUnit: Codable {
         self.init(mainCoinID: mainCoinID, name: name, privateKey: pKey, address: address)
     }
     
-    convenience init?(json: JSON, pwd: String) {
-        guard let mainCoinID = json["mainCoinID"].string,
-            let name = json["name"].string,
-            let encryPrivateKey = json["privateKey"].string,
-            let address = json["address"].string else {
+    convenience init?(json: JSON, pwd: String,mnemonic:String? = nil) {
+        
+        guard let mainCoinIdentifier = json["mainCoinID"].string,
+            let walletName = json["name"].string
+            else {
                 return nil
         }
-        
-        self.init(mainCoinID: mainCoinID,
-                  name: name,
-                  encryPrivateKey: encryPrivateKey,
-                  pwd: pwd,
-                  address: address)
+        var pvtKey :String
+        var addr: String
+        if  json["privateKey"].string != nil,json["address"].string != nil {
+            pvtKey = json["privateKey"].string!
+            addr = json["address"].string!
+            self.init(mainCoinID: mainCoinIdentifier,
+                      name: walletName,
+                      encryPrivateKey: pvtKey ,
+                      pwd: pwd,
+                      address: addr)
+        } else {
+            guard let mnemonic = mnemonic else {
+                return nil
+            }
+            let chainType:ChainType = mainCoinIdentifier == Coin.btc_identifier ? .btc : .eth
+            let (pvtKey,addr) = WalletCreator.generatePvtKeyAndAddress(mnemonic: mnemonic, chain: chainType)
+          
+            self.init(mainCoinID: mainCoinIdentifier,
+                      name: walletName,
+                      privateKey: pvtKey,
+                      address: addr)
+        }
     }
-    
+
     convenience init(wallet: Wallet) {
         let pKey = wallet.pKey
         let mainCoinID = wallet.walletMainCoinID!
@@ -76,6 +92,12 @@ class IdentityQRCodeContentWalletUnit: Codable {
             "name" : name,
             "privateKey" : encryPKey,
             "address" : address
+        ]
+    }
+    func convertToEncryJSONDictionaryForSystemWallet() -> [String : Any]? {
+        return [
+            "mainCoinID" : mainCoinID,
+            "name" : name,
         ]
     }
 }

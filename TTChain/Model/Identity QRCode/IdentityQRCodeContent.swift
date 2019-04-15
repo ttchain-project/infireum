@@ -86,14 +86,11 @@ class IdentityQRCodeContent: Codable {
         
         let systemWallets = systemWalletJSONs.compactMap { (json) -> IdentityQRCodeContentWalletUnit? in
             if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier {
-                return IdentityQRCodeContentWalletUnit.init(json: json, pwd: pwd)
+                return IdentityQRCodeContentWalletUnit.init(json: json, pwd: pwd,mnemonic:mnemonic)
             }
                 return nil
         }
-        
-    
-        
-        
+
         let importedWallets = importedWalletJSONs.compactMap { (json) -> IdentityQRCodeContentWalletUnit? in
             if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier {
                 return IdentityQRCodeContentWalletUnit.init(json: json, pwd: pwd)
@@ -208,7 +205,7 @@ class IdentityQRCodeContent: Codable {
     public func generateQRCodeContent(withPwd pwd: String) -> String? {
         guard let encryMnemonic = OWDatabaseEntityCrypter.encrypt(source: systemMnemonic, key: pwd) else { return nil }
         
-        let systemWalletsEncryJSONDictionaries = systemWallets.compactMap { $0.convertToEncryJSONDictionary(withPwd: pwd) }
+        let systemWalletsEncryJSONDictionaries = systemWallets.compactMap { $0.convertToEncryJSONDictionaryForSystemWallet() }
         
         let importedWalletsEncryJSONDictionaries = importedWallets.compactMap { $0.convertToEncryJSONDictionary(withPwd: pwd) }
         
@@ -232,72 +229,4 @@ class IdentityQRCodeContent: Codable {
         
         return str
     }
-    public func generateMultipleQRCodeContent(withPwd pwd:String) -> [String]? {
-        
-        var jsonArray = [String]()
-        
-        guard let encryMnemonic = OWDatabaseEntityCrypter.encrypt(source: systemMnemonic, key: pwd) else { return nil }
-//        let systemWalletsEncryJSONDictionaries = systemWallets.compactMap { $0.convertToEncryJSONDictionary(withPwd: pwd) }
-//        let importedWalletsEncryJSONDictionaries = importedWallets.compactMap { $0.convertToEncryJSONDictionary(withPwd: pwd) }
-        
-        let systemWalletsArray =  systemWallets.compactMap { wallet -> String? in
-            
-            guard let walletJson = wallet.convertToEncryJSONDictionary(withPwd: pwd) else {
-                return nil
-            }
-            
-            let encryContentDictionary: [String : Any] = [
-                "hint" : pwdHint,
-                "timestamp" : Int(timestamp * 1000),
-                "content": [
-                    "system" : [
-                        "mnemonic" : encryMnemonic,
-                        "wallets": walletJson
-                    ]
-                ]
-            ]
-            let json = try! JSONSerialization.data(withJSONObject: encryContentDictionary, options: [])
-            return json.string(encoding: .utf8)!
-        }
-        
-        let importedWalletArray = importedWallets.compactMap { wallet -> String? in
-            
-            guard let walletJson = wallet.convertToEncryJSONDictionary(withPwd: pwd) else {
-                return nil
-            }
-            
-            let encryContentDictionary: [String : Any] = [
-                "hint" : pwdHint,
-                "timestamp" : Int(timestamp * 1000),
-                "content": [
-                    "imported": walletJson
-                ]
-            ]
-            let json = try! JSONSerialization.data(withJSONObject: encryContentDictionary, options: [])
-            return json.string(encoding: .utf8)!
-        }
-        
-//        let encryContentDictionary: [String : Any] = [
-//            "hint" : pwdHint,
-//            "timestamp" : Int(timestamp * 1000),
-//            "content": [
-//                "system" : [
-//                    "mnemonic" : encryMnemonic,
-//                    "wallets": systemWalletsEncryJSONDictionaries
-//                ],
-//                "imported": importedWalletsEncryJSONDictionaries
-//            ]
-//        ]
-//
-//        let json = try! JSONSerialization.data(withJSONObject: encryContentDictionary, options: [])
-//        let str = json.string(encoding: .utf8)!
-        jsonArray = systemWalletsArray + importedWalletArray
-        
-        
-        //        let json = JSON(encryContentDictionary)
-        //        print("QRCode content result is\n\(str)")
-        
-        return jsonArray
-    }
-    
 }

@@ -99,7 +99,7 @@ class IdentityQRCodeImportViewModel: KLRxViewModel {
         guard !currentLocalWallets.isEmpty else { return false }
         
         for wallet in currentLocalWallets {
-            if wallet.address == unit.address {
+            if wallet.address!.caseInsensitiveCompare(unit.address) == .orderedSame {
                 return true
             }
         }

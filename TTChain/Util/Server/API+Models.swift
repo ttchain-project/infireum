@@ -694,9 +694,11 @@ struct GetCustomCommentsAPIModel: KLJSONMappableMoyaResponse {
         }
         let commentModelList = comments.compactMap { dict -> CommentsModel? in
             guard let txID = dict["txID"].string,
-                let comment = dict["comments"].string,let toIdentifier = dict["toIdentifier"].string,let toAddress = dict["toAddress"].string else {
+                let comment = dict["comments"].string else {
                     return nil
             }
+            let toIdentifier = dict["toIdentifier"].string
+            let toAddress = dict["toAddress"].string
             let commentModel = CommentsModel(txID: txID, comment: comment, toIdentifier: toIdentifier,toAddress:toAddress)
             return commentModel
         }
