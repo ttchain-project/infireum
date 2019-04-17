@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightTransDetailViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="coinIconImgView" destination="I6u-u9-q2C" id="Q0L-qQ-7qr"/>
+                <outlet property="fiatAmtLabel" destination="Xi7-RR-RWc" id="rj7-xU-zEL"/>
+                <outlet property="lightTransButton" destination="L1S-TE-5zL" id="2hv-DP-p6L"/>
+                <outlet property="receiveButon" destination="EBW-zL-ys1" id="ern-IJ-T6B"/>
+                <outlet property="totalAmountLabel" destination="OH0-V6-osI" id="DHm-ck-TGi"/>
+                <outlet property="txDetailButton" destination="oXE-cp-X43" id="E8F-0v-U5g"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt_icon_btc" translatesAutoresizingMaskIntoConstraints="NO" id="I6u-u9-q2C">
+                    <rect key="frame" x="137" y="94" width="101" height="159"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OH0-V6-osI">
+                    <rect key="frame" x="37.666666666666657" y="283" width="300" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xi7-RR-RWc">
+                    <rect key="frame" x="37.666666666666657" y="314" width="300" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXE-cp-X43">
+                    <rect key="frame" x="140.66666666666666" y="706" width="94" height="22"/>
+                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBW-zL-ys1">
+                    <rect key="frame" x="140.66666666666666" y="664" width="94" height="22"/>
+                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L1S-TE-5zL">
+                    <rect key="frame" x="140.66666666666666" y="622" width="94" height="22"/>
+                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="OH0-V6-osI" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="3XO-cH-3xk"/>
+                <constraint firstItem="oXE-cp-X43" firstAttribute="top" secondItem="EBW-zL-ys1" secondAttribute="bottom" constant="20" id="72N-5h-2ZC"/>
+                <constraint firstItem="EBW-zL-ys1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9ZI-8a-tSE"/>
+                <constraint firstItem="EBW-zL-ys1" firstAttribute="top" secondItem="L1S-TE-5zL" secondAttribute="bottom" constant="20" id="Ntb-Am-kIn"/>
+                <constraint firstItem="I6u-u9-q2C" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="Quw-77-eRJ"/>
+                <constraint firstItem="oXE-cp-X43" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Tyf-3M-6Ek"/>
+                <constraint firstItem="L1S-TE-5zL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WvY-4z-9Kx"/>
+                <constraint firstItem="Xi7-RR-RWc" firstAttribute="top" secondItem="OH0-V6-osI" secondAttribute="bottom" constant="10" id="Y4R-rO-LId"/>
+                <constraint firstItem="Xi7-RR-RWc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aH8-Ii-bp7"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="oXE-cp-X43" secondAttribute="bottom" priority="999" constant="50" id="cic-OR-Aaw"/>
+                <constraint firstItem="Xi7-RR-RWc" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="dUR-W4-323"/>
+                <constraint firstItem="OH0-V6-osI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="deJ-Jd-Uvn"/>
+                <constraint firstItem="OH0-V6-osI" firstAttribute="top" secondItem="I6u-u9-q2C" secondAttribute="bottom" constant="30" id="eEF-2x-HtK"/>
+                <constraint firstItem="I6u-u9-q2C" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nCm-wv-sbY"/>
+                <constraint firstItem="L1S-TE-5zL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Xi7-RR-RWc" secondAttribute="bottom" constant="10" id="wEx-HL-NJn"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="tt_icon_btc" width="101" height="159"/>
+    </resources>
+</document>

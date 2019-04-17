@@ -685,6 +685,8 @@ struct DLS_ZH_TW: DLS {
     var download_file_title:String = "下載檔案"
     var file_download_successful_message:String = "檔案下載成功"
 
+    var lightning_receipt_btn_title:String = "閃電收款"
+    var transaction_details_btn_title:String = "交易明細"
 }
 
 

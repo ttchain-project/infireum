@@ -679,5 +679,7 @@ struct DLS_EN_US: DLS {
     
     var download_file_title:String = "Download File"
     var file_download_successful_message:String = "File Downloaded successfully"
-    
+
+    var lightning_receipt_btn_title:String = "Lightning Receipt"
+    var transaction_details_btn_title:String = "Transaction Details"
 }

@@ -230,7 +230,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         //        transRecordBtn.setTitleForAllStates(text)
         switch self.viewModel.entryPoint! {
         case .MainTab:
-            self.title = "TTChain"
+            self.navigationItem.title = "TTChain"
         case .MainWallet:
             self.title = {
                 switch self.viewModel.input.source {

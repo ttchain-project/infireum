@@ -259,7 +259,7 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         
         changeLeftBarButtonToDismissToRoot(
             tintColor: theme.palette.nav_item_2,
-            image: #imageLiteral(resourceName: "navBarBackButton")
+            image: #imageLiteral(resourceName: "arrowNavBlack")
         )
         
         createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "scanQRCodeButton"), toColor: theme.palette.nav_item_2)

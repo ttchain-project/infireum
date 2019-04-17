@@ -95,7 +95,7 @@ final class IdentityQRCodeImportViewController: KLModuleViewController, KLVMVC {
         
         changeLeftBarButtonToDismissToRoot(
             tintColor: palette.nav_item_2,
-            image: #imageLiteral(resourceName: "navBarBackButton")
+            image: #imageLiteral(resourceName: "arrowNavBlack")
         )
         
         noteLabel.set(textColor: palette.specific(color: .owPinkRed),

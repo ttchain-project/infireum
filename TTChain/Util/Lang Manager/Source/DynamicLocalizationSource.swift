@@ -658,5 +658,6 @@ protocol DynamicLocalizationSource {
     var download_file_title:String {get set}
     var file_download_successful_message:String {get set}
     
-
+    var lightning_receipt_btn_title:String {get set}
+    var transaction_details_btn_title:String {get set}
 }

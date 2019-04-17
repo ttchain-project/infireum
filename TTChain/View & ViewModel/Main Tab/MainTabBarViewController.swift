@@ -28,7 +28,6 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return walletOptionNav?.viewControllers[0] as? WalletOptionsViewController
     }
     
-
     private lazy var walletItem: UITabBarItem = {
         let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "wallet1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "wallet2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
@@ -42,11 +41,12 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return tradeNav?.viewControllers[0] as? MainWalletViewController
     }
     private lazy var tradeItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "lightningTransactionIcon"), selectedImage: #imageLiteral(resourceName: "lightningTransactionIconSelected").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
-        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        let item = UITabBarItem.init()
+//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
     
+    private var tradeButton:UIButton!
     //MARK: = Chat
     private weak var chatNav: UINavigationController?
     private var chatVC: ChatListViewController? {
@@ -101,7 +101,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         let settingsNav = SettingMenuViewController.navInstance()
         
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
-//        tradeNav.viewControllers[0].tabBarItem = tradeItem
+        tradeNav.viewControllers[0].tabBarItem = tradeItem
 //        meVC.tabBarItem = meItem
         exploreNav.viewControllers[0].tabBarItem = exploreItem
         
@@ -121,23 +121,25 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
             exploreNav,
             settingsNav
         ]
-        
-        //        monitorLang { [unowned self] (lang) in
-        //            let dls = lang.dls
-        //            self.walletItem.title = dls.tab_wallet
-        //            self.tradeItem.title = dls.tab_trade
-        //            self.meItem.title = dls.tab_me
-        //        }
-        
-        //        monitorTheme { [unowned self] (theme) in
-        //            self.tabBar.unselectedItemTintColor = theme.palette.tab_unselected
-        //            self.tabBar.tintColor = theme.palette.tab_selected
-        //        }
+    
         //        observeLightningSwitchWithCoin()
 //        self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
-//        self.tabBar.backgroundColor = UIColor.init(red: 157, green: 216, blue: 210)
+        
         self.tabBar.barTintColor =  UIColor.init(red: 157, green: 216, blue: 210)
         self.view.backgroundColor = .owCharcoalGrey
+        
+        tradeButton = UIButton.init(type: .custom)
+        tradeButton.setImageForAllStates(#imageLiteral(resourceName: "LOGO"))
+        tradeButton.sizeToFit()
+        tradeButton.translatesAutoresizingMaskIntoConstraints = false
+        tradeButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
+            self.navigationController?.present(tradeNav, animated: true, completion: nil)
+        }).disposed(by: bag)
+        self.tabBar.addSubview(self.tradeButton)
+        tabBar.centerXAnchor.constraint(equalTo: tradeButton.centerXAnchor).isActive = true
+        tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor).isActive = true
+        tradeButton.adjustsImageWhenHighlighted = false
+//        self.tabBar.bringSubview(toFront: self.tradeButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -160,15 +162,6 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
 //    }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     private var systemWalletSyncedFlag: Bool = false
     private var systemWalletSyncHandler : SystemMainWalletSyncHandler?
     
@@ -256,5 +249,5 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         present(form, animated: true, completion: nil)
         AgreementViewController.displayFlagOfTheLaunch = true
     }
-    
+
 }

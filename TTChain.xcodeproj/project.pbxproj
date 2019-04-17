@@ -99,6 +99,30 @@
 		55340306224F227A007F355D /* UnknownFileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55340304224F227A007F355D /* UnknownFileTableViewCell.xib */; };
 		55340307224F227E007F355D /* UnknownFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55340303224F227A007F355D /* UnknownFileTableViewCell.swift */; };
 		55340308224F227F007F355D /* UnknownFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55340303224F227A007F355D /* UnknownFileTableViewCell.swift */; };
+		5537F0712265CFE30058B98D /* LightTransMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F06F2265CFE30058B98D /* LightTransMenuViewController.swift */; };
+		5537F0722265CFE30058B98D /* LightTransMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F06F2265CFE30058B98D /* LightTransMenuViewController.swift */; };
+		5537F0732265CFE30058B98D /* LightTransMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F06F2265CFE30058B98D /* LightTransMenuViewController.swift */; };
+		5537F0742265CFE30058B98D /* LightTransMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F0702265CFE30058B98D /* LightTransMenuViewController.xib */; };
+		5537F0752265CFE30058B98D /* LightTransMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F0702265CFE30058B98D /* LightTransMenuViewController.xib */; };
+		5537F0762265CFE30058B98D /* LightTransMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F0702265CFE30058B98D /* LightTransMenuViewController.xib */; };
+		5537F0782265D0B40058B98D /* LightTransViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0772265D0B40058B98D /* LightTransViewModel.swift */; };
+		5537F0792265D0B40058B98D /* LightTransViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0772265D0B40058B98D /* LightTransViewModel.swift */; };
+		5537F07A2265D0B40058B98D /* LightTransViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0772265D0B40058B98D /* LightTransViewModel.swift */; };
+		5537F07D2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F07B2265D4F90058B98D /* LightTransMenuTableViewCell.swift */; };
+		5537F07E2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F07B2265D4F90058B98D /* LightTransMenuTableViewCell.swift */; };
+		5537F07F2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F07B2265D4F90058B98D /* LightTransMenuTableViewCell.swift */; };
+		5537F0802265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F07C2265D4F90058B98D /* LightTransMenuTableViewCell.xib */; };
+		5537F0812265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F07C2265D4F90058B98D /* LightTransMenuTableViewCell.xib */; };
+		5537F0822265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F07C2265D4F90058B98D /* LightTransMenuTableViewCell.xib */; };
+		5537F08C2265EA490058B98D /* LightTransDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F08A2265EA490058B98D /* LightTransDetailViewController.swift */; };
+		5537F08D2265EA490058B98D /* LightTransDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F08A2265EA490058B98D /* LightTransDetailViewController.swift */; };
+		5537F08E2265EA490058B98D /* LightTransDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F08A2265EA490058B98D /* LightTransDetailViewController.swift */; };
+		5537F08F2265EA490058B98D /* LightTransDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F08B2265EA490058B98D /* LightTransDetailViewController.xib */; };
+		5537F0902265EA490058B98D /* LightTransDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F08B2265EA490058B98D /* LightTransDetailViewController.xib */; };
+		5537F0912265EA490058B98D /* LightTransDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537F08B2265EA490058B98D /* LightTransDetailViewController.xib */; };
+		5537F0932266D2240058B98D /* LightTransDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */; };
+		5537F0942266D2240058B98D /* LightTransDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */; };
+		5537F0952266D2240058B98D /* LightTransDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */; };
 		5539A46F21676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */; };
 		5539A47021676F0300A59ACC /* IdentityQRCodeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */; };
 		5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */; };
@@ -2059,6 +2083,14 @@
 		553402FF224E123C007F355D /* ForwarMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwarMessageViewModel.swift; sourceTree = "<group>"; };
 		55340303224F227A007F355D /* UnknownFileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownFileTableViewCell.swift; sourceTree = "<group>"; };
 		55340304224F227A007F355D /* UnknownFileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnknownFileTableViewCell.xib; sourceTree = "<group>"; };
+		5537F06F2265CFE30058B98D /* LightTransMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransMenuViewController.swift; sourceTree = "<group>"; };
+		5537F0702265CFE30058B98D /* LightTransMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightTransMenuViewController.xib; sourceTree = "<group>"; };
+		5537F0772265D0B40058B98D /* LightTransViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransViewModel.swift; sourceTree = "<group>"; };
+		5537F07B2265D4F90058B98D /* LightTransMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransMenuTableViewCell.swift; sourceTree = "<group>"; };
+		5537F07C2265D4F90058B98D /* LightTransMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightTransMenuTableViewCell.xib; sourceTree = "<group>"; };
+		5537F08A2265EA490058B98D /* LightTransDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransDetailViewController.swift; sourceTree = "<group>"; };
+		5537F08B2265EA490058B98D /* LightTransDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightTransDetailViewController.xib; sourceTree = "<group>"; };
+		5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransDetailViewModel.swift; sourceTree = "<group>"; };
 		5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeEncryptionFlow.swift; sourceTree = "<group>"; };
 		5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeContentViewController.swift; sourceTree = "<group>"; };
 		5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeContentViewController.xib; sourceTree = "<group>"; };
@@ -2949,6 +2981,45 @@
 				553402FF224E123C007F355D /* ForwarMessageViewModel.swift */,
 			);
 			path = ForwardMessageView;
+			sourceTree = "<group>";
+		};
+		5537F06E2265CFBE0058B98D /* LightTransTab */ = {
+			isa = PBXGroup;
+			children = (
+				5537F0852265E9DC0058B98D /* LightTransDetail */,
+				5537F0832265E9A00058B98D /* LightTransMenu */,
+			);
+			path = LightTransTab;
+			sourceTree = "<group>";
+		};
+		5537F0832265E9A00058B98D /* LightTransMenu */ = {
+			isa = PBXGroup;
+			children = (
+				5537F0842265E9C30058B98D /* LightTransMenuCell */,
+				5537F0772265D0B40058B98D /* LightTransViewModel.swift */,
+				5537F06F2265CFE30058B98D /* LightTransMenuViewController.swift */,
+				5537F0702265CFE30058B98D /* LightTransMenuViewController.xib */,
+			);
+			path = LightTransMenu;
+			sourceTree = "<group>";
+		};
+		5537F0842265E9C30058B98D /* LightTransMenuCell */ = {
+			isa = PBXGroup;
+			children = (
+				5537F07B2265D4F90058B98D /* LightTransMenuTableViewCell.swift */,
+				5537F07C2265D4F90058B98D /* LightTransMenuTableViewCell.xib */,
+			);
+			path = LightTransMenuCell;
+			sourceTree = "<group>";
+		};
+		5537F0852265E9DC0058B98D /* LightTransDetail */ = {
+			isa = PBXGroup;
+			children = (
+				5537F08A2265EA490058B98D /* LightTransDetailViewController.swift */,
+				5537F08B2265EA490058B98D /* LightTransDetailViewController.xib */,
+				5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */,
+			);
+			path = LightTransDetail;
 			sourceTree = "<group>";
 		};
 		5539A46821676F0300A59ACC /* Encryption */ = {
@@ -5008,6 +5079,7 @@
 		648139CD20DC96C900CAA4D8 /* Main Tab */ = {
 			isa = PBXGroup;
 			children = (
+				5537F06E2265CFBE0058B98D /* LightTransTab */,
 				554D2CFA2244CE3F0004CA09 /* RedEnvelope */,
 				550873E021E49713007B3B3B /* SettingTab */,
 				55EF69D421A812C5007E074A /* Chat */,
@@ -6368,6 +6440,7 @@
 				64C9D47420FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				5526B53922114BB100573576 /* ForwardListContainerViewController.xib in Resources */,
 				55EF6A8321A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
+				5537F0762265CFE30058B98D /* LightTransMenuViewController.xib in Resources */,
 				55E7305C2186DC4B003AE47E /* MainWalletViewController.xib in Resources */,
 				64C9D46C20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
 				64F07E3320D24DDD00A60C5C /* MainViewController.xib in Resources */,
@@ -6472,6 +6545,7 @@
 				64E4E4D52147B434009B556B /* LaunchViewController.xib in Resources */,
 				55D7D1BC2238B02E00309A22 /* IncomingCallViewController.xib in Resources */,
 				5539A4A521676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib in Resources */,
+				5537F0912265EA490058B98D /* LightTransDetailViewController.xib in Resources */,
 				640D88E020EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
 				6456192C2150DFBF001092E5 /* IdentityBackupTypeChooseViewController.xib in Resources */,
 				6481399020DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.xib in Resources */,
@@ -6484,6 +6558,7 @@
 				55F70E5221F999D000B5ED75 /* AssetDetailViewController.xib in Resources */,
 				640D892820F0691B0010D986 /* WithdrawalBaseViewController.xib in Resources */,
 				557C854B2236380E004C2E16 /* AudioCallViewController.xib in Resources */,
+				5537F0822265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */,
 				55BB1B45218FDCE70061F189 /* ExploreViewController.xib in Resources */,
 				64C9D4BA21044AFF000B0774 /* WithdrawalCICFeeInputViewController.xib in Resources */,
 				6424B65520F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.xib in Resources */,
@@ -6563,6 +6638,7 @@
 				5539A49721676F8C00A59ACC /* IdentityQRCodeImportViewController.xib in Resources */,
 				55787FBB21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				6470D6DE20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
+				5537F0802265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */,
 				55EF6AF021A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B68720F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200C120FB1DA100B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
@@ -6585,6 +6661,7 @@
 				551B77DB2241E976007BD626 /* SelectWalletTableViewCell.xib in Resources */,
 				55EF6AF621A812C7007E074A /* GroupInviteTableViewCell.xib in Resources */,
 				55EF6B0E21A812C7007E074A /* UserProfileViewController.xib in Resources */,
+				5537F0742265CFE30058B98D /* LightTransMenuViewController.xib in Resources */,
 				6424B63720F4E3FF00AEBCAD /* TransferRecordInfoBarViewController.xib in Resources */,
 				6485005F20DA488000107473 /* OWMnemonicViewController.xib in Resources */,
 				64D8266120E22F4300C8FC63 /* ManageAssetViewController.xib in Resources */,
@@ -6593,6 +6670,7 @@
 				64C9D4DA21044ECF000B0774 /* WithdrawalCICFeeInfoAdvModeViewController.xib in Resources */,
 				550873F321E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib in Resources */,
 				555E4ABC224CB99900C7CAD5 /* RedEnvelopeHistoryTableViewCell.xib in Resources */,
+				5537F08F2265EA490058B98D /* LightTransDetailViewController.xib in Resources */,
 				555E4A82224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A320F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
 				64C9D47A20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
@@ -6732,6 +6810,7 @@
 				5539A49821676F8C00A59ACC /* IdentityQRCodeImportViewController.xib in Resources */,
 				55787FBC21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				6470D6DF20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
+				5537F0812265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */,
 				55EF6AF121A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B68820F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200C020FB1DA000B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
@@ -6754,6 +6833,7 @@
 				551B77DC2241E976007BD626 /* SelectWalletTableViewCell.xib in Resources */,
 				55EF6AF721A812C7007E074A /* GroupInviteTableViewCell.xib in Resources */,
 				55EF6B0F21A812C7007E074A /* UserProfileViewController.xib in Resources */,
+				5537F0752265CFE30058B98D /* LightTransMenuViewController.xib in Resources */,
 				6424B63820F4E3FF00AEBCAD /* TransferRecordInfoBarViewController.xib in Resources */,
 				6485006020DA488000107473 /* OWMnemonicViewController.xib in Resources */,
 				64D8266220E22F4300C8FC63 /* ManageAssetViewController.xib in Resources */,
@@ -6762,6 +6842,7 @@
 				64C9D4DB21044ECF000B0774 /* WithdrawalCICFeeInfoAdvModeViewController.xib in Resources */,
 				550873F421E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib in Resources */,
 				555E4ABD224CB99900C7CAD5 /* RedEnvelopeHistoryTableViewCell.xib in Resources */,
+				5537F0902265EA490058B98D /* LightTransDetailViewController.xib in Resources */,
 				555E4A83224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A420F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
 				64C9D47B20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
@@ -7284,6 +7365,7 @@
 				6485003620DA006900107473 /* IdentityCreateViewController.swift in Sources */,
 				55EF6B4521A81567007E074A /* DLog.swift in Sources */,
 				55EF6AFB21A812C7007E074A /* ChatGroupListViewController.swift in Sources */,
+				5537F0952266D2240058B98D /* LightTransDetailViewModel.swift in Sources */,
 				64813A9420DCAFCE00CAA4D8 /* KLDebugHelper.swift in Sources */,
 				640D88FA20EF206A0010D986 /* TransInoutType.swift in Sources */,
 				649E489420ECAC4900B217AD /* PwdHintViewController.swift in Sources */,
@@ -7296,6 +7378,7 @@
 				64D8268B20E3939400C8FC63 /* AssetSort.swift in Sources */,
 				64813A4820DCA6EE00CAA4D8 /* Fiat+CoreDataProperties.swift in Sources */,
 				6470D62220F0FEFA00EB0780 /* UIButton+Position.swift in Sources */,
+				5537F0732265CFE30058B98D /* LightTransMenuViewController.swift in Sources */,
 				64D8267E20E339C200C8FC63 /* OfflineWallet.xcdatamodeld in Sources */,
 				649E48AD20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.swift in Sources */,
 				64F07E0E20D241A000A60C5C /* UIViewController+QuickAlertPopUp.swift in Sources */,
@@ -7360,6 +7443,7 @@
 				55EF6B2E21A81500007E074A /* LocalIMUser.swift in Sources */,
 				555A45B022057F35004A713A /* ChatImageViewController.swift in Sources */,
 				64C9D42D20FD98BC000B0774 /* AddressBookUnit+Helper.swift in Sources */,
+				5537F07A2265D0B40058B98D /* LightTransViewModel.swift in Sources */,
 				6446E23720FC967B00EC1E2E /* SettingsViewModel.swift in Sources */,
 				64F07E1D20D241A000A60C5C /* NVActivityExtension.swift in Sources */,
 				64813A9020DCAEB500CAA4D8 /* ServerSyncRecord.swift in Sources */,
@@ -7563,6 +7647,7 @@
 				55D4C7D12253656B005F3BEF /* PhotoCropperViewController.swift in Sources */,
 				6470D6B820F35B2B00EB0780 /* WithdrawalETHFeeInfoViewModel.swift in Sources */,
 				55EF6A5321A812C6007E074A /* ChatViewController.swift in Sources */,
+				5537F07F2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */,
 				64F43BAB210B259700982AFD /* Unspent.swift in Sources */,
 				555E4ADC224CC99600C7CAD5 /* RedEnvelopeHistoryModel.swift in Sources */,
 				64C9D4B221042F6F000B0774 /* LocalAuthViewModel.swift in Sources */,
@@ -7715,6 +7800,7 @@
 				64F07E7420D36AFE00A60C5C /* IdentitySetupViewController.swift in Sources */,
 				649732CF213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,
 				6470D61620F0E01B00EB0780 /* WithdrawalAddressViewModel.swift in Sources */,
+				5537F08E2265EA490058B98D /* LightTransDetailViewController.swift in Sources */,
 				64F07DE120D241A000A60C5C /* String+Localization.swift in Sources */,
 				643200AE20FAE1DE00B11334 /* LightningTradeConfirmViewController.swift in Sources */,
 				6485001020D8DFE100107473 /* OWStringValidator.swift in Sources */,
@@ -7781,6 +7867,7 @@
 				55EF6B4321A81567007E074A /* DLog.swift in Sources */,
 				55EF6AF921A812C7007E074A /* ChatGroupListViewController.swift in Sources */,
 				64813A9F20DCB18F00CAA4D8 /* Asset+CoreDataClass.swift in Sources */,
+				5537F0932266D2240058B98D /* LightTransDetailViewModel.swift in Sources */,
 				64F07DEB20D241A000A60C5C /* GTThemeStyle.swift in Sources */,
 				5539A48B21676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewController.swift in Sources */,
 				645006F320F45B4E00C0FC11 /* WithdrawalConfirmETHFeeInputViewController.swift in Sources */,
@@ -7793,6 +7880,7 @@
 				64C9D4C421044D3E000B0774 /* WithdrawalCICFeeInfoModeBase.swift in Sources */,
 				64C9D43B20FDC52B000B0774 /* AddressbookTableViewCell.swift in Sources */,
 				6470D62020F0FEFA00EB0780 /* UIButton+Position.swift in Sources */,
+				5537F0712265CFE30058B98D /* LightTransMenuViewController.swift in Sources */,
 				64F07DFA20D241A000A60C5C /* UIImage+ColorRendering.swift in Sources */,
 				640D88E220EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
 				6485002920D9F28700107473 /* UIViewController+KLInstanceSetup.swift in Sources */,
@@ -7857,6 +7945,7 @@
 				64813A7E20DCADEB00CAA4D8 /* Asset+Helper.swift in Sources */,
 				555A45AE22057F35004A713A /* ChatImageViewController.swift in Sources */,
 				55EF6B2C21A81500007E074A /* LocalIMUser.swift in Sources */,
+				5537F0782265D0B40058B98D /* LightTransViewModel.swift in Sources */,
 				55E730702186E580003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
 				64C9D47720FDDFBB000B0774 /* UpdatetABUnitAddressViewController.swift in Sources */,
 				64D8264720E0D8C400C8FC63 /* ChangeAssetViewController.swift in Sources */,
@@ -8060,6 +8149,7 @@
 				55D4C7CF2253656B005F3BEF /* PhotoCropperViewController.swift in Sources */,
 				55EF6A5121A812C6007E074A /* ChatViewController.swift in Sources */,
 				6424B62720F4CFAA00AEBCAD /* TransferRecordsOptionsSelectBase.swift in Sources */,
+				5537F07D2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */,
 				64D8264120DFB94D00C8FC63 /* QRCodeGenerator.swift in Sources */,
 				555E4ADA224CC99600C7CAD5 /* RedEnvelopeHistoryModel.swift in Sources */,
 				649E487920EC6FFF00B217AD /* ManageWalletViewController.swift in Sources */,
@@ -8212,6 +8302,7 @@
 				64B98EE020FA03BE00C4EB11 /* LightningTransRecordTableViewCell.swift in Sources */,
 				64D8267C20E339C200C8FC63 /* OfflineWallet.xcdatamodeld in Sources */,
 				64A1178B20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
+				5537F08C2265EA490058B98D /* LightTransDetailViewController.swift in Sources */,
 				649732CD213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,
 				64F07E4420D26D6400A60C5C /* DataModeExtensionl+IdentifiablePredication.swift in Sources */,
 				64813A3D20DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataClass.swift in Sources */,
@@ -8271,6 +8362,7 @@
 				55EF6B4421A81567007E074A /* DLog.swift in Sources */,
 				55EF6AFA21A812C7007E074A /* ChatGroupListViewController.swift in Sources */,
 				64D826C220E3E53600C8FC63 /* Identity+CoreDataProperties.swift in Sources */,
+				5537F0942266D2240058B98D /* LightTransDetailViewModel.swift in Sources */,
 				5539A48C21676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewController.swift in Sources */,
 				640D88F920EF206A0010D986 /* TransInoutType.swift in Sources */,
 				64813AA020DCB18F00CAA4D8 /* Asset+CoreDataClass.swift in Sources */,
@@ -8283,6 +8375,7 @@
 				64813A5620DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataClass.swift in Sources */,
 				64F07E1320D241A000A60C5C /* UIViewController+QuickBarItemSetup.swift in Sources */,
 				64F07DEC20D241A000A60C5C /* GTThemeStyle.swift in Sources */,
+				5537F0722265CFE30058B98D /* LightTransMenuViewController.swift in Sources */,
 				64F07DFB20D241A000A60C5C /* UIImage+ColorRendering.swift in Sources */,
 				64F07E4C20D29B9500A60C5C /* Palette.swift in Sources */,
 				64F07E1C20D241A000A60C5C /* NVActivityExtension.swift in Sources */,
@@ -8347,6 +8440,7 @@
 				55EF6B2D21A81500007E074A /* LocalIMUser.swift in Sources */,
 				555A45AF22057F35004A713A /* ChatImageViewController.swift in Sources */,
 				55E7306E2186E57F003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
+				5537F0792265D0B40058B98D /* LightTransViewModel.swift in Sources */,
 				64F07E7B20D36B4200A60C5C /* IdentitySetupViewModel.swift in Sources */,
 				64C9D42C20FD98BC000B0774 /* AddressBookUnit+Helper.swift in Sources */,
 				6446E23620FC967B00EC1E2E /* SettingsViewModel.swift in Sources */,
@@ -8550,6 +8644,7 @@
 				55D4C7D02253656B005F3BEF /* PhotoCropperViewController.swift in Sources */,
 				55EF6A5221A812C6007E074A /* ChatViewController.swift in Sources */,
 				64F07DD120D241A000A60C5C /* WindowOrientaionLocker.swift in Sources */,
+				5537F07E2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */,
 				64B2771F20D55A05004FF75B /* FiatToFiatRate+Helper.swift in Sources */,
 				555E4ADB224CC99600C7CAD5 /* RedEnvelopeHistoryModel.swift in Sources */,
 				6470D6B720F35B2B00EB0780 /* WithdrawalETHFeeInfoViewModel.swift in Sources */,
@@ -8702,6 +8797,7 @@
 				64813A6B20DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataProperties.swift in Sources */,
 				640D88C020EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				649732CE213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,
+				5537F08D2265EA490058B98D /* LightTransDetailViewController.swift in Sources */,
 				64F07E1020D241A000A60C5C /* String+Util.swift in Sources */,
 				649E48AC20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.swift in Sources */,
 				643200AD20FAE1DE00B11334 /* LightningTradeConfirmViewController.swift in Sources */,
