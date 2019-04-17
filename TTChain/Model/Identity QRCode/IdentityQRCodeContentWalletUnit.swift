@@ -48,9 +48,9 @@ class IdentityQRCodeContentWalletUnit: Codable {
         }
         var pvtKey :String
         var addr: String
-        if  json["privateKey"].string != nil,json["address"].string != nil {
-            pvtKey = json["privateKey"].string!
-            addr = json["address"].string!
+        if let jPvtKey = json["privateKey"].string, jPvtKey.count > 0, let jAddr = json["address"].string, jAddr.count > 0{
+            pvtKey = jPvtKey
+            addr = jAddr
             self.init(mainCoinID: mainCoinIdentifier,
                       name: walletName,
                       encryPrivateKey: pvtKey ,
