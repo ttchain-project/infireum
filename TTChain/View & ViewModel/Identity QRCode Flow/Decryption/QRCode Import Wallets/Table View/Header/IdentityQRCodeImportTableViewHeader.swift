@@ -40,10 +40,10 @@ class IdentityQRCodeImportTableViewHeader: UITableViewHeaderFooterView, RxThemeR
     func config(headerType: HeaderType) {
         let dls = LM.dls
         switch headerType {
-        case .imported:
+        case .system:
             icon.image = #imageLiteral(resourceName: "iconListProfileBlueNormal")
             titleLabel.text = dls.qrCodeImport_list_user_system_wallets
-        case .system:
+        case .imported:
             icon.image = #imageLiteral(resourceName: "iconListImportBlueNormal")
             titleLabel.text = dls.qrCodeImport_list_imported_wallets
         }

@@ -47,6 +47,10 @@ class WalletCreator {
 
             }
             
+            var address = pvtKeyForNewWallet!.publicKey.address
+            if chain == .eth {
+                address = address.lowercased()
+            }
             let source = (address: pvtKeyForNewWallet!.publicKey.address,
                           pKey: pvtKeyForNewWallet!.get(),
                           mnenomic: mnemonic,
@@ -94,7 +98,13 @@ class WalletCreator {
     static func generatePvtKeyAndAddress(mnemonic:String, chain:ChainType) -> (String,String) {
         let change = WalletCreator.getChange(forMnemonic: mnemonic, chain: chain)
         let firstPrivateKey = change.derived(at: .notHardened(UInt32(0)))
-        return (firstPrivateKey.get(),firstPrivateKey.publicKey.address)
+        
+        var address = firstPrivateKey.publicKey.address
+        if chain == .eth {
+            address = address.lowercased()
+        }
+        
+        return (firstPrivateKey.get(),address)
     }
     
 }

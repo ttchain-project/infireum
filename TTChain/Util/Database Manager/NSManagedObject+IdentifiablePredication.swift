@@ -128,7 +128,7 @@ extension KLIdentifiableManagedObject {
         case .num(keyPath: let k, value: let n):
             return NSPredicate.init(format: "%K = %i", k, n)
         case .str(keyPath: let k, value: let s):
-            return NSPredicate.init(format: "%K = %@", k, s)
+            return NSPredicate.init(format: "%K ==[c] %@", k, s)
         case .date(keyPath: let k, value: let d):
             return NSPredicate.init(format: "%K = %@", k, d)
         }
