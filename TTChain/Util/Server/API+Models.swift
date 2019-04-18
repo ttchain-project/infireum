@@ -42,7 +42,8 @@ enum BlockchainAPI: KLMoyaAPISet {
            
         case .getMarketTestAPI(let api): return api
         case .getQuotesTestAPI(let api): return api
-
+        
+        case .getVersion(let api): return api
         }
         
     }
@@ -75,6 +76,9 @@ enum BlockchainAPI: KLMoyaAPISet {
     case getCICTxRecords(GetCICTxRecordsAPI)
     case getMarketTestAPI(MarketTestAPI)
     case getQuotesTestAPI(QuotesTestAPI)
+    
+    case getVersion(GetVersionAPI)
+
 }
 
 //MARK: - GET AssetAmt
@@ -1894,7 +1898,6 @@ enum HelperAPI: KLMoyaAPISet {
         case .getCICFee(let api): return api
         case .getLightningTransRate(let api): return api
         case .getCoinToUSDRate(let api): return api
-        case .getVersion(let api): return api
             
         case .broadcastETHTx(let api): return api
         case .broadcastBTCTx(let api): return api
@@ -1923,7 +1926,6 @@ enum HelperAPI: KLMoyaAPISet {
     case getLightningTransRate(GetLightningTransRateAPI)
     case getCoinToUSDRate(GetCoinToUSDRateAPI)
     
-    case getVersion(GetVersionAPI)
     
     case broadcastETHTx(BroadcastETHTxAPI)
     case broadcastBTCTx(BroadcastBTCTxAPI)
@@ -2630,7 +2632,7 @@ struct FiatRateTableAPIModel: KLJSONMappableMoyaResponse {
 
 //MARK: - GET /Version
 struct GetVersionAPI: KLMoyaAPIData {
-    var path: String { return "/Version" }
+    var path: String { return "/topChain/versionTest" }
     var method: Moya.Method { return .get }
     
     var task: Task {

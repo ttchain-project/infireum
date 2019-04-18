@@ -67,43 +67,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FeeManager.configIfNeeded()
         window?.rootViewController = xib(vc: LaunchViewController.self)
         
-        //To let the photo slide show in the LaunchViewController display for 4 sec (1 sec/img).
+        //To let the gif show in the LaunchViewController display for 4 sec
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4.0) {
             //Start to define the root vc for current status.
             self.start()
+            
+            //Start version checking flow, prohobit further using if found current version is below required version.
+            self.versionChecker()
         }
         
         window?.makeKeyAndVisible()
         
-        //Start version checking flow, prohobit further using if found current version is below required version.
-        let versionCheck = VersionChecker.sharedInstance
-            .checkVersion()
-
-        versionCheck
-            .subscribe(onSuccess: {
-                [weak self]
-                result in
-                switch result {
-                //Might encounter some error
-                case .failed(error: let err):
-                    if let vc = self?.window?.rootViewController {
-                        vc.showAPIErrorResponsePopUp(from: err,
-                                                     cancelTitle: LM.dls.g_confirm)
-                    }
-                case .success(let checkResult):
-                    switch checkResult {
-                    case .localVersionIsNewer, .localVersionIsSupported: return
-                    case .localVersionIsTooOld:
-                        if let vc = self?.window?.rootViewController {
-                            vc.showAPIErrorResponsePopUp(
-                                from: GTServerAPIError.invalidVerision,
-                                cancelTitle: LM.dls.g_confirm)
-                            
-                        }
-                    }
-                }
-            })
-            .disposed(by: bag)
         
         
         manageThemeUpdate()
@@ -153,6 +127,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Server.instance.getMarketTest().subscribe().disposed(by: bag)
         MarketTestHandler.shared.launch()
 //        Server.instance.getQuotesTest().subscribe().disposed(by: bag)
+    }
+    
+    
+    func versionChecker() {
+        let versionCheck = VersionChecker.sharedInstance
+            .checkVersion()
+        
+        versionCheck
+            .subscribe(onSuccess: {
+                [weak self]
+                result in
+                switch result {
+                //Might encounter some error
+                case .failed(error: let err):
+                    if let vc = self?.window?.rootViewController {
+                        vc.showAPIErrorResponsePopUp(from: err,
+                                                     cancelTitle: LM.dls.g_confirm)
+                    }
+                case .success(let checkResult):
+                    switch checkResult {
+                    case .localVersionIsNewer, .localVersionIsSupported: return
+                    case .localVersionIsTooOld:
+                        if let vc = self?.window?.rootViewController {
+                            vc.showAPIErrorResponsePopUp(
+                                from: GTServerAPIError.invalidVerision,
+                                cancelTitle: LM.dls.g_confirm)
+                            
+                        }
+                    }
+                }
+            })
+            .disposed(by: bag)
     }
     
     private func syncLocalDefaultInfoIfNeverSyncBefore() {
