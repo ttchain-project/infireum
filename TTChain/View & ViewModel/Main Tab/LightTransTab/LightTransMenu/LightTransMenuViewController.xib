@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightTransMenuViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="Dhq-px-w32" id="Lh7-eL-Q9e"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -660,4 +660,10 @@ protocol DynamicLocalizationSource {
     
     var lightning_receipt_btn_title:String {get set}
     var transaction_details_btn_title:String {get set}
+    
+    var lightning_payment_title:String {get set}
+    
+    var light_withdraw_btn_title:String {get set}
+    var light_deposit_btn_title:String {get set}
+
 }

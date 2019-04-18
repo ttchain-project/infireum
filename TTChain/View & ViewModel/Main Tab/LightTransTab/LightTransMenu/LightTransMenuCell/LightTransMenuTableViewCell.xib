@@ -60,17 +60,20 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJ9-4f-RTQ">
-                        <rect key="frame" x="202" y="94" width="54" height="21.5"/>
+                        <rect key="frame" x="162" y="94" width="74" height="21.5"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <state key="normal" title="Button"/>
                         <connections>
                             <action selector="depositButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xwx-I3-CgG"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGk-9h-qC0">
-                        <rect key="frame" x="266" y="94" width="54" height="21.5"/>
+                        <rect key="frame" x="246" y="94" width="74" height="21.5"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <state key="normal" title="Button"/>
                     </button>
                 </subviews>
+                <color key="backgroundColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="OGk-9h-qC0" firstAttribute="leading" secondItem="KJ9-4f-RTQ" secondAttribute="trailing" constant="10" id="47J-9l-Mbp"/>
                     <constraint firstAttribute="trailing" secondItem="xYw-VT-flI" secondAttribute="trailing" id="DcG-C4-tfb"/>

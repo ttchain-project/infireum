@@ -40,12 +40,11 @@ class LightTransMenuTableViewCell: UITableViewCell {
         self.bgView.cornerRadius = 8
         self.coinNameLabel.set(textColor: .white, font: .owMedium(size: 20))
         self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 18))
-        self.transferButton.set(color: .white, font: .owRegular(size: 12), text: "Transfer")
-        self.depositButton.set(color: .white, font: .owRegular(size: 12), text: "Deposit")
-        
+        self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: LM.dls.light_withdraw_btn_title)
+        self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: LM.dls.light_deposit_btn_title)
     }
     
-    func config() {
+    func config(asset:Asset) {
         self.bgView.setGradientColor(color1: UIColor.init(red: 8, green: 74, blue: 89)?.cgColor, color2: UIColor.init(red: 24, green: 173, blue: 212)?.cgColor)
     }
 }

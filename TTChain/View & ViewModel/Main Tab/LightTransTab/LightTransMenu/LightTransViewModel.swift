@@ -8,8 +8,23 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
-class LightTransViewModel: ViewModel,Rx {
+class LightTransViewModel: KLRxViewModel {
+   
+    required init(input: LightTransViewModel.Input, output: LightTransViewModel.Output) {
+        self.input = input
+        self.output = output
+    }
+    
+    func concatInput() {
+        
+    }
+    
+    func concatOutput() {
+        
+    }
+    
     var bag: DisposeBag = DisposeBag()
     
     var input: LightTransViewModel.Input
@@ -17,13 +32,9 @@ class LightTransViewModel: ViewModel,Rx {
     var output: LightTransViewModel.Output
     
     struct Input {
-        
     }
     struct Output {
         
     }
-    init() {
-        self.input = Input()
-        self.output = Output()
-    }
+    private(set) var assets: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
 }
