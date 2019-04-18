@@ -297,7 +297,7 @@
     //MARK: - GET /Version
     func getVersion() -> RxAPIResponse<GetVersionAPIModel> {
         let api = GetVersionAPI.init()
-        return fire(router: .helper(.getVersion(api)),
+        return fire(router: .blockchain(.getVersion(api)),
                     shouldEnsureVersionIsValid: false)
     }
  }

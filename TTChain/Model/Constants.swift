@@ -167,12 +167,13 @@ struct Constants {
         enum Identifier {
             static let SIT = "d8b8be3f3acb4bd0a04a60b3b171a56f"
             static let UAT = ""
-            static let PRD = "63a4426399584000a095574752efa5a5"
+            static let PRD = "3764ef676a9549c3ae4310baae0b5021"
         }
     }
     
     struct IMDateFormat {
         static let dateFormatForIM:String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
     }
     
     enum PrivateMode {
@@ -190,7 +191,7 @@ struct Constants {
         }
         
         static var ipaUrlStr: String {
-            return "https://rink.hockeyapp.net/apps/bbd5ede5ffdb4704bc1f658ad2670fb6"
+            return "https://rink.hockeyapp.net/apps/3764ef676a9549c3ae4310baae0b5021"
         }
     }
     
