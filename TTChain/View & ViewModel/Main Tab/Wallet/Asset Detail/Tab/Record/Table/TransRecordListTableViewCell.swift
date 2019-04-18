@@ -98,17 +98,18 @@ class TransRecordListTableViewCell: UITableViewCell {
                 self.amtLabel.textColor = UIColor.owCoolGreen
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
-                self.amtLabel.textColor = UIColor.owWaterBlue
+                if transRecord.block == 0 {
+                    self.amtLabel.textColor = UIColor.owPumpkinOrange
+                }else {
+                    self.amtLabel.textColor = UIColor.owWaterBlue
+                    if transRecord.fromCoinID == Coin.btc_identifier {
+                        transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
+                    }
+                }
             }
         }
         
-        if transRecord.block == 0 {
-            self.amtLabel.textColor = UIColor.owPumpkinOrange
-        }else {
-            if transRecord.fromCoinID == Coin.btc_identifier {
-                transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
-            }
-        }
+        
         
         dateLabel.text = DateFormatter.dateString(from:
             transRecord.date! as Date, withFormat: "MM/dd/yyyy HH:mm:ss"

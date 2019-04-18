@@ -128,17 +128,17 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         self.tabBar.barTintColor =  UIColor.init(red: 157, green: 216, blue: 210)
         self.view.backgroundColor = .owCharcoalGrey
         
-        tradeButton = UIButton.init(type: .custom)
-        tradeButton.setImageForAllStates(#imageLiteral(resourceName: "LOGO"))
-        tradeButton.sizeToFit()
-        tradeButton.translatesAutoresizingMaskIntoConstraints = false
-        tradeButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
-            self.navigationController?.present(tradeNav, animated: true, completion: nil)
-        }).disposed(by: bag)
-        self.tabBar.addSubview(self.tradeButton)
-        tabBar.centerXAnchor.constraint(equalTo: tradeButton.centerXAnchor).isActive = true
-        tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor).isActive = true
-        tradeButton.adjustsImageWhenHighlighted = false
+//        tradeButton = UIButton.init(type: .custom)
+//        tradeButton.setImageForAllStates(#imageLiteral(resourceName: "LOGO"))
+//        tradeButton.sizeToFit()
+//        tradeButton.translatesAutoresizingMaskIntoConstraints = false
+//        tradeButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
+//            self.navigationController?.present(tradeNav, animated: true, completion: nil)
+//        }).disposed(by: bag)
+//        self.tabBar.addSubview(self.tradeButton)
+//        tabBar.centerXAnchor.constraint(equalTo: tradeButton.centerXAnchor).isActive = true
+//        tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor).isActive = true
+//        tradeButton.adjustsImageWhenHighlighted = false
 //        self.tabBar.bringSubview(toFront: self.tradeButton)
     }
 

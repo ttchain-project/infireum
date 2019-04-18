@@ -55,7 +55,7 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
             guard let `self` = self else {
                 return
             }
-            cell.config()
+//            cell.config()
             }.disposed(by:bag)
     }
 }
