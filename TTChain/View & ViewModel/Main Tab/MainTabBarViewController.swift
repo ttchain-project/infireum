@@ -125,6 +125,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         //        observeLightningSwitchWithCoin()
 //        self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
         
+        observeChatNotificationTapped()
+        
         self.tabBar.barTintColor =  UIColor.init(red: 157, green: 216, blue: 210)
         self.view.backgroundColor = .owCharcoalGrey
         
@@ -161,6 +163,25 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
 //            .disposed(by: bag)
 //    }
     
+    private func observeChatNotificationTapped() {
+        OWRxNotificationCenter.instance.notificationForChatTapped.subscribe(onNext: {
+            config in
+            guard let rootVC = UIApplication.shared.keyWindow?.rootViewController else {
+                return
+            }
+            let chatVC = ChatViewController.navInstance(from: config)
+
+            if var vc = rootVC.presentedViewController {
+                if vc.isKind(of: UINavigationController.self) {
+                    let nav:UINavigationController = vc as! UINavigationController
+                    vc = nav.viewControllers[0]
+                }
+                vc.present(chatVC, animated: true, completion: nil)
+            } else {
+                rootVC.present(chatVC, animated: true, completion: nil)
+            }
+        }).disposed(by: bag)
+    }
 
     private var systemWalletSyncedFlag: Bool = false
     private var systemWalletSyncHandler : SystemMainWalletSyncHandler?

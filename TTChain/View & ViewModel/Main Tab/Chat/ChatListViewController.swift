@@ -139,8 +139,8 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         present(alertController, animated: true, completion: nil)
     }
     
-    func chatSelected(forModel model:CommunicationListModel) {
-        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: model.roomType, chatTitle: model.displayName, roomID: model.roomId,chatAvatar:model.img, uid: model.privateMessageTargetUid))
+    public func chatSelected(forModel model:CommunicationListModel) {
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: model.roomType, chatTitle: model.displayName, roomID: model.roomId,chatAvatar:model.img, uid: model.privateMessageTargetUid,entryPoint:.chatList))
         self.navigationController?.pushViewController(vc)
     }
     

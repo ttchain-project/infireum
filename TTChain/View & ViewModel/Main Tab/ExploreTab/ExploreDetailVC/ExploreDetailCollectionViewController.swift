@@ -80,7 +80,7 @@ final class ExploreDetailCollectionViewController: KLModuleViewController, KLVMV
     
     func showGroupChat(model: GroupShortcutModel) {
         
-        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .channel, chatTitle: model.title, roomID: model.content, chatAvatar: model.img,uid:nil))
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .channel, chatTitle: model.title, roomID: model.content, chatAvatar: model.img,uid:nil,entryPoint:.chatList))
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

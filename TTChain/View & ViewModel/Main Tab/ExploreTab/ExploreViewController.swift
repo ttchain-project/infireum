@@ -250,7 +250,7 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
     }
     func showGroupChat(model: GroupShortcutModel) {
        
-        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .channel, chatTitle: model.title, roomID: model.content, chatAvatar: model.img,uid:nil))
+        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .channel, chatTitle: model.title, roomID: model.content, chatAvatar: model.img,uid:nil,entryPoint:.chatList))
         show(vc, sender: self)
     }
     

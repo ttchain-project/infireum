@@ -61,22 +61,37 @@ class TTNotificationHandler {
         guard let messageDict = userInfo["msg_content"] as? [String:Any] else {
             return
         }
-
-        guard var callMessageModel = CallMessageModel.init(json: messageDict) else {
-            return
-        }
+        
+        var messageRaw = ""
         if let aps =  userInfo["aps"] as? [String:Any], let alert = aps["alert"] as? [String:String], let message = alert["body"] {
-            callMessageModel.message = message
+            messageRaw = message
         }
+        if var callMessageModel = CallMessageModel.init(json: messageDict) {
+ 
+            //Show Incoming Call if not already in call
+            if !callMessageModel.isConnect {
+                AVCallHandler.handler.otherUserCancelledCall()
+                return
+            }
+            callMessageModel.message = messageRaw
+            AVCallHandler.handler.showIncomingCall(forCallMessage: callMessageModel, calleeName: callMessageModel.roomName ?? "")
 
-        //Show Incoming Call if not already in call
-        if !callMessageModel.isConnect {
-            AVCallHandler.handler.otherUserCancelledCall()
-            return
+        } else {
+            //Show Chat
+            
+            if (UIApplication.shared.applicationState != .inactive) {
+                return
+            }
+            
+            guard let isGroup = messageDict["isGroup"] as? Bool, let roomId = messageDict["roomId"] as? String, let roomName = messageDict["roomName"] as? String,let headImg = messageDict["headImg"] as? String else {
+                return
+            }
+            let config = ChatViewController.Config.init(roomType: isGroup ? .group : .pvtChat, chatTitle: roomName, roomID: roomId, chatAvatar: headImg, uid: "",entryPoint: .notification)
+            
+            OWRxNotificationCenter.instance.notificationForChatTapped(withConfig: config)
+
         }
         
-        AVCallHandler.handler.showIncomingCall(forCallMessage: callMessageModel, calleeName: callMessageModel.roomName ?? "")
-
     }
     
    

@@ -15,6 +15,11 @@ import PhotosUI
 import AVFoundation
 import CoreServices.UTCoreTypes
 
+
+enum ChatEntryPoint {
+    case notification
+    case chatList
+}
 final class ChatViewController: KLModuleViewController, KLVMVC {
 
     @IBOutlet weak var tableView: UITableView!
@@ -71,9 +76,12 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         var roomID:String
         var chatAvatar:String?
         var uid: String?
+        var entryPoint:ChatEntryPoint
     }
     
     typealias Constructor = Config
+    
+    private var chatEntryPoint: ChatEntryPoint?
     
     func config(constructor: ChatViewController.Config) {
         view.layoutIfNeeded()
@@ -87,7 +95,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 messageText: self.keyboardView.textField, uid: constructor.uid
             ),
             output: ())
-        
+        self.chatEntryPoint = constructor.entryPoint
         viewModel.blockSubject.subscribe(onNext: {
             [weak self] status in
             guard let `self` = self else { return }
@@ -135,7 +143,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         view.backgroundColor = palette.bgView_sub
-        renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_2)
+        renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 18))
         changeNavShadowVisibility(true)
         tableView.backgroundColor = palette.nav_bg_clear
@@ -336,7 +344,12 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     @objc func backButtonTapped() {
 //        self.viewModel.postChatSection()
         self.viewModel.timerSub?.dispose()
-        self.navigationController?.popViewController(animated: true)
+        
+        if self.chatEntryPoint == .notification {
+            self.dismiss(animated: true, completion: nil)
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func initKeyboardView() {
@@ -629,7 +642,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         }
         self.viewModel.timerSub?.dispose()
         self.bag = DisposeBag()
-        self.config(constructor: ChatViewController.Config.init(roomType: roomType!, chatTitle: chatTitle, roomID: roomId, chatAvatar: chatAvatar, uid: uid))
+        self.config(constructor: ChatViewController.Config.init(roomType: roomType!, chatTitle: chatTitle, roomID: roomId, chatAvatar: chatAvatar, uid: uid,entryPoint: .chatList))
         
         self.viewModel.sendForwardedMessages(messages:messages)
     }

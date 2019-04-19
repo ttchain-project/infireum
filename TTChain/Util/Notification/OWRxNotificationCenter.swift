@@ -220,6 +220,21 @@ class OWRxNotificationCenter {
         _notificationReceived.accept(())
     }
     
+    
+    //MARK: = Notification Tapped
+    
+    private lazy var _notificationForChatTapped:PublishRelay<ChatViewController.Config> = {
+       return PublishRelay.init()
+    }()
+    
+    public var notificationForChatTapped:Observable<ChatViewController.Config> {
+        return _notificationForChatTapped.asObservable()
+    }
+    
+    public func notificationForChatTapped(withConfig config:ChatViewController.Config) {
+        return _notificationForChatTapped.accept(config)
+    }
+    
 //    //MARK: - OnMessage Forward
 //    public var onMessageForward: Observable<MessageModel> {
 //
