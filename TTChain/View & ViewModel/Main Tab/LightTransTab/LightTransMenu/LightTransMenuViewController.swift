@@ -55,7 +55,30 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
             guard let `self` = self else {
                 return
             }
-            cell.config()
+            cell.config(asset: asset,transferAction: { asset in self.showTransferAction(asset: asset)}, depositAction: {asset in self.showDepositAction(asset: asset)})
+            
             }.disposed(by:bag)
+        
+        self.tableView.rx.itemSelected.asDriver().drive(onNext: { (path) in
+            if self.viewModel.assets.value.indices.contains(path.row) {
+                self.showLightDetail(asset: self.viewModel.assets.value[path.row])
+            }
+        }).disposed(by: bag)
+    }
+    
+    func showTransferAction(asset:Asset) {
+        let nav = WithdrawalBaseViewController.navInstance(from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil,defaultAmount:nil))
+        present(nav, animated: true, completion: nil)
+
+    }
+    func showDepositAction(asset:Asset) {
+        let vc = DepositViewController.navInstance(from: DepositViewController.Setup(wallet: asset.wallet!, asset: asset))
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func showLightDetail(asset:Asset) {
+        let viewModel = LightTransDetailViewModel.init(withAsset: asset)
+        let vc = LightTransDetailViewController.init(withViewModel: viewModel)
+        present(vc, animated: true, completion: nil)
     }
 }

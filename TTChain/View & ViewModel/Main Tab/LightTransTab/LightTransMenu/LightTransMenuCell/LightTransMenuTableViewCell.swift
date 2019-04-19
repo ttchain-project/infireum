@@ -44,7 +44,16 @@ class LightTransMenuTableViewCell: UITableViewCell {
         self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: LM.dls.light_deposit_btn_title)
     }
     
-    func config(asset:Asset) {
+    func config(asset:Asset, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ())) {
         self.bgView.setGradientColor(color1: UIColor.init(red: 8, green: 74, blue: 89)?.cgColor, color2: UIColor.init(red: 24, green: 173, blue: 212)?.cgColor)
+        self.coinNameLabel.text = asset.coin?.inAppName
+        self.coinAmountLabel.text = asset.amount?.decimalValue.asString(digits: 8)
+        self.transferButton.rx.tapGesture().asDriver().drive(onNext: { _ in
+            transferAction(asset)
+        }).disposed(by: disposeBag)
+        
+        self.depositButton.rx.tapGesture().asDriver().drive(onNext: { _ in
+            depositAction(asset)
+        }).disposed(by: disposeBag)
     }
 }
