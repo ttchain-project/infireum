@@ -76,7 +76,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
             self.profilePics.setProfileImage(image: leftImage, tempName: message.senderName)
 
             self.senderNameLabel.text = message.senderName
-            
+            self.msgImageView.backgroundColor = UIColor.white
+
         }
         self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)

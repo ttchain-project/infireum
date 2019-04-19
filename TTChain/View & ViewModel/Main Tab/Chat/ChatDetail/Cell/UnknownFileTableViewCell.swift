@@ -55,18 +55,16 @@ class UnknownFileTableViewCell: UITableViewCell {
         if message.isUserSender() {
             self.profilePics.isHidden = true
             self.dateLabel.textAlignment = .right
-//            self.senderConstraint.isActive = true
-//            self.receiverConstraint.isActive = false
             self.senderNameLabel.text = ""
             self.bgView.backgroundColor = UIColor.init(red: 137, green: 216, blue: 128)
             
         }else {
             self.profilePics.isHidden = false
             self.dateLabel.textAlignment = .left
-//            self.senderConstraint.isActive = false
-//            self.receiverConstraint.isActive = true
             self.profilePics.setProfileImage(image: leftImage, tempName: message.senderName)
             self.senderNameLabel.text = message.senderName
+            self.bgView.backgroundColor = UIColor.white
+
         }
         self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)

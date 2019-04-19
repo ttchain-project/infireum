@@ -121,8 +121,7 @@ class ChatViewModel: KLRxViewModel {
         Server.instance.getChatHistory(forRoom: self.input.roomID, roomType: self.input.roomType).asObservable().subscribe(onNext: { [unowned self] (response) in
             switch response {
             case .failed(error: let error):
-                print(error)
-                self.timerSub?.dispose()
+                print(error)                
             case .success(let chatHistory):
                 let prevCount = self._messages.value.count
                 self._messages.accept(chatHistory.messageArray.reversed())
@@ -143,6 +142,7 @@ class ChatViewModel: KLRxViewModel {
                 print(error)
             case .success(let model):
                 self.groupInfoModel.accept(model.groupInfo)
+                self.input.roomType = model.groupInfo.roomType
             }
         }).disposed(by: bag)
     }
