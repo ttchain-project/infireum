@@ -126,7 +126,7 @@ RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate>
         _messageQueue = [NSMutableArray array];
         _iceServers = [NSMutableArray arrayWithObject:[self defaultSTUNServer]];
         _serverHostUrl = kARDRoomServerHostUrl;
-        _isSpeakerEnabled = YES;
+        _isSpeakerEnabled = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(orientationChanged:)
