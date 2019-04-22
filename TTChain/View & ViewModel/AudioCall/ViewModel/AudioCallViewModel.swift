@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import SwiftMoment
+import AVFoundation
 
 class AudioCallViewModel: KLRxViewModel {
     
@@ -26,7 +27,8 @@ class AudioCallViewModel: KLRxViewModel {
     typealias InputSource = Input
     typealias OutputSource = Output
     var bag: DisposeBag = DisposeBag.init()
-    
+    var audioPlayer:AVAudioPlayer!
+
     var disconnectTimerBag: DisposeBag! = DisposeBag()
     private var disconnectTimer: Observable<Int>!
     
@@ -60,8 +62,10 @@ class AudioCallViewModel: KLRxViewModel {
                 
             case .disconnected?:
                 self.didEndCall.onNext(())
+                self.audioPlayer.stop()
             case .otherClientConnected?:
                 self.disconnectTimerBag = nil
+                self.audioPlayer.stop()
                 self.beginCallTime()
             //Start Timer here
             default:
@@ -76,6 +80,7 @@ class AudioCallViewModel: KLRxViewModel {
     
     func initiateCall() {
         AVCallHandler.handler.initiateAudioCall(forRoomId: self.input.roomId)
+        self.startOutgoingCallTone()
         disconnectTimer = Observable<Int>.interval(60.0, scheduler: MainScheduler.instance)
         
         disconnectTimer.map({[weak self] _ in
@@ -83,6 +88,7 @@ class AudioCallViewModel: KLRxViewModel {
                 return
             }
             AVCallHandler.handler.endCall()
+            self?.audioPlayer.stop()
             self?.didEndCall.onNext(())
             DLogInfo("EndCall here")
         }).subscribe(onNext: {[weak self] (_) in
@@ -91,7 +97,27 @@ class AudioCallViewModel: KLRxViewModel {
         }).disposed(by: disconnectTimerBag)
     }
 
+    func startOutgoingCallTone() {
+        guard let url = Bundle.main.path(forResource: "ringtone", ofType: "wav") else {
+            return
+        }
+        do {
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            
+            try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.none)
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: url))
+            audioPlayer?.play()
+            audioPlayer?.numberOfLoops = -1
+        }
+        catch let error{
+            print(error)
+        }
+
+    }
+    
     func joinCall(forStreamId streamId:String)  {
+        
         AVCallHandler.handler.acceptCall()
     }
     

@@ -123,6 +123,9 @@
 		5537F0932266D2240058B98D /* LightTransDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */; };
 		5537F0942266D2240058B98D /* LightTransDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */; };
 		5537F0952266D2240058B98D /* LightTransDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */; };
+		5537F097226D9D0C0058B98D /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5537F096226D9D0B0058B98D /* ringtone.wav */; };
+		5537F098226D9D0C0058B98D /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5537F096226D9D0B0058B98D /* ringtone.wav */; };
+		5537F099226D9D0C0058B98D /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5537F096226D9D0B0058B98D /* ringtone.wav */; };
 		5539A46F21676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */; };
 		5539A47021676F0300A59ACC /* IdentityQRCodeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */; };
 		5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */; };
@@ -2091,6 +2094,7 @@
 		5537F08A2265EA490058B98D /* LightTransDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransDetailViewController.swift; sourceTree = "<group>"; };
 		5537F08B2265EA490058B98D /* LightTransDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightTransDetailViewController.xib; sourceTree = "<group>"; };
 		5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransDetailViewModel.swift; sourceTree = "<group>"; };
+		5537F096226D9D0B0058B98D /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
 		5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeEncryptionFlow.swift; sourceTree = "<group>"; };
 		5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeContentViewController.swift; sourceTree = "<group>"; };
 		5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeContentViewController.xib; sourceTree = "<group>"; };
@@ -5929,6 +5933,7 @@
 				64F07CE720D0E4CB00A60C5C /* AppDelegate.swift */,
 				64F07CF120D0E4CE00A60C5C /* Assets.xcassets */,
 				64F07CF320D0E4CE00A60C5C /* LaunchScreen.storyboard */,
+				5537F096226D9D0B0058B98D /* ringtone.wav */,
 				55787FD121F9612F00A4F7D6 /* tt_splash.gif */,
 				64F07DA420D21A3D00A60C5C /* plist */,
 				557C855122366FDB004C2E16 /* ThirdParty Lib */,
@@ -6452,6 +6457,7 @@
 				5508743321EDD628007B3B3B /* ExploreDetailWebViewController.xib in Resources */,
 				64772557212D1643005E75FE /* Localizable.strings in Resources */,
 				550873F521E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib in Resources */,
+				5537F099226D9D0C0058B98D /* ringtone.wav in Resources */,
 				555E4AF3224CEC8100C7CAD5 /* ReceiveRedEnvelopeHistoryViewController.xib in Resources */,
 				649E484920E7D96000B217AD /* ChangeWalletTableViewCell.xib in Resources */,
 				640D890D20EF5FA10010D986 /* TransRecordListTableViewCell.xib in Resources */,
@@ -6695,6 +6701,7 @@
 				555E4A89224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */,
 				6485003720DA006900107473 /* IdentityCreateViewController.xib in Resources */,
 				55EF6AD521A812C6007E074A /* FriendTableViewCell.xib in Resources */,
+				5537F097226D9D0C0058B98D /* ringtone.wav in Resources */,
 				555E4A622248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
 				640D893120F069BF0010D986 /* WithdrawalAssetViewController.xib in Resources */,
 				64B98EE320FA03BE00C4EB11 /* LightningTransRecordTableViewCell.xib in Resources */,
@@ -6867,6 +6874,7 @@
 				555E4A8A224A472800C7CAD5 /* RedEnvelopeDetailView.xib in Resources */,
 				6485003820DA006900107473 /* IdentityCreateViewController.xib in Resources */,
 				55EF6AD621A812C6007E074A /* FriendTableViewCell.xib in Resources */,
+				5537F098226D9D0C0058B98D /* ringtone.wav in Resources */,
 				555E4A632248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
 				640D893220F069BF0010D986 /* WithdrawalAssetViewController.xib in Resources */,
 				64B98EE420FA03BE00C4EB11 /* LightningTransRecordTableViewCell.xib in Resources */,

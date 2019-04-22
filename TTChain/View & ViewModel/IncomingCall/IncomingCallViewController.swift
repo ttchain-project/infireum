@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import AudioToolbox
+import AVFoundation
 
 final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     
@@ -19,6 +20,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     typealias ViewModel = IncomingCallViewModel
     
     var bag: DisposeBag = DisposeBag.init()
+    var audioPlayer:AVAudioPlayer!
     
     typealias Constructor = Config
     
@@ -34,7 +36,7 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
     func config(constructor: IncomingCallViewController.Config) {
         self.view.layoutIfNeeded()
         self.viewModel = IncomingCallViewModel.init(input: IncomingCallViewModel.InputSource(callModel: constructor.callModel,strin:self.testLabel), output: ())
-        
+        self.startIncomingTone()
         self.callTitleLabel.text = constructor.callTitle
         self.callMessageLabel.text = constructor.callModel.message
         self.didAcceptCall = constructor.didReceiveCall
@@ -69,13 +71,14 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
 
             self.dismiss(animated: false, completion: {
                 self.didAcceptCall!(false)
-
+                self.audioPlayer.stop()
             })
         }).disposed(by: bag)
         
         self.acceptCall.rx.tap.subscribe(onNext: {
             [unowned self] in
             self.viewModel.timerBag.dispose()
+            self.audioPlayer.stop()
             self.dismiss(animated: false, completion: {
                 self.didAcceptCall!(true)
             })
@@ -85,12 +88,33 @@ final class IncomingCallViewController: KLModuleViewController,KLVMVC {
             guard let `self` = self else {
                 return
             }
+            
             if case .disconnected? = status {
                 self.viewModel.timerBag.dispose()
+                self.audioPlayer.stop()
                 self.dismiss(animated: true, completion: {
                     self.didAcceptCall = nil
                 })
             }
         }).disposed(by: bag)
+    }
+    
+    func startIncomingTone() {
+        guard let url = Bundle.main.path(forResource: "ringtone", ofType: "wav") else {
+            return
+        }
+        do {
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: url))
+            audioPlayer?.play()
+            audioPlayer?.numberOfLoops = -1
+        }
+        catch let error{
+            print(error)
+        }
+        
+        
     }
 }

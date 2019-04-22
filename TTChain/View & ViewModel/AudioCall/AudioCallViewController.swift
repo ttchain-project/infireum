@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+
 enum CallAction {
     case startCall
     case joinCall
@@ -22,7 +23,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
     typealias ViewModel = AudioCallViewModel
     
     var bag: DisposeBag = DisposeBag.init()
-    
+
     struct Config {
         let roomId:String
         let calleeName:String
@@ -52,6 +53,7 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
         case .startCall:
             DLogDebug("Start Call")
             self.viewModel.initiateCall()
+            
         }
         
         self.callTitleLabel.text = constructor.calleeName
@@ -109,4 +111,5 @@ final class AudioCallViewController:KLModuleViewController, KLVMVC {
         
         self.viewModel.totalCallTime.bind(to: self.timerLabel.rx.text).disposed(by: bag)
     }
+    
 }
