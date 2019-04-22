@@ -70,6 +70,7 @@ enum IMAPI :KLMoyaAPISet {
         case .promiseRedEnvelopeSent(let api):return api
         case .sendRedEnvelopeHistory(let api):return api
         case .receiveRedEnvelopeHistory(let api):return api
+        case .sendCoinRequest(let api):return api
         }
     }
     case preLogin(PreLoginAPI)
@@ -95,6 +96,7 @@ enum IMAPI :KLMoyaAPISet {
     case uploadHeadImage(UploadHeadImageAPI)
     case uploadFile(UploadFileAPI)
     case sendMessage(IMSendMessageAPI)
+    case sendCoinRequest(IMSendCoinRequestAPI)
     case blockUser(BlockUserAPI)
     case getDestructMessageSetting(GetSelfDestructingStatusAPI)
     case registerJiGuangPush(JiGuangPushSettingAPI)
@@ -933,8 +935,46 @@ struct IMSendMessageAPIModel:KLJSONMappableMoyaResponse {
     }
 }
 
+// MARK: - POST /IM/RedEnvelope/Request
 
+struct IMSendCoinRequestAPI:KLMoyaIMAPIData {
+    
+    struct Parameter:Paramenter {
+        let uid:String = Tokens.getUID()
+        let rocketChatUserId:String = Tokens.getRocketChatUserID()
+        let authToken:String = Tokens.getAuthToken()
+        let roomId :String
+        let isGroup : Bool
+        let msg : String
+    }
+    let parameters: Parameter
 
+    var path: String {return "/IM/RedEnvelope/Request"}
+    
+    var method: Moya.Method { return .post }
+    
+    var task: Task {
+        return Moya.Task.requestParameters(
+            parameters: parameters.asDictionary(),
+            encoding: JSONEncoding.default
+        )
+    }
+    
+    var stub: Data? {return nil}
+}
+
+struct IMSendCoinRequestAPIModel:KLJSONMappableMoyaResponse {
+    typealias API = IMSendCoinRequestAPI
+    var status : Bool
+
+    init(json: JSON, sourceAPI: API) throws {
+        guard let success = json["success"].bool
+            else {
+                throw GTServerAPIError.noData
+        }
+        self.status = success
+    }
+}
 // MARK: - /IM/CreateGroup
 
 struct CreateGroupAPI: KLMoyaIMAPIData {

@@ -61,6 +61,10 @@ class ChatViewModel: KLRxViewModel {
     
     public var memberAvatarMapping: [String:String?] = [:]
     
+    public lazy var isGroup:Bool = {
+       return self.input.roomType != .pvtChat
+    }()
+    
     var privateChat : PrivateChatSetup
     
     let blockSubject = PublishSubject<Bool>()
@@ -166,7 +170,7 @@ class ChatViewModel: KLRxViewModel {
             return
         }
         let param = UploadFileAPI.Parameters.init(uid: user.uID,
-                                                  isGroup: self.input.roomType == .pvtChat ? false : true,
+                                                  isGroup: self.isGroup,
                                                   image: data,roomId: self.input.roomID,
                                                   fileName:fileName)
         
@@ -184,7 +188,24 @@ class ChatViewModel: KLRxViewModel {
     
     func sendReceiptMessage(for walletAddress: String , identifier: String, amount: String) {
         let message = "{\"address\":\"" + walletAddress + "\",\"amount\":\"" + amount + "\",\"coinID\":\"" + identifier + "\"}"
-        self.sendMessage(txt: message)
+        
+        let parameter = IMSendCoinRequestAPI.Parameter.init(roomId: self.input.roomID, isGroup: isGroup, msg: message)
+        
+        Server.instance.sendCoinRequestMessage(parameter: parameter).asObservable().subscribe(onNext: {[unowned self] (result) in
+            switch result {
+            case .failed(error: let error):
+                DLogError(error)
+            case .success(let message):
+                DLogInfo("Message sent successfully \(parameter.msg) \(message.status)")
+                self.fetchAllMessagesForPrivateChat()
+                if message.status {
+                    if self.privateChat.isPrivateChatOn.value {
+                    }
+                } else {
+                    self.blockSubject.onNext((true))
+                }
+            }
+        }).disposed(by: bag)
     }
 
     func sendForwardedMessages(messages:[MessageModel]) {
@@ -271,7 +292,7 @@ class ChatViewModel: KLRxViewModel {
             return
         }
         
-        let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID, roomId: self.input.roomID, isGroup: self.input.roomType == .pvtChat ? false : true, msg: txt)
+        let parameter = IMSendMessageAPI.Parameter.init(uid: user.uID, roomId: self.input.roomID, isGroup: isGroup, msg: txt)
         DLogInfo("Trying to send message \(parameter.msg)")
 
         Server.instance.sendMessage(parameters: parameter).asObservable().subscribe(onNext: { (result) in

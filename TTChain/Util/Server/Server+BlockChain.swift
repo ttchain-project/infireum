@@ -715,6 +715,11 @@
         let api = ReceiveRedEnvelopeHistoryAPI.init(parameters: parameter)
         return fire(router: .IM(.receiveRedEnvelopeHistory(api)))
     }
+    
+    func sendCoinRequestMessage(parameter:IMSendCoinRequestAPI.Parameter) ->RxAPIResponse<IMSendCoinRequestAPIModel> {
+        let api = IMSendCoinRequestAPI.init(parameters: parameter)
+        return fire(router: .IM(.sendCoinRequest(api)))
+    }
  }
  
  //MARK: - RocketChat -
