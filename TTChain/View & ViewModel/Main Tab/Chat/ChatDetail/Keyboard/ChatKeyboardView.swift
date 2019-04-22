@@ -99,17 +99,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
                                       FunctionModel.init(title: LM.dls.send_file_title, image: UIImage(named: "iconFileColor"), type: .sendDocument)
                                       
 ]
-    
-    
-    //TODO: Change this implementation, looks very lame :-\
-    /*
-     FunctionModel.init(title: "圖片", image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
-     FunctionModel.init(title: "相機", image: UIImage(named: "iconCameraColor"), type: .openCamera),
-     FunctionModel.init(title: "影片", image: UIImage(named: "iconFilmColor"), type: .addVideo),
-     FunctionModel.init(title: "紅包", image: UIImage(named: "iconEnvelopeColor"), type: .addRedEnvelope),
-     FunctionModel.init(title: "通話", image: UIImage(named: "iconCallColor"), type: .makeAudioCall),
-     FunctionModel.init(title: LM.dls.chat_room_video_call, image: UIImage(named: "iconVideoColor"), type: .makeVideoCall),
- */
+
     
     var bag: DisposeBag = DisposeBag()
     
@@ -142,12 +132,13 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func initMoreButton() {
-        moreButton.rx.tap.asDriver().drive(onNext: {
-            self.textField.resignFirstResponder()
+        moreButton.rx.tap.asDriver().drive(onNext: {[weak self] _ in
+           
+            self?.textField.resignFirstResponder()
             
-            let offset = self.inputContentViewBottomConstraint.constant
+            let offset = self?.inputContentViewBottomConstraint.constant
             
-            self.animateInputContentView(offset: offset == 0 ? 156 : 0)
+            self?.animateInputContentView(offset: offset == 0 ? 156 : 0)
             
         }).disposed(by: bag)
     }
@@ -176,7 +167,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
                         0
                 }
                 ])
-            .merge().subscribe(onNext: { [weak self](height) in
+            .merge().subscribe(onNext: { [weak self] (height) in
                 guard let `self` = self else {
                     return
                 }
@@ -198,7 +189,10 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     func configRecorderButton() {
         
-        self.recorderKeyboardSwitchButton.rx.tap.asDriver().drive(onNext: { _ in
+        self.recorderKeyboardSwitchButton.rx.tap.asDriver().drive(onNext: { [weak self] _ in
+            guard let `self` = self else {
+                return
+            }
             self.recorderKeyboardSwitchButton.isSelected = !self.recorderKeyboardSwitchButton.isSelected
             self.textField.isHidden = self.recorderKeyboardSwitchButton.isSelected
             self.recordAudioButton.isHidden = !self.recorderKeyboardSwitchButton.isSelected
@@ -218,18 +212,18 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         self.recordAudioButton.setTitle(LM.dls.record_audio_start_button, for: .normal)
         self.recordAudioButton.setTitle(LM.dls.record_audio_stop_to_send_button, for: .highlighted)
         
-        self.recordAudioButton.rx.controlEvent([.touchDown]).subscribe(onNext: { _ in
-            self.startRecording()
+        self.recordAudioButton.rx.controlEvent([.touchDown]).subscribe(onNext: {[weak self] _ in
+            self?.startRecording()
         }).disposed(by: bag)
 
-        self.recordAudioButton.rx.controlEvent([.touchUpInside]).subscribe(onNext: { _ in
+        self.recordAudioButton.rx.controlEvent([.touchUpInside]).subscribe(onNext: {[weak self] _ in
             DLogInfo("End Recording")
-            self.finishRecording(success: true)
+            self?.finishRecording(success: true)
         }).disposed(by: bag)
         
-        self.recordAudioButton.rx.controlEvent([.touchCancel]).subscribe(onNext: { _ in
+        self.recordAudioButton.rx.controlEvent([.touchCancel]).subscribe(onNext: { [weak self] _ in
             DLogInfo("Cancel Recording")
-            self.finishRecording(success: false)
+            self?.finishRecording(success: false)
         }).disposed(by: bag)
         
     }

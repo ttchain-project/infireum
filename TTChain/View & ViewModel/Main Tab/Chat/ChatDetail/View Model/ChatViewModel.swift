@@ -78,14 +78,14 @@ class ChatViewModel: KLRxViewModel {
             self.fetchAllMessagesForPrivateChat()
         })
         
-        self.groupInfoModel.asObservable().subscribe(onNext: { (model) in
+        self.groupInfoModel.asObservable().subscribe(onNext: {[weak self] (model) in
             guard model?.membersArray != nil else {
                 return
             }
             for member in (model?.membersArray!)! {
-                self.memberAvatarMapping[member.uid] = member.avatarUrl
+                self?.memberAvatarMapping[member.uid] = member.avatarUrl
             }
-            self.shouldRefreshCellsForDataUpdate.onNext(())
+            self?.shouldRefreshCellsForDataUpdate.onNext(())
         }).disposed(by: bag)
         self.concatInput()
         self.concatOutput()
@@ -136,13 +136,13 @@ class ChatViewModel: KLRxViewModel {
     }
     
     func getGroupDetails() {
-        Server.instance.getGroupInfo(forRoomID: self.input.roomID).asObservable().subscribe(onNext: { (response) in
+        Server.instance.getGroupInfo(forRoomID: self.input.roomID).asObservable().subscribe(onNext: { [weak self] (response) in
             switch response {
             case .failed(error: let error):
                 print(error)
             case .success(let model):
-                self.groupInfoModel.accept(model.groupInfo)
-                self.input.roomType = model.groupInfo.roomType
+                self?.groupInfoModel.accept(model.groupInfo)
+                self?.input.roomType = model.groupInfo.roomType
             }
         }).disposed(by: bag)
     }
@@ -170,13 +170,13 @@ class ChatViewModel: KLRxViewModel {
                                                   image: data,roomId: self.input.roomID,
                                                   fileName:fileName)
         
-        Server.instance.uploadFile(parameters:param).asObservable().subscribe(onNext: { (result) in
+        Server.instance.uploadFile(parameters:param).asObservable().subscribe(onNext: {[weak self] (result) in
             switch result {
             case .failed(error: let error):
                 DLogError(error)
             case .success(let message):
                 DLogInfo(message)
-                self.fetchAllMessagesForPrivateChat()
+                self?.fetchAllMessagesForPrivateChat()
                 
             }
         }).disposed(by: bag)
@@ -253,7 +253,6 @@ class ChatViewModel: KLRxViewModel {
         
         var message = trimmed
 
-        
         repeat {
             self.sendMessage(txt: message)
             if message.count > 500 {
@@ -300,10 +299,10 @@ class ChatViewModel: KLRxViewModel {
             return
         }
         
-        Server.instance.searchUser(uid: user.uID, targetUid: uid).asObservable().subscribe(onNext: { (response) in
+        Server.instance.searchUser(uid: user.uID, targetUid: uid).asObservable().subscribe(onNext: {[weak self] (response) in
             switch response {
             case .success(let model):
-                self.blockSubject.onNext((model.isBlock))
+                self?.blockSubject.onNext((model.isBlock))
             case .failed(_):
                 print("Failed")
             }
@@ -312,30 +311,33 @@ class ChatViewModel: KLRxViewModel {
     
     func getPrivateChatStatus() {
         let parameter = GetSelfDestructingStatusAPI.Parameter.init(roomId: self.input.roomID, roomType: self.input.roomType.rawValue)
-        Server.instance.getDestructMessageSetting(parameter: parameter).asObservable().subscribe(onNext: { (result) in
+        Server.instance.getDestructMessageSetting(parameter: parameter).asObservable().subscribe(onNext: {[weak self] (result) in
             switch result {
             case .failed(error:let error) :
                 print(error)
             case .success(let model):
-                self.privateChat.isPrivateChatOn.accept(model.isOpenSelfDestructingMessage)
-                self.privateChat.privateChatDuration = model.privateChatType
+                self?.privateChat.isPrivateChatOn.accept(model.isOpenSelfDestructingMessage)
+                self?.privateChat.privateChatDuration = model.privateChatType
             }
         }).disposed(by: bag)
     }
     func deleteChatMessage(messageModel:MessageModel) {
-        Server.instance.deleteMessage(messageId:messageModel.messageId, roomID:messageModel.roomId).asObservable().subscribe(onNext: { (result) in
+        Server.instance.deleteMessage(messageId:messageModel.messageId, roomID:messageModel.roomId).asObservable().subscribe(onNext: {[weak self] (result) in
             switch result {
             case .failed(error:let error) :
                 print(error)
             case .success(_):
-                self.fetchAllMessagesForPrivateChat()
+                self?.fetchAllMessagesForPrivateChat()
             }
         }).disposed(by: bag)
     }
     
     func redEnvelopeAction(forRedEnvId redEnvMessage:RedEnvelope, navigateTo toViewController:@escaping (UIViewController) -> ()) {
         let parameter = RedEnvelopeInfoAPI.Parameters.init(redEnvelopeId: redEnvMessage.identifier)
-        Server.instance.getRedEnvelopeInfo(parameter: parameter).asObservable().subscribe(onNext: { (response) in
+        Server.instance.getRedEnvelopeInfo(parameter: parameter).asObservable().subscribe(onNext: {[weak self] (response) in
+            guard let `self` = self else {
+                return
+            }
             switch response {
             case .success(let model):
                 let info = model.redEnvelopeInfo

@@ -169,7 +169,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         tableView.register(RceiveRedEnvelopeTableViewCell.nib, forCellReuseIdentifier: RceiveRedEnvelopeTableViewCell.nameOfClass)
         tableView.register(UnknownFileTableViewCell.nib, forCellReuseIdentifier: UnknownFileTableViewCell.nameOfClass)
         
-        tableView.rx.klrx_tap.drive(onNext: { _ in
+        tableView.rx.klrx_tap.drive(onNext: { [unowned self] _ in
             self.view.endEditing(true)
         }).disposed(by: bag)
     }
@@ -194,18 +194,18 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             case .general,.audioCall(_):
                 let chatCell = tv.dequeueReusableCell(withIdentifier: ChatMessageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageTableViewCell
                 
-                chatCell.config(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
-                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                chatCell.config(forMessage: messageModel, leftImage: leftImage, leftImageAction: {[weak self] id in
+                    guard let friendModel = self?.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
                         return
                     }
-                    self.toUserProfileVC(forFriend: friendModel)
+                    self?.toUserProfileVC(forFriend: friendModel)
                 })
                 
-                chatCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                chatCell.rx.longPressGesture().skip(1).subscribe(onNext: {[weak self] (_) in
                     if case .audioCall = messageModel.msgType {
                         return
                     }
-                    self.showOptionsForLongGesture(for: messageModel)
+                    self?.showOptionsForLongGesture(for: messageModel)
                 }).disposed(by: chatCell.bag)
                 cell = chatCell
                 
@@ -213,56 +213,56 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 
                 let chatImgCell = tv.dequeueReusableCell(withIdentifier: ChatMessageImageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageImageTableViewCell
                 
-                chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
-                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                chatImgCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: {[weak self] id in
+                    guard let friendModel = self?.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
                         return
                     }
-                    self.toUserProfileVC(forFriend: friendModel)
+                    self?.toUserProfileVC(forFriend: friendModel)
                 })
-                chatImgCell.msgImageView!.rx.klrx_tap.drive(onNext: { _ in
+                chatImgCell.msgImageView!.rx.klrx_tap.drive(onNext: {[weak self] _ in
                     if case .image = messageModel.msgType {
-                        self.toImageViewer(for: messageModel)
+                        self?.toImageViewer(for: messageModel)
                     }else {
-                        self.playAudio(messageModel: messageModel)
+                        self?.playAudio(messageModel: messageModel)
                     }
                 }).disposed(by: chatImgCell.bag)
                 
-                chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                chatImgCell.rx.longPressGesture().skip(1).subscribe(onNext: {[weak self] (_) in
                     messageModel.messageImage = chatImgCell.msgImageView.image
-                    self.showOptionsForLongGesture(for: messageModel)
+                    self?.showOptionsForLongGesture(for: messageModel)
                 }).disposed(by: chatImgCell.bag)
                 
                 cell = chatImgCell
                 
             case .file :
                 let unknownFileCell = tv.dequeueReusableCell(withIdentifier: UnknownFileTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! UnknownFileTableViewCell
-                unknownFileCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
-                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                unknownFileCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: {[weak self] id in
+                    guard let friendModel = self?.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
                         return
                     }
-                    self.toUserProfileVC(forFriend: friendModel)
+                    self?.toUserProfileVC(forFriend: friendModel)
                 })
-                unknownFileCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                unknownFileCell.rx.longPressGesture().skip(1).subscribe(onNext: { [weak self] (_) in
                     messageModel.messageImage = unknownFileCell.msgImageView.image
-                    self.showOptionsForLongGesture(for: messageModel)
+                    self?.showOptionsForLongGesture(for: messageModel)
                 }).disposed(by: unknownFileCell.bag)
-                unknownFileCell.msgImageView.rx.klrx_tap.asDriver().drive(onNext: { (_) in
-                    self.toFileViewer(messageModel: messageModel)
+                unknownFileCell.msgImageView.rx.klrx_tap.asDriver().drive(onNext: {[weak self] (_) in
+                    self?.toFileViewer(messageModel: messageModel)
                 }).disposed(by: unknownFileCell.bag)
                 cell = unknownFileCell
                 
             case .receipt :
                 let receiptCell = tv.dequeueReusableCell(withIdentifier: ReceiptTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ReceiptTableViewCell
                 
-                receiptCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { id in
-                    guard let friendModel = self.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
+                receiptCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: {[weak self] id in
+                    guard let friendModel = self?.viewModel.getFriendsModel(for: messageModel.userName ?? "") else {
                         return
                     }
-                    self.toUserProfileVC(forFriend: friendModel)
+                    self?.toUserProfileVC(forFriend: friendModel)
                 })
                 
-                receiptCell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
-                    self.showOptionsForLongGesture(for: messageModel)
+                receiptCell.rx.longPressGesture().skip(1).subscribe(onNext: {[weak self] (_) in
+                    self?.showOptionsForLongGesture(for: messageModel)
                 }).disposed(by: receiptCell.bag)
                 
                 receiptCell.bgView.rx.klrx_tap.asDriver().drive(onNext: { [weak self] _ in
@@ -325,20 +325,17 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
         
         self.viewModel.privateChat.isPrivateChatOn
-            .asObservable().map { status in
+            .asObservable().map {[weak self] status in
                 if status {
-                    self.keyboardView.privateChatDurationTitleLabel.text = LM.dls.secret_chat_on
+                    self?.keyboardView.privateChatDurationTitleLabel.text = LM.dls.secret_chat_on
                 }else {
-                    self.keyboardView.privateChatDurationTitleLabel.text = ""
+                    self?.keyboardView.privateChatDurationTitleLabel.text = ""
                 }
                 return !status
             }
             .bind(to: self.keyboardView.privateChatBannerView.rx.isHidden)
             .disposed(by: bag)
-        
-        Observable.just(self.viewModel.privateChat.privateChatDuration).asObservable().subscribe(onNext: { (duration) in
-            
-        }).disposed(by: bag)
+    
     }
     
     @objc func backButtonTapped() {
@@ -459,9 +456,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             })
             
         }
-        let delete = UIAlertAction.init(title:LM.dls.delete,style:.default) { (_) in
+        let delete = UIAlertAction.init(title:LM.dls.delete,style:.default) {[weak self] (_) in
             //to Delete Message
-            self.viewModel.deleteChatMessage(messageModel:message)
+            self?.viewModel.deleteChatMessage(messageModel:message)
         }
         let cancelButton = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
         

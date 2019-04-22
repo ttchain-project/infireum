@@ -30,7 +30,6 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.setup()
-        self.selectMessageButtonWidth.constant = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,6 +50,8 @@ class ChatMessageImageTableViewCell: UITableViewCell {
         dateLabel.set(textColor: .black, font: .owMedium(size: 14))
         senderNameLabel.set(textColor: .black, font: .owDemiBold(size: 16))
         profilePics.layer.cornerRadius = 20
+  
+        self.selectMessageButtonWidth.constant = 0
 
         self.backgroundColor = .clear
         self.selectionStyle = .none
