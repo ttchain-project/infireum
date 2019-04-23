@@ -41,6 +41,16 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     
     @IBOutlet weak var recoveryPasswordButton: UIButton!
     
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
     func config(constructor: Void) {
         self.view.layoutIfNeeded()
        
@@ -119,11 +129,12 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         let image = self.profileImageView.image?.updateImageOrientionUpSide() ?? self.profileImageView.image
         
         let parameter = UploadHeadImageAPI.Parameters.init(personalOrGroupId:imUser!.uID , isGroup: false, image: UIImageJPEGRepresentation(image!, 0.5)!)
-        
+        self.hud.startAnimating(inView: view)
         Server.instance.uploadHeadImg(parameters: parameter).asObservable().subscribe(onNext: {[weak self] (result) in
             guard let `self` = self else {
                 return
             }
+            self.hud.stopAnimating()
             switch result {
             case .success(let model):
                 
@@ -154,8 +165,13 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             return
         }
         let parameter = UpdateUserAPI.Parameters.init(uid: (imUser?.uID)! , nickName: userName, introduction: imUser?.introduction ?? "")
+        self.hud.startAnimating(inView: view)
 
-        Server.instance.updateUserData(parameters: parameter).asObservable().subscribe(onNext: { (result) in
+        Server.instance.updateUserData(parameters: parameter).asObservable().subscribe(onNext: { [weak self] (result) in
+            guard let `self` = self else {
+                return
+            }
+            self.hud.stopAnimating()
             switch result {
             case .success(_):
                 self.imUser?.nickName = self.userNameTextField.text!
@@ -171,9 +187,11 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         
         self.getRecoveryPasswordFromUser().subscribe(onSuccess: { password in
             guard let id = IMUserManager.manager.userModel.value?.uID else { return }
+            self.hud.startAnimating(inView: self.view)
             Server.instance.setRecoveryPassword(withIMUserId: id, recoveryPassword: password).asObservable().subscribe(onNext: {
                 [weak self] result in
                 guard let `self` = self else { return }
+                self.hud.stopAnimating()
                 switch result {
                 case .success:
                     DLogDebug("set recovery key successful.")
