@@ -49,23 +49,29 @@ class AudioCallViewModel: KLRxViewModel {
     
     func concatInput() {
         self.input.endCallAction.asObservable().subscribe(onNext: {[weak self] _ in
-            guard self != nil else {
+            guard let `self` = self else {
                 return
             }
             AVCallHandler.handler.endCall()
-            self?.didEndCall.onNext(())
+            self.didEndCall.onNext(())
         }).disposed(by: bag)
         
-        AVCallHandler.handler.currentCallingStatus.asObservable().subscribe(onNext: { (callStatus) in
+        AVCallHandler.handler.currentCallingStatus.asObservable().subscribe(onNext: {[weak self] (callStatus) in
             
+            guard let `self` = self else {
+                return
+            }
             switch callStatus {
-                
             case .disconnected?:
                 self.didEndCall.onNext(())
-                self.audioPlayer.stop()
+                if self.audioPlayer.isPlaying {
+                    self.audioPlayer.stop()
+                }
             case .otherClientConnected?:
                 self.disconnectTimerBag = nil
-                self.audioPlayer.stop()
+                if self.audioPlayer.isPlaying {
+                    self.audioPlayer.stop()
+                }
                 self.beginCallTime()
             //Start Timer here
             default:
@@ -84,16 +90,21 @@ class AudioCallViewModel: KLRxViewModel {
         disconnectTimer = Observable<Int>.interval(60.0, scheduler: MainScheduler.instance)
         
         disconnectTimer.map({[weak self] _ in
-            guard self != nil else {
+            guard let `self` = self else {
                 return
             }
             AVCallHandler.handler.endCall()
-            self?.audioPlayer.stop()
-            self?.didEndCall.onNext(())
+            if self.audioPlayer.isPlaying {
+                self.audioPlayer.stop()
+            }
+            self.didEndCall.onNext(())
             DLogInfo("EndCall here")
         }).subscribe(onNext: {[weak self] (_) in
             DLogInfo("EndCall here")
-            self?.disconnectTimerBag = nil
+            guard let `self` = self else {
+                return
+            }
+            self.disconnectTimerBag = nil
         }).disposed(by: disconnectTimerBag)
     }
 
