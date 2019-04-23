@@ -56,6 +56,7 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
                 return
             }
             cell.config(asset: asset,transferAction: { asset in self.showTransferAction(asset: asset)}, depositAction: {asset in self.showDepositAction(asset: asset)})
+            
             }.disposed(by:bag)
         
         self.tableView.rx.itemSelected.asDriver().drive(onNext: { (path) in
