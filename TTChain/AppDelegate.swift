@@ -70,12 +70,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //To let the gif show in the LaunchViewController display for 4 sec
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4.0) {
             //Start to define the root vc for current status.
-            self.start()
+            if let dict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable : Any] {
+                // Launched from push notification
+                self.start(launchOption: dict)
+            }else {
+                self.start()
+            }
             
             //Start version checking flow, prohobit further using if found current version is below required version.
             self.versionChecker()
         }
-        
+
+
         window?.makeKeyAndVisible()
         
         
@@ -93,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// Define the root view controller of current app status.
-    private func start() {
+    private func start(launchOption : [AnyHashable : Any]? = nil) {
         if hasLoggedIn {
             //Check if user has turned on the local auth feature.
             if SettingsManager.isIDAuthEnabled {
@@ -117,6 +123,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window?.rootViewController = xib(vc: MainTabBarViewController.self)
                 IMUserManager.launch()
                 self.setupSetting()
+                if launchOption != nil {
+                    TTNotificationHandler.shared.parseNotification(userInfo: launchOption!)
+                }
             }
         } else {
             window?.rootViewController = IdentitySetupViewController.instance()
