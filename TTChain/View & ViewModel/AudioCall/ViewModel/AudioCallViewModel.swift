@@ -27,7 +27,7 @@ class AudioCallViewModel: KLRxViewModel {
     typealias InputSource = Input
     typealias OutputSource = Output
     var bag: DisposeBag = DisposeBag.init()
-    var audioPlayer:AVAudioPlayer!
+    var audioPlayer:AVAudioPlayer?
 
     var disconnectTimerBag: DisposeBag! = DisposeBag()
     private var disconnectTimer: Observable<Int>!
@@ -64,13 +64,13 @@ class AudioCallViewModel: KLRxViewModel {
             switch callStatus {
             case .disconnected?:
                 self.didEndCall.onNext(())
-                if self.audioPlayer.isPlaying {
-                    self.audioPlayer.stop()
+                if let player = self.audioPlayer, player.isPlaying {
+                    player.stop()
                 }
             case .otherClientConnected?:
                 self.disconnectTimerBag = nil
-                if self.audioPlayer.isPlaying {
-                    self.audioPlayer.stop()
+                if let player = self.audioPlayer, player.isPlaying {
+                    player.stop()
                 }
                 self.beginCallTime()
             //Start Timer here
@@ -94,8 +94,8 @@ class AudioCallViewModel: KLRxViewModel {
                 return
             }
             AVCallHandler.handler.endCall()
-            if self.audioPlayer.isPlaying {
-                self.audioPlayer.stop()
+            if let player = self.audioPlayer, player.isPlaying {
+                player.stop()
             }
             self.didEndCall.onNext(())
             DLogInfo("EndCall here")

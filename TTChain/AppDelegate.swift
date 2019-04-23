@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 IMUserManager.launch()
                 self.setupSetting()
                 if launchOption != nil {
-                    TTNotificationHandler.shared.parseNotification(userInfo: launchOption!)
+                    TTNotificationHandler.shared.parseNotification(userInfo: launchOption!,path:.launch)
                 }
             }
         } else {
@@ -405,6 +405,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DLogDebug("Notification received \(userInfo)")
-        TTNotificationHandler.shared.parseNotification(userInfo: userInfo)
+        TTNotificationHandler.shared.parseNotification(userInfo: userInfo,path:.notification)
     }
 }

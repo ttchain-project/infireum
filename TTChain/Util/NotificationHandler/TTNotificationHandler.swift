@@ -10,6 +10,11 @@ import Foundation
 import RxSwift
 import SwiftyJSON
 
+enum NotificationPath {
+    case launch
+    case notification
+}
+
 class TTNotificationHandler {
   
     static let shared:TTNotificationHandler = TTNotificationHandler.init()
@@ -54,7 +59,7 @@ class TTNotificationHandler {
         }
     }
     
-    func parseNotification(userInfo:[AnyHashable : Any]) {
+    func parseNotification(userInfo:[AnyHashable : Any],path:NotificationPath) {
      
         OWRxNotificationCenter.instance.notifyNotificationReceived()
 
@@ -66,6 +71,11 @@ class TTNotificationHandler {
         if let aps =  userInfo["aps"] as? [String:Any], let alert = aps["alert"] as? [String:String], let message = alert["body"] {
             messageRaw = message
         }
+       
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController, rootVC.isKind(of: LaunchViewController.self) {
+            return
+        }
+
         if var callMessageModel = CallMessageModel.init(json: messageDict) {
  
             //Show Incoming Call if not already in call
@@ -74,19 +84,26 @@ class TTNotificationHandler {
                 return
             }
             callMessageModel.message = messageRaw
+            if AVCallHandler.handler.isInCall() {
+                return
+            }
             AVCallHandler.handler.showIncomingCall(forCallMessage: callMessageModel, calleeName: callMessageModel.roomName ?? "")
 
         } else {
             //Show Chat
-            
-            if (UIApplication.shared.applicationState != .inactive) {
+            if AVCallHandler.handler.isInCall() {
+                return
+            }
+            if (UIApplication.shared.applicationState != .inactive) && path == .notification {
                 return
             }
             
             guard let isGroup = messageDict["isGroup"] as? Bool, let roomId = messageDict["roomId"] as? String, let roomName = messageDict["roomName"] as? String,let headImg = messageDict["headImg"] as? String else {
                 return
             }
+           
             let config = ChatViewController.Config.init(roomType: isGroup ? .group : .pvtChat, chatTitle: roomName, roomID: roomId, chatAvatar: headImg, uid: "",entryPoint: .notification)
+            
             
             OWRxNotificationCenter.instance.notificationForChatTapped(withConfig: config)
 
