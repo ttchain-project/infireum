@@ -79,4 +79,14 @@ class LightTransDetailViewController: UIViewController {
             $0.coin?.inAppName
         }.bind(to: self.navigationItem.rx.title).disposed(by: bag)
     }
+    
+    func showTransferAction(asset:Asset) {
+        let nav = WithdrawalBaseViewController.navInstance(from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil,defaultAmount:nil))
+        present(nav, animated: true, completion: nil)
+        
+    }
+    func showDepositAction(asset:Asset) {
+        let vc = DepositViewController.navInstance(from: DepositViewController.Setup(wallet: asset.wallet!, asset: asset))
+        present(vc, animated: true, completion: nil)
+    }
 }
