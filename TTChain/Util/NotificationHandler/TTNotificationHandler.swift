@@ -72,10 +72,10 @@ class TTNotificationHandler {
             messageRaw = message
         }
        
-        if let rootVC = UIApplication.shared.keyWindow?.rootViewController, rootVC.isKind(of: LaunchViewController.self) {
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController, rootVC.isKind(of: LaunchViewController.self)  {
             return
         }
-
+        
         if var callMessageModel = CallMessageModel.init(json: messageDict) {
  
             //Show Incoming Call if not already in call
@@ -103,7 +103,6 @@ class TTNotificationHandler {
             }
            
             let config = ChatViewController.Config.init(roomType: isGroup ? .group : .pvtChat, chatTitle: roomName, roomID: roomId, chatAvatar: headImg, uid: "",entryPoint: .notification)
-            
             
             OWRxNotificationCenter.instance.notificationForChatTapped(withConfig: config)
 

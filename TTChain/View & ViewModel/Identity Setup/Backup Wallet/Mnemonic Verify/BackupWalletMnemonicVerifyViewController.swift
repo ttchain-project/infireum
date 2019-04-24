@@ -219,11 +219,9 @@ class BackupWalletMnemonicVerifyViewController: KLModuleViewController {
     }
     
     private func toMainTab() {
-        let tab = xib(vc: MainTabBarViewController.self)
-        present(tab, animated: true, completion: {
-            IMUserManager.launch()
-            MarketTestHandler.shared.launch()
-        })
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.showMainTab()
+
     }
     
     /*

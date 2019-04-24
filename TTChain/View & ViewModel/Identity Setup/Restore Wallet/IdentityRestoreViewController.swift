@@ -358,12 +358,8 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     
     //MARK: - Routing
     func toMainTab() {
-        let tab = xib(vc: MainTabBarViewController.self)
-        present(tab, animated: true, completion: {
-            IMUserManager.launch()
-            MarketTestHandler.shared.launch()
-
-        })
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.showMainTab()
     }
     
     private var flow: IdentityQRCodeEncryptionFlow?

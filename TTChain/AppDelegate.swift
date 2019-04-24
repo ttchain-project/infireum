@@ -112,17 +112,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     .observeOn(MainScheduler.asyncInstance)
                     .subscribe(onNext: {
                         [unowned self] in
-                        self.window?.rootViewController = xib(vc: MainTabBarViewController.self)
-                        
-                        IMUserManager.launch()
-                        self.setupSetting()
+                        self.showMainTab()
                     })
                     .disposed(by: bag)
                 
             } else {
-                window?.rootViewController = xib(vc: MainTabBarViewController.self)
-                IMUserManager.launch()
-                self.setupSetting()
+                self.showMainTab()
+                
                 if launchOption != nil {
                     TTNotificationHandler.shared.parseNotification(userInfo: launchOption!,path:.launch)
                 }
@@ -133,9 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     func setupSetting()  {
-//        Server.instance.getMarketTest().subscribe().disposed(by: bag)
         MarketTestHandler.shared.launch()
-//        Server.instance.getQuotesTest().subscribe().disposed(by: bag)
     }
     
     
@@ -292,13 +286,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             oldWindow?.rootViewController?.dismiss(animated: false, completion: nil)
             
         }, completion: nil)
+    }
+    
+    func showMainTab() {
         
-//        window = UIWindow(frame: UIScreen.main.bounds)
-        
-        ///SO WHY DOES THE ROOT VIEW CONTROLLER WILL HOLD A STRONG REF EVEN THOUGH IT IS CHANGED??????????????????
-//        window?.rootViewController?.dismiss(animated: false, completion: nil)
-//        window?.rootViewController =
-//        window?.makeKeyAndVisible()
+        window?.rootViewController = xib(vc: MainTabBarViewController.self)
+        IMUserManager.launch()
+        self.setupSetting()
     }
 }
 
