@@ -139,6 +139,7 @@ class AVCallHandler : NSObject{
         self._currentCallStatus.accept(.disconnected)
         self._currentCallStatus.accept(nil)
         guard self.client != nil else {
+            self.callDetails = nil
             return
         }
         self.client?.disconnect()
