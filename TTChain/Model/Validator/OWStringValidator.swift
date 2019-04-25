@@ -151,6 +151,18 @@ extension OWStringValidator {
                             return .unsupported(source)
                         }
                 }
+            case .ttn:
+                let _regex = regex(forMainCoinID: _mainCoinID)
+                let mainCoin = Coin.getCoin(ofIdentifier: _mainCoinID)
+                return isSourceTTNChainTypeAddress(source, regex: _regex, mainCoin: mainCoin)
+                    .map {
+                        resultCoin in
+                        if let coin = resultCoin {
+                            return .address(source, chainType: .ttn, coin: coin, amt: nil)
+                        }else {
+                            return .unsupported(source)
+                        }
+                }
             }
         }else {
             //Non-specific type detection
@@ -275,6 +287,12 @@ extension OWStringValidator {
     
     //return element is mainCoin
     func isSourceCICChainTypeAddress(_ source: String, regex: String, mainCoin: Coin?) -> Single<Coin?> {
+        let _isMatchRegex = isMatchRegex(source: source, regex: regex)
+        let resultCoin = _isMatchRegex ? mainCoin : nil
+        return Single.just(resultCoin)
+    }
+    
+    func isSourceTTNChainTypeAddress(_ source: String, regex: String, mainCoin: Coin?) -> Single<Coin?> {
         let _isMatchRegex = isMatchRegex(source: source, regex: regex)
         let resultCoin = _isMatchRegex ? mainCoin : nil
         return Single.just(resultCoin)

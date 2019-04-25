@@ -377,6 +377,8 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
                     case .btc: c = Coin.btc
                     case .eth: c = Coin.eth
                     case .cic: c = Coin.btcRelay
+                    case .ttn: c = Coin.ttn
+
                     }
                     
                     attemptWithdrawal(with: addr, coin: c)

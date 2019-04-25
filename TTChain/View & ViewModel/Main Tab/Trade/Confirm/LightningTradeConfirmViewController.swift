@@ -245,7 +245,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
                     feeUnit = mainCoin.inAppName!.lowercased()
                     rateStr = rate.asString(digits: 9)
                 //THIS SHUOLD NOT HAPPENED
-                case .eth: return ""
+                case .eth,.ttn: return ""
                 }
                 
                 return rateStr + " " + feeUnit
@@ -332,6 +332,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
         case .btc: toUpdateBTCFeeRate()
         case .cic: toUpdateCICFeeRate()
         case .eth: return errorDebug(response: ())
+        case .ttn: return errorDebug(response: ())
         }
     }
     

@@ -235,6 +235,8 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
             OWRxNotificationCenter.instance
                 .switchToLightningModeWithCoin(asset.coin!)
             dismiss(animated: true) {}
+        case .ttn:
+            DLogInfo("TTN to withdrawal")
         }
     }
     
@@ -243,7 +245,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     private func prepareFee(ofAsset asset: Asset) -> RxAPIVoidResponse {
         switch asset.coin!.owChainType {
         case .btc: return FeeManager.updateBTCFeeRates()
-        case .eth: return FeeManager.updateETHFeeRates()
+        case .eth,.ttn: return FeeManager.updateETHFeeRates()
         case .cic:
             let mainCoinID = asset.coin!.walletMainCoinID!
             return FeeManager.updateCICFeeRates(mainCoinID: mainCoinID)

@@ -280,6 +280,8 @@ class MainWalletOverviewViewController: KLModuleViewController {
             }else {
                 return #imageLiteral(resourceName: "bgGuCwalletColor")
             }
+        case .ttn:
+            return #imageLiteral(resourceName: "bgBtcWalletColor")
         }
     }
 

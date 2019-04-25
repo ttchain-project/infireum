@@ -37,11 +37,12 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     
     //MARK:- Trade
     private weak var tradeNav: UINavigationController?
-    private var tradeVC: MainWalletViewController? {
-        return tradeNav?.viewControllers[0] as? MainWalletViewController
+    private var tradeVC: LightTransMenuViewController? {
+        return tradeNav?.viewControllers[0] as? LightTransMenuViewController
     }
     private lazy var tradeItem: UITabBarItem = {
-        let item = UITabBarItem.init()
+        let item = UITabBarItem.init(title: "Trade", image: nil, selectedImage: nil)
+
 //        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
@@ -82,16 +83,17 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        //        let walletNav = MainWalletViewController.navInstance()
-        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH)
-       
-        let tradeNav: UINavigationController = MainWalletViewController.navInstance(from: configForMainWallet)
-//        let meVC: MeViewController = MeViewController.instance()
+        //        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH)
+        
+        let tradeNav: UINavigationController = LightTransMenuViewController.navInstance(from: LightTransMenuViewController.Config())
+        //        let meVC: MeViewController = MeViewController.instance()
         
         let exploreNav : UINavigationController = ExploreViewController.navInstance()
         
@@ -102,7 +104,6 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem
-//        meVC.tabBarItem = meItem
         exploreNav.viewControllers[0].tabBarItem = exploreItem
         
         chatNav.viewControllers[0].tabBarItem = chatItem
@@ -112,38 +113,53 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         self.chatNav = chatNav
         
         self.tradeNav = tradeNav
-//        self.meVC = meVC
         self.exploreNav = exploreNav
         self.settingNav = settingsNav
         viewControllers = [
             walletOptionsNav,
             chatNav,
+            tradeNav,
             exploreNav,
             settingsNav
         ]
-    
+        
         //        observeLightningSwitchWithCoin()
-//        self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
+        //        self.tabBar.backgroundImage = UIImage.init(named: "tabBarBackgroundImage")?.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch)
         
         observeChatNotificationTapped()
         
         self.tabBar.barTintColor =  UIColor.init(red: 157, green: 216, blue: 210)
         self.view.backgroundColor = .owCharcoalGrey
         
-//        tradeButton = UIButton.init(type: .custom)
-//        tradeButton.setImageForAllStates(#imageLiteral(resourceName: "LOGO"))
-//        tradeButton.sizeToFit()
-//        tradeButton.translatesAutoresizingMaskIntoConstraints = false
-//        tradeButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
-//            self.navigationController?.present(tradeNav, animated: true, completion: nil)
-//        }).disposed(by: bag)
-//        self.tabBar.addSubview(self.tradeButton)
-//        tabBar.centerXAnchor.constraint(equalTo: tradeButton.centerXAnchor).isActive = true
-//        tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor).isActive = true
-//        tradeButton.adjustsImageWhenHighlighted = false
-//        self.tabBar.bringSubview(toFront: self.tradeButton)
-    }
+        tradeButton = UIButton.init(type: .custom)
+        tradeButton.setImageForAllStates(#imageLiteral(resourceName: "ttn_icon_white"))
+        tradeButton.set(backgroundColor: #colorLiteral(red: 1, green: 0.7882352941, blue: 0.4196078431, alpha: 1))
+        
+        tradeButton.sizeToFit()
+        tradeButton.translatesAutoresizingMaskIntoConstraints = false
+        tradeButton.rx.klrx_tap.asDriver().drive(onNext: {[unowned self] _ in
+            if self.selectedIndex != 2 {
+                self.selectedIndex = 2
+            }
+        }).disposed(by: bag)
+        
+        self.tabBar.addSubview(self.tradeButton)
+        tradeButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        
+        tradeButton.heightAnchor.constraint(equalTo: tradeButton.widthAnchor, multiplier: 1.0/1.0).isActive = true
 
+        tabBar.centerXAnchor.constraint(equalTo: tradeButton.centerXAnchor).isActive = true
+        tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor).isActive = true
+        tradeButton.widthAnchor.constraint(equalToConstant: 52).isActive = true
+        tradeButton.adjustsImageWhenHighlighted = false
+        self.tabBar.bringSubview(toFront: self.tradeButton)
+        
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tradeButton.cornerRadius = tradeButton.height/2
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -190,21 +206,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        #if DEBUG
-//        if flow == nil,
-//            let id = Identity.singleton {
-//            flow = IdentityQRCodeEncryptionFlow.start(
-//                launchType: .create,
-//                identity: id,
-//                onViewController: self) { [weak self] (result) in
-//                    print("Get result: \(result)")
-//                    self?.flow = nil
-//            }
-//        }
-//
-//        return
-//        #endif
-        
+
         guard VersionChecker.sharedInstance.isVersionValid else {
             self.showAPIErrorResponsePopUp(from: GTServerAPIError.invalidVerision,
                                            cancelTitle: LM.dls.g_cancel)

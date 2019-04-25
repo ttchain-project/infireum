@@ -195,7 +195,19 @@ extension Coin {
     
     var iconImg: UIImage? {
         guard let _icon = icon as Data? else { return #imageLiteral(resourceName: "iconListNoimage") }
-        return UIImage.init(data: _icon, scale: 1)
+        switch self.identifier {
+        case Coin.ttn_identifier:
+            return #imageLiteral(resourceName: "ttn_coin_icon")
+        case Coin.btcn_identifier:
+            return #imageLiteral(resourceName: "btcn_coin_icon")
+        case Coin.ethn_identifier:
+            return #imageLiteral(resourceName: "ethn_coin_icon")
+        case Coin.usdtn_identifier:
+            return #imageLiteral(resourceName: "usdtn_coin_icon")
+        default:
+            return UIImage.init(data: _icon, scale: 1)
+        }
+
     }
     
     static func createConstructorsFromServerAPIModelSources(_ sources: [CoinsAPIModel.CoinSource]) -> [ManagedObejctConstructor<Coin>] {
@@ -352,6 +364,13 @@ extension Coin {
         return _cic
     }
     
+    static var ttn: Coin {
+        guard let _ttn = getCoin(ofIdentifier: Coin.ttn_identifier) else {
+            fatalError()
+        }
+        return _ttn
+    }
+    
     static var btcRelay: Coin {
         guard let _cic = getCoin(ofIdentifier: Coin.btcRelay_identifier) else {
             fatalError()
@@ -392,6 +411,20 @@ extension Coin {
     static var usdt_identifier: String {
         return "Identifier_USDT"
     }
+    static var ttn_identifier:String {
+        return "Identifier_TTN"
+    }
+    static var btcn_identifier:String {
+        return "Identifier_BTCN"
+    }
+    static var ethn_identifier:String {
+        return "Identifier_ETHN"
+    }
+    static var usdtn_identifier:String {
+        return "Identifier_USDTN"
+    }
+
+
 }
 
 //MARK: - Lightning Transaction Support
@@ -425,6 +458,8 @@ extension Coin {
             return []
         case .cic:
             return [fCoin]
+        case .ttn:
+            return []
         }
     }
 }

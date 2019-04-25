@@ -31,6 +31,8 @@ class TxBlockCache {
             key = ethBlockHeightCacheKey
         case .cic:
             key = cicBlockHeightCacheKey
+        case .ttn:
+            key = ""
         }
         
         var map = assetBlockMap(forKey: key)
@@ -59,7 +61,7 @@ class TxBlockCache {
             return btcAssetBlockMap
         case .eth:
             return ethAssetBlockMap
-        case .cic:
+        case .cic,.ttn:
             fatalError()
         }
     }

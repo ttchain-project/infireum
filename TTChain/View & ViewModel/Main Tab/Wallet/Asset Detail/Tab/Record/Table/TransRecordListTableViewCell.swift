@@ -175,7 +175,7 @@ class TransRecordListTableViewCell: UITableViewCell {
                 }
             case .eth:
                 explorerURL = EtherscanURLCreator.url(ofTxID: txid)
-            case .cic:
+            case .cic,.ttn:
                 explorerURL = nil
             }
         }

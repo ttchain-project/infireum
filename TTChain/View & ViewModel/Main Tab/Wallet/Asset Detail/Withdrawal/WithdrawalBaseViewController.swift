@@ -140,7 +140,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             baseScrollView.addSubview(feeVC.view)
             
 //            return
-        case .cic:
+        case .cic,.ttn:
             //This shuold not happen
             return errorDebug(response: ())
         }
@@ -378,7 +378,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             nav.transitioningDelegate = animator
             
             present(nav, animated: true, completion: nil)
-        case .cic:
+        case .cic,.ttn:
             //THIS SHUOLD NOT HAPPEN
             return errorDebug(response: ())
         }

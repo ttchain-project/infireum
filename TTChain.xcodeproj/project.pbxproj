@@ -428,6 +428,18 @@
 		559CB0E2218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E3218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E4218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
+		55A3D25C227012B2002ABE13 /* TTNWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */; };
+		55A3D25D227012B2002ABE13 /* TTNWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */; };
+		55A3D25E227012B2002ABE13 /* TTNWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */; };
+		55A3D2622271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D2602271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift */; };
+		55A3D2632271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D2602271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift */; };
+		55A3D2642271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D2602271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift */; };
+		55A3D2652271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A3D2612271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib */; };
+		55A3D2662271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A3D2612271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib */; };
+		55A3D2672271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A3D2612271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib */; };
+		55A3D2692271A475002ABE13 /* LightReceiptQRCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D2682271A475002ABE13 /* LightReceiptQRCodeViewModel.swift */; };
+		55A3D26A2271A475002ABE13 /* LightReceiptQRCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D2682271A475002ABE13 /* LightReceiptQRCodeViewModel.swift */; };
+		55A3D26B2271A475002ABE13 /* LightReceiptQRCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D2682271A475002ABE13 /* LightReceiptQRCodeViewModel.swift */; };
 		55AADEF921FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */; };
 		55AADEFA21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */; };
 		55AADEFB21FF111E00F403C8 /* ReceiptRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */; };
@@ -2229,6 +2241,10 @@
 		559C4F15222665A2009466A8 /* TTNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTNotificationHandler.swift; sourceTree = "<group>"; };
 		559C4F192226A9FC009466A8 /* 甜甜圈.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "甜甜圈.entitlements"; sourceTree = "<group>"; };
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
+		55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTNWalletSetup.swift; sourceTree = "<group>"; };
+		55A3D2602271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightReceiptQRCodeViewController.swift; sourceTree = "<group>"; };
+		55A3D2612271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightReceiptQRCodeViewController.xib; sourceTree = "<group>"; };
+		55A3D2682271A475002ABE13 /* LightReceiptQRCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightReceiptQRCodeViewModel.swift; sourceTree = "<group>"; };
 		55AADEF721FF111E00F403C8 /* ReceiptRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewController.swift; sourceTree = "<group>"; };
 		55AADEF821FF111E00F403C8 /* ReceiptRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiptRequestViewController.xib; sourceTree = "<group>"; };
 		55AADF0021FFFB8700F403C8 /* ReceiptRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRequestViewModel.swift; sourceTree = "<group>"; };
@@ -2990,6 +3006,7 @@
 		5537F06E2265CFBE0058B98D /* LightTransTab */ = {
 			isa = PBXGroup;
 			children = (
+				55A3D25F2271A3B0002ABE13 /* LightReceiptQRCode */,
 				5537F0852265E9DC0058B98D /* LightTransDetail */,
 				5537F0832265E9A00058B98D /* LightTransMenu */,
 			);
@@ -3333,6 +3350,24 @@
 				559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		55A3D25A2270129B002ABE13 /* TTNWalletSetup */ = {
+			isa = PBXGroup;
+			children = (
+				55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */,
+			);
+			path = TTNWalletSetup;
+			sourceTree = "<group>";
+		};
+		55A3D25F2271A3B0002ABE13 /* LightReceiptQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				55A3D2602271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift */,
+				55A3D2612271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib */,
+				55A3D2682271A475002ABE13 /* LightReceiptQRCodeViewModel.swift */,
+			);
+			path = LightReceiptQRCode;
 			sourceTree = "<group>";
 		};
 		55AADEF621FF109800F403C8 /* Receipt */ = {
@@ -5968,6 +6003,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				55A3D25A2270129B002ABE13 /* TTNWalletSetup */,
 				55D4C7CC2253654E005F3BEF /* PhotoCropper */,
 				555E4AA1224B508900C7CAD5 /* TTChainTransfer */,
 				557C85522236700C004C2E16 /* CallHandler */,
@@ -6433,6 +6469,7 @@
 				55E113FE21F7278C0062198B /* GroupCollectionReusableView.xib in Resources */,
 				55EF6AD121A812C6007E074A /* ChatPersonListViewController.xib in Resources */,
 				6424B64220F4E46B00AEBCAD /* TransferRecordInfoBarCollectionViewCell.xib in Resources */,
+				55A3D2672271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib in Resources */,
 				5508742621EDC6EF007B3B3B /* ExploreDetailCollectionViewController.xib in Resources */,
 				55EF6A5621A812C6007E074A /* ChatViewController.xib in Resources */,
 				64D8263920DFABB000C8FC63 /* DepositViewController.xib in Resources */,
@@ -6660,6 +6697,7 @@
 				55AADEFC21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */,
 				55EF6A6021A812C6007E074A /* KeyboardFunctionCollectionViewCell.xib in Resources */,
 				643200E920FB8CB700B11334 /* MeViewController.xib in Resources */,
+				55A3D2652271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib in Resources */,
 				55E730772186F33B003AE47E /* WalletOptionsViewController.xib in Resources */,
 				55EF6AA521A812C6007E074A /* InviteFriendViewController.xib in Resources */,
 				5539A49D21676F8C00A59ACC /* IdentityQRCodeImportTableViewCell.xib in Resources */,
@@ -6833,6 +6871,7 @@
 				55AADEFD21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */,
 				55EF6A6121A812C6007E074A /* KeyboardFunctionCollectionViewCell.xib in Resources */,
 				643200EA20FB8CB700B11334 /* MeViewController.xib in Resources */,
+				55A3D2662271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib in Resources */,
 				55E730782186F33B003AE47E /* WalletOptionsViewController.xib in Resources */,
 				55EF6AA621A812C6007E074A /* InviteFriendViewController.xib in Resources */,
 				5539A49E21676F8C00A59ACC /* IdentityQRCodeImportTableViewCell.xib in Resources */,
@@ -7484,6 +7523,7 @@
 				64813AD920DD22EF00CAA4D8 /* MainWalletAssetTableViewCell.swift in Sources */,
 				6424B62920F4CFAA00AEBCAD /* TransferRecordsOptionsSelectBase.swift in Sources */,
 				64813AA420DCB18F00CAA4D8 /* Asset+CoreDataProperties.swift in Sources */,
+				55A3D2642271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift in Sources */,
 				6470D65520F1A2A400EB0780 /* WithdrawalBTCFeeInfoViewModel.swift in Sources */,
 				55BB1B42218FDCE70061F189 /* ExploreViewController.swift in Sources */,
 				643200CD20FB22F400B11334 /* WithdrawalChangeToAddressViewController.swift in Sources */,
@@ -7636,6 +7676,7 @@
 				64F07E3D20D25ADD00A60C5C /* DatabaseManager.swift in Sources */,
 				64D8265720E0E1F600C8FC63 /* ChangeAssetTableViewCell.swift in Sources */,
 				64D8269C20E3E2AC00C8FC63 /* TransRecord+CoreDataClass.swift in Sources */,
+				55A3D25E227012B2002ABE13 /* TTNWalletSetup.swift in Sources */,
 				64F07E7C20D36B4200A60C5C /* IdentitySetupViewModel.swift in Sources */,
 				55EF6B4821A81567007E074A /* Image+Until.swift in Sources */,
 				64F07E9220D3809800A60C5C /* API+Models.swift in Sources */,
@@ -7798,6 +7839,7 @@
 				550873F221E49FC1007B3B3B /* SettingMenuCollectionViewCell.swift in Sources */,
 				64B98EE220FA03BE00C4EB11 /* LightningTransRecordTableViewCell.swift in Sources */,
 				55F70E4B21F986E400B5ED75 /* ChatMessageImageTableViewCell.swift in Sources */,
+				55A3D26B2271A475002ABE13 /* LightReceiptQRCodeViewModel.swift in Sources */,
 				649E483420E7CED900B217AD /* ChangeWalletViewController.swift in Sources */,
 				550873DE21E45809007B3B3B /* MarketTestSectionModel.swift in Sources */,
 				640D890A20EF5FA10010D986 /* TransRecordListTableViewCell.swift in Sources */,
@@ -7986,6 +8028,7 @@
 				64C9D4D221044E5C000B0774 /* WithdrawalCICFeeInfoQuickModeViewModel.swift in Sources */,
 				6470D60F20F091C400EB0780 /* WithdrawalBaseViewModel.swift in Sources */,
 				5539A4A92167703000A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */,
+				55A3D2622271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift in Sources */,
 				64F07E7F20D36B8700A60C5C /* KLViewModel.swift in Sources */,
 				64D826D520E4CFD500C8FC63 /* SearchAssetTableViewCell.swift in Sources */,
 				55BB1B40218FDCE70061F189 /* ExploreViewController.swift in Sources */,
@@ -8138,6 +8181,7 @@
 				64F07E4F20D2A1DD00A60C5C /* Any+RxThemeRespondable.swift in Sources */,
 				64F07E2820D241A500A60C5C /* KLRx.swift in Sources */,
 				64F07E9020D3809800A60C5C /* API+Models.swift in Sources */,
+				55A3D25C227012B2002ABE13 /* TTNWalletSetup.swift in Sources */,
 				55EF6B4621A81567007E074A /* Image+Until.swift in Sources */,
 				648139DE20DC977800CAA4D8 /* MainWalletViewModel.swift in Sources */,
 				6481396D20DA496000CAA4D8 /* OWMnemonicWordCollectionViewCell.swift in Sources */,
@@ -8300,6 +8344,7 @@
 				550873F021E49FC1007B3B3B /* SettingMenuCollectionViewCell.swift in Sources */,
 				64813AC320DCE8F100CAA4D8 /* FiatManager.swift in Sources */,
 				55F70E4921F986E400B5ED75 /* ChatMessageImageTableViewCell.swift in Sources */,
+				55A3D2692271A475002ABE13 /* LightReceiptQRCodeViewModel.swift in Sources */,
 				64CDE198213D2F4600105BFB /* QRCodeImgScanner.swift in Sources */,
 				550873DC21E45809007B3B3B /* MarketTestSectionModel.swift in Sources */,
 				649E483A20E7CEED00B217AD /* ChangeWalletViewModel.swift in Sources */,
@@ -8481,6 +8526,7 @@
 				5539A4AA2167703100A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */,
 				648139CB20DBADC900CAA4D8 /* Constants.swift in Sources */,
 				6470D66120F22CB800EB0780 /* WithdrawalBTCFeeInputViewModel.swift in Sources */,
+				55A3D2632271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift in Sources */,
 				5539A49521676F8C00A59ACC /* IdentityQRCodeImportViewController.swift in Sources */,
 				55BB1B41218FDCE70061F189 /* ExploreViewController.swift in Sources */,
 				64F07E2520D241A000A60C5C /* KLTextField.swift in Sources */,
@@ -8633,6 +8679,7 @@
 				64F07E9120D3809800A60C5C /* API+Models.swift in Sources */,
 				64F07E0120D241A000A60C5C /* UITableViewCell+CellIdentifier.swift in Sources */,
 				64813A7420DCA6EE00CAA4D8 /* CoinRate+CoreDataClass.swift in Sources */,
+				55A3D25D227012B2002ABE13 /* TTNWalletSetup.swift in Sources */,
 				55EF6B4721A81567007E074A /* Image+Until.swift in Sources */,
 				649E483B20E7CEED00B217AD /* ChangeWalletViewModel.swift in Sources */,
 				64F07E2920D241A500A60C5C /* KLRx.swift in Sources */,
@@ -8795,6 +8842,7 @@
 				550873F121E49FC1007B3B3B /* SettingMenuCollectionViewCell.swift in Sources */,
 				64CDE197213D2F4500105BFB /* QRCodeImgScanner.swift in Sources */,
 				55F70E4A21F986E400B5ED75 /* ChatMessageImageTableViewCell.swift in Sources */,
+				55A3D26A2271A475002ABE13 /* LightReceiptQRCodeViewModel.swift in Sources */,
 				64B98EE120FA03BE00C4EB11 /* LightningTransRecordTableViewCell.swift in Sources */,
 				550873DD21E45809007B3B3B /* MarketTestSectionModel.swift in Sources */,
 				64813A5920DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataProperties.swift in Sources */,

@@ -204,6 +204,8 @@
             }
         case .cic:
             relay = cicHandler.records
+        case .ttn:
+            relay = BehaviorRelay.init(value: [])
         }
         
         return relay
@@ -262,6 +264,8 @@
                 return
             }
             
+            load = cicHandler.loadCurrentPage()
+        case .ttn:
             load = cicHandler.loadCurrentPage()
         }
         

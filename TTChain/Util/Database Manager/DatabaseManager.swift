@@ -22,7 +22,7 @@ class DatabaseManager {
         let storeName = "\(DB_NAME).sqlite"
         
         let documentsDirectoryURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        
+        DLogDebug(documentsDirectoryURL.absoluteString)
         let persistentStoreURL = documentsDirectoryURL.appendingPathComponent(storeName)
         do {
             let options = [

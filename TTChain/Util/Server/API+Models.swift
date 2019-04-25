@@ -213,6 +213,8 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
             )
             
             self.balanceInCoin = cicSmallestUnit * rateToCoinUnit
+        case .ttn:
+            self.balanceInCoin = 0
         }
     }
 }
@@ -1419,6 +1421,8 @@ struct SignCICTxAPI: KLMoyaAPIData {
         case .eth: addressTypeStr = "eth"
         case .cic:
             addressTypeStr = token
+        case .ttn:
+            addressTypeStr = ""
         }
         
         return Moya.Task.requestParameters(

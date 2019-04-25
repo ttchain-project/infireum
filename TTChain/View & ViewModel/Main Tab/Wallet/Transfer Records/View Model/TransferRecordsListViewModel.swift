@@ -168,6 +168,8 @@ class TransferRecordsListViewModel: KLRxViewModel {
             token_handler = nil
         case .cic:
             cic_handler = nil
+        case .ttn:
+            break
         }
     }
     
@@ -184,6 +186,8 @@ class TransferRecordsListViewModel: KLRxViewModel {
             cic_syncRecord(ofWallet: wallet,
                            reset: reset,
                            optionalCICAsset: nil)
+        case .ttn:
+            break;
         }
     }
     

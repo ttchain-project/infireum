@@ -32,6 +32,7 @@ class MigrationPolicy_1_0_0To1_0_4: NSEntityMigrationPolicy {
         case .btc: return Coin.btc_identifier
         case .eth: return Coin.eth_identifier
         case .cic: return Coin.cic_identifier
+        case .ttn: return Coin.ttn_identifier
         }
     }
     
@@ -84,6 +85,8 @@ class MigrationPolicy_1_0_0To1_0_4: NSEntityMigrationPolicy {
         case .btc: return Coin.btc_identifier
         case .eth: return Coin.eth_identifier
         case .cic: return Coin.cic_identifier
+        case .ttn: return Coin.ttn_identifier
+
         }
     }
 }
