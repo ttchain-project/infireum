@@ -122,8 +122,11 @@ extension CoinToFiatRate {
         } else {
             return request.map {
                 result -> NSDecimalNumber? in
-                let currentValue = MarketTestHandler.shared.coinMarketArray.value[0].items.filter { $0.title == "Tether" }.first as! CoinMarketModel
-                    let value = NSDecimalNumber.init(string: currentValue.price)
+                guard let currentValue = (MarketTestHandler.shared.coinMarketArray.value.first?.items.filter { $0.title == "Tether" }.first) as? CoinMarketModel
+                 else {
+                    return 0
+                }
+                let value = NSDecimalNumber.init(string: currentValue.price)
                     return usdToFiatRate?.multiplying(by: value)
                 
             }.map { $0 == nil ? nil : $0! as Decimal }
