@@ -295,7 +295,7 @@ extension OWStringValidator {
 // MARK: - PrivateKey Checker
 extension OWStringValidator {
     func isSourcePrivateKey(_ source: String) -> Single<ValidationResultType> {
-        return Server.instance.convertKeyToAddress(pKey: source)
+        return Server.instance.convertKeyToAddress(pKey: source,encrypted: true)
             .map {
                 result in
                 switch result {

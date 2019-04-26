@@ -29,9 +29,22 @@ extension TransferManager {
     func startBTCTransferFlow(with info: WithdrawalInfo,
                                       progressObserver observer: AnyObserver<BlockchainTransferFlowState>, isCompressed:Bool ) {
         var withdrawalInfo = info
-        
-        getBTCUnspent(fromInfo: withdrawalInfo)
-            .flatMap {
+        var isAddressCompressed = isCompressed
+        checkForUncompressedAddress(pvtKey: info.wallet.pKey).flatMap{ [unowned self] result -> RxAPIResponse<GetBTCUnspentAPIModel> in
+            let keyForUncompressed = "\(Coin.btc_identifier)uncompressed"
+
+            switch result {
+            case .failed(error: let error):
+                return .just(.failed(error: error))
+            case .success(let model):
+                if model.addressMap[Coin.btc_identifier] == withdrawalInfo.wallet.address {
+                    isAddressCompressed = true
+                }else if model.addressMap[keyForUncompressed] == withdrawalInfo.wallet.address {
+                    isAddressCompressed = false
+                }
+                return self.getBTCUnspent(fromInfo: withdrawalInfo)
+            }
+        }.flatMap {
                 [unowned self] result -> RxAPIResponse<SignBTCTxAPIModel> in
                 switch result {
                 case .failed(error: let err):
@@ -40,9 +53,9 @@ extension TransferManager {
                     switch model.result {
                     case .unspents(let unspents):
                         if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
-                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isCompressed)
+                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
                         }else {
-                            return self.signBTC(with: &withdrawalInfo, unspents: unspents, isCompressed: isCompressed)
+                            return self.signBTC(with: &withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed)
                         }
                     case .insufficient:
                         let digit = Int(withdrawalInfo.feeCoin.digit)
@@ -94,12 +107,7 @@ extension TransferManager {
             .subscribe(onSuccess: { (result) in
                 switch result {
                 case .failed(error: let err):
-                    if isCompressed {
-                        self.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: false)
-                    }else {
-                        observer.onNext(.finished(.failed(error: err)))
-                    }
-                    
+                    observer.onNext(.finished(.failed(error: err)))
                 case .success(let txId):
                     guard let transID = txId, let record = self.saveTxToLocal(with: transID, info: info) else {
                         let err: GTServerAPIError = .incorrectResult(
@@ -283,5 +291,11 @@ extension TransferManager {
         })
         
         return record
+    }
+}
+
+extension TransferManager {
+    func checkForUncompressedAddress(pvtKey:String) -> RxAPIResponse<KeyToAddressAPIModel> {
+        return Server.instance.convertKeyToAddress(pKey: pvtKey, encrypted: false)
     }
 }

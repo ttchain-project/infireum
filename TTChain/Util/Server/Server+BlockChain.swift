@@ -317,8 +317,8 @@
     }
     
     //MARK: - POST /topChain/keyToAddress
-    func convertKeyToAddress(pKey: String) -> RxAPIResponse<KeyToAddressAPIModel> {
-        let api = KeyToAddressAPI.init(pKey: pKey)
+    func convertKeyToAddress(pKey: String, encrypted:Bool) -> RxAPIResponse<KeyToAddressAPIModel> {
+        let api = KeyToAddressAPI.init(pKey: pKey,encrypted:encrypted)
         return fire(router: .blockchain(.keyToAddress(api)))
     }
     

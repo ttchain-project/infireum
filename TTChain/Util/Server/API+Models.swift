@@ -1750,15 +1750,15 @@ struct KeyToAddressAPI: KLMoyaAPIData {
     var method: Moya.Method { return .post }
     
     let pKey: String
-    
+    let encrypted:Bool
     var task: Task {
         guard let encryptedPKey = try? APISensitiveDataCrypter.encryptPrivateKey(rawPrivateKey: pKey) else {
             return errorDebug(response: Moya.Task.requestPlain)
         }
         
         return Moya.Task.requestParameters(
-            parameters: [ "privateKey" : encryptedPKey,
-                          "encry" : true ],
+            parameters: [ "privateKey" : encrypted ? encryptedPKey : pKey,
+                          "encry" : encrypted ],
             encoding: JSONEncoding.default
         )
     }
@@ -1791,12 +1791,15 @@ struct KeyToAddressAPIModel: KLJSONMappableMoyaResponse {
         for (k, v) in map {
             guard let addr = v.string else { continue }
             switch k {
-            case "BitcoinAddressUncompress:":
+            case "BitcoinAddress:":
                 addressMap[Coin.btc_identifier] = addr
             case "EthereumAddress:":
                 addressMap[Coin.eth_identifier] = addr
             case "CICAddress:":
                 addressMap[Coin.cic_identifier] = addr
+            case "BitcoinAddressUncompress:":
+                let key = "\(Coin.btc_identifier)uncompressed"
+                addressMap[key] = addr
             default:
                 //API Response format is really suck.
                 let clearedKey = k.replacingOccurrences(of: ":", with: "")
@@ -2312,7 +2315,7 @@ struct CoinsTestAPIModel: KLJSONMappableMoyaResponse {
                 //FIXME:
                 let mainCoinID = coinJSON["mainCoinID"].string
                 else {
-                    return errorDebug(response: nil)
+                    return nil
             }
             
             //FIXME:

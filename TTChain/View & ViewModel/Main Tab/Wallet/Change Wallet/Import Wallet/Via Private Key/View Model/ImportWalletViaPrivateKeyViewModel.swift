@@ -194,7 +194,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
         }
         
         let mainCoinID = input.mainCoinID
-        return Server.instance.convertKeyToAddress(pKey: _pKey)
+        return Server.instance.convertKeyToAddress(pKey: _pKey,encrypted: true)
             .map {
                 [unowned self]
                 result in
