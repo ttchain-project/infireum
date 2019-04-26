@@ -74,6 +74,17 @@
                         <constraint firstItem="ghR-Vi-Pva" firstAttribute="top" secondItem="LVI-8o-Lpo" secondAttribute="top" constant="5" id="qrg-OC-r3n"/>
                         <constraint firstItem="emE-FS-CO9" firstAttribute="top" secondItem="ghR-Vi-Pva" secondAttribute="bottom" constant="10" id="yKf-eO-TRF"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLd-0T-v0w">
                     <rect key="frame" x="335" y="114" width="30" height="30"/>
