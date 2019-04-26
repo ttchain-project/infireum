@@ -687,5 +687,6 @@ struct DLS_EN_US: DLS {
 
     var light_withdraw_btn_title:String = "Withdraw"
     var light_deposit_btn_title:String = "Deposit"
-    
+    var transfer_amount_title:String = "Transfer Amount"
+
 }

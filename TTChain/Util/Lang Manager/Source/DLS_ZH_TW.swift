@@ -692,6 +692,8 @@ struct DLS_ZH_TW: DLS {
     
     var light_withdraw_btn_title:String = "提出"
     var light_deposit_btn_title:String = "存入"
+    
+    var transfer_amount_title:String = "轉帳金額"
 }
 
 

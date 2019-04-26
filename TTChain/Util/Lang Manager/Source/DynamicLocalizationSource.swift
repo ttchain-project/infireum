@@ -666,4 +666,6 @@ protocol DynamicLocalizationSource {
     var light_withdraw_btn_title:String {get set}
     var light_deposit_btn_title:String {get set}
 
+    var transfer_amount_title:String {get set}
+
 }
