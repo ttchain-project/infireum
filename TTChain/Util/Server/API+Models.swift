@@ -262,7 +262,7 @@ struct GetBTCUnspentAPI: KLMoyaAPIData {
     let targetAmt: Decimal
     
     var base: APIBaseEndPointType {
-        let url = URL.init(string: C.BlockchainAPI.BlockExplorer.apiBase)!
+        let url = URL.init(string: C.HTTPServerAPI.urlStr)!
         return .custom(url: url)
     }
     
@@ -270,7 +270,7 @@ struct GetBTCUnspentAPI: KLMoyaAPIData {
     
     var langDepended: Bool { return false }
     
-    var path: String { return "/addr/\(btcAddress)/utxo" }
+    var path: String { return "\(LangManager.instance.lang.value._db_name)/BtcTransaction/\(btcAddress)" }
     
     var method: Moya.Method { return .get }
     

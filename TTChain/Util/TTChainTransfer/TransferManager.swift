@@ -93,7 +93,7 @@ extension TransferManager {
                         return .just(.success(model.txid))
                     }
                     
-                    let response = self.postCommentForTransaction(for: model.txid, comment: info.note, toIdentifier: info.asset.coinID!,toAddress:info.address)
+                    let response = self.postCommentForTransaction(for: model.txid, comment: withdrawalInfo.note, toIdentifier: withdrawalInfo.asset.coinID!,toAddress:withdrawalInfo.address)
                     return response.map {
                         _result -> APIResult<(String?)>  in
                         switch _result {
