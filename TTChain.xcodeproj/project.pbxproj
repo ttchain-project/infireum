@@ -422,6 +422,15 @@
 		557D4E5C21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */; };
 		557D4E5D21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */; };
 		557D4E5E21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */; };
+		559BDAFB2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BDAFA2276C42E00727244 /* LightWithdrawalFeeViewModel.swift */; };
+		559BDAFC2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BDAFA2276C42E00727244 /* LightWithdrawalFeeViewModel.swift */; };
+		559BDAFD2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BDAFA2276C42E00727244 /* LightWithdrawalFeeViewModel.swift */; };
+		559BDB012276CE8500727244 /* LightWithdrawNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BDAFF2276CE8500727244 /* LightWithdrawNoteViewController.swift */; };
+		559BDB022276CE8500727244 /* LightWithdrawNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BDAFF2276CE8500727244 /* LightWithdrawNoteViewController.swift */; };
+		559BDB032276CE8500727244 /* LightWithdrawNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559BDAFF2276CE8500727244 /* LightWithdrawNoteViewController.swift */; };
+		559BDB042276CE8500727244 /* LightWithdrawNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BDB002276CE8500727244 /* LightWithdrawNoteViewController.xib */; };
+		559BDB052276CE8500727244 /* LightWithdrawNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BDB002276CE8500727244 /* LightWithdrawNoteViewController.xib */; };
+		559BDB062276CE8500727244 /* LightWithdrawNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559BDB002276CE8500727244 /* LightWithdrawNoteViewController.xib */; };
 		559C4F16222665A2009466A8 /* TTNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559C4F15222665A2009466A8 /* TTNotificationHandler.swift */; };
 		559C4F17222665A2009466A8 /* TTNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559C4F15222665A2009466A8 /* TTNotificationHandler.swift */; };
 		559C4F18222665A2009466A8 /* TTNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559C4F15222665A2009466A8 /* TTNotificationHandler.swift */; };
@@ -2260,6 +2269,9 @@
 		557C85532236702B004C2E16 /* AVCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCallHandler.swift; sourceTree = "<group>"; };
 		557D4E5721E359C50073B8D8 /* MarketTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestHandler.swift; sourceTree = "<group>"; };
 		557D4E5B21E35B770073B8D8 /* MarketTestTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTestTabModel.swift; sourceTree = "<group>"; };
+		559BDAFA2276C42E00727244 /* LightWithdrawalFeeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightWithdrawalFeeViewModel.swift; sourceTree = "<group>"; };
+		559BDAFF2276CE8500727244 /* LightWithdrawNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightWithdrawNoteViewController.swift; sourceTree = "<group>"; };
+		559BDB002276CE8500727244 /* LightWithdrawNoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightWithdrawNoteViewController.xib; sourceTree = "<group>"; };
 		559C4F1222262D0D009466A8 /* TTChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TTChain-Bridging-Header.h"; sourceTree = "<group>"; };
 		559C4F13222652C2009466A8 /* 甜甜圈 UAT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "甜甜圈 UAT.entitlements"; sourceTree = "<group>"; };
 		559C4F15222665A2009466A8 /* TTNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTNotificationHandler.swift; sourceTree = "<group>"; };
@@ -3369,6 +3381,15 @@
 			path = SettingTabHandler;
 			sourceTree = "<group>";
 		};
+		559BDAFE2276CE6A00727244 /* LightWithdrawNote */ = {
+			isa = PBXGroup;
+			children = (
+				559BDAFF2276CE8500727244 /* LightWithdrawNoteViewController.swift */,
+				559BDB002276CE8500727244 /* LightWithdrawNoteViewController.xib */,
+			);
+			path = LightWithdrawNote;
+			sourceTree = "<group>";
+		};
 		559C4F142226658D009466A8 /* NotificationHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -3406,6 +3427,7 @@
 		55A3D26C22729E8F002ABE13 /* LightTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				559BDAFE2276CE6A00727244 /* LightWithdrawNote */,
 				55A3D28722730A05002ABE13 /* LightWithdrawalFee */,
 				55A3D27E2272FC09002ABE13 /* LightWithdrawalAddress */,
 				55A3D2752272ACB7002ABE13 /* LightWithdrawalAsset */,
@@ -3438,6 +3460,7 @@
 			children = (
 				55A3D28822730A32002ABE13 /* LightWithdrawalFeeViewController.swift */,
 				55A3D28922730A32002ABE13 /* LightWithdrawalFeeViewController.xib */,
+				559BDAFA2276C42E00727244 /* LightWithdrawalFeeViewModel.swift */,
 			);
 			path = LightWithdrawalFee;
 			sourceTree = "<group>";
@@ -6576,6 +6599,7 @@
 				55E730672186E534003AE47E /* WithdrawalRemarksViewController.xib in Resources */,
 				64C9D45520FDD230000B0774 /* AddressBookUnitBrowseViewController.xib in Resources */,
 				555E4A84224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
+				559BDB062276CE8500727244 /* LightWithdrawNoteViewController.xib in Resources */,
 				6470D6E020F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				55EF6A7721A812C6007E074A /* ChatExtendFunctionMenuViewController.xib in Resources */,
 				55EF6A8F21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
@@ -6796,6 +6820,7 @@
 				5537F08F2265EA490058B98D /* LightTransDetailViewController.xib in Resources */,
 				555E4A82224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A320F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
+				559BDB042276CE8500727244 /* LightWithdrawNoteViewController.xib in Resources */,
 				64C9D47A20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
 				5539A4AF2167704E00A59ACC /* IdentityQRCodeContentViewController.xib in Resources */,
 				64D826D820E4CFD500C8FC63 /* SearchAssetTableViewCell.xib in Resources */,
@@ -6974,6 +6999,7 @@
 				5537F0902265EA490058B98D /* LightTransDetailViewController.xib in Resources */,
 				555E4A83224A46E300C7CAD5 /* RedEnvelopeDetailViewController.xib in Resources */,
 				6470D6A420F3550700EB0780 /* WithdrawalETHFeeInputViewController.xib in Resources */,
+				559BDB052276CE8500727244 /* LightWithdrawNoteViewController.xib in Resources */,
 				64C9D47B20FDDFBB000B0774 /* UpdatetABUnitAddressViewController.xib in Resources */,
 				5539A4AC2167704D00A59ACC /* IdentityQRCodeContentViewController.xib in Resources */,
 				64D826D920E4CFD500C8FC63 /* SearchAssetTableViewCell.xib in Resources */,
@@ -7645,6 +7671,7 @@
 				6424B66E20F5B40B00AEBCAD /* TransferRecordChainTypeOptionViewController.swift in Sources */,
 				555E4AA0224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */,
 				64C9D45220FDD230000B0774 /* AddressBookUnitBrowseViewController.swift in Sources */,
+				559BDB032276CE8500727244 /* LightWithdrawNoteViewController.swift in Sources */,
 				6424B64A20F4FC0100AEBCAD /* TransferRecordSingleOptionBarCollectionViewCell.swift in Sources */,
 				555E4A81224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */,
 				64D8266020E22F4300C8FC63 /* ManageAssetViewController.swift in Sources */,
@@ -7684,6 +7711,7 @@
 				6481399A20DA754D00CAA4D8 /* BackupWalletMnemonicVerifyViewController.swift in Sources */,
 				645006F520F45B4E00C0FC11 /* WithdrawalConfirmETHFeeInputViewController.swift in Sources */,
 				645619292150DFBF001092E5 /* IdentityBackupTypeChooseViewController.swift in Sources */,
+				559BDAFD2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */,
 				64F43BAF210B4C0B00982AFD /* BTCTx.swift in Sources */,
 				648139CC20DBADC900CAA4D8 /* Constants.swift in Sources */,
 				55E730662186E534003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
@@ -8154,6 +8182,7 @@
 				64F07E2120D241A000A60C5C /* UITextField+PlaceholderColors.swift in Sources */,
 				555E4A9E224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */,
 				6470D63920F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,
+				559BDB012276CE8500727244 /* LightWithdrawNoteViewController.swift in Sources */,
 				64769B382124192E00C4AB9E /* CICTxHandler.swift in Sources */,
 				555E4A7F224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */,
 				643200BF20FB1D9800B11334 /* WithdrawalCICFeeInfoViewController.swift in Sources */,
@@ -8193,6 +8222,7 @@
 				64813A6120DCA6EE00CAA4D8 /* CoinSelection+CoreDataClass.swift in Sources */,
 				6470D6DB20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.swift in Sources */,
 				643200D320FB230500B11334 /* WithdrawalChangeToAddressViewModel.swift in Sources */,
+				559BDAFB2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */,
 				6424B67F20F5C97000AEBCAD /* TransferRecordCoinOptionViewModel.swift in Sources */,
 				6470D64C20F1A1A100EB0780 /* WithdrawalBTCFeeInfoViewController.swift in Sources */,
 				64813AB620DCD45A00CAA4D8 /* Language+Helper.swift in Sources */,
@@ -8656,6 +8686,7 @@
 				643200BE20FB1D9800B11334 /* WithdrawalCICFeeInfoViewController.swift in Sources */,
 				555E4A9F224A482A00C7CAD5 /* Reactive+UITableView.swift in Sources */,
 				640D88E320EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
+				559BDB022276CE8500727244 /* LightWithdrawNoteViewController.swift in Sources */,
 				6470D67320F304BA00EB0780 /* WithdrawalInfoOverviewViewModel.swift in Sources */,
 				555E4A80224A46E300C7CAD5 /* RedEnvelopeDetailViewController.swift in Sources */,
 				649732D8213F7D7C00C4D1D5 /* Model1_0_0To1_0_4.xcmappingmodel in Sources */,
@@ -8695,6 +8726,7 @@
 				64813A8F20DCAEB500CAA4D8 /* ServerSyncRecord.swift in Sources */,
 				6470D69C20F341CE00EB0780 /* WithdrawalConfirmPwdValidationViewModel.swift in Sources */,
 				643200D420FB230500B11334 /* WithdrawalChangeToAddressViewModel.swift in Sources */,
+				559BDAFC2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */,
 				6424B68020F5C97000AEBCAD /* TransferRecordCoinOptionViewModel.swift in Sources */,
 				64F07E3C20D25ADD00A60C5C /* DatabaseManager.swift in Sources */,
 				64813A8720DCAE2600CAA4D8 /* Coin+Helper.swift in Sources */,

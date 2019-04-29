@@ -7,9 +7,36 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class LightWithdrawalFeeViewController: UIViewController {
+final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC {
+    
+    func config(constructor: LightWithdrawalFeeViewController.Config) {
+        self.viewModel = LightWithdrawalFeeViewModel.init(input: LightWithdrawalFeeViewModel.Input(asset:constructor.asset), output: LightWithdrawalFeeViewModel.Output())
+       
+        Observable.of(FeeManager.getValue(fromOption: .ttn(.systemDefault))).map { (fee) -> String in
+            return fee.asString(digits: 4) + "TTN"
+        }.bind(to: self.totalMinorFee.rx.text).disposed(by: bag)
+        
+        self.minorFeeTitle.text = LM.dls.withdrawal_label_minerFee
+    }
+    
+    var viewModel: LightWithdrawalFeeViewModel!
+    
+    typealias ViewModel = LightWithdrawalFeeViewModel
+    
+    var bag: DisposeBag = DisposeBag()
+    
+    typealias Constructor = Config
 
+    struct Config {
+        let asset:Asset
+    }
+
+    @IBOutlet weak var minorFeeTitle: UILabel!
+    @IBOutlet weak var totalMinorFee: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

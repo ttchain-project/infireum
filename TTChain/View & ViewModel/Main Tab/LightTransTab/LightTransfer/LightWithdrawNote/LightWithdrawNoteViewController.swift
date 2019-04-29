@@ -1,21 +1,23 @@
 //
-//  WithdrawalRemarksViewController.swift
-//  OfflineWallet
+//  LightWithdrawNoteViewController.swift
+//  TTChain
 //
-//  Created by Ajinkya Sharma on 2018/10/9.
-//  Copyright © 2018 gib. All rights reserved.
+//  Created by Ajinkya Sharma on 2019/4/29.
+//  Copyright © 2019 gib. All rights reserved.
 //
 
 import UIKit
-import RxCocoa
 import RxSwift
+import RxCocoa
 
-final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
-    
+final class LightWithdrawNoteViewController: KLModuleViewController, KLVMVC {
+   
+    @IBOutlet weak var noteTitle: UILabel!
+    @IBOutlet weak var noteTextField: UITextField!
     
     typealias ViewModel = WithdrawalRemarkViewModel
     var viewModel: WithdrawalRemarkViewModel!
-
+    
     var bag =  DisposeBag.init()
     
     struct Config{
@@ -25,44 +27,37 @@ final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     var preferedHeight: CGFloat {
         return view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var noteTextField: UITextField!
-    @IBOutlet weak var separatorLine: UIView!
-    
-    func config(constructor: WithdrawalRemarksViewController.Config) {
+    func config(constructor: LightWithdrawNoteViewController.Config) {
         view.layoutIfNeeded()
-
+        
         viewModel = ViewModel.init(
             input: WithdrawalRemarkViewModel.InputSource(remarkInOut: noteTextField.rx.text),
             output: ()
         )
-        
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
-
-
+        
     }
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        titleLabel.text = dls.abInfo_label_note
+        noteTitle.text = dls.abInfo_label_note
         noteTextField.set(placeholder: dls.transfer_note_placeholder)
-
+        
     }
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         view.backgroundColor = palette.bgView_sub
-        separatorLine.backgroundColor = palette.sepline
-        titleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
+        noteTitle.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
         noteTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
         noteTextField.rx.text.orEmpty
             .scan("") { (previous, new) -> String in
@@ -77,10 +72,4 @@ final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
             .disposed(by: bag)
     }
     
-}
-
-extension WithdrawalRemarksViewController : UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return true
-    }
 }

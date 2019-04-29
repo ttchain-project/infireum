@@ -681,4 +681,5 @@ struct DLS_ZH_CN: DLS {
 
     var transfer_amount_title:String = "转帐金额"
 
+     var transfer_note_placeholder:String = "请输入20字以内的描述"
 }

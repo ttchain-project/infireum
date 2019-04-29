@@ -103,7 +103,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
         fromAddressTitleLabel.text = dls.ltTx_label_fromAddr
         feeRateTitleLabel.text = dls.ltTx_label_minerFee
         remarkNoteTitleLabel.text = dls.abInfo_label_note
-        remarkNoteTextfield.set(placeholder: "请输入20字以内的描述")
+        noteTextField.set(placeholder: dls.transfer_note_placeholder)
 
         nextStepBtn.setTitleForAllStates(dls.g_next)
     }

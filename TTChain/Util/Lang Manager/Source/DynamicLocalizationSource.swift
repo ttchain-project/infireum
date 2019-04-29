@@ -667,5 +667,5 @@ protocol DynamicLocalizationSource {
     var light_deposit_btn_title:String {get set}
 
     var transfer_amount_title:String {get set}
-
+var transfer_note_placeholder:String {get set}
 }

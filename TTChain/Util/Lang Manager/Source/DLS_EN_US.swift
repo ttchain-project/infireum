@@ -689,4 +689,5 @@ struct DLS_EN_US: DLS {
     var light_deposit_btn_title:String = "Deposit"
     var transfer_amount_title:String = "Transfer Amount"
 
+    var transfer_note_placeholder:String = "Please enter a description within 20 character"
 }
