@@ -95,7 +95,11 @@ class TransRecordListTableViewCell: UITableViewCell {
             switch type {
             case .deposit:
                 addrLabel.text = transRecord.fromAddress
-                self.amtLabel.textColor = UIColor.owCoolGreen
+                if transRecord.block <= 0 {
+                    self.amtLabel.textColor = UIColor.owPumpkinOrange
+                } else {
+                    self.amtLabel.textColor = UIColor.owCoolGreen
+                }
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
                 if transRecord.block <= 0 {
