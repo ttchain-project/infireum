@@ -176,6 +176,11 @@ struct Constants {
         
     }
     
+    struct BTCFee {
+        static let regular = Decimal.init(15000)
+        static let priority = Decimal.init(20000)
+    }
+    
     enum PrivateMode {
         //When private mode is on, all the asset amt would be changed to the disguisedValueStr.
         static let disguisedValueStr = "****"

@@ -135,17 +135,17 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
     
     private lazy var _regularFeeRate: BehaviorRelay<Decimal> = {
         //HARD-CODED for now
-        let fee = Decimal.init(3000).satoshiToBTC
-//            FeeManager.getValue(fromOption: .btc(.regular))
-        return BehaviorRelay.init(value: fee)
+//        let fee = Decimal.init(15000).satoshiToBTC
+        let fee = FeeManager.getValue(fromOption: .btc(.regular))
+        return BehaviorRelay.init(value: fee.satoshiToBTC)
     }()
     
     private lazy var _priorityFeeRate: BehaviorRelay<Decimal> = {
         //HARD-CODED for now
-        let fee = Decimal.init(6000).satoshiToBTC
+//        let fee = Decimal.init(20000).satoshiToBTC
 
-//            FeeManager.getValue(fromOption: .btc(.priority))
-        return BehaviorRelay.init(value: fee)
+       let fee = FeeManager.getValue(fromOption: .btc(.priority))
+        return BehaviorRelay.init(value: fee.satoshiToBTC)
     }()
     
     private lazy var _manualFeeRate: BehaviorRelay<String?> = {
