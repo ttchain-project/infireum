@@ -58,14 +58,12 @@ extension TransferManager {
                             return self.signBTC(with: &withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed)
                         }
                     case .insufficient:
-                        let digit = Int(withdrawalInfo.feeCoin.digit)
-                        let totalFee = withdrawalInfo.totalFee.asString(digits: digit)
                         let dls = LM.dls
                         let err: GTServerAPIError = GTServerAPIError.incorrectResult(
                             dls
                                 .withdrawalConfirm_pwdVerify_error_btc_insufficient_fee_title,
                             dls
-                                .withdrawalConfirm_pwdVerify_error_btc_insufficient_fee_content(totalFee)
+                                .insufficient_unspend_error_msg
                         )
                         return .just(.failed(error: err))
                     }
