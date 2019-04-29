@@ -44,19 +44,11 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RdF-be-xsK">
-                            <rect key="frame" x="15" y="55" width="325" height="1"/>
+                            <rect key="frame" x="15" y="50" width="325" height="1"/>
                             <color key="backgroundColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="Mu9-tg-QSF"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -65,9 +57,9 @@
                         <constraint firstAttribute="trailing" secondItem="rKu-ln-1uC" secondAttribute="trailing" constant="15" id="CVs-DY-dRh"/>
                         <constraint firstItem="rKu-ln-1uC" firstAttribute="leading" secondItem="nON-Bk-cI0" secondAttribute="leading" constant="15" id="SrM-iW-VOn"/>
                         <constraint firstItem="rKu-ln-1uC" firstAttribute="top" secondItem="nON-Bk-cI0" secondAttribute="top" constant="5" id="V98-XB-KKn"/>
-                        <constraint firstItem="RdF-be-xsK" firstAttribute="top" secondItem="rKu-ln-1uC" secondAttribute="bottom" constant="10" id="eul-WF-XeU"/>
+                        <constraint firstItem="RdF-be-xsK" firstAttribute="top" secondItem="rKu-ln-1uC" secondAttribute="bottom" constant="5" id="eul-WF-XeU"/>
                         <constraint firstAttribute="trailing" secondItem="RdF-be-xsK" secondAttribute="trailing" constant="15" id="sQ6-RN-tdk"/>
-                        <constraint firstAttribute="bottom" secondItem="RdF-be-xsK" secondAttribute="bottom" constant="5" id="tyu-x7-xzr"/>
+                        <constraint firstAttribute="bottom" secondItem="RdF-be-xsK" secondAttribute="bottom" constant="10" id="tyu-x7-xzr"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -82,10 +74,11 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ERV-3r-fuk">
-                    <rect key="frame" x="335" y="105" width="30" height="30"/>
+                    <rect key="frame" x="345" y="105" width="20" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="CI0-6I-U8j"/>
                     </constraints>
+                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="15"/>

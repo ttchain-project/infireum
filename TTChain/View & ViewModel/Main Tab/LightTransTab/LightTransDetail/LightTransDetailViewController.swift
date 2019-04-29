@@ -33,7 +33,13 @@ class LightTransDetailViewController: UIViewController {
             self.viewModel.output.fiatAmtStr.bind(to:self.fiatAmtLabel.rx.text).disposed(by: bag)
         }
     }
-    @IBOutlet weak var lightTransButton: UIButton!
+    @IBOutlet weak var lightTransButton: UIButton! {
+        didSet {
+            lightTransButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
+                self.showTransferAction()
+            }).disposed(by:bag)
+        }
+    }
     @IBOutlet weak var receiveButon: UIButton! {
         didSet {
             receiveButon.rx.klrx_tap.asDriver().drive(onNext: { _ in
@@ -86,8 +92,8 @@ class LightTransDetailViewController: UIViewController {
             text: LM.dls.transaction_details_btn_title,
             backgroundColor: pallete.nav_bg_clear)
         
-        renderNavBar(tint: pallete.nav_item_2, barTint: pallete.nav_bg_clear)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        renderNavBar(tint: pallete.nav_item_2, barTint: UIColor.init(hexString: "2C3C4E")!)
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         renderNavTitle(color: pallete.nav_item_2, font: .owMedium(size: 20))
 
         changeLeftBarButtonToDismissToRoot(tintColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
@@ -99,10 +105,9 @@ class LightTransDetailViewController: UIViewController {
         }.bind(to: self.navigationItem.rx.title).disposed(by: bag)
     }
     
-    func showTransferAction(asset:Asset) {
-        let nav = WithdrawalBaseViewController.navInstance(from: WithdrawalBaseViewController.Config(asset: asset, defaultToAddress: nil,defaultAmount:nil))
-        present(nav, animated: true, completion: nil)
-        
+    func showTransferAction() {
+        let vc = LightTransferViewController.instance(from: LightTransferViewController.Config(asset: self.viewModel.input.asset.value))
+        self.navigationController?.pushViewController(vc)
     }
     func showDepositAction() {
         let viewModel = LightReceiptQRCodeViewModel.init(asset: self.viewModel.input.asset.value)

@@ -10,9 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC {
+final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC,WithdrawalChildVC {
+    
     
     func config(constructor: LightWithdrawalFeeViewController.Config) {
+        self.view.layoutIfNeeded()
         self.viewModel = LightWithdrawalFeeViewModel.init(input: LightWithdrawalFeeViewModel.Input(asset:constructor.asset), output: LightWithdrawalFeeViewModel.Output())
        
         Observable.of(FeeManager.getValue(fromOption: .ttn(.systemDefault))).map { (fee) -> String in
@@ -43,4 +45,11 @@ final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC {
         // Do any additional setup after loading the view.
     }
 
+    var preferedHeight: CGFloat {
+        return view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+    }
+    
+    var isAllFieldsHaveValue: Observable<Bool> {
+        return Observable.of(true)
+    }
 }

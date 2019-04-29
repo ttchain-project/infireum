@@ -53,7 +53,11 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.fetchWallets()
 
+    }
     func bindUI(){
         
         self.tableView.register(cellType: LightTransMenuTableViewCell.self)

@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 
 class LightWithdrawalFeeViewModel: KLRxViewModel,WithdrawalFeeInfoProvider {
-    var isFeeInfoCompleted: Observable<Bool>
+  
+    var isFeeInfoCompleted: Observable<Bool> { return Observable.of(true) }
     
     func getFeeInfo() -> WithdrawalFeeInfoProvider.FeeInfo? {
         return (rate: Decimal(1.0), amt: Decimal(0), coin: self.input.asset.coin!, option: _feeOption!, totalHardCodedFee:nil)

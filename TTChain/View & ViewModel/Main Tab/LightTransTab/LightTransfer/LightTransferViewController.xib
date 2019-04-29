@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightTransferViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
+                <outlet property="nextStepButton" destination="9II-A0-pRE" id="46C-wq-OZE"/>
                 <outlet property="scrollView" destination="VMp-9n-Kn1" id="EWL-hj-ycl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,17 +23,33 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMp-9n-Kn1">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="583"/>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9II-A0-pRE">
+                    <rect key="frame" x="56.5" y="603" width="262.5" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="r4G-gB-cEj"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="9II-A0-pRE" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="2o2-WH-p1A"/>
                 <constraint firstItem="VMp-9n-Kn1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="EqN-5d-ht1"/>
+                <constraint firstItem="9II-A0-pRE" firstAttribute="top" secondItem="VMp-9n-Kn1" secondAttribute="bottom" id="HE6-8d-IBk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9II-A0-pRE" secondAttribute="bottom" constant="20" id="HUs-Mj-BjV"/>
+                <constraint firstItem="9II-A0-pRE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IOg-4D-saD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VMp-9n-Kn1" secondAttribute="trailing" id="aIy-95-hUH"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VMp-9n-Kn1" secondAttribute="bottom" id="h0D-bw-SV4"/>
                 <constraint firstItem="VMp-9n-Kn1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xAH-WJ-VAK"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="117.39130434782609"/>
         </view>
     </objects>
 </document>

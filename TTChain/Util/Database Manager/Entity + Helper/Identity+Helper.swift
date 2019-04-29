@@ -150,6 +150,10 @@ extension Identity {
                 return nil
         }
         
+        if (wallets.filter { $0.owChainType == ChainType.ttn }.count == 0) {
+            TTNWalletManager.setupTTNWallet(withPwd: pwd)
+        }
+
         return identity
     }
 }

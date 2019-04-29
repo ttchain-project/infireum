@@ -41,29 +41,21 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PoB-cr-HPT">
-                            <rect key="frame" x="15" y="55" width="329" height="1"/>
+                            <rect key="frame" x="15" y="50" width="329" height="1"/>
                             <color key="backgroundColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="pSX-Ad-dHo"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="EsD-tM-xqu" firstAttribute="leading" secondItem="VG5-p8-7Sy" secondAttribute="leading" constant="15" id="7HF-wX-nGY"/>
                         <constraint firstItem="PoB-cr-HPT" firstAttribute="leading" secondItem="VG5-p8-7Sy" secondAttribute="leading" constant="15" id="7Nv-ka-mMI"/>
-                        <constraint firstItem="PoB-cr-HPT" firstAttribute="top" secondItem="EsD-tM-xqu" secondAttribute="bottom" constant="10" id="Eo2-cB-2uW"/>
+                        <constraint firstItem="PoB-cr-HPT" firstAttribute="top" secondItem="EsD-tM-xqu" secondAttribute="bottom" constant="5" id="Eo2-cB-2uW"/>
                         <constraint firstItem="EsD-tM-xqu" firstAttribute="top" secondItem="VG5-p8-7Sy" secondAttribute="top" constant="5" id="HtG-sw-sdl"/>
                         <constraint firstAttribute="trailing" secondItem="PoB-cr-HPT" secondAttribute="trailing" constant="15" id="SQh-jS-kwz"/>
-                        <constraint firstAttribute="bottom" secondItem="PoB-cr-HPT" secondAttribute="bottom" constant="5" id="h5q-Lt-WCL"/>
+                        <constraint firstAttribute="bottom" secondItem="PoB-cr-HPT" secondAttribute="bottom" constant="10" id="h5q-Lt-WCL"/>
                         <constraint firstAttribute="trailing" secondItem="EsD-tM-xqu" secondAttribute="trailing" constant="15" id="qkH-SR-BYM"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>

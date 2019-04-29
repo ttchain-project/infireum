@@ -15,7 +15,6 @@ class LightTransViewModel: KLRxViewModel {
     required init(input: LightTransViewModel.Input, output: LightTransViewModel.Output) {
         self.input = input
         self.output = output
-        fetchWallets()
     }
     
     func concatInput() {

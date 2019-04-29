@@ -56,7 +56,6 @@ final class LightWithdrawNoteViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        view.backgroundColor = palette.bgView_sub
         noteTitle.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
         noteTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
         noteTextField.rx.text.orEmpty
