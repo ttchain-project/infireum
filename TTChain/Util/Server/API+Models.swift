@@ -21,7 +21,13 @@ enum BlockchainAPI: KLMoyaAPISet {
         case .keyToAddress(let api): return api
             
         case .getAssetAmt(let api): return api
-            
+        
+        case .getTTNAssetAmt(let api):return api
+        case .getTTNNOnce(let api):return api
+        case .signTTNTx(let api): return api
+        case .broadcastTTNTx(let api): return api
+        case .getTTNTxRecords(let api): return api
+
         case .getBTCurrentBlock(let api): return api
         case .getBTCUnspent(let api): return api
         case .getBTCTxRecords(let api): return api
@@ -53,6 +59,14 @@ enum BlockchainAPI: KLMoyaAPISet {
     
     //MARK: - General
     case getAssetAmt(GetAssetAmtAPI)
+    
+    //MARK: - TTN
+    case getTTNAssetAmt(GetTTNAssetAmountAPI)
+    case getTTNNOnce(GetTTNNonceAPI)
+    case signTTNTx(SignTTNTxAPI)
+    case broadcastTTNTx(BroadcastTTNTxAPI)
+    case getTTNTxRecords(GetTTNTxRecordsAPI)
+
     //MARK: - BTC
     case getBTCurrentBlock(GetBTCCurrentBlockAPI)
     case getBTCUnspent(GetBTCUnspentAPI)
@@ -92,6 +106,8 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
             urlString = C.BlockchainAPI.BlockExplorer.apiBase
         case (.btc,Coin.usdt_identifier):
             urlString = "https://api.omniexplorer.info"
+        case (.ttn,_):
+            urlString = "http://3.112.106.186:9997"
         default:
             urlString = C.BlockchainAPI.urlStr_32000
         }
@@ -114,6 +130,8 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
             return "/addr/\(address)/balance"
         case (.btc,Coin.usdt_identifier):
             return "/v1/address/addr/"
+        case(.ttn,_):
+            return "/getAccount"
         default:
             return "/topChain/getBalance_app/\(address)"
         }
@@ -150,6 +168,8 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
                 encoding: URLEncoding.default
             )
             
+        case .ttn:
+            return Moya.Task.requestParameters(parameters: ["address":asset.wallet?.address ?? ""], encoding: URLEncoding.default)
         default:
              return Moya.Task.requestPlain
         }
@@ -214,10 +234,35 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
             
             self.balanceInCoin = cicSmallestUnit * rateToCoinUnit
         case .ttn:
-            self.balanceInCoin = 0
+            if sourceAPI.asset.coin?.identifier == Coin.ttn_identifier,let balance = json["Balance"].string {
+                self.balanceInCoin = Decimal.init(string: balance) ?? 0
+            } else {
+                if let tokenDict = json["Token"].dictionary {
+                    let usdtBal = Decimal.init(string:tokenDict["usdtn"]?.string ?? "") ?? 0
+                    let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
+                    let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
+                
+                    switch sourceAPI.asset.coinID {
+                    case Coin.usdtn_identifier:
+                        self.balanceInCoin = usdtBal
+                    case Coin.btcn_identifier:
+                        self.balanceInCoin = btcnBal
+                    case Coin.ethn_identifier:
+                        self.balanceInCoin = ethnBal
+                    default:
+                        self.balanceInCoin = 0
+                    }
+                }else {
+                    self.balanceInCoin = 0
+                }
+
+            }
+
         }
     }
 }
+
+
 
 //MARK: - GET https://blockexplorer.com/api/status?q=getBlockCount
 struct GetBTCCurrentBlockAPI: KLMoyaAPIData {
@@ -1608,6 +1653,295 @@ struct GetCICTxRecordsAPIModel: KLJSONMappableMoyaResponse {
 }
 
 
+//MARK: TTN
+
+struct GetTTNAssetAmountAPI:KLMoyaAPIData {
+    let address: String
+    
+    var base: APIBaseEndPointType {
+        let urlString = "http://3.112.106.186:9997"
+        let url = URL.init(string: urlString)!
+        return .custom(url: url)
+    }
+    
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
+    var path: String {
+        return "/getAccount"
+    }
+    
+    var method: Moya.Method { return .get }
+    
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: ["address":address ], encoding: URLEncoding.default)
+    }
+    
+    var stub: Data? { return nil }
+}
+
+struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
+    typealias API = GetTTNAssetAmountAPI
+    struct Balance {
+        let ttnBalance:Decimal
+        let usdtnBalance:Decimal
+        let ethnBalance:Decimal
+        let btcnBalance:Decimal
+    }
+    var balance:Balance!
+    init(json: JSON, sourceAPI: API) throws {
+        guard let ttnBalanceStr = json["Balance"].string, let ttnBal = Decimal.init(string: ttnBalanceStr) else {
+            balance = Balance.init(ttnBalance: 0, usdtnBalance: 0, ethnBalance: 0, btcnBalance: 0)
+            return
+        }
+        let tokenDict = json["Token"].dictionary ?? [:]
+        let usdtBal = Decimal.init(string:tokenDict["usdtn"]?.string ?? "") ?? 0
+        let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
+        let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
+        
+        self.balance = Balance.init(ttnBalance: ttnBal, usdtnBalance: usdtBal, ethnBalance: ethnBal, btcnBalance: btcnBal)
+    }
+}
+
+//MARK: GET CIC Nonce
+struct GetTTNNonceAPI: KLMoyaAPIData {
+    let address: String
+    let mainCoin: Coin
+    var base: APIBaseEndPointType {
+        let urlString = "http://3.112.106.186:9997"
+        let url = URL.init(string: urlString)!
+        return .custom(url: url)
+    }
+    
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
+    var path: String {
+        return "/getAccount"
+    }
+    
+    var method: Moya.Method { return .get }
+    
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: ["address":address ], encoding: URLEncoding.default)
+    }
+    
+    var stub: Data? { return nil }
+}
+
+struct GetTTNNonceAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = GetTTNNonceAPI
+    let nonce: Int
+    init(json: JSON, sourceAPI: API) throws {
+        guard let nonce = json["Nonce"].int else {
+            throw GTServerAPIError.noData
+        }
+        
+        self.nonce = nonce
+    }
+}
+
+struct SignTTNTxAPI:KLMoyaAPIData {
+    let fromAsset: Asset
+    var epKey: String? {return fromAsset.wallet?.pKey }
+    let transferAmt_smallestUnit: Decimal
+    let toAddress: String
+    let feeInSmallestUnit: Decimal
+    let nonce: Int
+    
+    //Change to store variable if open input field in future.
+    var input: String { return "" }
+    
+    var base: APIBaseEndPointType {
+        let urlString = "http://3.112.106.186:9997"
+        let url = URL.init(string: urlString)!
+        return .custom(url: url)
+    }
+    
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
+    var path: String {
+        return "/signTransaction"
+    }
+    
+    var method: Moya.Method { return .post }
+    
+    var task: Task {
+        
+        var param : [String:Any] = [
+            "fee" : feeInSmallestUnit.asString(digits: 0),
+            "address" : toAddress,
+            "crypto" : "cic",
+            "balance" : transferAmt_smallestUnit.asString(digits: 0),
+            "nonce" : nonce,
+            "type" : "bnn",
+            "input" : input,
+            "PrivateKey" : epKey ?? ""
+        ]
+        
+        if fromAsset.coinID == Coin.btcn_identifier {
+            let outDict = ["balance":transferAmt_smallestUnit.asString(digits: 0),"token" : "btcn"]
+            let outArray : [[String:String]] = [outDict]
+            param["out"] = outArray
+            param["balance"] = "0"
+        }
+        
+        return Moya.Task.requestParameters(
+            parameters: param,
+            encoding: JSONEncoding.default
+        )
+    }
+    
+    var stub: Data? { return nil }
+}
+
+struct SignTTNTxAPIModel:KLJSONMappableMoyaResponse {
+   
+    let broadcastContent: [String : Any]
+    init(json: JSON, sourceAPI: SignTTNTxAPI) throws {
+        guard let content = json["result"].dictionaryObject else {
+            throw GTServerAPIError.noData
+        }
+        self.broadcastContent = content
+    }
+    
+    typealias API = SignTTNTxAPI
+}
+
+struct BroadcastTTNTxAPI: KLMoyaAPIData {
+    let contentData: [String : Any]
+    let mainCoin: Coin
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
+    var base: APIBaseEndPointType {
+        let urlString = "http://3.112.106.186:9997"
+        let url = URL.init(string: urlString)!
+        return .custom(url: url)
+    }
+    
+    var path: String { return "/broadcast" }
+    
+    var method: Moya.Method { return .post }
+    
+    var task: Task {
+        return Moya.Task.requestParameters(
+            parameters:contentData,
+            encoding: JSONEncoding.default
+        )
+    }
+    
+    
+    var stub: Data? { return nil }
+}
+
+struct BroadcastTTNTxAPIModel: KLJSONMappableMoyaResponse {
+    init(json: JSON, sourceAPI: BroadcastTTNTxAPI) throws {
+        //TODO: Need to confirm the response checking format
+        guard let txid = sourceAPI.contentData["txid"] as? String else {
+            throw GTServerAPIError.noData
+        }
+        
+        guard let tx = json["tx"].string else {
+            throw GTServerAPIError.noData
+        }
+        if tx == txid {
+            self.txid = txid
+        }else {
+            throw GTServerAPIError.incorrectResult("", tx)
+        }
+    }
+    
+    typealias API = BroadcastTTNTxAPI
+    let txid: String
+}
+
+struct GetTTNTxRecordsAPI: KLMoyaAPIData {
+    let address: String
+    let mainCoin: Coin
+    
+    var base: APIBaseEndPointType {
+        let urlString = "http://3.112.106.186:9997"
+        let url = URL.init(string: urlString)!
+        return .custom(url: url)
+    }
+    
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
+    var path: String {
+        return "getAccount"
+    }
+    
+    var method: Moya.Method { return .get }
+    
+    var task: Task {
+        return Moya.Task.requestParameters(
+            parameters: [ "address" : address ],
+            encoding: URLEncoding.default
+        )
+    }
+    
+    var stub: Data? { return nil }
+}
+
+struct GetTTNTxRecordsAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = GetTTNTxRecordsAPI
+    let txs: [TTNTx]
+    init(json: JSON, sourceAPI: API) throws {
+        guard let txJSONs = json["Transaction"].array else { throw GTServerAPIError.noData }
+        
+        //        let identifier = sourceAPI.asset.coin!.blockchainAPI_identifier.lowercased()
+        let txs = txJSONs.compactMap { (txJSON) -> TTNTx? in
+            guard let txid = txJSON["tx"].string,
+                let to = txJSON["to"].string,
+                let feeStr = txJSON["fee"].string,
+                let feeInSmallestUnit = Decimal.init(string: feeStr),
+                let timestamp = txJSON["timestamp"].number?.doubleValue,
+                let nonce = txJSON["nonce"].int,
+                let from = txJSON["from"].string else {
+                    return nil
+            }
+            
+            var balance:Decimal?
+            var coin:Coin?
+            if let outArray = txJSON["out"].array, let outDict = outArray.first {
+                if let token = outDict["token"].string, token == "btcn" {
+                    balance = Decimal.init(string:outDict["balance"].string ?? "") ?? 0
+                    coin = Coin.getCoin(ofIdentifier: Coin.btcn_identifier)!
+                }
+            }else {
+                balance = Decimal.init(string:txJSON["balance"].string ?? "") ?? 0
+                coin = Coin.getCoin(ofIdentifier: Coin.ttn_identifier)!
+            }
+            guard coin != nil else {
+                return nil
+            }
+            let coinUnitAmt = balance! / pow(10, Int(coin!.digit))
+            let feeInTTNAmt = feeInSmallestUnit > 0 ? (feeInSmallestUnit / pow(10, Int(coin!.digit))) : 0
+            
+            
+            //NOTE: Blockheight and confirmation cannot search from the api response now, these two fields is only design for future features. so it's fine to set it to 0 now.
+            return TTNTx(toAddress: to,
+                         fromAddress: from,
+                         coin: coin!,
+                         valueInCoinUnit: coinUnitAmt,
+                         feeInTTNUnit: feeInTTNAmt,
+                         nonce: nonce,
+                         txid: txid,
+                         blockHeight: 0,
+                         confirmations: 0,
+                         timestamp: timestamp)
+        }
+        self.txs = txs
+    }
+}
 //MARK: - Post /topChain/account
 struct CreateAccountAPI: KLMoyaAPIData {
     var authNeeded: Bool { return false }

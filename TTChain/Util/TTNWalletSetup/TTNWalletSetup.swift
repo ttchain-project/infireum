@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import HDWalletKit
+
 class TTNWalletManager {
     
     static func setupTTNWallet(withPwd pwd:String) {
@@ -16,9 +18,14 @@ class TTNWalletManager {
         guard let ethWallet = DB.instance.get(type: Wallet.self, predicate: predForETH, sorts: [sortDescriptor])?.first, ethWallet.isFromSystem else {
             return
         }
-        guard let shaAddress = ethWallet.address?.sha256() else {
-            return
+        let pvtKey =  PrivateKey.init(pk: ethWallet.pKey, coin: .ethereum)
+        let pubKey = pvtKey.publicKey.getPublicKey(compressed: false)
+        var publicKey = pubKey.toHexString()
+        if publicKey.count > 128 {
+            publicKey = String(publicKey.dropFirst(publicKey.count - 128))
         }
+        let shaAddress = publicKey.sha256()
+        
         let start = shaAddress.index(shaAddress.startIndex, offsetBy: 24)
         let end = shaAddress.index(shaAddress.startIndex, offsetBy: 63)
         let range = start...end

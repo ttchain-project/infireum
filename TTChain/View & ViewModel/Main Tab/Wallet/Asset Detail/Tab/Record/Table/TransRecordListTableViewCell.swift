@@ -98,7 +98,7 @@ class TransRecordListTableViewCell: UITableViewCell {
                 self.amtLabel.textColor = UIColor.owCoolGreen
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
-                if transRecord.block == 0 {
+                if transRecord.block == 0 && transRecord.fromCoinID != Coin.ttn_identifier{
                     self.amtLabel.textColor = UIColor.owPumpkinOrange
                 }else {
                     self.amtLabel.textColor = UIColor.owWaterBlue

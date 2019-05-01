@@ -247,6 +247,8 @@ extension OWStringValidator {
             return "^cx[a-fA-F0-9]{40}$"
         }else if id == Coin.guc_identifier {
             return "^gx[a-fA-F0-9]{40}$"
+        }else if id == Coin.ttn_identifier {
+            return "[a-fA-F0-9]{40}$"
         }
 //        else if id == Coin.bnn_identifier {
 //            return "^bnn[a-fA-F0-9]{40}$"

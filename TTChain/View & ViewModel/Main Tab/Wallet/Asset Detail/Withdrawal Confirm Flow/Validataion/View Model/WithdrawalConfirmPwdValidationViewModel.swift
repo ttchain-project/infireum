@@ -121,18 +121,18 @@ class WithdrawalConfirmPwdValidationViewModel: KLRxViewModel {
         return PublishRelay.init()
     }()
     
-    public var transferState: Observable<BlockchainTransferFlowState> {
+    public var transferState: Observable<TransferFlowState> {
         return _transferState.asObservable()
     }
     
-    private lazy var _transferState: BehaviorRelay<BlockchainTransferFlowState> = {
+    private lazy var _transferState: BehaviorRelay<TransferFlowState> = {
         return BehaviorRelay.init(value: .waitingUserActivate)
     }()
     
     /// This is the main transfer happen
     ///
     /// - Returns:
-    private func startTransfer() -> Observable<BlockchainTransferFlowState> {
+    private func startTransfer() -> Observable<TransferFlowState> {
         let info = input.info
         let chainType = info.wallet.owChainType
         return Observable.create({  (observer) -> Disposable in
@@ -153,7 +153,7 @@ class WithdrawalConfirmPwdValidationViewModel: KLRxViewModel {
 // MARK: - BTC Transfer Flow
 extension WithdrawalConfirmPwdValidationViewModel {
     private func startBTCTransferFlow(with info: WithdrawalInfo,
-                                      progressObserver observer: AnyObserver<BlockchainTransferFlowState>, isCompressed:Bool ) {
+                                      progressObserver observer: AnyObserver<TransferFlowState>, isCompressed:Bool ) {
         var withdrawalInfo = info
         //TEST
 //        info.wallet.address = "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r"
@@ -311,7 +311,7 @@ extension WithdrawalConfirmPwdValidationViewModel {
 // MARK: - ETH Transfer Flow
 extension WithdrawalConfirmPwdValidationViewModel {
     private func startETHTransferFlow(with info: WithdrawalInfo,
-                                      progressObserver observer: AnyObserver<BlockchainTransferFlowState> ) {
+                                      progressObserver observer: AnyObserver<TransferFlowState> ) {
         getETHNonce(fromInfo: info)
             .flatMap {
                 [unowned self] result -> RxAPIResponse<SignETHTxAPIModel> in

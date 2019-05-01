@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class LightTransMenuTableViewCell: UITableViewCell {
 
@@ -46,11 +47,29 @@ class LightTransMenuTableViewCell: UITableViewCell {
 
     }
     
-    func config(asset:Asset, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ())) {
+    func config(asset:Asset, amtSource:Observable<BehaviorRelay<Decimal?>>, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ())) {
        
+        amtSource
+            .flatMapLatest { $0 }
+            .map {
+                amt -> String in
+                guard let _amt = amt else {
+                    return "--"
+                }
+                
+                return _amt.power((Int(asset.coin!.digit * -1)))
+                    .asString(digits: 4,
+                              force: true,
+                              maxDigits: Int(asset.coin!.digit))
+                    .disguiseIfNeeded()
+                //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
+            }
+            .bind(to: coinAmountLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         self.coinNameLabel.text = asset.coin?.inAppName
         self.coinSymbol?.image = asset.coin?.iconImg
-        self.coinAmountLabel.text = asset.amount?.decimalValue.asString(digits: 8)
+        
         self.transferButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
             transferAction(asset)
         }).disposed(by: disposeBag)

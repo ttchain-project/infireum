@@ -216,12 +216,12 @@ class MarketTestHandler {
     func launch() {
         Server.instance.getMarketTest().subscribe().disposed(by: bag)
         
-        self.timerSub = timer.observeOn(MainScheduler.instance).subscribe(onNext: { [weak self] _ in
-            
-            guard let `self` = self else {
-                return
-            }
-            Server.instance.getQuotesTest().subscribe().disposed(by: self.bag)
-        })
+//        self.timerSub = timer.observeOn(MainScheduler.instance).subscribe(onNext: { [weak self] _ in
+//
+//            guard let `self` = self else {
+//                return
+//            }
+//            Server.instance.getQuotesTest().subscribe().disposed(by: self.bag)
+//        })
     }
 }

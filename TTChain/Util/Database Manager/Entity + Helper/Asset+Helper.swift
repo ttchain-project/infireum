@@ -186,7 +186,6 @@ extension Asset {
                 switch result {
                 case .failed(error: _): return self.amount as Decimal?
                 case .success(let model):
-//                    return 100
                     let balance = model.balanceInCoin
                     self.amount = balance as NSDecimalNumber
                     DB.instance.update()

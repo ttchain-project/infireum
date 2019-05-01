@@ -360,5 +360,8 @@ extension Decimal {
         return power(-8)
 //        return self * pow(Double(10), -8).decimalValue
     }
+    var ttnUnitToTTn:Decimal {
+        return power(-18)
+    }
 }
 

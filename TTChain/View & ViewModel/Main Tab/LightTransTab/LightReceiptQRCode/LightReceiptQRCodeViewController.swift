@@ -70,8 +70,8 @@ class LightReceiptQRCodeViewController: UIViewController {
         let pallete = ThemeManager.palette
         self.lightTransferLabel.set(textColor: .black, font: .owMedium(size:16))
         self.addressLabel.set(textColor: UIColor.owWarmGrey, font: .owMedium(size:11))
-        renderNavBar(tint: pallete.nav_item_2, barTint: pallete.nav_bg_clear)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        renderNavBar(tint: pallete.nav_item_2, barTint: pallete.nav_bg_clear)
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         renderNavTitle(color: pallete.nav_item_2, font: .owMedium(size: 20))
         changeBackBarButton(toColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
         

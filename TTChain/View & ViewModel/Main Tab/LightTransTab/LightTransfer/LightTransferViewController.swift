@@ -50,6 +50,15 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     private var remarkNoteVC : LightWithdrawNoteViewController!
     private var feeInfoProvider:LightWithdrawalFeeViewModel!
     
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
     
     private func configChildViewControllers(config: Config) {
         let fiat = Identity.singleton!.fiat!
@@ -113,7 +122,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             fee.leading == addr.leading
             fee.trailing == addr.trailing
             fee.top == addr.bottom + 12
-            let height = (feeVC as! WithdrawalChildVC).preferedHeight
+            let height = (feeVC as WithdrawalChildVC).preferedHeight
             fee.height == height
 //            fee.bottom == scroll.bottom - self.remarkNoteVC.preferedHeight - 12 - 60
         }
@@ -198,7 +207,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     private func bindViewModel() {
         viewModel.onStartConfirmWithdrawal.drive(onNext: {
             [unowned self] info in
-            print(info)
+            self.start(withInfo:info)
         })
             .disposed(by: bag)
         
@@ -268,4 +277,84 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         present(nav, animated: true, completion: nil)
     }
 
+    func start(withInfo info:WithdrawalInfo) {
+        self.askPwdBeforTransfer().subscribe(onSuccess: { (status) in
+            if status {
+                self.startTransfer(info: info).bind(onNext: self.handleTransferState).disposed(by: self.bag)
+            }
+        }).disposed(by: bag)
+    }
+    
+    func askPwdBeforTransfer() -> Single<Bool>{
+        return Single.create { [unowned self] (handler) -> Disposable in
+            let palette = TM.palette
+            let dls = LM.dls
+            let alert = UIAlertController.init(
+                title: dls.withdrawal_title(self.viewModel.input.asset.coin!.inAppName!),
+                message: dls.withdrawalConfirm_pwdVerify_title,
+                preferredStyle: .alert
+            )
+            
+            let cancel = UIAlertAction.init(title: dls.g_cancel,
+                                            style: .cancel,
+                                            handler: nil)
+            var textField: UITextField!
+            let confirm = UIAlertAction.init(title: dls.g_confirm,
+                                             style: .destructive) {
+                                                (_) in
+                                                if let pwd = textField.text, pwd.count > 0 {
+                                                    handler(.success(true))
+                                                }
+            }
+            
+            alert.addTextField { [unowned self] (tf) in
+                tf.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
+                tf.set(placeholder:dls.qrCodeImport_alert_placeholder_pwd(self.viewModel.input.asset.wallet?.pwdHint ?? "") )
+                textField = tf
+                tf.rx.text.map { $0?.count ?? 0 }.map { $0 > 0 }.bind(to: confirm.rx.isEnabled).disposed(by: self.bag)
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            self.present(alert, animated: true, completion: nil)
+            
+            return Disposables.create()
+        }
+    }
+
+    private func handleTransferState(_ state: TransferFlowState) {
+        let dls = LM.dls
+        switch state {
+        case .waitingUserActivate:
+            break
+        case .signing:
+            hud.startAnimating(inView: self.navigationController!.view)
+            hud.updateType(.spinner, text: dls.ltTx_pwdVerify_hud_signing)
+        case .broadcasting:
+            hud.updateType(.spinner, text: dls.ltTx_pwdVerify_hud_broadcasting)
+        case .finished(let result):
+            switch result {
+            case .failed(error: let err):
+                hud.stopAnimating()
+                self.showAPIErrorResponsePopUp(from: err, cancelTitle: dls.g_cancel)
+            case .success(let record):
+                hud.updateType(.img(#imageLiteral(resourceName: "iconSpinnerAlertOk")), text: dls.g_success)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    OWRxNotificationCenter.instance
+                        .transferRecordCreated(record)
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                    self.hud.stopAnimating()
+                }
+            }
+        }
+    }
+    
+    private func startTransfer(info : WithdrawalInfo) -> Observable<TransferFlowState> {
+        //TODO: Complete with two concated observable, signing and broadcasting
+        return Observable.create({ [unowned self] (observer) -> Disposable in
+            LightTransferManager.manager.startTTNTransfer(fromInfo: info, progressObserver: observer)
+            return Disposables.create()
+        })
+    }
 }
+

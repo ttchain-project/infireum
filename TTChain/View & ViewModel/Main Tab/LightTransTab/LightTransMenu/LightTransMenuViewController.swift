@@ -55,7 +55,7 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel.fetchWallets()
+        self.viewModel.refreshAllData()
 
     }
     func bindUI(){
@@ -68,7 +68,8 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
             guard let `self` = self else {
                 return
             }
-            cell.config(asset: asset,transferAction: { asset in self.showTransferAction(asset: asset)}, depositAction: {asset in self.showDepositAction(asset: asset)})
+            let balance = self.viewModel.amt(ofAsset: asset).asObservable()
+            cell.config(asset: asset,amtSource:balance,transferAction: { asset in self.showTransferAction(asset: asset)}, depositAction: {asset in self.showDepositAction(asset: asset)})
             
             switch row {
             case 1:

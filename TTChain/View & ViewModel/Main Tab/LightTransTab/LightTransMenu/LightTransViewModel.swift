@@ -15,6 +15,12 @@ class LightTransViewModel: KLRxViewModel {
     required init(input: LightTransViewModel.Input, output: LightTransViewModel.Output) {
         self.input = input
         self.output = output
+        let predForTTN = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.ttn.rawValue))
+        guard let ttnWallet = DB.instance.get(type: Wallet.self, predicate: predForTTN, sorts: nil)?.first else {
+            return
+        }
+        self.ttnWallet = ttnWallet
+        fetchWallets()
     }
     
     func concatInput() {
@@ -42,16 +48,18 @@ class LightTransViewModel: KLRxViewModel {
         return FiatManager.instance.fiat
     }()
     
+    var ttnWallet: Wallet!
+    
     func fetchWallets() {
 
-        let predForTTN = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.ttn.rawValue))
-        guard let ttnWallet = DB.instance.get(type: Wallet.self, predicate: predForTTN, sorts: nil)?.first else {
-            return
-        }
-        
         var _assets = [Asset]()
         _assets = Asset.getAllWalletAssetsUnderCurrenIdentity(wallet: ttnWallet, selectedOnly: true)
-        
+        let ttn = _assets.filter{ $0.coin?.identifier == Coin.ttn_identifier }.first
+        if let id = _assets.indices(of: ttn!).first {
+            _assets.remove(at: id)
+            _assets.insert(ttn!, at: 0)
+            
+        }
         self.assets.accept(_assets)
 //        self.refreshAllData()
     }
@@ -61,20 +69,49 @@ class LightTransViewModel: KLRxViewModel {
     
     /// Calling when wallet update. this function will refresh all the data source.
     func refreshAllData() {
-        for (k, v) in assetAmtTable {
-            v.accept(createAssetAmtUpater(ofAsset: k))
-        }
         
-        for (k, v) in fiatRateTable {
-            v.accept(createFiatRateUpater(ofAsset: k))
-        }
-        
-        for (k, v) in assetFiatValueTable {
-            v.accept(createFiatValueUpater(ofAsset: k))
-        }
-        
-        totalFiatValue.accept(createTotalFiatValues(for: assets))
-        
+        Server.instance.getTTNAssetAmt(address: self.ttnWallet.address!).asObservable().subscribe(onNext: {[weak self] (result) in
+            guard let `self` = self else {
+                return
+            }
+            switch result {
+            case .success(let model):
+                print(model)
+                guard let balance = model.balance else {
+                    return
+                }
+                for (k, v) in self.assetAmtTable {
+                    switch k.coinID {
+                    case Coin.ttn_identifier :
+                        v.accept(BehaviorRelay.init(value: balance.ttnBalance))
+                        k.updateAmt(balance.ttnBalance)
+                    case Coin.usdtn_identifier:
+                        v.accept(BehaviorRelay.init(value: balance.usdtnBalance))
+                        k.updateAmt(balance.usdtnBalance)
+                    case Coin.btcn_identifier:
+                        v.accept(BehaviorRelay.init(value: balance.btcnBalance))
+                        k.updateAmt(balance.btcnBalance)
+                    case Coin.ethn_identifier:
+                        v.accept(BehaviorRelay.init(value: balance.ethnBalance))
+                        k.updateAmt(balance.ethnBalance)
+                    default:
+                        continue
+                    }
+                }
+            case .failed(error: let error):
+                DLogError(error)
+            }
+        }).disposed(by: bag)
+//        for (k, v) in fiatRateTable {
+//            v.accept(createFiatRateUpater(ofAsset: k))
+//        }
+//
+//        for (k, v) in assetFiatValueTable {
+//            v.accept(createFiatValueUpater(ofAsset: k))
+//        }
+//
+//        totalFiatValue.accept(createTotalFiatValues(for: assets))
+//
         
     }
     

@@ -47,7 +47,17 @@ class LightTransDetailViewController: UIViewController {
             }).disposed(by:bag)
         }
     }
-    @IBOutlet weak var txDetailButton: UIButton!
+    @IBOutlet weak var txDetailButton: UIButton! {
+        didSet {
+            txDetailButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
+                let vc = AssetDetailViewController.navInstance(
+                    from: AssetDetailViewController.Config(asset: self.viewModel.input.asset.value,purpose:AssetDetailViewController.Purpose.lightTx)
+                )
+                //        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
+                self.present(vc, animated: true, completion: nil)
+            }).disposed(by: bag)
+        }
+    }
     
     
     var viewModel:LightTransDetailViewModel!

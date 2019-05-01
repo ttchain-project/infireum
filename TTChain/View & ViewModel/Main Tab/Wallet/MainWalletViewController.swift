@@ -317,7 +317,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             asset.wallet = wallet
         }
         let vc = AssetDetailViewController.navInstance(
-            from: AssetDetailViewController.Config(asset: asset)
+            from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
         )
         //        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
                 present(vc, animated: true, completion: nil)

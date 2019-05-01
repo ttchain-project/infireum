@@ -141,7 +141,7 @@ final class WithdrawalConfirmPwdValidationViewController: KLModuleViewController
         )
     }()
     
-    private func handleTransferState(_ state: BlockchainTransferFlowState) {
+    private func handleTransferState(_ state: TransferFlowState) {
         let dls = LM.dls
         switch state {
         case .waitingUserActivate:
