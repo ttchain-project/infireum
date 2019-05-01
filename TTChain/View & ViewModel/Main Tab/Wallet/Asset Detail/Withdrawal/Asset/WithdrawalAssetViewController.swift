@@ -105,7 +105,6 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         sepline.backgroundColor = palette.sepline
         transferAllButton.set(textColor: palette.label_main_1, font: .owMedium(size: 17), text: LM.dls.transfer_all_amount, backgroundColor: .clear)
         
-        
     }
     
     override func viewDidLoad() {

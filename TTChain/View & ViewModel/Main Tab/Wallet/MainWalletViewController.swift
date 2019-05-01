@@ -317,7 +317,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             asset.wallet = wallet
         }
         let vc = AssetDetailViewController.navInstance(
-            from: AssetDetailViewController.Config(asset: asset)
+            from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
         )
         //        let assetVC = AssetDetailViewController.instance(from: AssetDetailViewController.Config(asset: asset))
                 present(vc, animated: true, completion: nil)
@@ -377,6 +377,8 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
                     case .btc: c = Coin.btc
                     case .eth: c = Coin.eth
                     case .cic: c = Coin.btcRelay
+                    case .ttn: c = Coin.ttn
+
                     }
                     
                     attemptWithdrawal(with: addr, coin: c)

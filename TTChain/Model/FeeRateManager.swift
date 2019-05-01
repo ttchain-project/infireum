@@ -34,6 +34,9 @@ class FeeManager {
             case .btc(let option): return option.localKey
             case .eth(let option): return option.localKey
             case .cic(let option): return option.localKey + "_" + option.mainCoinID
+                
+            case .ttn(let option):
+                return option.localKey
             }
         }
         
@@ -118,9 +121,19 @@ class FeeManager {
             }
         }
         
+        enum TTNOption:FeeFinalOption {
+            var localKey: String {
+                switch self {
+                case .systemDefault: return FeeManager.key_ttn_system_fee
+                }
+            }
+            
+            case systemDefault
+        }
         case btc(BTCOption)
         case cic(CICOption)
         case eth(ETHOption)
+        case ttn(TTNOption)
     }
     
 
@@ -139,6 +152,7 @@ class FeeManager {
     private static let key_eth_systemMin_gasPrice: String = "key_eth_systemMin_gasPrice"
     private static let key_eth_suggest_gas: String = "key_eth_suggest_gas"
     
+    private static let key_ttn_system_fee:String = "key_ttn_system_fee"
     
     static func getValue(fromOption option: Option) -> Decimal {
         return option.value
@@ -170,6 +184,7 @@ class FeeManager {
         setValueIfHasNotSetBefore(100, forOption: .eth(.gasPrice(.systemMax)))
         setValueIfHasNotSetBefore(120000, forOption: .eth(.gas))
         
+        setValueIfHasNotSetBefore(0.007, forOption: .ttn(.systemDefault))
         
         //TODO: Rate need to be determined
         //CIC Unit
@@ -352,6 +367,9 @@ extension Decimal {
     var satoshiToBTC: Decimal {
         return power(-8)
 //        return self * pow(Double(10), -8).decimalValue
+    }
+    var ttnUnitToTTn:Decimal {
+        return power(-18)
     }
 }
 

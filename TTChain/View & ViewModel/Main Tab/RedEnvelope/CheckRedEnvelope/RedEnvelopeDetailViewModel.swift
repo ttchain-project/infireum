@@ -148,7 +148,7 @@ final class RedEnvelopeDetailViewModel: ViewModel {
         let chainType = info.wallet.owChainType
         self.output.hudAnimationStatus.onNext(true)
 return
-        Observable<BlockchainTransferFlowState>.create({  (observer) -> Disposable in
+        Observable<TransferFlowState>.create({  (observer) -> Disposable in
             observer.onNext(.signing)
             self.output.hudAnimationStatus.onNext(true)
             switch chainType {

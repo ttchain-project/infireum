@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 
-enum BlockchainTransferFlowState {
+enum TransferFlowState {
     /// This is the default state, to notify the view layer the transfer is not happened yet.
     case waitingUserActivate
     case signing
@@ -25,9 +25,10 @@ class TransferManager {
     static let manager = TransferManager.init()
     let bag = DisposeBag.init()
 }
+
 extension TransferManager {
     func startBTCTransferFlow(with info: WithdrawalInfo,
-                                      progressObserver observer: AnyObserver<BlockchainTransferFlowState>, isCompressed:Bool ) {
+                                      progressObserver observer: AnyObserver<TransferFlowState>, isCompressed:Bool ) {
         var withdrawalInfo = info
         var isAddressCompressed = isCompressed
         checkForUncompressedAddress(pvtKey: info.wallet.pKey).flatMap{ [unowned self] result -> RxAPIResponse<GetBTCUnspentAPIModel> in
@@ -169,7 +170,7 @@ extension TransferManager {
 
 extension TransferManager {
     func startETHTransferFlow(with info: WithdrawalInfo,
-                                      progressObserver observer: AnyObserver<BlockchainTransferFlowState> ) {
+                                      progressObserver observer: AnyObserver<TransferFlowState> ) {
         getETHNonce(fromInfo: info)
             .flatMap {
                 [unowned self] result -> RxAPIResponse<SignETHTxAPIModel> in

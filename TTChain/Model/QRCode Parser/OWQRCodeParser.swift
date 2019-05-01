@@ -36,7 +36,7 @@ class OWQRCodeEncoder {
                 encodedString = encodedString +  "decimal=18&value=0"
 
             default:
-                return ""
+                return asset.wallet?.address ?? ""
             }
             
             return encodedString

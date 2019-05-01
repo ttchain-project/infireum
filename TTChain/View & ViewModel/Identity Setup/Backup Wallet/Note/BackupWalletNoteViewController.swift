@@ -134,7 +134,6 @@ class BackupWalletNoteViewController: KLModuleViewController {
             #endif
         }
         
-       
         
         WalletCreator.createNewWallet(forChain: .btc, mnemonic: mnemonic, pwd: identitySource.pwd, pwdHint: identitySource.pwdHint, isSystemWallet:true).flatMap { response -> Single<Bool> in
             if response {
@@ -144,7 +143,7 @@ class BackupWalletNoteViewController: KLModuleViewController {
             }
             }.subscribe(onSuccess: { (status) in
                 self.hud.stopAnimating()
-
+                TTNWalletManager.setupTTNWallet(withPwd: self.identitySource.pwd)
                 if status {
                     self.startQRCodeBackupFlow()
                 }

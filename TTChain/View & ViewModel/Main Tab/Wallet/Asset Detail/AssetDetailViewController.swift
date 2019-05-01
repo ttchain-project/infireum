@@ -11,10 +11,17 @@ import RxSwift
 import RxCocoa
 import Cartography
 
+
 final class AssetDetailViewController: KLModuleViewController, KLVMVC {
+    
+    enum Purpose {
+        case mainWallet
+        case lightTx
+    }
     
     struct Config {
         let asset: Asset
+        let purpose:Purpose
     }
     
     typealias Constructor = Config
@@ -37,6 +44,13 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         configTabVC()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
+        
+        if constructor.purpose == .lightTx {
+            
+            self.transferBase.isHidden = true
+            self.height.constant = 0
+            self.view.layoutIfNeeded()
+        }
     }
     
     typealias ViewModel = AssetDetailViewModel
@@ -44,6 +58,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     var bag: DisposeBag = DisposeBag.init()
     
     
+    @IBOutlet weak var height: NSLayoutConstraint!
     @IBOutlet weak var assetInfoBase: UIView!
     @IBOutlet weak var assetAmtLabel: UILabel!
     @IBOutlet weak var assetFiatAmtLabel: UILabel!
@@ -235,6 +250,8 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
             OWRxNotificationCenter.instance
                 .switchToLightningModeWithCoin(asset.coin!)
             dismiss(animated: true) {}
+        case .ttn:
+            DLogInfo("TTN to withdrawal")
         }
     }
     
@@ -243,7 +260,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     private func prepareFee(ofAsset asset: Asset) -> RxAPIVoidResponse {
         switch asset.coin!.owChainType {
         case .btc: return FeeManager.updateBTCFeeRates()
-        case .eth: return FeeManager.updateETHFeeRates()
+        case .eth,.ttn: return FeeManager.updateETHFeeRates()
         case .cic:
             let mainCoinID = asset.coin!.walletMainCoinID!
             return FeeManager.updateCICFeeRates(mainCoinID: mainCoinID)

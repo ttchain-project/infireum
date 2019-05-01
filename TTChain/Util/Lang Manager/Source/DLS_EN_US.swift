@@ -687,6 +687,10 @@ struct DLS_EN_US: DLS {
 
     var light_withdraw_btn_title:String = "Withdraw"
     var light_deposit_btn_title:String = "Deposit"
+    var transfer_amount_title:String = "Transfer Amount"
 
     var insufficient_unspend_error_msg:String = "The transferable balance is insufficient. If it is USDT transfer, please check if the BTC wallet balance is enough to pay the miner fee."
+
+    var transfer_note_placeholder:String = "Please enter a description within 20 character"
+
 }

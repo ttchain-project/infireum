@@ -52,6 +52,8 @@ class ImportChainTypeChooseTableViewCell: UITableViewCell {
             }else {
                 return coin.iconImg ?? #imageLiteral(resourceName: "iconListNoimage")
             }
+        case .ttn:
+            return UIImage()
         }
     }
     

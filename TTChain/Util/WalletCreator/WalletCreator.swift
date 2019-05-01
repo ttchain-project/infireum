@@ -63,7 +63,7 @@ class WalletCreator {
             
             guard Wallet.create(identity: Identity.singleton!, source: source) != nil else {
                 handler(.error(error))
-                return Disposables.create ()
+                return Disposables.create()
 
             }
             handler(.success(true))

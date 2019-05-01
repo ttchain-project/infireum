@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class LightTransMenuTableViewCell: UITableViewCell {
 
@@ -42,9 +43,39 @@ class LightTransMenuTableViewCell: UITableViewCell {
         self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 18))
         self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: LM.dls.light_withdraw_btn_title)
         self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: LM.dls.light_deposit_btn_title)
+        self.backgroundColor = .clear
+
     }
     
-    func config(asset:Asset) {
-        self.bgView.setGradientColor(color1: UIColor.init(red: 8, green: 74, blue: 89)?.cgColor, color2: UIColor.init(red: 24, green: 173, blue: 212)?.cgColor)
+    func config(asset:Asset, amtSource:Observable<BehaviorRelay<Decimal?>>, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ())) {
+       
+        amtSource
+            .flatMapLatest { $0 }
+            .map {
+                amt -> String in
+                guard let _amt = amt else {
+                    return "--"
+                }
+                
+                return _amt.power((Int(asset.coin!.digit * -1)))
+                    .asString(digits: 4,
+                              force: true,
+                              maxDigits: Int(asset.coin!.digit))
+                    .disguiseIfNeeded()
+                //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
+            }
+            .bind(to: coinAmountLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        self.coinNameLabel.text = asset.coin?.inAppName
+        self.coinSymbol?.image = asset.coin?.iconImg
+        
+        self.transferButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
+            transferAction(asset)
+        }).disposed(by: disposeBag)
+        
+        self.depositButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
+            depositAction(asset)
+        }).disposed(by: disposeBag)
     }
 }

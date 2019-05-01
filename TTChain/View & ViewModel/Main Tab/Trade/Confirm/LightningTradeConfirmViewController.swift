@@ -103,7 +103,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
         fromAddressTitleLabel.text = dls.ltTx_label_fromAddr
         feeRateTitleLabel.text = dls.ltTx_label_minerFee
         remarkNoteTitleLabel.text = dls.abInfo_label_note
-        remarkNoteTextfield.set(placeholder: "请输入20字以内的描述")
+        remarkNoteTextfield.set(placeholder: dls.transfer_note_placeholder)
 
         nextStepBtn.setTitleForAllStates(dls.g_next)
     }
@@ -245,7 +245,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
                     feeUnit = mainCoin.inAppName!.lowercased()
                     rateStr = rate.asString(digits: 9)
                 //THIS SHUOLD NOT HAPPENED
-                case .eth: return ""
+                case .eth,.ttn: return ""
                 }
                 
                 return rateStr + " " + feeUnit
@@ -332,6 +332,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
         case .btc: toUpdateBTCFeeRate()
         case .cic: toUpdateCICFeeRate()
         case .eth: return errorDebug(response: ())
+        case .ttn: return errorDebug(response: ())
         }
     }
     

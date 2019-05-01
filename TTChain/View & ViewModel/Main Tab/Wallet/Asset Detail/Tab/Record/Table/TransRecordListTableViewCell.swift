@@ -102,7 +102,7 @@ class TransRecordListTableViewCell: UITableViewCell {
                 }
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
-                if transRecord.block <= 0 {
+                if transRecord.block <= 0 && transRecord.fromCoinID != Coin.ttn_identifier {
                     self.amtLabel.textColor = UIColor.owPumpkinOrange
                 }else {
                     self.amtLabel.textColor = UIColor.owWaterBlue
@@ -179,7 +179,7 @@ class TransRecordListTableViewCell: UITableViewCell {
                 }
             case .eth:
                 explorerURL = EtherscanURLCreator.url(ofTxID: txid)
-            case .cic:
+            case .cic,.ttn:
                 explorerURL = nil
             }
         }

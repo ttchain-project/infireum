@@ -55,6 +55,8 @@ class AddressbookTableViewCell: UITableViewCell {
             }else {
                 return coin.iconImg ?? #imageLiteral(resourceName: "iconListNoimage")
             }
+        case .ttn:
+            return #imageLiteral(resourceName: "ttn_icon")
         }
     }
 }

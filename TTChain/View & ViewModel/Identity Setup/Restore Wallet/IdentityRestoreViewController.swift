@@ -195,6 +195,8 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             }.subscribe(onSuccess: {[unowned self] (status) in
                 self.hud.stopAnimating()
                 if status {
+                    TTNWalletManager.setupTTNWallet(withPwd: pwd)
+
                     self.startBackupIdentityQRCodeFlow()
                 }else {
                     self.showSimplePopUp(with: LM.dls.sortMnemonic_error_create_wallet_fail,

@@ -195,7 +195,7 @@ final class SendRedEnvelopeHistoryViewModel: ViewModel {
     
     private func transferAmount(forIdentifier identifier:String,withWithdrawalInfo info:WithdrawalInfo, andMember member: Information.Member) {
         let chainType = info.wallet.owChainType
-        Observable<BlockchainTransferFlowState>.create({  (observer) -> Disposable in
+        Observable<TransferFlowState>.create({  (observer) -> Disposable in
             observer.onNext(.signing)
             switch chainType {
             case .btc:

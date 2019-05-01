@@ -294,6 +294,8 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
             }else {
                 return theme.palette.specific(color: .owWindowsBlue)
             }
+        case .ttn:
+            return theme.palette.wallet_3_gradient_to
         }
     }
     
@@ -333,6 +335,11 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
                     theme.palette.specific(color: .owDarkSlateBlue).cgColor
                 ]
             }
+        case .ttn:
+            return [
+                theme.palette.wallet_3_gradient_from.cgColor,
+                theme.palette.wallet_3_gradient_to.cgColor
+            ]
         }
     }
     

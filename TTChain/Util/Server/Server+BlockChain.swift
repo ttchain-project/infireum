@@ -310,6 +310,57 @@
         return fire(router: .blockchain(.getAssetAmt(api)))
     }
     
+    func getTTNAssetAmt(address:String) -> RxAPIResponse<GetTTNAssetAmountAPIModel> {
+        let api = GetTTNAssetAmountAPI.init(address: address)
+        return fire(router: .blockchain(.getTTNAssetAmt(api)))
+    }
+    
+    func getTTNNonce(address: String, mainCoin: Coin) -> RxAPIResponse<GetTTNNonceAPIModel> {
+        let api = GetTTNNonceAPI.init(address: address, mainCoin: mainCoin)
+        return fire(router: .blockchain(.getTTNNOnce(api)))
+    }
+    
+    //MARK: - http://125.227.132.127:3206/topChain/newSignAll/{cic private key}/{}
+    func signTTNTx(fromAsset: Asset,
+                   transferAmt_smallestUnit: Decimal,
+                   toAddress: String,
+                   toAddressType: ChainType,
+                   feeInTTNSmallestUnit: Decimal,
+                   nonce: Int) -> RxAPIResponse<SignTTNTxAPIModel> {
+        let api = SignTTNTxAPI.init(fromAsset: fromAsset, transferAmt_smallestUnit: transferAmt_smallestUnit, toAddress: toAddress, feeInSmallestUnit: feeInTTNSmallestUnit, nonce: nonce)
+        
+        return fire(router: .blockchain(.signTTNTx(api)))
+    }
+    
+    //MARK: - TTN Broadcast
+    func broadcastTTNTx(contentData: [String : Any], mainCoin: Coin) -> RxAPIResponse<BroadcastTTNTxAPIModel> {
+        
+        let api = BroadcastTTNTxAPI.init(contentData: contentData, mainCoin: mainCoin)
+        
+        return fire(router: .blockchain(.broadcastTTNTx(api)))
+
+//        let url = "http://3.112.106.186:9997/broadcast"
+//
+//        Alamofire.request(try! url.asURL(), method: HTTPMethod.post, parameters: contentData, encoding: JSONEncoding.default, headers: ["contentType":"application/json"])
+//            .validate(statusCode: 200..<300)
+//            .response {response in
+//                if let data = response.data, let string = String.init(data: data, encoding: .utf8) {
+//                    let dict = ["tx":string]
+//
+//                    let jsonData = try! JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+//                    let json = try! JSON.init(data: jsonData)
+//                    let model = try? BroadcastTTNTxAPIModel.init(json: json, sourceAPI: api)
+//                    return RxAPIResponse.just(.success(model))
+//                }
+//        }
+    }
+    
+    //MARK: - Get CIC Tx
+    func getTTNTxRecords(ofAddress address: String, mainCoin: Coin) -> RxAPIResponse<GetTTNTxRecordsAPIModel> {
+        let api = GetTTNTxRecordsAPI.init(address: address, mainCoin: mainCoin)
+        return fire(router: .blockchain(.getTTNTxRecords(api)))
+    }
+    
     //MARK: - POST /topChain/account
     func createAccount(defaultMnemonic: String?) -> RxAPIResponse<CreateAccountAPIModel> {
         let api = CreateAccountAPI.init(defaultMnemonic: defaultMnemonic)

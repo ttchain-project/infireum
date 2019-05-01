@@ -54,6 +54,9 @@
         return CICTxHandler.init(specificAsset: input.asset, filter: CICTxFilter())
     }()
     
+    private lazy var ttnHandler: TTNTxHandler = {
+        return TTNTxHandler.init(specificAsset: input.asset, filter: TTNTxFilter())
+    }()
     
     
     required init(input: InputSource, output: OutputSource) {
@@ -204,6 +207,8 @@
             }
         case .cic:
             relay = cicHandler.records
+        case .ttn:
+            relay = ttnHandler.records
         }
         
         return relay
@@ -263,6 +268,15 @@
             }
             
             load = cicHandler.loadCurrentPage()
+        case .ttn:
+            if reset { ttnHandler.reset() }
+            guard !ttnHandler.didReachedSearchLine else {
+                _finishLoading.accept(.success(()))
+                return
+            }
+            
+            load = ttnHandler.loadCurrentPage()
+            
         }
         
         _startLoading.accept(())

@@ -193,6 +193,8 @@ extension Wallet {
             return Coin.eth_identifier
         case .cic:
             return Coin.cic_identifier
+        case .ttn:
+            return Coin.ttn_identifier
         }
     }
 }

@@ -54,8 +54,8 @@ final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         titleLabel.text = dls.abInfo_label_note
-        noteTextField.set(placeholder: "请输入20字以内的描述")
-        
+        noteTextField.set(placeholder: dls.transfer_note_placeholder)
+
     }
     
     override func renderTheme(_ theme: Theme) {

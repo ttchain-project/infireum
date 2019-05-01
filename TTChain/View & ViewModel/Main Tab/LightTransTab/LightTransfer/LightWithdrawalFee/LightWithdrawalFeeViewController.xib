@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightWithdrawalFeeViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="minorFeeTitle" destination="9ej-X7-hu6" id="a0Z-62-pXl"/>
+                <outlet property="totalMinorFee" destination="2oP-j1-9zX" id="lxb-5B-NdI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Miner fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ej-X7-hu6" userLabel="Miner Fee">
+                    <rect key="frame" x="10" y="10" width="355" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFk-iY-1Ng">
+                    <rect key="frame" x="10" y="36" width="355" height="41"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Fee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oP-j1-9zX" userLabel="Fee">
+                            <rect key="frame" x="15" y="10" width="325" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="2oP-j1-9zX" firstAttribute="leading" secondItem="bFk-iY-1Ng" secondAttribute="leading" constant="15" id="9Ki-2Q-iCC"/>
+                        <constraint firstItem="2oP-j1-9zX" firstAttribute="top" secondItem="bFk-iY-1Ng" secondAttribute="top" constant="10" id="IPs-rl-BQ0"/>
+                        <constraint firstAttribute="bottom" secondItem="2oP-j1-9zX" secondAttribute="bottom" constant="10" id="Igo-lr-GgH"/>
+                        <constraint firstAttribute="trailing" secondItem="2oP-j1-9zX" secondAttribute="trailing" constant="15" id="gmO-0c-Hpc"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bFk-iY-1Ng" secondAttribute="bottom" constant="10" id="3T8-d3-P7J"/>
+                <constraint firstItem="bFk-iY-1Ng" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="5V2-eN-uPS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9ej-X7-hu6" secondAttribute="trailing" constant="10" id="WpT-H9-2px"/>
+                <constraint firstItem="9ej-X7-hu6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="hDx-db-DBd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bFk-iY-1Ng" secondAttribute="trailing" constant="10" id="jHG-dJ-Rt4"/>
+                <constraint firstItem="9ej-X7-hu6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="pcd-Ta-TZj"/>
+                <constraint firstItem="bFk-iY-1Ng" firstAttribute="top" secondItem="9ej-X7-hu6" secondAttribute="bottom" constant="5" id="v9T-e0-zcm"/>
+                <constraint firstItem="bFk-iY-1Ng" firstAttribute="top" secondItem="9ej-X7-hu6" secondAttribute="bottom" constant="5" id="wNI-DE-ZAj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="399" y="39"/>
+        </view>
+    </objects>
+</document>

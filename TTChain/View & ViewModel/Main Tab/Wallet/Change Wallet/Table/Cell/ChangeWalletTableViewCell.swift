@@ -110,7 +110,7 @@ class ChangeWalletTableViewCell: UITableViewCell, Rx {
         switch coin.owChainType {
         case .btc:
             return #imageLiteral(resourceName: "bgBtcWalletColor")
-        case .eth:
+        case .eth,.ttn:
             return #imageLiteral(resourceName: "bgEthWalletColor")
         case .cic:
             if mainCoinID == Coin.cic_identifier {

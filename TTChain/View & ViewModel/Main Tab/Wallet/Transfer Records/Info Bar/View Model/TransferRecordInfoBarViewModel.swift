@@ -87,6 +87,8 @@ class TransferRecordInfoBarViewModel: KLRxViewModel {
             typeName = "ETH"
         case .cic:
             typeName = "CIC"
+        case .ttn :
+            typeName = "TTN"
         }
         
         return [typeName, input.wallet.name!]
