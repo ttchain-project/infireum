@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5DD32284172CF624CA12099D30E096A2"
+               BlueprintIdentifier = "1E8324BA381368A333299EA90B3DE073"
                BuildableName = "HDWalletKit.framework"
                BlueprintName = "HDWalletKit"
                ReferencedContainer = "container:Pods.xcodeproj">

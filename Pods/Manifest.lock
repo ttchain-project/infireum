@@ -6,7 +6,7 @@ PODS:
   - Cartography (3.1.0)
   - Crashlytics (3.10.7):
     - Fabric (~> 1.7.11)
-  - CryptoSwift (0.12.0)
+  - CryptoSwift (0.15.0)
   - Differentiator (3.1.0)
   - EliteFramework (4.0.1)
   - Fabric (1.7.11)
@@ -58,9 +58,8 @@ PODS:
   - GoogleUtilities/Reachability (5.2.3):
     - GoogleUtilities/Logger
   - GzipSwift (4.0.4)
-  - HDWalletKit (0.1.11):
+  - HDWalletKit (0.2.8):
     - CryptoSwift (~> 0.12)
-    - scrypt (~> 2.0)
     - secp256k1.swift (~> 0.1.4)
   - HockeySDK (5.1.2):
     - HockeySDK/DefaultLib (= 5.1.2)
@@ -103,8 +102,6 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.3.0)
-  - scrypt (2.0):
-    - CryptoSwift (~> 0.11)
   - secp256k1.swift (0.1.4)
   - SkyFloatingLabelTextField (3.5.2)
   - SocketRocket (0.5.1)
@@ -206,7 +203,6 @@ SPEC REPOS:
     - RxGesture
     - RxOptional
     - RxSwift
-    - scrypt
     - secp256k1.swift
     - SkyFloatingLabelTextField
     - SocketRocket
@@ -223,7 +219,7 @@ SPEC CHECKSUMS:
   AutoInsetter: 3713c857f3c0cc4b6265fe55ecf0c14bfe8622ee
   Cartography: 1988b7578871a56c036e7af17195cb2190edf18c
   Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
-  CryptoSwift: 1c07ca50843dd48bc54e6ea53d7a4dba3b645716
+  CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   EliteFramework: a974925e07b4c9308072458d33912add2c04d9fa
   Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
@@ -236,7 +232,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: fc4a4c3fe0144db9313cbf443ffe62e6b1d6268c
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
-  HDWalletKit: 2b526d84a1c573af328d73157ac1b365d8e9813c
+  HDWalletKit: f0268857289221d4d6c2041d43ee78f1e84fc8e5
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   JCore: 14706de2640b25fb77dbd02332696491407f37c9
@@ -255,7 +251,6 @@ SPEC CHECKSUMS:
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxOptional: bd32ff8ca9df4177683d56ffeb618a9d4d5d5cad
   RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
-  scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SkyFloatingLabelTextField: f0672b67cd0e86abda946c0dc3b2fe8580767dbb
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
@@ -268,4 +263,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f56b942d5f2d6982d25b92218caa949472f60952
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

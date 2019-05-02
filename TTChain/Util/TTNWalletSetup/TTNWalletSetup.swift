@@ -19,8 +19,8 @@ class TTNWalletManager {
             return
         }
         let pvtKey =  PrivateKey.init(pk: ethWallet.pKey, coin: .ethereum)
-        let pubKey = pvtKey.publicKey.getPublicKey(compressed: false)
-        var publicKey = pubKey.toHexString()
+        let pubKey = pvtKey?.publicKey.getPublicKey(compressed: false)
+        var publicKey = pubKey?.toHexString() ?? ""
         if publicKey.count > 128 {
             publicKey = String(publicKey.dropFirst(publicKey.count - 128))
         }
