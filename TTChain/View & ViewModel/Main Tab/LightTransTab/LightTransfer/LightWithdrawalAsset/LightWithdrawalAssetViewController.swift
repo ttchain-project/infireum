@@ -61,9 +61,8 @@ final class LightWithdrawalAssetViewController: KLModuleViewController,KLVMVC {
             let _amtString = amt.asString(
                 digits: C.Coin.min_digit,
                 force: true,
-                maxDigits: Int(coin.digit),
-                digitMoveCondition: { Decimal.init(string: $0) ?? 0 != amt }
-            )
+                maxDigits: Int(coin.requiredDigit),
+                digitMoveCondition: { Decimal.init(string: $0)! != amt })
             
             let dls = LM.dls
             return dls.withdrawal_label_assetAmt(_amtString, coinName)

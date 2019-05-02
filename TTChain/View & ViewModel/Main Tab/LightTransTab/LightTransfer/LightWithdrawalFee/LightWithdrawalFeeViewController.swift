@@ -12,14 +12,21 @@ import RxCocoa
 
 final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC,WithdrawalChildVC {
     
-    
     func config(constructor: LightWithdrawalFeeViewController.Config) {
         self.view.layoutIfNeeded()
-        self.viewModel = LightWithdrawalFeeViewModel.init(input: LightWithdrawalFeeViewModel.Input(asset:constructor.asset), output: LightWithdrawalFeeViewModel.Output())
+        self.viewModel = LightWithdrawalFeeViewModel.init(input: LightWithdrawalFeeViewModel.Input(asset:constructor.asset, purpose: constructor.purpose), output: LightWithdrawalFeeViewModel.Output())
        
-        Observable.of(FeeManager.getValue(fromOption: .ttn(.systemDefault))).map { (fee) -> String in
-            return fee.asString(digits: 4) + "TTN"
-        }.bind(to: self.totalMinorFee.rx.text).disposed(by: bag)
+        if constructor.purpose == .ttnTransfer {
+            Observable.of(FeeManager.getValue(fromOption: .ttn(.systemDefault))).map { (fee) -> String in
+                return fee.asString(digits: 4) + "TTN"
+                }.bind(to: self.totalMinorFee.rx.text).disposed(by: bag)
+
+        }else {
+            Observable.combineLatest(Observable.of(FeeManager.getValue(fromOption: .ttn(.systemDefault))), Observable.of(FeeManager.getValue(fromOption: .ttn(.btcnWithdrawal)))).map { (fee,feeBtcn) -> String in
+                return fee.asString(digits: 4) + "TTN, " + feeBtcn.asString(digits:8) + "BTC⚡"
+                }.bind(to: self.totalMinorFee.rx.text).disposed(by: bag)
+            
+        }
         
         self.minorFeeTitle.text = LM.dls.withdrawal_label_minerFee
     }
@@ -34,6 +41,7 @@ final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC,With
 
     struct Config {
         let asset:Asset
+        let purpose:LightTransferViewController.Purpose
     }
 
     @IBOutlet weak var minorFeeTitle: UILabel!

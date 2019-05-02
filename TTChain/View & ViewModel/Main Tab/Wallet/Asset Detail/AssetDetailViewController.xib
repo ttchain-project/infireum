@@ -18,6 +18,8 @@
                 <outlet property="depositBtn" destination="71J-84-iL2" id="xOx-nU-0SZ"/>
                 <outlet property="height" destination="NP4-5M-RDz" id="pG2-ah-X2X"/>
                 <outlet property="recordTabBase" destination="Tws-vD-1rs" id="Hzi-r4-QgM"/>
+                <outlet property="tableViewTopToView" destination="dsT-GF-2eT" id="qqS-FY-EN8"/>
+                <outlet property="tableviewTopToSelf" destination="ekH-zD-vGx" id="MHv-2g-pNu"/>
                 <outlet property="transferBase" destination="NIR-YL-rVY" id="GMe-eE-zuz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="withdrawalBtn" destination="gQN-7X-LuA" id="H66-Nc-Nrp"/>
@@ -96,10 +98,16 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NIR-YL-rVY" secondAttribute="trailing" id="PA3-XS-VPo"/>
                 <constraint firstItem="Tws-vD-1rs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VJc-pl-rYx"/>
                 <constraint firstItem="Tws-vD-1rs" firstAttribute="top" secondItem="r1Q-W7-fbN" secondAttribute="bottom" constant="20" id="dsT-GF-2eT"/>
+                <constraint firstItem="Tws-vD-1rs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ekH-zD-vGx"/>
                 <constraint firstItem="NIR-YL-rVY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wLL-aW-mAV"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ekH-zD-vGx"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>

@@ -26,6 +26,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     
     typealias Constructor = Config
     func config(constructor: AssetDetailViewController.Config) {
+        
         view.layoutIfNeeded()
         tabVC = TransRecordListTabViewController.instance(of: [], asset: constructor.asset)
         
@@ -48,7 +49,6 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         if constructor.purpose == .lightTx {
             
             self.transferBase.isHidden = true
-            self.height.constant = 0
             self.view.layoutIfNeeded()
         }
     }

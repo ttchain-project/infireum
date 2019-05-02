@@ -32,10 +32,10 @@ class LightTransDetailViewModel: ViewModel,Rx {
         self.output = Output()
         self._amtSource.map { amt in
             if let _amt = amt {
-                return _amt.ttnUnitToTTn
+                return _amt
                     .asString(digits: 4,
                               force: true,
-                              maxDigits: Int(self.input.asset.value.coin!.digit),
+                              maxDigits: Int(self.input.asset.value.coin!.requiredDigit),
                               digitMoveCondition: { Decimal.init(string: $0)! != _amt })
                     .disguiseIfNeeded()
             }else {

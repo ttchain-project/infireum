@@ -125,10 +125,12 @@ class FeeManager {
             var localKey: String {
                 switch self {
                 case .systemDefault: return FeeManager.key_ttn_system_fee
+                case .btcnWithdrawal: return FeeManager.key_ttn_btcn_withdrawal_fee
                 }
             }
             
             case systemDefault
+            case btcnWithdrawal
         }
         case btc(BTCOption)
         case cic(CICOption)
@@ -153,7 +155,8 @@ class FeeManager {
     private static let key_eth_suggest_gas: String = "key_eth_suggest_gas"
     
     private static let key_ttn_system_fee:String = "key_ttn_system_fee"
-    
+    private static let key_ttn_btcn_withdrawal_fee:String = "key_ttn_btcn_withdrawal_fee"
+
     static func getValue(fromOption option: Option) -> Decimal {
         return option.value
     }
@@ -184,8 +187,8 @@ class FeeManager {
         setValueIfHasNotSetBefore(100, forOption: .eth(.gasPrice(.systemMax)))
         setValueIfHasNotSetBefore(120000, forOption: .eth(.gas))
         
-        setValueIfHasNotSetBefore(0.007, forOption: .ttn(.systemDefault))
-        
+        setValueIfHasNotSetBefore(0.001, forOption: .ttn(.systemDefault))
+        setValueIfHasNotSetBefore(0.00020546, forOption: .ttn(.btcnWithdrawal))
         //TODO: Rate need to be determined
         //CIC Unit
         

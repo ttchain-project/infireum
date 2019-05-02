@@ -423,8 +423,19 @@ extension Coin {
     static var usdtn_identifier:String {
         return "Identifier_USDTN"
     }
+}
 
-
+extension Coin {
+    var requiredDigit: Int16 {
+        switch self.identifier {
+        case Coin.ttn_identifier :
+            return 18
+        case Coin.btcn_identifier :
+            return 8
+        default:
+            return self.digit
+        }
+    }
 }
 
 //MARK: - Lightning Transaction Support

@@ -149,7 +149,9 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         tradeButton.heightAnchor.constraint(equalTo: tradeButton.widthAnchor, multiplier: 1.0/1.0).isActive = true
 
         tabBar.centerXAnchor.constraint(equalTo: tradeButton.centerXAnchor).isActive = true
-        tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor).isActive = true
+        let top = tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor)
+        top.constant = -10
+        top.isActive = true
         tradeButton.widthAnchor.constraint(equalToConstant: 52).isActive = true
         tradeButton.adjustsImageWhenHighlighted = false
         self.tabBar.bringSubview(toFront: self.tradeButton)

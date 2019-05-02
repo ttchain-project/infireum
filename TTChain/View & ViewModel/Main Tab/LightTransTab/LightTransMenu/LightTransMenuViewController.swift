@@ -94,9 +94,12 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
     }
     
     func showTransferAction(asset:Asset) {
-        
+        let vc = LightTransferViewController.navInstance(from: LightTransferViewController.Config(asset: asset, purpose: LightTransferViewController.Purpose.btcnWithdrawal))
+        self.present(vc, animated: true, completion: nil)
+
     }
     func showDepositAction(asset:Asset) {
+       
     }
     
     func showLightDetail(asset:Asset) {

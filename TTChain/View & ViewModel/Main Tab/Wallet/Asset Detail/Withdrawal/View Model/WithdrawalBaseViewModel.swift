@@ -176,6 +176,9 @@ class WithdrawalInfoValidator {
         case Coin.eth_identifier:
             feeUnitRate = feeInfo.rate.etherToGWei
             minFeeRate = FeeManager.getValue(fromOption: .eth(.gasPrice(.systemMin)))
+        case Coin.ttn_identifier :
+            feeUnitRate = feeInfo.rate
+            minFeeRate = 1
         default:
             let mainCoin = feeInfo.coin
             let digit = Int(mainCoin.digit)

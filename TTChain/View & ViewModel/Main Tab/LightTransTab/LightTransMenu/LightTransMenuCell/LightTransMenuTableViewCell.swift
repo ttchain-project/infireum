@@ -57,11 +57,11 @@ class LightTransMenuTableViewCell: UITableViewCell {
                     return "--"
                 }
                 
-                return _amt.power((Int(asset.coin!.digit * -1)))
+                return _amt
                     .asString(digits: 4,
                               force: true,
-                              maxDigits: Int(asset.coin!.digit))
-                    .disguiseIfNeeded()
+                              maxDigits: Int(asset.coin!.requiredDigit),
+                              digitMoveCondition: { Decimal.init(string: $0)! != amt })
                 //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
             }
             .bind(to: coinAmountLabel.rx.text)
@@ -77,5 +77,10 @@ class LightTransMenuTableViewCell: UITableViewCell {
         self.depositButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
             depositAction(asset)
         }).disposed(by: disposeBag)
+        
+        if asset.coinID == Coin.ttn_identifier {
+            self.depositButton.isHidden = true
+            self.transferButton.isHidden = true
+        }
     }
 }

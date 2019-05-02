@@ -15,14 +15,14 @@ class LightWithdrawalFeeViewModel: KLRxViewModel,WithdrawalFeeInfoProvider {
     var isFeeInfoCompleted: Observable<Bool> { return Observable.of(true) }
     
     func getFeeInfo() -> WithdrawalFeeInfoProvider.FeeInfo? {
-        return (rate: Decimal(1.0), amt: Decimal(0), coin: self.input.asset.coin!, option: _feeOption!, totalHardCodedFee:nil)
+        return (rate: Decimal(1.0), amt: 0, coin: self.input.asset.coin!, option: _feeOption!, totalHardCodedFee:nil)
     }
     
     func checkValidity() -> WithdrawalFeeInfoValidity {
         return .valid
     }
     private lazy var _feeOption: FeeManager.Option? = {
-        return FeeManager.Option.ttn(.systemDefault)
+        return input.purpose == .ttnTransfer ? FeeManager.Option.ttn(.systemDefault) : FeeManager.Option.ttn(.btcnWithdrawal)
     }()
    
     required init(input: LightWithdrawalFeeViewModel.Input, output: LightWithdrawalFeeViewModel.Output) {
@@ -50,6 +50,7 @@ class LightWithdrawalFeeViewModel: KLRxViewModel,WithdrawalFeeInfoProvider {
     
     struct Input {
         let asset:Asset
+        let purpose:LightTransferViewController.Purpose
     }
     struct Output {
         

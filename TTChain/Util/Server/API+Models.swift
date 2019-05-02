@@ -213,7 +213,7 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
             
             let rateToCoinUnit: Decimal = 1 / pow(
                 Decimal.init(10),
-                Int(sourceAPI.asset.coin!.digit)
+                Int(sourceAPI.asset.coin!.requiredDigit)
             )
             
             let coinUnitBalance = smallestUnitBalance * rateToCoinUnit
@@ -234,21 +234,28 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
             
             self.balanceInCoin = cicSmallestUnit * rateToCoinUnit
         case .ttn:
+            
+            let rateToCoinUnit: Decimal = 1 / pow(
+                Decimal.init(10),
+                Int(sourceAPI.asset.coin!.requiredDigit)
+            )
             if sourceAPI.asset.coin?.identifier == Coin.ttn_identifier,let balance = json["Balance"].string {
-                self.balanceInCoin = Decimal.init(string: balance) ?? 0
+                self.balanceInCoin = (Decimal.init(string: balance) ?? 0) * rateToCoinUnit
             } else {
                 if let tokenDict = json["Token"].dictionary {
                     let usdtBal = Decimal.init(string:tokenDict["usdtn"]?.string ?? "") ?? 0
                     let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
                     let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
                 
+                   
+                    
                     switch sourceAPI.asset.coinID {
                     case Coin.usdtn_identifier:
-                        self.balanceInCoin = usdtBal
+                        self.balanceInCoin = usdtBal * rateToCoinUnit
                     case Coin.btcn_identifier:
-                        self.balanceInCoin = btcnBal
+                        self.balanceInCoin = btcnBal * rateToCoinUnit
                     case Coin.ethn_identifier:
-                        self.balanceInCoin = ethnBal
+                        self.balanceInCoin = ethnBal * rateToCoinUnit
                     default:
                         self.balanceInCoin = 0
                     }
@@ -1696,11 +1703,21 @@ struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
             return
         }
         let tokenDict = json["Token"].dictionary ?? [:]
+        let rateToCoinUnit: Decimal = 1 / pow(
+            Decimal.init(10),
+            Int(18)
+        )
+        
+        let rateToCoinUnitBTCN: Decimal = 1 / pow(
+            Decimal.init(10),
+            Int(8)
+        )
+        
         let usdtBal = Decimal.init(string:tokenDict["usdtn"]?.string ?? "") ?? 0
         let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
         let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
         
-        self.balance = Balance.init(ttnBalance: ttnBal, usdtnBalance: usdtBal, ethnBalance: ethnBal, btcnBalance: btcnBal)
+        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnit, ethnBalance: ethnBal*rateToCoinUnit, btcnBalance: btcnBal*rateToCoinUnitBTCN)
     }
 }
 
@@ -1750,9 +1767,13 @@ struct SignTTNTxAPI:KLMoyaAPIData {
     let toAddress: String
     let feeInSmallestUnit: Decimal
     let nonce: Int
+    let transType:TransType
+    enum TransType {
+        case ttnTx
+        case btcnWithdraw
+    }
     
-    //Change to store variable if open input field in future.
-    var input: String { return "" }
+    var input: String { return transType == .btcnWithdraw ? "b2bbbbbb0000000000000001" + toAddress : ""}
     
     var base: APIBaseEndPointType {
         let urlString = "http://3.112.106.186:9997"
@@ -1773,8 +1794,8 @@ struct SignTTNTxAPI:KLMoyaAPIData {
     var task: Task {
         
         var param : [String:Any] = [
-            "fee" : feeInSmallestUnit.asString(digits: 0),
-            "address" : toAddress,
+            "fee" : "0",
+            "address" : transType == .btcnWithdraw ? "e658e4a47103b4578fd2ba6aa52af1b9fc67c129" : toAddress,
             "crypto" : "cic",
             "balance" : transferAmt_smallestUnit.asString(digits: 0),
             "nonce" : nonce,
@@ -1784,7 +1805,8 @@ struct SignTTNTxAPI:KLMoyaAPIData {
         ]
         
         if fromAsset.coinID == Coin.btcn_identifier {
-            let outDict = ["balance":transferAmt_smallestUnit.asString(digits: 0),"token" : "btcn"]
+            let balance = self.transType == .btcnWithdraw ? transferAmt_smallestUnit + feeInSmallestUnit : transferAmt_smallestUnit
+            let outDict = ["balance":balance.asString(digits: 0),"token" : "btcn"]
             let outArray : [[String:String]] = [outDict]
             param["out"] = outArray
             param["balance"] = "0"
@@ -1806,6 +1828,7 @@ struct SignTTNTxAPIModel:KLJSONMappableMoyaResponse {
         guard let content = json["result"].dictionaryObject else {
             throw GTServerAPIError.noData
         }
+        
         self.broadcastContent = content
     }
     
@@ -1825,7 +1848,7 @@ struct BroadcastTTNTxAPI: KLMoyaAPIData {
         return .custom(url: url)
     }
     
-    var path: String { return "/broadcast" }
+    var path: String { return "/broadcastPy" }
     
     var method: Moya.Method { return .post }
     
@@ -1843,17 +1866,26 @@ struct BroadcastTTNTxAPI: KLMoyaAPIData {
 struct BroadcastTTNTxAPIModel: KLJSONMappableMoyaResponse {
     init(json: JSON, sourceAPI: BroadcastTTNTxAPI) throws {
         //TODO: Need to confirm the response checking format
-        guard let txid = sourceAPI.contentData["txid"] as? String else {
+        guard let txid = sourceAPI.contentData["tx"] as? String else {
             throw GTServerAPIError.noData
         }
-        
-        guard let tx = json["tx"].string else {
+        guard let tx = json["txid"].string,let result = json["result"].bool else {
             throw GTServerAPIError.noData
         }
-        if tx == txid {
-            self.txid = txid
+        if result {
+            if tx == txid {
+                self.txid = tx
+            }else {
+                self.txid = ""
+            }
         }else {
-            throw GTServerAPIError.incorrectResult("", tx)
+            self.txid = ""
+
+            if let msg = json["message"].string {
+            throw GTServerAPIError.incorrectResult("", msg)
+            }else {
+                throw GTServerAPIError.incorrectResult("", "")
+            }
         }
     }
     
@@ -1923,8 +1955,8 @@ struct GetTTNTxRecordsAPIModel: KLJSONMappableMoyaResponse {
             guard coin != nil else {
                 return nil
             }
-            let coinUnitAmt = balance! / pow(10, Int(coin!.digit))
-            let feeInTTNAmt = feeInSmallestUnit > 0 ? (feeInSmallestUnit / pow(10, Int(coin!.digit))) : 0
+            let coinUnitAmt = balance! / pow(10, Int(coin!.requiredDigit))
+            let feeInTTNAmt = feeInSmallestUnit > 0 ? (feeInSmallestUnit / pow(10, Int(coin!.requiredDigit))) : 0
             
             
             //NOTE: Blockheight and confirmation cannot search from the api response now, these two fields is only design for future features. so it's fine to set it to 0 now.
@@ -2844,7 +2876,7 @@ struct GetCICFeeAPIModel: KLJSONMappableMoyaResponse {
             throw GTServerAPIError.noData
         }
         
-        let digit = Int(coin.digit)
+        let digit = Int(coin.requiredDigit)
         self.suggestGasPrice = suggestGasPrice.power(digit * -1)
         self.minGasPrice = minGasPrice.power(digit * -1)
         self.maxGasPrice = maxGasPrice.power(digit * -1)

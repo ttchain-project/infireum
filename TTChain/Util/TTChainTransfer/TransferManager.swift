@@ -298,3 +298,4 @@ extension TransferManager {
         return Server.instance.convertKeyToAddress(pKey: pvtKey, encrypted: false)
     }
 }
+

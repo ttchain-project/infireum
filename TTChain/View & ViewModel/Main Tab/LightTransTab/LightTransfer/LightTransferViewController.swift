@@ -16,6 +16,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     
     func config(constructor: LightTransferViewController.Config) {
         view.layoutIfNeeded()
+        self.purpose = constructor.purpose
         configChildViewControllers(config: constructor)
         viewModel = ViewModel.init(
             input: WithdrawalBaseViewModel.InputSource(
@@ -33,6 +34,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         startMonitorLangIfNeeded()
         bindUI()
         bindViewModel()
+        
     }
     
     
@@ -40,8 +42,13 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     var bag: DisposeBag = DisposeBag()
     typealias Constructor = Config
 
+    enum Purpose {
+        case ttnTransfer
+        case btcnWithdrawal
+    }
     struct Config {
         let asset:Asset
+        let purpose:Purpose
     }
     
     private var assetVC: LightWithdrawalAssetViewController!
@@ -50,6 +57,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     private var remarkNoteVC : LightWithdrawNoteViewController!
     private var feeInfoProvider:LightWithdrawalFeeViewModel!
     
+    private var purpose:Purpose!
     private lazy var hud = {
         return KLHUD.init(
             type: .spinner,
@@ -67,10 +75,14 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         assetVC.didMove(toParentViewController: self)
         scrollView.addSubview(assetVC.view)
         
-        assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
-            let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
-            self.assetVC.viewModel.transferAll(withFee:feeInfo)
-        }).disposed(by:bag)
+        if config.purpose == .btcnWithdrawal {
+            assetVC.transferAllButton.isHidden = true
+        }else {
+            assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
+                let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
+                self.assetVC.viewModel.transferAll(withFee:feeInfo)
+            }).disposed(by:bag)
+        }
         
         constrain(assetVC.view, scrollView) { [unowned self] (view, scroll) in
             view.top == scroll.top + 25
@@ -104,19 +116,22 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         
         let type = ChainType.init(rawValue: config.asset.wallet!.chainType)!
        
-        let feeVC = LightWithdrawalFeeViewController.instance(from: LightWithdrawalFeeViewController.Config(asset:config.asset))
+        let feeVC = LightWithdrawalFeeViewController.instance(from: LightWithdrawalFeeViewController.Config(asset:config.asset, purpose: config.purpose))
         addChildViewController(feeVC)
         feeVC.didMove(toParentViewController: self)
         self.feeVC = feeVC
         self.feeInfoProvider = feeVC.viewModel
 //        isInfoDisplayed = feeVC.viewModel.isInfoDisplayed
         scrollView.addSubview(feeVC.view)
-        
-        
+
         remarkNoteVC = LightWithdrawNoteViewController.instance(from: LightWithdrawNoteViewController.Config())
-        addChildViewController(remarkNoteVC)
-        remarkNoteVC.didMove(toParentViewController: self)
-        scrollView.addSubview(remarkNoteVC.view)
+
+        if self.purpose == .ttnTransfer {
+            addChildViewController(remarkNoteVC)
+            remarkNoteVC.didMove(toParentViewController: self)
+            scrollView.addSubview(remarkNoteVC.view)
+            
+        }
         
         constrain(feeVC.view, addressVC.view, scrollView) { (fee, addr, scroll) in
             fee.leading == addr.leading
@@ -124,18 +139,26 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             fee.top == addr.bottom + 12
             let height = (feeVC as WithdrawalChildVC).preferedHeight
             fee.height == height
-//            fee.bottom == scroll.bottom - self.remarkNoteVC.preferedHeight - 12 - 60
+            if self.purpose == .btcnWithdrawal {
+                fee.bottom == scroll.bottom - 10
+
+            }
         }
         
-        constrain(remarkNoteVC.view, feeVC.view, scrollView) { [unowned self] (remark, fee, scroll) in
-            remark.leading == fee.leading
-            remark.trailing == fee.trailing
-            remark.width == fee.width
-            let height = self.remarkNoteVC.preferedHeight
-            remark.height == height
-            remark.top == fee.bottom + 10
-            remark.bottom == scroll.bottom - 10
+        if self.purpose == .ttnTransfer {
+            
+            constrain(remarkNoteVC.view, feeVC.view, scrollView) { [unowned self] (remark, fee, scroll) in
+                remark.leading == fee.leading
+                remark.trailing == fee.trailing
+                remark.width == fee.width
+                let height = self.remarkNoteVC.preferedHeight
+                remark.height == height
+                remark.top == fee.bottom + 10
+                remark.bottom == scroll.bottom - 10
+            }
+            
         }
+       
         
 //        let group = constrain(remarkNoteVC.view, addressVC.view, scrollView) {  (remark, address, scroll) in
 //            remark.top == address.bottom + 56 + 12
@@ -179,7 +202,12 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         self.navigationController?.navigationBar.backgroundColor = UIColor.init(hexString: "2C3C4E")!
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.nav_item_2, shouldClear: true)
+        if self.purpose == .ttnTransfer {
         changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
+        }else {
+            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
+        }
+
 
         nextStepButton.setTitleColor(palette.btn_bgFill_enable_text, for: .normal)
         nextStepButton.setTitleColor(palette.btn_bgFill_disable_text, for: .disabled)
@@ -261,7 +289,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         let nav = AddressBookViewController.navInstance(from: AddressBookViewController.Config(
             identity: Identity.singleton!,
             purpose: .select(
-                targetMainCoinID: viewModel.input.asset.wallet!.walletMainCoinID
+            targetMainCoinID: self.purpose == .ttnTransfer ? viewModel.input.asset.wallet!.walletMainCoinID : Coin.btc_identifier
             )
             )
         )
@@ -280,7 +308,12 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     func start(withInfo info:WithdrawalInfo) {
         self.askPwdBeforTransfer().subscribe(onSuccess: { (status) in
             if status {
-                self.startTransfer(info: info).bind(onNext: self.handleTransferState).disposed(by: self.bag)
+                if self.purpose == .btcnWithdrawal {
+                    self.startBTCNWithdrawal(info: info).bind(onNext: self.handleTransferState).disposed(by: self.bag)
+                }else {
+                    self.startTransfer(info: info).bind(onNext: self.handleTransferState).disposed(by: self.bag)
+                }
+
             }
         }).disposed(by: bag)
     }
@@ -351,10 +384,19 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     
     private func startTransfer(info : WithdrawalInfo) -> Observable<TransferFlowState> {
         //TODO: Complete with two concated observable, signing and broadcasting
-        return Observable.create({ [unowned self] (observer) -> Disposable in
-            LightTransferManager.manager.startTTNTransfer(fromInfo: info, progressObserver: observer)
+        return Observable.create({ (observer) -> Disposable in
+            LightTransferManager.manager.startTTNTransfer(fromInfo: info, progressObserver: observer,isWithdrawal: false)
             return Disposables.create()
         })
     }
+    
+    private func startBTCNWithdrawal(info: WithdrawalInfo) -> Observable<TransferFlowState> {
+        
+        return Observable.create({ (observer) -> Disposable in
+            LightTransferManager.manager.startTTNTransfer(fromInfo: info, progressObserver: observer,isWithdrawal: true)
+            return Disposables.create()
+        })
+    }
+    
 }
 
