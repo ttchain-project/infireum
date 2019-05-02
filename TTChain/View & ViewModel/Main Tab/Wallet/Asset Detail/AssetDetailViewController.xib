@@ -16,10 +16,7 @@
                 <outlet property="assetFiatAmtLabel" destination="ID3-2d-Wr4" id="0bk-fL-xGC"/>
                 <outlet property="assetInfoBase" destination="r1Q-W7-fbN" id="e3k-Fd-Bd8"/>
                 <outlet property="depositBtn" destination="71J-84-iL2" id="xOx-nU-0SZ"/>
-                <outlet property="height" destination="NP4-5M-RDz" id="pG2-ah-X2X"/>
                 <outlet property="recordTabBase" destination="Tws-vD-1rs" id="Hzi-r4-QgM"/>
-                <outlet property="tableViewTopToView" destination="dsT-GF-2eT" id="qqS-FY-EN8"/>
-                <outlet property="tableviewTopToSelf" destination="ekH-zD-vGx" id="MHv-2g-pNu"/>
                 <outlet property="transferBase" destination="NIR-YL-rVY" id="GMe-eE-zuz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="withdrawalBtn" destination="gQN-7X-LuA" id="H66-Nc-Nrp"/>
@@ -49,7 +46,6 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="ID3-2d-Wr4" firstAttribute="centerX" secondItem="F74-2i-ntz" secondAttribute="centerX" id="3yr-1R-KrE"/>
-                        <constraint firstAttribute="height" priority="750" constant="153" id="NP4-5M-RDz"/>
                         <constraint firstItem="F74-2i-ntz" firstAttribute="centerX" secondItem="r1Q-W7-fbN" secondAttribute="centerX" id="SkI-x4-ynv"/>
                         <constraint firstAttribute="bottom" secondItem="ID3-2d-Wr4" secondAttribute="bottom" constant="20" id="TRV-dU-ymr"/>
                         <constraint firstItem="ID3-2d-Wr4" firstAttribute="top" secondItem="F74-2i-ntz" secondAttribute="bottom" constant="4" id="WKv-Bt-HJa"/>

@@ -21,7 +21,7 @@ class TransRecordListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var commentsLabel: UILabel!
     //Will send the blockexplorer url.
-    var onTapStatusBtn: ((URL) -> Void)?
+    var onTapStatusBtn: ((URL?) -> Void)?
     private var explorerURL: URL?
     
     private var transRecord: TransRecord!
@@ -42,7 +42,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func config(address: String, chainType: ChainType, transRecord: TransRecord, statusURLHandle: @escaping (URL) -> Void) {
+    func config(address: String, chainType: ChainType, transRecord: TransRecord, statusURLHandle: @escaping (URL?) -> Void) {
         bag = DisposeBag.init()
 
         self.transRecord = transRecord
@@ -102,7 +102,7 @@ class TransRecordListTableViewCell: UITableViewCell {
                 }
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
-                if transRecord.block <= 0 && transRecord.fromCoinID != Coin.ttn_identifier {
+                if transRecord.block <= 0 && transRecord.fromCoinID != Coin.ttn_identifier,transRecord.fromCoinID != Coin.btcn_identifier{
                     self.amtLabel.textColor = UIColor.owPumpkinOrange
                 }else {
                     self.amtLabel.textColor = UIColor.owWaterBlue
@@ -163,7 +163,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         }).disposed(by: bag)
     }
     
-    func config(asset: Asset, transRecord: TransRecord, statusURLHandle: @escaping (URL) -> Void) {
+    func config(asset: Asset, transRecord: TransRecord, statusURLHandle: @escaping (URL?) -> Void) {
         config(address: asset.wallet!.address!,
                chainType: asset.wallet!.owChainType,
                transRecord: transRecord,
@@ -186,12 +186,9 @@ class TransRecordListTableViewCell: UITableViewCell {
     }
     
     @objc private func statusBtnTapped() {
-        guard let rec = transRecord else { return }
-        guard let url = explorerURL else {
-                return
-        }
+        guard transRecord != nil else { return }
 
-        onTapStatusBtn?(url)
+        onTapStatusBtn?(explorerURL)
     }
     
     private func icon(of address: String, in record: TransRecord) -> UIImage {

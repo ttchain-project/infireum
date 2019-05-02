@@ -58,7 +58,6 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     var bag: DisposeBag = DisposeBag.init()
     
     
-    @IBOutlet weak var height: NSLayoutConstraint!
     @IBOutlet weak var assetInfoBase: UIView!
     @IBOutlet weak var assetAmtLabel: UILabel!
     @IBOutlet weak var assetFiatAmtLabel: UILabel!

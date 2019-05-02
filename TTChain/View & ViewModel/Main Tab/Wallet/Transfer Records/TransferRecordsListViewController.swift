@@ -106,6 +106,9 @@ final class TransferRecordsListViewController: KLModuleViewController, KLVMVC {
                         chainType: type,
                         transRecord: rec,
                         statusURLHandle: { (url) in
+                            guard let url = url else {
+                                return
+                            }
                             wSelf.toRecordUrl(url: url)
                         })
         }

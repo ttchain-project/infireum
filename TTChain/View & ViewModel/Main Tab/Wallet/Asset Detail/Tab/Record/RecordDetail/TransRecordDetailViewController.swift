@@ -98,16 +98,19 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         let feeAmtStr = feeAmt.asString(digits: Int(feeCoin.digit))
         self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + (feeCoin.identifier == Coin.usdt_identifier ? "BTC" :  feeCoin.inAppName!)
         
+        self.startMonitorLangIfNeeded()
+        self.startMonitorThemeIfNeeded()
+        
+        guard let url = URL.init(string: constructor.url) else {
+            self.toLinkButton.isHidden = true
+            return
+        }
         self.toLinkButton.rx.tap.asDriver().drive(onNext: { () in
-            guard let url = URL.init(string: constructor.url) else {
-                return
-            }
             let vc = ExploreDetailWebViewController.instance(from: ExploreDetailWebViewController.Config(model: nil,url:url))
             self.navigationController?.pushViewController(vc,animated:true)
         }).disposed(by: bag)
         
-        self.startMonitorLangIfNeeded()
-        self.startMonitorThemeIfNeeded()
+        
     }
    
     struct Input {

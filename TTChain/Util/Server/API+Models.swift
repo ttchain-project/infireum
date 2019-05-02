@@ -1932,14 +1932,23 @@ struct GetTTNTxRecordsAPIModel: KLJSONMappableMoyaResponse {
         //        let identifier = sourceAPI.asset.coin!.blockchainAPI_identifier.lowercased()
         let txs = txJSONs.compactMap { (txJSON) -> TTNTx? in
             guard let txid = txJSON["tx"].string,
-                let to = txJSON["to"].string,
+                var to = txJSON["to"].string,
                 let feeStr = txJSON["fee"].string,
                 let feeInSmallestUnit = Decimal.init(string: feeStr),
                 let timestamp = txJSON["timestamp"].number?.doubleValue,
                 let nonce = txJSON["nonce"].int,
-                let from = txJSON["from"].string else {
+                var from = txJSON["from"].string else {
                     return nil
             }
+            
+            if to == sourceAPI.address {
+                guard let _from = txJSON["from"].string else { return nil }
+                from = _from
+            }else {
+                from = sourceAPI.address
+            }
+            
+           
             
             var balance:Decimal?
             var coin:Coin?
@@ -1947,7 +1956,12 @@ struct GetTTNTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                 if let token = outDict["token"].string, token == "btcn" {
                     balance = Decimal.init(string:outDict["balance"].string ?? "") ?? 0
                     coin = Coin.getCoin(ofIdentifier: Coin.btcn_identifier)!
+                    
+                    if let input = txJSON["input"].string, input.contains("b2bbbbbb0000000000000001", caseSensitive: false) {
+                        to = input.replacingOccurrences(of: "b2bbbbbb0000000000000001", with: "")
+                    }
                 }
+                
             }else {
                 balance = Decimal.init(string:txJSON["balance"].string ?? "") ?? 0
                 coin = Coin.getCoin(ofIdentifier: Coin.ttn_identifier)!
