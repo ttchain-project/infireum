@@ -25,7 +25,9 @@ extension UIView {
     func setGradientColor(color1: CGColor? = (UIColor.init(hexString: "b8d4ea", transparency: 1)?.cgColor), color2: CGColor? = (UIColor.init(hexString: "f3cdbf", transparency: 1)?.cgColor), startPoint:CGPoint? = nil, endPoint:CGPoint? = nil) {
         self.setGradientColor(cgColors: [color1!,color2!], startPoint: startPoint, endPoint: endPoint)
     }
-    func setGradientColor(cgColors:[CGColor], startPoint:CGPoint? = nil, endPoint:CGPoint? = nil) {
+    
+    @discardableResult
+    func setGradientColor(cgColors:[CGColor], startPoint:CGPoint? = nil, endPoint:CGPoint? = nil) -> CAGradientLayer{
         let gradient = CAGradientLayer()
         gradient.colors = cgColors
         gradient.cornerRadius = self.layer.cornerRadius
@@ -34,8 +36,9 @@ extension UIView {
             gradient.startPoint = startPoint
             gradient.endPoint = endPoint
         }
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height: frame.size.height)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: frame.size.width, height: frame.size.height)
         self.layer.insertSublayer(gradient, at: 0)
+        return gradient
     }
 }
 

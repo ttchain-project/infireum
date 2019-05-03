@@ -81,8 +81,8 @@ class LightTransDetailViewController: UIViewController {
     func setupUI() {
         
         let pallete = ThemeManager.palette
-        self.totalAmountLabel.set(textColor: pallete.label_main_1, font: .owDemiBold(size: 32))
-        self.fiatAmtLabel.set(textColor: pallete.label_main_1, font: .owDemiBold(size: 16))
+        self.totalAmountLabel.set(textColor: pallete.label_main_2, font: .owDemiBold(size: 32))
+        self.fiatAmtLabel.set(textColor: pallete.label_main_2, font: .owDemiBold(size: 16))
         
         self.lightTransButton.set(
             textColor: pallete.btn_bgFill_enable_text,

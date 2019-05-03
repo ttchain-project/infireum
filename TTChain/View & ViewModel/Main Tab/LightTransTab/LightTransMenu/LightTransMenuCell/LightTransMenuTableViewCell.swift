@@ -24,7 +24,9 @@ class LightTransMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var depositButton: UIButton!
     @IBOutlet weak var transferButton: UIButton!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var gradView: UIView!
     
+    private var gradient: CAGradientLayer!
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -38,17 +40,18 @@ class LightTransMenuTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
-        self.bgView.cornerRadius = 8
+        self.gradView.cornerRadius = 8
         self.coinNameLabel.set(textColor: .white, font: .owMedium(size: 20))
         self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 18))
         self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: LM.dls.light_withdraw_btn_title)
         self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: LM.dls.light_deposit_btn_title)
         self.backgroundColor = .clear
-
+        self.gradView.backgroundColor = .clear
+        self.bgView.backgroundColor = .clear
     }
     
     func config(asset:Asset, amtSource:Observable<BehaviorRelay<Decimal?>>, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ())) {
-       
+        
         amtSource
             .flatMapLatest { $0 }
             .map {
@@ -82,5 +85,21 @@ class LightTransMenuTableViewCell: UITableViewCell {
             self.depositButton.isHidden = true
             self.transferButton.isHidden = true
         }
+        
+        if self.gradient != nil {
+            return
+        }
+        switch asset.coinID {
+        case Coin.ethn_identifier:
+            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "FFA734")!.cgColor, UIColor.init(hexString: "FFDB24")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
+        case Coin.usdtn_identifier:
+            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "417C9E")!.cgColor,UIColor.init(hexString: "A6C1DC")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
+        case Coin.btcn_identifier:
+            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "208588")!.cgColor,UIColor.init(hexString: "1CC491")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
+        default:
+            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "098A95")!.cgColor,UIColor.init(hexString: "18ADD4")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
+        }
+        
+
     }
 }

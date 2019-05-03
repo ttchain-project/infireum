@@ -164,3 +164,8 @@ extension LightTransferManager {
         return Server.instance.postCommentsForTransaction(parameter:parameter)
     }
 }
+
+
+extension LightTransferManager {
+
+}

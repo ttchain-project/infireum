@@ -187,7 +187,7 @@ class FeeManager {
         setValueIfHasNotSetBefore(100, forOption: .eth(.gasPrice(.systemMax)))
         setValueIfHasNotSetBefore(120000, forOption: .eth(.gas))
         
-        setValueIfHasNotSetBefore(0.001, forOption: .ttn(.systemDefault))
+        setValueIfHasNotSetBefore(0.1, forOption: .ttn(.systemDefault))
         setValueIfHasNotSetBefore(0.00020546, forOption: .ttn(.btcnWithdrawal))
         //TODO: Rate need to be determined
         //CIC Unit

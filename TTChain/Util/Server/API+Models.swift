@@ -24,6 +24,7 @@ enum BlockchainAPI: KLMoyaAPISet {
         
         case .getTTNAssetAmt(let api):return api
         case .getTTNNOnce(let api):return api
+        case .signBTCToTTNTxAPI(let api):return api
         case .signTTNTx(let api): return api
         case .broadcastTTNTx(let api): return api
         case .getTTNTxRecords(let api): return api
@@ -63,6 +64,7 @@ enum BlockchainAPI: KLMoyaAPISet {
     //MARK: - TTN
     case getTTNAssetAmt(GetTTNAssetAmountAPI)
     case getTTNNOnce(GetTTNNonceAPI)
+    case signBTCToTTNTxAPI(SignBTCToTTNTxAPI)
     case signTTNTx(SignTTNTxAPI)
     case broadcastTTNTx(BroadcastTTNTxAPI)
     case getTTNTxRecords(GetTTNTxRecordsAPI)
@@ -1759,6 +1761,97 @@ struct GetTTNNonceAPIModel: KLJSONMappableMoyaResponse {
         self.nonce = nonce
     }
 }
+
+struct SignBTCToTTNTxAPI: KLMoyaAPIData {
+    
+    let btcWalletPrivateKey: String
+    let fromBTCAddress: String
+    let toBTCAddress: String
+    let isUSDTTx:Bool
+    let transferBTC: Decimal
+    let feeBTC: Decimal
+    let compressed:Bool
+    let unspents: [Unspent]
+    
+    var authNeeded: Bool { return false }
+    
+    var langDepended: Bool { return false }
+    
+    var base: APIBaseEndPointType {
+        let urlString = "http://3.112.106.186:9997"
+        let url = URL.init(string: urlString)!
+        return .custom(url: url)
+    }
+    var path: String {
+        return "/topChain/newSignAll/1/1"
+    }
+    
+    var method: Moya.Method { return .post }
+    
+    var task: Task {
+        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC - ((isUSDTTx ? 0 : transferBTC) + feeBTC)
+        guard changeBTC >= 0 else {
+            return errorDebug(response: Moya.Task.requestPlain)
+        }
+        
+        guard let encryptedPKey = try? APISensitiveDataCrypter.encryptPrivateKey(rawPrivateKey: btcWalletPrivateKey) else {
+            return errorDebug(response: Moya.Task.requestPlain)
+        }
+        
+        let transferSatoshi = transferBTC.btcToSatoshi
+        let changeSatoshi = changeBTC.btcToSatoshi
+        
+        let unspentParams = unspents.map {
+            unspent -> [String : Any] in
+            return [
+                "txid" : unspent.txid,
+                "value" : unspent.vout
+            ]
+        }
+        
+        return Moya.Task.requestParameters(
+            parameters: [
+                "token" : "btc",
+                "encry" : true,
+                "privatekey" : encryptedPKey,
+                "tx": [
+                    [
+                        "address" : toBTCAddress,
+                        "value" : transferSatoshi
+                    ],
+                    [
+                        "address" : fromBTCAddress,
+                        "value" : changeSatoshi
+                    ]
+                ],
+                "unspend" : unspentParams,
+                "compressed" :  compressed
+            ],
+            encoding: JSONEncoding.default
+        )
+    }
+    
+    var stub: Data? { return nil }
+}
+
+struct SignBTCToTTNTxAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = SignBTCToTTNTxAPI
+    let signText: String
+    init(json: JSON, sourceAPI: API) throws {
+        guard let signText = json["signText"].string else {
+            if let errorCode = json["error"].string,
+                let message = json["message"].string {
+                throw GTServerAPIError.incorrectResult(errorCode, message)
+            }
+            
+            throw GTServerAPIError.noData
+        }
+        
+        self.signText = signText
+    }
+}
+
 
 struct SignTTNTxAPI:KLMoyaAPIData {
     let fromAsset: Asset

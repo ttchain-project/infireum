@@ -168,7 +168,7 @@ class ChangeWalletViewModel: KLRxViewModel, RxNetworkReachabilityRespondable {
 //        var sysWallets: [Wallet] = []
 //        var impWallets: [Wallet] = []
 //
-        self.assets.accept(assets.sorted { $0.wallet!.name! <= $1.wallet!.name!  } )
+        self.assets.accept(assets.filter { $0.wallet != nil }.sorted { $0.wallet!.name! <= $1.wallet!.name!  } )
 //        systemWallets.accept(wallets.sorted { $0.name! <= $1.name! })
 //        importedWallets.accept(impWallets.sorted { $0.name! <= $1.name! })
     }

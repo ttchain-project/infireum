@@ -17,6 +17,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     func config(constructor: LightTransferViewController.Config) {
         view.layoutIfNeeded()
         self.purpose = constructor.purpose
+        
         configChildViewControllers(config: constructor)
         viewModel = ViewModel.init(
             input: WithdrawalBaseViewModel.InputSource(
@@ -75,13 +76,14 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         assetVC.didMove(toParentViewController: self)
         scrollView.addSubview(assetVC.view)
         
-        if config.purpose == .btcnWithdrawal {
-            assetVC.transferAllButton.isHidden = true
-        }else {
+        if config.purpose == .ttnTransfer {
+           
             assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
                 let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
                 self.assetVC.viewModel.transferAll(withFee:feeInfo)
             }).disposed(by:bag)
+        }else {
+            assetVC.transferAllButton.isHidden = true
         }
         
         constrain(assetVC.view, scrollView) { [unowned self] (view, scroll) in
@@ -111,8 +113,6 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             [unowned self] in
             self.toAddressbookList()
         }).disposed(by: bag)
-        
-//        var isInfoDisplayed : Observable<Bool>
         
         let type = ChainType.init(rawValue: config.asset.wallet!.chainType)!
        
@@ -397,6 +397,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             return Disposables.create()
         })
     }
+    
     
 }
 

@@ -694,10 +694,12 @@ struct DLS_ZH_TW: DLS {
     var light_deposit_btn_title:String = "存入"
     
     var insufficient_unspend_error_msg:String = "可轉帳餘額不足。若為USDT轉帳，請檢查BTC錢包餘額是否足夠支付礦工費"
-
+    
     var transfer_amount_title:String = "轉帳金額"
     
-     var transfer_note_placeholder:String = "請輸入20字以內的描述"
+    var transfer_note_placeholder:String = "請輸入20字以內的描述"
+    
+    var payment_wallet:String = "付款錢包"
 }
 
 

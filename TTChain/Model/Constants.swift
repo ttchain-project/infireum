@@ -178,7 +178,7 @@ struct Constants {
     
     struct BTCFee {
         static let regular = Decimal.init(15000)
-        static let priority = Decimal.init(20000)
+        static let priority = Decimal.init(30000)
     }
     
     enum PrivateMode {

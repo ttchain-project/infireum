@@ -31,6 +31,8 @@ extension TransferManager {
                                       progressObserver observer: AnyObserver<TransferFlowState>, isCompressed:Bool ) {
         var withdrawalInfo = info
         var isAddressCompressed = isCompressed
+        observer.onNext(.signing)
+
         checkForUncompressedAddress(pvtKey: info.wallet.pKey).flatMap{ [unowned self] result -> RxAPIResponse<GetBTCUnspentAPIModel> in
             let keyForUncompressed = "\(Coin.btc_identifier)uncompressed"
 
@@ -121,7 +123,7 @@ extension TransferManager {
             .disposed(by: bag)
     }
     
-    private func getBTCUnspent(fromInfo info: WithdrawalInfo) -> RxAPIResponse<GetBTCUnspentAPIModel> {
+    func getBTCUnspent(fromInfo info: WithdrawalInfo) -> RxAPIResponse<GetBTCUnspentAPIModel> {
         return Server.instance.getBTCUnspent(fromBTCAddress: info.wallet.address!, targetAmt: (info.withdrawalAmt + info.totalFee))
     }
     
@@ -171,6 +173,9 @@ extension TransferManager {
 extension TransferManager {
     func startETHTransferFlow(with info: WithdrawalInfo,
                                       progressObserver observer: AnyObserver<TransferFlowState> ) {
+        
+        observer.onNext(.signing)
+
         getETHNonce(fromInfo: info)
             .flatMap {
                 [unowned self] result -> RxAPIResponse<SignETHTxAPIModel> in
@@ -293,9 +298,121 @@ extension TransferManager {
     }
 }
 
+
+
+
 extension TransferManager {
     func checkForUncompressedAddress(pvtKey:String) -> RxAPIResponse<KeyToAddressAPIModel> {
         return Server.instance.convertKeyToAddress(pKey: pvtKey, encrypted: false)
     }
 }
 
+extension TransferManager {
+    func startBTCDepositToTTN(with info: WithdrawalInfo,
+                         progressObserver observer: AnyObserver<TransferFlowState> ) {
+        
+        var withdrawalInfo = info
+        var isAddressCompressed = false
+        observer.onNext(.signing)
+
+        TransferManager.manager.checkForUncompressedAddress(pvtKey: info.wallet.pKey).flatMap{ [unowned self] result -> RxAPIResponse<GetBTCUnspentAPIModel> in
+            let keyForUncompressed = "\(Coin.btc_identifier)uncompressed"
+            switch result {
+            case .failed(error: let error):
+                return .just(.failed(error: error))
+            case .success(let model):
+                if model.addressMap[Coin.btc_identifier] == withdrawalInfo.wallet.address {
+                    isAddressCompressed = true
+                }else if model.addressMap[keyForUncompressed] == withdrawalInfo.wallet.address {
+                    isAddressCompressed = false
+                }
+                return self.getBTCUnspent(fromInfo: withdrawalInfo)
+            }
+            }.flatMap {
+                [unowned self] result -> RxAPIResponse<SignBTCTxAPIModel> in
+                switch result {
+                case .failed(error: let err):
+                    return .just(.failed(error: err))
+                case .success(let model):
+                    switch model.result {
+                    case .unspents(let unspents):
+                        if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
+                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
+                        }else {
+                            return self.signBTC(with: &withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed)
+                        }
+                    case .insufficient:
+                        let dls = LM.dls
+                        let err: GTServerAPIError = GTServerAPIError.incorrectResult(
+                            dls
+                                .withdrawalConfirm_pwdVerify_error_btc_insufficient_fee_title,
+                            dls
+                                .insufficient_unspend_error_msg
+                        )
+                        return .just(.failed(error: err))
+                    }
+                }
+            }
+            .flatMap {
+                [unowned self] result -> RxAPIResponse<BroadcastBTCTxAPIModel> in
+                switch result {
+                case .failed(error: let err):
+                    
+                    return .just(.failed(error: err))
+                case .success(let model):
+                    observer.onNext(.broadcasting)
+                    return self.broadcastBTC(with: model.signText, withComments: withdrawalInfo.note ?? "")
+                }
+            }.flatMap {
+                [unowned self] result -> RxAPIResponse<(String?)> in
+                switch result {
+                case .failed(error: let err):
+                    return RxAPIResponse.just(.failed(error: err))
+                case .success(let model):
+                    observer.onNext(.broadcasting)
+                    
+                    guard let note = info.note, note.count > 0 else {
+                        return .just(.success(model.txid))
+                    }
+                    
+                    let response = self.postCommentForTransaction(for: model.txid, comment: withdrawalInfo.note, toIdentifier: withdrawalInfo.asset.coinID!,toAddress:withdrawalInfo.address)
+                    return response.map {
+                        _result -> APIResult<(String?)>  in
+                        switch _result {
+                        //Even If the comment fails, the transaction should complete
+                        case .failed(_): return .success((model.txid))
+                        case .success(_): return .success((model.txid))
+                        }
+                    }
+                }
+            }
+            .subscribe(onSuccess: { (result) in
+                switch result {
+                case .failed(error: let err):
+                    observer.onNext(.finished(.failed(error: err)))
+                case .success(let txId):
+                    guard let transID = txId, let record = self.saveTxToLocal(with: transID, info: info) else {
+                        let err: GTServerAPIError = .incorrectResult(
+                            LM.dls.withdrawalConfirm_pwdVerify_error_tx_save_fail, ""
+                        )
+                        observer.onNext(.finished(.failed(error: err)))
+                        return
+                    }
+                    observer.onNext(.finished(.success(record)))
+                }
+            })
+            .disposed(by: bag)
+    }
+    
+    func signBTCToTTNTx(info :WithdrawalInfo, unspents: [Unspent],isCompressed:Bool) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
+        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
+        
+        if changeBTC < 0 {
+            return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
+        }
+        return Server.instance.signBTCToTTNTxAPI(pkey: info.wallet.pKey,
+                                                 fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, isCompressed: isCompressed, feeBTC: info.totalFee,
+                                                 unspents: unspents)
+    }
+}

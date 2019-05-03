@@ -69,21 +69,9 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
                 return
             }
             let balance = self.viewModel.amt(ofAsset: asset).asObservable()
+            
             cell.config(asset: asset,amtSource:balance,transferAction: { asset in self.showTransferAction(asset: asset)}, depositAction: {asset in self.showDepositAction(asset: asset)})
-            
-            switch row {
-            case 1:
-                cell.bgView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "FFA734")!.cgColor, UIColor.init(hexString: "FFDB24")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-            case 2:
-                cell.bgView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "417C9E")!.cgColor,UIColor.init(hexString: "A6C1DC")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-            case 3:
-                
-                cell.bgView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "208588")!.cgColor,UIColor.init(hexString: "1CC491")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-            default:
-                
-                cell.bgView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "098A95")!.cgColor,UIColor.init(hexString: "18ADD4")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-            }
-            
+
             }.disposed(by:bag)
         
         self.tableView.rx.itemSelected.asDriver().drive(onNext: { (path) in
@@ -99,7 +87,8 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
 
     }
     func showDepositAction(asset:Asset) {
-       
+        let vc = LightDepositWalletChooseViewController.navInstance(from: LightDepositWalletChooseViewController.Config(asset:asset))
+        self.present(vc, animated: true, completion: nil)
     }
     
     func showLightDetail(asset:Asset) {
