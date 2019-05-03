@@ -70,7 +70,7 @@ class LightTransMenuTableViewCell: UITableViewCell {
             .bind(to: coinAmountLabel.rx.text)
             .disposed(by: disposeBag)
         
-        self.coinNameLabel.text = asset.coin?.inAppName
+        self.coinNameLabel.text = asset.coin?.inAppName?.replacingOccurrences(of: "BTCN", with: "BTC")
         self.coinSymbol?.image = asset.coin?.iconImg
         
         self.transferButton.rx.klrx_tap.asDriver().drive(onNext: { _ in

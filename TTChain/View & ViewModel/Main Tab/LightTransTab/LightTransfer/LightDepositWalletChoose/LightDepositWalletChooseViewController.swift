@@ -236,7 +236,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
     private func startBTCDeposit(info: WithdrawalInfo) -> Observable<TransferFlowState> {
         
         return Observable.create({ (observer) -> Disposable in
-            TransferManager.manager.startBTCDepositToTTN(with: info, progressObserver: observer)
+            TransferManager.manager.startBTCDepositToTTN(with: info, progressObserver: observer,ttnAsset: self.viewModel.toAsset.value)
             return Disposables.create()
         })
     }

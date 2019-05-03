@@ -309,9 +309,9 @@ extension TransferManager {
 
 extension TransferManager {
     func startBTCDepositToTTN(with info: WithdrawalInfo,
-                         progressObserver observer: AnyObserver<TransferFlowState> ) {
+                              progressObserver observer: AnyObserver<TransferFlowState>,ttnAsset:Asset ) {
         
-        var withdrawalInfo = info
+        let withdrawalInfo = info
         var isAddressCompressed = false
         observer.onNext(.signing)
 
@@ -329,18 +329,16 @@ extension TransferManager {
                 return self.getBTCUnspent(fromInfo: withdrawalInfo)
             }
             }.flatMap {
-                [unowned self] result -> RxAPIResponse<SignBTCTxAPIModel> in
+                [unowned self] result -> RxAPIResponse<SignBTCToTTNTxAPIModel> in
                 switch result {
                 case .failed(error: let err):
                     return .just(.failed(error: err))
                 case .success(let model):
                     switch model.result {
                     case .unspents(let unspents):
-                        if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
-                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
-                        }else {
-                            return self.signBTC(with: &withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed)
-                        }
+                       
+                        return self.signBTCToTTNTx(info: withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed)
+    
                     case .insufficient:
                         let dls = LM.dls
                         let err: GTServerAPIError = GTServerAPIError.incorrectResult(
@@ -398,6 +396,7 @@ extension TransferManager {
                         observer.onNext(.finished(.failed(error: err)))
                         return
                     }
+//                    self.saveCorrespondingTxToBTCTTN(txId: transID, info: info, ttnAsset:ttnAsset)
                     observer.onNext(.finished(.success(record)))
                 }
             })
@@ -414,5 +413,31 @@ extension TransferManager {
         return Server.instance.signBTCToTTNTxAPI(pkey: info.wallet.pKey,
                                                  fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, isCompressed: isCompressed, feeBTC: info.totalFee,
                                                  unspents: unspents)
+    }
+    
+    func saveCorrespondingTxToBTCTTN(txId:String,info:WithdrawalInfo,ttnAsset:Asset) {
+        
+        DB.instance.create(type: TransRecord.self, setup: { (rec) in
+            //            rec.inoutID = TransInoutType.withdrawal.rawValue
+            rec.date = Date() as NSDate
+            rec.feeAmt = 0
+            rec.feeCoinID = Coin.ttn_identifier
+            
+            rec.feeRate = 0
+            rec.fromAddress = "e658e4a47103b4578fd2ba6aa52af1b9fc67c129"
+            rec.fromAmt = info.withdrawalAmt as NSDecimalNumber
+            rec.fromCoinID = Coin.btcn_identifier
+            
+            rec.status = TransRecordStatus.success.rawValue
+            rec.syncDate = Date() as NSDate
+            rec.toAddress = ttnAsset.wallet?.address
+            rec.toAmt = (info.withdrawalAmt) as NSDecimalNumber
+            rec.toCoinID = Coin.btcn_identifier
+            rec.totalFee = 0
+            rec.txID = txId
+            
+            rec.addToCoins(ttnAsset.coin!)
+            ttnAsset.coin!.addToTransRecords(rec)
+        })
     }
 }

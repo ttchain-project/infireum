@@ -94,9 +94,27 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         self.recieptAddressValueLabel.text = transRecord.toAddress
        
         guard let feeCoin = Coin.getCoin(ofIdentifier: transRecord.feeCoinID!) else { return }
+        
         let feeAmt = transRecord.totalFee! as Decimal
-        let feeAmtStr = feeAmt.asString(digits: Int(feeCoin.digit))
-        self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + (feeCoin.identifier == Coin.usdt_identifier ? "BTC" :  feeCoin.inAppName!)
+        var feeAmtStr = feeAmt.asString(digits: Int(feeCoin.digit))
+        
+        var coinName = feeCoin.identifier == Coin.usdt_identifier ? "BTC" :  feeCoin.inAppName!
+
+        if ( transRecord.fromCoinID == Coin.ttn_identifier) {
+            feeAmtStr = "0.1 TTN"
+            coinName = ""
+        } else if ( transRecord.fromCoinID == Coin.btcn_identifier) {
+            if (transRecord.fromAddress == "e658e4a47103b4578fd2ba6aa52af1b9fc67c129") {  //deposit
+                feeAmtStr = "請查看BTC錢包"
+            } else if (transRecord.toAddress == "e658e4a47103b4578fd2ba6aa52af1b9fc67c129") { //withdraw
+                feeAmtStr = "0.1 TTN, 0.00020546 BTC⚡"
+            } else {
+                feeAmtStr = "0.1 TTN"
+            }
+            coinName = ""
+        }
+
+        self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + coinName
         
         self.startMonitorLangIfNeeded()
         self.startMonitorThemeIfNeeded()
