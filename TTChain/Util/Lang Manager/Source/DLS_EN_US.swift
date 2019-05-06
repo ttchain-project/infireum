@@ -683,7 +683,7 @@ struct DLS_EN_US: DLS {
     var lightning_receipt_btn_title:String = "Lightning Receipt"
     var transaction_details_btn_title:String = "Transaction Details"
     
-    var lightning_payment_title:String = "Lightning Payment"
+    var lightning_payment_title:String = "Lightning Transfer"
 
     var light_withdraw_btn_title:String = "Withdraw"
     var light_deposit_btn_title:String = "Deposit"

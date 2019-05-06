@@ -56,6 +56,11 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
             .disposed(by: bag)
         
         self.fromAsset.map { $0?.wallet! }.asObservable().bind(to:self._selectedWallet).disposed(by: bag)
+        
+        self.fromAsset.map {
+            (($0?.amount ?? 0) as Decimal)
+            }.bind(to: self._assetAvailableAmt).disposed(by: bag)
+
     }
     
     let messageSubject : PublishSubject<String> = PublishSubject<String>.init()

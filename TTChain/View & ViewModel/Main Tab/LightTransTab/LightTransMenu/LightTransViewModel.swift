@@ -15,12 +15,12 @@ class LightTransViewModel: KLRxViewModel {
     required init(input: LightTransViewModel.Input, output: LightTransViewModel.Output) {
         self.input = input
         self.output = output
-        let predForTTN = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.ttn.rawValue))
-        guard let ttnWallet = DB.instance.get(type: Wallet.self, predicate: predForTTN, sorts: nil)?.first else {
-            return
-        }
-        self.ttnWallet = ttnWallet
-        fetchWallets()
+        
+        self.setupWallet()
+        
+        OWRxNotificationCenter.instance.ttnWalletCreated.asObservable().subscribe(onNext:{ _ in
+            self.setupWallet()
+        }).disposed(by:bag)
     }
     
     func concatInput() {
@@ -29,6 +29,15 @@ class LightTransViewModel: KLRxViewModel {
     
     func concatOutput() {
         
+    }
+    
+    func setupWallet() {
+        let predForTTN = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.ttn.rawValue))
+        guard let ttnWallet = DB.instance.get(type: Wallet.self, predicate: predForTTN, sorts: nil)?.first else {
+            return
+        }
+        self.ttnWallet = ttnWallet
+        fetchWallets()
     }
     
     var bag: DisposeBag = DisposeBag()

@@ -1772,6 +1772,7 @@ struct SignBTCToTTNTxAPI: KLMoyaAPIData {
     let feeBTC: Decimal
     let compressed:Bool
     let unspents: [Unspent]
+    let ttnAddress:String
     
     var authNeeded: Bool { return false }
     
@@ -1812,9 +1813,10 @@ struct SignBTCToTTNTxAPI: KLMoyaAPIData {
         
         return Moya.Task.requestParameters(
             parameters: [
-                "token" : "btc",
+                "token" : "btcrelay",
                 "encry" : true,
                 "privatekey" : encryptedPKey,
+                "cicAddress":ttnAddress,
                 "tx": [
                     [
                         "address" : toBTCAddress,

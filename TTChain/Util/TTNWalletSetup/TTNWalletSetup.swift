@@ -10,13 +10,13 @@ import Foundation
 import HDWalletKit
 
 class TTNWalletManager {
-    
-    static func setupTTNWallet(withPwd pwd:String) {
+    @discardableResult
+    static func setupTTNWallet(withPwd pwd:String) -> Wallet? {
         //String noPrefixAddress = Utility.getSHA256(ethMaster.getPublicKey()).substring(24, 64);
         let sortDescriptor = NSSortDescriptor.init(key: "isFromSystem", ascending: false)
         let predForETH = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.eth.rawValue))
         guard let ethWallet = DB.instance.get(type: Wallet.self, predicate: predForETH, sorts: [sortDescriptor])?.first, ethWallet.isFromSystem else {
-            return
+            return nil
         }
         let pvtKey =  PrivateKey.init(pk: ethWallet.pKey, coin: .ethereum)
         let pubKey = pvtKey?.publicKey.getPublicKey(compressed: false)
@@ -40,6 +40,6 @@ class TTNWalletManager {
                       chainType: ChainType.ttn,
                       mainCoinID: Coin.ttn_identifier)
         
-        _ = Wallet.create(identity: Identity.singleton!, source: source)
+        return Wallet.create(identity: Identity.singleton!, source: source)
     }
 }

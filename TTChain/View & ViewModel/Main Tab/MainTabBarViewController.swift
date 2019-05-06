@@ -167,6 +167,55 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         // Dispose of any resources that can be recreated.
     }
     
+    func checkForTTNWallet() {
+        let predForTTN = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.ttn.rawValue))
+        if (DB.instance.get(type: Wallet.self, predicate: predForTTN, sorts: nil)?.first) != nil {
+            return
+        }else {
+            
+            self.askPwdBeforTransfer().subscribe(onSuccess: { (pwd) in
+                 TTNWalletManager.setupTTNWallet(withPwd: pwd)
+                OWRxNotificationCenter.instance.notifyTTNWalletCreated()
+            }).disposed(by: bag)
+        }
+    }
+    
+    func askPwdBeforTransfer() -> Single<String>{
+        return Single.create { [unowned self] (handler) -> Disposable in
+            let palette = TM.palette
+            let dls = LM.dls
+            let alert = UIAlertController.init(
+                title: dls.tab_alert_newSystemWallet_title,
+                message: dls.tab_alert_newSystemWallet_content,
+                preferredStyle: .alert
+            )
+            
+            let cancel = UIAlertAction.init(title: dls.g_cancel,
+                                            style: .cancel,
+                                            handler: nil)
+            var textField: UITextField!
+            let confirm = UIAlertAction.init(title: dls.g_confirm,
+                                             style: .destructive) {
+                                                (_) in
+                                                if let pwd = textField.text, pwd.count > 0 {
+                                                    handler(.success(pwd))
+                                                }
+            }
+            
+            alert.addTextField { [unowned self] (tf) in
+                tf.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
+                tf.set(placeholder:LM.dls.tab_alert_placeholder_identityPwd)
+                textField = tf
+                tf.rx.text.map { $0?.count ?? 0 }.map { $0 > 0 }.bind(to: confirm.rx.isEnabled).disposed(by: self.bag)
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            self.selectedViewController?.present(alert, animated: true, completion: nil)
+            
+            return Disposables.create()
+        }
+    }
     //MARK: - Notification
 //    private func observeLightningSwitchWithCoin() {
 //        OWRxNotificationCenter
@@ -223,6 +272,9 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         }else {
             displayAgreementIfNeeded()
         }
+        
+        checkForTTNWallet()
+
     }
     
     private func attempSyncSystemWallets(onComplete: @escaping () -> Void) {

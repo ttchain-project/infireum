@@ -177,9 +177,9 @@ class FeeManager {
         
         //Sat/b
 
-        setValueIfHasNotSetBefore(C.BTCFee.regular, forOption: .btc(.regular))
-        setValueIfHasNotSetBefore(C.BTCFee.priority, forOption: .btc(.priority))
-        
+        self.setValue(C.BTCFee.regular, forOption: .btc(.regular))
+        self.setValue(C.BTCFee.priority, forOption: .btc(.priority))
+
         
         //GWei
         setValueIfHasNotSetBefore(25, forOption: .eth(.gasPrice(.suggest)))

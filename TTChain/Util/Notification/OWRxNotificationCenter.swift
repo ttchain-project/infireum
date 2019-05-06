@@ -247,5 +247,14 @@ class OWRxNotificationCenter {
 //    public func didForwardMessage(message:MessageModel, toChat:ChatListPage) {
 //        _didInsertCoinSelection.accept(selection)
 //    }
+
+    //Notify TTNWalletCreated
+    private let _ttnWalletCreated: PublishRelay<Void> = PublishRelay.init()
+    public var ttnWalletCreated: Observable<Void> {
+        return _ttnWalletCreated.asObservable()
+    }
     
+    public func notifyTTNWalletCreated() {
+        _ttnWalletCreated.accept(())
+    }
 }

@@ -74,7 +74,7 @@ extension LightTransferManager {
                     observer.onNext(.finished(.failed(error: err)))
                     return
                 case .success(( _, let txID)):
-                    guard let transID = txID, let record = self.saveTxToLocal(with: transID, info: info) else {
+                    guard let transID = txID, let record = self.saveTxToLocal(with: transID, info: info,isWithdrawal: isWithdrawal) else {
                         let err: GTServerAPIError = .incorrectResult(
                             LM.dls.ltTx_pwdVerify_error_tx_save_fail, ""
                         )
@@ -133,7 +133,7 @@ extension LightTransferManager {
 
 extension LightTransferManager {
     
-    private func saveTxToLocal(with txid: String, info: WithdrawalInfo) -> TransRecord? {
+    private func saveTxToLocal(with txid: String, info: WithdrawalInfo,isWithdrawal:Bool) -> TransRecord? {
         let record = DB.instance.create(type: TransRecord.self, setup: { (rec) in
             //            rec.inoutID = TransInoutType.withdrawal.rawValue
             rec.date = Date() as NSDate

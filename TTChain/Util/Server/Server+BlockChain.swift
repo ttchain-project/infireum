@@ -327,9 +327,9 @@
                            isUSDTTx:Bool,
                            isCompressed:Bool,
                            feeBTC: Decimal,
-                           unspents: [Unspent]) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
+                           unspents: [Unspent],ttnAddress:String) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
         
-        let api = SignBTCToTTNTxAPI.init(btcWalletPrivateKey: pkey, fromBTCAddress: fromAddress, toBTCAddress: toAddress, isUSDTTx: false, transferBTC: tranferBTC, feeBTC: feeBTC, compressed: isCompressed, unspents: unspents)
+        let api = SignBTCToTTNTxAPI.init(btcWalletPrivateKey: pkey, fromBTCAddress: fromAddress, toBTCAddress: toAddress, isUSDTTx: false, transferBTC: tranferBTC, feeBTC: feeBTC, compressed: isCompressed, unspents: unspents,ttnAddress:ttnAddress)
         return fire(router: .blockchain(.signBTCToTTNTxAPI(api)))
 
     }

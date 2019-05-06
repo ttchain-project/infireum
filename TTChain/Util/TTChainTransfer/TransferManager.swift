@@ -337,7 +337,7 @@ extension TransferManager {
                     switch model.result {
                     case .unspents(let unspents):
                        
-                        return self.signBTCToTTNTx(info: withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed)
+                        return self.signBTCToTTNTx(info: withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed,ttnAddress:ttnAsset.wallet!.address!)
     
                     case .insufficient:
                         let dls = LM.dls
@@ -403,7 +403,7 @@ extension TransferManager {
             .disposed(by: bag)
     }
     
-    func signBTCToTTNTx(info :WithdrawalInfo, unspents: [Unspent],isCompressed:Bool) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
+    func signBTCToTTNTx(info :WithdrawalInfo, unspents: [Unspent],isCompressed:Bool,ttnAddress:String) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
         let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
         let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
         
@@ -412,7 +412,7 @@ extension TransferManager {
         }
         return Server.instance.signBTCToTTNTxAPI(pkey: info.wallet.pKey,
                                                  fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, isCompressed: isCompressed, feeBTC: info.totalFee,
-                                                 unspents: unspents)
+                                                 unspents: unspents,ttnAddress:ttnAddress)
     }
     
     func saveCorrespondingTxToBTCTTN(txId:String,info:WithdrawalInfo,ttnAsset:Asset) {

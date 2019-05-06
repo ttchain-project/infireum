@@ -93,7 +93,15 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
             tv,row,asset in
             var cell: SelectWalletTableViewCell
             cell = tv.dequeueReusableCell(withIdentifier: SelectWalletTableViewCell.cellIdentifier()) as! SelectWalletTableViewCell
-            cell.setData(walletName: asset.wallet!.name!, coinName: asset.coin!.inAppName!, walletAmount: asset.amount!.decimalValue.asString(digits: 4), isSelected: asset.walletEPKey == self.selectedAsset!.walletEPKey)
+            let amt = asset.amount!.decimalValue
+            let _amtString = amt.asString(
+                digits: C.Coin.min_digit,
+                force: true,
+                maxDigits: Int(asset.coin!.digit),
+                digitMoveCondition: { Decimal.init(string: $0) ?? 0 != amt }
+            )
+            
+            cell.setData(walletName: asset.wallet!.name!, coinName: asset.coin!.inAppName!, walletAmount: _amtString, isSelected: asset.walletEPKey == self.selectedAsset!.walletEPKey)
             
                     cell.contentView.alpha = self.viewModel.isAbleToSelectWallet(withAsset: asset) ? 1 : 0.4
             

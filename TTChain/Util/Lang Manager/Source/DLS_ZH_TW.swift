@@ -688,7 +688,7 @@ struct DLS_ZH_TW: DLS {
     var lightning_receipt_btn_title:String = "閃電收款"
     var transaction_details_btn_title:String = "交易明細"
     
-    var lightning_payment_title:String = "閃電支付"
+    var lightning_payment_title:String = "閃電轉帳"
     
     var light_withdraw_btn_title:String = "提出"
     var light_deposit_btn_title:String = "存入"
