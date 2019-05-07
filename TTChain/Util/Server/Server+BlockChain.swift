@@ -320,19 +320,19 @@
         return fire(router: .blockchain(.getTTNNOnce(api)))
     }
     
-    func signBTCToTTNTxAPI(pkey: String,
-                           fromAddress: String,
-                           toAddress: String,
-                           tranferBTC: Decimal,
-                           isUSDTTx:Bool,
-                           isCompressed:Bool,
-                           feeBTC: Decimal,
-                           unspents: [Unspent],ttnAddress:String) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
-        
-        let api = SignBTCToTTNTxAPI.init(btcWalletPrivateKey: pkey, fromBTCAddress: fromAddress, toBTCAddress: toAddress, isUSDTTx: false, transferBTC: tranferBTC, feeBTC: feeBTC, compressed: isCompressed, unspents: unspents,ttnAddress:ttnAddress)
-        return fire(router: .blockchain(.signBTCToTTNTxAPI(api)))
-
-    }
+//    func signBTCToTTNTxAPI(pkey: String,
+//                           fromAddress: String,
+//                           toAddress: String,
+//                           tranferBTC: Decimal,
+//                           isUSDTTx:Bool,
+//                           isCompressed:Bool,
+//                           feeBTC: Decimal,
+//                           unspents: [Unspent],ttnAddress:String) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
+//
+//        let api = SignBTCToTTNTxAPI.init(btcWalletPrivateKey: pkey, fromBTCAddress: fromAddress, toBTCAddress: toAddress, isUSDTTx: false, transferBTC: tranferBTC, feeBTC: feeBTC, compressed: isCompressed, unspents: unspents,ttnAddress:ttnAddress)
+//        return fire(router: .blockchain(.signBTCToTTNTxAPI(api)))
+//
+//    }
     
     //MARK: - http://125.227.132.127:3206/topChain/newSignAll/{cic private key}/{}
     func signTTNTx(fromAsset: Asset,

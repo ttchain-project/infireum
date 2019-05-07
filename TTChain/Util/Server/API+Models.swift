@@ -358,19 +358,24 @@ struct GetBTCUnspentAPIModel: KLJSONMappableMoyaResponse {
         
         let target = sourceAPI.targetAmt
         let fromAddress = sourceAPI.btcAddress
+        
         let maxToMinUnspents: [Unspent] = unspentJSONs.compactMap { (uJSON) -> Unspent? in
-            guard let addr = uJSON["address"].string, addr == fromAddress,
-                let txid = uJSON["txid"].string,
-                let amount = uJSON["amount"].number?.decimalValue,
-                let confirmations = uJSON["confirmations"].int,
-                let vout = uJSON["vout"].int else {
-                    return nil
-            }
+//            guard let addr = uJSON["address"].string, addr == fromAddress,
+//                let txid = uJSON["txid"].string,
+//                let amount = uJSON["amount"].number?.decimalValue,
+//                let confirmations = uJSON["confirmations"].int,
+//                let vout = uJSON["vout"].int else {
+//                    return nil
+//            }
             
-            let unspent = Unspent(txid: txid, btcAmount: amount, confirmation: confirmations, vout: vout)
-            return unspent
+            
+            
+            guard let object = try? JSONDecoder().decode(Unspent.self, from: try! uJSON.rawData()) else {
+                return nil
             }
-            .sorted { $0.btcAmount > $1.btcAmount }
+            return object.address != fromAddress ? nil : object
+            }
+            .sorted { $0.amount > $1.amount }
         
         var usedUnspents: [Unspent] = []
         var accumulatedUnspentAmount: Decimal = 0
@@ -380,7 +385,7 @@ struct GetBTCUnspentAPIModel: KLJSONMappableMoyaResponse {
             let unspent = maxToMinUnspents[i]
             usedUnspents.append(unspent)
             
-            accumulatedUnspentAmount += unspent.btcAmount
+            accumulatedUnspentAmount += unspent.amount.decimalValue
             i += 1
         }
         
@@ -418,8 +423,8 @@ struct SignBTCTxAPI: KLMoyaAPIData {
     var method: Moya.Method { return .post }
     
     var task: Task {
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - ((isUSDTTx ? 0 : transferBTC) + feeBTC)
+        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC.decimalValue - ((isUSDTTx ? 0 : transferBTC) + feeBTC)
         guard changeBTC >= 0 else {
             return errorDebug(response: Moya.Task.requestPlain)
         }
@@ -1326,8 +1331,8 @@ struct LTSignBTCRelayTxAPI: KLMoyaAPIData {
     var task: Task {
         guard let _epKey = epKey else { return Moya.Task.requestPlain }
         
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - (transferBTC + feeBTC)
+        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC.decimalValue - (transferBTC + feeBTC)
         guard changeBTC >= 0 else {
             return errorDebug(response: Moya.Task.requestPlain)
         }
@@ -1790,8 +1795,8 @@ struct SignBTCToTTNTxAPI: KLMoyaAPIData {
     var method: Moya.Method { return .post }
     
     var task: Task {
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - ((isUSDTTx ? 0 : transferBTC) + feeBTC)
+        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC.decimalValue - ((isUSDTTx ? 0 : transferBTC) + feeBTC)
         guard changeBTC >= 0 else {
             return errorDebug(response: Moya.Task.requestPlain)
         }

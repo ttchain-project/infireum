@@ -131,8 +131,8 @@ extension TransferManager {
         //        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
         //        info.feeAmt = Decimal.init(amt)
         
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
+        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC.decimalValue - (info.withdrawalAmt + info.totalFee)
         
         if changeBTC < 0 {
             return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
@@ -146,8 +146,8 @@ extension TransferManager {
         //        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
         //        info.feeAmt = Decimal.init(amt)
         
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - info.totalFee
+        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC.decimalValue - info.totalFee
         
         if changeBTC < 0 {
             return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
@@ -329,15 +329,15 @@ extension TransferManager {
                 return self.getBTCUnspent(fromInfo: withdrawalInfo)
             }
             }.flatMap {
-                [unowned self] result -> RxAPIResponse<SignBTCToTTNTxAPIModel> in
+                [unowned self] result -> RxAPIResponse<String> in
                 switch result {
                 case .failed(error: let err):
                     return .just(.failed(error: err))
                 case .success(let model):
                     switch model.result {
                     case .unspents(let unspents):
-                       
-                        return self.signBTCToTTNTx(info: withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed,ttnAddress:ttnAsset.wallet!.address!)
+                       let unspentTx = unspents.map { return $0.unspendTx }
+                        return SignBTCTransaction.getSignTx(withInfo: info, forUnspents: unspentTx, ttnAddress: ttnAsset.wallet!.address!, isCompressed: isAddressCompressed)
     
                     case .insufficient:
                         let dls = LM.dls
@@ -359,7 +359,7 @@ extension TransferManager {
                     return .just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)
-                    return self.broadcastBTC(with: model.signText, withComments: withdrawalInfo.note ?? "")
+                    return self.broadcastBTC(with: model, withComments: withdrawalInfo.note ?? "")
                 }
             }.flatMap {
                 [unowned self] result -> RxAPIResponse<(String?)> in
@@ -403,18 +403,18 @@ extension TransferManager {
             .disposed(by: bag)
     }
     
-    func signBTCToTTNTx(info :WithdrawalInfo, unspents: [Unspent],isCompressed:Bool,ttnAddress:String) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
-        
-        if changeBTC < 0 {
-            return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
-        }
-        return Server.instance.signBTCToTTNTxAPI(pkey: info.wallet.pKey,
-                                                 fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, isCompressed: isCompressed, feeBTC: info.totalFee,
-                                                 unspents: unspents,ttnAddress:ttnAddress)
-    }
-    
+//    func signBTCToTTNTx(info :WithdrawalInfo, unspents: [Unspent],isCompressed:Bool,ttnAddress:String) -> RxAPIResponse<SignBTCToTTNTxAPIModel> {
+//        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+//        let changeBTC = totalUnspentBTC.decimalValue - (info.withdrawalAmt + info.totalFee)
+//
+//        if changeBTC < 0 {
+//            return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
+//        }
+//        return Server.instance.signBTCToTTNTxAPI(pkey: info.wallet.pKey,
+//                                                 fromAddress: info.wallet.address!, toAddress: info.address, tranferBTC: info.withdrawalAmt, isUSDTTx:false, isCompressed: isCompressed, feeBTC: info.totalFee,
+//                                                 unspents: unspents,ttnAddress:ttnAddress)
+//    }
+//
     func saveCorrespondingTxToBTCTTN(txId:String,info:WithdrawalInfo,ttnAsset:Asset) {
         
         DB.instance.create(type: TransRecord.self, setup: { (rec) in

@@ -889,6 +889,9 @@
 		55F987C4227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F987C3227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift */; };
 		55F987C5227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F987C3227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift */; };
 		55F987C6227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F987C3227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift */; };
+		55F987C8227FE5B7000C32F9 /* SignBTCTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F987C7227FE5B7000C32F9 /* SignBTCTransaction.swift */; };
+		55F987C9227FE5B7000C32F9 /* SignBTCTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F987C7227FE5B7000C32F9 /* SignBTCTransaction.swift */; };
+		55F987CA227FE5B7000C32F9 /* SignBTCTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F987C7227FE5B7000C32F9 /* SignBTCTransaction.swift */; };
 		64083D0021101DC300DE1C31 /* TxFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64083CFF21101DC300DE1C31 /* TxFilter.swift */; };
 		64083D0121101DC300DE1C31 /* TxFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64083CFF21101DC300DE1C31 /* TxFilter.swift */; };
 		64083D0221101DC300DE1C31 /* TxFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64083CFF21101DC300DE1C31 /* TxFilter.swift */; };
@@ -2459,6 +2462,7 @@
 		55F987BB227BE59F000C32F9 /* LightDepositWalletChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightDepositWalletChooseViewController.swift; sourceTree = "<group>"; };
 		55F987BC227BE59F000C32F9 /* LightDepositWalletChooseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightDepositWalletChooseViewController.xib; sourceTree = "<group>"; };
 		55F987C3227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightDepositWalletChooseViewModel.swift; sourceTree = "<group>"; };
+		55F987C7227FE5B7000C32F9 /* SignBTCTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignBTCTransaction.swift; sourceTree = "<group>"; };
 		59C4B87EB06708C0D8E5036F /* Pods-TTChainTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChainTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTChainTests/Pods-TTChainTests.release.xcconfig"; sourceTree = "<group>"; };
 		5CB0825A1656DF550CAAF6E6 /* Pods-TTChain_SIT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChain_SIT.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTChain_SIT/Pods-TTChain_SIT.release.xcconfig"; sourceTree = "<group>"; };
 		64083CFF21101DC300DE1C31 /* TxFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxFilter.swift; sourceTree = "<group>"; };
@@ -4113,6 +4117,14 @@
 				55F987C3227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift */,
 			);
 			path = LightDepositWalletChoose;
+			sourceTree = "<group>";
+		};
+		55F987CB227FEA09000C32F9 /* BTCTransactionSign */ = {
+			isa = PBXGroup;
+			children = (
+				55F987C7227FE5B7000C32F9 /* SignBTCTransaction.swift */,
+			);
+			path = BTCTransactionSign;
 			sourceTree = "<group>";
 		};
 		64083CF02110182500DE1C31 /* Tx */ = {
@@ -6204,6 +6216,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				55F987CB227FEA09000C32F9 /* BTCTransactionSign */,
 				55A3D25A2270129B002ABE13 /* TTNWalletSetup */,
 				55D4C7CC2253654E005F3BEF /* PhotoCropper */,
 				555E4AA1224B508900C7CAD5 /* TTChainTransfer */,
@@ -7972,6 +7985,7 @@
 				64B98ED420F98E9B00C4EB11 /* LightningTransactionViewController.swift in Sources */,
 				64083D0221101DC300DE1C31 /* TxFilter.swift in Sources */,
 				55EF6B1921A812C7007E074A /* ChatListViewModel.swift in Sources */,
+				55F987CA227FE5B7000C32F9 /* SignBTCTransaction.swift in Sources */,
 				649E484D20E7D97800B217AD /* SystemWalletTableHeaderView.swift in Sources */,
 				64F07DD520D241A000A60C5C /* GTThemeExtensions.swift in Sources */,
 				55D7D1C02238F8C000309A22 /* IncomingCallViewModel.swift in Sources */,
@@ -8491,6 +8505,7 @@
 				6473AE9621421DC1009FB8E9 /* APIWalletCreateResult.swift in Sources */,
 				6470D66520F253C500EB0780 /* KLTransferConfirmAnimator.swift in Sources */,
 				55EF6B1721A812C7007E074A /* ChatListViewModel.swift in Sources */,
+				55F987C8227FE5B7000C32F9 /* SignBTCTransaction.swift in Sources */,
 				649E483220E7CED900B217AD /* ChangeWalletViewController.swift in Sources */,
 				6470D6A720F355A400EB0780 /* WithdrawalETHFeeInputViewModel.swift in Sources */,
 				55D7D1BE2238F8C000309A22 /* IncomingCallViewModel.swift in Sources */,
@@ -9003,6 +9018,7 @@
 				640D88ED20EF0D890010D986 /* AssetDetailViewController.swift in Sources */,
 				6470D6C620F35BD800EB0780 /* WithdrawalETHFeeInfoQuickModeViewController.swift in Sources */,
 				55EF6B1821A812C7007E074A /* ChatListViewModel.swift in Sources */,
+				55F987C9227FE5B7000C32F9 /* SignBTCTransaction.swift in Sources */,
 				64B2773320D8AE0B004FF75B /* OWQRCodeViewController.swift in Sources */,
 				640D88C820EDBAAA0010D986 /* ImportWalletViaPrivateKeyViewModel.swift in Sources */,
 				55D7D1BF2238F8C000309A22 /* IncomingCallViewModel.swift in Sources */,

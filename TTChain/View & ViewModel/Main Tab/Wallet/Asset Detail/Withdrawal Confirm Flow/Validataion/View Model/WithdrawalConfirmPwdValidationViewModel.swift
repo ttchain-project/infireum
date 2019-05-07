@@ -270,8 +270,8 @@ extension WithdrawalConfirmPwdValidationViewModel {
 //        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
 //        info.feeAmt = Decimal.init(amt)
         
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - (info.withdrawalAmt + info.totalFee)
+        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC.decimalValue - (info.withdrawalAmt + info.totalFee)
         
         if changeBTC < 0 {
             return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
@@ -285,8 +285,8 @@ extension WithdrawalConfirmPwdValidationViewModel {
 //        let amt = BTCFeeCalculator.txSizeInByte(ofInfo: info, unspents: unspents)
 //        info.feeAmt = Decimal.init(amt)
         
-        let totalUnspentBTC = unspents.map { $0.btcAmount }.reduce(0, +)
-        let changeBTC = totalUnspentBTC - info.totalFee
+        let totalUnspentBTC = unspents.map { $0.amount }.reduce(0, +)
+        let changeBTC = totalUnspentBTC.decimalValue - info.totalFee
         
         if changeBTC < 0 {
             return RxAPIResponse.just(APIResult.failed(error: GTServerAPIError.incorrectResult(LM.dls.lightningTx_error_insufficient_asset_amt(info.feeCoin.inAppName!), "")))
