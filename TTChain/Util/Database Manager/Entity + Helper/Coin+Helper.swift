@@ -430,7 +430,9 @@ extension Coin {
         switch self.identifier {
         case Coin.ttn_identifier :
             return 18
-        case Coin.btcn_identifier :
+        case Coin.btcn_identifier:
+            fallthrough
+        case Coin.usdtn_identifier:
             return 8
         default:
             return self.digit

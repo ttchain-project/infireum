@@ -26,7 +26,6 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
     
     func concatInput() {
         (input.amtStrInout <-> _transferAmtStr).disposed(by: bag)
-
     }
     func concatOutput() {
         
@@ -34,20 +33,20 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
   
     func bindInternalLogic() {
         
-        let sortDescriptor = NSSortDescriptor.init(key: "isFromSystem", ascending: false)
-        let predForBTC = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.btc.rawValue))
-        guard let btcWallet = DB.instance.get(type: Wallet.self, predicate: predForBTC, sorts: [sortDescriptor])?.first else {
-            return
-        }
-        
-        guard btcWallet.isFromSystem else {
-            return
-        }
-        guard let asset = btcWallet.getAsset(of: btcWallet.mainCoin!) else {
-            return
-        }
-        
-        self.fromAsset.accept(asset)
+//        let sortDescriptor = NSSortDescriptor.init(key: "isFromSystem", ascending: false)
+//        let predForBTC = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: ChainType.btc.rawValue))
+//        guard let btcWallet = DB.instance.get(type: Wallet.self, predicate: predForBTC, sorts: [sortDescriptor])?.first else {
+//            return
+//        }
+//
+//        guard btcWallet.isFromSystem else {
+//            return
+//        }
+//        guard let asset = btcWallet.getAsset(of: btcWallet.mainCoin!) else {
+//            return
+//        }
+//
+//        self.fromAsset.accept(asset)
         
         _transferAmtStr.map {
             Decimal.init(string: $0 ?? "")
@@ -72,7 +71,9 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
     var bag = DisposeBag()
     
     struct Input {
+        
         let toAsset:Asset
+        let fromAsset:Asset
         let amtStrInout: ControlProperty<String?>
 
     }
@@ -82,7 +83,7 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
     }()
     
     lazy var fromAsset:BehaviorRelay<Asset?> = {
-        return BehaviorRelay.init(value: nil)
+        return BehaviorRelay.init(value: self.input.fromAsset)
     }()
     
     lazy var toAsset:BehaviorRelay<Asset> = {

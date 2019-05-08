@@ -17,7 +17,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
     func config(constructor: LightDepositWalletChooseViewController.Config) {
         self.view.layoutIfNeeded()
         
-        self.viewModel = ViewModel.init(input: LightDepositWalletChooseViewModel.Input.init(toAsset: constructor.asset, amtStrInout: self.transferAmountTextField.rx.text), output:())
+        self.viewModel = ViewModel.init(input: LightDepositWalletChooseViewModel.Input.init(toAsset: constructor.toAsset, fromAsset: constructor.fromAsset, amtStrInout: self.transferAmountTextField.rx.text), output:())
         bindViewModel()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
@@ -31,7 +31,8 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
     typealias Constructor = Config
     
     struct Config {
-        let asset:Asset
+        let toAsset:Asset
+        let fromAsset:Asset
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,9 +98,6 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
         self.doneButton.rx.klrx_tap.asDriver().drive(onNext: {[unowned self] _ in
             self.startTransfer()
         }).disposed(by: bag)
-        
-
-       
 
     }
     override func renderTheme(_ theme: Theme) {
@@ -131,8 +129,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
     }
     override func renderLang(_ lang: Lang) {
         self.walletTitleLabel.text = lang.dls.payment_wallet
-        self.navigationItem.title = "BTC" + lang.dls.light_deposit_btn_title
-        depositAddressTitile.text = ""
+        self.navigationItem.title = "\(self.viewModel.input.fromAsset.coin!.inAppName!) \(lang.dls.light_deposit_btn_title)"
         
         transferAmountTextField.set(placeholder: lang.dls.withdrawal_placeholder_withdrawalAmt)
         transAmountTitleLabel.text = lang.dls.transfer_amount_title

@@ -248,8 +248,6 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                     let usdtBal = Decimal.init(string:tokenDict["usdtn"]?.string ?? "") ?? 0
                     let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
                     let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
-                
-                   
                     
                     switch sourceAPI.asset.coinID {
                     case Coin.usdtn_identifier:
@@ -1724,7 +1722,7 @@ struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
         let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
         let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
         
-        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnit, ethnBalance: ethnBal*rateToCoinUnit, btcnBalance: btcnBal*rateToCoinUnitBTCN)
+        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnitBTCN, ethnBalance: ethnBal*rateToCoinUnit, btcnBalance: btcnBal*rateToCoinUnitBTCN)
     }
 }
 
@@ -1904,9 +1902,9 @@ struct SignTTNTxAPI:KLMoyaAPIData {
             "PrivateKey" : epKey ?? ""
         ]
         
-        if fromAsset.coinID == Coin.btcn_identifier {
+        if fromAsset.coinID != Coin.ttn_identifier {
             let balance = self.transType == .btcnWithdraw ? transferAmt_smallestUnit + feeInSmallestUnit : transferAmt_smallestUnit
-            let outDict = ["balance":balance.asString(digits: 0),"token" : "btcn"]
+            let outDict = ["balance":balance.asString(digits: 0),"token" : fromAsset.coin?.chainName?.lowercased() ?? ""]
             let outArray : [[String:String]] = [outDict]
             param["out"] = outArray
             param["balance"] = "0"

@@ -128,7 +128,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     
     private func bindViewModel() {
         let coin = viewModel.input.asset.coin!
-        title = viewModel.input.asset.coin?.inAppName
+        title = viewModel.input.asset.coin?.inAppName?.replacingOccurrences(of: "BTCN", with: "BTC")
         
         viewModel.records
             .subscribe(

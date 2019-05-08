@@ -104,6 +104,14 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
             feeAmtStr = "0.1 TTN"
             coinName = ""
         } else if ( transRecord.fromCoinID == Coin.btcn_identifier) {
+            
+        }
+
+        switch transRecord.fromCoinID! {
+        case Coin.ttn_identifier:
+            feeAmtStr = "0.1 TTN"
+            coinName = ""
+        case Coin.btcn_identifier,Coin.usdtn_identifier:
             if (transRecord.fromAddress == "e658e4a47103b4578fd2ba6aa52af1b9fc67c129") {  //deposit
                 feeAmtStr = "請查看BTC錢包"
             } else if (transRecord.toAddress == "e658e4a47103b4578fd2ba6aa52af1b9fc67c129") { //withdraw
@@ -112,8 +120,10 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
                 feeAmtStr = "0.1 TTN"
             }
             coinName = ""
+        default:
+            break
         }
-
+        
         self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + coinName
         
         self.startMonitorLangIfNeeded()

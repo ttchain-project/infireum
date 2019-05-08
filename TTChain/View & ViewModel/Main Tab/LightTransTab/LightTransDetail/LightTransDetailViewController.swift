@@ -111,7 +111,7 @@ class LightTransDetailViewController: UIViewController {
     
     func viewModelBinding() {
         self.viewModel.input.asset.map {
-            $0.coin?.inAppName
+            $0.coin?.inAppName?.replacingOccurrences(of: "BTCN", with: "BTC")
         }.bind(to: self.navigationItem.rx.title).disposed(by: bag)
     }
     

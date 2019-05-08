@@ -8,6 +8,7 @@
 
 import Foundation
 import HDWalletKit
+import CryptoSwift
 
 class TTNWalletManager {
     @discardableResult
@@ -42,4 +43,22 @@ class TTNWalletManager {
         
         return Wallet.create(identity: Identity.singleton!, source: source)
     }
+}
+
+extension TTNWalletManager{
+    static func getBase58Address(forAddress addr:String) -> String{
+        let addrWithPrefix = "00" + addr
+        let hexAddressData = Data.init(hex: addrWithPrefix)
+        let hash = hexAddressData.sha256().sha256()
+        let hexHash = hash.toHexString()
+        let addrString = addrWithPrefix + String(hexHash.prefix(8))
+        let base58 =  Base58.encode(Data.fromHex(addrString)!)
+        return base58
+    }
+    
+//    static func getTTNAddressDataForScript(addr:String) -> Data {
+//        let hexAddressData = Data.fromHex(addr.toHexString())
+//        let hash = hexAddressData!.sha256().sha256()
+//        return hash
+//    }
 }

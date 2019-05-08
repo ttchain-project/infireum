@@ -87,7 +87,24 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
 
     }
     func showDepositAction(asset:Asset) {
-        let vc = LightDepositWalletChooseViewController.navInstance(from: LightDepositWalletChooseViewController.Config(asset:asset))
+                
+        guard let wallets = Identity.singleton!.wallets?.array as? [Wallet] else {
+            return
+        }
+        let sysWallets = wallets.filter { $0.isFromSystem }
+       
+        let fromAsset:Asset? = {
+            switch asset.coinID {
+            case Coin.btcn_identifier:
+                return sysWallets.filter { $0.walletMainCoinID == Coin.btc_identifier }.first!.getAsset(of: Coin.btc)
+            case Coin.usdtn_identifier:
+                return sysWallets.filter { $0.walletMainCoinID == Coin.btc_identifier }.first!.getAsset(of: Coin.USDT)
+            default:
+                return nil
+            }
+        }()
+        
+        let vc = LightDepositWalletChooseViewController.navInstance(from: LightDepositWalletChooseViewController.Config(toAsset: asset, fromAsset: fromAsset!))
         self.present(vc, animated: true, completion: nil)
     }
     
