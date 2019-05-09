@@ -112,9 +112,9 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
             feeAmtStr = "0.1 TTN"
             coinName = ""
         case Coin.btcn_identifier,Coin.usdtn_identifier:
-            if (transRecord.fromAddress == "e658e4a47103b4578fd2ba6aa52af1b9fc67c129") {  //deposit
+            if (transRecord.fromAddress == C.TTNTx.officialTTNAddress) {  //deposit
                 feeAmtStr = "請查看BTC錢包"
-            } else if (transRecord.toAddress == "e658e4a47103b4578fd2ba6aa52af1b9fc67c129") { //withdraw
+            } else if (transRecord.toAddress == C.TTNTx.officialTTNAddress) { //withdraw
                 feeAmtStr = "0.1 TTN, 0.00020546 BTC⚡"
             } else {
                 feeAmtStr = "0.1 TTN"

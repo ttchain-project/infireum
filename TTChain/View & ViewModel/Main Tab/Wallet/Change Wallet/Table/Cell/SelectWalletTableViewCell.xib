@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="78" id="KGk-i7-Jjw" customClass="SelectWalletTableViewCell" customModule="Hope_Seed" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="336" height="78"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="104" id="KGk-i7-Jjw" customClass="SelectWalletTableViewCell" customModule="Hope_Seed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="336" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="336" height="77.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="336" height="103.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMa-Jy-GAS">
@@ -25,19 +25,27 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNy-u9-IpH">
+                        <rect key="frame" x="15" y="46.5" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="btnListCheck" translatesAutoresizingMaskIntoConstraints="NO" id="3tE-p7-3qM">
                         <rect key="frame" x="311" y="20" width="15" height="11.5"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lV6-7f-Kk3">
-                        <rect key="frame" x="15" y="46.5" width="301" height="21"/>
+                        <rect key="frame" x="15" y="72.5" width="301" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lV6-7f-Kk3" firstAttribute="top" secondItem="eMa-Jy-GAS" secondAttribute="bottom" constant="5" id="5u2-nW-jC6"/>
+                    <constraint firstItem="TNy-u9-IpH" firstAttribute="leading" secondItem="eMa-Jy-GAS" secondAttribute="leading" id="7eZ-dl-beJ"/>
                     <constraint firstItem="lV6-7f-Kk3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Hi0-hK-9S3"/>
+                    <constraint firstItem="lV6-7f-Kk3" firstAttribute="top" secondItem="TNy-u9-IpH" secondAttribute="bottom" constant="5" id="IYh-Bm-lmW"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TNy-u9-IpH" secondAttribute="trailing" constant="20" id="Onu-ED-CEX"/>
                     <constraint firstAttribute="trailing" secondItem="3tE-p7-3qM" secondAttribute="trailing" constant="10" id="UZJ-K3-h12"/>
                     <constraint firstItem="eMa-Jy-GAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="VDj-AL-CXa"/>
                     <constraint firstAttribute="trailing" secondItem="lV6-7f-Kk3" secondAttribute="trailing" constant="20" id="Yun-Vg-7lV"/>
@@ -46,15 +54,17 @@
                     <constraint firstAttribute="bottom" secondItem="lV6-7f-Kk3" secondAttribute="bottom" constant="10" id="ldw-lz-ig4"/>
                     <constraint firstItem="eMa-Jy-GAS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="sMp-oT-bRG"/>
                     <constraint firstItem="3tE-p7-3qM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" symbolic="YES" id="v0x-mt-Iuf"/>
+                    <constraint firstItem="TNy-u9-IpH" firstAttribute="top" secondItem="eMa-Jy-GAS" secondAttribute="bottom" constant="5" id="zff-f4-zc4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="walletAddressLabel" destination="TNy-u9-IpH" id="KGS-DF-bZP"/>
                 <outlet property="walletAmountLabel" destination="lV6-7f-Kk3" id="xag-6Z-UvN"/>
                 <outlet property="walletNameLabel" destination="eMa-Jy-GAS" id="OkQ-KH-qhj"/>
                 <outlet property="walletSelectedImage" destination="3tE-p7-3qM" id="qQa-IF-YVQ"/>
             </connections>
-            <point key="canvasLocation" x="150.40000000000001" y="166.41679160419793"/>
+            <point key="canvasLocation" x="150.40000000000001" y="178.11094452773614"/>
         </tableViewCell>
     </objects>
     <resources>

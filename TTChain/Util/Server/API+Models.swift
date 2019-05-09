@@ -1871,7 +1871,7 @@ struct SignTTNTxAPI:KLMoyaAPIData {
         case btcnWithdraw
     }
     
-    var input: String { return transType == .btcnWithdraw ? "b2bbbbbb0000000000000001" + toAddress : ""}
+    var input: String { return transType == .btcnWithdraw ? C.TTNTx.withdrawInputPrefix + toAddress : ""}
     
     var base: APIBaseEndPointType {
         let urlString = "http://3.112.106.186:9997"
@@ -1893,7 +1893,7 @@ struct SignTTNTxAPI:KLMoyaAPIData {
         
         var param : [String:Any] = [
             "fee" : "0",
-            "address" : transType == .btcnWithdraw ? "e658e4a47103b4578fd2ba6aa52af1b9fc67c129" : toAddress,
+            "address" : transType == .btcnWithdraw ? C.TTNTx.officialTTNAddress : toAddress,
             "crypto" : "cic",
             "balance" : transferAmt_smallestUnit.asString(digits: 0),
             "nonce" : nonce,
@@ -2051,12 +2051,16 @@ struct GetTTNTxRecordsAPIModel: KLJSONMappableMoyaResponse {
             var balance:Decimal?
             var coin:Coin?
             if let outArray = txJSON["out"].array, let outDict = outArray.first {
-                if let token = outDict["token"].string, token == "btcn" {
+                if let token = outDict["token"].string
+                {
                     balance = Decimal.init(string:outDict["balance"].string ?? "") ?? 0
-                    coin = Coin.getCoin(ofIdentifier: Coin.btcn_identifier)!
-                    
-                    if let input = txJSON["input"].string, input.contains("b2bbbbbb0000000000000001", caseSensitive: false) {
-                        to = input.replacingOccurrences(of: "b2bbbbbb0000000000000001", with: "")
+                    if let input = txJSON["input"].string, input.contains(C.TTNTx.withdrawInputPrefix, caseSensitive: false) {
+                        to = input.replacingOccurrences(of: C.TTNTx.withdrawInputPrefix, with: "")
+                    }
+                    if token == "btcn" {
+                        coin = Coin.getCoin(ofIdentifier: Coin.btcn_identifier)!
+                    }else if token == "usdtn" {
+                            coin = Coin.getCoin(ofIdentifier: Coin.usdtn_identifier)!
                     }
                 }
                 

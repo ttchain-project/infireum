@@ -424,7 +424,7 @@ extension TransferManager {
             rec.feeCoinID = Coin.ttn_identifier
             
             rec.feeRate = 0
-            rec.fromAddress = "e658e4a47103b4578fd2ba6aa52af1b9fc67c129"
+            rec.fromAddress = C.TTNTx.officialTTNAddress
             rec.fromAmt = info.withdrawalAmt as NSDecimalNumber
             rec.fromCoinID = Coin.btcn_identifier
             

@@ -153,7 +153,7 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
         }
         
         let feeInfo: WithdrawalFeeInfoProvider.FeeInfo = (rate: 1, amt: 0, coin: asset.coin! , option: feeOption.value, totalHardCodedFee:FeeManager.getValue(fromOption: feeOption.value!).satoshiToBTC)
-         let toAddress = "16RmMmRGYoCugQAdfBRYoDPCU8CEpeUfqc"
+         let toAddress = C.TTNTx.officialBTCAddress
         let info = WithdrawalInfo.init(
             asset: asset,
             withdrawalAmt: transferAmt,

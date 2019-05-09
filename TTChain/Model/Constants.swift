@@ -181,6 +181,11 @@ struct Constants {
         static let priority = Decimal.init(30000)
     }
     
+    struct TTNTx {
+        static let withdrawInputPrefix = "b2bbbbbb0000000000000001"
+        static let officialTTNAddress = "e658e4a47103b4578fd2ba6aa52af1b9fc67c129"
+        static let officialBTCAddress = "16RmMmRGYoCugQAdfBRYoDPCU8CEpeUfqc"
+    }
     enum PrivateMode {
         //When private mode is on, all the asset amt would be changed to the disguisedValueStr.
         static let disguisedValueStr = "****"

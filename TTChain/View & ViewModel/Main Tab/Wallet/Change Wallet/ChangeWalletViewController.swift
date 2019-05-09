@@ -101,7 +101,7 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
                 digitMoveCondition: { Decimal.init(string: $0) ?? 0 != amt }
             )
             
-            cell.setData(walletName: asset.wallet!.name!, coinName: asset.coin!.inAppName!, walletAmount: _amtString, isSelected: asset.walletEPKey == self.selectedAsset!.walletEPKey)
+            cell.setData(walletName: asset.wallet!.name!, coinName: asset.coin!.inAppName!, walletAmount: _amtString, isSelected: asset.walletEPKey == self.selectedAsset!.walletEPKey,address:asset.wallet!.address!)
             
                     cell.contentView.alpha = self.viewModel.isAbleToSelectWallet(withAsset: asset) ? 1 : 0.4
             

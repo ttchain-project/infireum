@@ -104,7 +104,7 @@ extension LightTransferManager {
     }
     
     private func signTTNTx(with info: WithdrawalInfo, nonce: Int,isWithdrawal:Bool) -> RxAPIResponse<SignTTNTxAPIModel> {
-        guard let wallet = info.asset.wallet
+        guard info.asset.wallet != nil
             else {
                 return RxAPIResponse.just(.failed(error: .noData))
         }
