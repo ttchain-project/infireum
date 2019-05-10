@@ -83,7 +83,7 @@ extension TransferManager {
                     return .just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)
-                    return self.broadcastBTC(with: model, withComments: withdrawalInfo.note ?? "")
+                    return self.broadcastBTC(with: model.signText, withComments: withdrawalInfo.note ?? "")
                 }
             }.flatMap {
                 [unowned self] result -> RxAPIResponse<(String?)> in
