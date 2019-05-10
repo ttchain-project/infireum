@@ -23,7 +23,7 @@ final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC,With
 
         }else {
             Observable.combineLatest(Observable.of(FeeManager.getValue(fromOption: .ttn(.systemDefault))), Observable.of(FeeManager.getValue(fromOption: .ttn(.btcnWithdrawal)))).map { (fee,feeBtcn) -> String in
-                return fee.asString(digits: 4) + "TTN, " + feeBtcn.asString(digits:8) + "BTC⚡"
+                return fee.asString(digits: 4) + "TTN, " + feeBtcn.satoshiToBTC.asString(digits:8) + "BTC⚡"
                 }.bind(to: self.totalMinorFee.rx.text).disposed(by: bag)
             
         }

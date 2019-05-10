@@ -358,19 +358,23 @@ struct GetBTCUnspentAPIModel: KLJSONMappableMoyaResponse {
         let fromAddress = sourceAPI.btcAddress
         
         let maxToMinUnspents: [Unspent] = unspentJSONs.compactMap { (uJSON) -> Unspent? in
-//            guard let addr = uJSON["address"].string, addr == fromAddress,
-//                let txid = uJSON["txid"].string,
-//                let amount = uJSON["amount"].number?.decimalValue,
-//                let confirmations = uJSON["confirmations"].int,
-//                let vout = uJSON["vout"].int else {
-//                    return nil
-//            }
-            
-            
-            
-            guard let object = try? JSONDecoder().decode(Unspent.self, from: try! uJSON.rawData()) else {
-                return nil
+            guard let addr = uJSON["address"].string, addr == fromAddress,
+                let txid = uJSON["txid"].string,
+                let amount = uJSON["amount"].number?.decimalValue,
+                let confirmations = uJSON["confirmations"].int,
+                let vout = uJSON["vout"].int,
+            let scriptPubKey = uJSON["scriptPubKey"].string,
+            let satoshis = uJSON["satoshis"].int
+            else {
+                    return nil
             }
+            
+            
+            let height = uJSON["height"].int ?? 0
+            let object = Unspent.init(address: addr, amount: amount, confirmations: confirmations, height: height, satoshis: satoshis, scriptPubKey: scriptPubKey, txid: txid, vout: vout)
+//            guard let object = try? JSONDecoder().decode(Unspent.self, from: try! uJSON.rawData()) else {
+//                return nil
+//            }
             return object.address != fromAddress ? nil : object
             }
             .sorted { $0.amount > $1.amount }
@@ -383,7 +387,7 @@ struct GetBTCUnspentAPIModel: KLJSONMappableMoyaResponse {
             let unspent = maxToMinUnspents[i]
             usedUnspents.append(unspent)
             
-            accumulatedUnspentAmount += unspent.amount.decimalValue
+            accumulatedUnspentAmount += unspent.amount
             i += 1
         }
         

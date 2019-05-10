@@ -12,7 +12,7 @@ import HDWalletKit
 
 struct Unspent:Codable {
     public let address: String
-    public let amount: Double
+    public let amount: Decimal
     public let confirmations: Int
     public let height: Int?
     public let satoshis: Int

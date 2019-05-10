@@ -10,6 +10,14 @@ import Foundation
 import RxSwift
 
 
+enum LightTransferFlowState {
+    /// This is the default state, to notify the view layer the transfer is not happened yet.
+    case waitingUserActivate
+    case signing
+    case broadcasting
+    /// Whether success or not will return this state, and send in the request result.
+    case finished(RxAPIResponse<Void>.E)
+}
 class LightTransferManager {
     
     static let manager = LightTransferManager.init()
@@ -18,7 +26,7 @@ class LightTransferManager {
 
 extension LightTransferManager {
     func startTTNTransfer(fromInfo info: WithdrawalInfo,
-                          progressObserver observer: AnyObserver<TransferFlowState>, isWithdrawal:Bool) {
+                          progressObserver observer: AnyObserver<LightTransferFlowState>, isWithdrawal:Bool) {
         observer.onNext(.signing)
         getTTNNonce(fromInfo: info)
             .flatMap {
@@ -74,14 +82,14 @@ extension LightTransferManager {
                     observer.onNext(.finished(.failed(error: err)))
                     return
                 case .success(( _, let txID)):
-                    guard let transID = txID, let record = self.saveTxToLocal(with: transID, info: info,isWithdrawal: isWithdrawal) else {
+                    guard txID != nil else {
                         let err: GTServerAPIError = .incorrectResult(
                             LM.dls.ltTx_pwdVerify_error_tx_save_fail, ""
                         )
                         observer.onNext(.finished(.failed(error: err)))
                         return
                     }
-                    observer.onNext(.finished(.success(record)))
+                    observer.onNext(.finished(.success(())))
                 }
                 
             })
@@ -113,14 +121,13 @@ extension LightTransferManager {
             let address = info.address
         
         let feeAmt = isWithdrawal ? FeeManager.getValue(fromOption: .ttn(.btcnWithdrawal)) : 0
-        let feeInTTNSmallestUnit = feeAmt * pow(10, Int(coin.requiredDigit))
         
         let transferAmt_smallestUnit = info.withdrawalAmt * pow(10, Int(coin.requiredDigit))
         return Server.instance.signTTNTx(fromAsset: asset,
                                          transferAmt_smallestUnit: transferAmt_smallestUnit,
                                          toAddress: address,
                                          toAddressType: .ttn,
-                                         feeInTTNSmallestUnit: feeInTTNSmallestUnit,
+                                         feeInTTNSmallestUnit: feeAmt,
                                          nonce: nonce, transType: isWithdrawal ? .btcnWithdraw : .ttnTx  )
     }
     

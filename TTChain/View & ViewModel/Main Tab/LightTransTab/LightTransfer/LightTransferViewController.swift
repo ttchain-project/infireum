@@ -355,7 +355,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         }
     }
 
-    private func handleTransferState(_ state: TransferFlowState) {
+    private func handleTransferState(_ state: LightTransferFlowState) {
         let dls = LM.dls
         switch state {
         case .waitingUserActivate:
@@ -370,11 +370,10 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             case .failed(error: let err):
                 hud.stopAnimating()
                 self.showAPIErrorResponsePopUp(from: err, cancelTitle: dls.g_cancel)
-            case .success(let record):
+            case .success(_):
                 hud.updateType(.img(#imageLiteral(resourceName: "iconSpinnerAlertOk")), text: dls.g_success)
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                    OWRxNotificationCenter.instance
-                        .transferRecordCreated(record)
+                   
                     self.navigationController?.dismiss(animated: true, completion: nil)
                     self.hud.stopAnimating()
                 }
@@ -382,7 +381,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         }
     }
     
-    private func startTransfer(info : WithdrawalInfo) -> Observable<TransferFlowState> {
+    private func startTransfer(info : WithdrawalInfo) -> Observable<LightTransferFlowState> {
         //TODO: Complete with two concated observable, signing and broadcasting
         return Observable.create({ (observer) -> Disposable in
             LightTransferManager.manager.startTTNTransfer(fromInfo: info, progressObserver: observer,isWithdrawal: false)
@@ -390,7 +389,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         })
     }
     
-    private func startBTCNWithdrawal(info: WithdrawalInfo) -> Observable<TransferFlowState> {
+    private func startBTCNWithdrawal(info: WithdrawalInfo) -> Observable<LightTransferFlowState> {
         
         return Observable.create({ (observer) -> Disposable in
             LightTransferManager.manager.startTTNTransfer(fromInfo: info, progressObserver: observer,isWithdrawal: true)

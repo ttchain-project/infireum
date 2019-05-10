@@ -197,7 +197,8 @@ class WithdrawalInfoValidator {
             asset: asset,
             withdrawalAmt: transferAmt,
             address: toAddress,
-            feeRate: feeInfo.rate, feeAmt:(feeInfo.totalHardCodedFee != nil) ? feeInfo.totalHardCodedFee! : feeInfo.amt,
+            feeRate: feeInfo.rate,
+            feeAmt:(feeInfo.totalHardCodedFee != nil) ? feeInfo.totalHardCodedFee! : feeInfo.amt,
             feeCoin: feeInfo.coin,
             feeOption: feeInfo.option,
             note: note
