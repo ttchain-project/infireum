@@ -20,15 +20,17 @@ class SignBTCTransaction {
     private var fee:UInt64 = 0
     private var targetValue:UInt64 = 0
     private var isCompressed:Bool = true
-    static func getSignTx(withInfo info: WithdrawalInfo, forUnspents unspents:[UnspentTransaction], ttnAddress:String,isCompressed:Bool) -> RxAPIResponse<String> {
+    
+    static func getSignTxForBTC(withInfo info: WithdrawalInfo, forUnspents unspents:[UnspentTransaction],isCompressed:Bool) -> RxAPIResponse<String> {
+        
         
         let instance = SignBTCTransaction.init()
         instance.fee = NSDecimalNumber(decimal:info.totalFee.btcToSatoshi).uint64Value
-        if info.asset.coinID == Coin.usdt_identifier {
-            instance.fee += (546+546) // extra fee for USDT_tx
-        }
         instance.targetValue = NSDecimalNumber(decimal:info.withdrawalAmt.btcToSatoshi).uint64Value
         instance.isCompressed = isCompressed
+        let fromAddress = try! LegacyAddress(info.wallet.address!, coin: .bitcoin)
+        let toAddress = try! LegacyAddress(info.address, coin: .bitcoin)
+        
         return Single.create { (handler) -> Disposable in
             do {
                 
@@ -37,16 +39,53 @@ class SignBTCTransaction {
                 
                 let change: UInt64 = totalAmount - instance.targetValue - instance.fee
                 
-                let fromAddress = try LegacyAddress(info.wallet.address!, coin: .bitcoin)
-                let toAddress = try LegacyAddress(info.address, coin: .bitcoin)
+                var unsignedTx:UnsignedTransaction
+                instance.destinations = [(toAddress, instance.targetValue), (fromAddress, change)]
+                unsignedTx = try instance.buildUnspentTxForBTCtoBTC(utxos: utxosToSpend)
+                
+                guard let privateKey = PrivateKey.init(pk: info.wallet.pKey, coin: .bitcoin) else {
+                    throw GTServerAPIError.incorrectResult("", "Cant get private key")
+                }
+                let signedTx = try instance.signBtc(unsignedTx, with: privateKey)
+                let signedTxString = signedTx.serialized().hex
+                DLogInfo(signedTxString)
+                handler(.success(.success(signedTxString)))
+            } catch let error{
+                let apiError = error is GTServerAPIError ? (error as! GTServerAPIError) : GTServerAPIError.incorrectResult("", error.localizedDescription)
+                handler(.success(.failed(error: apiError)))
+            }
+            return Disposables.create()
+        }
+        
+    }
+    
+    static func getSignTxForTTNChain(withInfo info: WithdrawalInfo, forUnspents unspents:[UnspentTransaction], ttnAddress:String,isCompressed:Bool) -> RxAPIResponse<String> {
+        
+        let instance = SignBTCTransaction.init()
+        instance.fee = NSDecimalNumber(decimal:info.totalFee.btcToSatoshi).uint64Value
+        if info.asset.coinID == Coin.usdt_identifier {
+            instance.fee += (546+546) // extra fee for USDT_tx
+        }
+        instance.targetValue = NSDecimalNumber(decimal:info.withdrawalAmt.btcToSatoshi).uint64Value
+        instance.isCompressed = isCompressed
+        let fromAddress = try! LegacyAddress(info.wallet.address!, coin: .bitcoin)
+        let toAddress = try! LegacyAddress(info.address, coin: .bitcoin)
+
+        return Single.create { (handler) -> Disposable in
+            do {
+                
+                let utxosToSpend = try instance.select(info: info, utxos: unspents)
+                let totalAmount = utxosToSpend.sum()
+                
+                let change: UInt64 = totalAmount - instance.targetValue - instance.fee
                 
                 var unsignedTx:UnsignedTransaction
                 if info.asset.coinID == Coin.usdt_identifier {
                     instance.destinations = [(fromAddress, change),(toAddress, 546)]
-                    unsignedTx = try instance.buildUnspendTxForUSDTN(utxos: utxosToSpend,ttnAddress: ttnAddress)
+                    unsignedTx = try instance.buildUnspendTxForUSDTNtoTTN(utxos: utxosToSpend,ttnAddress: ttnAddress)
                 }else {
                     instance.destinations = [(toAddress, instance.targetValue), (fromAddress, change)]
-                    unsignedTx = try instance.buildUnspentTxForBTC(utxos: utxosToSpend,ttnAddress: ttnAddress)
+                    unsignedTx = try instance.buildUnspentTxForBTCtoTTN(utxos: utxosToSpend,ttnAddress: ttnAddress)
                 }
                 guard let privateKey = PrivateKey.init(pk: info.wallet.pKey, coin: .bitcoin) else {
                     throw GTServerAPIError.incorrectResult("", "Cant get private key")
@@ -65,8 +104,7 @@ class SignBTCTransaction {
     }
     
 
-    func buildUnspendTxForUSDTN(utxos:[UnspentTransaction],ttnAddress:String) throws -> UnsignedTransaction {
-        
+    func buildUnspendTxForUSDTNtoTTN(utxos:[UnspentTransaction],ttnAddress:String) throws -> UnsignedTransaction {
         
         var outputs = [TransactionOutput]()
         
@@ -87,21 +125,13 @@ class SignBTCTransaction {
 
         
         let base58TTNAddress = TTNWalletManager.getBase58Address(forAddress:ttnAddress)
-        
-//        let script = try! Script().append(.OP_DUP)
-//            .append(.OP_HASH160)
-//            .appendData(base58TTNAddress)
-//            .append(.OP_EQUALVERIFY)
-//            .append(.OP_CHECKSIG)
-        
+
         guard let address = try? LegacyAddress.init(base58TTNAddress, coin: .bitcoin) else {
             throw GTServerAPIError.incorrectResult("","Failed to create base58 ttn address")
         }
         
-        
         guard let lockingScript = Script.init(address: address)?.data else {
             throw GTServerAPIError.incorrectResult("","Failed to create LockingScript")
-
         }
         outputs.append(TransactionOutput.init(value: 546, lockingScript: lockingScript))
         
@@ -117,7 +147,7 @@ class SignBTCTransaction {
         return UnsignedTransaction(tx: tx, utxos: utxos)
     }
     
-    func buildUnspentTxForBTC(utxos:[UnspentTransaction],ttnAddress:String) throws -> UnsignedTransaction {
+    func buildUnspentTxForBTCtoTTN(utxos:[UnspentTransaction],ttnAddress:String) throws -> UnsignedTransaction {
         
         var outputs = try self.destinations!.map { (address: Address, amount: UInt64) -> TransactionOutput in
             guard let lockingScript = Script(address: address)?.data else {
@@ -137,6 +167,21 @@ class SignBTCTransaction {
         let transOutput = TransactionOutput(value: 0, lockingScript: lockingScript)
         outputs.append(transOutput)
         
+        
+        let unsignedInputs = utxos.map { TransactionInput(previousOutput: $0.outpoint, signatureScript: $0.output.lockingScript, sequence: UInt32.max) }
+        let tx = Transaction(version: 1, inputs: unsignedInputs, outputs: outputs, lockTime: 0)
+        return UnsignedTransaction(tx: tx, utxos: utxos)
+    }
+    
+    
+    func buildUnspentTxForBTCtoBTC(utxos:[UnspentTransaction]) throws -> UnsignedTransaction {
+        
+        let outputs = try self.destinations!.map { (address: Address, amount: UInt64) -> TransactionOutput in
+            guard let lockingScript = Script(address: address)?.data else {
+                throw GTServerAPIError.incorrectResult("","Invalid address type")
+            }
+            return TransactionOutput(value: amount, lockingScript: lockingScript)
+        }
         
         let unsignedInputs = utxos.map { TransactionInput(previousOutput: $0.outpoint, signatureScript: $0.output.lockingScript, sequence: UInt32.max) }
         let tx = Transaction(version: 1, inputs: unsignedInputs, outputs: outputs, lockTime: 0)

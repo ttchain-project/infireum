@@ -48,18 +48,20 @@ extension TransferManager {
                 return self.getBTCUnspent(fromInfo: withdrawalInfo)
             }
         }.flatMap {
-                [unowned self] result -> RxAPIResponse<SignBTCTxAPIModel> in
+                [unowned self] result -> RxAPIResponse<String> in
                 switch result {
                 case .failed(error: let err):
                     return .just(.failed(error: err))
                 case .success(let model):
                     switch model.result {
                     case .unspents(let unspents):
-                        if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
-                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
-                        }else {
-                            return self.signBTC(with: &withdrawalInfo, unspents: unspents, isCompressed: isAddressCompressed)
-                        }
+//                        if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
+////                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
+//                        }else {
+
+                            let unspentTx = unspents.map { return $0.unspendTx }
+                            return SignBTCTransaction.getSignTxForBTC(withInfo: info, forUnspents: unspentTx, isCompressed: isAddressCompressed)
+//                        }
                     case .insufficient:
                         let dls = LM.dls
                         let err: GTServerAPIError = GTServerAPIError.incorrectResult(
@@ -80,7 +82,7 @@ extension TransferManager {
                     return .just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)
-                    return self.broadcastBTC(with: model.signText, withComments: withdrawalInfo.note ?? "")
+                    return self.broadcastBTC(with: model, withComments: withdrawalInfo.note ?? "")
                 }
             }.flatMap {
                 [unowned self] result -> RxAPIResponse<(String?)> in
@@ -337,7 +339,7 @@ extension TransferManager {
                     switch model.result {
                     case .unspents(let unspents):
                        let unspentTx = unspents.map { return $0.unspendTx }
-                        return SignBTCTransaction.getSignTx(withInfo: info, forUnspents: unspentTx, ttnAddress: ttnAsset.wallet!.address!, isCompressed: isAddressCompressed)
+                        return SignBTCTransaction.getSignTxForTTNChain(withInfo: info, forUnspents: unspentTx, ttnAddress: ttnAsset.wallet!.address!, isCompressed: isAddressCompressed)
     
                     case .insufficient:
                         let dls = LM.dls
