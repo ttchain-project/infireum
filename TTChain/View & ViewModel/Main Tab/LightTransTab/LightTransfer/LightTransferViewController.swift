@@ -76,15 +76,10 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         assetVC.didMove(toParentViewController: self)
         scrollView.addSubview(assetVC.view)
         
-        if config.purpose == .ttnTransfer {
-           
-            assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
-                let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
-                self.assetVC.viewModel.transferAll(withFee:feeInfo)
-            }).disposed(by:bag)
-        }else {
-            assetVC.transferAllButton.isHidden = true
-        }
+        assetVC.transferAllButton.rx.klrx_tap.asDriver().drive(onNext: {
+            let feeInfo = self.viewModel.input.feeProvider.getFeeInfo()
+            self.assetVC.viewModel.transferAll(withFee:feeInfo)
+        }).disposed(by:bag)
         
         constrain(assetVC.view, scrollView) { [unowned self] (view, scroll) in
             view.top == scroll.top + 25
@@ -95,10 +90,13 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             view.height == height
         }
         
-        addressVC = LightWithdrawalAddressViewController.instance(from: LightWithdrawalAddressViewController.Config(asset: config.asset))
+        let toAddressCoinID = self.purpose == .ttnTransfer ? config.asset.coinID! : Coin.btc_identifier
+        
+        addressVC = LightWithdrawalAddressViewController.instance(from: LightWithdrawalAddressViewController.Config(asset: config.asset, toAddressCoinID: toAddressCoinID))
         addChildViewController(addressVC)
         addressVC.didMove(toParentViewController: self)
         scrollView.addSubview(addressVC.view)
+        addressVC.addrbookBtn.isHidden = self.purpose == .ttnTransfer
         
         constrain(addressVC.view, assetVC.view, scrollView) { [unowned self] (addr, asset, scroll) in
             addr.leading == asset.leading
@@ -108,13 +106,10 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             addr.height == height
         }
         
-        
         addressVC.onTapChangeToAddress.drive(onNext: {
             [unowned self] in
             self.toAddressbookList()
         }).disposed(by: bag)
-        
-        let type = ChainType.init(rawValue: config.asset.wallet!.chainType)!
        
         let feeVC = LightWithdrawalFeeViewController.instance(from: LightWithdrawalFeeViewController.Config(asset:config.asset, purpose: config.purpose))
         addChildViewController(feeVC)
@@ -235,6 +230,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     private func bindViewModel() {
         viewModel.onStartConfirmWithdrawal.drive(onNext: {
             [unowned self] info in
+            
             self.start(withInfo:info)
         })
             .disposed(by: bag)
@@ -256,19 +252,15 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     
     @objc private func toQRCode() {
         let asset = viewModel.input.asset
-        let mainCoinID = asset.wallet!.walletMainCoinID!
+        let mainCoinID = self.purpose == .btcnWithdrawal ? Coin.btc_identifier : asset.wallet!.walletMainCoinID!
+        
         let vc = OWQRCodeViewController.navInstance(
             from: OWQRCodeViewController._Constructor(
                 purpose: .withdrawal(mainCoinID),
                 resultCallback: { [unowned self] (result, purpose, scanningType) in
                     switch result {
-                    case .address(let addr, chainType: _, coin: let coin, amt: _):
+                    case .address(let addr, chainType: _, coin:  _, amt: _):
                         // Ensure the source qrcode is from the same chain
-                        if let detectedCoin = coin {
-                            guard detectedCoin.walletMainCoinID == asset.coin!.walletMainCoinID else {
-                                return
-                            }
-                        }
                         
                         self.addressVC.viewModel.changeToAddress(addr)
                         self.navigationController?

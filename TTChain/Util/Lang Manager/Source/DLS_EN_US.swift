@@ -695,5 +695,5 @@ struct DLS_EN_US: DLS {
     
     var payment_wallet:String = "Payment Wallet"
     
-    
+    var transfer_all_coin_ttn_address:String = "Transfer all coins"
 }

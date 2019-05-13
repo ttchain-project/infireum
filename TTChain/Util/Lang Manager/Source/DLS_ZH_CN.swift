@@ -687,5 +687,6 @@ struct DLS_ZH_CN: DLS {
      var transfer_note_placeholder:String = "请输入20字以内的描述"
     
     var payment_wallet:String = "付款钱包"
+    var transfer_all_coin_ttn_address:String = "轉出所有金額"
 
 }

@@ -79,7 +79,6 @@ extension TransferManager {
                 [unowned self] result -> RxAPIResponse<BroadcastBTCTxAPIModel> in
                 switch result {
                 case .failed(error: let err):
-                    
                     return .just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)

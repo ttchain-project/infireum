@@ -21,13 +21,14 @@ final class LightWithdrawalAddressViewController: KLModuleViewController,KLVMVC 
     
     struct Config {
         let asset: Asset
+        let toAddressCoinID:String
     }
     
     func config(constructor: LightWithdrawalAddressViewController.Config) {
         view.layoutIfNeeded()
 
         viewModel = ViewModel.init(
-            input: WithdrawalAddressViewModel.InputSource(asset: constructor.asset, toAddressInout: toAddressTextField.rx.text),
+            input: WithdrawalAddressViewModel.InputSource(asset: constructor.asset, toAddressInout: toAddressTextField.rx.text, toAddressCoinId: constructor.toAddressCoinID),
             output: ()
         )
         

@@ -700,6 +700,9 @@ struct DLS_ZH_TW: DLS {
     var transfer_note_placeholder:String = "請輸入20字以內的描述"
     
     var payment_wallet:String = "付款錢包"
+    
+    var transfer_all_coin_ttn_address:String = "轉出所有金額"
+
 }
 
 

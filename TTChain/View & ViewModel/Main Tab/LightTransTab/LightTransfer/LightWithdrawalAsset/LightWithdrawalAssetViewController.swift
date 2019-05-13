@@ -81,7 +81,7 @@ final class LightWithdrawalAssetViewController: KLModuleViewController,KLVMVC {
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         transferAmtTextField.set(textColor: palette.label_main_1, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
-        transferAllButton.set(textColor: palette.label_main_2, font: .owMedium(size: 17), text: LM.dls.transfer_all_amount, backgroundColor: UIColor.init(hexString: "18ADD4"))
+        transferAllButton.set(textColor: palette.label_main_2, font: .owMedium(size: 17), text: LM.dls.transfer_all_coin_ttn_address, backgroundColor: UIColor.init(hexString: "18ADD4"))
         transferAmountLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 17))
         balanceAmountLabel.set(textColor: UIColor.init(white: 0, alpha: 0.4), font: .owMedium(size: 17))
         

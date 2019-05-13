@@ -161,6 +161,8 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
                 } else {
                     return 0
                 }
+            case .ttn:
+                    return feeInfo?.amt ?? 0
             default:
                 return 0
             }

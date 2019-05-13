@@ -672,5 +672,6 @@ protocol DynamicLocalizationSource {
     var transfer_note_placeholder:String {get set}
     
     var payment_wallet:String {get set}
+    var transfer_all_coin_ttn_address:String {get set}
 
 }

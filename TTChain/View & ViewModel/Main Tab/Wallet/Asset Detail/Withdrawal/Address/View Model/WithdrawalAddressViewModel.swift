@@ -13,6 +13,7 @@ import RxCocoa
 enum WithdrawalAddressValidity {
     case emptyToAddress
     case valid
+    case wrongAddressFormat
 }
 
 protocol WithdrawalAddressInfoProvider {
@@ -29,6 +30,7 @@ class WithdrawalAddressViewModel: KLRxViewModel, WithdrawalAddressInfoProvider {
     struct Input {
         let asset: Asset
         let toAddressInout: ControlProperty<String?>
+        let toAddressCoinId:String
     }
     
     typealias InputSource = Input

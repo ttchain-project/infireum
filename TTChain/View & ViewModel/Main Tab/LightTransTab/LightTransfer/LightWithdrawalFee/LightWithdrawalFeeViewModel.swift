@@ -15,7 +15,10 @@ class LightWithdrawalFeeViewModel: KLRxViewModel,WithdrawalFeeInfoProvider {
     var isFeeInfoCompleted: Observable<Bool> { return Observable.of(true) }
     
     func getFeeInfo() -> WithdrawalFeeInfoProvider.FeeInfo? {
-        return (rate: Decimal(1.0), amt: FeeManager.getValue(fromOption: _feeOption!).satoshiToBTC, coin: self.input.asset.wallet!.mainCoin!, option: _feeOption!, totalHardCodedFee:nil)
+        
+        let feeAmt = input.purpose == .ttnTransfer ? 0 :FeeManager.getValue(fromOption: _feeOption!).satoshiToBTC
+        
+        return (rate: Decimal(1.0), amt: feeAmt, coin: self.input.asset.coin!, option: _feeOption!, totalHardCodedFee:nil)
     }
     
     func checkValidity() -> WithdrawalFeeInfoValidity {

@@ -22,6 +22,7 @@ class WithdrawalInfoValidator {
         case feeRateTooLow(suggestion: Decimal, feeCoin: Coin)
         //In case that any lost case happended
         case unknown(systemMsg: String)
+        case wrongAddressFormat
         
         var localizedFailedDesciption: String {
             let dls = LM.dls
@@ -29,6 +30,8 @@ class WithdrawalInfoValidator {
                 
             case .sameWalletAddresses:
                 return dls.withdrawal_error_same_address_content
+            case .wrongAddressFormat :
+                return dls.strValidate_field_addressInvalid
             case .insufficientAsset(tranferAmt: let tAmt, extraFeeCost: let feeCost, asset: let asset):
                 let assetAmt = asset.amount! as Decimal
                 if tAmt > assetAmt {
@@ -176,7 +179,7 @@ class WithdrawalInfoValidator {
         case Coin.eth_identifier:
             feeUnitRate = feeInfo.rate.etherToGWei
             minFeeRate = FeeManager.getValue(fromOption: .eth(.gasPrice(.systemMin)))
-        case Coin.ttn_identifier :
+        case Coin.ttn_identifier,Coin.btcn_identifier :
             feeUnitRate = feeInfo.rate
             minFeeRate = 1
         default:

@@ -33,7 +33,7 @@ final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalC
         addrTextField.sepInset = 8
         
         viewModel = ViewModel.init(
-            input: WithdrawalAddressViewModel.InputSource(asset: constructor.asset, toAddressInout: addrTextField.rx.text),
+            input: WithdrawalAddressViewModel.InputSource(asset: constructor.asset, toAddressInout: addrTextField.rx.text, toAddressCoinId: constructor.asset.coinID!),
             output: ()
         )
         
