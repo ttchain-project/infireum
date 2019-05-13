@@ -19,6 +19,7 @@ enum MessageType {
     case audioCall (messageDetails : CallMessageModel)
     case createRedEnvelope (messageDetails: RedEnvelope)
     case receiveRedEnvelope (messageDetails: RedEnvelope)
+    case urlMessage
     
     var messageDict:[String:String] {
         switch  self {
@@ -143,20 +144,20 @@ class MessageModel {
                 }
                 fallthrough
             default:
-                if let data = rawMessage.data(using: .utf8) {
-                    guard let dict :[String:Any]? = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                        return .general
+                if let data = rawMessage.data(using: .utf8),
+                    let dict :[String:Any]? = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                        dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
+                        return .receipt(messageDict: dict as! [String : String])
                     }
-                        if dict!["address"] != nil,dict!["amount"] != nil,dict!["coinID"] != nil {
-                            return .receipt(messageDict: dict as! [String : String])
-                        }
+                if rawMessage.checkForURL() != nil {
+                    return .urlMessage
                 }
                 return .general
             }
         }()
         
         let date = DateFormatter.date(from: timeStampString, withFormat: C.IMDateFormat.dateFormatForIM)
-        
+
         self.init(messageId: msgID,
                   roomId: roomId,
                   msg: rawMessage,

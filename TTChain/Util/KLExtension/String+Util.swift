@@ -71,3 +71,31 @@ extension String {
         return date.string()
     }
 }
+
+
+extension String {
+    
+    /// Return first available URL in the string else nil
+    func checkForURL() -> NSRange? {
+        guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
+            return nil
+        }
+        let matches = detector.matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
+        
+        for match in matches {
+            guard Range(match.range, in: self) != nil else { continue }
+            return match.range
+        }
+        return nil
+    }
+    
+    func getURLIfPresent() -> String? {
+        guard let range = self.checkForURL() else{
+            return nil
+        }
+        guard let stringRange = Range(range,in:self) else {
+            return nil
+        }
+        return String(self[stringRange])
+    }
+}
