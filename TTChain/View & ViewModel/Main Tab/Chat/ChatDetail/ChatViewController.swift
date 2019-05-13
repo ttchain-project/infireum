@@ -191,7 +191,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             }
             
             switch messageModel.msgType {
-            case .general,.audioCall(_):
+            case .general,.audioCall(_),.urlMessage:
                 let chatCell = tv.dequeueReusableCell(withIdentifier: ChatMessageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageTableViewCell
                 
                 chatCell.config(forMessage: messageModel, leftImage: leftImage, leftImageAction: {[weak self] id in
@@ -200,6 +200,35 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                     }
                     self?.toUserProfileVC(forFriend: friendModel)
                 })
+                chatCell.leftMessageLabel.rx.klrx_tap.asDriver().drive(onNext: { _ in
+                    if case .urlMessage = messageModel.msgType {
+                        guard let urlMessage = messageModel.msg.getURLIfPresent() else {
+                            return
+                        }
+                        guard let url = URL.init(string: urlMessage) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
+                }).disposed(by: chatCell.bag)
+                chatCell.rightMessageLabel.rx.klrx_tap.asDriver().drive(onNext: { _ in
+                    
+                    if case .urlMessage = messageModel.msgType {
+                        guard let urlMessage = messageModel.msg.getURLIfPresent() else {
+                            return
+                        }
+                        guard let url = URL.init(string: urlMessage) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }
+                    
+                    
+                }).disposed(by: chatCell.bag)
                 
                 chatCell.rx.longPressGesture().skip(1).subscribe(onNext: {[weak self] (_) in
                     if case .audioCall = messageModel.msgType {
@@ -484,13 +513,15 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             alertVC.addAction(delete)
         }
         switch message.msgType {
-        case .general:
+        case .general,.urlMessage:
             alertVC.addAction(actionCopy)
             alertVC.addAction(forward)
             break
         case .file:
             alertVC.addAction(actionCopyFileURL)
             alertVC.addAction(downloadAction)
+            alertVC.addAction(forward)
+
         case .voiceMessage:
             alertVC.addAction(forward)
         case .image:

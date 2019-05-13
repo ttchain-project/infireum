@@ -85,7 +85,13 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     }
     
     private func configForSender(message:MessageModel) {
-        self.rightMessageLabel.text = message.msg
+        
+        if case .urlMessage = message.msgType {
+            self.setupForURL(message: message.msg,label:rightMessageLabel)
+        }else {
+            self.rightMessageLabel.text = message.msg
+        }
+        
         self.rightDateLabel.text = message.timestamp.string()
         self.rightSpeakerContentView.isHidden = false
         self.leftSpeakerContentView.isHidden = true
@@ -93,7 +99,12 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
     }
     
     private func configForLeft(message:MessageModel,leftImage: String?) {
-        self.leftMessageLabel.text = message.msg
+        
+        if case .urlMessage = message.msgType {
+            self.setupForURL(message: message.msg,label:leftMessageLabel)
+        }else {
+            self.leftMessageLabel.text = message.msg
+        }
         self.leftDateLabel.text = message.timestamp.string()
         self.leftAvatarImageView.setProfileImage(image: leftImage, tempName: message.senderName)
 
@@ -113,5 +124,17 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         }
        
         self.selectMessageButtonWidth.constant = 36
+    }
+    
+    private func setupForURL(message:String,label : UILabel)  {
+        if let urlMessageRange = message.checkForURL() {
+            let attribute = NSMutableAttributedString.init(string: message)
+            attribute.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: urlMessageRange)
+            attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.blue, range: urlMessageRange)
+            label.attributedText = attribute
+        }else {
+            label.text = message
+
+        }
     }
 }
