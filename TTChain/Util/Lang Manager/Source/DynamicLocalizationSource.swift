@@ -674,4 +674,5 @@ protocol DynamicLocalizationSource {
     var payment_wallet:String {get set}
     var transfer_all_coin_ttn_address:String {get set}
 
+    var forward_message_title_string :String {get set}
 }

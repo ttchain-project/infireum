@@ -689,4 +689,6 @@ struct DLS_ZH_CN: DLS {
     var payment_wallet:String = "付款钱包"
     var transfer_all_coin_ttn_address:String = "轉出所有金額"
 
+    var forward_message_title_string :String = "选择消息"
+
 }
