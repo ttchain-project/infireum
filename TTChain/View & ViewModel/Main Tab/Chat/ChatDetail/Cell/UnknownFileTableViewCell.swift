@@ -18,7 +18,9 @@ class UnknownFileTableViewCell: UITableViewCell {
     @IBOutlet weak var msgImageView: UIImageView!
     @IBOutlet var senderConstraint: NSLayoutConstraint!
     @IBOutlet var receiverConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var selectMessageButtonWidth: NSLayoutConstraint!
+    @IBOutlet weak var selectMessageButton: UIButton!
+
     
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
@@ -45,12 +47,14 @@ class UnknownFileTableViewCell: UITableViewCell {
         dateLabel.set(textColor: .black, font: .owMedium(size: 14))
         senderNameLabel.set(textColor: .black, font: .owDemiBold(size: 16))
         profilePics.layer.cornerRadius = 20
-        
+        self.selectMessageButtonWidth.constant = 0
         self.backgroundColor = .clear
         self.selectionStyle = .none
     }
     
     func setMessage(forMessage message:MessageModel, leftImage: String?, leftImageAction:@escaping ((String) -> Void)) {
+        self.selectMessageButtonWidth.constant = 0
+        
         dateLabel.text = message.timestamp.string()
         if message.isUserSender() {
             self.profilePics.isHidden = true
@@ -64,7 +68,7 @@ class UnknownFileTableViewCell: UITableViewCell {
             self.profilePics.setProfileImage(image: leftImage, tempName: message.senderName)
             self.senderNameLabel.text = message.senderName
             self.bgView.backgroundColor = UIColor.white
-
+            
         }
         self.profilePics.rx.klrx_tap.asDriver().drive(onNext: { _ in
             leftImageAction(message.messageId)
@@ -75,6 +79,21 @@ class UnknownFileTableViewCell: UITableViewCell {
         }else {
             self.fileNameLabel.text = message.msg
         }
-            self.msgImageView.image = #imageLiteral(resourceName: "iconFileColor")
+        self.msgImageView.image = #imageLiteral(resourceName: "iconFileColor")
+    }
+    
+    func setDataForForwarSelection(message:MessageModel, leftImage: String?,messageSelected:@escaping ((MessageModel) -> Void)) {
+        
+        self.selectMessageButton.isSelected = message.isMessageSelected
+        
+        self.selectMessageButton.rx.tap.asDriver().drive(onNext: { _ in
+            self.selectMessageButton.isSelected = !self.selectMessageButton.isSelected
+            messageSelected(message)
+        }).disposed(by: bag)
+        
+        self.setMessage(forMessage: message, leftImage: leftImage) { (_) in
+            
         }
+        self.selectMessageButtonWidth.constant = 36
+    }
 }

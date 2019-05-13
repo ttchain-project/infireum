@@ -17,7 +17,7 @@ import ObjectiveC
 extension MessageModel {
     
     private struct AssociatedKeys {
-        static var kIsSelected = "kTransComments"
+        static var kIsSelected = "kIsSelected"
     }
     private var isSelected: Bool? {
         get {
@@ -49,7 +49,7 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
     
     func config(constructor: ForwarMessageViewController.Config) {
         self.view.layoutIfNeeded()
-        self.navigationItem.title = "Select Messages"
+        self.navigationItem.title = LM.dls.forward_message_title_string
         self.viewModel = ForwarMessageViewModel.init(input: ForwarMessageViewModel.InputSource.init(messages: constructor.messages, roomId: constructor.roomId, avatarImage: constructor.avatarImage,memberAvatarMapping:constructor.memberAvatarMapping), output: ForwarMessageViewModel.OutputSource())
         self.onForwardMessagesSelection = constructor.forwardMessagesSelected
         self.initTableView()
@@ -67,6 +67,9 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
             }).disposed(by: vc.bag)
         }).disposed(by: bag)
         
+        renderNavBar(tint: .white, barTint: .clear)
+        renderNavTitle(color: .white, font: .owMedium(size: 18))
+        self.changeLeftBarButtonToDismissToRoot(tintColor: .black, image: #imageLiteral(resourceName: "arrowNavBlack"))
     }
     
     var bag: DisposeBag = DisposeBag.init()
@@ -95,6 +98,7 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
         tableView.register(ReceiptTableViewCell.nib, forCellReuseIdentifier: ReceiptTableViewCell.nameOfClass)
         tableView.register(RedEnvTableViewCell.nib, forCellReuseIdentifier: RedEnvTableViewCell.nameOfClass)
         tableView.register(RceiveRedEnvelopeTableViewCell.nib, forCellReuseIdentifier: RceiveRedEnvelopeTableViewCell.nameOfClass)
+        tableView.register(UnknownFileTableViewCell.nib, forCellReuseIdentifier: UnknownFileTableViewCell.nameOfClass)
     }
     
     func bindViewModel() {
@@ -111,7 +115,7 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
                 leftImage = self.viewModel.input.avatarImage ?? ""
             }
             switch messageModel.msgType {
-            case .general,.audioCall(_):
+            case .general,.audioCall(_),.urlMessage:
                 let chatCell = tv.dequeueReusableCell(withIdentifier: ChatMessageTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! ChatMessageTableViewCell
                 
                 chatCell.setDataForForwarSelection(message: messageModel, leftImage: leftImage, messageSelected: { (model) in
@@ -157,7 +161,9 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
            
             case .file :
                 let unknownFileCell = tv.dequeueReusableCell(withIdentifier: UnknownFileTableViewCell.cellIdentifier(), for: IndexPath.init(item: row, section: 0)) as! UnknownFileTableViewCell
-                unknownFileCell.setMessage(forMessage: messageModel, leftImage: leftImage, leftImageAction: { _ in })
+                unknownFileCell.setDataForForwarSelection(message: messageModel, leftImage: leftImage, messageSelected: { (model) in
+                    model.isMessageSelected = !model.isMessageSelected
+                })
             
                 cell = unknownFileCell
             }

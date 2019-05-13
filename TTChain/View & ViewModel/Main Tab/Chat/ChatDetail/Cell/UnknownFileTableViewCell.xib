@@ -44,16 +44,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLZ-dK-pdZ">
-                        <rect key="frame" x="66" y="51.5" width="236" height="128"/>
+                        <rect key="frame" x="66" y="51.5" width="190" height="128"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqT-C2-ZTO">
-                                <rect key="frame" x="0.0" y="73" width="236" height="35"/>
+                                <rect key="frame" x="0.0" y="73" width="190" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gQv-dF-ghf">
-                                <rect key="frame" x="94" y="20" width="48" height="48"/>
+                                <rect key="frame" x="71" y="20" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="2uV-kC-zoP"/>
                                     <constraint firstAttribute="width" constant="48" id="4Yh-4u-Ohc"/>
@@ -70,18 +70,29 @@
                             <constraint firstItem="EqT-C2-ZTO" firstAttribute="leading" secondItem="zLZ-dK-pdZ" secondAttribute="leading" id="oX1-ss-I9L"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zp-1S-UeJ">
+                        <rect key="frame" x="266" y="51.5" width="36" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="bKx-Ta-LhE"/>
+                            <constraint firstAttribute="height" constant="36" id="hyl-7y-ruv"/>
+                        </constraints>
+                        <state key="normal" image="checkbox_unselected"/>
+                        <state key="selected" image="checkbox_selected"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="7Zp-1S-UeJ" firstAttribute="top" secondItem="zLZ-dK-pdZ" secondAttribute="top" id="7bA-mH-JkA"/>
                     <constraint firstItem="GHN-fj-wHQ" firstAttribute="leading" secondItem="JPi-qf-9sj" secondAttribute="trailing" constant="2" id="7tF-pp-ETp"/>
+                    <constraint firstItem="7Zp-1S-UeJ" firstAttribute="leading" secondItem="zLZ-dK-pdZ" secondAttribute="trailing" constant="10" id="8dh-he-DNr"/>
                     <constraint firstItem="zLZ-dK-pdZ" firstAttribute="top" secondItem="JPi-qf-9sj" secondAttribute="bottom" constant="10" id="GUu-Pf-gjc"/>
                     <constraint firstItem="JPi-qf-9sj" firstAttribute="leading" secondItem="asn-g6-HNq" secondAttribute="trailing" constant="10" id="V1c-Hd-AJy"/>
-                    <constraint firstAttribute="trailing" secondItem="zLZ-dK-pdZ" secondAttribute="trailing" constant="20" id="V1o-n3-2xX"/>
                     <constraint firstAttribute="bottom" secondItem="zLZ-dK-pdZ" secondAttribute="bottom" constant="10" id="XtR-7d-vKW"/>
                     <constraint firstAttribute="trailing" secondItem="GHN-fj-wHQ" secondAttribute="trailing" constant="20" id="akZ-Ob-LdJ"/>
+                    <constraint firstAttribute="trailing" secondItem="7Zp-1S-UeJ" secondAttribute="trailing" constant="20" id="cUa-dA-Mfx"/>
                     <constraint firstItem="asn-g6-HNq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="hRh-bf-YGu"/>
                     <constraint firstItem="GHN-fj-wHQ" firstAttribute="centerY" secondItem="JPi-qf-9sj" secondAttribute="centerY" id="jNs-Lq-wiz"/>
-                    <constraint firstItem="zLZ-dK-pdZ" firstAttribute="leading" secondItem="JPi-qf-9sj" secondAttribute="leading" id="kab-Ff-2ID"/>
                     <constraint firstItem="asn-g6-HNq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="tNJ-4a-jvJ"/>
+                    <constraint firstItem="zLZ-dK-pdZ" firstAttribute="leading" secondItem="asn-g6-HNq" secondAttribute="trailing" constant="10" id="vUM-rl-B6I"/>
                     <constraint firstItem="JPi-qf-9sj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="21" id="xz9-QE-zqI"/>
                 </constraints>
             </tableViewCellContentView>
@@ -92,11 +103,17 @@
                 <outlet property="fileNameLabel" destination="EqT-C2-ZTO" id="uJU-Ow-Ufx"/>
                 <outlet property="msgImageView" destination="gQv-dF-ghf" id="kme-7q-wRu"/>
                 <outlet property="profilePics" destination="asn-g6-HNq" id="uqP-ox-Grj"/>
-                <outlet property="receiverConstraint" destination="kab-Ff-2ID" id="H8U-6H-Lrm"/>
-                <outlet property="senderConstraint" destination="V1o-n3-2xX" id="EiW-Z5-hbn"/>
+                <outlet property="receiverConstraint" destination="vUM-rl-B6I" id="NTl-q7-PC7"/>
+                <outlet property="selectMessageButton" destination="7Zp-1S-UeJ" id="F5M-D9-X3G"/>
+                <outlet property="selectMessageButtonWidth" destination="bKx-Ta-LhE" id="Tzv-MP-1GY"/>
+                <outlet property="senderConstraint" destination="8dh-he-DNr" id="NnZ-lt-wYQ"/>
                 <outlet property="senderNameLabel" destination="JPi-qf-9sj" id="eZ5-sD-vug"/>
             </connections>
             <point key="canvasLocation" x="270.39999999999998" y="116.04197901049476"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="checkbox_selected" width="48" height="48"/>
+        <image name="checkbox_unselected" width="48" height="48"/>
+    </resources>
 </document>
