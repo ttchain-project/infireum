@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Cartography
 
 final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMVC {
    
@@ -18,6 +19,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
         self.view.layoutIfNeeded()
         
         self.viewModel = ViewModel.init(input: LightDepositWalletChooseViewModel.Input.init(toAsset: constructor.toAsset, fromAsset: constructor.fromAsset, amtStrInout: self.transferAmountTextField.rx.text), output:())
+        self.configInfoView()
         bindViewModel()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
@@ -50,7 +52,12 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
     @IBOutlet weak var depositAddressTitile: UILabel!
     @IBOutlet weak var depositAddressLabel: UILabel!
     @IBOutlet weak var transferAmountTextField: UITextField!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var infoViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var infoViewButton: UIButton!
     
+    private var infoVC: WithdrawalBTCFeeInfoViewController!
+
     private lazy var hud = {
         return KLHUD.init(
             type: .spinner,
@@ -60,6 +67,50 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
             )
         )
     }()
+    
+    func configInfoView() {
+        infoVC = WithdrawalBTCFeeInfoViewController.instance(from: WithdrawalBTCFeeInfoViewController.Config(
+            defaultFeeOption: .btc(.regular),
+            defaultFeeRate: nil
+            )
+        )
+        
+        infoVC.view.backgroundColor = .white
+        infoVC.viewModel.satPerByte.subscribe(
+            onNext: {
+                [unowned self] in
+                self.viewModel.feeAmount.accept($0)
+        }
+            )
+            .disposed(by: bag)
+        
+        infoVC.viewModel.selectedOption
+            .subscribe(onNext: {
+                [unowned self]
+                option in
+                DLogInfo(option)
+                switch option {
+                case .manual:
+                    self.viewModel.feeOption.accept(nil)
+                case .priority:
+                    self.viewModel.feeOption.accept(.btc(.priority))
+                case .regular:
+                    self.viewModel.feeOption.accept(.btc(.regular))
+                }
+            })
+            .disposed(by: bag)
+        
+        
+        addChildViewController(infoVC)
+        infoVC.didMove(toParentViewController: self)
+        infoView.addSubview(infoVC.view)
+        constrain(infoVC.view) { (view) in
+            let sup = view.superview!
+            view.edges == sup.edges
+        }
+        self.infoViewHeight.constant = infoVC.preferedHeight
+        self.infoView.isHidden = true
+    }
     
     func bindViewModel() {
         viewModel.fromAsset
@@ -71,6 +122,12 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
         viewModel.toAsset.map {
             $0.wallet?.address
         }.bind(to: self.depositAddressLabel.rx.text).disposed(by: bag)
+        
+        self.infoViewButton.rx.klrx_tap.asDriver().drive(onNext: { (_) in
+            self.infoView.isHidden = !self.infoView.isHidden
+            let img = self.infoView.isHidden ? #imageLiteral(resourceName: "icDown") : #imageLiteral(resourceName: "arrowNavBlue")
+            self.infoViewButton.set(image: img, title: nil, titlePosition: .left, additionalSpacing: 8, state: .normal)
+        }).disposed(by: bag)
         
         let coin = self.viewModel.fromAsset.value!.coin!
         viewModel.assetAvailableAmt.map {
@@ -86,7 +143,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
             }
             .bind(to: availableBalanceLabel.rx.text).disposed(by: bag)
         
-        self.viewModel.feeRate.asObservable().bind(to: self.feeAmountLable.rx.text).disposed(by:bag)
+        self.viewModel.feeRateStr.asObservable().bind(to: self.feeAmountLable.rx.text).disposed(by:bag)
         
         self.walletButton.rx.klrx_tap.asDriver().drive(onNext: {[unowned self] _ in
             self.toSelectWallet()
@@ -121,6 +178,9 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
         doneButton.setTitleColor(palette.btn_bgFill_disable_text, for: .disabled)
         doneButton.set(font: UIFont.owRegular(size: 17))
         doneButton.cornerRadius = 12
+        
+        infoViewButton.set(image: #imageLiteral(resourceName: "doneBlue"), title: nil, titlePosition: .left, additionalSpacing: 8, state: .normal)
+
         self.doneButton.isEnabled = false
         self.viewModel._transferAmt.map { $0 != nil }.map { status in
             self.doneButton.backgroundColor = status ? UIColor.init(hexString: "18ADD4") : palette.btn_bgFill_disable_bg

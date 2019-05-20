@@ -60,6 +60,10 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
             (($0?.amount ?? 0) as Decimal)
             }.bind(to: self._assetAvailableAmt).disposed(by: bag)
 
+        self.feeAmount.map {
+            ($0?.asString(digits: 8) ?? "--") + " " + "btc"
+        }.bind(to: self.feeRateStr).disposed(by: bag)
+        
     }
     
     let messageSubject : PublishSubject<String> = PublishSubject<String>.init()
@@ -134,11 +138,15 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
         _transferAmtStr.accept(amt.asString(digits: 8))
     }
     
-    lazy var feeRate:BehaviorRelay<String> = {
+    lazy var feeRateStr:BehaviorRelay<String> = {
         
         let fee = "\(FeeManager.getValue(fromOption: feeOption.value!).satoshiToBTC) btc"
     
         return BehaviorRelay.init(value: fee)
+    }()
+    
+    lazy var feeAmount: BehaviorRelay<Decimal?> = {
+        return BehaviorRelay.init(value: nil)
     }()
     
     func initiateTransfer() -> WithdrawalInfo? {
@@ -152,13 +160,15 @@ class LightDepositWalletChooseViewModel: KLRxViewModel {
             return nil
         }
         
-        let feeInfo: WithdrawalFeeInfoProvider.FeeInfo = (rate: 1, amt: 0, coin: asset.coin! , option: feeOption.value, totalHardCodedFee:FeeManager.getValue(fromOption: feeOption.value!).satoshiToBTC)
+        let hardCodedFee = self.feeAmount.value ?? 0
+        let feeInfo: WithdrawalFeeInfoProvider.FeeInfo = (rate: 1, amt: 0, coin: asset.coin! , option: feeOption.value, totalHardCodedFee:hardCodedFee)
          let toAddress = C.TTNTx.officialBTCAddress
         let info = WithdrawalInfo.init(
             asset: asset,
             withdrawalAmt: transferAmt,
             address: toAddress,
-            feeRate: feeInfo.rate, feeAmt:(feeInfo.totalHardCodedFee != nil) ? feeInfo.totalHardCodedFee! : feeInfo.amt,
+            feeRate: feeInfo.rate,
+            feeAmt:(feeInfo.totalHardCodedFee != nil) ? feeInfo.totalHardCodedFee! : feeInfo.amt,
             feeCoin: feeInfo.coin,
             feeOption: feeInfo.option,
             note: ""
