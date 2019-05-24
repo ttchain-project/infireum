@@ -70,7 +70,7 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
     
     //MARK: - Public
     public var hasAmt: Observable<Bool> {
-        return _transferAmt.map { $0 != nil }
+        return _transferAmt.map { $0 != nil && ($0 ?? 0) > Decimal(integerLiteral: 0)}
     }
     
     public var assetAvailableAmt: Observable<Decimal> {
