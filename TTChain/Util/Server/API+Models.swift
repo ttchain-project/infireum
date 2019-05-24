@@ -103,12 +103,12 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     
     var base: APIBaseEndPointType {
         let urlString: String
-        switch (asset.coin!.owChainType,asset.coin?.identifier) {
-        case (.btc,Coin.btc_identifier):
+        switch (asset.coin?.owChainType,asset.coin?.identifier) {
+        case (.btc?,Coin.btc_identifier):
             urlString = C.BlockchainAPI.BlockExplorer.apiBase
-        case (.btc,Coin.usdt_identifier):
+        case (.btc?,Coin.usdt_identifier):
             urlString = "https://api.omniexplorer.info"
-        case (.ttn,_):
+        case (.ttn?,_):
             urlString = "http://3.112.106.186:9997"
         default:
             urlString = C.BlockchainAPI.urlStr_32000
@@ -541,7 +541,7 @@ struct GetBTCTxRecordsAPI: KLMoyaAPIData {
     let to: Int
     
     var base: APIBaseEndPointType {
-        let url = URL.init(string: C.BlockchainAPI.BlockExplorer.apiBase)!
+        let url = URL.init(string: "https://blockchain.info")!
         return .custom(url: url)
     }
     
@@ -549,14 +549,14 @@ struct GetBTCTxRecordsAPI: KLMoyaAPIData {
     
     var langDepended: Bool { return false }
     
-    var path: String { return "/addrs/\(btcAddress)/txs" }
+    var path: String { return "/rawaddr/\(btcAddress)" }
     
     var method: Moya.Method { return .get }
     
     var task: Task {
         return Moya.Task.requestParameters(
-            parameters: [ "from" : from,
-                          "to" : to ],
+            parameters: [ "limit" : (to - from),
+                          "offset" : from ],
             encoding: URLEncoding.default
         )
     }
@@ -566,7 +566,7 @@ struct GetBTCTxRecordsAPI: KLMoyaAPIData {
 
 struct GetBTCTxRecordsAPIModel: KLJSONMappableMoyaResponse {
     typealias API = GetBTCTxRecordsAPI
-    let total: Int
+//    let total: Int
     let from: Int
     let to: Int
     let txs: [BTCTx]
@@ -575,27 +575,32 @@ struct GetBTCTxRecordsAPIModel: KLJSONMappableMoyaResponse {
         if let errorString = json.string {
             throw GTServerAPIError.incorrectResult("Cannot Get BTC Tx Records", errorString)
         }else {
-            guard let totalItems = json["totalItems"].int,
-                let from = json["from"].int,
-                let to = json["to"].int,
-                let items = json["items"].array else {
+            guard
+                let items = json["txs"].array else {
                     throw GTServerAPIError.noData
             }
             
             let txs = items.compactMap { (item) -> BTCTx? in
-                guard let txid = item["txid"].string,
-                    let blockHeight = item["blockheight"].int,
-                    let confirmations = item["confirmations"].int,
-                    let fees = item["fees"].number?.decimalValue,
-                    let valueIn = item["valueIn"].number?.decimalValue,
-                    let valueOut = item["valueOut"].number?.decimalValue,
+                guard let txid = item["hash"].string,
+                    let blockHeight = item["block_height"].int,
                     let time = item["time"].double,
-                    let vin = item["vin"].array,
-                    let vout = item["vout"].array else {
+                    let vin = item["inputs"].array,
+                    let vout = item["out"].array else {
                         return nil
                 }
                 
                 let inUnitParse: (JSON) -> BTCTx.TxUnit? = {
+                    j in
+                    guard let dict = j["prev_out"].dictionary,
+                        let _addr = dict["addr"]?.string,
+                        let _btcAmt = dict["value"]?.number?.decimalValue else {
+                            return nil
+                    }
+                    
+                    return BTCTx.TxUnit(addr: _addr, btc: _btcAmt.satoshiToBTC)
+                }
+                
+                let outUnitParse: (JSON) -> BTCTx.TxUnit? = {
                     j in
                     guard
                         let _addr = j["addr"].string,
@@ -603,26 +608,7 @@ struct GetBTCTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                             return nil
                     }
                     
-                    return BTCTx.TxUnit(addr: _addr, btc: _btcAmt)
-                }
-                
-                let outUnitParse: (JSON) -> BTCTx.TxUnit? = {
-                    j in
-                    /* WARNING: As vout address in is array
-                     - scriptPubKey: {
-                     - addresses: [String]
-                     ...
-                     }
-                     
-                     now only take the first addr.
-                     */
-                    guard
-                        let _addr = j["scriptPubKey"]["addresses"].array?.first?.string,
-                        let _btcAmt = Decimal.init(string:  j["value"].stringValue) else {
-                            return nil
-                    }
-                    
-                    return BTCTx.TxUnit(addr: _addr, btc: _btcAmt)
+                    return BTCTx.TxUnit(addr: _addr, btc: _btcAmt.satoshiToBTC)
                 }
                 
                 
@@ -631,9 +617,14 @@ struct GetBTCTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                 
                 guard !ins.isEmpty && !outs.isEmpty else { return nil }
                 
+                let valueIn = ins.map { $0.btc }.reduce(0,+)
+                
+                let valueOut = outs.map { $0.btc }.reduce(0,+)
+                let fees = (valueIn - valueOut)
+                
                 return BTCTx(txid: txid,
                              blockHeight: blockHeight,
-                             confirmations: confirmations,
+                             confirmations: 0,
                              vins: ins,
                              vouts: outs,
                              totalFeeBTC: fees,
@@ -642,9 +633,9 @@ struct GetBTCTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                              timestamp: time)
             }
             
-            self.total = totalItems
-            self.from = from
-            self.to = to
+//            self.total = totalItems
+            self.from = sourceAPI.from
+            self.to = sourceAPI.to
             self.txs = txs
         }
     }
