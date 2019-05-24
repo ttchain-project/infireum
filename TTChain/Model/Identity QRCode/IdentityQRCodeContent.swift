@@ -205,7 +205,8 @@ class IdentityQRCodeContent: Codable {
     public func generateQRCodeContent(withPwd pwd: String) -> String? {
         guard let encryMnemonic = OWDatabaseEntityCrypter.encrypt(source: systemMnemonic, key: pwd) else { return nil }
         
-        let systemWalletsEncryJSONDictionaries = systemWallets.compactMap { $0.convertToEncryJSONDictionaryForSystemWallet() }
+        //For now just add the TTN and ETH wallet in the QRCode
+        let systemWalletsEncryJSONDictionaries = systemWallets.filter { [Coin.btc_identifier,Coin.eth_identifier].contains($0.mainCoinID) }.compactMap { $0.convertToEncryJSONDictionaryForSystemWallet() }
         
         let importedWalletsEncryJSONDictionaries = importedWallets.compactMap { $0.convertToEncryJSONDictionary(withPwd: pwd) }
         
