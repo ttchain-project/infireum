@@ -23,11 +23,19 @@ class SignETHTransaction {
             }.map { nonce in
                 let digitExp = Int(withdrawalInfo.asset.coin!.digit)
                 let unitAmt = withdrawalInfo.withdrawalAmt * pow(10, digitExp)
+                var data = Data()
+                if let contract = withdrawalInfo.asset.coin?.contract {
+                    let erc20Token = ERC20.init(contractAddress: contract, decimal: digitExp, symbol: withdrawalInfo.asset.coin!.inAppName!)
+                    data = try Data(hex: erc20Token.generateSendBalanceParameter(toAddress: withdrawalInfo.address,
+                                                                                     amount: unitAmt.asString(digits: 0)).toHexString().addHexPrefix())
+                }
                 let ethTx = EthereumRawTransaction(value: Wei(unitAmt.asString(digits: 0))!,
                                                    to: withdrawalInfo.address,
                                                    gasPrice: Int(withdrawalInfo.feeRate.etherToWei.doubleValue),
                                                    gasLimit: Int(withdrawalInfo.feeAmt.doubleValue),
-                                                   nonce: nonce)
+                                                   nonce: nonce,data:data)
+                
+                
                 let dataPk = Data(hex: withdrawalInfo.asset.wallet!.pKey)
                 let signer = EIP155Signer.init(chainId: 1)
                 guard let txData = try? signer.sign(ethTx, privateKey: dataPk) else {
