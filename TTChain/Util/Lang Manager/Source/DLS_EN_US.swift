@@ -700,4 +700,6 @@ struct DLS_EN_US: DLS {
     var forward_message_title_string :String = "Select Messages"
     
     var light_withdrawal_placeholder_toAddr : String  = "Please enter TTN address or scan the qrcode"
+    
+    var alert_post_message_restriction = "Only administrators can post messages in this group"
 }

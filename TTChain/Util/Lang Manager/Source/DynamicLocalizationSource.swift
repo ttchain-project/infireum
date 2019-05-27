@@ -677,4 +677,6 @@ protocol DynamicLocalizationSource {
     var forward_message_title_string :String {get set}
     
     var light_withdrawal_placeholder_toAddr : String {get set}
+    
+    var alert_post_message_restriction : String {get set}
 }

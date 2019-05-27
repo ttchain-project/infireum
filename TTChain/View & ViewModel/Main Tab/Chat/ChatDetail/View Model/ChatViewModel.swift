@@ -33,6 +33,7 @@ class ChatViewModel: KLRxViewModel {
         
     }
     
+    let outputMessageSubject = PublishSubject<String>.init()
     var input: Input
     var output: Void
     
@@ -170,6 +171,9 @@ class ChatViewModel: KLRxViewModel {
     func sendReceiptMessage(for walletAddress: String , identifier: String, amount: String) {
         let message = "{\"address\":\"" + walletAddress + "\",\"amount\":\"" + amount + "\",\"coinID\":\"" + identifier + "\"}"
         
+        guard canPostMessage() else {
+            return
+        }
         let parameter = IMSendCoinRequestAPI.Parameter.init(roomId: self.input.roomID, isGroup: isGroup, msg: message)
         
         Server.instance.sendCoinRequestMessage(parameter: parameter).asObservable().subscribe(onNext: {[unowned self] (result) in
@@ -269,7 +273,7 @@ class ChatViewModel: KLRxViewModel {
     
     func sendMessage(txt:String) {
         
-        guard let user = IMUserManager.manager.userModel.value else {
+        guard let user = IMUserManager.manager.userModel.value,canPostMessage() else {
             return
         }
         
@@ -294,7 +298,7 @@ class ChatViewModel: KLRxViewModel {
     }
     
     func sendDataAsMessage(data:Data, fileName:String) {
-        guard let user = IMUserManager.manager.userModel.value else {
+        guard let user = IMUserManager.manager.userModel.value,canPostMessage() else {
             return
         }
         let param = UploadFileAPI.Parameters.init(uid: user.uID,
@@ -330,6 +334,14 @@ class ChatViewModel: KLRxViewModel {
                 print("Failed")
             }
         } ).disposed(by: bag)
+    }
+    
+    func canPostMessage() -> Bool {
+        let status = self.groupInfoModel.value?.isPostMsg ?? true
+        if !status {
+            self.outputMessageSubject.onNext(LM.dls.alert_post_message_restriction)
+        }
+        return status
     }
     
     func getPrivateChatStatus() {

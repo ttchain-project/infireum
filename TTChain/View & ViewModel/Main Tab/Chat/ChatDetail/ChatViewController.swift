@@ -112,6 +112,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         startMonitorThemeIfNeeded()
         bindViewModel()
     
+        self.viewModel.outputMessageSubject.asObservable().subscribe(onNext:{ message in
+            self.showAlert(title: "", message: message)
+        }).disposed(by:bag)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -582,6 +585,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     
     func toCreateRedEnv() {
         
+        guard self.viewModel.canPostMessage() else {
+            return
+        }
         let cordinator = RedEnvelopeCordinator.init()
         
         var type: CreateRedEnvelopeViewModel.CreateType = .normal

@@ -706,7 +706,9 @@ struct DLS_ZH_TW: DLS {
     var forward_message_title_string :String = "选择消息"
     
     var light_withdrawal_placeholder_toAddr : String  = "請輸入TTN閃電支付的收款地址 或 掃描行動條碼"
-    
+
+    var alert_post_message_restriction = "只有管理員才能在此組中發布消息"
+
 }
 
 
