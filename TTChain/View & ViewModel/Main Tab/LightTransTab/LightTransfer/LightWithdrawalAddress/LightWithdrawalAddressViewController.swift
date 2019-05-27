@@ -65,7 +65,7 @@ final class LightWithdrawalAddressViewController: KLModuleViewController,KLVMVC 
                         additionalSpacing: 4,
                         state: .normal)
 
-        toAddressTextField.set(placeholder: dls.withdrawal_placeholder_toAddr)
+        toAddressTextField.set(placeholder: dls.light_withdrawal_placeholder_toAddr)
         
         fromAddressTitleLabel.text = dls.withdrawal_label_fromAddr
     }

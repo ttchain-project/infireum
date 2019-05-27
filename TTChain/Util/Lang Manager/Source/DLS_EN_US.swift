@@ -698,4 +698,6 @@ struct DLS_EN_US: DLS {
     var transfer_all_coin_ttn_address:String = "Transfer all coins"
     
     var forward_message_title_string :String = "Select Messages"
+    
+    var light_withdrawal_placeholder_toAddr : String  = "Please enter TTN address or scan the qrcode"
 }

@@ -691,4 +691,6 @@ struct DLS_ZH_CN: DLS {
 
     var forward_message_title_string :String = "选择消息"
 
+    var light_withdrawal_placeholder_toAddr : String  = "请输入TTN闪电支付的收款地址或扫描行动条码"
+    
 }

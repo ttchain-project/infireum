@@ -105,7 +105,6 @@ extension LightTransferManager {
             return  RxAPIResponse.just(.failed(error: .noData))
         }
         //Till now, fee coin is always the basic coin of the chain.
-        
         return Server.instance.getTTNNonce(
             address: address, mainCoin: info.feeCoin
         )

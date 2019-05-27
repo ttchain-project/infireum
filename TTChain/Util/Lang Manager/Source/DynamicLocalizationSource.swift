@@ -675,4 +675,6 @@ protocol DynamicLocalizationSource {
     var transfer_all_coin_ttn_address:String {get set}
 
     var forward_message_title_string :String {get set}
+    
+    var light_withdrawal_placeholder_toAddr : String {get set}
 }
