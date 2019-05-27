@@ -165,26 +165,7 @@ class ChatViewModel: KLRxViewModel {
         self.sendDataAsMessage(data: data,fileName: "audioRecording.3gpp")
     }
     
-    func sendDataAsMessage(data:Data, fileName:String) {
-        guard let user = IMUserManager.manager.userModel.value else {
-            return
-        }
-        let param = UploadFileAPI.Parameters.init(uid: user.uID,
-                                                  isGroup: self.isGroup,
-                                                  image: data,roomId: self.input.roomID,
-                                                  fileName:fileName)
-        
-        Server.instance.uploadFile(parameters:param).asObservable().subscribe(onNext: {[weak self] (result) in
-            switch result {
-            case .failed(error: let error):
-                DLogError(error)
-            case .success(let message):
-                DLogInfo(message)
-                self?.fetchAllMessagesForPrivateChat()
-                
-            }
-        }).disposed(by: bag)
-    }
+    
     
     func sendReceiptMessage(for walletAddress: String , identifier: String, amount: String) {
         let message = "{\"address\":\"" + walletAddress + "\",\"amount\":\"" + amount + "\",\"coinID\":\"" + identifier + "\"}"
@@ -212,7 +193,7 @@ class ChatViewModel: KLRxViewModel {
         
         for message in messages {
             switch message.msgType {
-            case .general :
+            case .general,.urlMessage :
                 self.sendMessage(txt:message.msg)
             case .image:
                 if let url = URL.init(string:message.msg) {
@@ -308,6 +289,27 @@ class ChatViewModel: KLRxViewModel {
                 } else {
                     self.blockSubject.onNext((true))
                 }
+            }
+        }).disposed(by: bag)
+    }
+    
+    func sendDataAsMessage(data:Data, fileName:String) {
+        guard let user = IMUserManager.manager.userModel.value else {
+            return
+        }
+        let param = UploadFileAPI.Parameters.init(uid: user.uID,
+                                                  isGroup: self.isGroup,
+                                                  image: data,roomId: self.input.roomID,
+                                                  fileName:fileName)
+        
+        Server.instance.uploadFile(parameters:param).asObservable().subscribe(onNext: {[weak self] (result) in
+            switch result {
+            case .failed(error: let error):
+                DLogError(error)
+            case .success(let message):
+                DLogInfo(message)
+                self?.fetchAllMessagesForPrivateChat()
+                
             }
         }).disposed(by: bag)
     }
