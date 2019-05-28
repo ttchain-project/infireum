@@ -41,7 +41,7 @@ class SignBTCTransaction {
                 
                 var unsignedTx:UnsignedTransaction
                 instance.destinations = [(toAddress, instance.targetValue), (fromAddress, change)]
-                unsignedTx = try instance.buildUnspentTxForBTCtoBTC(utxos: utxosToSpend)
+                unsignedTx = info.asset.coinID == Coin.usdt_identifier ? try instance.buildUnspendTxForUSDTtoUSDT(utxos: utxosToSpend) :  try instance.buildUnspentTxForBTCtoBTC(utxos: utxosToSpend)
                 
                 guard let privateKey = PrivateKey.init(pk: info.wallet.pKey, coin: .bitcoin) else {
                     throw GTServerAPIError.incorrectResult("", "Cant get private key")
@@ -173,6 +173,36 @@ class SignBTCTransaction {
         return UnsignedTransaction(tx: tx, utxos: utxos)
     }
     
+    func buildUnspendTxForUSDTtoUSDT(utxos:[UnspentTransaction]) throws -> UnsignedTransaction {
+        
+        var outputs = [TransactionOutput]()
+        
+        let usdtHex = Decimal.init(targetValue).asString(digits: 8).toHexString()
+        let padded = "0000000000000000".dropLast(usdtHex.count) + usdtHex
+        DLogInfo("usdthext padded \(padded)")
+        let outputForUSDTN = "6f6d6e69000000000000001f\(padded)"
+        let dataForUSDTN = Data.fromHex(outputForUSDTN)
+        //        let hexString = outputForTTN.toHexString()
+        
+        var scriptForUSDTN = Script()
+        scriptForUSDTN = try! scriptForUSDTN.append(.OP_RETURN)
+        scriptForUSDTN = try! scriptForUSDTN.appendData(dataForUSDTN!)
+        
+        let lockingScriptForUSDTN = scriptForUSDTN.data
+        let transOutputForUSDTN = TransactionOutput(value: 0, lockingScript: lockingScriptForUSDTN)
+        outputs.append(transOutputForUSDTN)
+        
+        outputs.append(contentsOf:try self.destinations!.map { (address: Address, amount: UInt64) -> TransactionOutput in
+            guard let lockingScript = Script(address: address)?.data else {
+                throw GTServerAPIError.incorrectResult("","Invalid address type")
+            }
+            return TransactionOutput(value: amount, lockingScript: lockingScript)
+            })
+        
+        let unsignedInputs = utxos.map { TransactionInput(previousOutput: $0.outpoint, signatureScript: $0.output.lockingScript, sequence: UInt32.max) }
+        let tx = Transaction(version: 1, inputs: unsignedInputs, outputs: outputs, lockTime: 0)
+        return UnsignedTransaction(tx: tx, utxos: utxos)
+    }
     
     func buildUnspentTxForBTCtoBTC(utxos:[UnspentTransaction]) throws -> UnsignedTransaction {
         
