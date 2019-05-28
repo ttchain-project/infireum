@@ -24,17 +24,20 @@ class SignETHTransaction {
                 let digitExp = Int(withdrawalInfo.asset.coin!.digit)
                 let unitAmt = withdrawalInfo.withdrawalAmt * pow(10, digitExp)
                 var data = Data()
-                if let contract = withdrawalInfo.asset.coin?.contract {
+                var toAddress = withdrawalInfo.address
+                var value:Wei? = Wei(unitAmt.asString(digits: 0))
+                if let contract = withdrawalInfo.asset.coin?.contract, withdrawalInfo.asset.coinID != Coin.eth_identifier {
                     let erc20Token = ERC20.init(contractAddress: contract, decimal: digitExp, symbol: withdrawalInfo.asset.coin!.inAppName!)
                     data = try Data(hex: erc20Token.generateSendBalanceParameter(toAddress: withdrawalInfo.address,
-                                                                                     amount: unitAmt.asString(digits: 0)).toHexString().addHexPrefix())
+                                                                                     amount: withdrawalInfo.withdrawalAmt.asString(digits: 0)).toHexString().addHexPrefix())
+                    toAddress = contract
+                    value = Wei("0")
                 }
-                let ethTx = EthereumRawTransaction(value: Wei(unitAmt.asString(digits: 0))!,
-                                                   to: withdrawalInfo.address,
+                let ethTx = EthereumRawTransaction(value: value!,
+                                                   to: toAddress,
                                                    gasPrice: Int(withdrawalInfo.feeRate.etherToWei.doubleValue),
                                                    gasLimit: Int(withdrawalInfo.feeAmt.doubleValue),
                                                    nonce: nonce,data:data)
-                
                 
                 let dataPk = Data(hex: withdrawalInfo.asset.wallet!.pKey)
                 let signer = EIP155Signer.init(chainId: 1)
