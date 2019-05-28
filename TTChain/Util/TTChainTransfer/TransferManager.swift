@@ -48,21 +48,21 @@ extension TransferManager {
                 return self.getBTCUnspent(fromInfo: withdrawalInfo)
             }
         }.flatMap {
-                [unowned self] result -> RxAPIResponse<SignBTCTxAPIModel> in
+                [unowned self] result -> RxAPIResponse<String> in
                 switch result {
                 case .failed(error: let err):
                     return .just(.failed(error: err))
                 case .success(let model):
                     switch model.result {
                     case .unspents(let unspents):
-                        if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
-                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
-                        }else {
-                            return self.signBTC(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
+//                        if withdrawalInfo.feeCoin.identifier == Coin.usdt_identifier {
+//                            return self.signUSDT(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
+//                        }else {
+//                            return self.signBTC(with: &withdrawalInfo, unspents: unspents,isCompressed: isAddressCompressed)
 
-//                            let unspentTx = unspents.map { return $0.unspendTx }
-//                            return SignBTCTransaction.getSignTxForBTC(withInfo: info, forUnspents: unspentTx, isCompressed: isAddressCompressed)
-                        }
+                            let unspentTx = unspents.map { return $0.unspendTx }
+                            return SignBTCTransaction.getSignTxForBTC(withInfo: info, forUnspents: unspentTx, isCompressed: isAddressCompressed)
+//                        }
                     case .insufficient:
                         let dls = LM.dls
                         let err: GTServerAPIError = GTServerAPIError.incorrectResult(
@@ -82,7 +82,7 @@ extension TransferManager {
                     return .just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)
-                    return self.broadcastBTC(with: model.signText, withComments: withdrawalInfo.note ?? "")
+                    return self.broadcastBTC(with: model, withComments: withdrawalInfo.note ?? "")
                 }
             }.flatMap {
                 [unowned self] result -> RxAPIResponse<(String?)> in
@@ -178,20 +178,21 @@ extension TransferManager {
         
         observer.onNext(.signing)
 
-        getETHNonce(fromInfo: info)
-            .flatMap {
-                [unowned self] result -> RxAPIResponse<SignETHTxAPIModel> in
-                switch result {
-                case .failed(error: let err):
-                    observer.onNext(
-                        .finished(.failed(error: err))
-                    )
-                    
-                    return .just(.failed(error: err))
-                case .success(let model):
-                    return self.signETHTx(fromInfo: info, nonce: model.nonce)
-                }
-            }
+//        getETHNonce(fromInfo: info)
+//            .flatMap {
+//                [unowned self] result -> RxAPIResponse<SignETHTxAPIModel> in
+//                switch result {
+//                case .failed(error: let err):
+//                    observer.onNext(
+//                        .finished(.failed(error: err))
+//                    )
+//
+//                    return .just(.failed(error: err))
+//                case .success(let model):
+//                    return self.signETHTx(fromInfo: info, nonce: model.nonce)
+//                }
+//            }
+            SignETHTransaction.signTransaction(withdrawalInfo: info)
             .flatMap {
                 [unowned self] result -> RxAPIResponse<BroadcastETHTxAPIModel> in
                 switch result {
@@ -203,7 +204,7 @@ extension TransferManager {
                     return .just(.failed(error: err))
                 case .success(let model):
                     observer.onNext(.broadcasting)
-                    return self.broadcastETHTx(with: model.signText,  andComments: info.note ?? "")
+                    return self.broadcastETHTx(with: model,  andComments: info.note ?? "")
                 }
             }
             .flatMap {
