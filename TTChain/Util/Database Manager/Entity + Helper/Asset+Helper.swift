@@ -191,22 +191,7 @@ extension Asset {
                     DB.instance.update()
                     return balance
                 }
-            }
-//        let fakeValue: RxAPIResponse<Decimal> = RxAPIResponse.just(.failed(error: GTServerAPIError.noData))
-//        return fakeValue.map {
-//            result -> NSDecimalNumber? in
-//            switch result {
-//            case .failed:
-//                //If failed, try to return database value
-//                return self.amount
-//            case .success(let value):
-//                //If success, sync to the database and return the new rate
-//                self.amount = value as NSDecimalNumber
-//                DatabaseManager.instance.update()
-//                return self.amount
-//            }
-//            }
-//            .map { $0 == nil ? nil : $0! as Decimal }
+        }
     }
 }
 

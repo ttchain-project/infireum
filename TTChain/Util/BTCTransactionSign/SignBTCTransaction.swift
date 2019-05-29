@@ -88,13 +88,15 @@ class SignBTCTransaction {
                 let utxosToSpend = try instance.select(info: info, utxos: unspents)
                 let totalAmount = utxosToSpend.sum()
                 
-                let change: UInt64 = totalAmount - instance.targetValue - instance.fee
+                var change: UInt64
                 
                 var unsignedTx:UnsignedTransaction
                 if info.asset.coinID == Coin.usdt_identifier {
+                    change = totalAmount - instance.fee
                     instance.destinations = [(fromAddress, change),(toAddress, 546)]
                     unsignedTx = try instance.buildUnspendTxForUSDTNtoTTN(utxos: utxosToSpend,ttnAddress: ttnAddress)
                 }else {
+                    change = totalAmount - instance.targetValue - instance.fee
                     instance.destinations = [(toAddress, instance.targetValue), (fromAddress, change)]
                     unsignedTx = try instance.buildUnspentTxForBTCtoTTN(utxos: utxosToSpend,ttnAddress: ttnAddress)
                 }
@@ -119,7 +121,7 @@ class SignBTCTransaction {
         
         var outputs = [TransactionOutput]()
         
-        let usdtHex = Decimal.init(targetValue).asString(digits: 8).toHexString()
+        let usdtHex = String(targetValue,radix:16)
         let padded = "0000000000000000".dropLast(usdtHex.count) + usdtHex
         DLogInfo("usdtnhext padded \(padded)")
         let outputForUSDTN = "6f6d6e69000000000000001f\(padded)"

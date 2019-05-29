@@ -251,6 +251,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
             alert.addTextField { [unowned self] (tf) in
                 tf.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
                 tf.set(placeholder:dls.qrCodeImport_alert_placeholder_pwd(self.viewModel._selectedWallet.value?.pwdHint ?? "") )
+                tf.isSecureTextEntry = true
                 textField = tf
                 tf.rx.text.map { $0?.count ?? 0 }.map { $0 > 0 }.bind(to: confirm.rx.isEnabled).disposed(by: self.bag)
             }

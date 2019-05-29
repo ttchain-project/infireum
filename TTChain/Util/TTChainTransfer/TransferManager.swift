@@ -133,7 +133,6 @@ extension TransferManager {
         }else {
             targetAmt = info.withdrawalAmt + info.totalFee
         }
-        
         return Server.instance.getBTCUnspent(fromBTCAddress: info.wallet.address!, targetAmt: targetAmt)
     }
     

@@ -43,11 +43,20 @@ class LightTransMenuTableViewCell: UITableViewCell {
         self.gradView.cornerRadius = 8
         self.coinNameLabel.set(textColor: .white, font: .owMedium(size: 20))
         self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 18))
-        self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: LM.dls.light_withdraw_btn_title)
-        self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: LM.dls.light_deposit_btn_title)
         self.backgroundColor = .clear
         self.gradView.backgroundColor = .clear
         self.bgView.backgroundColor = .clear
+        
+        LM.instance.lang.subscribe(onNext: {
+            [unowned self] in self.configUI(lang: $0)
+        })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    private func configUI(lang:Lang) {
+        self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: lang.dls.light_withdraw_btn_title)
+        self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: lang.dls.light_deposit_btn_title)
     }
     
     func config(asset:Asset, amtSource:Observable<BehaviorRelay<Decimal?>>, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ())) {
