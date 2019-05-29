@@ -126,7 +126,15 @@ extension TransferManager {
     }
     
     func getBTCUnspent(fromInfo info: WithdrawalInfo) -> RxAPIResponse<GetBTCUnspentAPIModel> {
-        return Server.instance.getBTCUnspent(fromBTCAddress: info.wallet.address!, targetAmt: (info.withdrawalAmt + info.totalFee))
+        
+        var targetAmt : Decimal!
+        if info.asset.coinID == Coin.usdt_identifier {
+            targetAmt = info.totalFee + Decimal.init(integerLiteral: 546).satoshiToBTC
+        }else {
+            targetAmt = info.withdrawalAmt + info.totalFee
+        }
+        
+        return Server.instance.getBTCUnspent(fromBTCAddress: info.wallet.address!, targetAmt: targetAmt)
     }
     
     private func signBTC(with info: inout WithdrawalInfo, unspents: [Unspent],isCompressed:Bool) -> RxAPIResponse<SignBTCTxAPIModel> {
