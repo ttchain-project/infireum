@@ -26,7 +26,8 @@ class SignBTCTransaction {
         
         let instance = SignBTCTransaction.init()
         instance.fee = NSDecimalNumber(decimal:info.totalFee.btcToSatoshi).uint64Value
-        instance.targetValue = NSDecimalNumber(decimal:info.withdrawalAmt.btcToSatoshi).uint64Value
+        
+        instance.targetValue =  NSDecimalNumber(decimal:info.withdrawalAmt.btcToSatoshi).uint64Value
         instance.isCompressed = isCompressed
         let fromAddress = try! LegacyAddress(info.wallet.address!, coin: .bitcoin)
         let toAddress = try! LegacyAddress(info.address, coin: .bitcoin)
@@ -37,11 +38,21 @@ class SignBTCTransaction {
                 let utxosToSpend = try instance.select(info: info, utxos: unspents)
                 let totalAmount = utxosToSpend.sum()
                 
-                let change: UInt64 = totalAmount - instance.targetValue - instance.fee
-                
+                var change: UInt64
+                var targetValue:UInt64
                 var unsignedTx:UnsignedTransaction
-                instance.destinations = [(toAddress, instance.targetValue), (fromAddress, change)]
-                unsignedTx = info.asset.coinID == Coin.usdt_identifier ? try instance.buildUnspendTxForUSDTtoUSDT(utxos: utxosToSpend) :  try instance.buildUnspentTxForBTCtoBTC(utxos: utxosToSpend)
+                
+                if info.asset.coinID == Coin.usdt_identifier {
+                    targetValue = 546
+                    change = totalAmount - targetValue - instance.fee
+                    instance.destinations = [(toAddress, targetValue), (fromAddress, change)]
+                    unsignedTx = try instance.buildUnspendTxForUSDTtoUSDT(utxos: utxosToSpend)
+                }else {
+                    change = totalAmount - instance.targetValue - instance.fee
+                    targetValue = instance.targetValue
+                    instance.destinations = [(toAddress, targetValue), (fromAddress, change)]
+                    unsignedTx = try instance.buildUnspentTxForBTCtoBTC(utxos: utxosToSpend)
+                }
                 
                 guard let privateKey = PrivateKey.init(pk: info.wallet.pKey, coin: .bitcoin) else {
                     throw GTServerAPIError.incorrectResult("", "Cant get private key")
@@ -110,7 +121,7 @@ class SignBTCTransaction {
         
         let usdtHex = Decimal.init(targetValue).asString(digits: 8).toHexString()
         let padded = "0000000000000000".dropLast(usdtHex.count) + usdtHex
-        DLogInfo("usdthext padded \(padded)")
+        DLogInfo("usdtnhext padded \(padded)")
         let outputForUSDTN = "6f6d6e69000000000000001f\(padded)"
         let dataForUSDTN = Data.fromHex(outputForUSDTN)
         //        let hexString = outputForTTN.toHexString()
@@ -177,20 +188,19 @@ class SignBTCTransaction {
         
         var outputs = [TransactionOutput]()
         
-        let usdtHex = Decimal.init(targetValue).asString(digits: 8).toHexString()
+        let usdtHex = String(targetValue,radix:16)
         let padded = "0000000000000000".dropLast(usdtHex.count) + usdtHex
-        DLogInfo("usdthext padded \(padded)")
-        let outputForUSDTN = "6f6d6e69000000000000001f\(padded)"
-        let dataForUSDTN = Data.fromHex(outputForUSDTN)
-        //        let hexString = outputForTTN.toHexString()
+        DLogInfo("usdthex padded \(padded)")
+        let outputForUSDT = "6f6d6e69000000000000001f\(padded)"
+        let dataForUSDT = Data.fromHex(outputForUSDT)
         
-        var scriptForUSDTN = Script()
-        scriptForUSDTN = try! scriptForUSDTN.append(.OP_RETURN)
-        scriptForUSDTN = try! scriptForUSDTN.appendData(dataForUSDTN!)
+        var scriptForUSDT = Script()
+        scriptForUSDT = try! scriptForUSDT.append(.OP_RETURN)
+        scriptForUSDT = try! scriptForUSDT.appendData(dataForUSDT!)
         
-        let lockingScriptForUSDTN = scriptForUSDTN.data
-        let transOutputForUSDTN = TransactionOutput(value: 0, lockingScript: lockingScriptForUSDTN)
-        outputs.append(transOutputForUSDTN)
+        let lockingScriptForUSDT = scriptForUSDT.data
+        let transOutputForUSDT = TransactionOutput(value: 0, lockingScript: lockingScriptForUSDT)
+        outputs.append(transOutputForUSDT)
         
         outputs.append(contentsOf:try self.destinations!.map { (address: Address, amount: UInt64) -> TransactionOutput in
             guard let lockingScript = Script(address: address)?.data else {
@@ -220,28 +230,39 @@ class SignBTCTransaction {
     
     func select(info: WithdrawalInfo, utxos: [UnspentTransaction]) throws ->[UnspentTransaction] {
         // if target value is zero, fee is zero
+        var tranferAmount = targetValue
+        let dustThreshhold : UInt64 = 3 * 182
 
-        guard targetValue > 0 else {
+        if info.asset.coinID == Coin.usdt_identifier {
+            //Since we are transferring USDT, for unspents we just make sure there is enough for fee and dust
+            tranferAmount = 0 + dustThreshhold
+        }
+        guard tranferAmount > 0 else {
             return []
         }
         
-        let dustThreshhold : UInt64 = 3 * 182
         // definitions for the following caluculation
-        let doubleTargetValue = targetValue * 2
+        let doubleTargetValue = tranferAmount * 2
         var numOutputs = 2 // if allow multiple output, it will be changed.
         var numInputs = 2
-        var targetWithFee: UInt64 {
-            return targetValue + fee
+        var tranferAmountWithFee: UInt64 {
+            return tranferAmount + fee
         }
         var targetWithFeeAndDust: UInt64 {
-            return targetWithFee + dustThreshhold
+            return tranferAmountWithFee + dustThreshhold
         }
         
         let sortedUtxos: [UnspentTransaction] = utxos.sorted(by: { $0.output.value < $1.output.value })
         
         // total values of utxos should be greater than targetValue
-        guard sortedUtxos.sum() >= targetValue && !sortedUtxos.isEmpty else {
-            throw Result.insufficient
+        guard sortedUtxos.sum() >= tranferAmount && !sortedUtxos.isEmpty else {
+            let err: GTServerAPIError = GTServerAPIError.incorrectResult(
+                LM.dls
+                    .withdrawalConfirm_pwdVerify_error_btc_insufficient_fee_title,
+                LM.dls
+                    .insufficient_unspend_error_msg
+            )
+            throw err
         }
         
         // difference from 2x targetValue
@@ -271,7 +292,7 @@ class SignBTCTransaction {
                 numInputs = numTx
                 let nOutputsSlices = sortedUtxos.eachSlices(numInputs)
                 let nOutputsInRange = nOutputsSlices.filter {
-                    return $0.sum() >= targetWithFee
+                    return $0.sum() >= tranferAmountWithFee
                 }
                 if let nOutputs = nOutputsInRange.first {
                     return nOutputs
@@ -279,7 +300,13 @@ class SignBTCTransaction {
             }
         }
         
-        throw Result.insufficient
+        let err: GTServerAPIError = GTServerAPIError.incorrectResult(
+            LM.dls
+                .withdrawalConfirm_pwdVerify_error_btc_insufficient_fee_title,
+            LM.dls
+                .insufficient_unspend_error_msg
+        )
+        throw err
     }
     
     func signBtc(_ unsignedTransaction: UnsignedTransaction, with key: PrivateKey) throws -> Transaction {
