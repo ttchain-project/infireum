@@ -50,6 +50,7 @@ class TTNTxHandler: TxHandler {
     }()
     
     func loadCurrentPage() -> RxAPIVoidResponse {
+        self.deleteTxBeforeJuneFirst()
         guard !didReachedSearchLine else { return RxAPIResponse.just(.success(()))}
         return fetcher.getTxs(address: address)
             .map {
@@ -78,7 +79,14 @@ class TTNTxHandler: TxHandler {
         }
     }
     
-    
+    private func deleteTxBeforeJuneFirst() {
+        let date = NSDate.init(timeIntervalSince1970: 1559318400)
+        let datePred = NSPredicate.init(format: "date < %@", date)
+        let addressPred = TransRecord.anyInoutPredicate(forAddress: self.address)
+        let pred = NSCompoundPredicate.init(andPredicateWithSubpredicates: [datePred, addressPred])
+
+        DB.instance.delete(type: TransRecord.self, predicate: pred)
+    }
     private func preSaveUnusedTxs(unusedTxs txs: [Fetcher.Tx]) {
         let tokenTxsContructors = txs.map {
             $0.transformToSyncConcstructor()

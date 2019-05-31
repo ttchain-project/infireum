@@ -252,6 +252,7 @@ extension TransRecord {
             block: block
         )
     }
+    
 }
 
 import RxSwift
