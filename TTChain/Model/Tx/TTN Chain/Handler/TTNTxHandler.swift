@@ -89,10 +89,17 @@ class TTNTxHandler: TxHandler {
     
     func recordsMapping(withSourceTxs txs: [Fetcher.Tx]) -> [TransRecord]? {
         let _ = txs.mapToTransRecords()
+        //Filter the transactions after 1559102400, since the chain was cleared on this timestamp
         if let asset = asset {
-            return TransRecord.getAllRecords(ofAsset: asset)?.sorted(by: { ($0.date! as Date) > ($1.date! as Date) })
+            return TransRecord.getAllRecords(ofAsset: asset)?.filter({ (record) -> Bool in
+                let date = Date.init(timeIntervalSince1970: 1559102400)
+                return (record.date! as Date) >= date
+            }).sorted(by: { ($0.date! as Date) > ($1.date! as Date) })
         }else {
-            return TransRecord.getAllRecords(ofWallet: wallet)?.sorted(by: { ($0.date! as Date) > ($1.date! as Date) })
+            return TransRecord.getAllRecords(ofWallet: wallet)?.filter({ (record) -> Bool in
+                let date = Date.init(timeIntervalSince1970: 1559102400)
+                return (record.date! as Date) >= date
+            }).sorted(by: { ($0.date! as Date) > ($1.date! as Date) })
         }
     }
 }
