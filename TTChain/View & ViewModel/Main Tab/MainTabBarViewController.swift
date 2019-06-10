@@ -41,9 +41,9 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return tradeNav?.viewControllers[0] as? LightTransMenuViewController
     }
     private lazy var tradeItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: "Trade", image: nil, selectedImage: nil)
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "tt_tab_icon").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "tt_tab_icon").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
 
-//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
     
@@ -128,9 +128,23 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         observeChatNotificationTapped()
         
-        self.tabBar.barTintColor =  UIColor.init(red: 157, green: 216, blue: 210)
+        self.tabBar.barTintColor =  UIColor.white
         self.view.backgroundColor = .owCharcoalGrey
         
+  
+//        self.addTTICon()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    private func addTTICon() {
         tradeButton = UIButton.init(type: .custom)
         tradeButton.setImageForAllStates(#imageLiteral(resourceName: "ttn_icon_white"))
         tradeButton.set(backgroundColor: #colorLiteral(red: 1, green: 0.7882352941, blue: 0.4196078431, alpha: 1))
@@ -147,7 +161,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         tradeButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         
         tradeButton.heightAnchor.constraint(equalTo: tradeButton.widthAnchor, multiplier: 1.0/1.0).isActive = true
-
+        
         tabBar.centerXAnchor.constraint(equalTo: tradeButton.centerXAnchor).isActive = true
         let top = tabBar.topAnchor.constraint(equalTo: tradeButton.centerYAnchor)
         top.constant = -10
@@ -155,16 +169,6 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         tradeButton.widthAnchor.constraint(equalToConstant: 52).isActive = true
         tradeButton.adjustsImageWhenHighlighted = false
         self.tabBar.bringSubview(toFront: self.tradeButton)
-        
-    }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tradeButton.cornerRadius = tradeButton.height/2
-
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func checkForTTNWallet() {
