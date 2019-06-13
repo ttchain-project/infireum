@@ -387,7 +387,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             }
         case .importWallet:
             switch result {
-            case .mnemonic(let _): //NOTE: No mnemonic import now.
+            case .mnemonic( _): //NOTE: No mnemonic import now.
                 break
             case .privateKey(let pKey, possibleAddresssesInfo: let infos) where infos.count == 1:
                 let info = infos[0]
