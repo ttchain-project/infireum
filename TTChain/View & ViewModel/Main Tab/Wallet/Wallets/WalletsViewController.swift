@@ -117,10 +117,10 @@ extension WalletsViewController:UITableViewDelegate {
                 //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
             }
             .bind(to: headerView.totalBalance.rx.text)
-            .disposed(by: bag)
+            .disposed(by: headerView.bag)
         
         
-        let fiatValSrc = self.viewModel.totalAssetAmtForCoin(coin: sectionModel.header)
+        let fiatValSrc = self.viewModel.totalFiatAmoutForCoin(coin: sectionModel.header)
         
         Observable.combineLatest(
             fiatValSrc.flatMapLatest { $0 },
@@ -131,7 +131,7 @@ extension WalletsViewController:UITableViewDelegate {
                 return fiat.fullSymbol + (fiatValue?.asString(digits: 2, force: true).disguiseIfNeeded() ?? "--")
             }
             .bind(to: headerView.fiatValue.rx.text)
-            .disposed(by: bag)
+            .disposed(by: headerView.bag)
         
         return headerView
     }

@@ -79,7 +79,12 @@ class WalletsViewModel: KLRxViewModel {
         var coins = Coin.getAllCoins(of: ChainType.btc) + Coin.getAllCoins(of: ChainType.eth)
         coins = coins.filter { $0.identifier != Coin.usdt_identifier  }.filter { $0.identifier?.contains("_FIAT") == false  }.compactMap { $0 }
         self.sectionModelSources.accept(coins.map(SectionOfTable.init))
-        self.assets.accept(coins.map{ Asset.getAssetsForCoin(coin: $0) }.flatMap { $0 })
+        self.assets.accept(coins.map{ coin -> [Asset] in
+           let assets = Asset.getAssetsForCoin(coin: coin)
+            self.coinToAssetsTable[coin] = assets
+            return assets
+            }.flatMap { $0 })
+        
         refreshAllData()
     }
     
@@ -97,7 +102,7 @@ class WalletsViewModel: KLRxViewModel {
         if sectionModel.isShowing {
             sectionModel.items = []
         } else {
-            let assets = Asset.getAssetsForCoin(coin: sectionModelsArray[section].header)
+            let assets = self.assetsForCoin(sectionModel.header)
             sectionModel.items = assets
         }
         
@@ -237,7 +242,7 @@ class WalletsViewModel: KLRxViewModel {
     }
     
     public func totalFiatAmoutForCoin(coin:Coin) -> BehaviorRelay<BehaviorRelay<Decimal?>>{
-        let assetsForCoin = self.coinToAssetsTable[coin] ?? []
+        let assetsForCoin = self.assetsForCoin(coin)
         return BehaviorRelay.init(value: self.createTotalFiatValues(assets: assetsForCoin))
     }
     
@@ -289,8 +294,7 @@ class WalletsViewModel: KLRxViewModel {
             values -> Decimal? in
             let nonOptionalVals = values.compactMap { $0 }
             if !nonOptionalVals.isEmpty {
-                return nonOptionalVals.map { $0.rounded(toPlaces: 2,
-                                                        rule: .towardZero) }
+                return nonOptionalVals
                     .reduce(0, +)
             }else {
                 return nil
