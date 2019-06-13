@@ -702,4 +702,7 @@ struct DLS_EN_US: DLS {
     var light_withdrawal_placeholder_toAddr : String  = "Please enter TTN address or scan the qrcode"
     
     var alert_post_message_restriction = "Only administrators can post messages in this group"
+    
+    var total_assets_title = "Total assets"
+    var asset_management_btn_title :String = "Asset Management"
 }

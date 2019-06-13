@@ -11,40 +11,6 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-
-struct SectionOfTable : AnimatableSectionModelType{
-    
-    var identity: String {
-        return self.header.identifier!
-    }
-    
-    typealias Identity = String
-    
-    init(original: SectionOfTable, items: [Asset]) {
-        self = original
-        self.items = items
-        self.isShowing = false
-    }
-    
-    init(header:Coin) {
-        self.header = header
-        self.items = []
-        self.isShowing = false
-    }
-    
-    typealias Item = Asset
-    let header: Coin
-    var items: [Item]
-    var isShowing:Bool = false
-}
-
-extension Asset:IdentifiableType {
-    public var identity: Int {
-        return (self.coinID! + (self.walletEPKey ?? "")).hashValue
-    }
-    public typealias Identity = Int
-}
-
 class WalletsViewModel: KLRxViewModel {
     
     func concatInput() {
@@ -128,6 +94,8 @@ class WalletsViewModel: KLRxViewModel {
     }
 
     
+    
+    //Setup data structure for Assets
     func refreshAllData() {
         for (k, v) in assetAmtTable {
             v.accept(createAssetAmtUpater(ofAsset: k))
@@ -260,6 +228,10 @@ class WalletsViewModel: KLRxViewModel {
         let assetsForCoin = self.assetsForCoin(coin)
         return BehaviorRelay.init(value: self.createTotalFiatValues(assets: assetsForCoin))
     }
+    
+    private(set) lazy var totalFiatValues: BehaviorRelay<BehaviorRelay<Decimal?>> = {
+        return BehaviorRelay.init(value: createTotalFiatValues(assets: self.assets.value))
+    }()
     
     private func createTotalFiatValues(assets:[Asset]) -> BehaviorRelay<Decimal?> {
         let source: BehaviorRelay<Decimal?> = BehaviorRelay.init(value: nil)

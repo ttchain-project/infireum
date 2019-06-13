@@ -323,6 +323,18 @@
 		555E4AF8224CEDC000C7CAD5 /* RedEnvelopeCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4AF7224CEDC000C7CAD5 /* RedEnvelopeCordinator.swift */; };
 		555E4AF9224CEDC000C7CAD5 /* RedEnvelopeCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4AF7224CEDC000C7CAD5 /* RedEnvelopeCordinator.swift */; };
 		555E4AFA224CEDC000C7CAD5 /* RedEnvelopeCordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E4AF7224CEDC000C7CAD5 /* RedEnvelopeCordinator.swift */; };
+		5565063F22B248950042EFC4 /* WalletTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565063E22B248950042EFC4 /* WalletTableSection.swift */; };
+		5565064022B248950042EFC4 /* WalletTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565063E22B248950042EFC4 /* WalletTableSection.swift */; };
+		5565064122B248950042EFC4 /* WalletTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565063E22B248950042EFC4 /* WalletTableSection.swift */; };
+		5565064422B24EF90042EFC4 /* WalletHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064222B24EF90042EFC4 /* WalletHeaderViewController.swift */; };
+		5565064522B24EF90042EFC4 /* WalletHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064222B24EF90042EFC4 /* WalletHeaderViewController.swift */; };
+		5565064622B24EF90042EFC4 /* WalletHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064222B24EF90042EFC4 /* WalletHeaderViewController.swift */; };
+		5565064722B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5565064322B24EF90042EFC4 /* WalletHeaderViewController.xib */; };
+		5565064822B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5565064322B24EF90042EFC4 /* WalletHeaderViewController.xib */; };
+		5565064922B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5565064322B24EF90042EFC4 /* WalletHeaderViewController.xib */; };
+		5565064D22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */; };
+		5565064E22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */; };
+		5565064F22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */; };
 		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
@@ -2264,6 +2276,10 @@
 		555E4AEF224CEC7F00C7CAD5 /* ReceiveRedEnvelopeHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiveRedEnvelopeHistoryViewController.xib; sourceTree = "<group>"; };
 		555E4AF0224CEC8000C7CAD5 /* ReceiveRedEnvelopeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveRedEnvelopeHistoryViewController.swift; sourceTree = "<group>"; };
 		555E4AF7224CEDC000C7CAD5 /* RedEnvelopeCordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedEnvelopeCordinator.swift; sourceTree = "<group>"; };
+		5565063E22B248950042EFC4 /* WalletTableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableSection.swift; sourceTree = "<group>"; };
+		5565064222B24EF90042EFC4 /* WalletHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderViewController.swift; sourceTree = "<group>"; };
+		5565064322B24EF90042EFC4 /* WalletHeaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHeaderViewController.xib; sourceTree = "<group>"; };
+		5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderViewModel.swift; sourceTree = "<group>"; };
 		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
@@ -3430,6 +3446,27 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		5565064A22B24F210042EFC4 /* WalletHeaderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5565064222B24EF90042EFC4 /* WalletHeaderViewController.swift */,
+				5565064322B24EF90042EFC4 /* WalletHeaderViewController.xib */,
+				5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */,
+			);
+			path = WalletHeaderViewController;
+			sourceTree = "<group>";
+		};
+		5565064B22B24F3E0042EFC4 /* WalletsCell&SectionHeader */ = {
+			isa = PBXGroup;
+			children = (
+				55CAC60E22AFB03B00BEBE25 /* WalletsTableSectionHeaderView.xib */,
+				55CAC61222AFB14600BEBE25 /* WalletsTableSectionHeaderView.swift */,
+				55CAC61622AFB8E600BEBE25 /* WalletsTableViewCell.swift */,
+				55CAC61722AFB8E600BEBE25 /* WalletsTableViewCell.xib */,
+			);
+			path = "WalletsCell&SectionHeader";
+			sourceTree = "<group>";
+		};
 		557C8494223209AE004C2E16 /* AudioCall */ = {
 			isa = PBXGroup;
 			children = (
@@ -3743,10 +3780,9 @@
 				55CAC60222AF91A400BEBE25 /* WalletsViewController.swift */,
 				55CAC60322AF91A400BEBE25 /* WalletsViewController.xib */,
 				55CAC60A22AF91D100BEBE25 /* WalletsViewModel.swift */,
-				55CAC60E22AFB03B00BEBE25 /* WalletsTableSectionHeaderView.xib */,
-				55CAC61222AFB14600BEBE25 /* WalletsTableSectionHeaderView.swift */,
-				55CAC61622AFB8E600BEBE25 /* WalletsTableViewCell.swift */,
-				55CAC61722AFB8E600BEBE25 /* WalletsTableViewCell.xib */,
+				5565064B22B24F3E0042EFC4 /* WalletsCell&SectionHeader */,
+				5565063E22B248950042EFC4 /* WalletTableSection.swift */,
+				5565064A22B24F210042EFC4 /* WalletHeaderViewController */,
 			);
 			path = Wallets;
 			sourceTree = "<group>";
@@ -6881,6 +6917,7 @@
 				557C854B2236380E004C2E16 /* AudioCallViewController.xib in Resources */,
 				5537F0822265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */,
 				55BB1B45218FDCE70061F189 /* ExploreViewController.xib in Resources */,
+				5565064922B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */,
 				64C9D4BA21044AFF000B0774 /* WithdrawalCICFeeInputViewController.xib in Resources */,
 				6424B65520F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.xib in Resources */,
 				64C9D44D20FDC8C6000B0774 /* AddressBookViewController.xib in Resources */,
@@ -7041,6 +7078,7 @@
 				55AADF0A22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */,
 				64D8265820E0E1F600C8FC63 /* ChangeAssetTableViewCell.xib in Resources */,
 				6EB422F121635B8C00DF75DB /* AgreementMeViewController.xib in Resources */,
+				5565064722B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */,
 				640D890220EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
 				55EF6A6F21A812C6007E074A /* ChatNavigationController.xib in Resources */,
 				64D8268520E33FAF00C8FC63 /* ManageAssetTableViewCell.xib in Resources */,
@@ -7225,6 +7263,7 @@
 				55AADF0B22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */,
 				64D8265920E0E1F600C8FC63 /* ChangeAssetTableViewCell.xib in Resources */,
 				6EB422F221635B8C00DF75DB /* AgreementMeViewController.xib in Resources */,
+				5565064822B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */,
 				640D890320EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
 				55EF6A7021A812C6007E074A /* ChatNavigationController.xib in Resources */,
 				64D8268620E33FAF00C8FC63 /* ManageAssetTableViewCell.xib in Resources */,
@@ -7975,6 +8014,7 @@
 				643200E320FB51FC00B11334 /* WithdrawalLightningPwdValidationViewModel.swift in Sources */,
 				64A1178D20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
 				64C9D4E021044F6D000B0774 /* WithdrawalCICFeeInfoAdvModeViewModel.swift in Sources */,
+				5565064F22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */,
 				640D891720EF6A6D0010D986 /* TransRecordListViewModel.swift in Sources */,
 				649E48B820ECE79600B217AD /* WalletPrivateKeyInfoViewController.swift in Sources */,
 				6481397720DA4AF100CAA4D8 /* OWMnemonicViewModel.swift in Sources */,
@@ -7992,6 +8032,7 @@
 				555E4A9C224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */,
 				64083D0621101E2F00DE1C31 /* TxFetcher.swift in Sources */,
 				648139E020DC977800CAA4D8 /* MainWalletViewModel.swift in Sources */,
+				5565064622B24EF90042EFC4 /* WalletHeaderViewController.swift in Sources */,
 				64B2772020D55A05004FF75B /* FiatToFiatRate+Helper.swift in Sources */,
 				64F07DAF20D240FF00A60C5C /* Any+ReachabilityMonitor.swift in Sources */,
 				64C614AC2109BA50005B7394 /* String+PrivateMode.swift in Sources */,
@@ -8090,6 +8131,7 @@
 				645D4E8A211344150052D0E1 /* TxBlockCache.swift in Sources */,
 				557D4E5E21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */,
 				5539A48D21676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewController.swift in Sources */,
+				5565064122B248950042EFC4 /* WalletTableSection.swift in Sources */,
 				64813A5720DCA6EE00CAA4D8 /* FiatToFiatRate+CoreDataClass.swift in Sources */,
 				64813A8820DCAE2600CAA4D8 /* Coin+Helper.swift in Sources */,
 				64813AC520DCE8F100CAA4D8 /* FiatManager.swift in Sources */,
@@ -8500,6 +8542,7 @@
 				649732CA213F7D2B00C4D1D5 /* Coin+CoreDataClass.swift in Sources */,
 				6470D6CD20F35BE900EB0780 /* WithdrawalETHFeeInfoAdvModeViewController.swift in Sources */,
 				643200E120FB51FC00B11334 /* WithdrawalLightningPwdValidationViewModel.swift in Sources */,
+				5565064D22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */,
 				64813A2E20DCA6EE00CAA4D8 /* Language+CoreDataProperties.swift in Sources */,
 				64C9D4DE21044F6D000B0774 /* WithdrawalCICFeeInfoAdvModeViewModel.swift in Sources */,
 				649E485320E7D98E00B217AD /* ImportedWalletTableHeaderView.swift in Sources */,
@@ -8517,6 +8560,7 @@
 				555E4A9A224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */,
 				648139B820DB5E6500CAA4D8 /* IdentityRestoreViewModel.swift in Sources */,
 				6470D6BE20F35B9D00EB0780 /* WithdrawalETHFeeInfoAdvModeViewModel.swift in Sources */,
+				5565064422B24EF90042EFC4 /* WalletHeaderViewController.swift in Sources */,
 				6485002F20D9FF0500107473 /* OWInputTextField.swift in Sources */,
 				64083D0421101E2F00DE1C31 /* TxFetcher.swift in Sources */,
 				6481398B20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.swift in Sources */,
@@ -8615,6 +8659,7 @@
 				648139C020DB8B7600CAA4D8 /* UINavigationBar+Shadow.swift in Sources */,
 				557D4E5C21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */,
 				64813AC720DCEE7900CAA4D8 /* CoinToFiatRate+Helper.swift in Sources */,
+				5565063F22B248950042EFC4 /* WalletTableSection.swift in Sources */,
 				64769B1A2121E86F00C4AB9E /* AgreementViewController.swift in Sources */,
 				6424B6A520F5E43500AEBCAD /* TransferRecordsListViewModel.swift in Sources */,
 				643200B420FAE22E00B11334 /* LightningTradeConfirmViewModel.swift in Sources */,
@@ -9018,6 +9063,7 @@
 				649732CB213F7D2B00C4D1D5 /* Coin+CoreDataClass.swift in Sources */,
 				64813AC820DCEE7900CAA4D8 /* CoinToFiatRate+Helper.swift in Sources */,
 				643200E220FB51FC00B11334 /* WithdrawalLightningPwdValidationViewModel.swift in Sources */,
+				5565064E22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */,
 				640D892420F0691B0010D986 /* WithdrawalBaseViewController.swift in Sources */,
 				64C9D4DF21044F6D000B0774 /* WithdrawalCICFeeInfoAdvModeViewModel.swift in Sources */,
 				6470D62320F1024400EB0780 /* ThemeManager.swift in Sources */,
@@ -9035,6 +9081,7 @@
 				555E4A9B224A477F00C7CAD5 /* RedEnvelopeDetailViewModel.swift in Sources */,
 				64D826BF20E3E53600C8FC63 /* Identity+CoreDataClass.swift in Sources */,
 				64D826A420E3E2AC00C8FC63 /* LightningTransRecord+CoreDataProperties.swift in Sources */,
+				5565064522B24EF90042EFC4 /* WalletHeaderViewController.swift in Sources */,
 				64083D0521101E2F00DE1C31 /* TxFetcher.swift in Sources */,
 				648139BD20DB77A500CAA4D8 /* KLPlaceholderTextView.swift in Sources */,
 				64F07DFE20D241A000A60C5C /* GTQuickLogExtensions.swift in Sources */,
@@ -9133,6 +9180,7 @@
 				645006FC20F45E0500C0FC11 /* WithdrawalConfirmETHFeeInputViewModel.swift in Sources */,
 				557D4E5D21E35B770073B8D8 /* MarketTestTabModel.swift in Sources */,
 				64769B1B2121E86F00C4AB9E /* AgreementViewController.swift in Sources */,
+				5565064022B248950042EFC4 /* WalletTableSection.swift in Sources */,
 				6424B6A620F5E43500AEBCAD /* TransferRecordsListViewModel.swift in Sources */,
 				643200B520FAE22E00B11334 /* LightningTradeConfirmViewModel.swift in Sources */,
 				649E483320E7CED900B217AD /* ChangeWalletViewController.swift in Sources */,

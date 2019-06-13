@@ -709,6 +709,9 @@ struct DLS_ZH_TW: DLS {
 
     var alert_post_message_restriction = "只有管理員才能在此組中發布消息"
 
+    var total_assets_title = "總資產"
+
+    var asset_management_btn_title :String = "資產管理"
 }
 
 

@@ -679,4 +679,7 @@ protocol DynamicLocalizationSource {
     var light_withdrawal_placeholder_toAddr : String {get set}
     
     var alert_post_message_restriction : String {get set}
+    var total_assets_title : String {get set}
+
+    var asset_management_btn_title :String {get set}
 }

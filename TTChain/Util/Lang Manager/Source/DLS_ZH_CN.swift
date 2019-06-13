@@ -694,4 +694,6 @@ struct DLS_ZH_CN: DLS {
     var light_withdrawal_placeholder_toAddr : String  = "请输入TTN闪电支付的收款地址或扫描行动条码"
     var alert_post_message_restriction = "只有管理员才能在此组中发布消息"
 
+    var total_assets_title = "总资产"
+    var asset_management_btn_title :String = "资产管理"
 }

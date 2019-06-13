@@ -19,12 +19,14 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
         self.configTableView()
         self.viewModel = WalletsViewModel.init(input: WalletsViewModel.Input(), output: WalletsViewModel.Output())
         self.viewModel.sectionModelSources.bind(to: self.tableView.rx.items(dataSource: self.viewModel.dataSource)).disposed(by: bag)
+        self.configHeaderView()
 
     }
     
     var bag: DisposeBag = DisposeBag()
     var viewModel:ViewModel!
     
+    var headerViewController:WalletHeaderViewController!
     typealias Constructor = Void
 
     private func configTableView() {
@@ -34,6 +36,16 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
         self.tableView.separatorStyle = .none
     }
 
+    func configHeaderView() {
+        let totalFiatValues = self.viewModel.totalFiatValues.asObservable()
+        headerViewController = WalletHeaderViewController.instance(from: WalletHeaderViewController.Config(totalAssetFiatValue: totalFiatValues,
+                                                                                             fiatCurrency: self.viewModel.fiat.asObservable(), manageAsset: ({
+                                                                                                print("oasdf")
+                                                                                             })))
+        headerViewController.view.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: self.view.height * 0.4)
+        self.tableView.tableHeaderView = headerViewController.view
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
