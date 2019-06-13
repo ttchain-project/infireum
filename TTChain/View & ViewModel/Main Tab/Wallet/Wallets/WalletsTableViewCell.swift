@@ -30,5 +30,37 @@ class WalletsTableViewCell: UITableViewCell {
     @IBOutlet weak var assetBalance: UILabel!
     @IBOutlet weak var fiatValue: UILabel!
     
-    
+    func config(asset:Asset, amtSource:Observable<BehaviorRelay<Decimal?>>,fiatValueSource:Observable<BehaviorRelay<Decimal?>>,fiatSource:Observable<Fiat>) {
+        amtSource
+            .flatMapLatest { $0 }
+            .map {
+                amt -> String in
+                guard let _amt = amt else {
+                    return "--"
+                }
+                return _amt
+                    .asString(digits: C.Coin.min_digit,
+                              force: true,
+                              maxDigits: Int(asset.coin!.digit),
+                              digitMoveCondition: { Decimal.init(string: $0)! != _amt })
+                    .disguiseIfNeeded()
+                //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
+            }
+            .bind(to: self.assetBalance.rx.text)
+            .disposed(by: self.bag)
+        
+        Observable.combineLatest(
+            fiatValueSource.flatMapLatest { $0 },
+            fiatSource
+            )
+            .map {
+                fiatValue, fiat -> String in
+                return fiat.fullSymbol + (fiatValue?.asString(digits: 2, force: true).disguiseIfNeeded() ?? "--")
+            }
+            .bind(to: self.fiatValue.rx.text)
+            .disposed(by: self.bag)
+        
+        self.titleLabel.text = asset.wallet?.name
+
+    }
 }

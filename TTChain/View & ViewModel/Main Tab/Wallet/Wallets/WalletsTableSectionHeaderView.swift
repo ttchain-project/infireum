@@ -29,4 +29,41 @@ class WalletsTableSectionHeaderView : UITableViewHeaderFooterView {
         super.awakeFromNib()
     }
     
+    func config(sectionModel:SectionOfTable, amtSource:BehaviorRelay<BehaviorRelay<Decimal?>>,fiatValSrc:BehaviorRelay<BehaviorRelay<Decimal?>>) {
+        
+        self.titleLabel.text = sectionModel.header.inAppName
+        self.expandButton.isSelected = sectionModel.isShowing
+        self.imageView.image = sectionModel.header.iconImg
+
+        amtSource
+            .flatMapLatest { $0 }
+            .map {
+                amt -> String in
+                guard let _amt = amt else {
+                    return "--"
+                }
+                
+                return _amt
+                    .asString(digits: C.Coin.min_digit,
+                              force: true,
+                              maxDigits: Int(sectionModel.header.digit),
+                              digitMoveCondition: { Decimal.init(string: $0)! != _amt })
+                    .disguiseIfNeeded()
+                //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
+            }
+            .bind(to: self.totalBalance.rx.text)
+            .disposed(by: self.bag)
+        
+        Observable.combineLatest(
+            fiatValSrc.flatMapLatest { $0 },
+            FiatManager.instance.fiat.asObservable()
+            )
+            .map {
+                fiatValue, fiat -> String in
+                return fiat.fullSymbol + (fiatValue?.asString(digits: 2, force: true).disguiseIfNeeded() ?? "--")
+            }
+            .bind(to: self.fiatValue.rx.text)
+            .disposed(by: self.bag)
+    }
+    
 }

@@ -73,6 +73,7 @@ class WalletsViewModel: KLRxViewModel {
     private(set) var assets: BehaviorRelay<[Asset]> = BehaviorRelay.init(value: [])
 
     var sectionModelSources : BehaviorRelay<[SectionOfTable]> = BehaviorRelay.init(value: [])
+    
     required init(input: WalletsViewModel.Input, output: WalletsViewModel.Output) {
         self.input = input
         self.output = output
@@ -85,6 +86,20 @@ class WalletsViewModel: KLRxViewModel {
             return assets
             }.flatMap { $0 })
         
+        self.dataSource.configureCell = { [weak self] (dataSource, tv, indexPath, asset) -> WalletsTableViewCell in
+            guard let `self` = self else {
+                return WalletsTableViewCell()
+            }
+            let cell = tv.dequeueReusableCell(with: WalletsTableViewCell.self, for: indexPath)
+            
+            let amtSource = self.amt(ofAsset: asset).asObservable()
+            let fiatValueSource = self.fiatValue(ofAsset: asset).asObservable()
+            let fiatSource = self.fiat.asObservable()
+            
+            cell.config(asset:asset,amtSource: amtSource,fiatValueSource:fiatValueSource,fiatSource:fiatSource)
+            
+            return cell
+        }
         refreshAllData()
     }
     
