@@ -24,8 +24,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     }
     
     private var walletOptionNav: UINavigationController?
-    private var walletOptionVC: WalletOptionsViewController? {
-        return walletOptionNav?.viewControllers[0] as? WalletOptionsViewController
+    private var walletOptionVC: WalletsViewController? {
+        return walletOptionNav?.viewControllers[0] as? WalletsViewController
     }
     
     private lazy var walletItem: UITabBarItem = {
@@ -97,7 +97,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         let exploreNav : UINavigationController = ExploreViewController.navInstance()
         
-        let walletOptionsNav = WalletOptionsViewController.navInstance()
+        let walletOptionsNav = WalletsViewController.navInstance()
         
         let chatNav = ChatListViewController.navInstance(from: ())
         let settingsNav = SettingMenuViewController.navInstance()
