@@ -105,7 +105,7 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
         let urlString: String
         switch (asset.coin?.owChainType,asset.coin?.identifier) {
         case (.btc?,Coin.btc_identifier):
-            urlString = C.BlockchainAPI.BlockExplorer.apiBase
+            urlString = "https://blockchain.info"
         case (.btc?,Coin.usdt_identifier):
             urlString = "https://api.omniexplorer.info"
         case (.ttn?,_):
@@ -129,7 +129,7 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
         }
         switch (asset.coin!.owChainType,asset.coinID) {
         case (.btc,Coin.btc_identifier):
-            return "/addr/\(address)/balance"
+            return "/balance"
         case (.btc,Coin.usdt_identifier):
             return "/v1/address/addr/"
         case(.ttn,_):
@@ -157,7 +157,7 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
                 return .uploadMultipart(multiPartData)
             }
             
-            return Moya.Task.requestPlain
+            return Moya.Task.requestParameters(parameters: ["active" : address], encoding: URLEncoding.default)
 
         case .eth:
             var params = [ "token" : "ETH" ]
@@ -201,10 +201,11 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                         self.balanceInCoin = 0
                 }
             }else {
-                guard let balance = json.number else {
+                guard let address = sourceAPI.asset.wallet?.address, let balanceDict = json[address].dictionary,let totalBalance = balanceDict["final_balance"]?.numberValue else {
                     throw GTServerAPIError.noData
                 }
-                self.balanceInCoin = balance.decimalValue.satoshiToBTC
+                
+                self.balanceInCoin = totalBalance.decimalValue.satoshiToBTC
             }
            
         case .eth:
