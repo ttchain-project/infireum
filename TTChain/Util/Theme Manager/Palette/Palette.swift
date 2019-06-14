@@ -121,4 +121,8 @@ extension UIColor {
     @nonobjc class var owHopBush: UIColor {
         return UIColor.init(red: 207, green: 105, blue: 149)!
     }
+    
+    @nonobjc class var yellowGreen: UIColor {
+        return UIColor.init(hexString: "98C736")!
+    }
 }

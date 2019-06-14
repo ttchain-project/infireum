@@ -335,6 +335,15 @@
 		5565064D22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */; };
 		5565064E22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */; };
 		5565064F22B24F6C0042EFC4 /* WalletHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */; };
+		5565065222B33C190042EFC4 /* WalletsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565065022B33C180042EFC4 /* WalletsContainerViewController.swift */; };
+		5565065322B33C190042EFC4 /* WalletsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565065022B33C180042EFC4 /* WalletsContainerViewController.swift */; };
+		5565065422B33C190042EFC4 /* WalletsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565065022B33C180042EFC4 /* WalletsContainerViewController.swift */; };
+		5565065522B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5565065122B33C180042EFC4 /* WalletsContainerViewController.xib */; };
+		5565065622B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5565065122B33C180042EFC4 /* WalletsContainerViewController.xib */; };
+		5565065722B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5565065122B33C180042EFC4 /* WalletsContainerViewController.xib */; };
+		5565065A22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565065922B342640042EFC4 /* WalletsContainerViewModel.swift */; };
+		5565065B22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565065922B342640042EFC4 /* WalletsContainerViewModel.swift */; };
+		5565065C22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565065922B342640042EFC4 /* WalletsContainerViewModel.swift */; };
 		5568384B21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384C21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
 		5568384D21F5A8460006892C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568384921F5A8460006892C /* ProfileViewController.swift */; };
@@ -2280,6 +2289,9 @@
 		5565064222B24EF90042EFC4 /* WalletHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderViewController.swift; sourceTree = "<group>"; };
 		5565064322B24EF90042EFC4 /* WalletHeaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletHeaderViewController.xib; sourceTree = "<group>"; };
 		5565064C22B24F6C0042EFC4 /* WalletHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderViewModel.swift; sourceTree = "<group>"; };
+		5565065022B33C180042EFC4 /* WalletsContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsContainerViewController.swift; sourceTree = "<group>"; };
+		5565065122B33C180042EFC4 /* WalletsContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletsContainerViewController.xib; sourceTree = "<group>"; };
+		5565065922B342640042EFC4 /* WalletsContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsContainerViewModel.swift; sourceTree = "<group>"; };
 		5568384921F5A8460006892C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5568384A21F5A8460006892C /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
@@ -3467,6 +3479,16 @@
 			path = "WalletsCell&SectionHeader";
 			sourceTree = "<group>";
 		};
+		5565065822B340C10042EFC4 /* WalletsContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				5565065022B33C180042EFC4 /* WalletsContainerViewController.swift */,
+				5565065922B342640042EFC4 /* WalletsContainerViewModel.swift */,
+				5565065122B33C180042EFC4 /* WalletsContainerViewController.xib */,
+			);
+			path = WalletsContainerView;
+			sourceTree = "<group>";
+		};
 		557C8494223209AE004C2E16 /* AudioCall */ = {
 			isa = PBXGroup;
 			children = (
@@ -3783,6 +3805,7 @@
 				5565064B22B24F3E0042EFC4 /* WalletsCell&SectionHeader */,
 				5565063E22B248950042EFC4 /* WalletTableSection.swift */,
 				5565064A22B24F210042EFC4 /* WalletHeaderViewController */,
+				5565065822B340C10042EFC4 /* WalletsContainerView */,
 			);
 			path = Wallets;
 			sourceTree = "<group>";
@@ -6866,6 +6889,7 @@
 				64B98EE520FA03BE00C4EB11 /* LightningTransRecordTableViewCell.xib in Resources */,
 				64769B1F2121E86F00C4AB9E /* AgreementViewController.xib in Resources */,
 				555E4ABE224CB99900C7CAD5 /* RedEnvelopeHistoryTableViewCell.xib in Resources */,
+				5565065722B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */,
 				6446E24E20FCE85A00EC1E2E /* SelectFiatTableViewCell.xib in Resources */,
 				55EF6A6221A812C6007E074A /* KeyboardFunctionCollectionViewCell.xib in Resources */,
 				555E4AB0224CB7E800C7CAD5 /* RedEnvelopeHistoryViewController.xib in Resources */,
@@ -7081,6 +7105,7 @@
 				5565064722B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */,
 				640D890220EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
 				55EF6A6F21A812C6007E074A /* ChatNavigationController.xib in Resources */,
+				5565065522B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */,
 				64D8268520E33FAF00C8FC63 /* ManageAssetTableViewCell.xib in Resources */,
 				55EF6AC621A812C6007E074A /* ExtendFunctionTableViewCell.xib in Resources */,
 				64E4E4D32147B434009B556B /* LaunchViewController.xib in Resources */,
@@ -7266,6 +7291,7 @@
 				5565064822B24EF90042EFC4 /* WalletHeaderViewController.xib in Resources */,
 				640D890320EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
 				55EF6A7021A812C6007E074A /* ChatNavigationController.xib in Resources */,
+				5565065622B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */,
 				64D8268620E33FAF00C8FC63 /* ManageAssetTableViewCell.xib in Resources */,
 				55EF6AC721A812C6007E074A /* ExtendFunctionTableViewCell.xib in Resources */,
 				64E4E4D42147B434009B556B /* LaunchViewController.xib in Resources */,
@@ -8112,6 +8138,7 @@
 				55EF6B4B21A81567007E074A /* Paramenter.swift in Sources */,
 				55EF6AF521A812C7007E074A /* GroupInviteTableViewCell.swift in Sources */,
 				5539A49621676F8C00A59ACC /* IdentityQRCodeImportViewController.swift in Sources */,
+				5565065422B33C190042EFC4 /* WalletsContainerViewController.swift in Sources */,
 				555E4A91224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */,
 				64C9D44A20FDC8C6000B0774 /* AddressBookViewController.swift in Sources */,
 				64F07DE720D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
@@ -8200,6 +8227,7 @@
 				55EF6B8421A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4421A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
 				559C4F18222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
+				5565065C22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
 				64F07E7420D36AFE00A60C5C /* IdentitySetupViewController.swift in Sources */,
 				649732CF213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,
 				6470D61620F0E01B00EB0780 /* WithdrawalAddressViewModel.swift in Sources */,
@@ -8640,6 +8668,7 @@
 				55EF6B4921A81567007E074A /* Paramenter.swift in Sources */,
 				55EF6AF321A812C7007E074A /* GroupInviteTableViewCell.swift in Sources */,
 				6470D67E20F32B9500EB0780 /* WithdrawalConfirmChangeWalletViewController.swift in Sources */,
+				5565065222B33C190042EFC4 /* WalletsContainerViewController.swift in Sources */,
 				555E4A8F224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */,
 				64813A3A20DCA6EE00CAA4D8 /* SubAddress+CoreDataProperties.swift in Sources */,
 				6481397A20DA4D1700CAA4D8 /* MnemonicHelper.swift in Sources */,
@@ -8728,6 +8757,7 @@
 				55EF6B8221A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4221A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
 				559C4F16222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
+				5565065A22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
 				64B98EE020FA03BE00C4EB11 /* LightningTransRecordTableViewCell.swift in Sources */,
 				64D8267C20E339C200C8FC63 /* OfflineWallet.xcdatamodeld in Sources */,
 				64A1178B20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
@@ -9161,6 +9191,7 @@
 				55EF6B4A21A81567007E074A /* Paramenter.swift in Sources */,
 				55EF6AF421A812C7007E074A /* GroupInviteTableViewCell.swift in Sources */,
 				640D88D620EDD6660010D986 /* ImportChainTypeChooseViewModel.swift in Sources */,
+				5565065322B33C190042EFC4 /* WalletsContainerViewController.swift in Sources */,
 				555E4A90224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.swift in Sources */,
 				648139B920DB5E6500CAA4D8 /* IdentityRestoreViewModel.swift in Sources */,
 				64A1179120D5372C00797C2C /* ChainType.swift in Sources */,
@@ -9249,6 +9280,7 @@
 				55EF6B8321A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4321A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
 				559C4F17222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
+				5565065B22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
 				64813A6B20DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataProperties.swift in Sources */,
 				640D88C020EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				649732CE213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,

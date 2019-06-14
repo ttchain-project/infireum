@@ -705,4 +705,6 @@ struct DLS_EN_US: DLS {
     
     var total_assets_title = "Total assets"
     var asset_management_btn_title :String = "Asset Management"
+    
+    var wallet_type_btn_main_chain:String  = "Main Chain"
 }

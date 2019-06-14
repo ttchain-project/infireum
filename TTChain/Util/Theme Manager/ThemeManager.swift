@@ -103,7 +103,7 @@ protocol OfflineWalletThemePalette {
     var recordStatus_deposit: UIColor { get set }
     var recordStatus_withdrawal: UIColor { get set }
     var recordStatus_failed: UIColor { get set }
-    
+    var bg_fill_new: UIColor { get set }
     func specific(color: UIColor) -> UIColor
 }
 
@@ -220,4 +220,6 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     var recordStatus_withdrawal: UIColor = .owAzure
     
     var recordStatus_failed: UIColor = .owPinkRed
+    
+    var bg_fill_new:UIColor = .yellowGreen
 }

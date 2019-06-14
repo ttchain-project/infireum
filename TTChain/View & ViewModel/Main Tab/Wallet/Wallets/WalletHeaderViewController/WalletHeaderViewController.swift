@@ -61,13 +61,13 @@ final class WalletHeaderViewController: KLModuleViewController, KLVMVC{
         
          totalAssetValueTitleLabel.set(textColor: theme.palette.label_sub, font: .owRegular(size: 12))
         
-        manageCoinButton.set(textColor: UIColor.init(hexString: "98C736"), font: .owRegular(size: 14),  backgroundColor: .white)
+        manageCoinButton.set(textColor: theme.palette.bg_fill_new, font: .owRegular(size: 14),  backgroundColor: .white)
     }
     
     func bindUI() {
         self.viewModel.input.fiatSource.map { $0.fullSymbol }.bind(to:self.fiatCurrencyLabel.rx.text).disposed(by:bag)
         
-        self.viewModel.input.fiatAmtValue.flatMapLatest { $0 }.debug("Value here is this").map { $0?.asString(digits: 2, force: true).disguiseIfNeeded() ?? "--" }.bind(to:self.totalAssetValue.rx.text).disposed(by:bag)
+        self.viewModel.input.fiatAmtValue.flatMapLatest { $0 }.map { $0?.asString(digits: 2, force: true).disguiseIfNeeded() ?? "--" }.bind(to:self.totalAssetValue.rx.text).disposed(by:bag)
         
         self.manageCoinButton.rx.klrx_tap.drive(onNext:{[unowned self] in
             self.manageAssetBtnAction()

@@ -14,11 +14,9 @@ import RxDataSources
 class WalletsViewModel: KLRxViewModel {
     
     func concatInput() {
-        
     }
     
     func concatOutput() {
-        
     }
     
     var bag: DisposeBag = DisposeBag()
@@ -27,7 +25,7 @@ class WalletsViewModel: KLRxViewModel {
     var output: WalletsViewModel.Output
     
     struct Input {
-        
+        var coins : [Coin]
     }
     struct Output {
         
@@ -43,14 +41,7 @@ class WalletsViewModel: KLRxViewModel {
     required init(input: WalletsViewModel.Input, output: WalletsViewModel.Output) {
         self.input = input
         self.output = output
-        var coins = Coin.getAllCoins(of: ChainType.btc) + Coin.getAllCoins(of: ChainType.eth)
-        coins = coins.filter { $0.identifier != Coin.usdt_identifier  }.filter { $0.identifier?.contains("_FIAT") == false  }.compactMap { $0 }
-        self.sectionModelSources.accept(coins.map(SectionOfTable.init))
-        self.assets.accept(coins.map{ coin -> [Asset] in
-           let assets = Asset.getAssetsForCoin(coin: coin)
-            self.coinToAssetsTable[coin] = assets
-            return assets
-            }.flatMap { $0 })
+        self.prepareSectionModels()
         
         self.dataSource.configureCell = { [weak self] (dataSource, tv, indexPath, asset) -> WalletsTableViewCell in
             guard let `self` = self else {
@@ -66,7 +57,9 @@ class WalletsViewModel: KLRxViewModel {
             
             return cell
         }
+
         refreshAllData()
+        self.observeTransferFinishedEvent()
     }
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfTable>.init(animationConfiguration:AnimationConfiguration(insertAnimation: .fade,
@@ -75,6 +68,72 @@ class WalletsViewModel: KLRxViewModel {
         ,configureCell: { (dataSource, tv, indexPath, viewModel) -> UITableViewCell in
             return UITableViewCell()
     })
+    
+    public var onAssetFinishUpdateFromTransfer: Observable<Asset> {
+        return _onAssetFinishUpdateFromTransfer.asObservable()
+    }
+    
+    private lazy var _onAssetFinishUpdateFromTransfer: PublishRelay<Asset> = {
+        return PublishRelay.init()
+    }()
+    
+    
+    private func observeTransferFinishedEvent() {
+        let withdrawalFinished = OWRxNotificationCenter.instance.onTransferRecordCreate
+        let lightningTradeFinished = OWRxNotificationCenter.instance.onLightningTransferRecordCreate
+        
+        let tradeOfCoinIDHappened =
+            Observable<String>.merge(
+                withdrawalFinished
+                    .map {
+                        $0.fromCoinID!
+                },
+                withdrawalFinished
+                    .map {
+                        $0.toCoinID!
+                },
+                withdrawalFinished
+                    .map {
+                        $0.feeCoinID!
+                },
+                lightningTradeFinished
+                    .map {
+                        $0.fromCoinID!
+                },
+                lightningTradeFinished
+                    .map {
+                        $0.toCoinID!
+                },
+                lightningTradeFinished
+                    .map {
+                        $0.feeCoinID!
+                }
+                )
+                .distinctUntilChanged()
+        
+        tradeOfCoinIDHappened.map {
+            [unowned self] coinID in
+            return self.assets.value.index(where: { (asset) -> Bool in
+                return asset.coinID == coinID
+            })
+            }
+            .filterNil()
+            .map { [unowned self] in self.assets.value[$0] }
+            .subscribe(onNext: {
+                [unowned self] assetNeedToUpdate in
+                
+                self.amt(ofAsset: assetNeedToUpdate).accept(
+                    self.createAssetAmtUpater(ofAsset: assetNeedToUpdate)
+                )
+                self.fiatValue(ofAsset: assetNeedToUpdate).accept(
+                    self.createFiatValueUpater(ofAsset: assetNeedToUpdate)
+                )
+                
+                self._onAssetFinishUpdateFromTransfer.accept(assetNeedToUpdate)
+            })
+            .disposed(by: bag)
+    }
+    
     
     func updateSectionModel(forSection section: Int)  {
         var sectionModelsArray = self.sectionModelSources.value
@@ -93,6 +152,14 @@ class WalletsViewModel: KLRxViewModel {
         self.sectionModelSources.accept(sectionModelsArray)
     }
 
+    func prepareSectionModels() {
+        self.sectionModelSources.accept(self.input.coins.map(SectionOfTable.init))
+        self.assets.accept(self.input.coins.map{ coin -> [Asset] in
+            let assets = Asset.getAssetsForCoin(coin: coin)
+            self.coinToAssetsTable[coin] = assets
+            return assets
+            }.flatMap { $0 })
+    }
     
     
     //Setup data structure for Assets
@@ -107,9 +174,6 @@ class WalletsViewModel: KLRxViewModel {
         
         for (k, v) in assetFiatValueTable {
             v.accept(createFiatValueUpater(ofAsset: k))
-        }
-        for (coin,_) in coinToAssetsTable {
-            coinToAssetsTable[coin] = Asset.getAssetsForCoin(coin: coin)
         }
     }
     

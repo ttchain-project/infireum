@@ -682,4 +682,6 @@ protocol DynamicLocalizationSource {
     var total_assets_title : String {get set}
 
     var asset_management_btn_title :String {get set}
+    
+    var wallet_type_btn_main_chain:String {get set}
 }

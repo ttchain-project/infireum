@@ -712,6 +712,7 @@ struct DLS_ZH_TW: DLS {
     var total_assets_title = "總資產"
 
     var asset_management_btn_title :String = "資產管理"
+    var wallet_type_btn_main_chain:String  = "主鏈幣"
 }
 
 
