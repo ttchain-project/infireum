@@ -12,7 +12,7 @@ import Pageboy
 import RxSwift
 import RxCocoa
 
-final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable, PageboyViewControllerDataSource {
+final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable, PageboyViewControllerDataSource,TMBarDataSource {
     
     var themeBag: DisposeBag = DisposeBag.init()
     var langBag: DisposeBag = DisposeBag.init()
@@ -35,40 +35,44 @@ final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, Rx
     }
     
     private var wallet: Wallet!
-    
+    private var items: [TMBarItem] = []
+
     private func config(wallet: Wallet) {
         self.wallet = wallet
         vcs = createPages()
-        self.bar.style = .buttonBar
-        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-            appearance.indicator.preferredStyle = TabmanIndicator.Style.line
-            appearance.style.background = Tabman.TabmanBar.BackgroundView.Style.solid(color: UIColor.clear)
-            switch bar.style {
-            case .scrollingButtonBar:
-                appearance.layout.itemDistribution = .leftAligned
-            default:
-                appearance.layout.itemDistribution = .centered
-            }
-            
-            //            appearance.indicator.color = UIColor.eeAquaBlue
-            appearance.indicator.lineWeight = .thin
-            appearance.indicator.useRoundedCorners = true
-            //            appearance.state.selectedColor = UIColor.eeAquaBlue
-            //            appearance.state.color = UIColor.eeAquaBlue.withAlphaComponent(0.5)
-            appearance.layout.height = TabmanBar.Height.explicit(value: 44)
-        })
+        let bar = TMBar.ButtonBar()
+        addBar(bar, dataSource: self, at: .top)
+        bar.indicator.weight = .light
+        bar.layout.alignment = .center
+        bar.indicator.cornerStyle = .rounded
+        bar.buttons.customize { (button) in
+            button.backgroundColor = .clear
+        }
+//        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
+//            appearance.indicator.preferredStyle = TabmanIndicator.Style.line
+//            appearance.style.background = Tabman.TabmanBar.BackgroundView.Style.solid(color: UIColor.clear)
+//            switch bar.style {
+//            case .scrollingButtonBar:
+//                appearance.layout.itemDistribution = .leftAligned
+//            default:
+//                appearance.layout.itemDistribution = .centered
+//            }
+//
+//            appearance.indicator.lineWeight = .thin
+//            appearance.indicator.useRoundedCorners = true
+//            appearance.layout.height = TabmanBar.Height.explicit(value: 44)
+//        })
         
-        reloadPages()
         
         monitorLang { [unowned self] (lang) in
-            self.bar.items = self.items(with: lang.dls)
+            self.items = self.items(with: lang.dls)
             self.config(with: lang.dls)
         }
         
         monitorTheme { (theme) in
-            self.bar.appearance?.indicator.color = theme.palette.label_main_1
-            self.bar.appearance?.state.selectedColor = theme.palette.label_main_1
-            self.bar.appearance?.state.color = theme.palette.label_sub
+//            self.bar.appearance?.indicator.color = theme.palette.label_main_1
+//            self.bar.appearance?.state.selectedColor = theme.palette.label_main_1
+//            self.bar.appearance?.state.color = theme.palette.label_sub
             self.config(with: theme.palette)
         }
     }
@@ -77,10 +81,10 @@ final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, Rx
         title = dls.exportPKey_title
     }
     
-    private func items(with dls: DLS) -> [TabmanBar.Item] {
+    private func items(with dls: DLS) -> [TMBarItem] {
         return [dls.exportPKey_tab_privateKey, dls.exportPKey_tab_qrcode].map {
-            (name) -> TabmanBar.Item in
-            let item = Item.init(title: name)
+            (name) -> TMBarItem in
+            let item = TMBarItem.init(title: name)
             return item
         }
     }
@@ -92,13 +96,10 @@ final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, Rx
     }
     
     private func createPages() -> [UIViewController] {
-        
         let vc1 = WalletPrivateKeyInfoViewController.instance(from: WalletPrivateKeyInfoViewController.Config(wallet: wallet)
         )
-        
         let vc2 = WalletPKeyQRCodeViewController.instance(from: WalletPKeyQRCodeViewController.Config(wallet: wallet)
         )
-        
         return [vc1, vc2]
     }
     
@@ -136,5 +137,7 @@ final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, Rx
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return nil
     }
-    
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        return self.items[index]
+    }
 }

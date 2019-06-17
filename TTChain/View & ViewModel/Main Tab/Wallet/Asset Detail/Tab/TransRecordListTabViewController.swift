@@ -12,7 +12,9 @@ import Pageboy
 import RxSwift
 import RxCocoa
 
-class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable, PageboyViewControllerDataSource {
+class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable,PageboyViewControllerDataSource, TMBarDataSource {
+    
+    
     
     var themeBag: DisposeBag = DisposeBag.init()
     var langBag: DisposeBag = DisposeBag.init()
@@ -63,56 +65,40 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
         vc.config(transRecords: transRecords, asset: asset)
         return vc
     }
-    
+
     private var transRecords: [TransRecord]!
+    private var items: [TMBarItem] = []
     
     private func config(transRecords: [TransRecord], asset: Asset) {
         self.transRecords = transRecords
         self.asset = asset
-        
+        typealias TTBar = TMBarView<TMHorizontalBarLayout, TTTabManButton, TMBarIndicator.None>
         vcs = createPages()
-        self.bar.style = .buttonBar
-        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-            appearance.indicator.preferredStyle = TabmanIndicator.Style.line
-            appearance.style.background = Tabman.TabmanBar.BackgroundView.Style.solid(color: UIColor.white)
-            switch bar.style {
-            case .scrollingButtonBar:
-                appearance.layout.itemDistribution = .leftAligned
-            default:
-                appearance.layout.itemDistribution = .centered
-            }
-            
-            //            appearance.indicator.color = UIColor.eeAquaBlue
-            appearance.indicator.lineWeight = .thin
-            appearance.indicator.useRoundedCorners = true
-            //            appearance.state.selectedColor = UIColor.eeAquaBlue
-            //            appearance.state.color = UIColor.eeAquaBlue.withAlphaComponent(0.5)
-            appearance.layout.height = TabmanBar.Height.explicit(value: 44)
-        })
-        
-        reloadPages()
-        
-        monitorLang { [unowned self] (lang) in
-            self.bar.items = self.items(with: lang.dls)
-        }
+        let bar = TTBar()
+        dataSource = self
+
+        bar.layout.alignment = .center
+        bar.layout.transitionStyle = .snap // Customize
+        bar.layout.contentMode = .fit
+        bar.backgroundView.style = TMBarBackgroundView.Style.flat(color: UIColor.owBlack20)
+        self.items = self.items(with: LM.dls)
+
+        addBar(bar, dataSource: self, at: .top)
         
         monitorTheme { (theme) in
-            self.bar.appearance?.indicator.color = theme.palette.label_main_1
-            self.bar.appearance?.state.selectedColor = theme.palette.label_main_1
-            self.bar.appearance?.state.color = theme.palette.label_sub
             self.config(with: theme.palette)
             self.view.backgroundColor = theme.palette.nav_bg_clear
         }
     }
     
-    private func items(with dls: DLS) -> [TabmanBar.Item] {
+    private func items(with dls: DLS) -> [TMBarItem] {
         return [dls.assetDetail_tab_total,
                 dls.assetDetail_btn_withdrawal,
                 dls.assetDetail_receive,
                 dls.assetDetail_tab_fail]
             .map {
-                (name) -> TabmanBar.Item in
-                let item = Item.init(title: name)
+                (name) -> TMBarItem in
+                let item = TMBarItem.init(title: name)
                 return item
             }
     }
@@ -125,24 +111,13 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
     
     private func createPages() -> [TransRecordListViewController] {
         let totalVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-                asset: asset, records: transRecords, type: .total
-            )
-        )
-        
+                asset: asset, records: transRecords, type: .total))
         let withdrawalVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-                asset: asset, records: transRecords, type: .withdrawal
-            )
-        )
-
+                asset: asset, records: transRecords, type: .withdrawal))
         let depositVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-                asset: asset, records: transRecords, type: .deposit
-            )
-        )
-
+                asset: asset, records: transRecords, type: .deposit))
         let failedVC = TransRecordListViewController.instance(from: TransRecordListViewController.Config(
-                asset: asset, records: transRecords, type: .failed
-            )
-        )
+                asset: asset, records: transRecords, type: .failed))
         
         return [totalVC, withdrawalVC, depositVC, failedVC]
     }
@@ -150,9 +125,6 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        automaticallyAdjustsChildViewInsets = false
-        dataSource = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -160,22 +132,12 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return vcs.count
     }
     
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
+        
         return vcs[index]
     }
     
@@ -192,6 +154,10 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
         let vc = vcs[index]
         _nextPage.accept(vc.nextPage)
         _refresh.accept(vc.onRefresh)
+    }
+    
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        return self.items[index]
     }
 }
 

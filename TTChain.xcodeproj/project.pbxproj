@@ -98,6 +98,9 @@
 		5526B54022128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
 		5526B54122128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
 		5526B54222128E7700573576 /* PhotoAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5526B53F22128E7700573576 /* PhotoAuthHandler.swift */; };
+		5530C1A822B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
+		5530C1A922B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
+		5530C1AA22B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
 		553402F9224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
 		553402FA224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
 		553402FB224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
@@ -2208,6 +2211,7 @@
 		5526B53322114BB100573576 /* ForwardListContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwardListContainerViewController.xib; sourceTree = "<group>"; };
 		5526B53A22114BDB00573576 /* ForwardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardListViewModel.swift; sourceTree = "<group>"; };
 		5526B53F22128E7700573576 /* PhotoAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthHandler.swift; sourceTree = "<group>"; };
+		5530C1A722B7366E00125653 /* TTTabManButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTabManButton.swift; sourceTree = "<group>"; };
 		553402F7224E105A007F355D /* ForwarMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwarMessageViewController.swift; sourceTree = "<group>"; };
 		553402F8224E105A007F355D /* ForwarMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwarMessageViewController.xib; sourceTree = "<group>"; };
 		553402FF224E123C007F355D /* ForwarMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwarMessageViewModel.swift; sourceTree = "<group>"; };
@@ -3181,6 +3185,14 @@
 				5526B53F22128E7700573576 /* PhotoAuthHandler.swift */,
 			);
 			path = PhotoAuth;
+			sourceTree = "<group>";
+		};
+		5530C1A622B7362C00125653 /* TTTabManButton */ = {
+			isa = PBXGroup;
+			children = (
+				5530C1A722B7366E00125653 /* TTTabManButton.swift */,
+			);
+			path = TTTabManButton;
 			sourceTree = "<group>";
 		};
 		553402F6224E103A007F355D /* ForwardMessageView */ = {
@@ -6330,6 +6342,7 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5530C1A622B7362C00125653 /* TTTabManButton */,
 				5559CAD9228E686600D37895 /* SignETHTransaction */,
 				55F987CB227FEA09000C32F9 /* BTCTransactionSign */,
 				55A3D25A2270129B002ABE13 /* TTNWalletSetup */,
@@ -7871,6 +7884,7 @@
 				64813A4220DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataProperties.swift in Sources */,
 				55E730652186E534003AE47E /* WIthdrawalRemarkViewModel.swift in Sources */,
 				64769B36212416C800C4AB9E /* CICTxFetcher.swift in Sources */,
+				5530C1AA22B7366E00125653 /* TTTabManButton.swift in Sources */,
 				64F07E2020D241A000A60C5C /* KLInsetLabel.swift in Sources */,
 				64D826A220E3E2AC00C8FC63 /* LightningTransRecord+CoreDataClass.swift in Sources */,
 				55EF6AE321A812C7007E074A /* FriendListContainerViewController.swift in Sources */,
@@ -8401,6 +8415,7 @@
 				640D892320F0691B0010D986 /* WithdrawalBaseViewController.swift in Sources */,
 				649E48AB20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.swift in Sources */,
 				6424B67420F5B97900AEBCAD /* TransferRecordWalletOptionViewController.swift in Sources */,
+				5530C1A822B7366E00125653 /* TTTabManButton.swift in Sources */,
 				64D8264F20E0D8D600C8FC63 /* ChangeAssetViewModel.swift in Sources */,
 				64A1179020D5372C00797C2C /* ChainType.swift in Sources */,
 				64F07DD620D241A000A60C5C /* UIViewController+MZFormSheetVC.swift in Sources */,
@@ -8924,6 +8939,7 @@
 				6485002220D9110000107473 /* OWQRCodeVIewModel.swift in Sources */,
 				6485005720DA440400107473 /* KLTagFlowLayout.swift in Sources */,
 				64769B35212416C800C4AB9E /* CICTxFetcher.swift in Sources */,
+				5530C1A922B7366E00125653 /* TTTabManButton.swift in Sources */,
 				64A1178C20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
 				64F07E1920D241A000A60C5C /* ServerAPIErrorHandler.swift in Sources */,
 				55EF6AE221A812C7007E074A /* FriendListContainerViewController.swift in Sources */,

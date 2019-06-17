@@ -19,6 +19,7 @@
                 <outlet property="recordTabBase" destination="Tws-vD-1rs" id="Hzi-r4-QgM"/>
                 <outlet property="transferBase" destination="NIR-YL-rVY" id="GMe-eE-zuz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="walletNameLabel" destination="0QU-og-TZN" id="AK6-p7-jc3"/>
                 <outlet property="withdrawalBtn" destination="gQN-7X-LuA" id="H66-Nc-Nrp"/>
             </connections>
         </placeholder>
@@ -28,16 +29,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1Q-W7-fbN">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F74-2i-ntz">
-                            <rect key="frame" x="166.5" y="87" width="42" height="21"/>
+                            <rect key="frame" x="166.5" y="68.5" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ID3-2d-Wr4">
-                            <rect key="frame" x="166.5" y="112" width="42" height="21"/>
+                            <rect key="frame" x="166.5" y="93.5" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QU-og-TZN" userLabel="WalletNameLabel">
+                            <rect key="frame" x="166.5" y="43" width="42" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -46,13 +53,15 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="ID3-2d-Wr4" firstAttribute="centerX" secondItem="F74-2i-ntz" secondAttribute="centerX" id="3yr-1R-KrE"/>
+                        <constraint firstItem="F74-2i-ntz" firstAttribute="top" secondItem="0QU-og-TZN" secondAttribute="bottom" constant="5" id="GL7-tO-0QI"/>
+                        <constraint firstItem="0QU-og-TZN" firstAttribute="centerX" secondItem="r1Q-W7-fbN" secondAttribute="centerX" id="M8X-v1-gz0"/>
                         <constraint firstItem="F74-2i-ntz" firstAttribute="centerX" secondItem="r1Q-W7-fbN" secondAttribute="centerX" id="SkI-x4-ynv"/>
                         <constraint firstAttribute="bottom" secondItem="ID3-2d-Wr4" secondAttribute="bottom" constant="20" id="TRV-dU-ymr"/>
                         <constraint firstItem="ID3-2d-Wr4" firstAttribute="top" secondItem="F74-2i-ntz" secondAttribute="bottom" constant="4" id="WKv-Bt-HJa"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tws-vD-1rs">
-                    <rect key="frame" x="0.0" y="173" width="375" height="427"/>
+                    <rect key="frame" x="0.0" y="134.5" width="375" height="465.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIR-YL-rVY">
@@ -84,27 +93,27 @@
             </subviews>
             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="0QU-og-TZN" secondAttribute="top" constant="-23" id="40R-5W-kmU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tws-vD-1rs" secondAttribute="trailing" id="5sw-ZK-pWE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="r1Q-W7-fbN" secondAttribute="trailing" id="5ze-0w-q9e"/>
                 <constraint firstItem="r1Q-W7-fbN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7O1-Va-0gg"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="F74-2i-ntz" secondAttribute="top" constant="-23" id="94P-of-zqL"/>
                 <constraint firstItem="NIR-YL-rVY" firstAttribute="top" secondItem="Tws-vD-1rs" secondAttribute="bottom" constant="1" id="BIK-zT-IrL"/>
                 <constraint firstItem="NIR-YL-rVY" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="HTQ-vo-bVE"/>
                 <constraint firstItem="r1Q-W7-fbN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JYM-WD-Y8D"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NIR-YL-rVY" secondAttribute="trailing" id="PA3-XS-VPo"/>
                 <constraint firstItem="Tws-vD-1rs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VJc-pl-rYx"/>
-                <constraint firstItem="Tws-vD-1rs" firstAttribute="top" secondItem="r1Q-W7-fbN" secondAttribute="bottom" constant="20" id="dsT-GF-2eT"/>
+                <constraint firstItem="Tws-vD-1rs" firstAttribute="top" secondItem="r1Q-W7-fbN" secondAttribute="bottom" id="dsT-GF-2eT"/>
                 <constraint firstItem="Tws-vD-1rs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ekH-zD-vGx"/>
                 <constraint firstItem="NIR-YL-rVY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wLL-aW-mAV"/>
             </constraints>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <nil key="simulatedTopBarMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="ekH-zD-vGx"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="32.799999999999997" y="52.623688155922046"/>
         </view>
     </objects>
 </document>

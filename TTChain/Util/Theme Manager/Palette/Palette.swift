@@ -125,4 +125,8 @@ extension UIColor {
     @nonobjc class var yellowGreen: UIColor {
         return UIColor.init(hexString: "98C736")!
     }
+    @nonobjc class var cloudBurst: UIColor {
+        return UIColor.init(hexString: "354252")!
+    }
+
 }

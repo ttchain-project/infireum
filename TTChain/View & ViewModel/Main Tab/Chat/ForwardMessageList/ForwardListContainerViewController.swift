@@ -12,7 +12,7 @@ import Pageboy
 import RxSwift
 import RxCocoa
 
-final class ForwardListContainerViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable,PageboyViewControllerDataSource {
+final class ForwardListContainerViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable,PageboyViewControllerDataSource,TMBarDataSource {
     
     var langBag: DisposeBag = DisposeBag.init()
     
@@ -28,7 +28,7 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
     var onForwardChatToSelection : Observable<(ChatListPage)> {
         return forwardChatToSelection.asObservable()
     }
-    
+    var items:[TMBarItem] = []
     private lazy var vcs: [ForwardListViewController] = {
         return []
     }()
@@ -71,24 +71,34 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.dataSource = self
+        self.items = [LM.dls.group,LM.dls.chat_list_title].map {
+            (name) -> TMBarItem in
+            let item = TMBarItem.init(title: name)
+            return item
+        }
         
-        self.bar.items = [Item(title: LM.dls.friend), Item(title: LM.dls.group),Item(title: LM.dls.chat_list_title)]
+        let bar = TMBar.ButtonBar()
+        addBar(bar, dataSource: self, at: .top)
+        bar.indicator.weight = .light
+        bar.layout.alignment = .center
+        bar.indicator.cornerStyle = .rounded
+        bar.buttons.customize { (button) in
+            button.backgroundColor = .clear
+        }
         
-        bar.appearance = TabmanBar.Appearance.init({ (appearance) in
-            appearance.layout.itemDistribution = TabmanBar.Appearance.Layout.ItemDistribution.leftAligned
-            appearance.layout.minimumItemWidth = UIScreen.main.bounds.width/3
-            appearance.layout.interItemSpacing = 0.0
-            appearance.layout.edgeInset = 0.0
-            
-            appearance.indicator.color = UIColor.white
-            
-            appearance.indicator.bounces = true
-            
-            appearance.style.background = TabmanBar.BackgroundView.Style.solid(color:UIColor.owIceCold)
-            appearance.bottomSeparator.color = UIColor.init(hex: 0xd6d6d6, transparency: 0.5)
-        })
+//        bar.appearance = TabmanBar.Appearance.init({ (appearance) in
+//            appearance.layout.itemDistribution = TabmanBar.Appearance.Layout.ItemDistribution.leftAligned
+//            appearance.layout.minimumItemWidth = UIScreen.main.bounds.width/3
+//            appearance.layout.interItemSpacing = 0.0
+//            appearance.layout.edgeInset = 0.0
+//
+//            appearance.indicator.color = UIColor.white
+//
+//            appearance.indicator.bounces = true
+//
+//            appearance.style.background = TabmanBar.BackgroundView.Style.solid(color:UIColor.owIceCold)
+//            appearance.bottomSeparator.color = UIColor.init(hex: 0xd6d6d6, transparency: 0.5)
+//        })
         
         // Do any additional setup after loading the view.
     }
@@ -103,5 +113,8 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
         vc.onForwardChatToSelection.asObservable().subscribe(onNext: { (model) in
             self.forwardChatToSelection.accept(model)
         }).disposed(by: vc.bag)
+    }
+    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
+        return self.items[index]
     }
 }

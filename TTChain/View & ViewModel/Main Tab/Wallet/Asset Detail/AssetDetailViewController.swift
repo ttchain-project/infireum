@@ -60,6 +60,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     
     @IBOutlet weak var assetInfoBase: UIView!
     @IBOutlet weak var assetAmtLabel: UILabel!
+    @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var assetFiatAmtLabel: UILabel!
     @IBOutlet weak var recordTabBase: UIView!
     @IBOutlet weak var transferBase: UIView!
@@ -76,22 +77,25 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_1, barTint: .clear)
+        self.hideDefaultNavBar()
+        renderNavBar(tint: palette.nav_item_1, barTint: .cloudBurst)
+
         renderNavTitle(color: palette.nav_bg_1, font: .owMedium(size: 18))
         changeNavShadowVisibility(false)
         
         changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_bg_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
         
-        view.backgroundColor = palette.bgView_sub
-        assetInfoBase.addShadow(
-            ofColor: UIColor.init(white: 214.0/256.0, alpha: 0.5),
-            radius: 1,
-            offset: CGSize.init(width: 0, height: 1),
-            opacity: 1
-        )
-        
-        assetAmtLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 26))
+        view.backgroundColor = .white
+//        assetInfoBase.addShadow(
+//            ofColor: UIColor.init(white: 214.0/256.0, alpha: 0.5),
+//            radius: 1,
+//            offset: CGSize.init(width: 0, height: 1),
+//            opacity: 1
+//        )
+        assetInfoBase.backgroundColor = .cloudBurst
+        assetAmtLabel.set(textColor: palette.label_main_2, font: .owMedium(size: 26))
         assetFiatAmtLabel.set(textColor: palette.label_sub, font: .owRegular(size: 10))
+        walletNameLabel.set(textColor: palette.label_sub, font: .owRegular(size: 10))
         
         depositBtn.cornerRadius = 5
         depositBtn.set(
@@ -127,6 +131,9 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     }
     
     private func bindViewModel() {
+        
+        self.walletNameLabel.text = "(\(self.viewModel.input.asset.wallet!.name!))"
+        
         let coin = viewModel.input.asset.coin!
         title = viewModel.input.asset.coin?.inAppName?.replacingOccurrences(of: "BTCN", with: "BTC")
         
