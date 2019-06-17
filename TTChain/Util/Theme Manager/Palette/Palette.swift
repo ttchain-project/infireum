@@ -129,4 +129,10 @@ extension UIColor {
         return UIColor.init(hexString: "354252")!
     }
 
+    @nonobjc class var licorice: UIColor {
+        return UIColor.init(hexString: "2A3542")!
+    }
+    @nonobjc class var bittersweet:UIColor {
+        return UIColor.init(hexString: "FB6B5B")!
+    }
 }

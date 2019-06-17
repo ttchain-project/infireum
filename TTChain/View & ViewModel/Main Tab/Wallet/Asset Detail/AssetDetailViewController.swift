@@ -78,13 +78,14 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         self.hideDefaultNavBar()
-        renderNavBar(tint: palette.nav_item_1, barTint: .cloudBurst)
+        renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bar_tint)
 
         renderNavTitle(color: palette.nav_bg_1, font: .owMedium(size: 18))
         changeNavShadowVisibility(false)
         
         changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_bg_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
-        
+        createCustomRightBarButton(img: #imageLiteral(resourceName: "wallet_settings"), target: self, action: #selector(toSettings))
+
         view.backgroundColor = .white
 //        assetInfoBase.addShadow(
 //            ofColor: UIColor.init(white: 214.0/256.0, alpha: 0.5),
@@ -94,8 +95,8 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
 //        )
         assetInfoBase.backgroundColor = .cloudBurst
         assetAmtLabel.set(textColor: palette.label_main_2, font: .owMedium(size: 26))
-        assetFiatAmtLabel.set(textColor: palette.label_sub, font: .owRegular(size: 10))
-        walletNameLabel.set(textColor: palette.label_sub, font: .owRegular(size: 10))
+        assetFiatAmtLabel.set(textColor: palette.label_main_2, font: .owRegular(size: 12))
+        walletNameLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
         
         depositBtn.cornerRadius = 5
         depositBtn.set(
@@ -123,11 +124,16 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.setGradientColor()
+//        self.view.setGradientColor()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc private func toSettings() {
+        let vc = ManageWalletViewController.instance(from: ManageWalletViewController.Config(wallet: viewModel.input.asset.wallet!))
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func bindViewModel() {

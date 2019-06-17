@@ -81,6 +81,7 @@ protocol OfflineWalletThemePalette {
     var nav_bg_clear: UIColor { get set }
     var nav_item_1: UIColor { get set }
     var nav_item_2: UIColor { get set }
+    var nav_bar_tint:UIColor {get set }
     
     var pager_selected: UIColor { get set }
     var pager_unselected: UIColor { get set }
@@ -113,6 +114,7 @@ extension OfflineWalletThemePalette {
 
 
 struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
+    
     var application_main: UIColor = .owIceCold
     
     var application_alert: UIColor = .owPinkRed
@@ -189,6 +191,8 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var nav_item_2: UIColor = .owWhite
     
+    var nav_bar_tint: UIColor = .cloudBurst
+    
     var pager_selected: UIColor = .owBlack
     
     var pager_unselected: UIColor = .owSilver
@@ -217,7 +221,7 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var recordStatus_deposit: UIColor = .owCoolGreen
     
-    var recordStatus_withdrawal: UIColor = .owAzure
+    var recordStatus_withdrawal: UIColor = .bittersweet
     
     var recordStatus_failed: UIColor = .owPinkRed
     

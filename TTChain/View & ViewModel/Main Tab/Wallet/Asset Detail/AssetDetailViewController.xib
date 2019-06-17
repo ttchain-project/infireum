@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -25,26 +25,26 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1Q-W7-fbN">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="137.66666666666666"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F74-2i-ntz">
-                            <rect key="frame" x="166.5" y="68.5" width="42" height="21"/>
+                            <rect key="frame" x="166.66666666666666" y="71.666666666666671" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ID3-2d-Wr4">
-                            <rect key="frame" x="166.5" y="93.5" width="42" height="21"/>
+                            <rect key="frame" x="166.66666666666666" y="96.666666666666671" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QU-og-TZN" userLabel="WalletNameLabel">
-                            <rect key="frame" x="166.5" y="43" width="42" height="20.5"/>
+                            <rect key="frame" x="166.66666666666666" y="46" width="42" height="20.666666666666671"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -61,21 +61,29 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tws-vD-1rs">
-                    <rect key="frame" x="0.0" y="134.5" width="375" height="465.5"/>
+                    <rect key="frame" x="0.0" y="137.66666666666669" width="375" height="575.33333333333326"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIR-YL-rVY">
-                    <rect key="frame" x="0.0" y="601" width="375" height="66"/>
+                    <rect key="frame" x="0.0" y="714" width="375" height="64"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71J-84-iL2">
-                            <rect key="frame" x="8" y="12" width="175.5" height="42"/>
-                            <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71J-84-iL2">
+                            <rect key="frame" x="8" y="12" width="175.66666666666666" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Qog-NL-TZp"/>
+                            </constraints>
+                            <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                            <state key="normal" title="Button" image="wallet_btn_in"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQN-7X-LuA">
-                            <rect key="frame" x="191.5" y="12" width="175.5" height="42"/>
-                            <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQN-7X-LuA">
+                            <rect key="frame" x="191.66666666666663" y="12" width="175.33333333333337" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="aAv-OO-kdS"/>
+                            </constraints>
+                            <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                            <state key="normal" title="Button" image="wallet_btn_out"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,7 +101,7 @@
             </subviews>
             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="0QU-og-TZN" secondAttribute="top" constant="-23" id="40R-5W-kmU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="0QU-og-TZN" secondAttribute="top" constant="-2" id="40R-5W-kmU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tws-vD-1rs" secondAttribute="trailing" id="5sw-ZK-pWE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="r1Q-W7-fbN" secondAttribute="trailing" id="5ze-0w-q9e"/>
                 <constraint firstItem="r1Q-W7-fbN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7O1-Va-0gg"/>
@@ -116,4 +124,8 @@
             <point key="canvasLocation" x="32.799999999999997" y="52.623688155922046"/>
         </view>
     </objects>
+    <resources>
+        <image name="wallet_btn_in" width="48" height="48"/>
+        <image name="wallet_btn_out" width="48" height="48"/>
+    </resources>
 </document>

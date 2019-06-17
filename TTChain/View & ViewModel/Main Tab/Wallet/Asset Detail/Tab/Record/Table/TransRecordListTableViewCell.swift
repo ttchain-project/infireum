@@ -12,7 +12,7 @@ import RxSwift
 class TransRecordListTableViewCell: UITableViewCell {
     var bag:DisposeBag!
     
-//    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var statusIcon: UIImageView!
     @IBOutlet weak var addrLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amtLabel: UILabel!
@@ -55,36 +55,7 @@ class TransRecordListTableViewCell: UITableViewCell {
         dateLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
         commentsLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
         amtLabel.textColor = transRecord.getRecordColor(ofAddress: transRecord.fromAddress!)
-        
-//        let statusDesc: String
-//        let underlineStyle: NSUnderlineStyle
-//        let statusHidden: Bool
-        
-//        switch transRecord.owStatus {
-//        case .failed:
-//            statusDesc = dls.assetDetail_label_tx_failed
-//            underlineStyle = .styleSingle
-//            statusHidden = false
-//        case .success:
-//            statusDesc = dls.assetDetail_label_tx_go_check
-//            underlineStyle = .styleSingle
-//            //Has no explorer of cic, so hide when has cic success records
-//            statusHidden = (chainType == .cic)
-//        }
-        
-//        statusBtn.set(
-//            attrText: NSAttributedString.init(
-//                string: statusDesc,
-//                attributes: [
-//                    NSAttributedStringKey.foregroundColor : transRecord.getRecordColor(ofAddress: transRecord.fromAddress!),
-//                    NSAttributedStringKey.font : UIFont.owRegular(size: 10),
-//                    NSAttributedStringKey.underlineStyle : underlineStyle.rawValue
-//                ]
-//            )
-//        )
-        
-//        statusBtn.isHidden = statusHidden
-        
+      
         sepline.backgroundColor = palette.sepline
         
         var transAmount = transRecord.toAmt
@@ -98,28 +69,33 @@ class TransRecordListTableViewCell: UITableViewCell {
                 if transRecord.block <= 0 {
                     self.amtLabel.textColor = UIColor.owPumpkinOrange
                 } else {
-                    self.amtLabel.textColor = UIColor.owCoolGreen
+                    self.amtLabel.textColor = palette.recordStatus_deposit
                 }
+                statusIcon.image = #imageLiteral(resourceName: "wallet_icon_in")
             case .withdrawal:
                 addrLabel.text = transRecord.toAddress
+                statusIcon.image = #imageLiteral(resourceName: "wallet_icon_out")
+
                 if transRecord.block <= 0 && transRecord.fromCoinID != Coin.ttn_identifier,transRecord.fromCoinID != Coin.btcn_identifier{
                     self.amtLabel.textColor = UIColor.owPumpkinOrange
                 }else {
-                    self.amtLabel.textColor = UIColor.owWaterBlue
+                    self.amtLabel.textColor = palette.recordStatus_withdrawal
                     if transRecord.fromCoinID == Coin.btc_identifier {
                         transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
                     }
                 }
             }
         }
-        
-        
-        
+    
         dateLabel.text = DateFormatter.dateString(from:
             transRecord.date! as Date, withFormat: "MM/dd/yyyy HH:mm:ss"
         )
-
-        commentsLabel.text = transRecord.remarkComment
+        if let comments = transRecord.remarkComment, comments.count > 0 {
+            commentsLabel.isHidden = false
+            commentsLabel.text = transRecord.remarkComment
+        }else {
+            commentsLabel.isHidden = true
+        }
 
         var amtStr: String
         if let amt = (transAmount as Decimal?) {

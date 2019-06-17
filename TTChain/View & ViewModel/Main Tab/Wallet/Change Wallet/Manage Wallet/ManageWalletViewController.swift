@@ -14,8 +14,9 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
     
     @IBOutlet weak var walletInfoBase: UIView!
     @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var editWalletNameBtn: UIButton!
-    @IBOutlet weak var walletAddressLabel: UILabel!
+//    @IBOutlet weak var editWalletNameBtn: UIButton!
+//    @IBOutlet weak var walletAddressLabel: UILabel!
+    @IBOutlet weak var walletNameEditIcon: UIImageView!
     
     @IBOutlet weak var pwdHintBase: UIView!
     @IBOutlet weak var pwdHintIcon: UIImageView!
@@ -27,7 +28,7 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var exportPKeyHintTitleLabel: UILabel!
     @IBOutlet weak var exportPKeyHintIndicator: UIImageView!
     
-    @IBOutlet weak var deleteBtn: UIButton!
+//    @IBOutlet weak var deleteBtn: UIButton!
 
     var bag: DisposeBag = DisposeBag.init()
     typealias ViewModel = ManageWalletViewModel
@@ -46,7 +47,7 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
                 wallet: constructor.wallet,
                 managePwdHintInput: pwdHintBase.rx.klrx_tap,
                 exportPKeyInput: exportPKeyBase.rx.klrx_tap,
-                editNameInput: editWalletNameBtn.rx.tap.asDriver()
+                editNameInput: walletInfoBase.rx.klrx_tap.asDriver()
             ),
             output: ()
         )
@@ -57,7 +58,7 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     private func updateDeleteBtnVisibility(forWallet wallet: Wallet) {
-        deleteBtn.isHidden = wallet.isFromSystem
+//        deleteBtn.isHidden = wallet.isFromSystem
     }
     
     override func viewDidLoad() {
@@ -74,19 +75,19 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     private func bindBtnAction() {
-        deleteBtn.rx.tap.asDriver()
-            .drive(onNext: {
-                [weak self]
-                 _ in
-                self?.presentWalletDeletePwdValidation()
-            })
-            .disposed(by: bag)
+//        deleteBtn.rx.tap.asDriver()
+//            .drive(onNext: {
+//                [weak self]
+//                 _ in
+//                self?.presentWalletDeletePwdValidation()
+//            })
+//            .disposed(by: bag)
     }
     
     private func bindViewModel() {
 //        viewModel.isAbleToExportPKey.map { !$0 }.bind(to: exportPKeyBase.rx.isHidden).disposed(by: bag)
         viewModel.wallet.map { $0.name }.bind(to: walletNameLabel.rx.text).disposed(by: bag)
-        viewModel.wallet.map { $0.address }.bind(to: walletAddressLabel.rx.text).disposed(by: bag)
+//        viewModel.wallet.map { $0.address }.bind(to: walletAddressLabel.rx.text).disposed(by: bag)
         
         viewModel.startEditName.drive(onNext:{
             [unowned self] in
@@ -125,8 +126,8 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
         pwdHintTitleLabel.text = dls.walletManage_label_pwdHint
         exportPKeyHintTitleLabel.text = dls.walletManage_label_exportPKey
         
-        deleteBtn
-            .setTitleForAllStates(dls.walletManage_btn_delete_wallet)
+//        deleteBtn
+//            .setTitleForAllStates(dls.walletManage_btn_delete_wallet)
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -134,7 +135,7 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
         
         view.backgroundColor = palette.bgView_sub
         
-        renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
+        renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
         changeBackBarButton(toColor: palette.nav_item_1,
                                            image: #imageLiteral(resourceName: "arrowNavBlack"),
@@ -143,15 +144,15 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
         changeNavShadowVisibility(true)
         
         walletNameLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        walletAddressLabel.set(textColor: palette.label_sub, font: .owRegular(size: 14))
-        editWalletNameBtn.setPureImage(color: palette.application_main, image: #imageLiteral(resourceName: "btnListEditNormal"))
+//        walletAddressLabel.set(textColor: palette.label_sub, font: .owRegular(size: 14))
+//        editWalletNameBtn.setPureImage(color: palette.application_main, image: #imageLiteral(resourceName: "btnListEditNormal"))
         
         pwdHintTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
         exportPKeyHintTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
         
-        deleteBtn.set(color: palette.specific(color: .owPinkRed),
-                      font: .owRegular(size: 17),
-                      backgroundColor: palette.bgView_main)
+//        deleteBtn.set(color: palette.specific(color: .owPinkRed),
+//                      font: .owRegular(size: 17),
+//                      backgroundColor: palette.bgView_main)
     }
     
     /*

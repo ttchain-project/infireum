@@ -80,7 +80,7 @@ class TransRecordListTabViewController: TabmanViewController, RxThemeRespondable
         bar.layout.alignment = .center
         bar.layout.transitionStyle = .snap // Customize
         bar.layout.contentMode = .fit
-        bar.backgroundView.style = TMBarBackgroundView.Style.flat(color: UIColor.owBlack20)
+        bar.backgroundView.style = TMBarBackgroundView.Style.flat(color: .licorice)
         self.items = self.items(with: LM.dls)
 
         addBar(bar, dataSource: self, at: .top)

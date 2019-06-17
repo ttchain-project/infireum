@@ -708,3 +708,4 @@ struct DLS_EN_US: DLS {
     
     var wallet_type_btn_main_chain:String  = "Main Chain"
 }
+

@@ -29,9 +29,9 @@ class TTTabManButton: TMBarButton {
         self.titleLabel.sizeToFit()
         NSLayoutConstraint.activate([
             bgView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            bgView.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+            bgView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             bgView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            bgView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5),
+            bgView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
             
             titleLabel.leadingAnchor.constraint(equalTo: bgView.leadingAnchor, constant: 5),
             titleLabel.topAnchor.constraint(equalTo: bgView.topAnchor,constant: 5),
