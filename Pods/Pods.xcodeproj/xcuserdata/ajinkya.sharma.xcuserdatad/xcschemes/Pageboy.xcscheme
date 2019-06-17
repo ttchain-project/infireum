@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7BC8F7E2015A4255DB82AD88C4923B21"
+               BlueprintIdentifier = "F3F2DDE8EC16A75C2FEBDEA4DB6100FE"
                BuildableName = "Pageboy.framework"
                BlueprintName = "Pageboy"
                ReferencedContainer = "container:Pods.xcodeproj">
