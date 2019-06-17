@@ -24,7 +24,7 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
     var childWalletsViewController:WalletsViewController!
     
     var bag: DisposeBag = DisposeBag()
-    
+    var selectedChild:WalletChildType = .mainChain
     func config(constructor: Void) {
         self.view.layoutIfNeeded()
         self.hideDefaultNavBar()
@@ -33,7 +33,7 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
         startMonitorLangIfNeeded()
         self.bindUI()
         self.navigationController?.isNavigationBarHidden = true
-        self.handleButtonSelection(childType: .mainChain)
+        self.handleButtonSelection(childType: self.selectedChild)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,12 +104,15 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
             self.stableWalletBtn.isSelected = false
             self.mainWalletBtn.isSelected = false
         }
+        self.selectedChild = childType
         self.configureChildView(childType: childType)
     }
     
     func configureChildView(childType:WalletChildType) {
         let coins = self.viewModel.getCoinsForChild(child:childType)
-        let vc = WalletsViewController.instance(from: WalletsViewController.Config(coins: coins))
+        let vc = WalletsViewController.instance(from: WalletsViewController.Config(coins: coins, assetSelected: {[unowned self] asset in
+            self.toWalletDetail(asset: asset)
+        }))
         if self.childViewControllers.count > 0 {
             _ = self.childViewControllers.map {
                 willMove(toParentViewController: nil)
@@ -128,5 +131,24 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
             v.trailing == s.trailing
         }
         self.childWalletsViewController = vc
+    }
+    
+    func toWalletDetail(asset:Asset) {
+        
+        let source : MainWalletViewController.Source = {
+            switch (asset.coin!.owChainType,self.selectedChild) {
+        case (.btc,.mainChain):
+            return MainWalletViewController.Source.BTC
+        case (.eth,.mainChain):
+            return MainWalletViewController.Source.ETH
+        case (_,.stableChain):
+                return MainWalletViewController.Source.StableCoin
+        default:
+            return MainWalletViewController.Source.BTC
+            }
+        }()
+        
+        let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: asset.wallet!, source:source))
+        self.present(vc, animated: true, completion: nil)
     }
 }

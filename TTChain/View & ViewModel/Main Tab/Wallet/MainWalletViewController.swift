@@ -78,7 +78,6 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
             output: MainWalletViewModel.OutputSource(
                 finishRefreshWallet: {
                     [unowned self] in
-                    //                    print("finish refresh")
                     self.refreshControl.endRefreshing()
                 },
                 startChangeWallet: {
@@ -96,12 +95,12 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
 //        })
 //        .disposed(by: bag)
         
-        walletOverviewVC.onAddressCopied.drive(onNext:{
-            [unowned self]
-            addr in
-            self.handleAddressCopied(address: addr)
-        })
-        .disposed(by: bag)
+//        walletOverviewVC.onAddressCopied.drive(onNext:{
+//            [unowned self]
+//            addr in
+//            self.handleAddressCopied(address: addr)
+//        })
+//        .disposed(by: bag)
         
 //        walletOverviewVC.onDeposit.drive(onNext:{
 //            [unowned self]
@@ -251,16 +250,16 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
 //        transRecordBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
 //        qrCodeScannerBtn.tintColor = theme.palette.specific(color: theme.palette.application_main)
         let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_2, barTint: .clear)
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         switch self.viewModel.entryPoint {
         case .MainWallet?:
             changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
-            createCustomRightBarButton(img: #imageLiteral(resourceName: "settings"), target: self, action: #selector(toSettings))
+            createCustomRightBarButton(img: #imageLiteral(resourceName: "wallet_settings"), target: self, action: #selector(toSettings))
         default:
             changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
         }
-        tableView.backgroundColor = theme.palette.bgView_sub
+        tableView.backgroundColor = .white
     }
     
     private func startChangeWallet() {

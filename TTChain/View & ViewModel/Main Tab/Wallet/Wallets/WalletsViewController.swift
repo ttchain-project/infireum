@@ -23,6 +23,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
         self.monitorLocalWalletsUpdate()
         self.observePrivateModeUpdateEvent()
         bindAssetUpdate()
+        self.assetSelected = constructor.assetSelected
     }
     
     var bag: DisposeBag = DisposeBag()
@@ -30,9 +31,11 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
     
     var headerViewController:WalletHeaderViewController!
     typealias Constructor = Config
+    var assetSelected: ((Asset) -> Void)!
 
     struct Config {
         var coins:[Coin]
+        var assetSelected: (Asset) -> Void
     }
     
     private func configTableView() {
@@ -44,10 +47,11 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
             guard let `self` = self else {
                 return
             }
-            let vc = AssetDetailViewController.navInstance(
-                from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
-            )
-            self.present(vc, animated: true, completion: nil)
+//            let vc = AssetDetailViewController.navInstance(
+//                from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
+//            )
+//            self.present(vc, animated: true, completion: nil)
+           self.assetSelected(asset)
             
         }).disposed(by: bag)
     }

@@ -40,7 +40,7 @@ class WalletsContainerViewModel:KLRxViewModel {
     func getCoinsForChild(child:WalletChildType) -> [Coin]{
         switch child {
         case .mainChain:
-            return coins.filter { $0.identifier != Coin.usdt_identifier  }.filter { $0.identifier?.contains("_FIAT") == false  }.compactMap { $0 }
+            return [Coin.btc,Coin.eth]
         case .stableChain:
             return coins.filter { $0.identifier == Coin.usdt_identifier || $0.identifier?.contains("_FIAT") == true }.compactMap { $0 }
         default:

@@ -15,9 +15,10 @@ class MainWalletOverviewViewController: KLModuleViewController {
     
     static var prefSize: CGSize {
         let screenWidth = UIScreen.main.bounds.width
-        let ratio: CGFloat = 250/375
+        let ratio: CGFloat = 0.25 * UIScreen.main.bounds.height
         let min: CGFloat = 200
-        return CGSize.init(width: screenWidth, height: max(min, screenWidth * ratio))
+        return CGSize.init(width: screenWidth, height: max(min, ratio))
+        
 //        return CGSize.init(width: screenWidth, height: 320)
     }
     
@@ -36,7 +37,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
     private var wallet: Wallet! {
         didSet {
             walletNameLabel.text = wallet.name!
-            walletAddressLabel.text = wallet.address
+//            walletAddressLabel.text = wallet.address
 //            walletColorImg.image = self.img(ofMainCoinID: wallet.walletMainCoinID!)
 //            shareAddress.isEnabled = (wallet.owChainType != .btc)
         }
@@ -48,9 +49,9 @@ class MainWalletOverviewViewController: KLModuleViewController {
                 let symbol = f.fullSymbol
                 DispatchQueue.main.async {
                     if let t = self.total {
-                        self.totalFiatValueLabel.text = symbol + t.asString(digits: 2).disguiseIfNeeded()
+                        self.totalFiatValueLabel.text = t.asString(digits: 2).disguiseIfNeeded()
                     }else {
-                        self.totalFiatValueLabel.text = symbol + "--"
+                        self.totalFiatValueLabel.text = "--"
                     }
                 }
             }
@@ -63,20 +64,11 @@ class MainWalletOverviewViewController: KLModuleViewController {
             if let f = fiat {
                 let symbol = f.fullSymbol
                 DispatchQueue.main.async {
-                    if let t = self.total {
-                        self.totalFiatValueLabel.text = symbol + t.asString(digits: 2, force: true).disguiseIfNeeded()
-                    }else {
-                        self.totalFiatValueLabel.text = symbol + "--"
-                    }
+                    self.fiatCurrencyLabel.text = symbol
                 }
             }
         }
     }
-//    private(set) lazy var onDeposit: Driver<Wallet> = {
-//        return shareAddress.rx.tap.asDriver().map {
-//            [unowned self] in self.wallet
-//        }
-//    }()
     
 //    private(set) lazy var onManageAsset: Driver<Wallet> = {
 //        return shareAddress.rx.tap.asDriver()
@@ -93,33 +85,36 @@ class MainWalletOverviewViewController: KLModuleViewController {
 //        return self.transactionRecordButton.rx.tap.asDriver()
 //    }()
     
-    private(set) lazy var onAddressCopied: Driver<String> = {
-        
-        return Driver.merge(
-            walletNameLabel.rx.tapGesture().skip(1).map { _ in () }.asDriver(onErrorJustReturn: ()),
-            walletCopyBtn.rx.tap.asDriver()
-        ).map {
-                [unowned self] _ -> String in
-                self.copyAddress()
-                return self.wallet.address!
-        }
+//    private(set) lazy var onAddressCopied: Driver<String> = {
     
-    }()
+//        return Driver.merge(
+//            walletNameLabel.rx.tapGesture().skip(1).map { _ in () }.asDriver(onErrorJustReturn: ()),
+////            walletCopyBtn.rx.tap.asDriver()
+//        ).map {
+//                [unowned self] _ -> String in
+//                self.copyAddress()
+//                return self.wallet.address!
+//        }
+//
+//    }()
     
 //    private(set) var onSwitchWallet: Driver<Void>!
     
-    @IBOutlet weak var mainBG: UIView!
-    @IBOutlet weak var walletBase: UIView!
-    @IBOutlet weak var walletColorImg: UIImageView!
+//    @IBOutlet weak var mainBG: UIView!
+//    @IBOutlet weak var walletBase: UIView!
+//    @IBOutlet weak var walletColorImg: UIImageView!
     @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var walletAddressLabel: UILabel!
-    @IBOutlet weak var walletCopyBtn: UIButton!
+//    @IBOutlet weak var walletAddressLabel: UILabel!
+//    @IBOutlet weak var walletCopyBtn: UIButton!
     @IBOutlet weak var totalFiatValueLabel: UILabel!
-    @IBOutlet weak var manageLabel: UILabel!
-    @IBOutlet weak var assetsLabel: UILabel!
+    @IBOutlet weak var fiatCurrencyLabel: UILabel!
+//    @IBOutlet weak var manageLabel: UILabel!
+//    @IBOutlet weak var assetsLabel: UILabel!
+    @IBOutlet weak var mainChainTotlAssetLabel: UILabel!
     //    @IBOutlet weak var transactionRecordButton: UIButton!
 //    @IBOutlet weak var shareAddress: UIButton!
 //    @IBOutlet weak var switchWalletBtn: UIButton!
+    @IBOutlet weak var manageAssetsButton: UIButton!
     
     
     
@@ -159,19 +154,8 @@ class MainWalletOverviewViewController: KLModuleViewController {
     }
     
     private func setupUI() {
-//        let renderShadow: (UIButton) -> Void = {
-//            btn in
-//            btn.shadowColor = UIColor.init(white: 203.0/256.0, alpha: 0.5)
-//            btn.shadowOffset = CGSize.init(width: 2, height: 2)
-//            btn.shadowRadius = 0
-//            btn.shadowOpacity = 1
-//            btn.backgroundColor = .white
-//        }
         
-//        renderShadow(depositBtn)
-//        renderShadow(manageAssetBtn)
-        
-        walletCopyBtn.setImageForAllStates(#imageLiteral(resourceName: "copyAddressButtonCircle"))
+        //        walletCopyBtn.setImageForAllStates(#imageLiteral(resourceName: "copyAddressButtonCircle"))
 //        walletCopyBtn.setTitle(nil, for: .normal)
 //        walletColorImg.clipsToBounds = false
 //        walletColorImg.addShadow(ofColor: UIColor.init(red: 31,
@@ -182,13 +166,7 @@ class MainWalletOverviewViewController: KLModuleViewController {
 //                                 offset: CGSize.init(width: 0, height: 2),
 //                                 opacity: 1)
         
-//        walletBase.addShadow(ofColor: UIColor.init(red: 31,
-//                                                   green: 49,
-//                                                   blue: 74)!
-//                                              .withAlphaComponent(0.12),
-//                             radius: 2,
-//                             offset: CGSize.init(width: 0, height: 2),
-//                             opacity: 1)
+
         self.view.backgroundColor = UIColor.white
     }
     
@@ -225,40 +203,24 @@ class MainWalletOverviewViewController: KLModuleViewController {
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-//        depositBtn.setTitleForAllStates(dls.walletOverview_btn_deposit)
-        self.manageLabel.text =  dls.manage_currency
-        self.assetsLabel.text = dls.manageAsset_label_myAsset
-//        switchWalletBtn.setTitleForAllStates(dls.walletOverview_btn_switchWallet)
+        self.manageAssetsButton.setTitle(dls.asset_management_btn_title, for: .normal)
+        mainChainTotlAssetLabel.text = "\(self.wallet.mainCoin?.fullname ?? "") 主鏈總資產"
     }
     
     override func renderTheme(_ theme: Theme) {
 //        view.backgroundColor = thesme.palette.bgView_sub
 //        mainBG.backgroundColor = theme.palette.bgView_main
         
-        walletNameLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 16.3))
-        walletAddressLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 12))
-        totalFiatValueLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 21.7))
+        walletNameLabel.set(textColor: theme.palette.label_sub, font: .owMedium(size: 12))
+//        walletAddressLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 12))
+        totalFiatValueLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 22))
         
-//        walletBase.set(borderInfo: (color: theme.palette.bgView_border, width: 1))
-//        walletCopyBtn.set(color: theme.palette.label_main_2)
+        mainChainTotlAssetLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 12))
+        manageAssetsButton.set(textColor: theme.palette.bg_fill_new, font: .owRegular(size: 14),  backgroundColor: .white)
+
         
-//        depositBtn.set(
-//            color: theme.palette.btn_borderFill_enable_text,
-//            font: UIFont.owRegular(size: 12.7),
-//            borderInfo: (color: theme.palette.btn_borderFill_border_2nd, width: 1)
-//        )
+
         
-//        manageAssetBtn.set(
-//            color: theme.palette.btn_borderFill_enable_text,
-//            font: UIFont.owRegular(size: 12.7),
-//            borderInfo: (color: theme.palette.btn_borderFill_border_2nd, width: 1)
-//        )
-        
-//        switchWalletBtn.set(
-//            color: theme.palette.specific(color: .owWhite),
-//            font: UIFont.owRegular(size: 12.7),
-//            borderInfo: (color: theme.palette.specific(color: .owWhite), width: 1)
-//        )
     }
     
     private func copyAddress() {
