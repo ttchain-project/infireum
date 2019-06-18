@@ -11,11 +11,13 @@ import Tabman
 import Pageboy
 import RxSwift
 import RxCocoa
+import Cartography
 
-final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable, PageboyViewControllerDataSource,TMBarDataSource {
+final class ExportWalletPrivateKeyTabmanViewController:UIViewController, RxThemeRespondable, RxLangRespondable {
     
     var themeBag: DisposeBag = DisposeBag.init()
     var langBag: DisposeBag = DisposeBag.init()
+    var bag:DisposeBag = DisposeBag()
     
     private lazy var vcs: [UIViewController] = {
         return []
@@ -36,49 +38,28 @@ final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, Rx
     
     private var wallet: Wallet!
     private var items: [TMBarItem] = []
-
+    @IBOutlet weak var precautionLabel: UILabel!
+    @IBOutlet weak var segmentedController: UISegmentedControl!
+    @IBOutlet weak var containerView: UIView!
+    
     private func config(wallet: Wallet) {
+        self.view.layoutIfNeeded()
         self.wallet = wallet
-        vcs = createPages()
-        let bar = TMBar.ButtonBar()
-        addBar(bar, dataSource: self, at: .top)
-        bar.indicator.weight = .light
-        bar.layout.alignment = .center
-        bar.indicator.cornerStyle = .rounded
-        bar.buttons.customize { (button) in
-            button.backgroundColor = .clear
-        }
-//        self.bar.appearance = TabmanBar.Appearance({ (appearance) in
-//            appearance.indicator.preferredStyle = TabmanIndicator.Style.line
-//            appearance.style.background = Tabman.TabmanBar.BackgroundView.Style.solid(color: UIColor.clear)
-//            switch bar.style {
-//            case .scrollingButtonBar:
-//                appearance.layout.itemDistribution = .leftAligned
-//            default:
-//                appearance.layout.itemDistribution = .centered
-//            }
-//
-//            appearance.indicator.lineWeight = .thin
-//            appearance.indicator.useRoundedCorners = true
-//            appearance.layout.height = TabmanBar.Height.explicit(value: 44)
-//        })
-        
-        
+        self.vcs = createPages()
+
+        setupUI()
         monitorLang { [unowned self] (lang) in
-            self.items = self.items(with: lang.dls)
-            self.config(with: lang.dls)
+           let dls = lang.dls
+            self.title = dls.exportPKey_title
+            self.segmentedController.setTitle(dls.exportPKey_tab_privateKey, forSegmentAt: 0)
+            self.segmentedController.setTitle(dls.exportPKey_tab_qrcode, forSegmentAt: 1)
+            self.precautionLabel.text = dls.precaution_before_exporting_msg
         }
         
         monitorTheme { (theme) in
-//            self.bar.appearance?.indicator.color = theme.palette.label_main_1
-//            self.bar.appearance?.state.selectedColor = theme.palette.label_main_1
-//            self.bar.appearance?.state.color = theme.palette.label_sub
             self.config(with: theme.palette)
+            self.precautionLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 20))
         }
-    }
-    
-    private func config(with dls: DLS) {
-        title = dls.exportPKey_title
     }
     
     private func items(with dls: DLS) -> [TMBarItem] {
@@ -86,6 +67,38 @@ final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, Rx
             (name) -> TMBarItem in
             let item = TMBarItem.init(title: name)
             return item
+        }
+    }
+    
+    private func setupUI () {
+        self.segmentedController.cornerRadius = self.segmentedController.height/2
+        self.segmentedController.borderColor = .yellowGreen
+        self.segmentedController.tintColor = .yellowGreen
+        self.segmentedController.borderWidth = 1
+        self.segmentedController.rx.value.asDriver().drive(onNext:{[unowned self] segment in
+            self.setChildView(vc: self.vcs[segment])
+        }).disposed(by:bag)
+        self.segmentedController.selectedSegmentIndex = 0
+
+    }
+    
+    private func setChildView(vc:UIViewController) {
+        if self.childViewControllers.count > 0 {
+            _ = self.childViewControllers.map {
+                willMove(toParentViewController: nil)
+                $0.view.removeFromSuperview()
+                $0.removeFromParentViewController()
+            }
+        }
+        self.addChildViewController(vc)
+        self.containerView.addSubview(vc.view)
+        vc.didMove(toParentViewController: self)
+        constrain(vc.view) { (v) in
+            let s = v.superview!
+            v.top == s.top
+            v.bottom == s.bottom
+            v.leading == s.leading
+            v.trailing == s.trailing
         }
     }
     
@@ -105,39 +118,11 @@ final class ExportWalletPrivateKeyTabmanViewController: TabmanViewController, Rx
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
-        dataSource = self
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return vcs.count
-    }
-    
-    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return vcs[index]
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return nil
-    }
-    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        return self.items[index]
-    }
 }

@@ -101,6 +101,12 @@
 		5530C1A822B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
 		5530C1A922B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
 		5530C1AA22B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
+		5530C1AE22B889D800125653 /* ChangeWalletNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1AC22B889D800125653 /* ChangeWalletNameViewController.swift */; };
+		5530C1AF22B889D800125653 /* ChangeWalletNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1AC22B889D800125653 /* ChangeWalletNameViewController.swift */; };
+		5530C1B022B889D800125653 /* ChangeWalletNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1AC22B889D800125653 /* ChangeWalletNameViewController.swift */; };
+		5530C1B122B889D800125653 /* ChangeWalletNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5530C1AD22B889D800125653 /* ChangeWalletNameViewController.xib */; };
+		5530C1B222B889D800125653 /* ChangeWalletNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5530C1AD22B889D800125653 /* ChangeWalletNameViewController.xib */; };
+		5530C1B322B889D800125653 /* ChangeWalletNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5530C1AD22B889D800125653 /* ChangeWalletNameViewController.xib */; };
 		553402F9224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
 		553402FA224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
 		553402FB224E105A007F355D /* ForwarMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553402F7224E105A007F355D /* ForwarMessageViewController.swift */; };
@@ -141,6 +147,9 @@
 		5537F097226D9D0C0058B98D /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5537F096226D9D0B0058B98D /* ringtone.wav */; };
 		5537F098226D9D0C0058B98D /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5537F096226D9D0B0058B98D /* ringtone.wav */; };
 		5537F099226D9D0C0058B98D /* ringtone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5537F096226D9D0B0058B98D /* ringtone.wav */; };
+		5538F12622B8946D00E7DEC5 /* ChangeWalletNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5538F12522B8946C00E7DEC5 /* ChangeWalletNameViewModel.swift */; };
+		5538F12722B8946D00E7DEC5 /* ChangeWalletNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5538F12522B8946C00E7DEC5 /* ChangeWalletNameViewModel.swift */; };
+		5538F12822B8946D00E7DEC5 /* ChangeWalletNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5538F12522B8946C00E7DEC5 /* ChangeWalletNameViewModel.swift */; };
 		5539A46F21676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */; };
 		5539A47021676F0300A59ACC /* IdentityQRCodeContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */; };
 		5539A47121676F0300A59ACC /* IdentityQRCodeContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */; };
@@ -2212,6 +2221,8 @@
 		5526B53A22114BDB00573576 /* ForwardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardListViewModel.swift; sourceTree = "<group>"; };
 		5526B53F22128E7700573576 /* PhotoAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthHandler.swift; sourceTree = "<group>"; };
 		5530C1A722B7366E00125653 /* TTTabManButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTabManButton.swift; sourceTree = "<group>"; };
+		5530C1AC22B889D800125653 /* ChangeWalletNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWalletNameViewController.swift; sourceTree = "<group>"; };
+		5530C1AD22B889D800125653 /* ChangeWalletNameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeWalletNameViewController.xib; sourceTree = "<group>"; };
 		553402F7224E105A007F355D /* ForwarMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwarMessageViewController.swift; sourceTree = "<group>"; };
 		553402F8224E105A007F355D /* ForwarMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForwarMessageViewController.xib; sourceTree = "<group>"; };
 		553402FF224E123C007F355D /* ForwarMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwarMessageViewModel.swift; sourceTree = "<group>"; };
@@ -2226,6 +2237,7 @@
 		5537F08B2265EA490058B98D /* LightTransDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightTransDetailViewController.xib; sourceTree = "<group>"; };
 		5537F0922266D2240058B98D /* LightTransDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransDetailViewModel.swift; sourceTree = "<group>"; };
 		5537F096226D9D0B0058B98D /* ringtone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringtone.wav; sourceTree = "<group>"; };
+		5538F12522B8946C00E7DEC5 /* ChangeWalletNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWalletNameViewModel.swift; sourceTree = "<group>"; };
 		5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeEncryptionFlow.swift; sourceTree = "<group>"; };
 		5539A46B21676F0300A59ACC /* IdentityQRCodeContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeContentViewController.swift; sourceTree = "<group>"; };
 		5539A46C21676F0300A59ACC /* IdentityQRCodeContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeContentViewController.xib; sourceTree = "<group>"; };
@@ -3193,6 +3205,16 @@
 				5530C1A722B7366E00125653 /* TTTabManButton.swift */,
 			);
 			path = TTTabManButton;
+			sourceTree = "<group>";
+		};
+		5530C1AB22B889BA00125653 /* ChangeWalletName */ = {
+			isa = PBXGroup;
+			children = (
+				5530C1AC22B889D800125653 /* ChangeWalletNameViewController.swift */,
+				5530C1AD22B889D800125653 /* ChangeWalletNameViewController.xib */,
+				5538F12522B8946C00E7DEC5 /* ChangeWalletNameViewModel.swift */,
+			);
+			path = ChangeWalletName;
 			sourceTree = "<group>";
 		};
 		553402F6224E103A007F355D /* ForwardMessageView */ = {
@@ -5702,6 +5724,7 @@
 		649E487620EC6FD700B217AD /* Manage Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				5530C1AB22B889BA00125653 /* ChangeWalletName */,
 				649E487720EC6FFF00B217AD /* ManageWalletViewController.swift */,
 				649E487820EC6FFF00B217AD /* ManageWalletViewController.xib */,
 				649E488420EC703B00B217AD /* View Model */,
@@ -6885,6 +6908,7 @@
 				5526B5312211247F00573576 /* ForwardListViewController.xib in Resources */,
 				6481398520DA719700CAA4D8 /* BackupWalletNoteViewController.xib in Resources */,
 				55EF6AA721A812C6007E074A /* InviteFriendViewController.xib in Resources */,
+				5530C1B322B889D800125653 /* ChangeWalletNameViewController.xib in Resources */,
 				6470D6B420F35B1000EB0780 /* WithdrawalETHFeeInfoViewController.xib in Resources */,
 				640D88D220EDD6540010D986 /* ImportChainTypeChooseViewController.xib in Resources */,
 				6481397220DA496000CAA4D8 /* OWMnemonicWordCollectionViewCell.xib in Resources */,
@@ -7177,6 +7201,7 @@
 				64C9D49320FDF5AA000B0774 /* DeletetABUnitAddressViewController.xib in Resources */,
 				6470D6C820F35BD800EB0780 /* WithdrawalETHFeeInfoQuickModeViewController.xib in Resources */,
 				555E4A8C224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */,
+				5530C1B122B889D800125653 /* ChangeWalletNameViewController.xib in Resources */,
 				55EF6AE421A812C7007E074A /* FriendListContainerViewController.xib in Resources */,
 				55EF6A4521A812C6007E074A /* ChatMessageTableViewCell.xib in Resources */,
 				6424B67720F5B97900AEBCAD /* TransferRecordWalletOptionViewController.xib in Resources */,
@@ -7363,6 +7388,7 @@
 				64C9D49420FDF5AA000B0774 /* DeletetABUnitAddressViewController.xib in Resources */,
 				6470D6C920F35BD800EB0780 /* WithdrawalETHFeeInfoQuickModeViewController.xib in Resources */,
 				555E4A8D224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */,
+				5530C1B222B889D800125653 /* ChangeWalletNameViewController.xib in Resources */,
 				55EF6AE521A812C7007E074A /* FriendListContainerViewController.xib in Resources */,
 				55EF6A4621A812C6007E074A /* ChatMessageTableViewCell.xib in Resources */,
 				6424B67820F5B97900AEBCAD /* TransferRecordWalletOptionViewController.xib in Resources */,
@@ -8129,6 +8155,7 @@
 				64813A2D20DCA6EE00CAA4D8 /* Language+CoreDataClass.swift in Sources */,
 				5539A4A221676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.swift in Sources */,
 				64F07DD220D241A000A60C5C /* WindowOrientaionLocker.swift in Sources */,
+				5538F12822B8946D00E7DEC5 /* ChangeWalletNameViewModel.swift in Sources */,
 				553402FB224E105A007F355D /* ForwarMessageViewController.swift in Sources */,
 				649E489C20ECACBA00B217AD /* PwdHintViewModel.swift in Sources */,
 				555E4AC4224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.swift in Sources */,
@@ -8203,6 +8230,7 @@
 				6424B65220F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.swift in Sources */,
 				64C9D46920FDDE78000B0774 /* EditABUnitViewController.swift in Sources */,
 				5508742B21EDC75C007B3B3B /* ExploreDetailCollectionViewModel.swift in Sources */,
+				5530C1B022B889D800125653 /* ChangeWalletNameViewController.swift in Sources */,
 				6481398D20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.swift in Sources */,
 				640D88C120EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				55AADF272203020800F403C8 /* UIView+XibInstance.swift in Sources */,
@@ -8660,6 +8688,7 @@
 				645D4E7B211151C00052D0E1 /* ETHTx.swift in Sources */,
 				6485005620DA440400107473 /* KLTagFlowLayout.swift in Sources */,
 				64B2772320D55BDC004FF75B /* KLRxImageDownloader.swift in Sources */,
+				5538F12622B8946D00E7DEC5 /* ChangeWalletNameViewModel.swift in Sources */,
 				553402F9224E105A007F355D /* ForwarMessageViewController.swift in Sources */,
 				649E48C120ECF42600B217AD /* WalletPKeyQRCodeViewModel.swift in Sources */,
 				555E4AC2224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.swift in Sources */,
@@ -8734,6 +8763,7 @@
 				64F07E3620D2538C00A60C5C /* KLModuleViewController.swift in Sources */,
 				640D88E620EE25860010D986 /* TransRecordStatus.swift in Sources */,
 				5508742921EDC75C007B3B3B /* ExploreDetailCollectionViewModel.swift in Sources */,
+				5530C1AE22B889D800125653 /* ChangeWalletNameViewController.swift in Sources */,
 				553ACEE521649CB7002C59AB /* AgreementMeViewController.swift in Sources */,
 				6470D69B20F341CE00EB0780 /* WithdrawalConfirmPwdValidationViewModel.swift in Sources */,
 				55AADF252203020800F403C8 /* UIView+XibInstance.swift in Sources */,
@@ -9184,6 +9214,7 @@
 				64F07DD420D241A000A60C5C /* GTThemeExtensions.swift in Sources */,
 				649E48BE20ECE7A700B217AD /* WalletPrivateKeyInfoViewModel.swift in Sources */,
 				648139C120DB8B7600CAA4D8 /* UINavigationBar+Shadow.swift in Sources */,
+				5538F12722B8946D00E7DEC5 /* ChangeWalletNameViewModel.swift in Sources */,
 				553402FA224E105A007F355D /* ForwarMessageViewController.swift in Sources */,
 				6473AE9721421DC1009FB8E9 /* APIWalletCreateResult.swift in Sources */,
 				555E4AC3224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.swift in Sources */,
@@ -9258,6 +9289,7 @@
 				64D8266720E22F5800C8FC63 /* ManageAssetViewModel.swift in Sources */,
 				553ACEE421649CB7002C59AB /* AgreementMeViewController.swift in Sources */,
 				5508742A21EDC75C007B3B3B /* ExploreDetailCollectionViewModel.swift in Sources */,
+				5530C1AF22B889D800125653 /* ChangeWalletNameViewController.swift in Sources */,
 				64813A3E20DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataClass.swift in Sources */,
 				6424B65120F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.swift in Sources */,
 				55AADF262203020800F403C8 /* UIView+XibInstance.swift in Sources */,

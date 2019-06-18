@@ -213,6 +213,9 @@ protocol DynamicLocalizationSource {
     var walletManage_alert_changeWalletName_title: String { get set }
     var walletManage_alert_changeWalletName_content: String { get set }
     var walletManage_error_walletName_invalidFormat_title: String { get set }
+    var walletManage_alert_wallet_name_changed_title:String { get set }
+    var walletManage_alert_wallet_name_changed_message :String { get set }
+
     var walletManage_alert_placeholder_walletName_char_range: String { get set }
     var walletManage_btn_delete_wallet: String { get set }
     var walletManage_alert_title_delete_wallet: String { get set }
@@ -557,7 +560,8 @@ protocol DynamicLocalizationSource {
     var all_members:String {get set}
     var group_description:String {get set}
     var show_qr_code:String {get set}
-    
+    var display_pvt_key_btn_title:String {get set}
+    var precaution_before_exporting_msg:String {get set}
     var group_member_new:String {get set}
     var group_member_invited:String {get set}
     func group_text_too_long(_ args: String...) -> String

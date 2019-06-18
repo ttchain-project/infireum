@@ -12,7 +12,6 @@ import RxCocoa
 
 final class WalletPrivateKeyInfoViewController: KLModuleViewController, KLVMVC {
 
-    @IBOutlet weak var noteBase: UIView!
     @IBOutlet weak var noteTitle_offlineSave: UILabel!
     @IBOutlet weak var noteContent_offlineSave: UILabel!
     @IBOutlet weak var noteTitle_userInternet: UILabel!
@@ -31,6 +30,7 @@ final class WalletPrivateKeyInfoViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var pKeyBase: UIView!
     @IBOutlet weak var pKeyLabel: UILabel!
     @IBOutlet weak var copyBtn: UIButton!
+    @IBOutlet weak var showPvtKeyBtn: UIButton!
     
     typealias ViewModel = WalletPrivateKeyInfoViewModel
     var viewModel: WalletPrivateKeyInfoViewModel!
@@ -71,48 +71,54 @@ final class WalletPrivateKeyInfoViewController: KLModuleViewController, KLVMVC {
     }
     
     private func bindViewModel() {
+        self.pKeyLabel.isHidden = true
+        self.copyBtn.isHidden = true
+        
         viewModel.pKey.drive(pKeyLabel.rx.text).disposed(by: bag)
         viewModel.addressCopied.drive(onNext: {
             [unowned self] _ in
             EZToast.present(on: self, content: LM.dls.copied_successfully)
         })
             .disposed(by: bag)
+       
+        showPvtKeyBtn.rx.klrx_tap.drive(onNext:{
+            self.pKeyLabel.isHidden = false
+            self.copyBtn.isHidden = false
+            self.showPvtKeyBtn.isHidden = true
+        }).disposed(by: bag)
     }
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        noteTitle_offlineSave.text = dls.exportPKey_label_offline_save
-        noteTitle_userInternet.text = dls.exportPKey_label_dont_trans_by_internet
-        noteTitle_tools.text = dls.exportPKey_label_pwd_manage_tool_save
+        noteTitle_offlineSave.text = "* " + dls.exportPKey_label_offline_save
+        noteTitle_userInternet.text = "* " +  dls.exportPKey_label_dont_trans_by_internet
+        noteTitle_tools.text =   "* " + dls.exportPKey_label_pwd_manage_tool_save
         
         noteContent_offlineSave.text = dls.exportPKey_label_offline_save_message
         noteContent_userInternet.text = dls.exportPKey_label_dont_trans_by_internet_message
         noteContent_tools.text = dls.exportPKey_label_pwd_manage_tool_save_message
         
-        copyBtn.setTitleForAllStates(dls.exportPKey_btn_copy_private_key)
+        showPvtKeyBtn.setTitleForAllStates(dls.display_pvt_key_btn_title)
     }
     
     override func renderTheme(_ theme: Theme) {
-        noteBase.backgroundColor = theme.palette.specific(color: .owPaleGrey)
         titleLabels.forEach { (label) in
-            label.set(textColor: theme.palette.label_asAppMain, font: .owMedium(size: 12))
+            label.set(textColor: .bittersweet, font: .owMedium(size: 16))
         }
         
         contentLabels.forEach { (label) in
-            label.set(textColor: theme.palette.label_sub, font: .owRegular(size: 12))
+            label.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
         }
         
-        pKeyBase.set(backgroundColor: theme.palette.bgView_sub, borderInfo: (color: theme.palette.bgView_border, width: 1))
+        pKeyBase.set(backgroundColor: theme.palette.bgView_main, borderInfo: (color: theme.palette.bgView_border, width: 1))
         pKeyBase.cornerRadius = 5
         
         pKeyLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 10))
         
-        copyBtn.cornerRadius = 5
-        copyBtn.setPureText(
-            color: theme.palette.btn_bgFill_enable_text,
-            font: .owRegular(size: 14),
-            backgroundColor: theme.palette.btn_bgFill_enable_bg
-        )
+        copyBtn.cornerRadius = 25
+        copyBtn.backgroundColor = UIColor.init(hexString: "F7BE73")
+        showPvtKeyBtn.setPureText(color: theme.palette.label_sub, font: .owRegular(size: 10))
+        
     }
 
     /*

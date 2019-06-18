@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletPKeyQRCodeViewController" customModule="OfflineWallet" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletPKeyQRCodeViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
                 <outlet property="displayBtn" destination="XJG-ge-coH" id="S4P-gf-gdX"/>
                 <outlet property="noteBase" destination="qcR-J2-a1d" id="Rcj-9y-ggX"/>
@@ -79,19 +78,19 @@
                     <rect key="frame" x="0.0" y="201" width="375" height="466"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w79-hO-4lj">
-                            <rect key="frame" x="56" y="102.5" width="262.5" height="262.5"/>
+                            <rect key="frame" x="75" y="120.5" width="225" height="225"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fa-e9-NNS">
-                            <rect key="frame" x="56" y="102.5" width="262.5" height="262.5"/>
+                            <rect key="frame" x="75" y="120.5" width="225" height="225"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJG-ge-coH">
-                                    <rect key="frame" x="100" y="114" width="62" height="34"/>
+                                    <rect key="frame" x="81.5" y="95.5" width="62" height="34"/>
                                     <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                     <state key="normal" title="Button"/>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qRX-g0-xVe">
-                                    <rect key="frame" x="0.0" y="0.0" width="262.5" height="262.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="225" height="225"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,7 +112,7 @@
                         <constraint firstItem="w79-hO-4lj" firstAttribute="leading" secondItem="1fa-e9-NNS" secondAttribute="leading" id="hRI-YC-eG9"/>
                         <constraint firstItem="1fa-e9-NNS" firstAttribute="centerX" secondItem="hqQ-37-NqZ" secondAttribute="centerX" id="nZf-15-2hM"/>
                         <constraint firstItem="w79-hO-4lj" firstAttribute="bottom" secondItem="1fa-e9-NNS" secondAttribute="bottom" id="q0s-9q-ryp"/>
-                        <constraint firstItem="1fa-e9-NNS" firstAttribute="width" secondItem="hqQ-37-NqZ" secondAttribute="width" multiplier="0.7" id="wWf-Co-gA3"/>
+                        <constraint firstItem="1fa-e9-NNS" firstAttribute="width" secondItem="hqQ-37-NqZ" secondAttribute="width" multiplier="0.6" id="wWf-Co-gA3"/>
                         <constraint firstItem="w79-hO-4lj" firstAttribute="top" secondItem="1fa-e9-NNS" secondAttribute="top" id="xAI-ft-OAQ"/>
                     </constraints>
                 </view>

@@ -212,7 +212,10 @@ struct DLS_EN_US: DLS {
     var walletManage_alert_placeholder_exportPKey_pwd = "Password"
     var walletManage_alert_changeWalletName_title = "Change wallet name"
     var walletManage_alert_changeWalletName_content = "Please enter the name of the wallet you want to replace"
-    var walletManage_error_walletName_invalidFormat_title = "Incorrect allet name format"
+    var walletManage_error_walletName_invalidFormat_title = "Incorrect wallet name format"
+    var walletManage_alert_wallet_name_changed_title = "Wallet name changed"
+    var walletManage_alert_wallet_name_changed_message = "Wallet name will be updated to the new name"
+    
     var walletManage_alert_placeholder_walletName_char_range = "1-30 characters, please do not leave blank at the beginning and end"
     var walletManage_btn_delete_wallet = "Delete wallet"
     var walletManage_alert_title_delete_wallet = "Delete wallet"
@@ -559,6 +562,8 @@ struct DLS_EN_US: DLS {
     var group_description = "Group Description"
     
     var show_qr_code =  "Display QR code"
+    var display_pvt_key_btn_title = "Display private key"
+    var precaution_before_exporting_msg = "Please read the precautions before exporting"
     
     var group_member_new = "New"
     var group_member_invited = "Invite"
@@ -707,5 +712,7 @@ struct DLS_EN_US: DLS {
     var asset_management_btn_title :String = "Asset Management"
     
     var wallet_type_btn_main_chain:String  = "Main Chain"
+    
+
 }
 

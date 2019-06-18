@@ -213,6 +213,8 @@ struct DLS_ZH_CN: DLS {
     var walletManage_alert_changeWalletName_title = "更换钱包名"
     var walletManage_alert_changeWalletName_content = "请输入要更换的钱包名字"
     var walletManage_error_walletName_invalidFormat_title = "钱包名称格式错误"
+    var walletManage_alert_wallet_name_changed_title = "已更改钱包名称"
+    var walletManage_alert_wallet_name_changed_message = "钱包名称将变更为新名称"
     var walletManage_alert_placeholder_walletName_char_range = "1-30 字元, 首尾请勿留空"
     var walletManage_btn_delete_wallet = "删除钱包"
     var walletManage_alert_title_delete_wallet = "删除钱包"
@@ -558,6 +560,9 @@ struct DLS_ZH_CN: DLS {
     var all_members = "所有成员"
     var group_description = "描述"
     var show_qr_code =  "显示二维码"
+    var display_pvt_key_btn_title = "点选此处显示私钥"
+    var precaution_before_exporting_msg = "導出前請先閱讀注意事項"
+    
     var group_member_new = "新增"
     var group_member_invited = "正在邀请"
     
@@ -698,4 +703,5 @@ struct DLS_ZH_CN: DLS {
     var asset_management_btn_title :String = "资产管理"
     
     var wallet_type_btn_main_chain:String  = "主链币"
+    
 }

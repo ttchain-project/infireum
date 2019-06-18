@@ -86,12 +86,16 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
     
     private func bindViewModel() {
 //        viewModel.isAbleToExportPKey.map { !$0 }.bind(to: exportPKeyBase.rx.isHidden).disposed(by: bag)
-        viewModel.wallet.map { $0.name }.bind(to: walletNameLabel.rx.text).disposed(by: bag)
+//        viewModel.wallet.map { $0.name }.bind(to: walletNameLabel.rx.text).disposed(by: bag)
 //        viewModel.wallet.map { $0.address }.bind(to: walletAddressLabel.rx.text).disposed(by: bag)
         
         viewModel.startEditName.drive(onNext:{
-            [unowned self] in
-            self.startEditWalletName($0)
+            [unowned self] wallet in
+            let vc = ChangeWalletNameViewController.instance(from: ChangeWalletNameViewController.Config(wallet: wallet,action: { wallet in
+                self.viewModel.reloadWallet(fromDB: true)
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.navigationController?.pushViewController(vc, animated: true)
         })
         .disposed(by: bag)
         
@@ -125,7 +129,7 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
         title = dls.walletManage_title
         pwdHintTitleLabel.text = dls.walletManage_label_pwdHint
         exportPKeyHintTitleLabel.text = dls.walletManage_label_exportPKey
-        
+        self.walletNameLabel.text = dls.walletManage_alert_changeWalletName_title
 //        deleteBtn
 //            .setTitleForAllStates(dls.walletManage_btn_delete_wallet)
     }

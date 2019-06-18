@@ -214,6 +214,8 @@ struct DLS_ZH_TW: DLS {
     var walletManage_alert_changeWalletName_title = "更換錢包名"
     var walletManage_alert_changeWalletName_content = "請輸入要更換的錢包名字"
     var walletManage_error_walletName_invalidFormat_title = "錢包名稱格式錯誤"
+    var walletManage_alert_wallet_name_changed_title = "已更改錢包名稱"
+    var walletManage_alert_wallet_name_changed_message = "錢包名稱將變更為新名稱"
     var walletManage_alert_placeholder_walletName_char_range = "1-30 字元, 首尾請勿留空"
     var walletManage_btn_delete_wallet = "刪除錢包"
     var walletManage_alert_title_delete_wallet = "刪除錢包"
@@ -567,7 +569,9 @@ struct DLS_ZH_TW: DLS {
     var all_members = "所有成員"
     var group_description = "描述"
     var show_qr_code =  "顯示二維碼"
-    
+    var display_pvt_key_btn_title = "點選此處顯示私鑰"
+    var precaution_before_exporting_msg = "導出前請先閱讀注意事項"
+
     var group_member_new = "新增"
     var group_member_invited = "正在邀請"
     

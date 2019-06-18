@@ -94,8 +94,8 @@ final class WalletPKeyQRCodeViewController: KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        noteTitle_scan.text = dls.exportPKey_label_provide_scan_directly_only
-        noteTitle_safeEnv.text = dls.exportPKey_label_use_in_save_environment
+        noteTitle_scan.text = "* " + dls.exportPKey_label_provide_scan_directly_only
+        noteTitle_safeEnv.text = "* " +  dls.exportPKey_label_use_in_save_environment
         
         
         noteContent_scan.text = dls.exportPKey_label_provide_scan_directly_only_message
@@ -105,13 +105,13 @@ final class WalletPKeyQRCodeViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderTheme(_ theme: Theme) {
-        noteBase.backgroundColor = theme.palette.specific(color: .owPaleGrey)
+        noteBase.backgroundColor = theme.palette.specific(color: .white)
         titleLabels.forEach { (label) in
-            label.set(textColor: theme.palette.label_asAppMain, font: .owMedium(size: 12))
+            label.set(textColor: .bittersweet, font: .owMedium(size: 16))
         }
         
         contentLabels.forEach { (label) in
-            label.set(textColor: theme.palette.label_sub, font: .owRegular(size: 12))
+            label.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
         }
         
         qrCodeShadowBase.addShadow(
@@ -121,15 +121,12 @@ final class WalletPKeyQRCodeViewController: KLModuleViewController, KLVMVC {
             opacity: 1
         )
         
-        qrCodeBase.set(backgroundColor: theme.palette.bgView_sub, borderInfo: (color: theme.palette.bgView_border, width: 1))
+        qrCodeBase.set(backgroundColor: theme.palette.bgView_main, borderInfo: (color: theme.palette.bgView_border, width: 1))
         qrCodeBase.cornerRadius = 5
         
-        
-        displayBtn.cornerRadius = 5
         displayBtn.setPureText(
-            color: theme.palette.btn_bgFill_enable_text,
-            font: .owRegular(size: 14),
-            backgroundColor: theme.palette.btn_bgFill_enable_bg
+            color: theme.palette.label_sub,
+            font: .owRegular(size: 10)
         )
     }
 }

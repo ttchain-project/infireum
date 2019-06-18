@@ -94,7 +94,7 @@ class ManageWalletViewModel: KLRxViewModel {
         
         reloadWallet(fromDB: false)
     }
-    
+   
     public func reloadWallet(fromDB: Bool) {
         if fromDB {
         
