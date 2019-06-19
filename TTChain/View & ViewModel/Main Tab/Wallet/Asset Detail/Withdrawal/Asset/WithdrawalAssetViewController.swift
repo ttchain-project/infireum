@@ -44,7 +44,6 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         
         let coin = viewModel.input.asset.coin!
         let coinName = coin.inAppName!
-        coinNameLabel.text = coinName
         viewModel.assetAvailableAmt.map {
             amt -> String? in
             let _amtString = amt.asString(
@@ -55,7 +54,7 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
             )
             
             let dls = LM.dls
-            return dls.withdrawal_label_assetAmt(_amtString, coinName)
+            return "(\(dls.withdrawal_label_assetAmt(_amtString, coinName)))"
         }
         .bind(to: availableAmtLabel.rx.text)
         .disposed(by: bag)
@@ -81,30 +80,44 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         return view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
     }
 
-    @IBOutlet weak var coinNameLabel: UILabel!
+    @IBOutlet weak var transferAmountTitleLabel: UILabel!
     @IBOutlet weak var availableAmtLabel: UILabel!
     
     @IBOutlet weak var transferAmtTextField: UITextField!
     @IBOutlet weak var transferAmtFiatValueLabel: UILabel!
+    @IBOutlet weak var infoButton: UIButton! {
+        didSet {
+            infoButton.cornerRadius =  infoButton.height/2
+            infoButton.rx.klrx_tap.drive(onNext:{
+                self.showSimplePopUp(with: LM.dls.total_amount_transfer_info_alert_title, contents: LM.dls.total_amount_transfer_info_alert_message, cancelTitle: LM.dls.g_ok, cancelHandler: nil)
+            }).disposed(by: bag)
+        }
+    }
     
-    @IBOutlet weak var transferAllButton: UIButton!
+    @IBOutlet weak var transferAllButton: UIButton! {
+        didSet {
+            transferAllButton.cornerRadius =  transferAllButton.height/2
+        }
+    }
     @IBOutlet weak var sepline: UIView!
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         transferAmtTextField.set(placeholder: dls.withdrawal_placeholder_withdrawalAmt)
+        transferAmountTitleLabel.text = dls.transfer_amount_title
+
     }
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         view.backgroundColor = palette.bgView_sub
-        coinNameLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 17))
-        transferAmtTextField.set(textColor: palette.label_main_1, font: .owRegular(size: 20), placeHolderColor: palette.input_placeholder)
-        availableAmtLabel.set(textColor: palette.input_text, font: .owRegular(size: 14))
-        transferAmtFiatValueLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 20))
+        transferAmountTitleLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 12))
+        transferAmtTextField.set(textColor: palette.label_main_1, font: .owRegular(size: 16), placeHolderColor: palette.input_placeholder)
+        availableAmtLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
+        transferAmtFiatValueLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 14))
         sepline.backgroundColor = palette.sepline
-        transferAllButton.set(textColor: palette.label_main_1, font: .owMedium(size: 17), text: LM.dls.transfer_all_amount, backgroundColor: .clear)
-        
+        transferAllButton.set(textColor: palette.label_main_2, font: .owMedium(size: 12), text: LM.dls.transfer_all_amount, backgroundColor: palette.btn_bgFill_enable_bg)
+        infoButton.set(backgroundColor: palette.btn_bgFill_enable_bg)
     }
     
     override func viewDidLoad() {
