@@ -30,7 +30,7 @@ class CreateRedEnvelopeViewController: UIViewController {
         didSet {
             viewModel.output.balanceSubject.bind(to: selectedCoinAmountLabel.rx.text)
                 .disposed(by: viewModel.disposeBag)
-            selectedCoinAmountLabel.textColor = UIColor.owIceCold
+            selectedCoinAmountLabel.textColor = TM.palette.application_main
             selectedCoinAmountLabel.font = .owMedium(size:15)
         }
     }
@@ -153,13 +153,13 @@ class CreateRedEnvelopeViewController: UIViewController {
     
     @IBOutlet weak var infoMessageLabelOne: UILabel! {
         didSet {
-            infoMessageLabelOne.textColor = .owIceCold
+            infoMessageLabelOne.textColor = TM.palette.application_main
             infoMessageLabelOne.text = LM.dls.red_env_send_notice_one
         }
     }
     @IBOutlet weak var infoMessageLabelTwo: UILabel! {
         didSet {
-            infoMessageLabelTwo.textColor = .owIceCold
+            infoMessageLabelTwo.textColor = TM.palette.application_main
             infoMessageLabelTwo.text = LM.dls.red_env_send_notice_two
         }
     }

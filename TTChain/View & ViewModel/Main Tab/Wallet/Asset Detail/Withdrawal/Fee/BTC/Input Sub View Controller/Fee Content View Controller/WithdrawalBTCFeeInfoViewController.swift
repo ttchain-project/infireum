@@ -12,6 +12,7 @@ import RxCocoa
 
 final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, WithdrawalChildVC, KLVMVC {
     
+    
     @IBOutlet weak var regularBase: UIView!
     @IBOutlet weak var regularLabel: UILabel!
     @IBOutlet weak var regularCheck: UIImageView!

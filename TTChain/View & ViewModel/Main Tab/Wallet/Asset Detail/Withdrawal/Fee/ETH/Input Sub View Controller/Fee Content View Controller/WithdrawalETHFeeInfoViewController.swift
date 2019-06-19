@@ -50,6 +50,10 @@ final class WithdrawalETHFeeInfoViewController: KLModuleViewController, KLVMVC {
     private var quickModeVC: WithdrawalETHFeeInfoQuickModeViewController!
     private var advModeVC: WithdrawalETHFeeInfoAdvModeViewController!
     
+    var preferedHeight: CGFloat {
+        return view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+    }
+    
     private func setupChildVCs() {
         quickModeVC = WithdrawalETHFeeInfoQuickModeViewController.instance()
         addChildViewController(quickModeVC)

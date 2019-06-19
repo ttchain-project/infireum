@@ -324,7 +324,7 @@ class GroupInformationViewController: UIViewController {
             case .leave: self.bottomButton.setTitleForAllStates(LM.dls.exit_group)
             case .edit: self.bottomButton.setTitleForAllStates(LM.dls.manage_group)
             }
-            self.bottomButton.backgroundColor = type == .leave ? UIColor.owPumpkinOrange : UIColor.owIceCold
+            self.bottomButton.backgroundColor = type == .leave ? UIColor.owPumpkinOrange : TM.palette.btn_bgFill_enable_bg
         }).disposed(by: disposeBag)
         
         viewModel.output.leaveGroupActionSubject.subscribe(onNext: {

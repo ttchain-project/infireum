@@ -54,7 +54,7 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
         self.onForwardMessagesSelection = constructor.forwardMessagesSelected
         self.initTableView()
         self.bindViewModel()
-        self.confirmButton.backgroundColor = .owIceCold
+        self.confirmButton.backgroundColor = TM.palette.btn_bgFill_enable_bg
         self.confirmButton.setTitle(LM.dls.g_confirm, for: .normal)
         self.confirmButton.rx.tap.asDriver().drive(onNext: { () in
             let vc = ForwardListContainerViewController.init()

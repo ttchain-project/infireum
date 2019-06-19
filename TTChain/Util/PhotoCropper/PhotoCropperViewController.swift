@@ -37,7 +37,7 @@ class PhotoCropperViewController: UIViewController {
     @IBOutlet weak var useImageButton: UIButton! {
         didSet {
             useImageButton.setTitle(LM.dls.use_original_image_title, for: .normal)
-            useImageButton.backgroundColor = UIColor.owIceCold
+            useImageButton.backgroundColor = TM.palette.application_main
             useImageButton.rx.klrx_tap.asDriver().drive(onNext: {[weak self] (_) in
                 guard let `self` = self else {
                     return
@@ -51,7 +51,7 @@ class PhotoCropperViewController: UIViewController {
     @IBOutlet weak var useCroppedImageButton: UIButton! {
         didSet {
             useCroppedImageButton.setTitle(LM.dls.use_edited_image_title, for: .normal)
-            useCroppedImageButton.backgroundColor = UIColor.owIceCold
+            useCroppedImageButton.backgroundColor = TM.palette.application_main
             useCroppedImageButton.rx.klrx_tap.asDriver().drive(onNext: {[weak self] (_) in
                 guard let `self` = self else {
                     return

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Cartography
 
-final class WithdrawalBTCFeeInputViewController: KLModuleViewController, WithdrawalChildVC, KLVMVC, WithdrawalFeeViewControllerBase {
+final class WithdrawalBTCFeeInputViewController: KLModuleViewController, WithdrawalFeeChildVC, KLVMVC, WithdrawalFeeViewControllerBase {
     
     struct Config {
         let asset:Asset
@@ -38,7 +38,11 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
 
     
     var preferedHeight: CGFloat {
-        return view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        return headerBase.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height + self.infoVC.preferedHeight
+    }
+    
+    var preferedDisclosedHeight:CGFloat {
+        return headerBase.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
     }
     
     var isAllFieldsHaveValue: Observable<Bool> {

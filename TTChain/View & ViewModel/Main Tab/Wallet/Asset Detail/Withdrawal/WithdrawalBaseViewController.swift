@@ -46,6 +46,9 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
     
     @IBOutlet weak var baseScrollView: UIScrollView!
     @IBOutlet weak var nextStepBtn: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
+    var feeVCHeightConstraint : NSLayoutConstraint?
 //    @IBOutlet weak var backButton: UIButton!
 //    @IBOutlet weak var scanButton: UIButton!
 //    @IBOutlet weak var titleLabel: UILabel!
@@ -80,27 +83,10 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             self.assetVC.viewModel.transferAll(withFee:feeInfo)
         }).disposed(by:bag)
         
-        constrain(assetVC.view, baseScrollView) { [unowned self] (view, scroll) in
-            view.top == scroll.top + 25
-            view.leading == scroll.leading
-            view.trailing == scroll.trailing
-            view.width == scroll.width
-            let height = self.assetVC.preferedHeight
-            view.height == height
-        }
-        
         addressVC = WithdrawalAddressViewController.instance(from: WithdrawalAddressViewController.Config(asset: config.asset))
         addChildViewController(addressVC)
         addressVC.didMove(toParentViewController: self)
         baseScrollView.addSubview(addressVC.view)
-        
-        constrain(addressVC.view, assetVC.view, baseScrollView) { [unowned self] (addr, asset, scroll) in
-            addr.leading == asset.leading
-            addr.trailing == asset.trailing
-            addr.top == asset.bottom + 12
-            let height = self.addressVC.preferedHeight
-            addr.height == height
-        }
         
         if let defaultAddress = config.defaultToAddress {
             addressVC.viewModel.changeToAddress(defaultAddress)
@@ -149,33 +135,70 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         addChildViewController(remarkNoteVC)
         remarkNoteVC.didMove(toParentViewController: self)
         baseScrollView.addSubview(remarkNoteVC.view)
-
-        constrain(feeVC.view, addressVC.view, baseScrollView) { (fee, addr, scroll) in
-            fee.leading == addr.leading
-            fee.trailing == addr.trailing
-            fee.top == addr.bottom + 12
-            let height = (feeVC as! WithdrawalChildVC).preferedHeight
-            fee.height == height
-            fee.bottom == scroll.bottom - self.remarkNoteVC.preferedHeight - 12 - 60
+      
+        let preferredHeight = (self.feeVC as! WithdrawalChildVC).preferedHeight
+        let preferredDisclosedHeight = (self.feeVC as! WithdrawalFeeChildVC).preferedDisclosedHeight
+        self.setupConstraints()
+      
+//        let group = constrain(remarkNoteVC.view, addressVC.view, baseScrollView) {  (remark, address, scroll) in
+//            remark.top == address.bottom + 12
+//        }
+        
+        
+        isInfoDisplayed.skip(1).subscribe(onNext: {
+            [weak self] (isDisplayed) in
+            var height:CGFloat
+            if isDisplayed {
+               height = preferredHeight
+            }else {
+                height = preferredDisclosedHeight
+            }
+            self?.feeVCHeightConstraint?.constant = height
             
+            UIView.animate(withDuration: 0.2, animations: {
+                self?.view.layoutIfNeeded()
+            })
+//            self?.updateContraintsForRemark(isDisplayed: isDisplayed, group: group)
+        }).disposed(by: bag)
+    }
+
+    private func setupConstraints() {
+        constrain(assetVC.view, baseScrollView) { [unowned self] (assets, scroll) in
+            assets.top == scroll.top + 25
+            assets.leading == scroll.leading
+            assets.trailing == scroll.trailing
+            assets.width == scroll.width
+            let height = self.assetVC.preferedHeight
+            assets.height == height
         }
         
-         constrain(remarkNoteVC.view, addressVC.view, baseScrollView) { [unowned self] (remark, address, scroll) in
+        constrain(feeVC.view, assetVC.view, baseScrollView) {[unowned self] (fee, asset, scroll) in
+            fee.leading == asset.leading
+            fee.trailing == asset.trailing
+            fee.top == asset.bottom + 12
+            let height = (self.feeVC as! WithdrawalFeeChildVC).preferedDisclosedHeight
+            self.feeVCHeightConstraint = (fee.height == height)
+        }
+        
+        constrain(addressVC.view, feeVC.view, baseScrollView) { (address, fee, scroll) in
+            address.leading == fee.leading
+            address.trailing == fee.trailing
+            address.top == fee.bottom + 12
+            let height = self.addressVC.preferedHeight
+            address.height == height
+        }
+        
+        constrain(remarkNoteVC.view, addressVC.view, baseScrollView) { [unowned self] (remark, address, scroll) in
             remark.leading == address.leading
             remark.trailing == address.trailing
             remark.width == address.width
             let height = self.remarkNoteVC.preferedHeight
             remark.height == height
+            remark.top == address.bottom + 12
+            remark.bottom == scroll.bottom - 20
         }
-        let group = constrain(remarkNoteVC.view, addressVC.view, baseScrollView) {  (remark, address, scroll) in
-            remark.top == address.bottom + 56 + 12
-        }
-        isInfoDisplayed.subscribe(onNext: {
-            [weak self] (isDisplayed) in
-            self?.updateContraintsForRemark(isDisplayed: isDisplayed, group: group)
-        }).disposed(by: bag)
     }
-
+    
     private func updateContraintsForRemark(isDisplayed: Bool, group: ConstraintGroup) {
         if isDisplayed {
             constrain(self.remarkNoteVC.view,self.feeVC.view, replace: group) { (remark,fee) in
@@ -206,12 +229,13 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         let dls = lang.dls
         title = dls.withdrawal_title(viewModel.input.asset.coin!.inAppName!)
         nextStepBtn.setTitleForAllStates(dls.withdrawal_btn_nextstep)
+        backButton.setTitleForAllStates(lang.dls.g_cancel)
     }
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
 //        view.backgroundColor = palette.bgView_main
-        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bg_clear)
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.nav_item_2, shouldClear: true)
 
@@ -248,6 +272,14 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         .disposed(by: bag)
         
         viewModel.isAbleToStartTransfer.bind(to: nextStepBtn.rx.isEnabled).disposed(by: bag)
+        
+        self.backButton.rx.klrx_tap.drive(onNext:{ _ in
+            if (self.presentingViewController != nil) || (self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+                self.dismiss(animated: true, completion: nil)
+            }else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }).disposed(by: bag)
     }
     
     private func bindViewModel() {

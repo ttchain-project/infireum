@@ -14,3 +14,7 @@ protocol WithdrawalChildVC {
     var preferedHeight: CGFloat { get }
     var isAllFieldsHaveValue: Observable<Bool> { get }
 }
+
+protocol WithdrawalFeeChildVC :  WithdrawalChildVC{
+    var preferedDisclosedHeight:CGFloat {get}
+}
