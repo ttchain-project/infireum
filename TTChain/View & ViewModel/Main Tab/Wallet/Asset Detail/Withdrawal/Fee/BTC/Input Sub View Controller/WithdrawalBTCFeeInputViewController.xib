@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WithdrawalBTCFeeInputViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
+                <outlet property="feeAmtLabel" destination="6yt-MN-Kkr" id="HPy-4d-R7M"/>
                 <outlet property="feeBtn" destination="QSo-qq-4rq" id="odd-XT-nk3"/>
                 <outlet property="feeTitleLabel" destination="iBR-uk-vCY" id="Y8h-VQ-egy"/>
                 <outlet property="headerBase" destination="1S4-Nq-VAW" id="XnJ-bS-ytg"/>
@@ -36,6 +37,12 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yt-MN-Kkr">
+                                    <rect key="frame" x="273" y="12.5" width="42" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSo-qq-4rq">
                                     <rect key="frame" x="325" y="0.0" width="30" height="45"/>
                                     <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
@@ -44,12 +51,14 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="QSo-qq-4rq" firstAttribute="leading" secondItem="6yt-MN-Kkr" secondAttribute="trailing" constant="10" id="C3Y-Zi-zCs"/>
                                 <constraint firstItem="iBR-uk-vCY" firstAttribute="leading" secondItem="1S4-Nq-VAW" secondAttribute="leading" constant="20" id="Ebm-ef-Dk5"/>
                                 <constraint firstAttribute="trailing" secondItem="QSo-qq-4rq" secondAttribute="trailing" constant="20" id="FgF-jX-GMn"/>
                                 <constraint firstItem="QSo-qq-4rq" firstAttribute="top" secondItem="1S4-Nq-VAW" secondAttribute="top" id="X8y-ig-k6B"/>
                                 <constraint firstItem="iBR-uk-vCY" firstAttribute="top" secondItem="1S4-Nq-VAW" secondAttribute="top" constant="12" id="rRR-9Y-I1n"/>
                                 <constraint firstAttribute="bottom" secondItem="QSo-qq-4rq" secondAttribute="bottom" id="sCY-Jw-TZa"/>
                                 <constraint firstAttribute="bottom" secondItem="iBR-uk-vCY" secondAttribute="bottom" constant="12" id="wPN-CT-SZa"/>
+                                <constraint firstItem="6yt-MN-Kkr" firstAttribute="centerY" secondItem="QSo-qq-4rq" secondAttribute="centerY" id="zUv-S8-se3"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J98-cs-nAH">
@@ -67,7 +76,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="34.5" y="-147.5"/>
+            <point key="canvasLocation" x="34.399999999999999" y="-147.97601199400302"/>
         </view>
     </objects>
 </document>

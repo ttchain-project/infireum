@@ -52,6 +52,7 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
     @IBOutlet weak var headerBase: UIView!
     @IBOutlet weak var feeTitleLabel: UILabel!
     @IBOutlet weak var feeBtn: UIButton!
+    @IBOutlet weak var feeAmtLabel: UILabel!
     
     @IBOutlet weak var infoBase: UIView!
     private var infoVC: WithdrawalBTCFeeInfoViewController!
@@ -103,7 +104,9 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
                 ($0?.asString(digits: 8) ?? "--") + " " + "btc"//LM.dls.fee_sat_per_byte
         }
         
-        feeStr.subscribe(onNext: {
+        feeStr.bind(to: self.feeAmtLabel.rx.text).disposed(by: bag)
+        
+        self.viewModel.feeAmtFiatValue.subscribe(onNext: {
             [unowned self]
             text in
             self.feeBtn.set(image: nil, title: text, titlePosition: .left, additionalSpacing: 8, state: .normal)
@@ -115,7 +118,7 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
             .subscribe(onNext: {
                 [unowned self]
                 isDisplayed in
-                let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
+                let img = isDisplayed ? #imageLiteral(resourceName: "btn_close") :  #imageLiteral(resourceName: "btn_open")
                 self.feeBtn.set(image: img, title: nil, titlePosition: .left, additionalSpacing: 8, state: .normal)
             })
             .disposed(by: bag)
@@ -140,10 +143,12 @@ final class WithdrawalBTCFeeInputViewController: KLModuleViewController, Withdra
         let palette = theme.palette
         headerBase.backgroundColor = palette.bgView_sub
         infoBase.backgroundColor = palette.bgView_sub
-        feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        feeBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 14))
+        feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 12))
+        feeBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 12))
+        feeAmtLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 12))
+        
         let isDisplayed = !infoBase.isHidden
-        let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
+        let img = isDisplayed ? #imageLiteral(resourceName: "btn_close") :  #imageLiteral(resourceName: "btn_open")
         self.feeBtn.set(image: img,
                         title: nil,
                         titlePosition: .left,

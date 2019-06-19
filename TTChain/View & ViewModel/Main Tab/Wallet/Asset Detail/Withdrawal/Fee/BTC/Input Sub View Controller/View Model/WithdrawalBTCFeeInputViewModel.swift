@@ -66,6 +66,40 @@ class WithdrawalBTCFeeInputViewModel: KLRxViewModel, WithdrawalFeeInfoProvider {
         return _satPerByte.asObservable()
     }
     
+    private lazy var _fiat: BehaviorRelay<Fiat> = {
+        return FiatManager.instance.fiat
+    }()
+    
+    private lazy var _fiatRate: BehaviorRelay<Decimal?> = {
+        let relay = BehaviorRelay<Decimal?>.init(value: CoinToFiatRate.getRateFromDatabase(coinID: input.asset.coinID!, fiatID: _fiat.value.id)?.rate as Decimal?)
+        updateFiatRateToCoin(fiat: _fiat.value, coin: input.asset.coin!).bind(to: relay).disposed(by: bag)
+        return relay
+    }()
+    
+    private func updateFiatRateToCoin(fiat: Fiat, coin: Coin) -> Observable<Decimal?> {
+        return CoinToFiatRate.getRateFromServerIfPossible(coin: coin, fiat: fiat).asObservable()
+    }
+    
+    private lazy var _feeAmtFiatValue: BehaviorRelay<String?> = {
+        let relay = BehaviorRelay<String?>.init(value: nil)
+        Observable.combineLatest(_fiatRate, _satPerByte).map { [unowned self]
+            rate, amt -> String? in
+            if let r = rate, let a = amt {
+                return  "≈\(self._fiat.value.symbol!) \(r * a)"
+            }else {
+                return nil
+            }
+            }
+            .bind(to: relay)
+            .disposed(by: bag)
+        
+        return relay
+    }()
+    
+    public var feeAmtFiatValue: Observable<String?> {
+        return _feeAmtFiatValue.asObservable()
+    }
+    
     public func updateFee(satPerByte: Decimal?) {
         _satPerByte.accept(satPerByte)
     }

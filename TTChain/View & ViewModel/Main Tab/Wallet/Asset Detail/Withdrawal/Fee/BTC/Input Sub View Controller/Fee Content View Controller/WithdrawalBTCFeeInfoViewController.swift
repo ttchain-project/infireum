@@ -17,16 +17,19 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
     @IBOutlet weak var regularLabel: UILabel!
     @IBOutlet weak var regularCheck: UIImageView!
     @IBOutlet weak var regularSepline: UIView!
+    @IBOutlet weak var regularFiatValue: UILabel!
     
     @IBOutlet weak var priorityBase: UIView!
     @IBOutlet weak var priorityLabel: UILabel!
     @IBOutlet weak var priorityCheck: UIImageView!
     @IBOutlet weak var prioritySepline: UIView!
-    
+    @IBOutlet weak var priorityFiatValue: UILabel!
+
     @IBOutlet weak var manualBase: UIView!
     @IBOutlet weak var manualTextField: UITextField!
     @IBOutlet weak var manualCheck: UIImageView!
     @IBOutlet weak var manualSepline: UIView!
+    @IBOutlet weak var manualFiatValue: UILabel!
 
     struct Config {
         let defaultFeeOption: FeeManager.Option?
@@ -78,10 +81,15 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         view.backgroundColor = palette.bgView_sub
-        regularLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
-        priorityLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
-        manualTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
         
+        regularLabel.set(textColor: palette.input_text, font: .owRegular(size: 14))
+        priorityLabel.set(textColor: palette.input_text, font: .owRegular(size: 14))
+        manualTextField.set(textColor: palette.input_text, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
+        
+        regularFiatValue.set(textColor: palette.application_main, font: .owRegular(size: 14))
+        manualFiatValue.set(textColor: palette.application_main, font: .owRegular(size: 14))
+        priorityFiatValue.set(textColor: palette.application_main, font: .owRegular(size: 14))
+
         regularSepline.backgroundColor = palette.sepline
         prioritySepline.backgroundColor = palette.sepline
         manualSepline.backgroundColor = palette.sepline
@@ -107,26 +115,29 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
         let dls = LM.dls
         viewModel.regularSatPerByte.map {
             rate -> String in
-            return dls.withdrawal_placeholder_btc_feeRate_normal
+            return
+//            dls.withdrawal_placeholder_btc_feeRate_normal + " " +
+                rate.asString(digits: 8)
                 + " "
-                + rate.asString(digits: 8)
-                + " "
-                + "btc" //dls.fee_sat_per_byte
+                + "BTC" //dls.fee_sat_per_byte
             }
             .bind(to: regularLabel.rx.text)
             .disposed(by: bag)
         
         viewModel.prioritySatPerByte.map {
             rate -> String in
-            
-            return dls.withdrawal_placeholder_btc_feeRate_priority
+            return
+//            dls.withdrawal_placeholder_btc_feeRate_priority + " " +
+                rate.asString(digits: 8)
                 + " "
-                + rate.asString(digits: 8)
-                + " "
-                + "btc" //dls.fee_sat_per_byte
+                + "BTC" //dls.fee_sat_per_byte
             }
             .bind(to: priorityLabel.rx.text)
             .disposed(by: bag)
+        
+        viewModel.manualFiatValue.bind(to:manualFiatValue.rx.text).disposed(by: bag)
+        viewModel.regularFiatValue.bind(to:regularFiatValue.rx.text).disposed(by: bag)
+        viewModel.priorityFiatValue.bind(to:priorityFiatValue.rx.text).disposed(by: bag)
     }
     
     private func updateOptionSelectedLayout(option: ViewModel.InputOption) {

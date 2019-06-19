@@ -152,6 +152,80 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
         return BehaviorRelay.init(value: (input.feeDefault.defaultFeeRate ?? 0).asString(digits: 8))
     }()
     
+    private lazy var _fiat: BehaviorRelay<Fiat> = {
+        return FiatManager.instance.fiat
+    }()
+    
+    private lazy var _fiatRate: BehaviorRelay<Decimal?> = {
+        let relay = BehaviorRelay<Decimal?>.init(value: CoinToFiatRate.getRateFromDatabase(coinID: Coin.btc_identifier, fiatID: _fiat.value.id)?.rate as Decimal?)
+        updateFiatRateToCoin(fiat: _fiat.value, coin: Coin.btc).bind(to: relay).disposed(by: bag)
+        return relay
+    }()
+    
+    private func updateFiatRateToCoin(fiat: Fiat, coin: Coin) -> Observable<Decimal?> {
+        return CoinToFiatRate.getRateFromServerIfPossible(coin: coin, fiat: fiat).asObservable()
+    }
+    
+    private lazy var _regularFiatValue: BehaviorRelay<String?> = {
+        let relay = BehaviorRelay<String?>.init(value: nil)
+        Observable.combineLatest(_fiatRate, _regularFeeRate).map { [unowned self]
+            rate, amt -> String? in
+            if let r = rate {
+                return  "≈\(self._fiat.value.symbol!) \(r * amt)"
+            }else {
+                return nil
+            }
+            }
+            .bind(to: relay)
+            .disposed(by: bag)
+        
+        return relay
+    }()
+    
+    private lazy var _priorityFiatValue: BehaviorRelay<String?> = {
+        let relay = BehaviorRelay<String?>.init(value: nil)
+        Observable.combineLatest(_fiatRate, _priorityFeeRate).map { [unowned self]
+            rate, amt -> String? in
+            if let r = rate {
+                return  "≈\(self._fiat.value.symbol!) \(r * amt)"
+            }else {
+                return nil
+            }
+            }
+            .bind(to: relay)
+            .disposed(by: bag)
+        
+        return relay
+    }()
+    
+    private lazy var _manualFiatValue: BehaviorRelay<String?> = {
+        let relay = BehaviorRelay<String?>.init(value: nil)
+        Observable.combineLatest(_fiatRate, _manualFeeRate).map { [unowned self]
+            rate, amt -> String? in
+            if let r = rate,let a = Decimal.init(string: amt ?? "") {
+                
+                return  "≈\(self._fiat.value.symbol!) \(r * a)"
+            }else {
+                return nil
+            }
+            }
+            .bind(to: relay)
+            .disposed(by: bag)
+        
+        return relay
+    }()
+    
+    public var manualFiatValue: Observable<String?> {
+        return _manualFiatValue.asObservable()
+    }
+    
+    public var regularFiatValue: Observable<String?> {
+        return _regularFiatValue.asObservable()
+    }
+    
+    public var priorityFiatValue: Observable<String?> {
+        return _priorityFiatValue.asObservable()
+    }
     
     /// Calling updateSuggestFeeRate() will ask FeeManager to update rate and sync with the local variable after completed.
     /// FeeManager will return the available value, whether from server of local (if HTTP request if failed).
