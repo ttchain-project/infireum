@@ -53,6 +53,7 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
     @IBOutlet weak var headerBase: UIView!
     @IBOutlet weak var feeTitleLabel: UILabel!
     @IBOutlet weak var feeBtn: UIButton!
+    @IBOutlet weak var feeValueLabel: UILabel!
     
     @IBOutlet weak var infoBase: UIView!
     private var infoVC: WithdrawalETHFeeInfoViewController!
@@ -77,17 +78,14 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
     private func bindViewModel() {
         viewModel.isInfoDisplayed.map { !$0 }.bind(to: infoBase.rx.isHidden).disposed(by: bag)
         
-        let feeStr = Observable.combineLatest(
-            viewModel.input.gasProvider.totalGas,
+        let feeStr =
             viewModel.totalGasFiatValue
-            )
             .map {
                 [unowned self]
-                totalGas, totalFiat -> String in
-                let gasStr = (totalGas?.gweiToEther.asString(digits: 18) ?? "--") + LM.dls.fee_ether
+                 totalFiat -> String in
                 let fiatSymbol = self.viewModel.input.fiat.fullSymbol
                 let fiatStr = fiatSymbol + (totalFiat?.asString(digits: 2) ?? "--")
-                return gasStr + " ≈ " + fiatStr
+                return " ≈ " + fiatStr
             }
         
         feeStr.subscribe(onNext: {
@@ -97,12 +95,15 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
         })
         .disposed(by: bag)
         
+        viewModel.input.gasProvider.totalGas.map {
+            (($0?.gweiToEther)?.asString(digits: 18) ?? "--") + LM.dls.fee_ether
+        }.bind(to: self.feeValueLabel.rx.text).disposed(by: bag)
         
         viewModel.isInfoDisplayed
             .subscribe(onNext: {
                 [unowned self]
                 isDisplayed in
-                let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
+                let img = isDisplayed ? #imageLiteral(resourceName: "btn_close") :  #imageLiteral(resourceName: "btn_open")
                 self.feeBtn.set(image: img,
                                 title: nil,
                                 titlePosition: .left,
@@ -131,11 +132,12 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
         let palette = theme.palette
         headerBase.backgroundColor = palette.bgView_sub
         infoBase.backgroundColor = palette.bgView_sub
-        feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        feeBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 14))
+        feeTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
+        feeBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 14))
         let isDisplayed = !infoBase.isHidden
-        let img = isDisplayed ? #imageLiteral(resourceName: "doneBlue") : #imageLiteral(resourceName: "arrowNavBlue")
+        let img = isDisplayed ? #imageLiteral(resourceName: "btn_close") :  #imageLiteral(resourceName: "btn_open")
         self.feeBtn.set(image: img, title: nil, titlePosition: .left, additionalSpacing: 8, state: .normal)
+        feeValueLabel.set(textColor: palette.label_main_1, font: UIFont.owRegular(size: 14))
     }
     
     /*

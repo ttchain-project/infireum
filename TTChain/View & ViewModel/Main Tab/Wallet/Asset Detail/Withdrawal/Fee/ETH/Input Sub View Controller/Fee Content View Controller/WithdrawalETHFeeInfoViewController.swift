@@ -65,13 +65,13 @@ final class WithdrawalETHFeeInfoViewController: KLModuleViewController, KLVMVC {
         }
         
         advModeVC = WithdrawalETHFeeInfoAdvModeViewController.instance()
-        addChildViewController(advModeVC)
-        advModeVC.didMove(toParentViewController: self)
-        modeBase.addSubview(advModeVC.view)
-        constrain(advModeVC.view) { (view) in
-            let sup = view.superview!
-            view.edges == sup.edges
-        }
+//        addChildViewController(advModeVC)
+//        advModeVC.didMove(toParentViewController: self)
+//        modeBase.addSubview(advModeVC.view)
+//        constrain(advModeVC.view) { (view) in
+//            let sup = view.superview!
+//            view.edges == sup.edges
+//        }
     }
     
     override func renderTheme(_ theme: Theme) {

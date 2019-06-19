@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="feeBtn" destination="9jA-om-f2h" id="mu1-5h-nKM"/>
                 <outlet property="feeTitleLabel" destination="s2j-YE-7de" id="q5M-Yv-kLO"/>
+                <outlet property="feeValueLabel" destination="TG1-rc-6Pt" id="xfh-jD-HCZ"/>
                 <outlet property="headerBase" destination="fbA-sT-uhq" id="bNc-zS-fpu"/>
                 <outlet property="infoBase" destination="eg0-fU-xHQ" id="UZ0-UW-N5s"/>
                 <outlet property="view" destination="lWO-Ql-pWT" id="eHT-3X-T31"/>
@@ -21,11 +22,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="lWO-Ql-pWT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="265"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="193"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9iv-sS-BPs">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="265"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="193"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbA-sT-uhq">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
@@ -36,27 +37,35 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jA-om-f2h">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jA-om-f2h">
                                     <rect key="frame" x="311" y="0.0" width="44" height="44.5"/>
                                     <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
                                     <state key="normal" title="asdfjl">
                                         <color key="titleColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="asdf asdfsadf asdf  asdf" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TG1-rc-6Pt">
+                                    <rect key="frame" x="137.5" y="12" width="168.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="9jA-om-f2h" secondAttribute="bottom" id="3oS-F1-MlO"/>
                                 <constraint firstItem="s2j-YE-7de" firstAttribute="leading" secondItem="fbA-sT-uhq" secondAttribute="leading" constant="20" id="Kw2-If-K8I"/>
+                                <constraint firstItem="9jA-om-f2h" firstAttribute="leading" secondItem="TG1-rc-6Pt" secondAttribute="trailing" constant="5" id="RvH-ag-OAc"/>
                                 <constraint firstItem="9jA-om-f2h" firstAttribute="top" secondItem="fbA-sT-uhq" secondAttribute="top" id="Vch-y8-Syk"/>
                                 <constraint firstAttribute="trailing" secondItem="9jA-om-f2h" secondAttribute="trailing" constant="20" id="apA-Q2-kuz"/>
-                                <constraint firstItem="9jA-om-f2h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s2j-YE-7de" secondAttribute="trailing" constant="20" id="grr-MV-nV7"/>
+                                <constraint firstItem="TG1-rc-6Pt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s2j-YE-7de" secondAttribute="trailing" constant="10" id="fm0-3x-S9h"/>
                                 <constraint firstAttribute="bottom" secondItem="s2j-YE-7de" secondAttribute="bottom" constant="12" id="hdK-VK-pJc"/>
                                 <constraint firstItem="s2j-YE-7de" firstAttribute="top" secondItem="fbA-sT-uhq" secondAttribute="top" constant="12" id="pgY-iU-MKS"/>
+                                <constraint firstItem="TG1-rc-6Pt" firstAttribute="centerY" secondItem="9jA-om-f2h" secondAttribute="centerY" id="sj6-y7-iQI"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eg0-fU-xHQ">
-                            <rect key="frame" x="0.0" y="44.5" width="375" height="220.5"/>
+                            <rect key="frame" x="0.0" y="44.5" width="375" height="148.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
@@ -70,7 +79,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="8xH-xJ-eqS"/>
-            <point key="canvasLocation" x="34.5" y="-147.5"/>
+            <point key="canvasLocation" x="34.399999999999999" y="-180.35982008995504"/>
         </view>
     </objects>
 </document>

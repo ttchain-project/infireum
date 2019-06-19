@@ -24,14 +24,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vj-i8-J0o">
-                    <rect key="frame" x="0.0" y="0.0" width="365" height="297"/>
+                    <rect key="frame" x="0.0" y="0.0" width="365" height="358"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rkf-CJ-6AS">
+                <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rkf-CJ-6AS">
                     <rect key="frame" x="296" y="317" width="51" height="31"/>
                     <color key="onTintColor" red="0.63921568630000003" green="0.86274509799999999" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </switch>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yay-uK-xlP">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yay-uK-xlP">
                     <rect key="frame" x="234" y="322" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -40,6 +40,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6vj-i8-J0o" secondAttribute="bottom" constant="10" id="7F6-RL-dpE"/>
                 <constraint firstItem="6vj-i8-J0o" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="9g6-x3-WsF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Rkf-CJ-6AS" secondAttribute="bottom" constant="20" id="EOK-UB-soE"/>
                 <constraint firstItem="Rkf-CJ-6AS" firstAttribute="leading" secondItem="yay-uK-xlP" secondAttribute="trailing" constant="20" id="Tjc-Nd-8zW"/>
@@ -51,6 +52,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="EOK-UB-soE"/>
+                    <exclude reference="ugH-R3-LaC"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="179.5" y="-90"/>
         </view>
     </objects>
