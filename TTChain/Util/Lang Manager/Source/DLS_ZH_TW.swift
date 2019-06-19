@@ -579,7 +579,7 @@ struct DLS_ZH_TW: DLS {
 
     var members_invitation_successfull = "成員邀請成功"
     
-    var transfer_all_amount = "轉出所有金額(扣除礦工費)"
+    var transfer_all_amount = "轉出總額"
 
     var invalid_mnemonic_phrase = "助記詞不正確"
     
@@ -717,6 +717,9 @@ struct DLS_ZH_TW: DLS {
 
     var asset_management_btn_title :String = "資產管理"
     var wallet_type_btn_main_chain:String  = "主鏈幣"
+    
+    var total_amount_transfer_info_alert_title:String = "什麼是轉出總額？"
+    var total_amount_transfer_info_alert_message:String  = "點選此選項後，系統會自動將錢包內的該幣全部轉出，不用再另外計算輸入。 而系統也會將總額自動扣除所選擇的礦工費用。"
 }
 
 

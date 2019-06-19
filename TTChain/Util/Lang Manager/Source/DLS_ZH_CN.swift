@@ -568,7 +568,7 @@ struct DLS_ZH_CN: DLS {
     
     func group_text_too_long(_ args: String...) -> String { return String.init(format: "字数过长 (%@)/%@", arguments: args) }
         var members_invitation_successfull = "成员邀请成功"
-    var transfer_all_amount = "轉出所有金額(扣除礦工費)"
+    var transfer_all_amount = "转出总额"
     var invalid_mnemonic_phrase = "助记词不正确"
     var image_saved_success = "图像保存到相册"
     var exists = "已存在"
@@ -685,7 +685,7 @@ struct DLS_ZH_CN: DLS {
     var light_deposit_btn_title:String = "存入"
 
 
-        var insufficient_unspend_error_msg:String = "可转帐余额不足。若为USDT转帐，请检查BTC钱包余额是否足够支付矿工费"
+    var insufficient_unspend_error_msg:String = "可转帐余额不足。若为USDT转帐，请检查BTC钱包余额是否足够支付矿工费"
 
     var transfer_amount_title:String = "转帐金额"
 
@@ -703,5 +703,8 @@ struct DLS_ZH_CN: DLS {
     var asset_management_btn_title :String = "资产管理"
     
     var wallet_type_btn_main_chain:String  = "主链币"
-    
+
+    var total_amount_transfer_info_alert_title:String = "什么是转出总额？"
+    var total_amount_transfer_info_alert_message:String  = "点选此选项后，系统会自动将钱包内的该币全部转出，不用再另外计算输入。而系统也会将总额自动扣除所选择的矿工费用。"
+
 }

@@ -571,7 +571,7 @@ struct DLS_EN_US: DLS {
     func group_text_too_long(_ args: String...) -> String { return String.init(format: "The text is too long (%@)/%@", arguments: args) }
     
     var members_invitation_successfull = "Members invited successfully"
-    var transfer_all_amount = "Transfer all coins(exclude miner fee)"
+    var transfer_all_amount = "Total Transfer "
     var invalid_mnemonic_phrase = "Invalid mnemonic phrase"
     
     var image_saved_success = "Image saved to album"
@@ -713,6 +713,8 @@ struct DLS_EN_US: DLS {
     
     var wallet_type_btn_main_chain:String  = "Main Chain"
     
+    var total_amount_transfer_info_alert_title:String = "What is the total amount of transfer?"
+    var total_amount_transfer_info_alert_message:String  = "After clicking this option, the system will automatically transfer all the coins in the wallet without having to calculate the input. The system will also automatically deduct the selected miner's fees."
 
 }
 
