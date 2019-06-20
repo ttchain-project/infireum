@@ -63,7 +63,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
                                                                                                 
                                                                                              })))
         
-        headerViewController.view.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: self.view.height * 0.4)
+        headerViewController.view.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: max(350,self.view.height * 0.4))
         self.tableView.tableHeaderView = headerViewController.view
         
     }

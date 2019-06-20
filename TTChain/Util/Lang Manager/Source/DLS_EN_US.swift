@@ -106,7 +106,7 @@ struct DLS_EN_US: DLS {
     var tab_wallet = "Wallet"
     var tab_trade = "Trade"
     var tab_me = "Me"
-    var tab_chat = ""
+    var tab_chat = "Chat"
     var tab_alert_newSystemWallet_title = "Hope Seed supports a new wallets!"
     var tab_alert_newSystemWallet_content = "To add a wallet, please enter identity (wallet) password."
     var tab_alert_placeholder_identityPwd = "Identity (wallet) password"

@@ -199,7 +199,7 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var pager_unselected: UIColor = .owSilver
     
-    var tab_selected: UIColor = .owAzure
+    var tab_selected: UIColor = .cloudBurst
     
     var tab_unselected: UIColor = .owWarmGrey
     

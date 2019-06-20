@@ -106,7 +106,7 @@ struct DLS_ZH_CN: DLS {
     var tab_wallet = "钱包"
     var tab_trade = "交易"
     var tab_me = "我的"
-    var tab_chat = ""
+    var tab_chat = "聊天"
     var tab_alert_newSystemWallet_title = "Hope Seed 支援了新的钱包！"
     var tab_alert_newSystemWallet_content = "若要新增钱包，请输入身份(钱包)密码"
     var tab_alert_placeholder_identityPwd = "身份(钱包)密码"

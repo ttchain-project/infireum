@@ -107,6 +107,7 @@ protocol DynamicLocalizationSource {
     var tab_trade: String { get set }
     var tab_me: String { get set }
     var tab_chat: String { get set }
+    
     var tab_alert_newSystemWallet_title: String { get set }
     var tab_alert_newSystemWallet_content: String { get set }
     var tab_alert_placeholder_identityPwd: String { get set }
@@ -698,4 +699,5 @@ protocol DynamicLocalizationSource {
     
     func tx_record_detail_title(_ args: String...) -> String
 
+    
 }
