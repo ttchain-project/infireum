@@ -175,7 +175,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
         constrain(feeVC.view, assetVC.view, baseScrollView) {[unowned self] (fee, asset, scroll) in
             fee.leading == asset.leading
             fee.trailing == asset.trailing
-            fee.top == asset.bottom + 12
+            fee.top == asset.bottom
             let height = (self.feeVC as! WithdrawalFeeChildVC).preferedDisclosedHeight
             self.feeVCHeightConstraint = (fee.height == height)
         }
@@ -218,7 +218,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.setGradientColor()
+//        self.view.setGradientColor()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -244,19 +244,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             return
         }
         changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
-
-//        if((self.presentingViewController) != nil) {
-//        } else if(self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
-//        }
-        
-//        self.backButton.rx.tap.bind {
-//            self.navigationController?.popViewController(animated: true)
-//            }.disposed(by: bag)
-//
-//        self.scanButton.rx.tap.bind {
-//            self.toQRCode()
-//        }.disposed(by: bag)
-        
+        self.view.backgroundColor = palette.bgView_main
         nextStepBtn.setTitleColor(palette.btn_bgFill_enable_text, for: .normal)
         nextStepBtn.setTitleColor(palette.btn_bgFill_disable_text, for: .disabled)
         nextStepBtn.set(font: UIFont.owRegular(size: 14))
@@ -267,7 +255,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             [unowned self]
             isEnabled in
             let palette = TM.palette
-            self.nextStepBtn.backgroundColor = isEnabled ? palette.btn_bgFill_enable_bg : palette.btn_bgFill_disable_bg
+            self.nextStepBtn.backgroundColor = isEnabled ? palette.btn_bgFill_enable_bg2 : palette.btn_bgFill_disable_bg
         })
         .disposed(by: bag)
         
@@ -398,21 +386,26 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
 
     let animator = KLTransferConfirmAnimator.init(topRevealPercentage: 0.4)
     private func startConfirmWithWithdrawalInfo(_ info: WithdrawalInfo) {
-        let chainType = ChainType.init(rawValue: info.wallet.chainType)!
-        switch chainType {
-        case .btc:
-            let nav = WithdrawalBTCInfoOverviewViewController.navInstance(from: WithdrawalBTCInfoOverviewViewController.Config(info: info))
-            nav.transitioningDelegate = animator
-            
-            present(nav, animated: true, completion: nil)
-        case .eth:
-            let nav = WithdrawalETHInfoOverviewViewController.navInstance(from: WithdrawalETHInfoOverviewViewController.Config(info: info))
-            nav.transitioningDelegate = animator
-            
-            present(nav, animated: true, completion: nil)
-        case .cic,.ttn:
-            //THIS SHUOLD NOT HAPPEN
-            return errorDebug(response: ())
-        }
+        
+        let vc = WithdrawalConfirmationViewController.instance(from: WithdrawalConfirmationViewController.Config(info: info))
+        self.navigationController?.pushViewController(vc)
+        
+//        let chainType = ChainType.init(rawValue: info.wallet.chainType)!
+        
+//        switch chainType {
+//        case .btc:
+//            let nav = WithdrawalBTCInfoOverviewViewController.navInstance(from: WithdrawalBTCInfoOverviewViewController.Config(info: info))
+//            nav.transitioningDelegate = animator
+//
+//            present(nav, animated: true, completion: nil)
+//        case .eth:
+//            let nav = WithdrawalETHInfoOverviewViewController.navInstance(from: WithdrawalETHInfoOverviewViewController.Config(info: info))
+//            nav.transitioningDelegate = animator
+//
+//            present(nav, animated: true, completion: nil)
+//        case .cic,.ttn:
+//            //THIS SHUOLD NOT HAPPEN
+//            return errorDebug(response: ())
+//        }
     }
 }

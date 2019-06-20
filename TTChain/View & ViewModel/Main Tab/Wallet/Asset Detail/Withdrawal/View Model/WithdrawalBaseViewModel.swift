@@ -219,11 +219,7 @@ class WithdrawalInfo {
         return asset.wallet!
     }
     var feeRate: Decimal
-    var feeAmt: Decimal {
-        didSet {
-            print(feeAmt)
-        }
-    }
+    var feeAmt: Decimal
     var feeCoin: Coin
     
     var totalFee: Decimal {

@@ -40,6 +40,7 @@ protocol OfflineWalletThemePalette {
     var application_success: UIColor { get set }
     
     var btn_bgFill_enable_bg: UIColor { get set }
+    var btn_bgFill_enable_bg2: UIColor { get set }
     var btn_bgFill_enable_text: UIColor { get set }
     var btn_bgFill_disable_bg: UIColor { get set }
     var btn_bgFill_disable_text: UIColor { get set }
@@ -123,6 +124,7 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var btn_bgFill_enable_bg: UIColor = .yellowGreen
     
+    var btn_bgFill_enable_bg2:UIColor = .cloudBurst
     var btn_bgFill_enable_text: UIColor = .owWhite
     
     var btn_bgFill_disable_bg: UIColor = .owSilver
@@ -155,9 +157,9 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var sepline: UIColor = UIColor.owSilver.withAlphaComponent(0.5)
     
-    var bgView_main: UIColor = .owWhite
+    var bgView_main: UIColor = .owWhiteTwo
     
-    var bgView_sub: UIColor = .owWhiteTwo
+    var bgView_sub: UIColor = .owWhite
     
     var bgView_mask: UIColor = .owBlack40
     

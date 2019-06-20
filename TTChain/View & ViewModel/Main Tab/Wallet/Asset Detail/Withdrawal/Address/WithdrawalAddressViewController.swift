@@ -13,7 +13,11 @@ import RxCocoa
 final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalChildVC, KLVMVC {
     
     @IBOutlet weak var toAddrTitleLabel: UILabel!
-    @IBOutlet weak var addrbookBtn: UIButton!
+    @IBOutlet weak var addrbookBtn: UIButton! {
+        didSet {
+            addrbookBtn.cornerRadius = addrbookBtn.height/2
+        }
+    }
     @IBOutlet weak var addrTextField: OWInputTextField!
     @IBOutlet weak var fromAddrTitleLabel: UILabel!
     @IBOutlet weak var fromWalletBtn: UIButton!
@@ -76,7 +80,7 @@ final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalC
                 $0.wallet!.name!
             }
             .subscribe(onNext: {
-                [unowned self] in self.fromWalletBtn.set(image: #imageLiteral(resourceName: "doneBlue"), title: $0, titlePosition: .left, additionalSpacing: 8, state: .normal)
+                [unowned self] in self.fromWalletBtn.set(image: #imageLiteral(resourceName: "btn_next.png"), title: $0, titlePosition: .left, additionalSpacing: 8, state: .normal)
             })
             .disposed(by: bag)
         
@@ -99,24 +103,14 @@ final class WithdrawalAddressViewController: KLModuleViewController, WithdrawalC
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         view.backgroundColor = palette.bgView_sub
-        toAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        addrbookBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 14))
-        addrTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
+        toAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
+        addrbookBtn.set(color: palette.label_main_2, font: UIFont.owRegular(size: 14),backgroundColor:palette.application_main)
+        addrTextField.set(textColor: palette.input_text, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
         addrTextField.sepline.backgroundColor = palette.sepline
         
-        fromAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        fromWalletBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 17))
-        fromAddrLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
+        fromAddrTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
+        fromWalletBtn.set(color: palette.label_main_1, font: UIFont.owRegular(size: 14))
+        fromAddrLabel.set(textColor: palette.input_text, font: .owRegular(size: 14))
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

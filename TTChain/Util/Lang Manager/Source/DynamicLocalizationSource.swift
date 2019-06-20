@@ -691,4 +691,6 @@ protocol DynamicLocalizationSource {
     
     var total_amount_transfer_info_alert_title:String {get set}
     var total_amount_transfer_info_alert_message:String {get set}
+    var transfer_success_check_record_message:String {get set}
+    var check_record_btn_title:String {get set}
 }

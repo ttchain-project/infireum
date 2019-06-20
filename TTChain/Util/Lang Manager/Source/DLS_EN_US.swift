@@ -716,5 +716,8 @@ struct DLS_EN_US: DLS {
     var total_amount_transfer_info_alert_title:String = "What is the total amount of transfer?"
     var total_amount_transfer_info_alert_message:String  = "After clicking this option, the system will automatically transfer all the coins in the wallet without having to calculate the input. The system will also automatically deduct the selected miner's fees."
 
+    var transfer_success_check_record_message = "Your transfer request has been successful. You can check the status of this transaction by going to the transfer record."
+    
+    var check_record_btn_title = "View history"
 }
 

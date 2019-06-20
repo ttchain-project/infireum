@@ -720,6 +720,11 @@ struct DLS_ZH_TW: DLS {
     
     var total_amount_transfer_info_alert_title:String = "什麼是轉出總額？"
     var total_amount_transfer_info_alert_message:String  = "點選此選項後，系統會自動將錢包內的該幣全部轉出，不用再另外計算輸入。 而系統也會將總額自動扣除所選擇的礦工費用。"
+    
+    var transfer_success_check_record_message = "您的轉帳請求已經成功。您可以到轉帳紀錄查看此筆交易狀態。"
+
+    var check_record_btn_title = "查看轉帳紀錄"
+
 }
 
 

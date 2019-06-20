@@ -27,8 +27,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ols-bg-nRE">
-                    <rect key="frame" x="275" y="19" width="54" height="14"/>
+                    <rect key="frame" x="255" y="7.5" width="74" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="u2h-ak-zb0"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                     <state key="normal" title="常用地址" image="doneBlue"/>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2wF-6u-dDb" customClass="OWInputTextField" customModule="Hope_Seed" customModuleProvider="target">
@@ -70,10 +74,10 @@
                 <constraint firstItem="xYE-63-0tf" firstAttribute="top" secondItem="yQE-P2-yIk" secondAttribute="bottom" constant="12" id="IFb-Ae-SET"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xYE-63-0tf" secondAttribute="trailing" constant="20" id="O94-Mm-1k0"/>
                 <constraint firstItem="h5d-1p-eTx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="RQ3-uC-00B"/>
-                <constraint firstItem="Ols-bg-nRE" firstAttribute="bottom" secondItem="h5d-1p-eTx" secondAttribute="bottom" id="Rls-eN-Gv2"/>
                 <constraint firstItem="yQE-P2-yIk" firstAttribute="leading" secondItem="2wF-6u-dDb" secondAttribute="leading" id="aaM-Qy-Gil"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xYE-63-0tf" secondAttribute="bottom" constant="12" id="acW-E3-tMo"/>
                 <constraint firstItem="yhN-my-aQ6" firstAttribute="trailing" secondItem="Ols-bg-nRE" secondAttribute="trailing" id="biJ-Sv-Gyd"/>
+                <constraint firstItem="Ols-bg-nRE" firstAttribute="centerY" secondItem="h5d-1p-eTx" secondAttribute="centerY" id="g6z-Pb-A1U"/>
                 <constraint firstItem="h5d-1p-eTx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="gOP-2C-emG"/>
                 <constraint firstItem="xYE-63-0tf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="qW1-yQ-g79"/>
                 <constraint firstItem="yQE-P2-yIk" firstAttribute="top" secondItem="2wF-6u-dDb" secondAttribute="bottom" constant="12" id="u3B-bE-B4A"/>

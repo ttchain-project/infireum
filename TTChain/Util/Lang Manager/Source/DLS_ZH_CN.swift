@@ -706,5 +706,7 @@ struct DLS_ZH_CN: DLS {
 
     var total_amount_transfer_info_alert_title:String = "什么是转出总额？"
     var total_amount_transfer_info_alert_message:String  = "点选此选项后，系统会自动将钱包内的该币全部转出，不用再另外计算输入。而系统也会将总额自动扣除所选择的矿工费用。"
-
+    var transfer_success_check_record_message = "您的转帐请求已经成功。您可以到转帐纪录查看此笔交易状态。"
+    
+    var check_record_btn_title = "查看转帐纪录"
 }

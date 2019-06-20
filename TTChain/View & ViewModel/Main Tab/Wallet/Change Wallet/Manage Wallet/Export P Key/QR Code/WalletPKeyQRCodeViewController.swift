@@ -121,7 +121,7 @@ final class WalletPKeyQRCodeViewController: KLModuleViewController, KLVMVC {
             opacity: 1
         )
         
-        qrCodeBase.set(backgroundColor: theme.palette.bgView_main, borderInfo: (color: theme.palette.bgView_border, width: 1))
+        qrCodeBase.set(backgroundColor: theme.palette.bgView_sub, borderInfo: (color: theme.palette.bgView_border, width: 1))
         qrCodeBase.cornerRadius = 5
         
         displayBtn.setPureText(

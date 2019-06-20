@@ -33,12 +33,57 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
     @IBOutlet weak var paymentAddressValueLabel: UILabel!
 
     let bag: DisposeBag = DisposeBag.init()
-    
+    var transRecord:TransRecord!
+    var asset:Asset!
     func config(constructor: TransRecordDetailViewController.Input) {
         
         self.view.layoutIfNeeded()
         
-        let transRecord = constructor.transRecord
+        self.transRecord = constructor.transRecord
+        self.asset = constructor.asset
+        self.setupUI()
+        
+        self.startMonitorLangIfNeeded()
+        self.startMonitorThemeIfNeeded()
+        
+
+    }
+   
+    struct Input {
+        let transRecord:TransRecord
+        let asset:Asset
+    }
+    typealias Constructor = Input
+    
+    override func renderTheme(_ theme: Theme) {
+        self.transactionStatusLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 24))
+        self.transactionDateLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 20))
+        
+        [self.amountTitleLabel,self.amountValueLabel,
+         self.minorFeeTitleLabel,minorFeeValueLabel,
+         self.paymentAddressTitleLabel,paymentAddressValueLabel,
+         recieptAddressTitleLabel,recieptAddressValueLabel].forEach
+            { label in
+                label?.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 15))
+        }
+        self.toLinkButton.set(textColor: theme.palette.btn_bgFill_enable_text, font: .owMedium(size: 15), backgroundColor: theme.palette.btn_bgFill_enable_bg)
+    }
+    
+    override func renderLang(_ lang: Lang) {
+        self.amountTitleLabel.text = lang.dls.assetDetail_tab_total
+        self.minorFeeTitleLabel.text  = lang.dls.ltTx_label_minerFee
+        self.paymentAddressTitleLabel.text = lang.dls.withdrawal_label_fromAddr
+        self.recieptAddressTitleLabel.text = lang.dls.withdrawal_label_toAddr
+        self.toLinkButton.setTitle(lang.dls.assetDetail_label_tx_go_check, for: .normal)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    func setupUI() {
+        
         if transRecord.owStatus == .failed {
             self.transactionStatusLabel.text = LM.dls.trans_failed
         }else {
@@ -47,11 +92,11 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         
         let format = "MM/dd/yyyy HH:mm:ss"
         self.transactionDateLabel.text = DateFormatter.dateString(from: (transRecord.date! as Date), withFormat: format)
-
+        
         var amtStr: String = ""
         var transAmount = transRecord.toAmt
-
-        switch transRecord.inoutRoleOfAddress(constructor.asset.wallet!.address!) {
+        
+        switch transRecord.inoutRoleOfAddress(asset.wallet!.address!) {
         case .none: break
         case .some(let type):
             switch type {
@@ -59,7 +104,7 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
                 amtStr = "+"
             case .withdrawal:
                 amtStr = "-"
-                if constructor.asset.wallet?.walletMainCoinID == Coin.btc_identifier {
+                if asset.wallet?.walletMainCoinID == Coin.btc_identifier {
                     if transRecord.block > 0 {
                         transAmount = transAmount?.subtracting(transRecord.totalFee ?? NSDecimalNumber.init(value:0.0))
                     }
@@ -92,21 +137,21 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         
         self.paymentAddressValueLabel.text = transRecord.fromAddress
         self.recieptAddressValueLabel.text = transRecord.toAddress
-       
+        
         guard let feeCoin = Coin.getCoin(ofIdentifier: transRecord.feeCoinID!) else { return }
         
         let feeAmt = transRecord.totalFee! as Decimal
         var feeAmtStr = feeAmt.asString(digits: Int(feeCoin.digit))
         
         var coinName = feeCoin.identifier == Coin.usdt_identifier ? "BTC" :  feeCoin.inAppName!
-
+        
         if ( transRecord.fromCoinID == Coin.ttn_identifier) {
             feeAmtStr = "0.1 TTN"
             coinName = ""
         } else if ( transRecord.fromCoinID == Coin.btcn_identifier) {
             
         }
-
+        
         switch transRecord.fromCoinID! {
         case Coin.ttn_identifier:
             feeAmtStr = "0.1 TTN"
@@ -125,11 +170,7 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         }
         
         self.minorFeeValueLabel.text = feeAmtStr.disguiseIfNeeded() + coinName
-        
-        self.startMonitorLangIfNeeded()
-        self.startMonitorThemeIfNeeded()
-        
-        guard let url = URL.init(string: constructor.url) else {
+        guard let url = self.createTxURL() else {
             self.toLinkButton.isHidden = true
             return
         }
@@ -140,39 +181,24 @@ final class TransRecordDetailViewController: KLModuleViewController,KLInstanceSe
         
         
     }
-   
-    struct Input {
-        let transRecord:TransRecord
-        let asset:Asset
-        let url:String
-    }
-    typealias Constructor = Input
-    
-    override func renderTheme(_ theme: Theme) {
-        self.transactionStatusLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 24))
-        self.transactionDateLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 20))
-        
-        [self.amountTitleLabel,self.amountValueLabel,
-         self.minorFeeTitleLabel,minorFeeValueLabel,
-         self.paymentAddressTitleLabel,paymentAddressValueLabel,
-         recieptAddressTitleLabel,recieptAddressValueLabel].forEach
-            { label in
-                label?.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 15))
+    private func createTxURL() -> URL?{
+        if let txid = self.transRecord.txID {
+            switch asset.wallet!.owChainType {
+            case .btc:
+                if asset.coinID == Coin.usdt_identifier {
+                    return OmniExplorerCreator.url(ofTxID: txid)
+                }else {
+                    return BlockExplorerURLCreator.url(ofTxID: txid)
+                }
+            case .eth:
+                return EtherscanURLCreator.url(ofTxID: txid)
+            case .cic:
+                return nil
+            case .ttn:
+                return TTNURLCreator.url(txid: txid)
+            }
         }
-        self.toLinkButton.set(textColor: theme.palette.btn_bgFill_enable_text, font: .owMedium(size: 15), backgroundColor: theme.palette.btn_bgFill_enable_bg)
-    }
-    
-    override func renderLang(_ lang: Lang) {
-        self.amountTitleLabel.text = lang.dls.assetDetail_tab_total
-        self.minorFeeTitleLabel.text  = lang.dls.ltTx_label_minerFee
-        self.paymentAddressTitleLabel.text = lang.dls.withdrawal_label_fromAddr
-        self.recieptAddressTitleLabel.text = lang.dls.withdrawal_label_toAddr
-        self.toLinkButton.setTitle(lang.dls.assetDetail_label_tx_go_check, for: .normal)
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        return nil
     }
 
 }

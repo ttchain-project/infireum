@@ -110,7 +110,7 @@ final class WalletPrivateKeyInfoViewController: KLModuleViewController, KLVMVC {
             label.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
         }
         
-        pKeyBase.set(backgroundColor: theme.palette.bgView_main, borderInfo: (color: theme.palette.bgView_border, width: 1))
+        pKeyBase.set(backgroundColor: theme.palette.bgView_sub, borderInfo: (color: theme.palette.bgView_border, width: 1))
         pKeyBase.cornerRadius = 5
         
         pKeyLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 10))

@@ -48,7 +48,6 @@ final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
 
-
     }
     
     override func renderLang(_ lang: Lang) {
@@ -62,8 +61,8 @@ final class WithdrawalRemarksViewController: KLModuleViewController, KLVMVC {
         let palette = theme.palette
         view.backgroundColor = palette.bgView_sub
         separatorLine.backgroundColor = palette.sepline
-        titleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        noteTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
+        titleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
+        noteTextField.set(textColor: palette.input_text, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
         noteTextField.rx.text.orEmpty
             .scan("") { (previous, new) -> String in
                 if new.count > 30 {
