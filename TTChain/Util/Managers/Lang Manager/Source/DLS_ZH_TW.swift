@@ -731,6 +731,7 @@ struct DLS_ZH_TW: DLS {
         return String.init(format: "%@ 轉帳紀錄", arguments: args)
     }
 
+    var chat_msg_tab_title:String = "訊息"
 }
 
 

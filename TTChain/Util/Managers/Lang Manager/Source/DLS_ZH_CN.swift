@@ -717,4 +717,5 @@ struct DLS_ZH_CN: DLS {
         return String.init(format: "%@ 转帐纪录", arguments: args)
     }
 
+        var chat_msg_tab_title:String = "讯息"
 }

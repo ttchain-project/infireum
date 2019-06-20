@@ -697,5 +697,6 @@ protocol DynamicLocalizationSource {
     var tx_block_number_title:String {get set}
     
     func tx_record_detail_title(_ args: String...) -> String
-
+    
+    var chat_msg_tab_title:String {get set}
 }
