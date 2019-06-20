@@ -107,6 +107,9 @@
 		5529D58A22BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58922BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift */; };
 		5529D58B22BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58922BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift */; };
 		5529D58C22BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58922BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift */; };
+		5529D58E22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */; };
+		5529D58F22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */; };
+		5529D59022BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */; };
 		5530C1A822B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
 		5530C1A922B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
 		5530C1AA22B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
@@ -2232,6 +2235,7 @@
 		5529D58022BA20D1008AE3E5 /* WithdrawalConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewController.swift; sourceTree = "<group>"; };
 		5529D58122BA20D1008AE3E5 /* WithdrawalConfirmationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawalConfirmationViewController.xib; sourceTree = "<group>"; };
 		5529D58922BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewModel.swift; sourceTree = "<group>"; };
+		5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		5530C1A722B7366E00125653 /* TTTabManButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTabManButton.swift; sourceTree = "<group>"; };
 		5530C1AC22B889D800125653 /* ChangeWalletNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWalletNameViewController.swift; sourceTree = "<group>"; };
 		5530C1AD22B889D800125653 /* ChangeWalletNameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeWalletNameViewController.xib; sourceTree = "<group>"; };
@@ -3836,6 +3840,7 @@
 			children = (
 				55B5C032221A9D61007250FA /* TransRecordDetailViewController.swift */,
 				55B5C033221A9D61007250FA /* TransRecordDetailViewController.xib */,
+				5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */,
 			);
 			path = RecordDetail;
 			sourceTree = "<group>";
@@ -8015,6 +8020,7 @@
 				64F07E1A20D241A000A60C5C /* ServerAPIErrorHandler.swift in Sources */,
 				6485002720D9340F00107473 /* UIView+FastUISetup.swift in Sources */,
 				55E730692186E564003AE47E /* CommentsModel.swift in Sources */,
+				5529D59022BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */,
 				55D7D1B92238B02E00309A22 /* IncomingCallViewController.swift in Sources */,
 				557C851122360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
 				64F07E2620D241A000A60C5C /* KLTextField.swift in Sources */,
@@ -8550,6 +8556,7 @@
 				64F07DDC20D241A000A60C5C /* Printer.swift in Sources */,
 				6424B68420F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.swift in Sources */,
 				6424B69820F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
+				5529D58E22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */,
 				55D7D1B72238B02E00309A22 /* IncomingCallViewController.swift in Sources */,
 				557C850F22360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
 				55EF6A7E21A812C6007E074A /* AddGroupMemberTableViewCell.swift in Sources */,
@@ -9078,6 +9085,7 @@
 				640D891120EF62C40010D986 /* BlockExplorerURLCreator.swift in Sources */,
 				6424B69920F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
 				64D8264220DFB94D00C8FC63 /* QRCodeGenerator.swift in Sources */,
+				5529D58F22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */,
 				55D7D1B82238B02E00309A22 /* IncomingCallViewController.swift in Sources */,
 				557C851022360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
 				5539A48921676F8C00A59ACC /* IdentityQRCodeDecryptionFlow.swift in Sources */,

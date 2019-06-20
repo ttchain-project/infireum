@@ -192,7 +192,7 @@ final class TransRecordListViewController: KLModuleViewController, KLVMVC {
     }
     
     private func openTxDetail(url:URL?, transrecord:TransRecord) {
-        let vc = TransRecordDetailViewController.instance(from: TransRecordDetailViewController.Input(transRecord: transrecord,asset:self.asset))
+        let vc = TransRecordDetailViewController.instance(from: TransRecordDetailViewController.Config(transRecord: transrecord,asset:self.asset))
         self.navigationController?.pushViewController(vc,animated:true)
     }
 }

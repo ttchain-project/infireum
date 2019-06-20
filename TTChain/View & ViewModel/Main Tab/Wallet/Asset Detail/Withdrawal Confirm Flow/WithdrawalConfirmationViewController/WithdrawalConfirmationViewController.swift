@@ -188,7 +188,7 @@ final class WithdrawalConfirmationViewController: KLModuleViewController, KLVMVC
                     return
                 }
                 self.navigationController?.dismiss(animated: false, completion: {
-                    let transRecordVC = TransRecordDetailViewController.instance(from: TransRecordDetailViewController.Input(transRecord: record, asset: self.viewModel.input.info.asset))
+                    let transRecordVC = TransRecordDetailViewController.instance(from: TransRecordDetailViewController.Config(transRecord: record, asset: self.viewModel.input.info.asset))
                     let navVC = presentingVC as! UINavigationController
                     navVC.pushViewController(transRecordVC, animated: false)
                 })

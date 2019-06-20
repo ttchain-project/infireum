@@ -693,4 +693,9 @@ protocol DynamicLocalizationSource {
     var total_amount_transfer_info_alert_message:String {get set}
     var transfer_success_check_record_message:String {get set}
     var check_record_btn_title:String {get set}
+    var tx_number_title :String {get set}
+    var tx_block_number_title:String {get set}
+    
+    func tx_record_detail_title(_ args: String...) -> String
+
 }

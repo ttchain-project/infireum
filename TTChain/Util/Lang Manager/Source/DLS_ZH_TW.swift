@@ -724,6 +724,12 @@ struct DLS_ZH_TW: DLS {
     var transfer_success_check_record_message = "您的轉帳請求已經成功。您可以到轉帳紀錄查看此筆交易狀態。"
 
     var check_record_btn_title = "查看轉帳紀錄"
+    var tx_number_title = "交易序號"
+    var tx_block_number_title = "區塊編號"
+    
+    func tx_record_detail_title(_ args: String...) -> String {
+        return String.init(format: "%@ 轉帳紀錄", arguments: args)
+    }
 
 }
 

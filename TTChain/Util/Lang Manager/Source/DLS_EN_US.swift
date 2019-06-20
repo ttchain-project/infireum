@@ -719,5 +719,14 @@ struct DLS_EN_US: DLS {
     var transfer_success_check_record_message = "Your transfer request has been successful. You can check the status of this transaction by going to the transfer record."
     
     var check_record_btn_title = "View history"
+    
+    var tx_number_title = "Transaction Number"
+    
+    var tx_block_number_title = "Block numbers"
+    
+    func tx_record_detail_title(_ args: String...) -> String {
+        return String.init(format: "%@ tranfer record", arguments: args)
+    }
+
 }
 
