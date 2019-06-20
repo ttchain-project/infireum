@@ -110,6 +110,12 @@
 		5529D58E22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */; };
 		5529D58F22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */; };
 		5529D59022BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */; };
+		5529D59922BB753E008AE3E5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D59722BB753E008AE3E5 /* ChatContainerViewController.swift */; };
+		5529D59A22BB753E008AE3E5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D59722BB753E008AE3E5 /* ChatContainerViewController.swift */; };
+		5529D59B22BB753E008AE3E5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5529D59722BB753E008AE3E5 /* ChatContainerViewController.swift */; };
+		5529D59C22BB753E008AE3E5 /* ChatContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5529D59822BB753E008AE3E5 /* ChatContainerViewController.xib */; };
+		5529D59D22BB753E008AE3E5 /* ChatContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5529D59822BB753E008AE3E5 /* ChatContainerViewController.xib */; };
+		5529D59E22BB753E008AE3E5 /* ChatContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5529D59822BB753E008AE3E5 /* ChatContainerViewController.xib */; };
 		5530C1A822B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
 		5530C1A922B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
 		5530C1AA22B7366E00125653 /* TTTabManButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530C1A722B7366E00125653 /* TTTabManButton.swift */; };
@@ -2236,6 +2242,8 @@
 		5529D58122BA20D1008AE3E5 /* WithdrawalConfirmationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawalConfirmationViewController.xib; sourceTree = "<group>"; };
 		5529D58922BA24A9008AE3E5 /* WithdrawalConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalConfirmationViewModel.swift; sourceTree = "<group>"; };
 		5529D58D22BB555D008AE3E5 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
+		5529D59722BB753E008AE3E5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
+		5529D59822BB753E008AE3E5 /* ChatContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatContainerViewController.xib; sourceTree = "<group>"; };
 		5530C1A722B7366E00125653 /* TTTabManButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTabManButton.swift; sourceTree = "<group>"; };
 		5530C1AC22B889D800125653 /* ChangeWalletNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWalletNameViewController.swift; sourceTree = "<group>"; };
 		5530C1AD22B889D800125653 /* ChangeWalletNameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeWalletNameViewController.xib; sourceTree = "<group>"; };
@@ -3225,6 +3233,62 @@
 			path = WithdrawalConfirmationViewController;
 			sourceTree = "<group>";
 		};
+		5529D59222BB73A4008AE3E5 /* ChatTab */ = {
+			isa = PBXGroup;
+			children = (
+				5529D59722BB753E008AE3E5 /* ChatContainerViewController.swift */,
+				5529D59822BB753E008AE3E5 /* ChatContainerViewController.xib */,
+			);
+			path = ChatTab;
+			sourceTree = "<group>";
+		};
+		5529D59322BB73CE008AE3E5 /* LaunchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				64E4E4D22147B434009B556B /* LaunchViewController.xib */,
+				64E4E4CB2147AC93009B556B /* LaunchViewController.swift */,
+			);
+			path = LaunchViewController;
+			sourceTree = "<group>";
+		};
+		5529D59422BB7418008AE3E5 /* TransactionManagers */ = {
+			isa = PBXGroup;
+			children = (
+				555E4AA1224B508900C7CAD5 /* TTChainTransfer */,
+				5559CAD9228E686600D37895 /* SignETHTransaction */,
+				55F987CB227FEA09000C32F9 /* BTCTransactionSign */,
+			);
+			path = TransactionManagers;
+			sourceTree = "<group>";
+		};
+		5529D59522BB744F008AE3E5 /* URLCreators */ = {
+			isa = PBXGroup;
+			children = (
+				55B5C024221A96B0007250FA /* Omni Explorer URL Creator */,
+				64E77DE121206BB500B0AC15 /* Etherscan URL Creator */,
+				640D890E20EF62A30010D986 /* Block Explorer URL Creator */,
+			);
+			path = URLCreators;
+			sourceTree = "<group>";
+		};
+		5529D59622BB74D6008AE3E5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				5529D59422BB7418008AE3E5 /* TransactionManagers */,
+				557C85522236700C004C2E16 /* CallHandler */,
+				559C4F142226658D009466A8 /* NotificationHandler */,
+				55B5C01F22151F04007250FA /* WalletCreator */,
+				557D4E5621E357A90073B8D8 /* SettingTabHandler */,
+				55EF6B2221A81500007E074A /* IMUserManager */,
+				55EF6B2F21A81516007E074A /* RocketChatManager */,
+				64B2772120D55BCB004FF75B /* Image Downloader */,
+				64F07E3920D25AC700A60C5C /* Database Manager */,
+				64F07E4720D287D500A60C5C /* Theme Manager */,
+				55EF6B7721A81D42007E074A /* Lang Manager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		5530C1A622B7362C00125653 /* TTTabManButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -3822,6 +3886,7 @@
 		55B5C01F22151F04007250FA /* WalletCreator */ = {
 			isa = PBXGroup;
 			children = (
+				55A3D25A2270129B002ABE13 /* TTNWalletSetup */,
 				55B5C02022151F25007250FA /* WalletCreator.swift */,
 			);
 			path = WalletCreator;
@@ -5505,6 +5570,7 @@
 		648139CD20DC96C900CAA4D8 /* Main Tab */ = {
 			isa = PBXGroup;
 			children = (
+				5529D59222BB73A4008AE3E5 /* ChatTab */,
 				5537F06E2265CFBE0058B98D /* LightTransTab */,
 				554D2CFA2244CE3F0004CA09 /* RedEnvelope */,
 				550873E021E49713007B3B3B /* SettingTab */,
@@ -6393,25 +6459,15 @@
 		64F07DA620D2403700A60C5C /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				55EF6B1B21A814E8007E074A /* UIRepresentableCell.swift */,
 				5530C1A622B7362C00125653 /* TTTabManButton */,
-				5559CAD9228E686600D37895 /* SignETHTransaction */,
-				55F987CB227FEA09000C32F9 /* BTCTransactionSign */,
-				55A3D25A2270129B002ABE13 /* TTNWalletSetup */,
+				5529D59622BB74D6008AE3E5 /* Managers */,
 				55D4C7CC2253654E005F3BEF /* PhotoCropper */,
-				555E4AA1224B508900C7CAD5 /* TTChainTransfer */,
-				557C85522236700C004C2E16 /* CallHandler */,
-				559C4F142226658D009466A8 /* NotificationHandler */,
-				55B5C01F22151F04007250FA /* WalletCreator */,
 				55B5C0192212D35E007250FA /* ImageScrollView */,
 				5526B53E22128E5400573576 /* PhotoAuth */,
-				557D4E5621E357A90073B8D8 /* SettingTabHandler */,
-				55EF6B2221A81500007E074A /* IMUserManager */,
-				55EF6B2F21A81516007E074A /* RocketChatManager */,
 				646198B7212D04FE00432D8E /* Localization */,
 				643F9E572108423600CE70F4 /* Toast */,
-				55B5C024221A96B0007250FA /* Omni Explorer URL Creator */,
-				64E77DE121206BB500B0AC15 /* Etherscan URL Creator */,
-				640D890E20EF62A30010D986 /* Block Explorer URL Creator */,
+				5529D59522BB744F008AE3E5 /* URLCreators */,
 				64D8263F20DFB93A00C8FC63 /* QRCode Generator */,
 				64CDE194213D2F2300105BFB /* QRCode Static Image Scanner */,
 				6485005020DA397900107473 /* HUD */,
@@ -6421,10 +6477,6 @@
 				64F07DB020D2416C00A60C5C /* MVVM */,
 				64F07E3420D250DE00A60C5C /* View Controller Modulairization */,
 				64F07DA720D2404400A60C5C /* Network Reachability */,
-				64B2772120D55BCB004FF75B /* Image Downloader */,
-				64F07E3920D25AC700A60C5C /* Database Manager */,
-				64F07E4720D287D500A60C5C /* Theme Manager */,
-				55EF6B7721A81D42007E074A /* Lang Manager */,
 				64769B202122967D00C4AB9E /* Version Checker */,
 				64F07E8620D3802000A60C5C /* Server */,
 				649E488920EC9D3F00B217AD /* Notification */,
@@ -6445,6 +6497,7 @@
 		64F07DB020D2416C00A60C5C /* MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				55EF6B1A21A814E7007E074A /* ViewModel.swift */,
 				64F07E7D20D36B7D00A60C5C /* KLMVVM */,
 			);
 			path = MVVM;
@@ -6509,10 +6562,7 @@
 			children = (
 				55D7D1B42238B01300309A22 /* IncomingCall */,
 				557C8494223209AE004C2E16 /* AudioCall */,
-				55EF6B1B21A814E8007E074A /* UIRepresentableCell.swift */,
-				55EF6B1A21A814E7007E074A /* ViewModel.swift */,
-				64E4E4D22147B434009B556B /* LaunchViewController.xib */,
-				64E4E4CB2147AC93009B556B /* LaunchViewController.swift */,
+				5529D59322BB73CE008AE3E5 /* LaunchViewController */,
 				6414C14B214A5D8B00E45F32 /* Identity QRCode Flow */,
 				64769B172121E85E00C4AB9E /* Agreement */,
 				64B2772A20D8A22E004FF75B /* General */,
@@ -6974,6 +7024,7 @@
 				55787FD421F9613100A4F7D6 /* tt_splash.gif in Resources */,
 				55F987C2227BE59F000C32F9 /* LightDepositWalletChooseViewController.xib in Resources */,
 				55EF6A4121A812C6007E074A /* ChatHistoryTableViewCell.xib in Resources */,
+				5529D59E22BB753E008AE3E5 /* ChatContainerViewController.xib in Resources */,
 				64D8265A20E0E1F600C8FC63 /* ChangeAssetTableViewCell.xib in Resources */,
 				6EB422F321635B8C00DF75DB /* AgreementMeViewController.xib in Resources */,
 				55EF6ADD21A812C6007E074A /* InviteTableViewCell.xib in Resources */,
@@ -7178,6 +7229,7 @@
 				64E4E4D32147B434009B556B /* LaunchViewController.xib in Resources */,
 				640D88DE20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
 				6456192A2150DFBF001092E5 /* IdentityBackupTypeChooseViewController.xib in Resources */,
+				5529D59C22BB753E008AE3E5 /* ChatContainerViewController.xib in Resources */,
 				5568384E21F5A8460006892C /* ProfileViewController.xib in Resources */,
 				55A3D28D22730A32002ABE13 /* LightWithdrawalFeeViewController.xib in Resources */,
 				55787FD221F9613100A4F7D6 /* tt_splash.gif in Resources */,
@@ -7366,6 +7418,7 @@
 				64E4E4D42147B434009B556B /* LaunchViewController.xib in Resources */,
 				640D88DF20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.xib in Resources */,
 				6456192B2150DFBF001092E5 /* IdentityBackupTypeChooseViewController.xib in Resources */,
+				5529D59D22BB753E008AE3E5 /* ChatContainerViewController.xib in Resources */,
 				5568384F21F5A8460006892C /* ProfileViewController.xib in Resources */,
 				55A3D28E22730A32002ABE13 /* LightWithdrawalFeeViewController.xib in Resources */,
 				55787FD321F9613100A4F7D6 /* tt_splash.gif in Resources */,
@@ -8146,6 +8199,7 @@
 				6470D6B820F35B2B00EB0780 /* WithdrawalETHFeeInfoViewModel.swift in Sources */,
 				55EF6A5321A812C6007E074A /* ChatViewController.swift in Sources */,
 				5537F07F2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */,
+				5529D59B22BB753E008AE3E5 /* ChatContainerViewController.swift in Sources */,
 				64F43BAB210B259700982AFD /* Unspent.swift in Sources */,
 				555E4ADC224CC99600C7CAD5 /* RedEnvelopeHistoryModel.swift in Sources */,
 				64C9D4B221042F6F000B0774 /* LocalAuthViewModel.swift in Sources */,
@@ -8682,6 +8736,7 @@
 				55EF6A5121A812C6007E074A /* ChatViewController.swift in Sources */,
 				6424B62720F4CFAA00AEBCAD /* TransferRecordsOptionsSelectBase.swift in Sources */,
 				5537F07D2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */,
+				5529D59922BB753E008AE3E5 /* ChatContainerViewController.swift in Sources */,
 				64D8264120DFB94D00C8FC63 /* QRCodeGenerator.swift in Sources */,
 				555E4ADA224CC99600C7CAD5 /* RedEnvelopeHistoryModel.swift in Sources */,
 				649E487920EC6FFF00B217AD /* ManageWalletViewController.swift in Sources */,
@@ -9211,6 +9266,7 @@
 				55EF6A5221A812C6007E074A /* ChatViewController.swift in Sources */,
 				64F07DD120D241A000A60C5C /* WindowOrientaionLocker.swift in Sources */,
 				5537F07E2265D4F90058B98D /* LightTransMenuTableViewCell.swift in Sources */,
+				5529D59A22BB753E008AE3E5 /* ChatContainerViewController.swift in Sources */,
 				64B2771F20D55A05004FF75B /* FiatToFiatRate+Helper.swift in Sources */,
 				555E4ADB224CC99600C7CAD5 /* RedEnvelopeHistoryModel.swift in Sources */,
 				6470D6B720F35B2B00EB0780 /* WithdrawalETHFeeInfoViewModel.swift in Sources */,
