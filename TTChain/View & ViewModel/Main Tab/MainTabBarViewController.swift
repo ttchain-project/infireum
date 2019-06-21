@@ -50,8 +50,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     private var tradeButton:UIButton!
     //MARK: = Chat
     private weak var chatNav: UINavigationController?
-    private var chatVC: ChatListViewController? {
-        return chatNav?.viewControllers[0] as? ChatListViewController
+    private var chatVC: ChatContainerViewController? {
+        return chatNav?.viewControllers[0] as? ChatContainerViewController
     }
     
     private lazy var chatItem: UITabBarItem = {
@@ -99,7 +99,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         let walletOptionsNav = WalletsContainerViewController.navInstance()
         
-        let chatNav = ChatListViewController.navInstance(from: ())
+        let chatNav = ChatContainerViewController.navInstance(from: ())
         let settingsNav = SettingMenuViewController.navInstance()
         
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem

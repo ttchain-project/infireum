@@ -38,8 +38,7 @@ struct GroupListSectionModel: SectionModelType {
 class GroupChatListViewModel: KLRxViewModel {
     
     struct Input {
-        var searchTextInOut:ControlProperty<String?>
-        var searchModeStatus:BehaviorRelay<Bool>
+        var searchTextInOut:Driver<String>
     }
     
     required init(input: Input, output: Void) {
@@ -75,7 +74,7 @@ class GroupChatListViewModel: KLRxViewModel {
             
             let (groupListArray, groupRequestListArray,searchText) = arg
            
-            if let searchText = searchText, searchText.count > 0 {
+            if searchText.count > 0 {
                 let filterGroupListArray = groupListArray.filter { $0.groupName.localizedCaseInsensitiveContains(searchText) }
                 let filterGroupRequestArray = groupRequestListArray.filter { $0.groupName.localizedCaseInsensitiveContains(searchText) }
                 return  [GroupListSectionModel.init(title: LM.dls.group_request_title, items: filterGroupRequestArray),

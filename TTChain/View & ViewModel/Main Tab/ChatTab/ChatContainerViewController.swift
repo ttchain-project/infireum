@@ -24,9 +24,14 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
     typealias ViewModel = ChatTabViewModel
     var viewModel: ChatContainerViewController.ViewModel!
     func config(constructor: Void) {
+        self.view.layoutIfNeeded()
+        self.hideDefaultNavBar()
+        self.navigationController?.isNavigationBarHidden = true
+
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
-        
+        self.bindUI()
+        self.handleSelection(forTab: .Message)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,25 +66,55 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
     }
     
     func bindUI() {
-        
+        self.messagesButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            if self.messagesButton.isSelected {
+                return
+            }
+            self.handleSelection(forTab: .Message)
+        }).disposed(by: bag)
+        self.friendsButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            if self.friendsButton.isSelected {
+                return
+            }
+            self.handleSelection(forTab: .Friends)
+        }).disposed(by: bag)
+        self.groupsButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            if self.groupsButton.isSelected {
+                return
+            }
+            self.handleSelection(forTab: .Groups)
+        }).disposed(by: bag)
     }
     
     func handleSelection(forTab tab:ChatTabs) {
         self.currentTab = tab
+        self.messagesButton.isSelected = false
+        self.groupsButton.isSelected = false
+        self.friendsButton.isSelected = false
         switch tab {
         case .Message:
+            self.messagesButton.isSelected = true
             configureChildView(forVC: self.getChatListViewController())
             DLogDebug()
         case .Friends:
-            DLogDebug()
+            self.friendsButton.isSelected = true
+            configureChildView(forVC: self.getFriendListController())
+
         case .Groups:
-            DLogDebug()
+            self.groupsButton.isSelected = true
+            configureChildView(forVC: self.getGroupListController())
         }
     }
     
-    func getChatListViewController() -> ChatListViewController{
-        let vc = ChatListViewController.instance(from: ())
+    func getChatListViewController() -> ChatMessageListViewController{
+        let vc = ChatMessageListViewController.instance()
         return vc
+    }
+    func getFriendListController() -> ChatPersonListViewController {
+        return ChatPersonListViewController.instance()
+    }
+    func getGroupListController() -> ChatGroupListViewController {
+        return ChatGroupListViewController.instance()
     }
     func configureChildView(forVC vc:UIViewController) {
         if self.childViewControllers.count > 0 {

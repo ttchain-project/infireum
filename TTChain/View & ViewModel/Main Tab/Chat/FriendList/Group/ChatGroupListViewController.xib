@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatGroupListViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
+                <outlet property="searchBar" destination="II9-gT-LCd" id="DbG-83-Sy8"/>
                 <outlet property="tableView" destination="loy-bz-Gle" id="hPD-8b-oo7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,19 +23,29 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="loy-bz-Gle">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <searchBar contentMode="redraw" showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="II9-gT-LCd">
+                    <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="barTintColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="II9-gT-LCd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="G7F-W8-AWo"/>
                 <constraint firstItem="loy-bz-Gle" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Jew-Rk-2tT"/>
-                <constraint firstItem="loy-bz-Gle" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="X9t-uq-p3o"/>
+                <constraint firstItem="II9-gT-LCd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UHH-Y2-B8G"/>
                 <constraint firstItem="loy-bz-Gle" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="XRY-qg-VAR"/>
                 <constraint firstItem="loy-bz-Gle" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="d91-GP-rGc"/>
+                <constraint firstItem="II9-gT-LCd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="mq4-mD-933"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="loy-bz-Gle" secondAttribute="bottom" id="pqU-RQ-bEc"/>
+                <constraint firstItem="loy-bz-Gle" firstAttribute="top" secondItem="II9-gT-LCd" secondAttribute="bottom" id="r2o-UV-V2v"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="138.98050974512745"/>
         </view>
     </objects>
 </document>

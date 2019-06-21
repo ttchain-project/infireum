@@ -26,7 +26,7 @@ class FunctionModel {
 class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var moreButton: UIButton!
-    @IBOutlet weak var sendButton: UIButton!
+//    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var textField: UITextField! {
         didSet {
             textField.placeholder = LM.dls.chat_keyboard_placeholder
@@ -44,6 +44,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     @IBOutlet weak var privateChatBannerView: UIView!
     @IBOutlet weak var privateChatDurationTitleLabel: UILabel!
+    
+    var sendButton:UIButton!
     
     enum ChatFunctionEnum : Int{
         
@@ -121,14 +123,22 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     func initTextField() {
         textField.inputView = nil
         
-
-        sendButton.setImage(#imageLiteral(resourceName: "iconSendActive"), for: .normal)
-        sendButton.setImage(#imageLiteral(resourceName: "iconSendGray"), for: .disabled)
+        self.sendButton = UIButton.init(type: .custom)
+        sendButton.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
+        sendButton.setImageForAllStates(#imageLiteral(resourceName: "iconSendActive"))
         sendButton.isEnabled = false
+        let rightView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+        rightView.addSubview(sendButton)
+        textField.rightView = rightView
+        textField.rightViewMode = .always
+        
+//        sendButton.setImageForAllStates(#imageLiteral(resourceName: "iconSendActive"))
+//        sendButton.setImage(#imageLiteral(resourceName: "iconSendGray"), for: .disabled)
+//        sendButton.isEnabled = false
         textField.rx.text
             .replaceNilWith("")
             .map { $0.count > 0 }
-            .bind(to: self.sendButton.rx.isEnabled).disposed(by: bag)
+            .bind(to: sendButton.rx.isEnabled).disposed(by: bag)
     }
     
     func initMoreButton() {
@@ -152,6 +162,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     
     func initCollectionView() {
         collectionView.register(UINib(nibName: "KeyboardFunctionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "KeyboardFunctionCollectionViewCell")
+        collectionView.backgroundColor = .yellowGreen
     }
     
     func listenKeyboardNotification() {
@@ -160,7 +171,12 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
             .from([
                 NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillShow)
                     .map { notification -> CGFloat in
-                        (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                       var keyboardHeight =  (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                        if #available(iOS 11.0, *) {
+                            let bottomInset = self.superview?.safeAreaInsets.bottom ?? 0
+                            keyboardHeight -= bottomInset
+                        }
+                        return keyboardHeight
                 },
                 NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide)
                     .map { _ -> CGFloat in
@@ -233,7 +249,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         
         inputContentViewBottomConstraint.constant = offset
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.25) {
             self.layoutIfNeeded()
         }
         

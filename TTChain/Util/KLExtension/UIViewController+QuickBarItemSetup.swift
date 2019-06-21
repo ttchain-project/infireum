@@ -180,4 +180,5 @@ extension UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear
     }
+    
 }

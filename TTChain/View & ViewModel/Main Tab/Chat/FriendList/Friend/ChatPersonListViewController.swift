@@ -14,13 +14,9 @@ import RxDataSources
 final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    struct Config {
-        var searchTextInOut: ControlProperty<String?>
-        var searchStatus: BehaviorRelay<Bool>
-    }
-    
-    typealias Constructor = Config
+    typealias Constructor = Void
     var viewModel: ChatPersonListViewModel!
     var bag: DisposeBag = DisposeBag()
     
@@ -33,9 +29,15 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
         super.viewDidAppear(animated)
     }
 
-    func config(constructor: ChatPersonListViewController.Config) {
+    func config(constructor: Void) {
         self.view.layoutSubviews()
-        viewModel = ViewModel.init(input: ChatPersonListViewModel.InputSource(searchTextInOut: constructor.searchTextInOut,searchModeStatus:constructor.searchStatus), output: ())
+        
+        let searchDriver = Observable.combineLatest(
+            self.searchBar.rx.text,
+            self.searchBar.rx.textDidEndEditing.startWith(())
+            ).map {_ in return self.searchBar.text ?? ""}.distinctUntilChanged().asDriver(onErrorJustReturn: "")
+        
+        viewModel = ViewModel.init(input: ChatPersonListViewModel.InputSource(searchTextInOut: searchDriver), output: ())
         self.bindTableView()
         initTableView()
         startMonitorLangIfNeeded()
@@ -46,12 +48,11 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
         tableView.register(InviteTableViewCell.nib, forCellReuseIdentifier: InviteTableViewCell.nameOfClass)
         tableView.register(FriendTableViewCell.nib, forCellReuseIdentifier: FriendTableViewCell.nameOfClass)
         tableView.backgroundColor = .clear
-        tableView.delegate = self
+//        tableView.delegate = self
         
-        // didSelected
-        tableView.rx.itemSelected.subscribe(onNext: { (indexPath) in
-            self.tableView.deselectRow(at: indexPath, animated: true)
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: bag)
+        self.searchBar.rx.cancelButtonClicked.asDriver().drive(onNext: { _ in
+            self.searchBar.endEditing(true)
+        }).disposed(by: bag)
     }
     
     func bindTableView() {
@@ -82,12 +83,12 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
             case 0:
                 let model = self.viewModel.friendRequestList.value[indexPath.row]
                 let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.notMyFriend, user: model)
-                let viewController = UserProfileViewController.instance(from: config)
-                self.navigationController?.pushViewController(viewController)
+                let viewController = UserProfileViewController.navInstance(from: config)
+                self.present(viewController, animated: true)
             case 1:
                 let model = self.viewModel.friendsList.value[indexPath.row]
-                let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: RoomType.pvtChat, chatTitle: model.nickName, roomID: model.roomId,chatAvatar:model.avatarUrl, uid: model.uid,entryPoint:.chatList))
-                    self.navigationController?.pushViewController(vc)
+                let viewController = ChatViewController.navInstance(from: ChatViewController.Config(roomType: RoomType.pvtChat, chatTitle: model.nickName, roomID: model.roomId,chatAvatar:model.avatarUrl, uid: model.uid,entryPoint:.chatList))
+                self.present(viewController, animated: true)
             default:
                 print("chat person item selected wron index")
             }
@@ -102,13 +103,7 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderTheme(_ theme: Theme) {
-        let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-        statusBarView.backgroundColor = .white
-        view.addSubview(statusBarView)
-        
         view.backgroundColor = theme.palette.bgView_main
-        tabBarController?.hidesBottomBarWhenPushed = true
-
     }
     override func renderLang(_ lang: Lang) {
         

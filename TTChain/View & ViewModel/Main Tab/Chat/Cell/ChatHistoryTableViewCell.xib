@@ -20,34 +20,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ChT-U7-MAW">
-                        <rect key="frame" x="16" y="26" width="52" height="52"/>
+                        <rect key="frame" x="16" y="32" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="52" id="o0J-L8-9NH"/>
+                            <constraint firstAttribute="height" constant="40" id="o0J-L8-9NH"/>
                             <constraint firstAttribute="width" secondItem="ChT-U7-MAW" secondAttribute="height" multiplier="1:1" id="v6g-Dj-zN3"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uJ-yh-xti">
-                        <rect key="frame" x="86" y="18" width="216" height="67.5"/>
+                        <rect key="frame" x="74" y="9" width="228" height="85.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Hopeseed 官方帐号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-YE-NoA">
-                                <rect key="frame" x="0.0" y="5" width="160" height="42.5"/>
+                                <rect key="frame" x="0.0" y="5" width="160" height="60.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您好，欢迎来到HopeSeed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsu-eU-Ufw">
-                                <rect key="frame" x="0.0" y="50.5" width="196" height="17"/>
+                                <rect key="frame" x="0.0" y="68.5" width="208" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上午 11:45" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jl-Pq-reA">
-                                <rect key="frame" x="158" y="0.0" width="58" height="14.5"/>
+                                <rect key="frame" x="170" y="0.0" width="58" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9q9-Az-bl5">
-                                <rect key="frame" x="201" y="20.5" width="15" height="15"/>
+                                <rect key="frame" x="213" y="20.5" width="15" height="15"/>
                                 <color key="backgroundColor" red="0.90980392156862744" green="0.32941176470588235" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -75,8 +75,8 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="8uJ-yh-xti" secondAttribute="bottom" constant="18" id="4lP-Q1-uTI"/>
-                    <constraint firstItem="8uJ-yh-xti" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="Iib-GK-Jdb"/>
+                    <constraint firstAttribute="bottom" secondItem="8uJ-yh-xti" secondAttribute="bottom" constant="9" id="4lP-Q1-uTI"/>
+                    <constraint firstItem="8uJ-yh-xti" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="Iib-GK-Jdb"/>
                     <constraint firstAttribute="trailing" secondItem="8uJ-yh-xti" secondAttribute="trailing" constant="18" id="Ldt-w7-yoY"/>
                     <constraint firstItem="8uJ-yh-xti" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YDy-qa-9sk"/>
                     <constraint firstItem="ChT-U7-MAW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="au0-bR-DZu"/>
