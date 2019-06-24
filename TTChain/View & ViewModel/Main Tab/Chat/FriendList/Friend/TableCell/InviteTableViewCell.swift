@@ -43,19 +43,19 @@ class InviteTableViewCell: UITableViewCell {
         rejectButton.layer.cornerRadius = 3.0
         acceptButton.layer.cornerRadius = 3.0
         
-        selectionStyle = .none
+//        selectionStyle = .none
         
         initButton()
         
         let palette = TM.palette
         
-        self.nameLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 18))
+        self.nameLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
         self.resumeLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 14))
         self.backgroundColor = .clear
         
         self.acceptButton.setTitle(LM.dls.accept_request, for: .normal)
         self.rejectButton.setTitle(LM.dls.reject_request, for: .normal)
-
+//        self.selectionStyle = .none
     }
 
     func config(friendRequestModel: FriendRequestInformationModel?,

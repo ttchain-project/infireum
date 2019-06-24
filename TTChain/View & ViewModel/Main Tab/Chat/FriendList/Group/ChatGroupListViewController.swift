@@ -19,28 +19,32 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
         var searchStatus: BehaviorRelay<Bool>
     }
     
-    typealias Constructor = Config
+    typealias Constructor = Void
 
     //
     @IBOutlet weak var tableView: UITableView!
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     //
     private let refresher = UIRefreshControl.init()
 
     var viewModel: GroupChatListViewModel!
     var bag: DisposeBag = DisposeBag()
     
-//    var items: [UserGroupInfoModelSection] = []
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    func config(constructor: ChatGroupListViewController.Config) {
+    func config(constructor: Void) {
         self.view.layoutIfNeeded()
-        viewModel = ViewModel.init(input:ViewModel.InputSource(searchTextInOut: constructor.searchTextInOut,searchModeStatus:constructor.searchStatus), output: ())
+        let searchDriver = Observable.combineLatest(
+            self.searchBar.rx.text,
+            self.searchBar.rx.textDidEndEditing.startWith(())
+            ).map {_ in return self.searchBar.text ?? ""}.distinctUntilChanged().asDriver(onErrorJustReturn: "")
+
+        
+        viewModel = ViewModel.init(input:ViewModel.InputSource(searchTextInOut: searchDriver), output: ())
         self.bindTableView()
         initTableView()
         startMonitorLangIfNeeded()
@@ -59,6 +63,10 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
             self.chatSelected(forModel: group)
             self.tableView.deselectRow(at: indexPath, animated: true)
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: bag)
+        
+        self.searchBar.rx.cancelButtonClicked.asDriver().drive(onNext: { _ in
+            self.searchBar.endEditing(true)
+        }).disposed(by: bag)
     }
     
     func bindTableView() {
@@ -102,8 +110,8 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
     }
     
     private func chatSelected(forModel model: UserGroupInfoModel) {
-        let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: model.isPrivate ? .group : .channel, chatTitle: model.groupName, roomID: model.imGroupId, chatAvatar: model.headImg, uid: nil,entryPoint:.chatList))
-        show(vc, sender: self)
+        let vc = ChatViewController.navInstance(from: ChatViewController.Config(roomType: model.isPrivate ? .group : .channel, chatTitle: model.groupName, roomID: model.imGroupId, chatAvatar: model.headImg, uid: nil,entryPoint:.chatList))
+        present(vc, animated: true)
     }
 }
 

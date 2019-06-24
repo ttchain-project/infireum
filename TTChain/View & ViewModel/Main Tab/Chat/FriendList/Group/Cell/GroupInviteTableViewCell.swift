@@ -42,8 +42,7 @@ class GroupInviteTableViewCell: UITableViewCell {
         let palette = TM.palette
         
         self.separatorView.backgroundColor = palette.sepline
-        self.titleLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 18))
-        selectionStyle = .none
+        self.titleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
         self.backgroundColor = .clear
         
         self.acceptButton.setTitle(LM.dls.accept_request, for: .normal)

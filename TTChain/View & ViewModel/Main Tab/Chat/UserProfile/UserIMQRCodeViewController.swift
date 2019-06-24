@@ -73,6 +73,8 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
         doneButton.setPureText(color: palette.btn_bgFill_enable_text,
                                font: .owRegular(size: 14),
                                backgroundColor: palette.btn_bgFill_enable_bg)
+        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
     }
     
     func config(constructor: UserIMQRCodeViewController.Config) {

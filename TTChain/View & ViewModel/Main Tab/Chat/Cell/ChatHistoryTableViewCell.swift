@@ -23,6 +23,9 @@ class ChatHistoryTableViewCell: UITableViewCell {
         // Initialization code
         selectionStyle = .none
         backgroundColor = .clear
+        self.titleLabel.set(textColor: TM.palette.label_main_1, font: .owRegular(size: 14))
+        self.dateLabel.set(textColor: TM.palette.label_main_1, font: .owRegular(size: 11))
+        self.descriptionLabel.set(textColor: TM.palette.label_sub, font: .owRegular(size: 12))
         self.coverImageView.cornerRadius = coverImageView.frame.height/2
     }
     
@@ -54,7 +57,7 @@ class ChatHistoryTableViewCell: UITableViewCell {
         if calendar.isDateInToday(date) {
             return date.timeString()
         } else {
-            return date.dateString()
+            return date.dateString(ofStyle: DateFormatter.Style.short)
         }
     }
     

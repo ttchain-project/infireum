@@ -16,6 +16,7 @@ class KeyboardFunctionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = .yellowGreen
     }
 
 }

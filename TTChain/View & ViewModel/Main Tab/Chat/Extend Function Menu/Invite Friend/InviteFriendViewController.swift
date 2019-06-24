@@ -72,6 +72,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         tabBarController?.tabBar.isHidden = true
         textField.text = String()
         startMonitorLangIfNeeded()
+        startMonitorThemeIfNeeded()
         qrcodeButton.rx.tap.asDriver().drive(onNext: { (button) in
             let qrCode = OWQRCodeViewController.navInstance(from: OWQRCodeViewController._Constructor(
                 purpose: .userId,
@@ -117,7 +118,11 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         self.titleLabel.text = lang.dls.account
         self.confirmButton.setTitle(lang.dls.g_confirm, for: .normal)
     }
-    
+    override func renderTheme(_ theme: Theme) {
+        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
+        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
+
+    }
     func showStep1AlertDialog() {
         let alertController = UIAlertController.init(title: LM.dls.add_friend_alert_title, message: LM.dls.add_friend_alert_message, preferredStyle: .alert)
         

@@ -90,9 +90,9 @@ final class FriendsListViewController: TabmanViewController, RxThemeRespondable,
     }
     
     private func createPages() -> [UIViewController] {
-        let vc1 = ChatPersonListViewController.instance(from: ChatPersonListViewController.Config(searchTextInOut: self.configVar.searchTextInOut,searchStatus:self.configVar.searchStatus))
+        let vc1 = ChatPersonListViewController.instance()
 
-        let vc2 = ChatGroupListViewController.instance(from: ChatGroupListViewController.Config(searchTextInOut: self.configVar.searchTextInOut,searchStatus:self.configVar.searchStatus))
+        let vc2 = ChatGroupListViewController.instance()
         return [vc1, vc2]
     }
     

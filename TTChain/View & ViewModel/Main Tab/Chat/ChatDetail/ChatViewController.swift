@@ -149,9 +149,9 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 18))
         changeNavShadowVisibility(true)
-        tableView.backgroundColor = palette.nav_bg_clear
+        tableView.backgroundColor = UIColor.CSS.whiteSmoke
         changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: palette.nav_item_2, image:#imageLiteral(resourceName: "arrowNavBlack") )
-        self.viewToHideKeyboard.backgroundColor = palette.bgView_main
+        self.viewToHideKeyboard.backgroundColor = palette.btn_bgFill_enable_bg2
         
         navigationItem.rightBarButtonItems = viewModel.input.roomType == .channel ? [profileBarButtonButton,qrCodeBarButton] : [profileBarButtonButton]
         navigationItem.rightBarButtonItem?.tintColor = palette.nav_item_2
@@ -373,12 +373,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     @objc func backButtonTapped() {
 //        self.viewModel.postChatSection()
         self.viewModel.timerSub?.dispose()
-        
-        if self.chatEntryPoint == .notification {
-            self.dismiss(animated: true, completion: nil)
-        }else {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.dismiss(animated: true, completion: nil)
+
     }
     
     func initKeyboardView() {
@@ -390,7 +386,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                 }
                                 self.view.setNeedsLayout()
                                 self.keyboardViewHeight.constant = value
-                                UIView.animate(withDuration: 0.3, animations: {
+                                UIView.animate(withDuration: 0.25, animations: {
                                     self.view.layoutIfNeeded()
                                 })
                             }, onSelectChatFunction: { [unowned self]function in

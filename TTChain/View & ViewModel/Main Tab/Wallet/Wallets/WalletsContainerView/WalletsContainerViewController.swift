@@ -28,11 +28,12 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
     func config(constructor: Void) {
         self.view.layoutIfNeeded()
         self.hideDefaultNavBar()
+        self.navigationController?.isNavigationBarHidden = true
+
         self.viewModel = ViewModel.init(input: WalletsContainerViewModel.InputSource(), output: WalletsContainerViewModel.OutputSource())
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
         self.bindUI()
-        self.navigationController?.isNavigationBarHidden = true
         self.handleButtonSelection(childType: self.selectedChild)
     }
     override func viewDidLoad() {

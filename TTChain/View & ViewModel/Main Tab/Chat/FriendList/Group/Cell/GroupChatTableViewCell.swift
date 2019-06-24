@@ -29,7 +29,7 @@ class GroupChatTableViewCell: UITableViewCell {
         avatarImageView.cornerRadius = 15.0
         avatarImageView.clipsToBounds = true
         let palette = TM.palette
-        self.titleLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 21))
+        self.titleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
         self.separatorView.backgroundColor = palette.sepline
         self.backgroundColor = .clear
         

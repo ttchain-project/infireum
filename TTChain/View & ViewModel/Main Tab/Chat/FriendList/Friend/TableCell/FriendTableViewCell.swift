@@ -32,8 +32,9 @@ class FriendTableViewCell: UITableViewCell {
         avatarImageView.clipsToBounds = true
         let palette = TM.palette
         self.separatorView.backgroundColor = palette.sepline
-        self.descriptionLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 21))
+        self.descriptionLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
         self.backgroundColor = .clear
+//        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

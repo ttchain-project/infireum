@@ -29,8 +29,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     }
     
     private lazy var walletItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: LM.dls.tab_wallet, image: #imageLiteral(resourceName: "wallet1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "wallet2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
-//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "wallet1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "wallet2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
 
         return item
     }()
@@ -43,20 +43,20 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
     private lazy var tradeItem: UITabBarItem = {
         let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "tt_tab_icon").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "tt_tab_icon").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
 
-//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
     
     private var tradeButton:UIButton!
     //MARK: = Chat
     private weak var chatNav: UINavigationController?
-    private var chatVC: ChatListViewController? {
-        return chatNav?.viewControllers[0] as? ChatListViewController
+    private var chatVC: ChatContainerViewController? {
+        return chatNav?.viewControllers[0] as? ChatContainerViewController
     }
     
     private lazy var chatItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: LM.dls.tab_chat, image: #imageLiteral(resourceName: "chat1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "chat2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
-//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "chat1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "chat2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         
         return item
     }()
@@ -68,8 +68,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return exploreNav?.viewControllers[0] as? ExploreViewController
     }
     private lazy var exploreItem: UITabBarItem = {
-            let item = UITabBarItem.init(title: LM.dls.tab_explorer, image: #imageLiteral(resourceName: "find1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "find2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
-//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+            let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "find1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "find2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
         //MARK: = Setting
@@ -79,8 +79,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         return settingNav?.viewControllers[0] as? SettingMenuViewController
     }
     private lazy var settingItem: UITabBarItem = {
-        let item = UITabBarItem.init(title: LM.dls.tab_setting, image: #imageLiteral(resourceName: "setup1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "setup2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
-//        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
+        let item = UITabBarItem.init(title: "", image: #imageLiteral(resourceName: "setup1").withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: #imageLiteral(resourceName: "setup2").withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+        item.imageInsets = UIEdgeInsetsMake(10, 0, -10, 0)
         return item
     }()
     
@@ -90,25 +90,31 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         
         // Do any additional setup after loading the view.
         
+        //        let configForMainWallet = MainWalletViewController.Config.init(entryPoint: .MainTab, wallet: WalletFinder.getWallet(), source:.ETH)
         
         let tradeNav: UINavigationController = LightTransMenuViewController.navInstance(from: LightTransMenuViewController.Config())
+        //        let meVC: MeViewController = MeViewController.instance()
+        
         let exploreNav : UINavigationController = ExploreViewController.navInstance()
+        
         let walletOptionsNav = WalletsContainerViewController.navInstance()
-        let chatNav = ChatListViewController.navInstance(from: ())
+        
+        let chatNav = ChatContainerViewController.navInstance(from: ())
         let settingsNav = SettingMenuViewController.navInstance()
         
         walletOptionsNav.viewControllers[0].tabBarItem = walletItem
         tradeNav.viewControllers[0].tabBarItem = tradeItem
         exploreNav.viewControllers[0].tabBarItem = exploreItem
+        
         chatNav.viewControllers[0].tabBarItem = chatItem
         settingsNav.viewControllers[0].tabBarItem = settingItem
         
         self.walletOptionNav = walletOptionsNav
         self.chatNav = chatNav
+        
         self.tradeNav = tradeNav
         self.exploreNav = exploreNav
         self.settingNav = settingsNav
-        
         viewControllers = [
             walletOptionsNav,
             chatNav,
@@ -125,13 +131,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         self.tabBar.barTintColor =  UIColor.white
         self.view.backgroundColor = .owCharcoalGrey
         
-        monitorLang { [unowned self] (lang) in
-            let dls = lang.dls
-            self.walletItem.title = dls.tab_wallet
-            self.chatItem.title = dls.tab_chat
-            self.exploreItem.title = dls.tab_explorer
-            self.settingItem.title = dls.tab_setting
-        }
+  
+//        self.addTTICon()
     }
     
     override func viewDidLayoutSubviews() {

@@ -728,5 +728,6 @@ struct DLS_EN_US: DLS {
         return String.init(format: "%@ tranfer record", arguments: args)
     }
 
+    var chat_msg_tab_title:String = "Message"
 }
 

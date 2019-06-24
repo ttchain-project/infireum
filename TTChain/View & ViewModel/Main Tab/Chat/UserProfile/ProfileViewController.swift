@@ -108,13 +108,16 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderLang(_ lang: Lang) {
+        
         self.saveButton.setTitle(lang.dls.ab_update_btn_save, for: .normal)
         self.userNameTextField.placeholder = lang.dls.myIdentity_label_name
         self.recoveryPasswordButton.setTitle(lang.dls.user_profile_transfer_account, for: .normal)
     }
     
     override func renderTheme(_ theme: Theme) {
-        
+        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
+        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
+
         self.saveButton.backgroundColor = theme.palette.application_main
         self.recoveryPasswordButton.backgroundColor = theme.palette.application_main
         

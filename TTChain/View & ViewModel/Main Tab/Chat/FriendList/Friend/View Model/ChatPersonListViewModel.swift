@@ -55,8 +55,8 @@ extension FriendsSectionModel {
 class ChatPersonListViewModel: KLRxViewModel {
    
     struct Input {
-        var searchTextInOut:ControlProperty<String?>
-        var searchModeStatus:BehaviorRelay<Bool>
+        var searchTextInOut:Driver<String>
+//        var searchModeStatus:BehaviorRelay<Bool>
     }
     var input: InputSource
     
@@ -82,7 +82,7 @@ class ChatPersonListViewModel: KLRxViewModel {
 
             return Observable.combineLatest(friendsList.asObservable(),friendRequestList.asObservable(),self.input.searchTextInOut.asObservable()).map { (arg) -> [FriendsSectionModel] in
                 let (friendListArray, friendRequestListArray,searchText) = arg
-                if let searchText = searchText, searchText.count > 0 {
+                if searchText.count > 0 {
                     let filterFriendsListArray = friendListArray.filter { $0.nickName.localizedCaseInsensitiveContains(searchText) }
                     let filterFriendRequestArray = friendRequestListArray.filter { $0.nickName.localizedCaseInsensitiveContains(searchText) }
                     
