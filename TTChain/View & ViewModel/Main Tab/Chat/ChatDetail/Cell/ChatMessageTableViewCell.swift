@@ -47,20 +47,20 @@ class ChatMessageTableViewCell: UITableViewCell, Rx {
         leftAvatarImageView.layer.cornerRadius = 20.0
         leftAvatarImageView.layer.masksToBounds = true
         leftValueContentView.backgroundColor = .white
-        leftValueContentView.layer.cornerRadius = 5.0
+        leftValueContentView.layer.cornerRadius = 16.0
         leftValueContentView.layer.masksToBounds = true
         
         rightSpeakerContentView.backgroundColor = .clear
-        rightValueContentView.backgroundColor = UIColor.init(red: 137, green: 216, blue: 128)
-        rightValueContentView.layer.cornerRadius = 5.0
+        rightValueContentView.backgroundColor = .yellowGreen
+        rightValueContentView.layer.cornerRadius = 16.0
         rightValueContentView.layer.masksToBounds = true
         
-        leftDateLabel.set(textColor: .black, font: .owMedium(size: 14))
-        senderNameLabel.set(textColor: .black, font: .owDemiBold(size: 16))
-        rightDateLabel.set(textColor: .black, font: .owMedium(size: 14))
+        leftDateLabel.set(textColor: TM.palette.label_sub, font: .owMedium(size: 12))
+        senderNameLabel.set(textColor: TM.palette.label_sub, font: .owDemiBold(size: 12))
+        rightDateLabel.set(textColor: TM.palette.label_sub, font: .owMedium(size: 12))
         
-        leftMessageLabel.set(textColor: .black,font :.owRegular(size: 18))
-        rightMessageLabel.set(textColor: .black,font :.owRegular(size: 18))
+        leftMessageLabel.set(textColor: .black,font :.owRegular(size: 14))
+        rightMessageLabel.set(textColor: .white,font :.owRegular(size: 14))
         
         self.selectMessageButtonWidth.constant = 0
 

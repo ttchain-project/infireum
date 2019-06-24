@@ -149,7 +149,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 18))
         changeNavShadowVisibility(true)
-        tableView.backgroundColor = palette.nav_bg_clear
+        tableView.backgroundColor = UIColor.CSS.whiteSmoke
         changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: palette.nav_item_2, image:#imageLiteral(resourceName: "arrowNavBlack") )
         self.viewToHideKeyboard.backgroundColor = palette.btn_bgFill_enable_bg2
         

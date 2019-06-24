@@ -80,7 +80,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         self.output = output
         
         if self.input!.roomType == .pvtChat {
-            self.functions.append(contentsOf:[FunctionModel.init(title: LM.dls.chat_secret_setting, image: UIImage(named: "iconSecretColor"), type: .startSecretChat),
+            self.functions.append(contentsOf:[
                                   FunctionModel.init(title: LM.dls.chat_room_audio_call, image: #imageLiteral(resourceName: "iconCallColor"), type: .makeAudioCall)]
             )
             self.collectionView.reloadData()

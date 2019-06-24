@@ -224,7 +224,9 @@ class GroupInformationViewController: UIViewController {
         super.viewDidLoad()
         setUpRx()
         //Hiding the public private groupselection view
-        
+        let palette = TM.palette
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
+        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
         self.groupTypeStackView.isHidden = true
     }
     

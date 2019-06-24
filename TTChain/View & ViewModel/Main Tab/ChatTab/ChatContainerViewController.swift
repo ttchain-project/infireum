@@ -84,6 +84,33 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
             }
             self.handleSelection(forTab: .Groups)
         }).disposed(by: bag)
+        
+        self.createButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            switch self.currentTab! {
+            case .Friends:
+                let vc = InviteFriendViewController.navInstance()
+                self.navigationController?.present(vc, animated: true, completion: nil)
+            case .Groups:
+                let viewModel = GroupInformationViewModel()
+                let navController = UINavigationController.init(rootViewController:GroupInformationViewController.init(viewModel: viewModel))
+                self.navigationController?.present(navController, animated: true, completion: nil)
+            default:
+                return
+            }
+        }).disposed(by: bag)
+        
+        self.scanQRCodeButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            guard let uid = IMUserManager.manager.userModel.value?.uID else {
+                return
+            }
+            let vc = UserIMQRCodeViewController.navInstance(from: UserIMQRCodeViewController.Config(uid:uid, title:LM.dls.myQRCode))
+            self.navigationController?.present(vc,animated:true,completion: nil)
+        }).disposed(by: bag)
+        
+        self.profileButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            let viewController = ProfileViewController.navInstance()
+            self.navigationController?.present(viewController, animated: true, completion: nil)
+        }).disposed(by: bag)
     }
     
     func handleSelection(forTab tab:ChatTabs) {
@@ -91,11 +118,12 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         self.messagesButton.isSelected = false
         self.groupsButton.isSelected = false
         self.friendsButton.isSelected = false
+        self.createButton.isHidden = false
         switch tab {
         case .Message:
             self.messagesButton.isSelected = true
             configureChildView(forVC: self.getChatListViewController())
-            DLogDebug()
+            self.createButton.isHidden = true
         case .Friends:
             self.friendsButton.isSelected = true
             configureChildView(forVC: self.getFriendListController())
