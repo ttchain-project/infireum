@@ -41,6 +41,17 @@ class TTTabManButton: TMBarButton {
         
     }
     
+    var selectedBackgroundColor: UIColor! = UIColor.yellowGreen {
+        didSet {
+            update(for: self.selectionState)
+        }
+    }
+    var unselectedbackgroundColor: UIColor = .clear {
+        didSet {
+            update(for: self.selectionState)
+        }
+    }
+    
     override func layoutSubviews() {
         self.bgView.layoutIfNeeded()
         self.titleLabel.layoutIfNeeded()
@@ -53,13 +64,9 @@ class TTTabManButton: TMBarButton {
     }
     
     override func update(for selectionState: TMBarButton.SelectionState) {
-        switch selectionState {
-        case .selected:
-            bgView.backgroundColor = UIColor.yellowGreen
-         DLogInfo()
-        default:
-            bgView.backgroundColor = .clear
-         DLogInfo()
-        }
+        
+        let transitionColor = self.unselectedbackgroundColor.interpolate(with:self.selectedBackgroundColor,percent:selectionState.rawValue)
+        bgView.backgroundColor  = transitionColor
+        DLogInfo(selectionState)
     }
 }
