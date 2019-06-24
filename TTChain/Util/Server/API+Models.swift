@@ -249,6 +249,7 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                     let usdtBal = Decimal.init(string:tokenDict["usdtn"]?.string ?? "") ?? 0
                     let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
                     let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
+                    let elxrBal = Decimal.init(string:tokenDict["exr"]?.string ?? "") ?? 0
                     
                     switch sourceAPI.asset.coinID {
                     case Coin.usdtn_identifier:
@@ -257,6 +258,9 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                         self.balanceInCoin = btcnBal * rateToCoinUnit
                     case Coin.ethn_identifier:
                         self.balanceInCoin = ethnBal * rateToCoinUnit
+                    case Coin.exr_identifier:
+                        self.balanceInCoin = elxrBal * rateToCoinUnit
+
                     default:
                         self.balanceInCoin = 0
                     }
@@ -1695,12 +1699,13 @@ struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
         let ttnBalance:Decimal
         let usdtnBalance:Decimal
         let ethnBalance:Decimal
+        let exrBalance:Decimal
         let btcnBalance:Decimal
     }
     var balance:Balance!
     init(json: JSON, sourceAPI: API) throws {
         guard let ttnBalanceStr = json["Balance"].string, let ttnBal = Decimal.init(string: ttnBalanceStr) else {
-            balance = Balance.init(ttnBalance: 0, usdtnBalance: 0, ethnBalance: 0, btcnBalance: 0)
+            balance = Balance.init(ttnBalance: 0, usdtnBalance: 0, ethnBalance: 0, exrBalance: 0, btcnBalance: 0)
             return
         }
         let tokenDict = json["Token"].dictionary ?? [:]
@@ -1717,8 +1722,9 @@ struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
         let usdtBal = Decimal.init(string:tokenDict["usdtn"]?.string ?? "") ?? 0
         let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
         let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
+        let exrBal = Decimal.init(string:tokenDict["exr"]?.string ?? "") ?? 0
         
-        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnitBTCN, ethnBalance: ethnBal*rateToCoinUnit, btcnBalance: btcnBal*rateToCoinUnitBTCN)
+        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnitBTCN, ethnBalance: ethnBal*rateToCoinUnit, exrBalance: exrBal, btcnBalance: btcnBal*rateToCoinUnitBTCN)
     }
 }
 
@@ -1893,7 +1899,7 @@ struct SignTTNTxAPI:KLMoyaAPIData {
             "crypto" : "cic",
             "balance" : transferAmt_smallestUnit.asString(digits: 0),
             "nonce" : nonce,
-            "type" : "bnn",
+            "type" : "ttn",
             "input" : input,
             "PrivateKey" : epKey ?? ""
         ]
@@ -2041,14 +2047,11 @@ struct GetTTNTxRecordsAPIModel: KLJSONMappableMoyaResponse {
             }else {
                 from = sourceAPI.address
             }
-            
-           
-            
+     
             var balance:Decimal?
             var coin:Coin?
             if let outArray = txJSON["out"].array, let outDict = outArray.first {
-                if let token = outDict["token"].string
-                {
+                if let token = outDict["token"].string {
                     balance = Decimal.init(string:outDict["balance"].string ?? "") ?? 0
                     if let input = txJSON["input"].string, input.contains(C.TTNTx.withdrawInputPrefix, caseSensitive: false) {
                         to = input.replacingOccurrences(of: C.TTNTx.withdrawInputPrefix, with: "")
@@ -2056,7 +2059,11 @@ struct GetTTNTxRecordsAPIModel: KLJSONMappableMoyaResponse {
                     if token == "btcn" {
                         coin = Coin.getCoin(ofIdentifier: Coin.btcn_identifier)!
                     }else if token == "usdtn" {
-                            coin = Coin.getCoin(ofIdentifier: Coin.usdtn_identifier)!
+                        coin = Coin.getCoin(ofIdentifier: Coin.usdtn_identifier)!
+                    }else if token == "exr" {
+                        coin = Coin.getCoin(ofIdentifier: Coin.exr_identifier)!
+                    }else if token == "ethn" {
+                        coin = Coin.getCoin(ofIdentifier: Coin.ethn_identifier)!
                     }
                 }
                 

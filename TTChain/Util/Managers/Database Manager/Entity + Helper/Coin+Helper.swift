@@ -194,7 +194,6 @@ extension Coin {
     }
     
     var iconImg: UIImage? {
-        guard let _icon = icon as Data? else { return #imageLiteral(resourceName: "iconListNoimage") }
         switch self.identifier {
         case Coin.ttn_identifier:
             return #imageLiteral(resourceName: "ttn_coin_icon")
@@ -204,10 +203,13 @@ extension Coin {
             return #imageLiteral(resourceName: "ethn_coin_icon")
         case Coin.usdtn_identifier:
             return #imageLiteral(resourceName: "usdtn_coin_icon")
+        case Coin.exr_identifier:
+            return #imageLiteral(resourceName: "exr_coin_icon_white")
         default:
-            return UIImage.init(data: _icon, scale: 1)
+            break
         }
-
+        guard let _icon = icon as Data? else { return #imageLiteral(resourceName: "iconListNoimage") }
+        return UIImage.init(data: _icon, scale: 1)
     }
     
     static func createConstructorsFromServerAPIModelSources(_ sources: [CoinsAPIModel.CoinSource]) -> [ManagedObejctConstructor<Coin>] {
@@ -422,6 +424,9 @@ extension Coin {
     }
     static var usdtn_identifier:String {
         return "Identifier_USDTN"
+    }
+    static var exr_identifier:String {
+        return "Identifier_EXR"
     }
 }
 

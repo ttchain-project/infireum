@@ -116,7 +116,6 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         feeVC.didMove(toParentViewController: self)
         self.feeVC = feeVC
         self.feeInfoProvider = feeVC.viewModel
-//        isInfoDisplayed = feeVC.viewModel.isInfoDisplayed
         scrollView.addSubview(feeVC.view)
 
         remarkNoteVC = LightWithdrawNoteViewController.instance(from: LightWithdrawNoteViewController.Config())

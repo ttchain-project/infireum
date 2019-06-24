@@ -90,16 +90,19 @@ class LightTransMenuTableViewCell: UITableViewCell {
             depositAction(asset)
         }).disposed(by: disposeBag)
         
-        if asset.coinID == Coin.ttn_identifier {
+        if [Coin.ttn_identifier,Coin.exr_identifier].contains(asset.coinID) {
             self.depositButton.isHidden = true
             self.transferButton.isHidden = true
+        }else {
+            self.depositButton.isHidden = false
+            self.transferButton.isHidden = false
         }
         
         if self.gradient != nil {
             return
         }
         switch asset.coinID {
-        case Coin.ethn_identifier:
+        case Coin.exr_identifier:
             self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "FFA734")!.cgColor, UIColor.init(hexString: "FFDB24")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
         case Coin.usdtn_identifier:
             self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "417C9E")!.cgColor,UIColor.init(hexString: "A6C1DC")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))

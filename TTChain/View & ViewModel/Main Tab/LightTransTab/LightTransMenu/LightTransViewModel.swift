@@ -64,14 +64,13 @@ class LightTransViewModel: KLRxViewModel {
         var _assets = [Asset]()
         _assets = Asset.getAllWalletAssetsUnderCurrenIdentity(wallet: ttnWallet, selectedOnly: true)
         let ttn = _assets.filter{ $0.coin?.identifier == Coin.ttn_identifier }.first
-        _assets = _assets.filter { [Coin.ttn_identifier,Coin.btcn_identifier,Coin.usdtn_identifier].contains($0.coin?.identifier) }
+        _assets = _assets.filter { [Coin.ttn_identifier,Coin.exr_identifier,Coin.btcn_identifier,Coin.usdtn_identifier].contains($0.coin?.identifier) }
         if let id = _assets.indices(of: ttn!).first {
             _assets.remove(at: id)
             _assets.insert(ttn!, at: 0)
         }
         self.assets.accept(_assets)
     }
-    
     
     // implemented but not used as yet.
     
@@ -102,6 +101,9 @@ class LightTransViewModel: KLRxViewModel {
                     case Coin.ethn_identifier:
                         v.accept(BehaviorRelay.init(value: balance.ethnBalance))
                         k.updateAmt(balance.ethnBalance)
+                    case Coin.exr_identifier:
+                        v.accept(BehaviorRelay.init(value: balance.exrBalance))
+                        k.updateAmt(balance.exrBalance)
                     default:
                         continue
                     }

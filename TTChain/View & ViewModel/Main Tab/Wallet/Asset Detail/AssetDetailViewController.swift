@@ -29,7 +29,8 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         
         view.layoutIfNeeded()
         tabVC = TransRecordListTabViewController.instance(of: [], asset: constructor.asset)
-        
+        self.purpose = constructor.purpose
+
         viewModel = ViewModel.init(
             input: AssetDetailViewModel.InputSource(
                 asset: constructor.asset,
@@ -56,7 +57,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     typealias ViewModel = AssetDetailViewModel
     var viewModel: AssetDetailViewModel!
     var bag: DisposeBag = DisposeBag.init()
-    
+    var purpose:AssetDetailViewController.Purpose!
     
     @IBOutlet weak var assetInfoBase: UIView!
     @IBOutlet weak var assetAmtLabel: UILabel!
@@ -84,8 +85,10 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         changeNavShadowVisibility(false)
         
         changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_bg_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
-        createCustomRightBarButton(img: #imageLiteral(resourceName: "wallet_settings"), target: self, action: #selector(toSettings))
-
+        if self.purpose == .mainWallet {
+            createCustomRightBarButton(img: #imageLiteral(resourceName: "wallet_settings"), target: self, action: #selector(toSettings))
+        }
+        
         view.backgroundColor = .white
 //        assetInfoBase.addShadow(
 //            ofColor: UIColor.init(white: 214.0/256.0, alpha: 0.5),
