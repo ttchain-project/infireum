@@ -58,63 +58,10 @@ final class ChatImageViewController: KLModuleViewController, KLVMVC {
         guard self.image != nil else {
             return
         }
-        self.attemptSavingQRCodeImg {}
-    }
-    
-    private func attemptSavingQRCodeImg(onSaved: @escaping () -> Void) {
-        DispatchQueue.main.async {
-            switch PHPhotoLibrary.authorizationStatus() {
-            case .notDetermined:
-                PHPhotoLibrary.requestAuthorization {
-                    [unowned self]
-                    (status) in
-                    self.handleUserAlbumAuthResultStatus(status)
-                }
-            case .denied, .restricted:
-                self.presentAlbumAuthorizationDeniedAlert()
-            case .authorized:
-                     self.saveImgToLocal(self.image!, onComplete: {
-                        self.view.makeToast(LM.dls.image_saved_success)
-                    })
-                
-            }
-        }
-    }
-    
-    private func handleUserAlbumAuthResultStatus(_ status: PHAuthorizationStatus) {
-        switch status {
-        case .authorized:
-            attemptSavingQRCodeImg() {}
-        case .denied, .restricted:
-            presentAlbumAuthorizationDeniedAlert()
-        case .notDetermined:
-            attemptSavingQRCodeImg() {}
-        }
-    }
-    
-    private func presentAlbumAuthorizationDeniedAlert() {
-        
-        let dls = LM.dls
-        showSimplePopUp(
-            with: dls.qrcodeProcess_alert_title_album_permission_denied,
-            contents: dls.qrcodeProcess_alert_content_album_permission_denied,
-            cancelTitle: dls.g_confirm,
-            cancelHandler: nil
-        )
-    }
-    
-    public func saveImgToLocal(_ img: UIImage,
-                               onComplete: @escaping () -> Void) {
-        
-//        let scaledImg = img.scaleImage(toSize: CGSize.init(width: 2048, height: 2048))!
-        do {
-            try PHPhotoLibrary.shared().performChangesAndWait {
-                PHAssetChangeRequest.creationRequestForAsset(from: img)
-            }
-            onComplete()
-        }
-        catch let e {
-            print(e)
-        }
+        ImageSaver.saveImage(image: image!, onViewController: self).subscribe(onSuccess: { (_) in
+            DLogInfo("Success")
+        }) { (error) in
+            DLogError(error)
+        }.disposed(by: bag)
     }
 }

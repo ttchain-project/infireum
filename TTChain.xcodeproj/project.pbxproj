@@ -227,6 +227,9 @@
 		554D2D042244F67C0004CA09 /* CreateRedEnvelopeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D2D032244F67B0004CA09 /* CreateRedEnvelopeViewModel.swift */; };
 		554D2D052244F67C0004CA09 /* CreateRedEnvelopeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D2D032244F67B0004CA09 /* CreateRedEnvelopeViewModel.swift */; };
 		554D2D062244F67C0004CA09 /* CreateRedEnvelopeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D2D032244F67B0004CA09 /* CreateRedEnvelopeViewModel.swift */; };
+		554EB36C22C1FE17008E847B /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36B22C1FE17008E847B /* ImageSaver.swift */; };
+		554EB36D22C1FE17008E847B /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36B22C1FE17008E847B /* ImageSaver.swift */; };
+		554EB36E22C1FE17008E847B /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36B22C1FE17008E847B /* ImageSaver.swift */; };
 		5559CADB228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADC228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADD228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
@@ -2289,6 +2292,7 @@
 		554D2CFB2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		554D2CFC2244CE6A0004CA09 /* CreateRedEnvelopeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateRedEnvelopeViewController.xib; sourceTree = "<group>"; };
 		554D2D032244F67B0004CA09 /* CreateRedEnvelopeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRedEnvelopeViewModel.swift; sourceTree = "<group>"; };
+		554EB36B22C1FE17008E847B /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		5559CADA228E688300D37895 /* SignETHTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignETHTransaction.swift; sourceTree = "<group>"; };
 		555A45AC22057F35004A713A /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		555A45AD22057F35004A713A /* ChatImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageViewController.xib; sourceTree = "<group>"; };
@@ -3227,6 +3231,7 @@
 			isa = PBXGroup;
 			children = (
 				5526B53F22128E7700573576 /* PhotoAuthHandler.swift */,
+				554EB36B22C1FE17008E847B /* ImageSaver.swift */,
 			);
 			path = PhotoAuth;
 			sourceTree = "<group>";
@@ -8228,6 +8233,7 @@
 				557C850822360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64083D1A21106F8B00DE1C31 /* BTCTxHandler.swift in Sources */,
 				64A1179220D5372C00797C2C /* ChainType.swift in Sources */,
+				554EB36E22C1FE17008E847B /* ImageSaver.swift in Sources */,
 				55340302224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				55EF6B7621A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
 				64C9D4A42101BF53000B0774 /* OWQRCodeParser.swift in Sources */,
@@ -8767,6 +8773,7 @@
 				557C850622360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64F43BA9210B259700982AFD /* Unspent.swift in Sources */,
 				55EF6B7421A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
+				554EB36C22C1FE17008E847B /* ImageSaver.swift in Sources */,
 				55340300224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				64C9D4B021042F6F000B0774 /* LocalAuthViewModel.swift in Sources */,
 				55EF6B0B21A812C7007E074A /* UserProfileViewController.swift in Sources */,
@@ -9299,6 +9306,7 @@
 				557C850722360FD1004C2E16 /* RTCICECandidate+JSON.m in Sources */,
 				64813A4120DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataProperties.swift in Sources */,
 				55EF6B7521A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
+				554EB36D22C1FE17008E847B /* ImageSaver.swift in Sources */,
 				55340301224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				64813A6820DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataClass.swift in Sources */,
 				55EF6B0C21A812C7007E074A /* UserProfileViewController.swift in Sources */,

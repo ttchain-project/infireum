@@ -92,7 +92,8 @@ final class TransRecordDetailViewController: KLModuleViewController,KLVMVC  {
             $0.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 15))
         }
         
-        self.toLinkButton.set(textColor: theme.palette.btn_bgFill_enable_text, font: .owMedium(size: 15), backgroundColor: UIColor.init(hexString: "EDBB4E"))
+        self.toLinkButton.set(textColor: theme.palette.btn_bgFill_enable_text, font: .owMedium(size: 15), backgroundColor: .creamCan)
+        
         self.toLinkButton.cornerRadius = self.toLinkButton.height/2
         
         self.view.backgroundColor = theme.palette.btn_bgFill_enable_bg2

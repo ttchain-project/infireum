@@ -16,6 +16,17 @@ class LightReceiptQRCodeViewController: UIViewController {
         super.viewDidLoad()
         self.setupView()
 
+        self.saveButton.rx.klrx_tap.drive(onNext:{ [unowned self] _ in
+        
+            guard let snapshot = self.qrcodeImageView.screenshot else {
+                return
+            }
+            ImageSaver.saveImage(image: snapshot, onViewController: self).subscribe(onSuccess: { _ in
+                
+            },onError:{ error in
+                DLogInfo(error)
+            }).disposed(by: self.bag)
+        }).disposed(by: bag)
         // Do any additional setup after loading the view.
     }
 
@@ -48,6 +59,11 @@ class LightReceiptQRCodeViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.backgroundColor = .creamCan
+        }
+    }
     
     var bag:DisposeBag = DisposeBag.init()
     
@@ -70,11 +86,8 @@ class LightReceiptQRCodeViewController: UIViewController {
         let pallete = ThemeManager.palette
         self.lightTransferLabel.set(textColor: .black, font: .owMedium(size:16))
         self.addressLabel.set(textColor: UIColor.owWarmGrey, font: .owMedium(size:11))
-//        renderNavBar(tint: pallete.nav_item_2, barTint: pallete.nav_bg_clear)
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         renderNavTitle(color: pallete.nav_item_2, font: .owMedium(size: 20))
         changeBackBarButton(toColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
-        
         self.navigationItem.title = LM.dls.walletOverview_btn_deposit
     }
 }

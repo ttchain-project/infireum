@@ -17,6 +17,7 @@
                 <outlet property="copuButton" destination="nIK-Md-ggA" id="ILG-T8-5Fl"/>
                 <outlet property="lightTransferLabel" destination="PJR-fj-uoP" id="W9P-aM-AH9"/>
                 <outlet property="qrcodeImageView" destination="ULf-Yx-yVk" id="bFE-hA-cVR"/>
+                <outlet property="saveButton" destination="6oN-LX-Aru" id="Ary-kV-wkB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -96,13 +97,29 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6oN-LX-Aru">
+                    <rect key="frame" x="165.5" y="543" width="44" height="44"/>
+                    <color key="backgroundColor" red="1" green="0.96078431369999995" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="evo-x1-8HK"/>
+                        <constraint firstAttribute="width" secondItem="6oN-LX-Aru" secondAttribute="height" multiplier="1:1" id="qwO-TA-v5g"/>
+                    </constraints>
+                    <state key="normal" image="btn_picture_download"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="22"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="tPY-Ki-oQJ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="L3r-K8-vWg"/>
+                <constraint firstItem="6oN-LX-Aru" firstAttribute="centerX" secondItem="tPY-Ki-oQJ" secondAttribute="centerX" id="XlC-N8-phn"/>
                 <constraint firstItem="tPY-Ki-oQJ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="cvy-AQ-pa1"/>
                 <constraint firstItem="tPY-Ki-oQJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fTD-db-GCc"/>
                 <constraint firstItem="tPY-Ki-oQJ" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="q8C-Gf-1w0"/>
+                <constraint firstItem="6oN-LX-Aru" firstAttribute="bottom" secondItem="tPY-Ki-oQJ" secondAttribute="bottom" constant="20" id="qTx-U9-mv5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="125.4872563718141"/>
@@ -110,6 +127,7 @@
     </objects>
     <resources>
         <image name="Copy" width="36" height="36"/>
+        <image name="btn_picture_download" width="72" height="72"/>
         <image name="ttn_icon_white" width="43" height="34"/>
     </resources>
 </document>

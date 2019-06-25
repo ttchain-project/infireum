@@ -138,4 +138,8 @@ extension UIColor {
     @nonobjc class var summerSky:UIColor {
         return UIColor.init(hexString: "18ADD4")!
     }
+    @nonobjc class var creamCan:UIColor {
+        return UIColor.init(hexString: "EDBB4E")!
+    }
 }
+
