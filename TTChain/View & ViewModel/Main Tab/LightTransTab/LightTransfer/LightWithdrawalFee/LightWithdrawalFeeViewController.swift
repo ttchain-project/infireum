@@ -29,6 +29,9 @@ final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC,With
         }
         
         self.minorFeeTitle.text = LM.dls.withdrawal_label_minerFee
+        let palette = TM.palette
+        minorFeeTitle.set(textColor: palette.label_main_1, font: .owRegular(size:12))
+        totalMinorFee.set(textColor: palette.label_main_1, font: .owRegular(size:14))
     }
     
     var viewModel: LightWithdrawalFeeViewModel!

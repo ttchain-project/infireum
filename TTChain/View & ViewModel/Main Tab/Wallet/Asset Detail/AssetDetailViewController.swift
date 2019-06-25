@@ -252,8 +252,11 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     
     //MARK: - Routing
     private func toDeposit(with asset: Asset) {
-        let vc = DepositViewController.navInstance(from: DepositViewController.Setup(wallet: asset.wallet!, asset: asset))
-        present(vc, animated: true, completion: nil)
+//        let vc = DepositViewController.navInstance(from: DepositViewController.Setup(wallet: asset.wallet!, asset: asset))
+        let viewModel = LightReceiptQRCodeViewModel.init(asset: asset)
+        let vc = LightReceiptQRCodeViewController.init(viewModel: viewModel)
+        self.navigationController?.pushViewController(vc)
+//        present(vc, animated: true, completion: nil)
     }
     
     private func toWithdrawal(with asset: Asset) {

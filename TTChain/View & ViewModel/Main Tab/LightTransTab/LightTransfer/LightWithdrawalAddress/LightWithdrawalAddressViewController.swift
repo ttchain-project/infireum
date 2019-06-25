@@ -73,14 +73,14 @@ final class LightWithdrawalAddressViewController: KLModuleViewController,KLVMVC 
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         
-        toAddressTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        addrbookBtn.set(textColor: palette.nav_bg_1, font: UIFont.owRegular(size: 17),backgroundColor: UIColor.init(hexString: "18ADD4"))
+        toAddressTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
+        addrbookBtn.set(textColor: palette.nav_bg_1, font: UIFont.owRegular(size: 14),backgroundColor:.summerSky)
         addrbookBtn.tintColor = .white
         addrbookBtn.cornerRadius = addrbookBtn.height/2
-        toAddressTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)
+        toAddressTextField.set(textColor: palette.input_text, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
         
-        fromAddressTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
-        fromAddressLabel.set(textColor: palette.input_text, font: .owRegular(size: 17))
+        fromAddressTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
+        fromAddressLabel.set(textColor: palette.input_text, font: .owRegular(size: 14))
         fromAddressLabel.sizeToFit()
     }
     

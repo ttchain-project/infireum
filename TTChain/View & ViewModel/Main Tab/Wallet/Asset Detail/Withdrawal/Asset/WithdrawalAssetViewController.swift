@@ -105,7 +105,6 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         let dls = lang.dls
         transferAmtTextField.set(placeholder: dls.withdrawal_placeholder_withdrawalAmt)
         transferAmountTitleLabel.text = dls.transfer_amount_title
-
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -116,8 +115,9 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
         availableAmtLabel.set(textColor: palette.label_sub, font: .owRegular(size: 12))
         transferAmtFiatValueLabel.set(textColor: palette.specific(color: .owSilver), font: .owRegular(size: 14))
         sepline.backgroundColor = palette.sepline
-        transferAllButton.set(textColor: palette.label_main_2, font: .owMedium(size: 12), text: LM.dls.transfer_all_amount, backgroundColor: palette.btn_bgFill_enable_bg)
-        infoButton.set(backgroundColor: palette.btn_bgFill_enable_bg)
+        let bgColor = self.viewModel.input.asset.wallet?.walletMainCoinID == Coin.ttn_identifier ? .summerSky : palette.btn_bgFill_enable_bg
+        transferAllButton.set(textColor: palette.label_main_2, font: .owMedium(size: 12), text: LM.dls.transfer_all_amount, backgroundColor: bgColor)
+        infoButton.set(backgroundColor: bgColor)
     }
     
     override func viewDidLoad() {

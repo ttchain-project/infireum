@@ -52,12 +52,13 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         let purpose:Purpose
     }
     
-    private var assetVC: LightWithdrawalAssetViewController!
+    private var assetVC: WithdrawalAssetViewController!
     private var addressVC: LightWithdrawalAddressViewController!
     private var feeVC: UIViewController!
-    private var remarkNoteVC : LightWithdrawNoteViewController!
+    private var remarkNoteVC : WithdrawalRemarksViewController!
     private var feeInfoProvider:LightWithdrawalFeeViewModel!
-    
+    var feeVCHeightConstraint : NSLayoutConstraint?
+
     private var purpose:Purpose!
     private lazy var hud = {
         return KLHUD.init(
@@ -71,7 +72,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     
     private func configChildViewControllers(config: Config) {
         let fiat = Identity.singleton!.fiat!
-        assetVC = LightWithdrawalAssetViewController.instance(from: LightWithdrawalAssetViewController.Config(asset:config.asset, fiat: fiat))
+        assetVC = WithdrawalAssetViewController.instance(from: WithdrawalAssetViewController.Config(asset:config.asset, fiat: fiat))
         addChildViewController(assetVC)
         assetVC.didMove(toParentViewController: self)
         scrollView.addSubview(assetVC.view)
@@ -81,15 +82,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             self.assetVC.viewModel.transferAll(withFee:feeInfo)
         }).disposed(by:bag)
         
-        constrain(assetVC.view, scrollView) { [unowned self] (view, scroll) in
-            view.top == scroll.top + 25
-            view.leading == scroll.leading
-            view.trailing == scroll.trailing
-            view.width == scroll.width
-            let height = self.assetVC.preferedHeight
-            view.height == height
-        }
-        
+       
         let toAddressCoinID = self.purpose == .ttnTransfer ? config.asset.coinID! : Coin.btc_identifier
         
         addressVC = LightWithdrawalAddressViewController.instance(from: LightWithdrawalAddressViewController.Config(asset: config.asset, toAddressCoinID: toAddressCoinID))
@@ -98,13 +91,6 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         scrollView.addSubview(addressVC.view)
         addressVC.addrbookBtn.isHidden = self.purpose == .ttnTransfer
         
-        constrain(addressVC.view, assetVC.view, scrollView) { [unowned self] (addr, asset, scroll) in
-            addr.leading == asset.leading
-            addr.trailing == asset.trailing
-            addr.top == asset.bottom + 12
-            let height = self.addressVC.preferedHeight
-            addr.height == height
-        }
         
         addressVC.onTapChangeToAddress.drive(onNext: {
             [unowned self] in
@@ -118,7 +104,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         self.feeInfoProvider = feeVC.viewModel
         scrollView.addSubview(feeVC.view)
 
-        remarkNoteVC = LightWithdrawNoteViewController.instance(from: LightWithdrawNoteViewController.Config())
+        remarkNoteVC = WithdrawalRemarksViewController.instance(from: WithdrawalRemarksViewController.Config())
 
         if self.purpose == .ttnTransfer {
             addChildViewController(remarkNoteVC)
@@ -126,41 +112,70 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             scrollView.addSubview(remarkNoteVC.view)
             
         }
+        self.setupConstraints()
+    }
+    
+    private func setupConstraints () {
         
-        constrain(feeVC.view, addressVC.view, scrollView) { (fee, addr, scroll) in
-            fee.leading == addr.leading
-            fee.trailing == addr.trailing
-            fee.top == addr.bottom + 12
-            let height = (feeVC as WithdrawalChildVC).preferedHeight
-            fee.height == height
+        constrain(assetVC.view, scrollView) { [unowned self] (view, scroll) in
+            view.top == scroll.top + 25
+            view.leading == scroll.leading
+            view.trailing == scroll.trailing
+            view.width == scroll.width
+            let height = self.assetVC.preferedHeight
+            view.height == height
+        }
+        
+        constrain(feeVC.view, assetVC.view, scrollView) {[unowned self] (fee, asset, scroll) in
+            fee.leading == asset.leading
+            fee.trailing == asset.trailing
+            fee.top == asset.bottom
+            let height = (self.feeVC as! WithdrawalChildVC).preferedHeight
+            self.feeVCHeightConstraint = (fee.height == height)
+        }
+//        constrain(addressVC.view, assetVC.view, scrollView) { [unowned self] (addr, asset, scroll) in
+//            addr.leading == asset.leading
+//            addr.trailing == asset.trailing
+//            addr.top == asset.bottom + 12
+//            let height = self.addressVC.preferedHeight
+//            addr.height == height
+//        }
+//
+        
+        constrain(addressVC.view, feeVC.view, scrollView) { (address, fee, scroll) in
+            address.leading == fee.leading
+            address.trailing == fee.trailing
+            address.top == fee.bottom + 12
+            let height = self.addressVC.preferedHeight
+            address.height == height
             if self.purpose == .btcnWithdrawal {
-                fee.bottom == scroll.bottom - 10
-
+                address.bottom == scroll.bottom - 10
             }
         }
         
+//        constrain(feeVC.view, addressVC.view, scrollView) { (fee, addr, scroll) in
+//            fee.leading == addr.leading
+//            fee.trailing == addr.trailing
+//            fee.top == addr.bottom + 12
+//            let height = (feeVC as! WithdrawalChildVC).preferedHeight
+//            fee.height == height
+//            if self.purpose == .btcnWithdrawal {
+//                fee.bottom == scroll.bottom - 10
+//
+//            }
+//        }
+
         if self.purpose == .ttnTransfer {
-            
-            constrain(remarkNoteVC.view, feeVC.view, scrollView) { [unowned self] (remark, fee, scroll) in
-                remark.leading == fee.leading
-                remark.trailing == fee.trailing
-                remark.width == fee.width
+            constrain(remarkNoteVC.view, addressVC.view, scrollView) { [unowned self] (remark, address, scroll) in
+                remark.leading == address.leading
+                remark.trailing == address.trailing
+                remark.width == address.width
                 let height = self.remarkNoteVC.preferedHeight
                 remark.height == height
-                remark.top == fee.bottom + 10
+                remark.top == address.bottom + 10
                 remark.bottom == scroll.bottom - 10
             }
-            
         }
-       
-        
-//        let group = constrain(remarkNoteVC.view, addressVC.view, scrollView) {  (remark, address, scroll) in
-//            remark.top == address.bottom + 56 + 12
-//        }
-//        isInfoDisplayed.subscribe(onNext: {
-//            [weak self] (isDisplayed) in
-//            self?.updateContraintsForRemark(isDisplayed: isDisplayed, group: group)
-//        }).disposed(by: bag)
     }
     
     private func updateContraintsForRemark(isDisplayed: Bool, group: ConstraintGroup) {
@@ -197,16 +212,16 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.nav_item_2, shouldClear: true)
         if self.purpose == .ttnTransfer {
-        changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
+            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
         }else {
             changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
         }
 
-
         nextStepButton.setTitleColor(palette.btn_bgFill_enable_text, for: .normal)
         nextStepButton.setTitleColor(palette.btn_bgFill_disable_text, for: .disabled)
         nextStepButton.set(font: UIFont.owRegular(size: 17))
-        self.scrollView.backgroundColor = .white
+        self.scrollView.backgroundColor = .clear
+        self.view.backgroundColor = palette.bgView_main
     }
     
 //    override func viewDidLayoutSubviews() {

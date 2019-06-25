@@ -17,17 +17,18 @@ class LightReceiptQRCodeViewController: UIViewController {
         self.setupView()
 
         self.saveButton.rx.klrx_tap.drive(onNext:{ [unowned self] _ in
-        
-            guard let snapshot = self.qrcodeImageView.screenshot else {
+            self.copuButton.isHidden = true
+
+            guard let snapshot = self.qrcodeImageView.superview?.screenshot else {
+                self.copuButton.isHidden = false
                 return
             }
+            self.copuButton.isHidden = false
             ImageSaver.saveImage(image: snapshot, onViewController: self).subscribe(onSuccess: { _ in
-                
             },onError:{ error in
                 DLogInfo(error)
             }).disposed(by: self.bag)
         }).disposed(by: bag)
-        // Do any additional setup after loading the view.
     }
 
     @IBOutlet weak var coinIcon: UIImageView!  {
@@ -37,7 +38,11 @@ class LightReceiptQRCodeViewController: UIViewController {
     }
     @IBOutlet weak var lightTransferLabel: UILabel! {
         didSet {
-            lightTransferLabel.text = LM.dls.lightningTx_title
+            if self.viewModel.input.asset.wallet?.walletMainCoinID == Coin.ttn_identifier {
+                lightTransferLabel.text = LM.dls.lightningTx_title
+            }else {
+                lightTransferLabel.text = self.viewModel.input.asset.wallet?.name
+            }
         }
     }
     @IBOutlet weak var addressLabel: UILabel! {
@@ -88,6 +93,20 @@ class LightReceiptQRCodeViewController: UIViewController {
         self.addressLabel.set(textColor: UIColor.owWarmGrey, font: .owMedium(size:11))
         renderNavTitle(color: pallete.nav_item_2, font: .owMedium(size: 20))
         changeBackBarButton(toColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        createRightBarButton(target: self, selector: #selector(startSharing), image: #imageLiteral(resourceName: "btnNavShareNormal"), title: nil, toColor: pallete.nav_item_2, shouldClear: true)
         self.navigationItem.title = LM.dls.walletOverview_btn_deposit
+    }
+    
+    @objc private func startSharing() {
+        self.copuButton.isHidden = true
+        guard let img = self.qrcodeImageView.superview?.screenshot else {
+            self.copuButton.isHidden = false
+
+            return
+        }
+        self.copuButton.isHidden = false
+
+        let activityVC = UIActivityViewController.init(activityItems: [img], applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
     }
 }
