@@ -730,5 +730,13 @@ struct DLS_EN_US: DLS {
 
     var chat_msg_tab_title:String = "Message"
     var loading_please_wait_label:String  = "System loading, please wait"
+    
+    
+    var register_new_account_btn_title = "Register New Account"
+    
+    var register_account_msg_label_login = "Registered account will automatically add multi-chain wallet"
+    
+    var original_account_login = "Original Account Login"
+
 }
 

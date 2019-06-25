@@ -719,4 +719,11 @@ struct DLS_ZH_CN: DLS {
 
     var chat_msg_tab_title:String = "讯息"
     var loading_please_wait_label:String  = "系统更新中，请稍后"
+    
+    var register_new_account_btn_title = "注册新帐号"
+    
+    var register_account_msg_label_login = "注册帐号将自动新增多链钱包"
+    
+    var original_account_login = "原有帐号登入"
+
 }

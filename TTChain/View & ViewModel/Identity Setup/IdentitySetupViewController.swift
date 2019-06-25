@@ -21,13 +21,13 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     private weak var qrcodeCameraVC: UINavigationController?
     
     //MARK: - Outlet
-    @IBOutlet weak var headerLabel: UILabel!
+//    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var createBtn: UIButton!
     @IBOutlet weak var createNoteLabel: UILabel!
-    @IBOutlet weak var orLabel: UILabel!
-    @IBOutlet weak var sepline: UIView!
+//    @IBOutlet weak var orLabel: UILabel!
+//    @IBOutlet weak var sepline: UIView!
     @IBOutlet weak var restoreBtn: UIButton!
-    @IBOutlet weak var bgHeaderImgView: UIImageView!
+//    @IBOutlet weak var bgHeaderImgView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +39,13 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        createBtn.roundBothSides()
-        restoreBtn.roundBothSides()
+//        createBtn.roundBothSides()
+//        restoreBtn.roundBothSides()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.setGradientColor()
+//        self.view.setGradientColor()
 
     }
     override func didReceiveMemoryWarning() {
@@ -71,50 +71,44 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderTheme(_ theme: Theme) {
-        headerLabel.set(
-            textColor: theme.palette.label_main_2,
-            font: UIFont.owRegular(size: 20)
-        )
         
         createBtn.set(
             textColor: theme.palette.btn_bgFill_enable_text,
-            font: UIFont.owRegular(size: 15)
+            font: UIFont.owRegular(size: 14),backgroundColor:theme.palette.btn_bgFill_enable_bg2
         )
-        createBtn.backgroundColor = theme.palette.btn_bgFill_enable_bg
         
+        self.view.backgroundColor = .white
 //        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
         
 //        createBtn.setBackgroundImage(image, for: .normal)
         
         createNoteLabel.set(
-            textColor: theme.palette.label_sub,
-            font: UIFont.owRegular(size: 12.5)
+            textColor: theme.palette.btn_bgFill_enable_bg,
+            font: UIFont.owRegular(size: 12)
         )
         
-        orLabel.set(
-            textColor: theme.palette.label_sub,
-            font: UIFont.owRegular(size: 12.5)
-        )
+//        orLabel.set(
+//            textColor: theme.palette.label_sub,
+//            font: UIFont.owRegular(size: 12.5)
+//        )
         
-        sepline.set(backgroundColor: theme.palette.sepline)
+//        sepline.set(backgroundColor: theme.palette.sepline)
         
         restoreBtn.set(
-            textColor: theme.palette.btn_bgFill_enable_text,
-            font: UIFont.owRegular(size: 15)
+            textColor: .cloudBurst,
+            font: UIFont.owRegular(size: 14),backgroundColor:.white, borderInfo:(color:.cloudBurst, width: 1)
         )
-        restoreBtn.backgroundColor = theme.palette.btn_bgFill_enable_bg
-
-        self.bgHeaderImgView.backgroundColor = .clear
-     
+        restoreBtn.cornerRadius = restoreBtn.height/2
+        createBtn.cornerRadius = createBtn.height/2
     }
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        headerLabel.text = dls.login_label_title
-        createBtn.setTitleForAllStates(dls.login_btn_create)
-        createNoteLabel.text = dls.login_label_desc
-        orLabel.text = " " + dls.login_label_or + " "
-        restoreBtn.setTitleForAllStates(dls.login_btn_restore)
+//        headerLabel.text = dls.login_label_title
+        createBtn.setTitleForAllStates(dls.register_new_account_btn_title)
+        createNoteLabel.text = dls.register_account_msg_label_login
+//        orLabel.text = " " + dls.login_label_or + " "
+        restoreBtn.setTitleForAllStates(dls.original_account_login)
     }
     
     private func toCreate() {
@@ -127,16 +121,6 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
         nav.navigationBar.renderShadow()
         present(nav, animated: true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

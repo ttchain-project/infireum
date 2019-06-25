@@ -1724,7 +1724,7 @@ struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
         let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
         let exrBal = Decimal.init(string:tokenDict["exr"]?.string ?? "") ?? 0
         
-        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnitBTCN, ethnBalance: ethnBal*rateToCoinUnit, exrBalance: exrBal, btcnBalance: btcnBal*rateToCoinUnitBTCN)
+        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnitBTCN, ethnBalance: ethnBal*rateToCoinUnit, exrBalance: exrBal*rateToCoinUnit, btcnBalance: btcnBal*rateToCoinUnitBTCN)
     }
 }
 

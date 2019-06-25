@@ -107,13 +107,17 @@ class LightTransMenuTableViewCell: UITableViewCell {
             addressView.isHidden = false
             self.bgView.backgroundColor = .cloudBurst
             addressLabel.text = asset.wallet?.address
-
         }else {
             self.depositButton.isHidden = false
             self.transferButton.isHidden = false
             addressView.isHidden = true
             addressLabel.text = asset.wallet?.address
             self.bgView.backgroundColor = .clear
+        }
+        
+        if asset.coinID == Coin.exr_identifier {
+            self.depositButton.isHidden = true
+            self.transferButton.isHidden = true
         }
         
         self.copyButton.rx.klrx_tap.drive(onNext:{ _ in

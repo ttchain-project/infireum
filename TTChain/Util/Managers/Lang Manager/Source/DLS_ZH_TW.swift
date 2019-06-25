@@ -733,7 +733,12 @@ struct DLS_ZH_TW: DLS {
 
     var chat_msg_tab_title:String = "訊息"
     var loading_please_wait_label:String  = "系統更新中，請稍後"
-
+    
+    var register_new_account_btn_title = "註冊新帳號"
+    
+    var register_account_msg_label_login = "註冊帳號將自動新增多鏈錢包"
+    
+    var original_account_login = "原有帳號登入"
 }
 
 

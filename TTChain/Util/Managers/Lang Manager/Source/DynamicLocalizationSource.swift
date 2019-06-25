@@ -701,4 +701,11 @@ protocol DynamicLocalizationSource {
     var chat_msg_tab_title:String {get set}
     
     var loading_please_wait_label:String {get set}
+    
+    var register_new_account_btn_title:String {get set}
+    
+    var register_account_msg_label_login:String {get set}
+    
+    var original_account_login :String {get set}
+
 }
