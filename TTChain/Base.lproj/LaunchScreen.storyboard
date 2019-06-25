@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,19 +15,18 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt_splash.gif" translatesAutoresizingMaskIntoConstraints="NO" id="F1n-pC-x3W">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2gj-fL-FJl">
+                                <rect key="frame" x="56.333333333333343" y="60.666666666666686" width="262.33333333333326" height="528"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.63921568627450975" green="0.86274509803921573" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="F1n-pC-x3W" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="59r-sJ-MBT"/>
-                            <constraint firstAttribute="trailing" secondItem="F1n-pC-x3W" secondAttribute="trailing" id="E5y-w4-dCq"/>
-                            <constraint firstAttribute="bottom" secondItem="F1n-pC-x3W" secondAttribute="bottom" id="FBs-3X-QsG"/>
-                            <constraint firstItem="F1n-pC-x3W" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fpJ-dp-gZc"/>
+                            <constraint firstItem="2gj-fL-FJl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3iO-05-Lsd"/>
+                            <constraint firstItem="2gj-fL-FJl" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.7" id="3ue-eW-cNE"/>
+                            <constraint firstItem="2gj-fL-FJl" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.8" id="Dta-D3-b1j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tt_splash.gif" width="800" height="955"/>
+        <image name="default_logo" width="603" height="528"/>
     </resources>
 </document>

@@ -732,6 +732,8 @@ struct DLS_ZH_TW: DLS {
     }
 
     var chat_msg_tab_title:String = "訊息"
+    var loading_please_wait_label:String  = "系統更新中，請稍後"
+
 }
 
 

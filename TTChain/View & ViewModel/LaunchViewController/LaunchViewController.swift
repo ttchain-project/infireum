@@ -15,22 +15,21 @@ class LaunchViewController: UIViewController, Rx {
     
     var bag: DisposeBag = DisposeBag.init()
 
-    @IBOutlet weak var fromImage: FLAnimatedImageView!
 
+    @IBOutlet weak var loadingLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.owIceCold
-        
-        let path1 : String = Bundle.main.path(forResource: "tt_splash", ofType:"gif")!
-        let url = URL(fileURLWithPath: path1)
-        guard let gifData = try? Data(contentsOf: url) else {
-            return
+        self.view.backgroundColor = UIColor.white
+        progressBar.setProgress(0.4, animated: false)
+        let transform = CGAffineTransform.init(scaleX: 1.0, y:4.0)
+        self.progressBar.transform = transform
+        self.progressBar.layoutIfNeeded()
+        UIView.animate(withDuration: 3.9) {
+            self.progressBar.setProgress(1, animated: true)
         }
-
-        let splashGIF = FLAnimatedImage.init(animatedGIFData: gifData)
-        self.fromImage.animatedImage = splashGIF
-    
+        self.loadingLabel.text = LM.dls.loading_please_wait_label
     }
 
     override func didReceiveMemoryWarning() {

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwifterSwift
 
 class LightTransMenuTableViewCell: UITableViewCell {
 
@@ -19,12 +20,17 @@ class LightTransMenuTableViewCell: UITableViewCell {
     }
 
     @IBOutlet weak var coinNameLabel: UILabel!
+    @IBOutlet weak var fiatAmountLabel: UILabel!
     @IBOutlet weak var coinSymbol: UIImageView!
     @IBOutlet weak var coinAmountLabel: UILabel!
     @IBOutlet weak var depositButton: UIButton!
     @IBOutlet weak var transferButton: UIButton!
     @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var gradView: UIView!
+//    @IBOutlet weak var gradView: UIView!
+    
+    @IBOutlet weak var copyButton: UIButton!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var addressView: UIView!
     
     private var gradient: CAGradientLayer!
     
@@ -40,26 +46,31 @@ class LightTransMenuTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
-        self.gradView.cornerRadius = 8
+//        self.gradView.cornerRadius = 8
         self.coinNameLabel.set(textColor: .white, font: .owMedium(size: 20))
         self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 18))
+        self.addressLabel.set(textColor: .white, font: .owRegular(size: 15))
+        fiatAmountLabel.set(textColor: .white, font: .owRegular(size: 14))
         self.backgroundColor = .clear
-        self.gradView.backgroundColor = .clear
+//        self.gradView.backgroundColor = .clear
         self.bgView.backgroundColor = .clear
-        
+        self.transferButton.cornerRadius = 16
+        self.depositButton.cornerRadius = 16
+        self.fiatAmountLabel.text = "≈$ 0.00"
         LM.instance.lang.subscribe(onNext: {
             [unowned self] in self.configUI(lang: $0)
         })
             .disposed(by: disposeBag)
-        
+
     }
     
     private func configUI(lang:Lang) {
-        self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: lang.dls.light_withdraw_btn_title)
-        self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: lang.dls.light_deposit_btn_title)
+        self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: lang.dls.light_withdraw_btn_title, borderInfo: (color: .summerSky    , width: 1))
+        self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: lang.dls.light_deposit_btn_title,borderInfo: (color: .summerSky    , width: 1))
+        
     }
     
-    func config(asset:Asset, amtSource:Observable<BehaviorRelay<Decimal?>>, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ())) {
+    func config(asset:Asset, amtSource:Observable<BehaviorRelay<Decimal?>>, transferAction:@escaping ((Asset) -> ()), depositAction:@escaping ((Asset) -> ()),copyAction:@escaping((String)->())) {
         
         amtSource
             .flatMapLatest { $0 }
@@ -90,28 +101,26 @@ class LightTransMenuTableViewCell: UITableViewCell {
             depositAction(asset)
         }).disposed(by: disposeBag)
         
-        if [Coin.ttn_identifier,Coin.exr_identifier].contains(asset.coinID) {
+        if asset.coinID == Coin.ttn_identifier{
             self.depositButton.isHidden = true
             self.transferButton.isHidden = true
+            addressView.isHidden = false
+            self.bgView.backgroundColor = .cloudBurst
+            addressLabel.text = asset.wallet?.address
+
         }else {
             self.depositButton.isHidden = false
             self.transferButton.isHidden = false
+            addressView.isHidden = true
+            addressLabel.text = asset.wallet?.address
+            self.bgView.backgroundColor = .clear
         }
         
-        if self.gradient != nil {
-            return
-        }
-        switch asset.coinID {
-        case Coin.exr_identifier:
-            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "FFA734")!.cgColor, UIColor.init(hexString: "FFDB24")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-        case Coin.usdtn_identifier:
-            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "417C9E")!.cgColor,UIColor.init(hexString: "A6C1DC")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-        case Coin.btcn_identifier:
-            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "208588")!.cgColor,UIColor.init(hexString: "1CC491")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-        default:
-            self.gradient = self.gradView.setGradientColor(cgColors: [UIColor.clear.cgColor,UIColor.init(hexString: "098A95")!.cgColor,UIColor.init(hexString: "18ADD4")!.cgColor],startPoint:CGPoint.init(x:0.11,y:0.0),endPoint:CGPoint.init(x:1.0,y:0))
-        }
-        
-
+        self.copyButton.rx.klrx_tap.drive(onNext:{ _ in
+            guard let address = asset.wallet?.address else {
+                return
+            }
+            copyAction(address)
+        }).disposed(by: disposeBag)
     }
 }

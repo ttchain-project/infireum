@@ -322,7 +322,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="JyG-V8-TDG"/>
                                                         <constraint firstAttribute="height" constant="30" id="rXQ-iR-ACo"/>
                                                     </constraints>
-                                                    <state key="normal" image="btn_copy">
+                                                    <state key="normal" image="btn_copy_white">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
@@ -440,6 +440,7 @@
     </objects>
     <resources>
         <image name="btn_copy" width="48" height="48"/>
+        <image name="btn_copy_white" width="48" height="48"/>
         <image name="wallet_receipt_success" width="144" height="144"/>
     </resources>
 </document>

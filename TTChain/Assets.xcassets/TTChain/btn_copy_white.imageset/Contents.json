@@ -6,12 +6,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "ethn_coin_icon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ethn_coin_icon@3x.png",
+      "filename" : "btn_copy_white.png",
       "scale" : "3x"
     }
   ],

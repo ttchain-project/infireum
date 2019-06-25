@@ -135,4 +135,7 @@ extension UIColor {
     @nonobjc class var bittersweet:UIColor {
         return UIColor.init(hexString: "FB6B5B")!
     }
+    @nonobjc class var summerSky:UIColor {
+        return UIColor.init(hexString: "18ADD4")!
+    }
 }

@@ -729,5 +729,6 @@ struct DLS_EN_US: DLS {
     }
 
     var chat_msg_tab_title:String = "Message"
+    var loading_please_wait_label:String  = "System loading, please wait"
 }
 

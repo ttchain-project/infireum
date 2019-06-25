@@ -75,7 +75,7 @@ class LightTransDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.view.setGradientColor(color1: UIColor.init(red: 44, green: 60, blue: 78)?.cgColor, color2: UIColor.init(red: 24, green: 34, blue: 39)?.cgColor)
+        self.view.setGradientColor(cgColors: [UIColor.init(white: 0, alpha: 1).cgColor,UIColor.cloudBurst.cgColor])
     }
     
     func setupUI() {
@@ -88,7 +88,7 @@ class LightTransDetailViewController: UIViewController {
             textColor: pallete.btn_bgFill_enable_text,
             font: .owRegular(size:14),
             text: LM.dls.lightningTx_title,
-            backgroundColor: pallete.recordStatus_failed)
+            backgroundColor: pallete.recordStatus_withdrawal)
         
         self.receiveButon.set(
             textColor: pallete.btn_bgFill_enable_text,
@@ -97,15 +97,14 @@ class LightTransDetailViewController: UIViewController {
             backgroundColor: pallete.recordStatus_deposit)
         
         self.txDetailButton.set(
-            textColor: pallete.btn_bgFill_enable_text,
+            textColor: UIColor.summerSky,
             font: .owRegular(size:14),
             text: LM.dls.transaction_details_btn_title,
-            backgroundColor: pallete.nav_bg_clear)
+            backgroundColor: pallete.nav_bg_clear,
+            borderInfo: (color: UIColor.summerSky, width: 1))
         
-        renderNavBar(tint: pallete.nav_item_2, barTint: UIColor.init(hexString: "2C3C4E")!)
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        renderNavBar(tint: pallete.nav_item_2, barTint: pallete.nav_bar_tint)
         renderNavTitle(color: pallete.nav_item_2, font: .owMedium(size: 20))
-
         changeLeftBarButtonToDismissToRoot(tintColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
     }
     

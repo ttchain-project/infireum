@@ -717,5 +717,6 @@ struct DLS_ZH_CN: DLS {
         return String.init(format: "%@ 转帐纪录", arguments: args)
     }
 
-        var chat_msg_tab_title:String = "讯息"
+    var chat_msg_tab_title:String = "讯息"
+    var loading_please_wait_label:String  = "系统更新中，请稍后"
 }

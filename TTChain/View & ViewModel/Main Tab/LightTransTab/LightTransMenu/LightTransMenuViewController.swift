@@ -44,7 +44,7 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-        self.view.backgroundColor = UIColor.init(hexString: "2C3C4E")
+        self.view.backgroundColor = .cloudBurst
     }
     
     override func viewDidLoad() {
@@ -52,6 +52,19 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.init(white: 0, alpha: 1).cgColor,UIColor.cloudBurst.cgColor]
+        let frame = UIScreen.main.bounds
+//            gradient.startPoint = CGPoint.zero
+//            gradient.endPoint = CGPoint.init(x: 0, y: 1)
+        
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: frame.size.width, height: frame.size.height)
+        self.view.layer.insertSublayer(gradient, at: 0)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,7 +75,7 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
         
         self.tableView.register(cellType: LightTransMenuTableViewCell.self)
         self.tableView.backgroundColor = .clear
-        self.tableView.contentInset = UIEdgeInsetsMake(40, 0, 40, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0)
         self.viewModel.assets.asObservable().bind(to: self.tableView.rx.items(cellIdentifier: LightTransMenuTableViewCell.className, cellType: LightTransMenuTableViewCell.self)) {[weak self]
             row, asset, cell in
             guard let `self` = self else {
@@ -70,8 +83,10 @@ final class LightTransMenuViewController: KLModuleViewController,KLVMVC {
             }
             let balance = self.viewModel.amt(ofAsset: asset).asObservable()
             
-            cell.config(asset: asset,amtSource:balance,transferAction: { asset in self.showTransferAction(asset: asset)}, depositAction: {asset in self.showDepositAction(asset: asset)})
-
+            cell.config(asset: asset,amtSource:balance,transferAction: { asset in self.showTransferAction(asset: asset)}, depositAction: {asset in self.showDepositAction(asset: asset)}, copyAction: { address in
+                UIPasteboard.general.string = address
+                EZToast.present(on: self, content: LM.dls.copied_successfully)
+            })
             }.disposed(by:bag)
         
         self.tableView.rx.itemSelected.asDriver().drive(onNext: { (path) in

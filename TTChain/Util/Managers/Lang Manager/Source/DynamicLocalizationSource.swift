@@ -699,4 +699,6 @@ protocol DynamicLocalizationSource {
     
     func tx_record_detail_title(_ args: String...) -> String
     var chat_msg_tab_title:String {get set}
+    
+    var loading_please_wait_label:String {get set}
 }
