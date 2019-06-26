@@ -71,37 +71,36 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
      
         collectionView.register(SettingMenuHeaderCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className)
         
-//        collectionView.delegate = self
     }
     
     func bindCollectionView() {
-        viewModel.datasource.configureCell = {
-            (datasource, cv, indexPath, settingModel) in
-            
-            let cell = cv.dequeueReusableCell(withReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier(), for: indexPath) as! SettingMenuCollectionViewCell
-            cell.setupCell(model:settingModel)
-            return cell
-        }
-        viewModel.datasource.configureSupplementaryView = { (datasource, cv, kind, indexpath) in
-            if (kind == UICollectionElementKindSectionHeader) {
-                let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
-                
-                let titleString : String = {
-                    switch indexpath.section {
-                    case 0:  return LM.dls.account_setting_title
-                    case 1:  return LM.dls.basic_setting_title
-                    case 2:  return LM.dls.follow_us_title
-                    case 3:  return LM.dls.others_title
-                    default:
-                        return ""
-                    }
-                    
-                }()
-                headerView.setup(title: titleString)
-                return headerView
-            }
-            return UICollectionReusableView()
-        }
+//        viewModel.datasource.configureCell = {
+//            (datasource, cv, indexPath, settingModel) in
+//
+//            let cell = cv.dequeueReusableCell(withReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier(), for: indexPath) as! SettingMenuCollectionViewCell
+//            cell.setupCell(model:settingModel)
+//            return cell
+//        }
+//        viewModel.datasource.configureSupplementaryView = { (datasource, cv, kind, indexpath) in
+//            if (kind == UICollectionElementKindSectionHeader) {
+//                let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
+//
+//                let titleString : String = {
+//                    switch indexpath.section {
+//                    case 0:  return LM.dls.account_setting_title
+//                    case 1:  return LM.dls.basic_setting_title
+//                    case 2:  return LM.dls.follow_us_title
+//                    case 3:  return LM.dls.others_title
+//                    default:
+//                        return ""
+//                    }
+//
+//                }()
+//                headerView.setup(title: titleString)
+//                return headerView
+//            }
+//            return UICollectionReusableView()
+//        }
         MarketTestHandler.shared.settingsArray
             .bind(to: collectionView.rx.items(
                 dataSource: viewModel.datasource)
@@ -532,18 +531,7 @@ extension SettingMenuViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize.init(width: self.view.width, height: 40)
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        if (kind == UICollectionElementKindSectionHeader) {
-//            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexPath) as!  SettingMenuHeaderCollectionReusableView
-//            headerView.setup(title:"Title")
-//            headerView.backgroundColor = UIColor.gray
-//            headerView.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 40)
-//            return headerView
-//        }else {
-//            return UIView() as! UICollectionReusableView
-//        }
-//    }
+
     
 }
 
