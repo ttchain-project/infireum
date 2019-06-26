@@ -230,6 +230,27 @@
 		554EB36C22C1FE17008E847B /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36B22C1FE17008E847B /* ImageSaver.swift */; };
 		554EB36D22C1FE17008E847B /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36B22C1FE17008E847B /* ImageSaver.swift */; };
 		554EB36E22C1FE17008E847B /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36B22C1FE17008E847B /* ImageSaver.swift */; };
+		554EB37122C35250008E847B /* SettingsTabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36F22C35250008E847B /* SettingsTabTableViewCell.swift */; };
+		554EB37222C35250008E847B /* SettingsTabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36F22C35250008E847B /* SettingsTabTableViewCell.swift */; };
+		554EB37322C35250008E847B /* SettingsTabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB36F22C35250008E847B /* SettingsTabTableViewCell.swift */; };
+		554EB37422C35250008E847B /* SettingsTabTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB37022C35250008E847B /* SettingsTabTableViewCell.xib */; };
+		554EB37522C35250008E847B /* SettingsTabTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB37022C35250008E847B /* SettingsTabTableViewCell.xib */; };
+		554EB37622C35250008E847B /* SettingsTabTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB37022C35250008E847B /* SettingsTabTableViewCell.xib */; };
+		554EB37922C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB37722C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift */; };
+		554EB37A22C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB37722C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift */; };
+		554EB37B22C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB37722C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift */; };
+		554EB37C22C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB37822C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib */; };
+		554EB37D22C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB37822C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib */; };
+		554EB37E22C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB37822C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib */; };
+		554EB38122C36306008E847B /* SettingHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB37F22C36306008E847B /* SettingHeaderViewController.swift */; };
+		554EB38222C36306008E847B /* SettingHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB37F22C36306008E847B /* SettingHeaderViewController.swift */; };
+		554EB38322C36306008E847B /* SettingHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB37F22C36306008E847B /* SettingHeaderViewController.swift */; };
+		554EB38422C36306008E847B /* SettingHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB38022C36306008E847B /* SettingHeaderViewController.xib */; };
+		554EB38522C36306008E847B /* SettingHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB38022C36306008E847B /* SettingHeaderViewController.xib */; };
+		554EB38622C36306008E847B /* SettingHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554EB38022C36306008E847B /* SettingHeaderViewController.xib */; };
+		554EB38922C364DD008E847B /* SettingHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */; };
+		554EB38A22C364DD008E847B /* SettingHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */; };
+		554EB38B22C364DD008E847B /* SettingHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */; };
 		5559CADB228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADC228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADD228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
@@ -2293,6 +2314,13 @@
 		554D2CFC2244CE6A0004CA09 /* CreateRedEnvelopeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateRedEnvelopeViewController.xib; sourceTree = "<group>"; };
 		554D2D032244F67B0004CA09 /* CreateRedEnvelopeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRedEnvelopeViewModel.swift; sourceTree = "<group>"; };
 		554EB36B22C1FE17008E847B /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		554EB36F22C35250008E847B /* SettingsTabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabTableViewCell.swift; sourceTree = "<group>"; };
+		554EB37022C35250008E847B /* SettingsTabTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTabTableViewCell.xib; sourceTree = "<group>"; };
+		554EB37722C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportWalletSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		554EB37822C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportWalletSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		554EB37F22C36306008E847B /* SettingHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderViewController.swift; sourceTree = "<group>"; };
+		554EB38022C36306008E847B /* SettingHeaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingHeaderViewController.xib; sourceTree = "<group>"; };
+		554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderViewModel.swift; sourceTree = "<group>"; };
 		5559CADA228E688300D37895 /* SignETHTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignETHTransaction.swift; sourceTree = "<group>"; };
 		555A45AC22057F35004A713A /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		555A45AD22057F35004A713A /* ChatImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageViewController.xib; sourceTree = "<group>"; };
@@ -3137,6 +3165,11 @@
 				550873EF21E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib */,
 				550873FB21E5A398007B3B3B /* SettingMenuHeaderCollectionReusableView.swift */,
 				550873FC21E5A398007B3B3B /* SettingMenuHeaderCollectionReusableView.xib */,
+				554EB36F22C35250008E847B /* SettingsTabTableViewCell.swift */,
+				554EB37022C35250008E847B /* SettingsTabTableViewCell.xib */,
+				554EB37722C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift */,
+				554EB37822C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib */,
+				554EB38722C364C1008E847B /* SettingHeaderVC */,
 			);
 			path = SettingCell;
 			sourceTree = "<group>";
@@ -3484,6 +3517,16 @@
 				555E4A652249C9FD00C7CAD5 /* CreateRedEnvelope */,
 			);
 			path = RedEnvelope;
+			sourceTree = "<group>";
+		};
+		554EB38722C364C1008E847B /* SettingHeaderVC */ = {
+			isa = PBXGroup;
+			children = (
+				554EB37F22C36306008E847B /* SettingHeaderViewController.swift */,
+				554EB38022C36306008E847B /* SettingHeaderViewController.xib */,
+				554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */,
+			);
+			path = SettingHeaderVC;
 			sourceTree = "<group>";
 		};
 		5559CAD9228E686600D37895 /* SignETHTransaction */ = {
@@ -7005,6 +7048,7 @@
 				55AADEFE21FF111E00F403C8 /* ReceiptRequestViewController.xib in Resources */,
 				55EF6A9521A812C6007E074A /* SearchMemberViewController.xib in Resources */,
 				64C9D4AD21042F5B000B0774 /* LocalAuthViewController.xib in Resources */,
+				554EB37E22C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib in Resources */,
 				55E730792186F33B003AE47E /* WalletOptionsViewController.xib in Resources */,
 				555E4AEB224CDF5700C7CAD5 /* SendRedEnvelopeTableViewCell.xib in Resources */,
 				5526B5312211247F00573576 /* ForwardListViewController.xib in Resources */,
@@ -7033,6 +7077,7 @@
 				55EF6A6221A812C6007E074A /* KeyboardFunctionCollectionViewCell.xib in Resources */,
 				555E4AB0224CB7E800C7CAD5 /* RedEnvelopeHistoryViewController.xib in Resources */,
 				643200D020FB22F400B11334 /* WithdrawalChangeToAddressViewController.xib in Resources */,
+				554EB37622C35250008E847B /* SettingsTabTableViewCell.xib in Resources */,
 				55CAC60922AF91A400BEBE25 /* WalletsViewController.xib in Resources */,
 				55787FBD21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				649E489720ECAC4900B217AD /* PwdHintViewController.xib in Resources */,
@@ -7091,6 +7136,7 @@
 				649E48BB20ECE79600B217AD /* WalletPrivateKeyInfoViewController.xib in Resources */,
 				64D826CC20E4C66B00C8FC63 /* SearchAssetViewController.xib in Resources */,
 				551B77DD2241E976007BD626 /* SelectWalletTableViewCell.xib in Resources */,
+				554EB38622C36306008E847B /* SettingHeaderViewController.xib in Resources */,
 				55EF6AE621A812C7007E074A /* FriendListContainerViewController.xib in Resources */,
 				6481399D20DA754D00CAA4D8 /* BackupWalletMnemonicVerifyViewController.xib in Resources */,
 				6446E24020FCE3F700EC1E2E /* ChangePrefFiatViewController.xib in Resources */,
@@ -7164,11 +7210,14 @@
 				55787FBB21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				6470D6DE20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				5537F0802265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */,
+				554EB38422C36306008E847B /* SettingHeaderViewController.xib in Resources */,
 				55EF6AF021A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B68720F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200C120FB1DA100B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
+				554EB37C22C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib in Resources */,
 				6470D69620F341BC00EB0780 /* WithdrawalConfirmPwdValidationViewController.xib in Resources */,
 				6470D61C20F0EEBE00EB0780 /* WithdrawalAddressViewController.xib in Resources */,
+				554EB37422C35250008E847B /* SettingsTabTableViewCell.xib in Resources */,
 				6470D64320F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
 				55E1141321F72CF70062198B /* ChatKeyboardView.xib in Resources */,
 				555E4AAE224CB7E800C7CAD5 /* RedEnvelopeHistoryViewController.xib in Resources */,
@@ -7353,11 +7402,14 @@
 				55787FBC21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */,
 				6470D6DF20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				5537F0812265D4F90058B98D /* LightTransMenuTableViewCell.xib in Resources */,
+				554EB38522C36306008E847B /* SettingHeaderViewController.xib in Resources */,
 				55EF6AF121A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B68820F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200C020FB1DA000B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
+				554EB37D22C35BD4008E847B /* ExportWalletSettingsTableViewCell.xib in Resources */,
 				6470D69720F341BC00EB0780 /* WithdrawalConfirmPwdValidationViewController.xib in Resources */,
 				6470D61D20F0EEBE00EB0780 /* WithdrawalAddressViewController.xib in Resources */,
+				554EB37522C35250008E847B /* SettingsTabTableViewCell.xib in Resources */,
 				6470D64420F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.xib in Resources */,
 				55E1141421F72CF70062198B /* ChatKeyboardView.xib in Resources */,
 				555E4AAF224CB7E800C7CAD5 /* RedEnvelopeHistoryViewController.xib in Resources */,
@@ -8052,6 +8104,7 @@
 				64083D12211052D500DE1C31 /* BTCTxFilter.swift in Sources */,
 				555E4A99224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */,
 				64F07E8520D36B8E00A60C5C /* KLRxViewModel.swift in Sources */,
+				554EB38B22C364DD008E847B /* SettingHeaderViewModel.swift in Sources */,
 				55EF6B2121A814E8007E074A /* UIRepresentableCell.swift in Sources */,
 				6485003E20DA009A00107473 /* IdentityCreateViewModel.swift in Sources */,
 				55E7305B2186DC4B003AE47E /* MainWalletViewController.swift in Sources */,
@@ -8095,6 +8148,7 @@
 				64B98EDC20F98EAC00C4EB11 /* LightningTransactionViewModel.swift in Sources */,
 				64F07E1A20D241A000A60C5C /* ServerAPIErrorHandler.swift in Sources */,
 				6485002720D9340F00107473 /* UIView+FastUISetup.swift in Sources */,
+				554EB38322C36306008E847B /* SettingHeaderViewController.swift in Sources */,
 				55E730692186E564003AE47E /* CommentsModel.swift in Sources */,
 				5529D59022BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */,
 				55D7D1B92238B02E00309A22 /* IncomingCallViewController.swift in Sources */,
@@ -8117,6 +8171,7 @@
 				645006F520F45B4E00C0FC11 /* WithdrawalConfirmETHFeeInputViewController.swift in Sources */,
 				645619292150DFBF001092E5 /* IdentityBackupTypeChooseViewController.swift in Sources */,
 				559BDAFD2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */,
+				554EB37B22C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift in Sources */,
 				64F43BAF210B4C0B00982AFD /* BTCTx.swift in Sources */,
 				648139CC20DBADC900CAA4D8 /* Constants.swift in Sources */,
 				55E730662186E534003AE47E /* WithdrawalRemarksViewController.swift in Sources */,
@@ -8234,6 +8289,7 @@
 				64083D1A21106F8B00DE1C31 /* BTCTxHandler.swift in Sources */,
 				64A1179220D5372C00797C2C /* ChainType.swift in Sources */,
 				554EB36E22C1FE17008E847B /* ImageSaver.swift in Sources */,
+				554EB37322C35250008E847B /* SettingsTabTableViewCell.swift in Sources */,
 				55340302224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				55EF6B7621A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
 				64C9D4A42101BF53000B0774 /* OWQRCodeParser.swift in Sources */,
@@ -8592,6 +8648,7 @@
 				64F07E2420D241A000A60C5C /* KLTextField.swift in Sources */,
 				555E4A97224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */,
 				64D8266620E22F5800C8FC63 /* ManageAssetViewModel.swift in Sources */,
+				554EB38922C364DD008E847B /* SettingHeaderViewModel.swift in Sources */,
 				640D88EC20EF0D890010D986 /* AssetDetailViewController.swift in Sources */,
 				55EF6B1F21A814E8007E074A /* UIRepresentableCell.swift in Sources */,
 				55CAC61322AFB14600BEBE25 /* WalletsTableSectionHeaderView.swift in Sources */,
@@ -8635,6 +8692,7 @@
 				64F07DDC20D241A000A60C5C /* Printer.swift in Sources */,
 				6424B68420F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.swift in Sources */,
 				6424B69820F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
+				554EB38122C36306008E847B /* SettingHeaderViewController.swift in Sources */,
 				5529D58E22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */,
 				55D7D1B72238B02E00309A22 /* IncomingCallViewController.swift in Sources */,
 				557C850F22360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
@@ -8657,6 +8715,7 @@
 				6470D6DB20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.swift in Sources */,
 				643200D320FB230500B11334 /* WithdrawalChangeToAddressViewModel.swift in Sources */,
 				559BDAFB2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */,
+				554EB37922C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift in Sources */,
 				6424B67F20F5C97000AEBCAD /* TransferRecordCoinOptionViewModel.swift in Sources */,
 				6470D64C20F1A1A100EB0780 /* WithdrawalBTCFeeInfoViewController.swift in Sources */,
 				64813AB620DCD45A00CAA4D8 /* Language+Helper.swift in Sources */,
@@ -8774,6 +8833,7 @@
 				64F43BA9210B259700982AFD /* Unspent.swift in Sources */,
 				55EF6B7421A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
 				554EB36C22C1FE17008E847B /* ImageSaver.swift in Sources */,
+				554EB37122C35250008E847B /* SettingsTabTableViewCell.swift in Sources */,
 				55340300224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				64C9D4B021042F6F000B0774 /* LocalAuthViewModel.swift in Sources */,
 				55EF6B0B21A812C7007E074A /* UserProfileViewController.swift in Sources */,
@@ -9125,6 +9185,7 @@
 				6470D64120F1A12D00EB0780 /* WithdrawalBTCFeeInputViewController.swift in Sources */,
 				555E4A98224A477F00C7CAD5 /* ReceiveRedEnvelopeTableViewCellModel.swift in Sources */,
 				64083D0921103EF300DE1C31 /* TxHandler.swift in Sources */,
+				554EB38A22C364DD008E847B /* SettingHeaderViewModel.swift in Sources */,
 				55EF6B2021A814E8007E074A /* UIRepresentableCell.swift in Sources */,
 				64C9D4BE21044B5C000B0774 /* WithdrawalCICFeeInputViewModel.swift in Sources */,
 				6470D64D20F1A1A100EB0780 /* WithdrawalBTCFeeInfoViewController.swift in Sources */,
@@ -9168,6 +9229,7 @@
 				640D891120EF62C40010D986 /* BlockExplorerURLCreator.swift in Sources */,
 				6424B69920F5D1A600AEBCAD /* TransferRecordOptionBarViewController.swift in Sources */,
 				64D8264220DFB94D00C8FC63 /* QRCodeGenerator.swift in Sources */,
+				554EB38222C36306008E847B /* SettingHeaderViewController.swift in Sources */,
 				5529D58F22BB555D008AE3E5 /* RecordDetailViewModel.swift in Sources */,
 				55D7D1B82238B02E00309A22 /* IncomingCallViewController.swift in Sources */,
 				557C851022360FD2004C2E16 /* RTCSessionDescription+JSON.m in Sources */,
@@ -9190,6 +9252,7 @@
 				6470D69C20F341CE00EB0780 /* WithdrawalConfirmPwdValidationViewModel.swift in Sources */,
 				643200D420FB230500B11334 /* WithdrawalChangeToAddressViewModel.swift in Sources */,
 				559BDAFC2276C42E00727244 /* LightWithdrawalFeeViewModel.swift in Sources */,
+				554EB37A22C35BD4008E847B /* ExportWalletSettingsTableViewCell.swift in Sources */,
 				6424B68020F5C97000AEBCAD /* TransferRecordCoinOptionViewModel.swift in Sources */,
 				64F07E3C20D25ADD00A60C5C /* DatabaseManager.swift in Sources */,
 				64813A8720DCAE2600CAA4D8 /* Coin+Helper.swift in Sources */,
@@ -9307,6 +9370,7 @@
 				64813A4120DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataProperties.swift in Sources */,
 				55EF6B7521A81D0D007E074A /* UIImageStringConversion.swift in Sources */,
 				554EB36D22C1FE17008E847B /* ImageSaver.swift in Sources */,
+				554EB37222C35250008E847B /* SettingsTabTableViewCell.swift in Sources */,
 				55340301224E123C007F355D /* ForwarMessageViewModel.swift in Sources */,
 				64813A6820DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataClass.swift in Sources */,
 				55EF6B0C21A812C7007E074A /* UserProfileViewController.swift in Sources */,

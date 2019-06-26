@@ -410,11 +410,21 @@ struct DLS_EN_US: DLS {
     var changePrefFiat_title = "Currency unit"
     var changePrefFiat_btn_save = "Save"
     
+    var settings_notification_title:String = "Message Notifications"
+    var setting_export_key_title:String = "Export"
+    var setting_export_btc_wallet_title:String  = "Bitcoin Wallet"
+    var setting_export_eth_wallet_title:String = "Ethereum Wallet"
+
+    var setting_delete_account_title:String = "Delete Account"
+    
     var account_setting_title = "Account Setting"
     var basic_setting_title = "Basic Setting"
     var follow_us_title = "Follow Us"
     var others_title = "Others"
-    
+    var system_settings_title:String = "System Setting"
+    var wallet_settings_title:String = "Wallet Settings"
+
+    var account_safety_settings_title:String = "Account Safety"
     var addressbook_title = "Common used address"
     var addressbook_label_empty_addressbook = "No history"
     var abInfo_title = "Contact information"

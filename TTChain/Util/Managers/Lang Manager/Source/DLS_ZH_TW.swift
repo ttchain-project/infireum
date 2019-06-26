@@ -410,10 +410,19 @@ struct DLS_ZH_TW: DLS {
     var changePrefFiat_title = "貨幣單位"
     var changePrefFiat_btn_save = "存儲"
     
+    var settings_notification_title:String = "訊息通知"
+    var setting_export_key_title:String = "導出"
+    var setting_export_btc_wallet_title:String  = "比特币（Bitcoin）钱包"
+    var setting_export_eth_wallet_title:String = "以太幣(Ethereum) 錢包"
+    var setting_delete_account_title:String = "刪除帳號"
+
     var account_setting_title = "帳戶設定"
     var basic_setting_title = "基本設置"
     var follow_us_title = "關注我們"
     var others_title = "其他"
+    var system_settings_title:String = "系統設定"
+    var wallet_settings_title:String = "錢包設定"
+    var account_safety_settings_title:String = "帳號安全"
     
     var addressbook_title = "常用地址"
     var addressbook_label_empty_addressbook = "暫無紀錄"

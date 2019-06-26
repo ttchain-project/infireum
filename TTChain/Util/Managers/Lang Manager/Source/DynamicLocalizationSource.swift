@@ -408,11 +408,21 @@ protocol DynamicLocalizationSource {
     var settings_label_language: String { get set }
     var settings_label_currencyUnit: String { get set }
     var settings_alert_verify_to_turn_off_functionality: String { get set }
+    var settings_notification_title:String {get set}
+    var setting_export_key_title:String {get set}
+
+    var setting_export_btc_wallet_title:String {get set}
+    var setting_export_eth_wallet_title:String {get set}
+    var setting_delete_account_title:String {get set}
     
     var account_setting_title: String { get set }
     var basic_setting_title: String { get set }
     var follow_us_title: String { get set }
     var others_title: String { get set }
+    var system_settings_title:String {get set}
+    var wallet_settings_title:String {get set}
+    var account_safety_settings_title:String {get set}
+
     
     var changePrefFiat_title: String { get set }
     var changePrefFiat_btn_save: String { get set }
@@ -707,5 +717,7 @@ protocol DynamicLocalizationSource {
     var register_account_msg_label_login:String {get set}
     
     var original_account_login :String {get set}
+    
+    
 
 }
