@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Cartography
 
 final class WalletsViewController: KLModuleViewController, KLVMVC {
     
@@ -47,11 +48,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
             guard let `self` = self else {
                 return
             }
-//            let vc = AssetDetailViewController.navInstance(
-//                from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
-//            )
-//            self.present(vc, animated: true, completion: nil)
-           self.assetSelected(asset)
+            self.assetSelected(asset)
             
         }).disposed(by: bag)
     }
@@ -59,12 +56,19 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
     func configHeaderView() {
         let totalFiatValues = self.viewModel.totalFiatValues.asObservable()
         headerViewController = WalletHeaderViewController.instance(from: WalletHeaderViewController.Config(totalAssetFiatValue: totalFiatValues,
-                                                                                             fiatCurrency: self.viewModel.fiat.asObservable(), manageAsset: ({
-                                                                                                
-                                                                                             })))
+                                                                                                           fiatCurrency: self.viewModel.fiat.asObservable(), manageAsset: ({
+                                                                                                           })))
+        let base = UIView.init()
+        base.backgroundColor = .clear
+        let height = max(250,self.view.height * 0.4)
+        base.addSubview(headerViewController.view)
+        base.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: height)
+        constrain(headerViewController.view) { (view) in
+            let sup = view.superview!
+            view.edges == sup.edges
+        }
+        tableView.tableHeaderView = base
         
-        headerViewController.view.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: max(350,self.view.height * 0.4))
-        self.tableView.tableHeaderView = headerViewController.view
         
     }
     override func viewDidLoad() {
