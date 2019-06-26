@@ -28,10 +28,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="piY-ex-hUh">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LRt-Sw-p0Q">
-                            <rect key="frame" x="20" y="34" width="226" height="30"/>
+                            <rect key="frame" x="20" y="40" width="226" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tte-ei-g5H">
                                     <rect key="frame" x="0.0" y="0.0" width="64" height="30"/>
@@ -75,7 +75,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="00F-HI-3Mp">
-                            <rect key="frame" x="289" y="34" width="110" height="30"/>
+                            <rect key="frame" x="289" y="40" width="110" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ssd-qf-WsL">
                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -124,12 +124,12 @@
                         <constraint firstAttribute="trailing" secondItem="00F-HI-3Mp" secondAttribute="trailing" constant="15" id="E2K-r5-XFi"/>
                         <constraint firstItem="LRt-Sw-p0Q" firstAttribute="leading" secondItem="piY-ex-hUh" secondAttribute="leading" constant="20" id="Qyw-19-epl"/>
                         <constraint firstAttribute="bottom" secondItem="00F-HI-3Mp" secondAttribute="bottom" constant="10" id="TKU-fO-DlC"/>
-                        <constraint firstAttribute="height" constant="74" id="d2z-4o-kSC"/>
+                        <constraint firstAttribute="height" constant="80" id="d2z-4o-kSC"/>
                         <constraint firstAttribute="bottom" secondItem="LRt-Sw-p0Q" secondAttribute="bottom" constant="10" id="y8D-D0-Rbb"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmw-NE-dJE">
-                    <rect key="frame" x="0.0" y="74" width="414" height="662"/>
+                    <rect key="frame" x="0.0" y="80" width="414" height="656"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>

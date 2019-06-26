@@ -23,6 +23,7 @@ class LightTransMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var fiatAmountLabel: UILabel!
     @IBOutlet weak var coinSymbol: UIImageView!
     @IBOutlet weak var coinAmountLabel: UILabel!
+    @IBOutlet weak var coinSubNameLabel: UILabel!
     @IBOutlet weak var depositButton: UIButton!
     @IBOutlet weak var transferButton: UIButton!
     @IBOutlet weak var bgView: UIView!
@@ -49,6 +50,7 @@ class LightTransMenuTableViewCell: UITableViewCell {
 //        self.gradView.cornerRadius = 8
         self.coinNameLabel.set(textColor: .white, font: .owMedium(size: 18))
         self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 16))
+        coinSubNameLabel.set(textColor: .white, font: .owRegular(size: 14))
         self.addressLabel.set(textColor: .white, font: .owRegular(size: 14))
         fiatAmountLabel.set(textColor: .white, font: .owRegular(size: 12))
         self.backgroundColor = .clear
@@ -95,14 +97,21 @@ class LightTransMenuTableViewCell: UITableViewCell {
             case Coin.btcn_identifier :
                 return "BTC-N"
             case Coin.usdtn_identifier:
-                return "USDT-N \n -omni-"
+                return "USDT-N"
             default:
                 return asset.coin!.inAppName!
             }
         }()
-        
+        let coinSubName:String = {
+            switch asset.coinID! {
+            case Coin.usdtn_identifier:
+                return "-omni-"
+            default:
+                return ""
+            }
+        }()
         self.coinNameLabel.text = coinName
-        
+        self.coinSubNameLabel.text = coinSubName
         self.coinSymbol?.image = asset.coin?.iconImg
         
         self.transferButton.rx.klrx_tap.asDriver().drive(onNext: { _ in

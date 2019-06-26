@@ -50,6 +50,12 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ios-EC-hbY">
+                                        <rect key="frame" x="44.5" y="90.5" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3p-6f-11Y">
                                         <rect key="frame" x="300" y="36.5" width="30" height="30"/>
                                         <constraints>
@@ -83,6 +89,7 @@
                                     <constraint firstItem="KJ9-4f-RTQ" firstAttribute="height" secondItem="OGk-9h-qC0" secondAttribute="height" id="5Gr-Qy-lfn"/>
                                     <constraint firstItem="iF6-bn-R8l" firstAttribute="leading" secondItem="jAX-rp-djX" secondAttribute="leading" id="DPp-Ha-uyU"/>
                                     <constraint firstItem="lz2-v4-QLl" firstAttribute="top" secondItem="xYw-VT-flI" secondAttribute="top" constant="10" id="EQI-Qo-37e"/>
+                                    <constraint firstItem="Ios-EC-hbY" firstAttribute="top" secondItem="Rjg-T6-rmv" secondAttribute="bottom" constant="1" id="FXd-gy-kew"/>
                                     <constraint firstItem="lz2-v4-QLl" firstAttribute="leading" secondItem="xYw-VT-flI" secondAttribute="leading" constant="20" id="HiF-OV-gU4"/>
                                     <constraint firstItem="jAX-rp-djX" firstAttribute="leading" secondItem="lz2-v4-QLl" secondAttribute="trailing" constant="30" id="HjK-mo-KFm"/>
                                     <constraint firstItem="OGk-9h-qC0" firstAttribute="top" secondItem="Rjg-T6-rmv" secondAttribute="bottom" constant="15" id="Iau-lU-y4s"/>
@@ -96,6 +103,7 @@
                                     <constraint firstItem="iF6-bn-R8l" firstAttribute="top" secondItem="jAX-rp-djX" secondAttribute="bottom" constant="8" id="qiv-gT-0lR"/>
                                     <constraint firstItem="j3p-6f-11Y" firstAttribute="leading" secondItem="jAX-rp-djX" secondAttribute="trailing" constant="10" id="sD2-bS-2z8"/>
                                     <constraint firstAttribute="trailing" secondItem="j3p-6f-11Y" secondAttribute="trailing" constant="10" id="sSW-mh-sSB"/>
+                                    <constraint firstItem="Ios-EC-hbY" firstAttribute="centerX" secondItem="Rjg-T6-rmv" secondAttribute="centerX" id="snb-bz-hqC"/>
                                     <constraint firstItem="OGk-9h-qC0" firstAttribute="trailing" secondItem="jAX-rp-djX" secondAttribute="trailing" id="wmG-nJ-eAh"/>
                                     <constraint firstItem="Rjg-T6-rmv" firstAttribute="centerX" secondItem="lz2-v4-QLl" secondAttribute="centerX" id="xQo-mt-IhV"/>
                                 </constraints>
@@ -145,6 +153,7 @@
                 <outlet property="bgView" destination="xYw-VT-flI" id="vva-Qi-cOf"/>
                 <outlet property="coinAmountLabel" destination="jAX-rp-djX" id="EPO-Vl-WdM"/>
                 <outlet property="coinNameLabel" destination="Rjg-T6-rmv" id="fjk-vO-mbQ"/>
+                <outlet property="coinSubNameLabel" destination="Ios-EC-hbY" id="nX7-aZ-tsG"/>
                 <outlet property="coinSymbol" destination="lz2-v4-QLl" id="eaQ-Tr-kQn"/>
                 <outlet property="copyButton" destination="Vvr-aE-5dO" id="bVO-2q-DTN"/>
                 <outlet property="depositButton" destination="KJ9-4f-RTQ" id="7hp-nF-qyE"/>

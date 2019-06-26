@@ -16,7 +16,7 @@ class EtherscanURLCreator {
 
 
 class TTNURLCreator {
-    private static let base = "http://3.112.106.186:3000/tables_txresult.html?tx="
+    private static let base = "http://3.112.106.186/tables_txresult.html?tx="
     static func url(txid:String)-> URL {
         return URL.init(string: "\(TTNURLCreator.base)\(txid)")!
     }
