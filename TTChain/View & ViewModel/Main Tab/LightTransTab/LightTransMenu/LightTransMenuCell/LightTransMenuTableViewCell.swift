@@ -47,10 +47,10 @@ class LightTransMenuTableViewCell: UITableViewCell {
     
     func setupUI() {
 //        self.gradView.cornerRadius = 8
-        self.coinNameLabel.set(textColor: .white, font: .owMedium(size: 20))
-        self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 18))
-        self.addressLabel.set(textColor: .white, font: .owRegular(size: 15))
-        fiatAmountLabel.set(textColor: .white, font: .owRegular(size: 14))
+        self.coinNameLabel.set(textColor: .white, font: .owMedium(size: 18))
+        self.coinAmountLabel.set(textColor: .white, font: .owRegular(size: 16))
+        self.addressLabel.set(textColor: .white, font: .owRegular(size: 14))
+        fiatAmountLabel.set(textColor: .white, font: .owRegular(size: 12))
         self.backgroundColor = .clear
 //        self.gradView.backgroundColor = .clear
         self.bgView.backgroundColor = .clear
@@ -65,8 +65,8 @@ class LightTransMenuTableViewCell: UITableViewCell {
     }
     
     private func configUI(lang:Lang) {
-        self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: lang.dls.light_withdraw_btn_title, borderInfo: (color: .summerSky    , width: 1))
-        self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: lang.dls.light_deposit_btn_title,borderInfo: (color: .summerSky    , width: 1))
+        self.transferButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_send"),text: lang.dls.light_withdraw_btn_title, borderInfo: (color: .summerSky, width: 1))
+        self.depositButton.set(color: .white, font: .owRegular(size: 12), image: #imageLiteral(resourceName: "light_receive"),text: lang.dls.light_deposit_btn_title,borderInfo: (color: .summerSky , width: 1))
         
     }
     
@@ -90,7 +90,19 @@ class LightTransMenuTableViewCell: UITableViewCell {
             .bind(to: coinAmountLabel.rx.text)
             .disposed(by: disposeBag)
         
-        self.coinNameLabel.text = asset.coin?.inAppName?.replacingOccurrences(of: "BTCN", with: "BTC")
+        let coinName : String = {
+            switch asset.coinID! {
+            case Coin.btcn_identifier :
+                return "BTC-N"
+            case Coin.usdtn_identifier:
+                return "USDT-N \n -omni-"
+            default:
+                return asset.coin!.inAppName!
+            }
+        }()
+        
+        self.coinNameLabel.text = coinName
+        
         self.coinSymbol?.image = asset.coin?.iconImg
         
         self.transferButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
