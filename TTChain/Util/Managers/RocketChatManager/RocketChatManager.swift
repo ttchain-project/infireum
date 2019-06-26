@@ -40,6 +40,7 @@ class RocketChatManager {
                 default:
                     print("Issues with login")
                 }
+                self.rocketChatUser.accept(nil)
             case .success(let model):
                 let rocketChatModel = RocketChatUser.init(rocketChatUserId: model.rocketChatUserId, authToken: model.authToken, name: model.username)
                 line()

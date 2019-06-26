@@ -495,7 +495,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         }
     }
     func showErrorMessage() {
-        let alertMessage = UIAlertController(title: "could not sent email", message: "check if your device have email support!", preferredStyle: UIAlertControllerStyle.alert)
+        let alertMessage = UIAlertController(title: "Could not sent email", message: "Check if your device has email support!", preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title:"Okay", style: UIAlertActionStyle.default, handler: nil)
         alertMessage.addAction(action)
         self.present(alertMessage, animated: true, completion: nil)

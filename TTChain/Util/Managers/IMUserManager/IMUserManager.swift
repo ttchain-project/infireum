@@ -109,7 +109,7 @@ class IMUserManager {
         }).disposed(by: getUserDataBag)
     }
     
-    func createUserForIM() {
+    func createUserForIM(status:((Bool)->Void)? = nil) {
         let deviceId = UIDevice.current.identifierForVendor!.uuidString
         guard let user = Identity.singleton, let userID = user.id else {
             return
@@ -117,12 +117,18 @@ class IMUserManager {
         Server.instance.createIMUser(userId: userID, deviceID: deviceId, nickName: user.name ?? "", headImg: "", introduction: "").asObservable().subscribe(onNext: {[weak self] (result) in
             switch result {
             case .success(let model):
+                if status != nil{
+                    status!(true)
+                }
                 let userModel = IMUser.init(uID: model.uID, nickName: user.name ?? "", introduction: "", headImg: nil)
                 self?.userModel = BehaviorRelay.init(value: userModel)
                 self?.shouldLoginToRocketChat.onNext(())
                 self?.userLoginStatus.accept(.userExists)
                 self?.saveIMUser()
             case .failed(let error):
+                if status != nil{
+                    status!(false)
+                }
                 DLogError(error)
             }
         }).disposed(by: bag)
@@ -133,7 +139,6 @@ class IMUserManager {
         guard let user = Identity.singleton, let userID = user.id else {
             return
         }
-        
         Server.instance.recoverIMUser(withUserId: userID, andDeviceID: deviceId, recoveryPassword: password).asObservable().subscribe(onNext: { [weak self] (result) in
             guard let `self` = self else {
                 return

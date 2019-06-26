@@ -56,6 +56,23 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         groupsButton.setTitleForAllStates(lang.dls.tab_social)
 
     }
+    
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if IMUserManager.manager.userLoginStatus.value == .deviceIDNotMatched {
+            showTransferAlert()
+        }
+    }
     override func renderTheme(_ theme: Theme) {
         messagesButton.set(textColor: .white, font: .owRegular(size:14), backgroundColor: .clear)
         friendsButton.set(textColor: .white, font: .owRegular(size:14), backgroundColor: .clear)
@@ -67,21 +84,15 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
     
     func bindUI() {
         self.messagesButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
-            if self.messagesButton.isSelected {
-                return
-            }
+            
             self.handleSelection(forTab: .Message)
         }).disposed(by: bag)
         self.friendsButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
-            if self.friendsButton.isSelected {
-                return
-            }
+           
             self.handleSelection(forTab: .Friends)
         }).disposed(by: bag)
         self.groupsButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
-            if self.groupsButton.isSelected {
-                return
-            }
+            
             self.handleSelection(forTab: .Groups)
         }).disposed(by: bag)
         
@@ -114,6 +125,9 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
     }
     
     func handleSelection(forTab tab:ChatTabs) {
+        if tab == currentTab {
+            return
+        }
         self.currentTab = tab
         self.messagesButton.isSelected = false
         self.groupsButton.isSelected = false
@@ -163,6 +177,58 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
             v.trailing == s.trailing
         }
         self.currentChildVC = vc
+    }
+    
+    func showTransferAlert() {
+        let alertController = UIAlertController.init(title: LM.dls.chat_list_alert_recover_message_history_title, message: LM.dls.chat_list_alert_recover_message_history_message, preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = LM.dls.chat_list_placeholder_recover_message_history
+        }
+        
+        alertController.addAction(UIAlertAction.init(title: LM.dls.chat_list_alert_recover_message_history_create, style: .default, handler: {[weak self] (action) in
+            guard let `self` = self else {
+                return
+            }
+            self.hud.startAnimating(inView: self.view)
+            IMUserManager.manager.createUserForIM(status : { status in
+                if status {
+                    RocketChatManager.manager.rocketChatUser.asObservable().subscribe(onNext: { (user) in
+                        self.hud.stopAnimating()
+                        if user != nil {
+                            self.currentTab = nil
+                            self.handleSelection(forTab: .Message)
+                        }else {
+                            
+                        }
+                    }).disposed(by: self.bag)
+                }else {
+                    self.hud.stopAnimating()
+                }
+            })
+        }))
+        
+        alertController.addAction(UIAlertAction.init(title: LM.dls.chat_list_alert_recover_message_history_recover, style: .default, handler: { (action) in
+            if let textFields = alertController.textFields, let text = textFields[0].text, text.count > 0 {
+                IMUserManager.manager.recoverUser(withPassword: text, handle: { [weak self] (isSuccess) in
+                    guard let `self` = self else { return }
+                    if isSuccess {
+                        self.currentTab = nil
+                        self.handleSelection(forTab: .Message)
+                    } else {
+                        let alertController = UIAlertController(title: LM.dls.backupChat_alert_password_mismatch, message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: LM.dls.g_ok, style: .default, handler: {
+                            _ in
+                            self.showTransferAlert()
+                        }))
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                })
+            }
+        }))
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 

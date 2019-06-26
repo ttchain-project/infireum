@@ -55,11 +55,7 @@ final class ChatMessageListViewController: KLModuleViewController,KLVMVC {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if IMUserManager.manager.userLoginStatus.value == .deviceIDNotMatched {
-//            showTransferAlert()
-        } else {
-            self.viewModel.getCommunicationList()
-        }
+        self.viewModel.getCommunicationList()
     }
     
     private lazy var hud = {
@@ -75,7 +71,6 @@ final class ChatMessageListViewController: KLModuleViewController,KLVMVC {
     func setupTableView() {
         self.tableView.addSubview(self.refreshControl)
         tableView.register(ChatHistoryTableViewCell.nib, forCellReuseIdentifier: ChatHistoryTableViewCell.cellIdentifier())
-        
     }
     override func renderTheme(_ theme: Theme) {
         

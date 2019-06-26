@@ -73,10 +73,10 @@ class ChatMsgListViewModel: KLRxViewModel {
         Server.instance.getCommunicationsList().asObservable().subscribe(onNext: { (result) in
             switch result {
             case .failed(error: let err) :
-                print(err)
+                DLogError(err)
             case .success(let model):
-//                self._allCommunicationList.accept(model.communicationList)
                 self._communicationList.accept(model.communicationList)
+                DLogInfo("GotCommunicationList")
             }
         }).disposed(by: bag)
     }
