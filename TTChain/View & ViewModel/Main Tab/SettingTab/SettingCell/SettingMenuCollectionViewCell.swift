@@ -31,4 +31,18 @@ class SettingMenuCollectionViewCell: UICollectionViewCell {
         let title = model.title.replacingOccurrences(of: "\n", with: " ")
         self.titleLabel.numberOfLines = title.components(separatedBy: " ").count == 1 ? 1 : 0
     }
+    
+    func setupCellForShortcuts(title:String) {
+//        guard let imageURL = URL.init(string: model.img) else {
+//            imageView.image = #imageLiteral(resourceName: "no_image")
+//            return
+//        }
+//        imageView.af_setImage(withURL: imageURL)
+        let titleStr = title.replacingOccurrences(of: "\n", with: " ")
+        self.titleLabel.numberOfLines = titleStr.components(separatedBy: " ").count == 1 ? 1 : 0
+        self.titleLabel.text = titleStr
+        self.imageView.cornerRadius = self.imageView.height/2
+        self.imageView.borderColor = .cloudBurst
+        self.imageView.borderWidth = 1
+    }
 }

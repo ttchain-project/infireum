@@ -11,11 +11,13 @@ import UIKit
 class SettingMenuHeaderCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    func setup(title:String) {
+    func setup(title:String,subTitle:String) {
         self.titleLabel.text = title
+        self.subTitle.text = subTitle
     }
 }

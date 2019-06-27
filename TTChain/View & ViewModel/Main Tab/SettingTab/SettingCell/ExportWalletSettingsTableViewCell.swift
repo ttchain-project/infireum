@@ -15,7 +15,7 @@ class ExportWalletSettingsTableViewCell: UITableViewCell {
         // Initialization code
         self.exportLabel.set(textColor: .cloudBurst, font: .owRegular(size: 14))
         self.walletExportLabel.set(textColor: .cloudBurst, font: .owRegular(size: 14))
-        self.exportLabel.text = LM.dls.setting_export_key_title
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,5 +31,7 @@ class ExportWalletSettingsTableViewCell: UITableViewCell {
     func config(setting:SettingType) {
         walletExportLabel.text = setting.title
         walletImageLabel.image = setting.image
+        self.exportLabel.text = LM.dls.setting_export_key_title
+
     }
 }

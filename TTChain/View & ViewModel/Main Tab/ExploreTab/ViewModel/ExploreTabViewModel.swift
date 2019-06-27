@@ -67,6 +67,10 @@ class ExploreTabViewModel: KLRxViewModel {
     
     var timerSub: Disposable?
 
+    lazy var shortcutsArray:[String] = {
+        return ["意見回饋","隱私政策","幫助中心","關於我們"]
+    }()
+    
     lazy var exploreOptionsDataSource: RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel> = {
         let source = RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel>.init(configureCell: { (source, tv, idxPath, model) -> UICollectionViewCell in
             fatalError()
@@ -76,11 +80,12 @@ class ExploreTabViewModel: KLRxViewModel {
         return source
     }()
     
-    lazy var marketCoinDataSource: RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel> = {
-        let source = RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel>.init(configureCell: { (source, tv, idxPath, model) -> UICollectionViewCell in
-            fatalError()
-        }, configureSupplementaryView: { (source, cv, kind, indexPath) -> UICollectionReusableView in
-            fatalError()
+    lazy var marketCoinDataSource: RxTableViewSectionedReloadDataSource<MarketTestSectionModel> = {
+        let source = RxTableViewSectionedReloadDataSource<MarketTestSectionModel>.init(configureCell: { (source, tv, idxPath, model) -> UITableViewCell in
+            let cell:CoinMarketTableViewCell = tv.dequeueReusableCell(withClass: CoinMarketTableViewCell.self, for: idxPath)
+            cell.config(model:model as! CoinMarketModel)
+            cell.srNoLabel.text = "\(idxPath.row + 1)"
+            return cell
         })
         return source
     }()

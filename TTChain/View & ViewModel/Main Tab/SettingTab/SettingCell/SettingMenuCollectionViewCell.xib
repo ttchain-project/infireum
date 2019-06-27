@@ -23,6 +23,7 @@
                         <rect key="frame" x="27.5" y="0.0" width="76" height="76"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="05E-6n-b3O" secondAttribute="height" multiplier="1:1" id="KHk-Uy-DeT"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="YPC-Ql-2Fs"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pin 密碼" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kMB-Ow-0CM">

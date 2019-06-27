@@ -9,8 +9,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
-final class ExploreViewController: KLModuleViewController, KLVMVC {
+import MessageUI
+final class ExploreViewController: KLModuleViewController, KLVMVC,MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
     
     var viewModel: ExploreTabViewModel!
     
@@ -31,14 +31,6 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
         self.configCollectionView()
         self.bindCollectionView()
         
-        let superview = self.exploreShortcutsCollectionView.superview
-        superview?.shadowColor = UIColor.gray
-        superview?.shadowRadius = 5.0
-        superview?.shadowOffset = CGSize.init(width: 3.0, height: 3.0)
-        superview?.shadowOpacity = 1.0
-        
-        exploreShortcutsCollectionView?.layer.cornerRadius = 5.0
-        exploreShortcutsCollectionView?.layer.masksToBounds = true
     }
 
     typealias ViewModel = ExploreTabViewModel
@@ -52,7 +44,7 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var exploreShortcutsCollectionView: UICollectionView!
     @IBOutlet weak var exploreOptionsCollectionView: UICollectionView!
-    @IBOutlet weak var coinMarketCollectionView: UICollectionView!
+    @IBOutlet weak var coinMarketTableView: UITableView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var optionsCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var shortcutsViewHeight: NSLayoutConstraint!
@@ -71,15 +63,13 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
     func configCollectionView() {
         bannerCollectionView.register(BannerCollectionViewCell.nib,
                                 forCellWithReuseIdentifier: BannerCollectionViewCell.cellIdentifier())
-        exploreShortcutsCollectionView.register(SettingMenuCollectionViewCell.nib,
-                                forCellWithReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier())
+        exploreShortcutsCollectionView.register(ExploreShortcutCollectionViewCell.nib,
+                                forCellWithReuseIdentifier: ExploreShortcutCollectionViewCell.cellIdentifier())
         exploreOptionsCollectionView.register(SettingMenuCollectionViewCell.nib,
                                 forCellWithReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier())
-        coinMarketCollectionView.register(CoinMarketCollectionViewCell.nib,
-                                              forCellWithReuseIdentifier: CoinMarketCollectionViewCell.cellIdentifier())
+        coinMarketTableView.register(nib: CoinMarketTableViewCell.nib, withCellClass: CoinMarketTableViewCell.self)
+        
         exploreOptionsCollectionView.register(SettingMenuHeaderCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className)
-        coinMarketCollectionView.register(SettingMenuHeaderCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className)
-
     }
     
     func bindCollectionView() {
@@ -95,21 +85,17 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
             if (kind == UICollectionElementKindSectionHeader) {
                 let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
               
-                var title :String {
                     switch indexpath.section {
                     case 0:
-                    return LM.dls.hot_group
+                        headerView.setup(title:LM.dls.hot_group,subTitle: "快來看看最火社群們")
                     case 1:
-                    return LM.dls.media
+                     headerView.setup(title:LM.dls.media,subTitle: "我們都幫你找好啦！不用再搜尋了！")
                     case 2:
-                    return "dApp"
+                     headerView.setup(title:"DApp",subTitle: "遊戲一把抓")
                     case 3:
-                    return LM.dls.blockchain_explorer
-                    default: return ""
+                     headerView.setup(title:LM.dls.blockchain_explorer,subTitle: "沒梗了可以幫我想台詞嗎")
+                    default: break
                     }
-                }
-                
-                headerView.setup(title:title)
                 return headerView
             }
             return UICollectionReusableView()
@@ -127,13 +113,13 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
             self.view.setNeedsLayout()
         }).disposed(by: bag)
         
-        self.exploreShortcutsCollectionView.rx.contentSize.asObservable().subscribe(onNext: { [unowned self](size) in
-            let height = size.height
-            self.shortcutsViewHeight.constant = height
-            self.view.setNeedsLayout()
-        }).disposed(by: bag)
+//        self.exploreShortcutsCollectionView.rx.contentSize.asObservable().subscribe(onNext: { [unowned self](size) in
+//            let height = size.height
+//            self.shortcutsViewHeight.constant = height
+//            self.view.setNeedsLayout()
+//        }).disposed(by: bag)
         
-        self.coinMarketCollectionView.rx.contentSize.asObservable().subscribe(onNext: { [unowned self](size) in
+        self.coinMarketTableView.rx.contentSize.asObservable().subscribe(onNext: { [unowned self](size) in
             let height = size.height
             self.coinMarketHeight.constant = height
             self.view.setNeedsLayout()
@@ -168,42 +154,22 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
             }
         }).disposed(by: bag)
         
-        viewModel.shortcutsDataSource.configureCell = {
-            (datasource, cv, indexPath, settingModel) in
-            let cell = cv.dequeueReusableCell(withReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier(), for: indexPath) as! SettingMenuCollectionViewCell
-            cell.setupCell(model:settingModel)
-            return cell
-        }
         
-        MarketTestHandler.shared.discoveryArray
-            .bind(to: exploreShortcutsCollectionView.rx.items(
-                dataSource: viewModel.shortcutsDataSource)
-            )
-            .disposed(by: bag)
+        Observable.of(self.viewModel.shortcutsArray)
+            .bind(to: self.exploreShortcutsCollectionView.rx.items) { cv, row, element in
+                let cell = cv.dequeueReusableCell(withClass: ExploreShortcutCollectionViewCell.self, for: IndexPath.init(row: row, section: 0))
+                cell.titleLabel.text = element
+                return cell
+        }.disposed(by: bag)
         
-        exploreShortcutsCollectionView.rx.itemSelected.subscribe(onNext: { (indexPath) in
-            let settingModel: MarketTestTabModel = MarketTestHandler.shared.discoveryArray.value[indexPath.section].items[indexPath.row] as! MarketTestTabModel
-            self.handleShortcutNavigation(model: settingModel)
+        exploreShortcutsCollectionView.rx.itemSelected.subscribe(onNext: {[unowned self] (indexPath) in
+            if indexPath.row == 0 {
+                self.sendMail()
+            }
         }).disposed(by: bag)
         
-        viewModel.marketCoinDataSource.configureCell = {
-            (datasource, cv, indexPath, settingModel) in
-            let cell = cv.dequeueReusableCell(withReuseIdentifier: CoinMarketCollectionViewCell.cellIdentifier(), for: indexPath) as! CoinMarketCollectionViewCell
-            cell.setup(model:settingModel as! CoinMarketModel)
-            return cell
-        }
-        
-        viewModel.marketCoinDataSource.configureSupplementaryView = { (datasource, cv, kind, indexpath) in
-            if (kind == UICollectionElementKindSectionHeader) {
-                let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
-                headerView.setup(title:LM.dls.trend)
-                return headerView
-            }
-            return UICollectionReusableView()
-        }
-        
         MarketTestHandler.shared.coinMarketArray
-            .bind(to: coinMarketCollectionView.rx.items(
+            .bind(to: coinMarketTableView.rx.items(
                 dataSource: viewModel.marketCoinDataSource)
             )
             .disposed(by: bag)
@@ -220,12 +186,13 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
 
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_2, barTint: .clear)
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
     }
   
     override func renderLang(_ lang: Lang) {
         self.navigationItem.title = lang.dls.tab_explorer
+        self.exploreOptionsCollectionView.reloadData()
     }
     
     func handleShortcutNavigation(model:MarketTestTabModel) {
@@ -264,6 +231,43 @@ final class ExploreViewController: KLModuleViewController, KLVMVC {
         self.bannerCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
         
     }
+    
+    func sendMail() {
+        if MFMailComposeViewController.canSendMail() {
+            let message:String  = ""
+            let composePicker = MFMailComposeViewController()
+            composePicker.mailComposeDelegate = self
+            composePicker.delegate = self
+            composePicker.setToRecipients(["service@ttchainplus.io"])
+            composePicker.setSubject("")
+            composePicker.setMessageBody(message, isHTML: false)
+            self.present(composePicker, animated: true, completion: nil)
+        } else {
+            self .showErrorMessage()
+        }
+    }
+    func showErrorMessage() {
+        let alertMessage = UIAlertController(title: "Could not sent email", message: "Check if your device has email support!", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title:"Okay", style: UIAlertActionStyle.default, handler: nil)
+        alertMessage.addAction(action)
+        self.present(alertMessage, animated: true, completion: nil)
+    }
+    
+    
+    //MARK: - Mail Composer Delegate Method
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            print("Mail cancelled")
+        case .saved:
+            print("Mail saved")
+        case .sent:
+            print("Mail sent")
+        case .failed:
+            break
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension ExploreViewController: UICollectionViewDelegateFlowLayout {
@@ -283,7 +287,7 @@ extension ExploreViewController: UICollectionViewDelegateFlowLayout {
         case self.exploreShortcutsCollectionView:
             return UIEdgeInsets.init(top: 5, left: 10, bottom: 5, right: 10)
 
-        case self.exploreOptionsCollectionView,coinMarketCollectionView:
+        case self.exploreOptionsCollectionView:
             return UIEdgeInsets.init(top: 5, left: 20, bottom: 5, right: 10)
         default:
             return UIEdgeInsets.zero
@@ -292,8 +296,8 @@ extension ExploreViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         switch collectionView {
-        case self.exploreOptionsCollectionView,coinMarketCollectionView:
-            return CGSize.init(width: self.view.width, height: 40)
+        case self.exploreOptionsCollectionView:
+            return CGSize.init(width: self.view.width, height: 62)
         default:
             return CGSize.zero
         }
