@@ -34,7 +34,6 @@ class TTNotificationHandler {
                 case .success(_): DLogDebug("success regist")
                 case .failed(error:let error):
                     DLogError(error)
-                    DLogError(error)
                 }
             }, onError: nil).disposed(by: TTNotificationHandler.shared.bag)
         }

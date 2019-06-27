@@ -68,6 +68,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
             view.edges == sup.edges
         }
         tableView.tableHeaderView = base
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

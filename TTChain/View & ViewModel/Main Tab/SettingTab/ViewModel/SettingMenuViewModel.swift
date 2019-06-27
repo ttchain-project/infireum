@@ -22,7 +22,7 @@ enum SettingType {
     case BackupAccount
     case DeleteAccount
     
-    var image: UIImage? {
+    var image: UIImage {
         switch self {
         case .Notification:
             return #imageLiteral(resourceName: "setting_icon_message.png")
@@ -35,9 +35,9 @@ enum SettingType {
         case .Currency:
             return #imageLiteral(resourceName: "setting_icon_money.png")
         case .ExportETHWallet:
-            return nil
+            return #imageLiteral(resourceName: "iconContentEth.png")
         case .ExportBTCWallet:
-            return nil
+            return #imageLiteral(resourceName: "iconFundsBitcoin")
         case .BackupAccount:
             return #imageLiteral(resourceName: "setting_icon_backup.png")
         case .DeleteAccount:
@@ -57,9 +57,9 @@ enum SettingType {
         case .DeleteAccount:
             return LM.dls.setting_delete_account_title
         case .ExportBTCWallet:
-            return LM.dls.setting_export_key_title + LM.dls.setting_export_btc_wallet_title
+            return LM.dls.setting_export_btc_wallet_title
         case .ExportETHWallet:
-            return LM.dls.setting_export_key_title + LM.dls.setting_export_eth_wallet_title
+            return LM.dls.setting_export_eth_wallet_title
         case .Language:
             return LM.dls.settings_label_language
         case .VersionCheck:
@@ -109,39 +109,32 @@ class SettingMenuViewModel: KLRxViewModel {
     typealias InputSource = Void
     typealias OutputSource = Void
     var bag: DisposeBag = DisposeBag.init()
-    var settingsArray : [SettingSectionModel] = []
-    
-    lazy var datasource: RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel> = {
-        let source = RxCollectionViewSectionedReloadDataSource<MarketTestSectionModel>.init(configureCell: { (source, cv, idxPath, settingModel) -> SettingMenuCollectionViewCell in
-            let cell = cv.dequeueReusableCell(withReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier(), for: idxPath) as! SettingMenuCollectionViewCell
-            cell.setupCell(model:settingModel)
-            return cell
-        }, configureSupplementaryView: { (datasource, cv, kind, indexpath) in
-            if (kind == UICollectionElementKindSectionHeader) {
-                let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
-                
-                let titleString : String = {
-                    switch indexpath.section {
-                    case 0:  return LM.dls.account_setting_title
-                    case 1:  return LM.dls.basic_setting_title
-                    case 2:  return LM.dls.follow_us_title
-                    case 3:  return LM.dls.others_title
-                    default:
-                        return ""
-                    }
-                    
-                }()
-                headerView.setup(title: titleString)
-                return headerView
-            }
-            return UICollectionReusableView()
-        })
-        return source
+    public lazy var settingsArray:Observable<[SettingSectionModel]> = {
+        _settingsArray.asObservable()
     }()
+    
+    private lazy var _settingsArray : BehaviorRelay<[SettingSectionModel]> = BehaviorRelay.init(value: [])
+    
+    lazy var dataSource: RxTableViewSectionedReloadDataSource<SettingSectionModel> = {
+        return RxTableViewSectionedReloadDataSource<SettingSectionModel>.init(configureCell: { (dataSource, tv, idxPath, settingType) -> UITableViewCell in
+            switch settingType {
+            case .ExportBTCWallet, .ExportETHWallet:
+                let cell: ExportWalletSettingsTableViewCell = tv.dequeueReusableCell(withClass: ExportWalletSettingsTableViewCell.self)
+                cell.config(setting:settingType)
+                return cell
+            default:
+                let cell: SettingsTabTableViewCell = tv.dequeueReusableCell(withClass: SettingsTabTableViewCell.self)
+                cell.config(setting:settingType)
+                return cell
+            }
+        })
+    }()
+    
+
     
     func createSettingOptionsArray() {
         
-        self.settingsArray = [SettingSectionModel.init(title: LM.dls.system_settings_title,
+        let _settingsArray = [SettingSectionModel.init(title: LM.dls.system_settings_title,
                                                       items: [SettingType.Notification,
                                                               SettingType.Language,
                                                               SettingType.VersionCheck]),
@@ -154,6 +147,7 @@ class SettingMenuViewModel: KLRxViewModel {
                                                       items: [SettingType.BackupAccount,
                                                               SettingType.DeleteAccount])
         ]
+        self._settingsArray.accept(_settingsArray)
     }
     
 }

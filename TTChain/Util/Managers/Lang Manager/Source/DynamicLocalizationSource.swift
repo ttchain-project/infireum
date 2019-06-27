@@ -414,7 +414,10 @@ protocol DynamicLocalizationSource {
     var setting_export_btc_wallet_title:String {get set}
     var setting_export_eth_wallet_title:String {get set}
     var setting_delete_account_title:String {get set}
-    
+   
+    var switch_on_notification_setting :String {get set}
+    var switch_off_notification_setting :String {get set}
+
     var account_setting_title: String { get set }
     var basic_setting_title: String { get set }
     var follow_us_title: String { get set }
@@ -422,7 +425,8 @@ protocol DynamicLocalizationSource {
     var system_settings_title:String {get set}
     var wallet_settings_title:String {get set}
     var account_safety_settings_title:String {get set}
-
+   
+ 
     
     var changePrefFiat_title: String { get set }
     var changePrefFiat_btn_save: String { get set }

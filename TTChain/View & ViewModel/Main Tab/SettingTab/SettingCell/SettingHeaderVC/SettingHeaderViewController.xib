@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingHeaderViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
+                <outlet property="settingButton" destination="bg9-SB-qaS" id="Svx-5b-AdY"/>
+                <outlet property="userImageView" destination="3rE-Ny-ZU7" id="7A2-SH-fFJ"/>
+                <outlet property="userName" destination="oe1-YV-ZdS" id="lBb-tf-brj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

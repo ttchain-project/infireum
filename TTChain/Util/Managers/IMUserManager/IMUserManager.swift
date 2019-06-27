@@ -20,9 +20,9 @@ class IMUserManager {
     
     let bag = DisposeBag.init()
     private var getUserDataBag = DisposeBag()
-    static var manager: IMUserManager!
+    static var manager: IMUserManager! = IMUserManager()
     static func launch() {
-        manager = IMUserManager.init()
+//        manager = IMUserManager.init()
         RocketChatManager.launch()
         manager.checkIMUserStatus()
     }
@@ -35,7 +35,6 @@ class IMUserManager {
     }
     
     var shouldLoginToRocketChat: PublishSubject<Void> = PublishSubject.init()
-    var didGetCha: PublishSubject<Void> = PublishSubject.init()
     
     func checkIMUserStatus() {
         self.checkForLocalMember().asObservable().subscribe(onNext: {[weak self] (result) in

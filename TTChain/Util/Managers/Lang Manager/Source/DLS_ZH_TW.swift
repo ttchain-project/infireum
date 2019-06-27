@@ -475,8 +475,8 @@ struct DLS_ZH_TW: DLS {
     var add_friend_placeholder_message = ""
     var add_friend_alert_success = "已送出交友邀請"
     var add_friend_placeholder_friend_id = "扫描好友QR Code"
-    
-
+    var switch_on_notification_setting = "開啟訊息通知"
+    var switch_off_notification_setting = "關閉訊息通知"
     var friend_request_title = "交友邀請"
     var group_request_title = "群组邀請"
     var friend = "好友"

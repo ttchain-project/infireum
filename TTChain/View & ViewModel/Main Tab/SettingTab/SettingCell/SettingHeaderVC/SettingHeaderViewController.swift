@@ -7,11 +7,47 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
-class SettingHeaderViewController: UIViewController {
+final class SettingHeaderViewController: KLModuleViewController,KLVMVC {
 
+    var bag:DisposeBag = DisposeBag()
+    typealias ViewModel = SettingHeaderViewModel
+    var viewModel: SettingHeaderViewModel!
+    func config(constructor: SettingHeaderViewController.Constructor) {
+        self.view.layoutIfNeeded()
+        startMonitorLangIfNeeded()
+        startMonitorThemeIfNeeded()
+        self.bindUI()
+    }
+    
+    typealias Constructor = Void
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
+    
+    @IBOutlet weak var userName:UILabel!
+    @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var userImageView: UIImageView!
+    
+    override func renderLang(_ lang: Lang) {
+        
+    }
+    override func renderTheme(_ theme: Theme) {
+        self.userName.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 16))
+    }
+    
+    func bindUI() {
+        IMUserManager.manager.userModel.asObservable().subscribe(onNext: { [unowned self] (user) in
+            guard let user = user else {
+                return
+            }
+            self.userImageView.setProfileImage(image: user.headImgUrl, tempName: user.nickName)
+        }).disposed(by: bag)
+
+        self.userName.text = Identity.singleton?.name
+        
+    }
+    
 }

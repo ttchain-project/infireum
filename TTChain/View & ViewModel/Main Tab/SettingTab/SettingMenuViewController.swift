@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MessageUI
+import RxDataSources
+import Cartography
 
 final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
     var viewModel: SettingMenuViewModel!
@@ -17,8 +19,8 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     func config(constructor: Void) {
         self.view.layoutIfNeeded()
         self.viewModel = ViewModel.init(input: (), output: ())
-        self.configCollectionView()
-        self.bindCollectionView()
+        self.configTableView()
+        self.bindTableView()
         self.setUpLangSelectView()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
@@ -30,11 +32,13 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     
     typealias Constructor = Void
 
-    @IBOutlet weak var collectionView: UICollectionView!
+//    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView:UITableView!
     
     let pickerView: UIPickerView = UIPickerView.init()
     private let pickerResponder = UITextField.init()
 
+    private var settingTableHeader : SettingHeaderViewController = {return SettingHeaderViewController.instance()}()
     private lazy var hud: KLHUD = {
         return KLHUD.init(type: .spinner,
                           frame: CGRect.init(
@@ -61,60 +65,47 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        
+
     }
-    func configCollectionView() {
-        
-        collectionView.register(SettingMenuCollectionViewCell.nib,
-                                forCellWithReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier())
-     
-        collectionView.register(SettingMenuHeaderCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className)
-        
+    func configTableView() {
+        tableView.register(cellType: SettingsTabTableViewCell.self)
+        tableView.register(cellType: ExportWalletSettingsTableViewCell.self)
+        let base = UIView.init()
+        base.backgroundColor = .clear
+        base.addSubview(settingTableHeader.view)
+        base.frame = CGRect.init(origin: .zero, size: CGSize(width: self.tableView.width, height: 120))
+        constrain(settingTableHeader.view) { (view) in
+            let sup = view.superview!
+            view.edges == sup.edges
+        }
+        tableView.tableHeaderView = base
     }
     
-    func bindCollectionView() {
-//        viewModel.datasource.configureCell = {
-//            (datasource, cv, indexPath, settingModel) in
-//
-//            let cell = cv.dequeueReusableCell(withReuseIdentifier: SettingMenuCollectionViewCell.cellIdentifier(), for: indexPath) as! SettingMenuCollectionViewCell
-//            cell.setupCell(model:settingModel)
-//            return cell
-//        }
-//        viewModel.datasource.configureSupplementaryView = { (datasource, cv, kind, indexpath) in
-//            if (kind == UICollectionElementKindSectionHeader) {
-//                let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as!  SettingMenuHeaderCollectionReusableView
-//
-//                let titleString : String = {
-//                    switch indexpath.section {
-//                    case 0:  return LM.dls.account_setting_title
-//                    case 1:  return LM.dls.basic_setting_title
-//                    case 2:  return LM.dls.follow_us_title
-//                    case 3:  return LM.dls.others_title
-//                    default:
-//                        return ""
-//                    }
-//
-//                }()
-//                headerView.setup(title: titleString)
-//                return headerView
-//            }
-//            return UICollectionReusableView()
-//        }
-        MarketTestHandler.shared.settingsArray
-            .bind(to: collectionView.rx.items(
-                dataSource: viewModel.datasource)
-            )
-            .disposed(by: bag)
+    
+    func bindTableView() {
 
-        collectionView.rx.itemSelected.subscribe(onNext: { (indexPath) in
-            let settingModel: MarketTestTabModel = MarketTestHandler.shared.settingsArray.value[indexPath.section].items[indexPath.row] as! MarketTestTabModel
-            if settingModel.isExternalLink , settingModel.url != nil{
-                if UIApplication.shared.canOpenURL(settingModel.url!) {
-                    UIApplication.shared.open(settingModel.url!, options: [:], completionHandler: nil)
-                }
-            }else {
-                self.handleNavigation(model: settingModel)
+        self.viewModel.settingsArray.bind(to: self.tableView.rx.items(dataSource: self.viewModel.dataSource)).disposed(by:bag)
+        
+        tableView.rx.modelSelected(SettingType.self).subscribe(onNext: { (type) in
+            switch type {
+            case .Address:
+                self.toAddressBook()
+            case .BackupAccount:
+                self.backup()
+            case .Currency:
+                self.toFiatSelectView()
+            case .Language:
+                self.pickerResponder.becomeFirstResponder()
+            case .DeleteAccount:
+                self.clear()
+            case .ExportBTCWallet:
+                self.handleWalletExport(forChain: .btc)
+            case .ExportETHWallet:
+                self.handleWalletExport(forChain: .eth)
+            case .Notification:
+                self.notificationSetting()
+            case .VersionCheck:
+                self.startCheckVersion()
             }
         }).disposed(by: bag)
     }
@@ -125,11 +116,11 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         
         pickerView.delegate = self
         pickerView.dataSource = self
-        
     }
     
     override func renderLang(_ lang: Lang) {
         self.navigationItem.title = lang.dls.tab_setting
+        self.tableView.reloadData()
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -137,7 +128,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         
-        collectionView.backgroundColor = palette.nav_bg_clear
+        tableView.backgroundColor = palette.nav_bg_clear
         view.backgroundColor = palette.bgView_main
     }
     
@@ -156,9 +147,9 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
             case "update":
                 startCheckVersion()
             case "delete":
-                self.clear(identity: Identity.singleton!)
+                self.clear()
             case "userQrCode":
-                self.backup(identity: Identity.singleton!)
+                self.backup()
             case "currency":
                 self.toFiatSelectView()
             case "language":
@@ -261,13 +252,13 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         present(alert, animated: true, completion: nil)
     }
     
-    private func clear(identity: Identity) {
+    private func clear() {
         //NOTE: As we need to check the pwd, but pwd is related to wallet.
         //      Since there's no pwd for identity now, must make sure that all
         //      the pwds are same, so we can guarantee that the system has no change
         //      pwd features yet.
-        
-        guard let wallets = identity.wallets?.array as? [Wallet] else {
+       
+        guard let identity = Identity.singleton, let wallets = identity.wallets?.array as? [Wallet] else {
             return
         }
         
@@ -290,7 +281,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
             .subscribe(onSuccess: {
                 [unowned self] (pwd) in
                 if sampleWallet.isWalletPwd(rawPwd: pwd) {
-                    self.clearIdentity(identity)
+                    self.clearIdentity()
                 }else {
                     let dls = LM.dls
                     self.showSimplePopUp(with: "",
@@ -370,7 +361,10 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         }
     }
     
-    private func clearIdentity(_ identity: Identity) {
+    private func clearIdentity() {
+        guard let identity = Identity.singleton else {
+            return
+        }
         clearHUD.startAnimating(inView: self.view)
         identity.clear()
         TTNotificationHandler.deregisterIMUserFromNotification()
@@ -388,13 +382,13 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     }
     
     
-    private func backup(identity: Identity) {
+    private func backup() {
         //NOTE: As we need to check the pwd, but pwd is related to wallet.
         //      Since there's no pwd for identity now, must make sure that all
         //      the pwds are same, so we can guarantee that the system has no
         //      pwd-updating features yet.
         
-        guard let wallets = identity.wallets?.array as? [Wallet] else {
+        guard let identity = Identity.singleton ,let wallets = identity.wallets?.array as? [Wallet] else {
             return
         }
         
@@ -517,23 +511,6 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     }
 }
 
-extension SettingMenuViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.width - 60)/4
-        let height = width + 40
-        let size = CGSize.init(width: width, height: height > 130 ? height : 130)
-        return size
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.init(top: 5, left: 10, bottom: 5, right: 10)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize.init(width: self.view.width, height: 40)
-    }
-
-    
-}
 
 extension SettingMenuViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -549,7 +526,20 @@ extension SettingMenuViewController: UIPickerViewDelegate,UIPickerViewDataSource
         let selectedLang = Lang.supportLangs[row]
         let selectedLanguage = Lang.init(rawValue: selectedLang.rawValue)
         LM.instance.lang.accept(selectedLanguage ?? Lang.default)
-        MarketTestHandler.shared.launch()
+    }
+}
+
+extension SettingMenuViewController:UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.set(textColor: .yellowGreen, font: .owRegular(size: 12))
+        return header
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
     }
 }
 
@@ -582,6 +572,36 @@ extension SettingMenuViewController {
         
         alert.addAction(actionETH)
         alert.addAction(actionBTC)
+        alert.addAction(actionCancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func notificationSetting() {
+        let alert = UIAlertController.init(title: LM.dls.settings_notification_title,
+                                           message: "",
+                                           preferredStyle: .actionSheet)
+        
+        let switchOnNotif = UIAlertAction.init(title: LM.dls.switch_on_notification_setting,
+                                               style: .default,
+                                               handler: { _ in
+                                                TTNotificationHandler.registerIMUserForNotification()
+                                                self.view.makeToast(LM.dls.g_success)
+        })
+        let switchOffNotif = UIAlertAction.init(title: LM.dls.switch_off_notification_setting,
+                                                style: .default,
+                                                handler: { _ in
+                                                    TTNotificationHandler.deregisterIMUserFromNotification()
+                                                    self.view.makeToast(LM.dls.g_success)
+        })
+        let actionCancel = UIAlertAction.init(title: LM.dls.g_cancel,
+                                              style: .cancel,
+                                              handler: { _ in
+        })
+        
+        
+        alert.addAction(switchOnNotif)
+        alert.addAction(switchOffNotif)
         alert.addAction(actionCancel)
         
         present(alert, animated: true, completion: nil)

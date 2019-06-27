@@ -26,4 +26,5 @@ class SettingHeaderViewModel:KLRxViewModel {
     func concatInput() {}
     func concatOutput() {}
     
+    
 }

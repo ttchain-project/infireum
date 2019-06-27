@@ -412,6 +412,8 @@ struct DLS_ZH_CN: DLS {
     var setting_export_btc_wallet_title:String  = "比特币（Bitcoin）钱包"
     var setting_export_eth_wallet_title:String = "以太币(Ethereum) 钱包"
     var setting_delete_account_title:String = "删除帐号"
+    var switch_on_notification_setting = "开启讯息通知"
+    var switch_off_notification_setting = "关闭讯息通知"
 
     
     var account_setting_title = "帐户设定"

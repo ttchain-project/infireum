@@ -417,6 +417,10 @@ struct DLS_EN_US: DLS {
 
     var setting_delete_account_title:String = "Delete Account"
     
+    var switch_on_notification_setting = "Switch on notifications"
+    var switch_off_notification_setting = "Switch on notifications"
+
+    
     var account_setting_title = "Account Setting"
     var basic_setting_title = "Basic Setting"
     var follow_us_title = "Follow Us"

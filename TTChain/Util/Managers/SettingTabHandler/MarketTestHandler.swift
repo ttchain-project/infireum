@@ -223,5 +223,10 @@ class MarketTestHandler {
             }
             Server.instance.getQuotesTest().subscribe().disposed(by: self.bag)
         })
+        
+        LM.instance.lang.asObservable().subscribe { _ in
+            DLogDebug("Lang changed, getting quotes")
+            Server.instance.getQuotesTest().subscribe().disposed(by: self.bag)
+        }.disposed(by: self.bag)
     }
 }
