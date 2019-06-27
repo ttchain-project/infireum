@@ -81,6 +81,8 @@ final class WithdrawalConfirmationViewController: KLModuleViewController, KLVMVC
         for (label,title) in zip(self.allTitleLabels,titles) {
             label.text = title
         }
+        confirmButton.setTitleForAllStates(lang.dls.g_confirm)
+        modifyButton.setTitleForAllStates(lang.dls.transfer_back_button_title)
     }
     
     func bindUI() {

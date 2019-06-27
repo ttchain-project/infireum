@@ -748,6 +748,9 @@ struct DLS_ZH_TW: DLS {
     var register_account_msg_label_login = "註冊帳號將自動新增多鏈錢包"
     
     var original_account_login = "原有帳號登入"
+    
+    var transfer_back_button_title :String = "修改"
+
 }
 
 

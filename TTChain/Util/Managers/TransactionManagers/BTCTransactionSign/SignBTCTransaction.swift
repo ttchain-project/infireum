@@ -23,7 +23,6 @@ class SignBTCTransaction {
     
     static func getSignTxForBTC(withInfo info: WithdrawalInfo, forUnspents unspents:[UnspentTransaction],isCompressed:Bool) -> RxAPIResponse<String> {
         
-        
         let instance = SignBTCTransaction.init()
         instance.fee = NSDecimalNumber(decimal:info.totalFee.btcToSatoshi).uint64Value
         

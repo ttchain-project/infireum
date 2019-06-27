@@ -48,7 +48,7 @@ extension TransferManager {
                 return self.getBTCUnspent(fromInfo: withdrawalInfo)
             }
         }.flatMap {
-                [unowned self] result -> RxAPIResponse<String> in
+                result -> RxAPIResponse<String> in
                 switch result {
                 case .failed(error: let err):
                     return .just(.failed(error: err))

@@ -377,9 +377,6 @@ struct GetBTCUnspentAPIModel: KLJSONMappableMoyaResponse {
             
             let height = uJSON["height"].int ?? 0
             let object = Unspent.init(address: addr, amount: amount, confirmations: confirmations, height: height, satoshis: satoshis, scriptPubKey: scriptPubKey, txid: txid, vout: vout)
-            //            guard let object = try? JSONDecoder().decode(Unspent.self, from: try! uJSON.rawData()) else {
-            //                return nil
-            //            }
             return object.address != fromAddress ? nil : object
             }
             .sorted { $0.amount > $1.amount }
