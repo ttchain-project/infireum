@@ -255,7 +255,7 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bg_clear)
+        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
         renderNavTitle(color: theme.palette.nav_item_2, font: .owMedium(size: 20))
 //        navigationController?.navigationBar.renderShadow()
         

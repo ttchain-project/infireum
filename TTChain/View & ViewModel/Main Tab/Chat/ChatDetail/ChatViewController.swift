@@ -146,7 +146,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
         view.backgroundColor = palette.bgView_sub
-        renderNavBar(tint: palette.nav_item_2, barTint: .clear)
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 18))
         changeNavShadowVisibility(true)
         tableView.backgroundColor = UIColor.CSS.whiteSmoke

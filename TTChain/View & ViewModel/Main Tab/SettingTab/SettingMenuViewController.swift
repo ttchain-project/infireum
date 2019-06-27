@@ -125,7 +125,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        renderNavBar(tint: palette.nav_item_2, barTint: .clear)
+        renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         
         tableView.backgroundColor = palette.nav_bg_clear

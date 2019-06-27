@@ -156,7 +156,7 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     }
     
     override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bg_clear)
+        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
         
         changeLeftBarButtonToDismissToRoot(
             tintColor: theme.palette.nav_item_1,
