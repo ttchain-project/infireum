@@ -738,4 +738,6 @@ struct DLS_ZH_CN: DLS {
     var original_account_login = "原有帐号登入"
 
     var transfer_back_button_title :String = "修改"
+    var import_key_string = "导入"
 }
+

@@ -83,9 +83,11 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
         }).disposed(by: bag)
         
         self.importWalletButton.rx.klrx_tap.drive(onNext: {[unowned self] _ in
-            let vc = xib(vc: ImportWalletTypeChooseViewController.self)
-            let nav = UINavigationController.init(rootViewController: vc)
-            self.present(nav, animated: true, completion: nil)
+//            let vc = xib(vc: ImportWalletTypeChooseViewController.self)
+//            let nav = UINavigationController.init(rootViewController: vc)
+            
+            let vc = AddWalletViewController.navInstance()
+            self.present(vc, animated: true, completion: nil)
         }).disposed(by: bag)
         
     }

@@ -751,6 +751,7 @@ struct DLS_ZH_TW: DLS {
     
     var transfer_back_button_title :String = "修改"
 
+    var import_key_string = "導入"
 }
 
 

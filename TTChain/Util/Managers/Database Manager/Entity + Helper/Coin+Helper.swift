@@ -204,7 +204,7 @@ extension Coin {
         case Coin.usdtn_identifier:
             return #imageLiteral(resourceName: "usdtn_coin_icon")
         case Coin.exr_identifier:
-            return #imageLiteral(resourceName: "exr_coin_icon")
+            return #imageLiteral(resourceName: "exr_coin_icon_white")
         default:
             break
         }

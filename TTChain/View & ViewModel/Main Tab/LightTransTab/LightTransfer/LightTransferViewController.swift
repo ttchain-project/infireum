@@ -25,7 +25,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
                 amtProvider: assetVC.viewModel,
                 addressProvider: addressVC.viewModel,
                 feeProvider: feeInfoProvider,
-                getWithdrawalResultInput: nextStepButton.rx.tap.asDriver(),
+                getWithdrawalResultInput: nextStepBtn.rx.tap.asDriver(),
                 note: remarkNoteVC.viewModel
             ),
             output: ()
@@ -200,7 +200,9 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         self.navigationItem.title = dls.withdrawal_title(viewModel.input.asset.coin!.inAppName!)
-        nextStepButton.setTitleForAllStates(dls.withdrawal_btn_nextstep)
+        nextStepBtn.setTitleForAllStates(dls.withdrawal_btn_nextstep)
+        backButton.setTitleForAllStates(dls.g_cancel)
+
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -217,9 +219,9 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
         }
 
-        nextStepButton.setTitleColor(palette.btn_bgFill_enable_text, for: .normal)
-        nextStepButton.setTitleColor(palette.btn_bgFill_disable_text, for: .disabled)
-        nextStepButton.set(font: UIFont.owRegular(size: 17))
+        nextStepBtn.setTitleColor(palette.btn_bgFill_enable_text, for: .normal)
+        nextStepBtn.setTitleColor(palette.btn_bgFill_disable_text, for: .disabled)
+        nextStepBtn.set(font: UIFont.owRegular(size: 14))
         self.scrollView.backgroundColor = .clear
         self.view.backgroundColor = palette.bgView_main
     }
@@ -234,11 +236,19 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
             [unowned self]
             isEnabled in
             let palette = TM.palette
-            self.nextStepButton.backgroundColor = isEnabled ? UIColor.init(hexString: "18ADD4") : palette.btn_bgFill_disable_bg
+          self.nextStepBtn.backgroundColor = isEnabled ? palette.btn_bgFill_enable_bg2 : palette.btn_bgFill_disable_bg
         })
             .disposed(by: bag)
         
-        viewModel.isAbleToStartTransfer.bind(to: nextStepButton.rx.isEnabled).disposed(by: bag)
+        viewModel.isAbleToStartTransfer.bind(to: nextStepBtn.rx.isEnabled).disposed(by: bag)
+        
+        self.backButton.rx.klrx_tap.drive(onNext:{ _ in
+            if (self.presentingViewController != nil) || (self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+                self.dismiss(animated: true, completion: nil)
+            }else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }).disposed(by: bag)
     }
     
     private func bindViewModel() {
@@ -262,7 +272,9 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     }
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var nextStepButton: UIButton!
+    @IBOutlet weak var nextStepBtn: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+
     
     @objc private func toQRCode() {
         let asset = viewModel.input.asset

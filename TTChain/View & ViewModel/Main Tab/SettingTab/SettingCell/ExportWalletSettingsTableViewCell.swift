@@ -34,4 +34,8 @@ class ExportWalletSettingsTableViewCell: UITableViewCell {
         self.exportLabel.text = LM.dls.setting_export_key_title
 
     }
+    func configForImport(walletUnit:AddWalletUnit) {
+        walletExportLabel.text = walletUnit.title
+        walletImageLabel.image = walletUnit.image
+    }
 }

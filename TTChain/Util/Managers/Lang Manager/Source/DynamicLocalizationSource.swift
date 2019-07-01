@@ -723,4 +723,6 @@ protocol DynamicLocalizationSource {
     var original_account_login :String {get set}
     
     var transfer_back_button_title :String {get set}
+    var import_key_string :String {get set}
+
 }

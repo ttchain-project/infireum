@@ -225,7 +225,7 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
     }
     
     override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bg_1)
+        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
         
         navigationController?.navigationBar.renderShadow()
         

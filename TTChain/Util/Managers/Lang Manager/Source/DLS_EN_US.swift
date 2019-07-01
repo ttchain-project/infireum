@@ -753,5 +753,7 @@ struct DLS_EN_US: DLS {
     var original_account_login = "Original Account Login"
 
     var transfer_back_button_title = "Revise"
+    var import_key_string = "Import"
+
 }
 
