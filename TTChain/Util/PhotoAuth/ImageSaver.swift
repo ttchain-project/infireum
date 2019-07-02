@@ -23,17 +23,16 @@ class ImageSaver {
             instance.imageToSave = image
             instance.vcToShow = vc
             instance.event = event
-            instance.attemptSavingImg {}
+            instance.attemptSavingImg()
              return Disposables.create()
         })
     }
     
-    private func attemptSavingImg(onSaved: @escaping () -> Void) {
+    private func attemptSavingImg() {
         DispatchQueue.main.async {
             switch PHPhotoLibrary.authorizationStatus() {
             case .notDetermined:
                 PHPhotoLibrary.requestAuthorization {
-                    [unowned self]
                     (status) in
                     self.handleUserAlbumAuthResultStatus(status)
                 }
@@ -51,11 +50,11 @@ class ImageSaver {
     private func handleUserAlbumAuthResultStatus(_ status: PHAuthorizationStatus) {
         switch status {
         case .authorized:
-            attemptSavingImg() {}
+            attemptSavingImg()
         case .denied, .restricted:
             presentAlbumAuthorizationDeniedAlert()
         case .notDetermined:
-            attemptSavingImg() {}
+            attemptSavingImg()
         }
     }
     
