@@ -754,6 +754,11 @@ struct DLS_EN_US: DLS {
 
     var transfer_back_button_title = "Revise"
     var import_key_string = "Import"
+ 
+    var add_wallet_password_warning_one = "The TTChain team will not save your wallet password, nor will you be able to assist in the recovery if you lose your wallet password. Please set a password and password prompt."
 
+    var add_wallet_password_warning_two = "If you forget the password, you will lose the assets in your wallet. Please pay special attention."
+    
+    var new_wallet_name = "Please name your new wallet"
 }
 

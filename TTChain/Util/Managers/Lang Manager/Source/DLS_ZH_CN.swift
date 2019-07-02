@@ -739,5 +739,9 @@ struct DLS_ZH_CN: DLS {
 
     var transfer_back_button_title :String = "修改"
     var import_key_string = "导入"
+    
+    var add_wallet_password_warning_one = "TTChain团队不会保存您的钱包密码，也无法在您遗失钱包密码时协助寻回，请谨慎设立密码与密码提示。"
+    var add_wallet_password_warning_two: String = "如遗忘密码将一并遗失钱包内的资产，请特别注意。"
+    var new_wallet_name = "请为新钱包命名"
 }
 

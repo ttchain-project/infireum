@@ -724,5 +724,7 @@ protocol DynamicLocalizationSource {
     
     var transfer_back_button_title :String {get set}
     var import_key_string :String {get set}
-
+    var add_wallet_password_warning_one:String {get set}
+    var add_wallet_password_warning_two:String {get set}
+    var new_wallet_name:String {get set}
 }

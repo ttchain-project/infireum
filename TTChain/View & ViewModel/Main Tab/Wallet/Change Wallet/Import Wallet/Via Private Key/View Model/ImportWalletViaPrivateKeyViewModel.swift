@@ -23,6 +23,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
         let confirmPwdInput: ControlProperty<String?>
         let pwdHintInput: ControlProperty<String?>
         let confirmInput: Driver<Void>
+        let walletName: ControlProperty<String?>
     }
 
     struct Output {
@@ -40,6 +41,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
         case emptyConfirmPwd
         case confirmPwd_notMatchPwd
         case emptyPwdHint
+        case emptyWalletName
         case alreadyHasSameWallet
     }
     
@@ -49,6 +51,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
         let mainCoinID: String
         let pwd: String
         let pwdHint: String
+        let walletName:String
     }
     
     var input: ImportWalletViaPrivateKeyViewModel.Input
@@ -59,6 +62,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
     private let pwd: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     private let confirmPwd: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     private let pwdHint: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
+    private let walletName: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     
     private let hasEmptyFields: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     
@@ -76,7 +80,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
         (input.pwdInput <-> pwd).disposed(by: bag)
         (input.confirmPwdInput <-> confirmPwd).disposed(by: bag)
         (input.pwdHintInput <-> pwdHint).disposed(by: bag)
-        
+        (input.walletName <-> walletName).disposed(by: bag)
         pKey.accept(input.defaultPKey)
         
         input.confirmInput
@@ -119,9 +123,10 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
             pKey.map { $0 == nil ? true : $0!.count > 0 },
             pwd.map { $0 == nil ? true : $0!.count > 0 },
             confirmPwd.map { $0 == nil ? true : $0!.count > 0 },
-            pwdHint.map { $0 == nil ? true : $0!.count > 0 }
+            pwdHint.map { $0 == nil ? true : $0!.count > 0 },
+             walletName.map { $0 == nil ? true : $0!.count > 0 }
             )
-            .map { $0 && $1 && $2 && $3 }
+            .map { $0 && $1 && $2 && $3 && $4}
             .bind(to: hasEmptyFields)
             .disposed(by: bag)
         
@@ -158,6 +163,10 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
             return .emptyPwdHint
         }
         
+        guard let _walletName = walletName.value, _walletName.count > 0 else {
+            return .emptyWalletName
+        }
+        
         //This check will move to after getting the address result response to compare address as well.
 //        guard !walletIsExistInDB(pKey: _pKey, mainCoiniD: input.mainCoinID) else {
 //            return .alreadyHasSameWallet
@@ -189,7 +198,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
     private func importWallet() -> RxAPIResponse<CreateResult> {
         guard let _pKey = pKey.value,
             let _pwd = pwd.value,
-            let _hint = pwdHint.value else {
+            let _hint = pwdHint.value,let _walletName = walletName.value else {
                 return RxAPIResponse.just(.failed(error: .noData))
         }
         
@@ -218,13 +227,15 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
                         address: addr,
                         mainCoinID: mainCoinID,
                         pwd: _pwd,
-                        pwdHint: _hint
+                        pwdHint: _hint,
+                        walletName:_walletName
                     )
                     
                     return .success(result)
                 }
             }
     }
+    
 }
 
 // MARK: - Helper

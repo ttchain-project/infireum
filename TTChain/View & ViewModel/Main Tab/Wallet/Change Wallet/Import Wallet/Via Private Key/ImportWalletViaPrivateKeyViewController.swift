@@ -16,6 +16,11 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         let mainCoinID: String
         /// The Private Key (might be scanned from QRCode)
         let defaultPKey: String?
+        let purpose:Purpose? = .import
+        enum Purpose {
+            case `import`
+            case create
+        }
     }
     
     typealias Constructor = Config
@@ -30,18 +35,33 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
     @IBOutlet weak var pKeyTextView: KLPlaceholderTextView!
     @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var pwdTitleLabel: UILabel!
+    @IBOutlet weak var privateKeyStackView: UIStackView!
+    @IBOutlet weak var enterWalleNameLabel: UILabel!
+    @IBOutlet weak var walletNameTextField: OWInputTextField!
     
     @IBOutlet weak var pwdTextField: OWInputTextField!
+    @IBOutlet weak var enterPasswordLabel: UILabel!
+    
+    @IBOutlet weak var confirmPasswordLabel: UILabel!
     @IBOutlet weak var confirmPwdTextField: OWInputTextField!
+    
+    @IBOutlet weak var passwordHintLabel: UILabel!
     @IBOutlet weak var pwdHintTextField: OWInputTextField!
     
     @IBOutlet weak var importBtn: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBOutlet weak var instructionLabel1: UILabel!
+    @IBOutlet weak var instructionLabel2: UILabel!
     
     fileprivate var pwdVisibleBtn: UIButton!
     
     private var fields: [OWInputTextField] {
-        return [pwdTextField, confirmPwdTextField, pwdHintTextField]
+        return [walletNameTextField,pwdTextField, confirmPwdTextField, pwdHintTextField]
+    }
+    
+    private var labels: [UILabel] {
+        return [enterWalleNameLabel,enterPasswordLabel, confirmPasswordLabel, passwordHintLabel]
     }
     
     lazy var hud: KLHUD = {
@@ -57,8 +77,12 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         )
     }()
     
+    var purpose: Constructor.Purpose!
+    
     func config(constructor: Config) {
         view.layoutIfNeeded()
+        self.purpose = constructor.purpose ?? .import
+        
         setupUI()
         viewModel = ViewModel.init(
             input:
@@ -69,7 +93,8 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
                 pwdInput: pwdTextField.rx.text,
                 confirmPwdInput: confirmPwdTextField.rx.text,
                 pwdHintInput: pwdHintTextField.rx.text,
-                confirmInput: importBtn.rx.tap.asDriver()
+                confirmInput: importBtn.rx.tap.asDriver(),
+                walletName:self.walletNameTextField.rx.text
             ),
             output:
             ImportWalletViaPrivateKeyViewModel.OutputSource(
@@ -108,7 +133,7 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
                     guard let wSelf = self else { return }
                     let palette = ThemeManager.instance.theme.value.palette
                     wSelf.importBtn.backgroundColor =
-                        isValid ? palette.btn_bgFill_enable_bg : palette.btn_bgFill_disable_bg
+                        isValid ? palette.btn_bgFill_enable_bg2 : palette.btn_bgFill_disable_bg
                 }
             )
         )
@@ -120,6 +145,8 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
     }
     
     private func setupUI() {
+        self.privateKeyStackView.isHidden = purpose == .create
+
         pwdVisibleBtn = UIButton.init(type: .custom)
         pwdVisibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOn"), for: .normal)
         pwdVisibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOff"), for: .selected)
@@ -145,6 +172,14 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
             .disposed(by: bag)
         
         pKeyTextView.rx.contentSize.map { $0.height }.bind(to: textViewHeight.rx.constant).disposed(by: bag)
+        
+        self.backButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            if self.navigationController?.viewControllers.first == self {
+                self.dismiss(animated: true, completion: nil)
+            }else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }).disposed(by: bag)
     }
     
     override func viewDidLoad() {
@@ -165,7 +200,7 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         }
         
         let mainCoin = Coin.getCoin(ofIdentifier: viewModel.input.mainCoinID)!
-        let name = Wallet.importedWalletName(ofMainCoin: mainCoin)
+        let name = result.walletName
         
         guard let newWallet = Wallet.create(
             identity: id,
@@ -206,26 +241,39 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         title = dls.importWallet_privateKey_import_general_wallet(coin.inAppName!)
         
         titleLabel.text = dls.importWallet_privateKey_label_desc_private_key
-        pwdTitleLabel.text = dls.importWallet_privateKey_label_setPwd
         importBtn.setTitleForAllStates(dls.importWallet_privateKey_btn_startImport)
+        backButton.setTitleForAllStates(lang.dls.g_cancel)
+
         
         pKeyTextView.placeholder = dls.importWallet_privateKey_placeholder_hint_fill_in_private_key
         
+        enterPasswordLabel.text = dls.restoreIdentity_placeholder_walletPwd
         pwdTextField.set(
             placeholder: dls.importWallet_privateKey_placeholder_walletPwd
         )
         
+        confirmPasswordLabel.text = dls.restoreIdentity_placeholder_walletConfirmPwd
         confirmPwdTextField.set(
             placeholder: dls.importWallet_privateKey_placeholder_confirmPwd
         )
-        
+        passwordHintLabel.text = dls.restoreIdentity_placeholder_pwdHint
         pwdHintTextField.set(
             placeholder: dls.importWallet_privateKey_placeholder_pwdHint
         )
+        
+        enterWalleNameLabel.text = dls.strValidate_field_walletName
+        walletNameTextField.set(
+            placeholder: dls.new_wallet_name
+        )
+        
+
+        
+        self.instructionLabel1.text = "* " + dls.add_wallet_password_warning_one
+        self.instructionLabel2.text = "* " +  dls.add_wallet_password_warning_two
     }
     
     override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
+        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
         
         navigationController?.navigationBar.renderShadow()
         
@@ -238,16 +286,13 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
             )
         }
         
-        createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), toColor: theme.palette.nav_item_1)
+        if purpose == .import {
+            createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), toColor: theme.palette.nav_item_1)
+        }
         
         titleLabel.set(
             textColor: theme.palette.label_sub,
             font: UIFont.owRegular(size: 12)
-        )
-        
-        pwdTitleLabel.set(
-            textColor: theme.palette.label_main_1,
-            font: .owRegular(size: 14)
         )
         
         for field in fields {
@@ -256,9 +301,12 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
             field.placeHolderColor = theme.palette.input_placeholder
         }
         
+        for label in labels {
+            label.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 12))
+        }
         importBtn.set(
             font: UIFont.owRegular(size: 14),
-            backgroundColor: theme.palette.btn_bgFill_enable_bg
+            backgroundColor: theme.palette.btn_bgFill_enable_bg2
         )
         
         pKeyBase.set(
@@ -269,6 +317,10 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         
         importBtn.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
         importBtn.setTitleColor(theme.palette.btn_bgFill_disable_text, for: .disabled)
+        
+        instructionLabel1.set(textColor: theme.palette.bg_fill_new, font: .owRegular(size:12))
+        instructionLabel2.set(textColor: theme.palette.bg_fill_new, font: .owRegular(size:12))
+        
     }
     
     private func respondToFieldCheckValidityResult(validity: ViewModel.InputValidity) {
