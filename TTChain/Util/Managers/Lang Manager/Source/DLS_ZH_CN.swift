@@ -34,9 +34,9 @@ struct DLS_ZH_CN: DLS {
     var g_camera_permission_requestion = "如要开启条码扫描功能，请允许开启相机权限"
     var g_error_mnemonic_wrong = "助记词错误。请删除多余空白或输入正确单字"
     var g_toast_addr_copied = "地址已复制"
-    var lang_zh_cn = "简体中文"
-    var lang_zh_tw = "繁体中文"
-    var lang_en_us = "英文"
+    var lang_zh_cn = "簡體中文"
+    var lang_zh_tw = "繁體中文"
+    var lang_en_us = "English"
     func strValidate_error_common_spacePrefixOrSuffix(_ args: String...) -> String { return String.init(format: "%@首尾不得空白", arguments: args) }
     func strValidate_error_common_lengthInvalid(_ args: String...) -> String { return String.init(format: "%@长度需为 %@-%@ 字元", arguments: args) }
     func strValidate_error_common_allowAlphanumericOnly(_ args: String...) -> String { return String.init(format: "%@只允许使用英数字", arguments: args) }

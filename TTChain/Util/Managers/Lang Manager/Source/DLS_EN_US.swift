@@ -34,8 +34,8 @@ struct DLS_EN_US: DLS {
     var g_camera_permission_requestion = "To enable QR code scanning, please enable access to camera"
     var g_error_mnemonic_wrong = "The mnemonic is wrong. Please remove extra white space or enter the correct word."
     var g_toast_addr_copied = "Address copied"
-    var lang_zh_cn = "Simplified Chinese"
-    var lang_zh_tw = "Traditional Chinese"
+    var lang_zh_cn = "簡體中文"
+    var lang_zh_tw = "繁體中文"
     var lang_en_us = "English"
     func strValidate_error_common_spacePrefixOrSuffix(_ args: String...) -> String { return String.init(format: "%@ must not be blank at the beginning and end", arguments: args) }
     func strValidate_error_common_lengthInvalid(_ args: String...) -> String { return String.init(format: "%@ length must be %@-%@ characters", arguments: args) }

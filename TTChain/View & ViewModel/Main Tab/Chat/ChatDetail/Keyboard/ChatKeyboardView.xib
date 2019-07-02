@@ -58,7 +58,7 @@
                     <rect key="frame" x="0.0" y="84" width="375" height="48"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EL4-jm-Aox">
-                            <rect key="frame" x="89" y="7" width="30" height="34"/>
+                            <rect key="frame" x="83" y="7" width="30" height="34"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ft0-rF-tYL">
                             <rect key="frame" x="7" y="8" width="32" height="32"/>
@@ -66,18 +66,23 @@
                                 <constraint firstAttribute="height" constant="32" id="9wF-L5-xxv"/>
                                 <constraint firstAttribute="width" secondItem="Ft0-rF-tYL" secondAttribute="height" multiplier="1:1" id="UuP-5V-CyE"/>
                             </constraints>
-                            <state key="normal" image="iconAddPic"/>
+                            <state key="normal" image="chat_btn_open"/>
+                            <state key="selected" image="chat_btn_close"/>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RcF-G5-WIi">
-                            <rect key="frame" x="89" y="7" width="276" height="34"/>
+                            <rect key="frame" x="83" y="7" width="282" height="34"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY6-Rj-llJ">
-                            <rect key="frame" x="46" y="6" width="36" height="36"/>
-                            <state key="normal" image="mic_black"/>
+                            <rect key="frame" x="46" y="9" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="GjZ-ot-8YU"/>
+                                <constraint firstAttribute="height" constant="30" id="zkg-wV-UbY"/>
+                            </constraints>
+                            <state key="normal" image="chat_btn_voice"/>
                             <state key="selected" image="keyboard_black"/>
                         </button>
                     </subviews>
@@ -167,8 +172,9 @@
         </view>
     </objects>
     <resources>
-        <image name="iconAddPic" width="15" height="15"/>
+        <image name="chat_btn_close" width="120" height="120"/>
+        <image name="chat_btn_open" width="120" height="120"/>
+        <image name="chat_btn_voice" width="72" height="72"/>
         <image name="keyboard_black" width="36" height="36"/>
-        <image name="mic_black" width="36" height="36"/>
     </resources>
 </document>

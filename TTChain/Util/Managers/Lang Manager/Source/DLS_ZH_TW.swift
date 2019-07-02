@@ -37,7 +37,7 @@ struct DLS_ZH_TW: DLS {
     var g_toast_addr_copied = "地址已復制"
     var lang_zh_cn = "簡體中文"
     var lang_zh_tw = "繁體中文"
-    var lang_en_us = "英語"
+    var lang_en_us = "English"
     func strValidate_error_common_spacePrefixOrSuffix(_ args: String...) -> String { return String.init(format: "%@首尾不得空白", arguments: args) }
     func strValidate_error_common_lengthInvalid(_ args: String...) -> String { return String.init(format: "%@長度需為 %@-%@ 字元", arguments: args) }
     func strValidate_error_common_allowAlphanumericOnly(_ args: String...) -> String { return String.init(format: "%@只允許使用英數字", arguments: args) }

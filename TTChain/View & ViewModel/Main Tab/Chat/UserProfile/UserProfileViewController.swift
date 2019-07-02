@@ -185,7 +185,6 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             font: UIFont.owRegular(size: 15),
             backgroundColor: theme.palette.btn_bgFill_enable_bg
         )
-//        createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "iconCommunicationQrcode"), toColor: theme.palette.application_main)
         self.blockUserSwitch.transform = CGAffineTransform(scaleX: 0.50, y: 0.50)
     }
     
