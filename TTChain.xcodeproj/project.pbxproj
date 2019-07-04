@@ -3904,6 +3904,21 @@
 			path = "Cell&SectionHeader";
 			sourceTree = "<group>";
 		};
+		55A583FA22CCB8010025809B /* CellsAndHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */,
+				55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */,
+				55EF69F321A812C5007E074A /* AddGroupMemberCollectionViewCell.swift */,
+				55EF69F421A812C5007E074A /* AddGroupMemberCollectionViewCell.xib */,
+				55EF69F521A812C5007E074A /* AddGroupMemberTableViewCell.swift */,
+				55EF69F621A812C5007E074A /* AddGroupMemberTableViewCell.xib */,
+				55EF69F921A812C5007E074A /* GroupMemberCollectionViewCell.swift */,
+				55EF69FA21A812C5007E074A /* GroupMemberCollectionViewCell.xib */,
+			);
+			path = CellsAndHeaders;
+			sourceTree = "<group>";
+		};
 		55AADEF621FF109800F403C8 /* Receipt */ = {
 			isa = PBXGroup;
 			children = (
@@ -4239,16 +4254,9 @@
 		55EF69F221A812C5007E074A /* Group Information */ = {
 			isa = PBXGroup;
 			children = (
+				55A583FA22CCB8010025809B /* CellsAndHeaders */,
 				55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */,
-				55E113FB21F7278C0062198B /* GroupCollectionReusableView.swift */,
-				55E113FA21F7278B0062198B /* GroupCollectionReusableView.xib */,
-				55EF69F321A812C5007E074A /* AddGroupMemberCollectionViewCell.swift */,
-				55EF69F421A812C5007E074A /* AddGroupMemberCollectionViewCell.xib */,
-				55EF69F521A812C5007E074A /* AddGroupMemberTableViewCell.swift */,
-				55EF69F621A812C5007E074A /* AddGroupMemberTableViewCell.xib */,
 				55EF69F721A812C5007E074A /* GroupInformationViewController.swift */,
-				55EF69F921A812C5007E074A /* GroupMemberCollectionViewCell.swift */,
-				55EF69FA21A812C5007E074A /* GroupMemberCollectionViewCell.xib */,
 				55EF69FB21A812C5007E074A /* SearchMemberViewController.swift */,
 				55EF69FC21A812C5007E074A /* SearchMemberViewController.xib */,
 			);
