@@ -13,19 +13,25 @@ import RxCocoa
 final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     typealias Constructor = Void
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var nameTitleLabel: UILabel!
     @IBOutlet weak var nameTextField: OWInputTextField!
+    @IBOutlet weak var pwdTitleLabel: UILabel!
     @IBOutlet weak var pwdTextField: OWInputTextField!
+    @IBOutlet weak var confirmPwdTitleLabel: UILabel!
     @IBOutlet weak var confirmTextField: OWInputTextField!
     fileprivate var pwdVisibleBtn: UIButton!
+    @IBOutlet weak var pwdHintTitleLabel: UILabel!
     @IBOutlet weak var pwdHintTextField: OWInputTextField!
     
     private var fields: [OWInputTextField] {
         return [nameTextField, pwdTextField, confirmTextField, pwdHintTextField]
     }
-    
+    private var labels: [UILabel] {
+        return [nameTitleLabel, pwdTitleLabel, confirmPwdTitleLabel, pwdHintTitleLabel]
+    }
     @IBOutlet weak var createBtn: UIButton!
-    
+    @IBOutlet weak var backButton: UIButton!
+
     typealias ViewModel = IdentityCreateViewModel
     var viewModel: IdentityCreateViewModel!
     var bag: DisposeBag = DisposeBag.init()
@@ -99,8 +105,8 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     
     private func setupUI() {
         pwdVisibleBtn = UIButton.init(type: .custom)
-        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOn"), for: .normal)
-        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOff"), for: .selected)
+        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "btn_show"), for: .normal)
+        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "btn_hide"), for: .selected)
         pwdVisibleBtn.frame = CGRect.init(origin: .zero, size: CGSize.init(width: 44, height: 44))
         pwdVisibleBtn.isSelected = true
         
@@ -123,6 +129,14 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
             self.confirmTextField.isSecureTextEntry = self.pwdVisibleBtn.isSelected
         })
         .disposed(by: bag)
+        
+        self.backButton.rx.klrx_tap.drive(onNext:{ _ in
+            if (self.presentingViewController != nil) || (self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+                self.dismiss(animated: true, completion: nil)
+            }else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }).disposed(by: bag)
     }
     
     override func viewDidLoad() {
@@ -147,33 +161,35 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         title = nil
-        titleLabel.text = dls.createID_title
         createBtn.setTitleForAllStates(dls.createID_btn_create)
+        backButton.setTitleForAllStates(lang.dls.g_cancel)
+        nameTitleLabel.text = dls.createID_placeholder_name
         nameTextField.set(placeholder: dls.createID_placeholder_name)
+        pwdTitleLabel.text =  dls.createID_placeholder_password
         pwdTextField.set(placeholder: dls.createID_placeholder_password)
+        confirmPwdTitleLabel.text = dls.createID_placeholder_confirmPassword
         confirmTextField.set(placeholder: dls.createID_placeholder_confirmPassword)
+        pwdHintTitleLabel.text = dls.createID_placeholder_passwordNote
         pwdHintTextField.set(placeholder: dls.createID_placeholder_passwordNote)
     }
     
     override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
-        
-        changeLeftBarButtonToDismissToRoot(
-            tintColor: theme.palette.nav_item_1,
-            image: #imageLiteral(resourceName: "arrowNavBlack")
-        )
-        
-        titleLabel.set(
-            textColor: theme.palette.label_main_1,
-            font: UIFont.owMedium(size: 18)
-        )
-        
+//        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
+//
+//        changeLeftBarButtonToDismissToRoot(
+//            tintColor: theme.palette.nav_item_1,
+//            image: #imageLiteral(resourceName: "arrowNavBlack")
+//        )
+
+        self.hideDefaultNavBar()
         for field in fields {
             field.sepline.backgroundColor = theme.palette.sepline
             field.textColor = theme.palette.input_text
             field.placeHolderColor = theme.palette.input_placeholder
         }
-        
+        for label in labels {
+            label.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
+        }
         createBtn.set(
             font: UIFont.owRegular(size: 14),
             backgroundColor: theme.palette.btn_bgFill_enable_bg

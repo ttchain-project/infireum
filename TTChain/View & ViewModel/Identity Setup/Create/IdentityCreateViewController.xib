@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IdentityCreateViewController" customModule="OfflineWallet" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IdentityCreateViewController" customModule="Hope_Seed" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="QQy-AY-hsP" id="LqN-yB-eFu"/>
+                <outlet property="confirmPwdTitleLabel" destination="zTf-XN-rlH" id="OWd-r3-xBv"/>
                 <outlet property="confirmTextField" destination="o1P-xX-szw" id="wv8-BL-mny"/>
-                <outlet property="createBtn" destination="bmF-m4-tmQ" id="FjS-fB-scF"/>
+                <outlet property="createBtn" destination="f3i-Y4-ty2" id="yKU-Uq-QMl"/>
                 <outlet property="nameTextField" destination="g6A-M4-gRV" id="rbs-EG-U0D"/>
+                <outlet property="nameTitleLabel" destination="ubR-IP-kug" id="kud-mb-U0e"/>
                 <outlet property="pwdHintTextField" destination="h9X-1q-sPD" id="UFh-BD-hD9"/>
+                <outlet property="pwdHintTitleLabel" destination="bYR-1H-zdS" id="DLv-gc-uz4"/>
                 <outlet property="pwdTextField" destination="fZ5-cL-6v8" id="BWA-mp-7nQ"/>
-                <outlet property="titleLabel" destination="n2U-mE-zGb" id="bzY-e7-aYY"/>
+                <outlet property="pwdTitleLabel" destination="iTl-u2-VwT" id="lRq-qX-wPA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,83 +30,155 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconHeaderSignWalletblackNormal" translatesAutoresizingMaskIntoConstraints="NO" id="1P0-y3-aPk">
-                    <rect key="frame" x="164.5" y="76" width="45" height="40"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2U-mE-zGb">
-                    <rect key="frame" x="166" y="120" width="42" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmF-m4-tmQ">
-                    <rect key="frame" x="0.0" y="625" width="375" height="42"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
-                    <state key="normal" title="Button"/>
-                </button>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7uk-HM-ven">
-                    <rect key="frame" x="20" y="160.5" width="335" height="188"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7uk-HM-ven">
+                    <rect key="frame" x="20" y="84" width="335" height="334"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g6A-M4-gRV" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Xd9-Lg-1cC">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="68.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubR-IP-kug">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g6A-M4-gRV" customClass="OWInputTextField" customModule="Hope_Seed" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="24.5" width="335" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="EyZ-Lb-oxF"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="rD9-mo-39y">
+                            <rect key="frame" x="0.0" y="88.5" width="335" height="68.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTl-u2-VwT">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZ5-cL-6v8" customClass="OWInputTextField" customModule="Hope_Seed" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="24.5" width="335" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="mmy-Nv-qKc"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Dk0-e1-OIR">
+                            <rect key="frame" x="0.0" y="177" width="335" height="68.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTf-XN-rlH">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o1P-xX-szw" customClass="OWInputTextField" customModule="Hope_Seed" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="24.5" width="335" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="4xw-nC-ekt"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="gGA-oP-XGz">
+                            <rect key="frame" x="0.0" y="265.5" width="335" height="68.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYR-1H-zdS">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9X-1q-sPD" customClass="OWInputTextField" customModule="Hope_Seed" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="24.5" width="335" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="Bs5-gu-gaH"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sAl-Q8-vr4" userLabel="BottomStack">
+                    <rect key="frame" x="20" y="599" width="335" height="48"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQy-AY-hsP">
+                            <rect key="frame" x="0.0" y="0.0" width="152.5" height="48"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="EyZ-Lb-oxF"/>
+                                <constraint firstAttribute="height" constant="48" id="PDq-il-fyE"/>
                             </constraints>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fZ5-cL-6v8" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="48" width="335" height="44"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
+                            <state key="normal" title="Button" image="btn_previous_dark">
+                                <color key="titleColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3i-Y4-ty2">
+                            <rect key="frame" x="182.5" y="0.0" width="152.5" height="48"/>
+                            <color key="backgroundColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="mmy-Nv-qKc"/>
+                                <constraint firstAttribute="height" constant="48" id="eMp-uc-z8I"/>
                             </constraints>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o1P-xX-szw" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="96" width="335" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="4xw-nC-ekt"/>
-                            </constraints>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9X-1q-sPD" customClass="OWInputTextField" customModule="OfflineWallet" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="144" width="335" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="Bs5-gu-gaH"/>
-                            </constraints>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Button" image="btn_next_light">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
                     </subviews>
                 </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="7uk-HM-ven" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="22D-8d-Oqc"/>
-                <constraint firstItem="bmF-m4-tmQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2Ee-bX-M18"/>
-                <constraint firstItem="n2U-mE-zGb" firstAttribute="centerX" secondItem="1P0-y3-aPk" secondAttribute="centerX" id="B8g-NG-umC"/>
-                <constraint firstItem="7uk-HM-ven" firstAttribute="top" secondItem="n2U-mE-zGb" secondAttribute="bottom" constant="20" id="Crl-YN-PAT"/>
-                <constraint firstItem="bmF-m4-tmQ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="CuI-3a-D1x"/>
-                <constraint firstItem="bmF-m4-tmQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="KVn-hY-A8f"/>
+                <constraint firstItem="sAl-Q8-vr4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="2Uy-Bm-opQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="sAl-Q8-vr4" secondAttribute="bottom" constant="20" id="9eV-9I-fwY"/>
+                <constraint firstItem="7uk-HM-ven" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="EHb-sN-xsH"/>
                 <constraint firstItem="7uk-HM-ven" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aHC-sk-FuV"/>
-                <constraint firstItem="bmF-m4-tmQ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="csz-k7-8iz"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bmF-m4-tmQ" secondAttribute="trailing" id="qsf-e2-iMt"/>
-                <constraint firstItem="1P0-y3-aPk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="sUO-BS-sw9"/>
-                <constraint firstItem="n2U-mE-zGb" firstAttribute="top" secondItem="1P0-y3-aPk" secondAttribute="bottom" constant="4" id="tWl-fW-rok"/>
-                <constraint firstItem="1P0-y3-aPk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="ypN-Xn-MBj"/>
-                <constraint firstItem="bmF-m4-tmQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zIb-05-uL5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7uk-HM-ven" secondAttribute="trailing" constant="20" id="k7e-Lo-qcV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sAl-Q8-vr4" secondAttribute="trailing" constant="20" id="nPV-Cj-sHJ"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
     <resources>
-        <image name="iconHeaderSignWalletblackNormal" width="45" height="40"/>
+        <image name="btn_next_light" width="16" height="16"/>
+        <image name="btn_previous_dark" width="16" height="16"/>
     </resources>
 </document>

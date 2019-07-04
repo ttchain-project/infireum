@@ -21,13 +21,14 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     private weak var qrcodeCameraVC: UINavigationController?
     
     //MARK: - Outlet
-//    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var createBtn: UIButton!
     @IBOutlet weak var createNoteLabel: UILabel!
-//    @IBOutlet weak var orLabel: UILabel!
-//    @IBOutlet weak var sepline: UIView!
     @IBOutlet weak var restoreBtn: UIButton!
-//    @IBOutlet weak var bgHeaderImgView: UIImageView!
+    @IBOutlet weak var loginOptionsView: UIStackView!
+    @IBOutlet weak var restoreOptionsView: UIView!
+    @IBOutlet weak var signUsingQRCode: UIButton!
+    @IBOutlet weak var signUsingMnenomics: UIButton!
+    @IBOutlet weak var backToLoginBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +40,7 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-//        createBtn.roundBothSides()
-//        restoreBtn.roundBothSides()
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -55,6 +55,7 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     
     func config(constructor: Void) {
         view.layoutIfNeeded()
+        self.restoreOptionsView.isHidden = true
         viewModel = ViewModel.init(
             input: IdentitySetupViewModel.InputSource(
                 onCreate: createBtn.rx.tap.asDriver(),
@@ -65,50 +66,53 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
                     [weak self] in self?.toCreate()
             },
                 startRestore: {
-                    [weak self] in self?.presentIdentityRestoreActionSheet()
+                    [weak self] in self?.showRestoreView()
             })
         )
+        self.bindUI()
     }
     
     override func renderTheme(_ theme: Theme) {
         
         createBtn.set(
             textColor: theme.palette.btn_bgFill_enable_text,
-            font: UIFont.owRegular(size: 14),backgroundColor:theme.palette.btn_bgFill_enable_bg2
+            font: UIFont.owRegular(size: 14),backgroundColor:theme.palette.btn_bgFill_enable_bg
         )
+        
         
         self.view.backgroundColor = .white
-//        let image = #imageLiteral(resourceName: "buttonPinkSolid").resizableImage(withCapInsets: .init(top: 0, left: 20, bottom: 0, right: 20), resizingMode: UIImageResizingMode.stretch)
-        
-//        createBtn.setBackgroundImage(image, for: .normal)
         
         createNoteLabel.set(
-            textColor: theme.palette.btn_bgFill_enable_bg,
+            textColor: theme.palette.bg_fill_new,
             font: UIFont.owRegular(size: 12)
         )
-        
-//        orLabel.set(
-//            textColor: theme.palette.label_sub,
-//            font: UIFont.owRegular(size: 12.5)
-//        )
-        
-//        sepline.set(backgroundColor: theme.palette.sepline)
-        
+                
         restoreBtn.set(
             textColor: .cloudBurst,
             font: UIFont.owRegular(size: 14),backgroundColor:.white, borderInfo:(color:.cloudBurst, width: 1)
         )
         restoreBtn.cornerRadius = restoreBtn.height/2
         createBtn.cornerRadius = createBtn.height/2
+        
+        signUsingQRCode.set(
+            textColor: theme.palette.btn_bgFill_enable_text,
+            font: UIFont.owRegular(size: 14),backgroundColor:theme.palette.btn_bgFill_enable_bg
+        )
+        signUsingMnenomics.set(
+            textColor: theme.palette.btn_bgFill_enable_text,
+            font: UIFont.owRegular(size: 14),backgroundColor:theme.palette.btn_bgFill_enable_bg
+        )
+        
     }
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-//        headerLabel.text = dls.login_label_title
         createBtn.setTitleForAllStates(dls.register_new_account_btn_title)
         createNoteLabel.text = dls.register_account_msg_label_login
-//        orLabel.text = " " + dls.login_label_or + " "
         restoreBtn.setTitleForAllStates(dls.original_account_login)
+        signUsingMnenomics.setTitleForAllStates(dls.login_actionsheet_restore_mnemonic)
+        signUsingQRCode.setTitleForAllStates(dls.login_actionsheet_restore_qrcode)
+        backToLoginBtn.setTitleForAllStates(dls.g_cancel)
     }
     
     private func toCreate() {
@@ -122,6 +126,27 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
         present(nav, animated: true, completion: nil)
     }
 
+    func showRestoreView() {
+        self.loginOptionsView.isHidden = true
+        self.restoreOptionsView.isHidden = false
+    }
+    func showLoginView() {
+        self.loginOptionsView.isHidden = false
+        self.restoreOptionsView.isHidden = true
+    }
+    func bindUI() {
+        self.backToLoginBtn.rx.klrx_tap.drive(onNext:{ _ in
+            self.showLoginView()
+        }).disposed(by: bag)
+        
+        self.signUsingMnenomics.rx.klrx_tap.drive(onNext:{ _ in
+            self.toRestore()
+        }).disposed(by: bag)
+        
+        self.signUsingQRCode.rx.klrx_tap.drive(onNext:{ _ in
+            self.presentQRCodeRestoreImgPicker()
+        }).disposed(by: bag)
+    }
 }
 
 // MARK: - Restore Type Choose
