@@ -32,10 +32,21 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
     var viewModel: GroupChatListViewModel!
     var bag: DisposeBag = DisposeBag()
     
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    
     func config(constructor: Void) {
         self.view.layoutIfNeeded()
         let searchDriver = Observable.combineLatest(
@@ -44,7 +55,16 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
             ).map {_ in return self.searchBar.text ?? ""}.distinctUntilChanged().asDriver(onErrorJustReturn: "")
 
         
-        viewModel = ViewModel.init(input:ViewModel.InputSource(searchTextInOut: searchDriver), output: ())
+        viewModel = ViewModel.init(input:ViewModel.InputSource(searchTextInOut: searchDriver),
+                                   output: GroupChatListViewModel.Output(onShowingHUD: {status in
+                                    if status {
+                                        self.hud.startAnimating()
+                                    }else {
+                                        self.hud.stopAnimating()
+                                    }
+                                   }))
+        viewModel.output.messageSubject.bind(to: self.rx.message).disposed(by: bag)
+
         self.bindTableView()
         initTableView()
         startMonitorLangIfNeeded()

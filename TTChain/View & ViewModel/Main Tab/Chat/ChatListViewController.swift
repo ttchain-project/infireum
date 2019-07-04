@@ -281,7 +281,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     func showAddFriendsList() {
         
         let addAction = UIAlertAction.init(title: LM.dls.user_profile_button_add_friend, style: .default) { _ in
-            self.show(InviteFriendViewController.instance(), sender: self)
+            self.show(InviteFriendViewController.instance(from: InviteFriendViewController.Config(userId:nil)), sender: self)
         }
         let joinGroupAction = UIAlertAction.init(title: LM.dls.join_group, style: .default) { _ in
             self.showQRCodeVCForJoinGroup()

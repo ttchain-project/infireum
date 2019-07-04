@@ -99,7 +99,7 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         self.createButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
             switch self.currentTab! {
             case .Friends:
-                let vc = InviteFriendViewController.navInstance()
+                let vc = InviteFriendViewController.navInstance(from: InviteFriendViewController.Config(userId:nil))
                 self.navigationController?.present(vc, animated: true, completion: nil)
             case .Groups:
                 let viewModel = GroupInformationViewModel()
@@ -111,11 +111,9 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         }).disposed(by: bag)
         
         self.scanQRCodeButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
-            guard let uid = IMUserManager.manager.userModel.value?.uID else {
-                return
-            }
-            let vc = UserIMQRCodeViewController.navInstance(from: UserIMQRCodeViewController.Config(uid:uid, title:LM.dls.myQRCode))
-            self.navigationController?.present(vc,animated:true,completion: nil)
+            
+            self.showQRCodeVCForJoinGroup()
+
         }).disposed(by: bag)
         
         self.profileButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
@@ -229,6 +227,36 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         }))
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func showQRCodeVCForJoinGroup() {
+        
+        let qrCode = OWQRCodeViewController.navInstance(from: OWQRCodeViewController._Constructor(
+            purpose: .userId,
+            resultCallback: { [weak self]
+                (result, purpose, scanningType) in
+                switch result {
+                case .userId(let id):
+                    print("ID",id)
+                    guard self != nil else {
+                        return
+                    }
+                    if self?.currentTab == .Groups {
+                        guard let vc = self?.currentChildVC as? ChatGroupListViewController else {
+                            return
+                        }
+                        vc.viewModel.joinGroup(groupID: id)
+                    } else{
+                        let vc = InviteFriendViewController.navInstance(from: InviteFriendViewController.Config(userId:id))
+                        self?.navigationController?.present(vc, animated: true, completion: nil)
+                    }
+                default: return
+                }
+            },
+            isTypeLocked: true
+        ))
+        
+        self.present(qrCode, animated: true, completion: nil)
     }
 }
 

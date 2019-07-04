@@ -33,14 +33,22 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         }
     }
     
-    typealias Constructor = Void
+    typealias Constructor = Config
+    struct Config {
+        let userId:String?
+    }
     var viewModel: InviteFriendViewModel!
     var bag: DisposeBag = DisposeBag()
     private var searchUserBag: DisposeBag = DisposeBag()
     private var inviteBag = DisposeBag()
     
-    func config(constructor: Void) {
+    func config(constructor: Config) {
+        self.view.layoutIfNeeded()
         viewModel = InviteFriendViewModel.init(input: InviteFriendViewModel.Input(), output: InviteFriendViewModel.Output())
+        if let userId = constructor.userId {
+            self.textField.text = userId
+            self.searchUser(text: userId)
+        }
     }
     
     private func searchUser(text: String) {

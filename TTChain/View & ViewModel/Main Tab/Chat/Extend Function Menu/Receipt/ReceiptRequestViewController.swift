@@ -17,9 +17,111 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
     
     func config(constructor: Void) {
         view.layoutIfNeeded()
+       
+        viewModel = ViewModel.init(input: ViewModel.Input.init(amtStrInout: self.receiptAmounTextField.rx.text, coinSelectedInOut: self.coinNameTextField.rx.text), output: ())
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
-        viewModel = ViewModel.init(input: ViewModel.Input.init(amtStrInout: self.receiptAmounTextField.rx.text, coinSelectedInOut: self.coinNameTextField.rx.text), output: ())
+        self.bindUI()
+    }
+    
+    typealias Constructor = Void
+    
+    var bag: DisposeBag = DisposeBag.init()
+    typealias ViewModel = ReceiptRequestViewModel
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    @IBOutlet weak var coinTitleLabel: UILabel!
+    @IBOutlet weak var coinNameTextField: UITextField! {
+        didSet {
+            let rightImage = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+            rightImage.image = #imageLiteral(resourceName: "btn_next.png")
+            self.coinNameTextField.rightView = rightImage
+            self.coinNameTextField.rightViewMode = .always
+        }
+    }
+    @IBOutlet weak var receiptAmountLabel: UILabel!
+    @IBOutlet weak var receiptAmounTextField: UITextField!
+    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var coinAddressTitleLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBOutlet weak var coinAddressTextfield: UITextField! {
+        didSet {
+            coinAddressTextfield.isEnabled = false
+            let rightImage = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+            rightImage.image = #imageLiteral(resourceName: "btn_next.png")
+            self.coinAddressTextfield.rightView = rightImage
+            self.coinAddressTextfield.rightViewMode = .always
+        }
+    }
+    private let coinPickerView: UIPickerView = UIPickerView.init()
+    
+    private var coinSelected: PublishRelay<(String,String,String)> = PublishRelay.init()
+    
+    var onSelectingCoin: Observable <(String,String,String)> {
+        return coinSelected.asObservable()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
+    override func renderTheme(_ theme: Theme) {
+        
+        changeBackBarButton(toColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+
+        receiptAmounTextField.textColor = theme.palette.input_text
+        receiptAmounTextField.placeHolderColor = theme.palette.input_placeholder
+
+        coinNameTextField.textColor = theme.palette.input_text
+        coinNameTextField.placeHolderColor = theme.palette.input_placeholder
+     
+        coinAddressTextfield.textColor = theme.palette.input_text
+        coinAddressTextfield.placeHolderColor = theme.palette.input_placeholder
+        
+        confirmButton.set(textColor: theme.palette.btn_bgFill_enable_text,
+                          backgroundColor: theme.palette.btn_bgFill_enable_bg )
+        
+        self.view.backgroundColor = theme.palette.bgView_main
+        coinTitleLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
+        receiptAmountLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
+        coinAddressTitleLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
+        infoLabel.set(textColor: theme.palette.application_main, font: .owRegular(size:14))
+        
+    }
+    
+    override func renderLang(_ lang: Lang) {
+        self.title = lang.dls.chat_room_receipt
+        confirmButton.setTitle(lang.dls.g_confirm, for: .normal)
+        coinTitleLabel.text = lang.dls.receipt_receiving_currency
+        receiptAmountLabel.text = lang.dls.receiving_amount
+        coinNameTextField.placeholder = lang.dls.red_env_send_please_select
+        receiptAmounTextField.placeholder = lang.dls.withdrawal_placeholder_withdrawalAmt
+        coinAddressTitleLabel.text = lang.dls.withdrawal_label_toAddr
+        coinAddressTextfield.placeholder = lang.dls.receipt_request_coin_address_placeholder
+        backButton.setTitleForAllStates(lang.dls.g_cancel)
+        let text = lang.dls.receipt_request_warning_label
+        infoLabel.text = "* " + text
+
+    }
+    
+    @objc func doneButtonClicked() {
+        let index = self.coinPickerView.selectedRow(inComponent: 1)
+        guard let coins = self.viewModel.coins.value else {
+            return
+        }
+        guard let selectedCoin = coins.count > index ? coins[index] : nil else {
+            return
+        }
+        self.viewModel.selectedCoin.accept(selectedCoin)
+        self.view.endEditing(true)
+    }
+    
+    func bindUI() {
         self.coinNameTextField.inputView = self.coinPickerView
         
         self.coinPickerView.delegate = self
@@ -33,69 +135,23 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
                 self.showAlert(title: "", message: LM.dls.receipt_request_error_string)
             }
         }).disposed(by: bag)
+        
+        self.backButton.rx.klrx_tap.drive(onNext:{ _ in
+            if (self.presentingViewController != nil) || (self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+                self.dismiss(animated: true, completion: nil)
+            }else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }).disposed(by: bag)
+        
         self.receiptAmounTextField.delegate = self
         self.coinNameTextField.addDoneOnKeyboardWithTarget(self, action: #selector(doneButtonClicked),titleText:LM.dls.g_confirm)
-    }
-    
-    typealias Constructor = Void
-    
-    var bag: DisposeBag = DisposeBag.init()
-    typealias ViewModel = ReceiptRequestViewModel
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    @IBOutlet weak var coinTitleLabel: UILabel!
-    @IBOutlet weak var coinNameTextField: UITextField!
-    @IBOutlet weak var receiptAmountLabel: UILabel!
-    @IBOutlet weak var receiptAmounTextField: UITextField!
-    @IBOutlet weak var confirmButton: UIButton!
-
-    private let coinPickerView: UIPickerView = UIPickerView.init()
-    
-    private var coinSelected: PublishRelay<(String,String,String)> = PublishRelay.init()
-    
-    var onSelectingCoin: Observable <(String,String,String)> {
-        return coinSelected.asObservable()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.setGradientColor()
-    }
-    
-    override func renderTheme(_ theme: Theme) {
-        receiptAmounTextField.textColor = theme.palette.input_text
-        receiptAmounTextField.placeHolderColor = theme.palette.input_placeholder
-
-        coinNameTextField.textColor = theme.palette.input_text
-        coinNameTextField.placeHolderColor = UIColor.gray
-        receiptAmounTextField.placeHolderColor = UIColor.gray
-
-        confirmButton.set(textColor: theme.palette.btn_bgFill_enable_text,
-                          backgroundColor: theme.palette.btn_bgFill_enable_bg )
-    }
-    
-    override func renderLang(_ lang: Lang) {
-        self.title = lang.dls.chat_room_receipt
-        confirmButton.setTitle(lang.dls.g_confirm, for: .normal)
-        coinTitleLabel.text = LM.dls.receipt_receiving_currency
-        receiptAmountLabel.text = LM.dls.receiving_amount
-        coinNameTextField.placeholder = LM.dls.red_env_send_please_select
-        receiptAmounTextField.placeholder = LM.dls.withdrawal_placeholder_withdrawalAmt
-    }
-    
-    @objc func doneButtonClicked() {
-        let index = self.coinPickerView.selectedRow(inComponent: 1)
-        guard let coins = self.viewModel.coins.value else {
-            return
-        }
-        guard let selectedCoin = coins.count > index ? coins[index] : nil else {
-            return
-        }
-        self.viewModel.selectedCoin.accept(selectedCoin)
-        self.view.endEditing(true)
+        
+        self.viewModel.selectedCoin.filterNil().subscribe(onNext: { (_) in
+            self.coinAddressTextfield.text = self.viewModel.selectedWallet.value?.address
+        }).disposed(by: bag)
+        
+        
     }
 }
 
@@ -136,24 +192,14 @@ extension ReceiptRequestViewController: UIPickerViewDelegate,UIPickerViewDataSou
         case 0:
             self.viewModel.selectedWallet.accept(self.viewModel.wallet[row])
             pickerView.selectRow(0, inComponent: 1, animated: true)
-//            guard let coins = self.viewModel.coins.value else {
-//                return
-//            }
-//            self.viewModel.selectedCoin.accept(coins[0])
             pickerView.reloadAllComponents()
-//        case 1:
-//            guard let coins = self.viewModel.coins.value else {
-//                return
-//            }
-//            self.viewModel.selectedCoin.accept(coins[row])
-            
         default:
             return
         }
     }
     
     func reloadComponents() {
-        
+       
     }
 }
 

@@ -36,11 +36,23 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         }
     }
     @IBOutlet weak var editProfileButton: UIButton!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var showQRCodeBtn: UIButton!
     @IBOutlet weak var recoveryPasswordButton: UIButton!
     
+    @IBOutlet weak var idTitleLabel: UILabel!
+    @IBOutlet weak var idTextField: UITextField! {
+        didSet {
+            idTextField.delegate = self
+        }
+    }
+
+    let editImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+    let copyImgView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+
     private lazy var hud = {
         return KLHUD.init(
             type: .spinner,
@@ -56,15 +68,90 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
        
         self.startMonitorLangIfNeeded()
         self.startMonitorThemeIfNeeded()
+        setupTextFields()
+
+        self.bindUI()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
+    
+    func setupTextFields() {
+        
+        editImageView.image = #imageLiteral(resourceName: "btn_edit.png")
+        self.userNameTextField.rightView = editImageView
+        self.userNameTextField.rightViewMode = .always
+        editImageView.rx.klrx_tap.drive(onNext: { () in
+            self.userNameTextField.becomeFirstResponder()
+        }).disposed(by: bag)
+        editImageView.contentMode = .scaleAspectFit
+        
+        copyImgView.image = #imageLiteral(resourceName: "Copy.png")
+        copyImgView.contentMode = .scaleAspectFit
+        self.idTextField.rightView = copyImgView
+        self.idTextField.rightViewMode = .always
+        copyImgView.rx.klrx_tap.drive(onNext: {() in
+            UIPasteboard.general.string = self.idTextField.text
+            EZToast.present(on: self, content: LM.dls.copied_successfully)
+        }).disposed(by: bag)
+    }
+    
+    override func renderLang(_ lang: Lang) {
+        self.title = lang.dls.personal_information
+        self.saveButton.setTitle(lang.dls.ab_update_btn_save, for: .normal)
+        self.userNameTextField.placeholder = lang.dls.myIdentity_label_name
+        self.recoveryPasswordButton.setTitle(lang.dls.user_profile_transfer_account, for: .normal)
+        self.userNameLabel.text = lang.dls.chat_nick_name
+        self.idTitleLabel.text = lang.dls.tab_chat + "ID"
+        self.showQRCodeBtn.setTitleForAllStates(lang.dls.show_qr_code)
+        
+    }
+    
+    override func renderTheme(_ theme: Theme) {
+        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
+        renderNavTitle(color: theme.palette.nav_item_2, font: .owRegular(size: 20))
+        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
+        self.view.backgroundColor = .white
+        self.saveButton.backgroundColor = theme.palette.btn_bgFill_enable_bg
+        self.recoveryPasswordButton.backgroundColor = theme.palette.application_main
+        
+        self.userNameTextField.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
+        
+         self.idTextField.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
+        
+        self.userNameLabel.set(textColor: theme.palette.btn_bgFill_enable_bg, font: .owRegular(size: 12))
+        self.idTitleLabel.set(textColor: theme.palette.btn_bgFill_enable_bg, font: .owRegular(size: 12))
+        
+        self.showQRCodeBtn.set(textColor: .white, font: .owRegular(size:14), backgroundColor: .creamCan)
+        self.showQRCodeBtn.cornerRadius = showQRCodeBtn.height/2
+    }
+
+    func bindUI() {
+        self.recoveryPasswordButton.isHidden = true
         
         self.userNameTextField.text = imUser?.nickName
+        self.idTextField.text = imUser?.uID
+        
         if let img = imUser?.headImgUrl  {
             self.profileImageView.setProfileImage(image: img, tempName: imUser?.nickName)
         }else {
             self.profileImageView.image = imUser?.headImg ?? ImageUntil.drawAvatar(text: (imUser?.nickName)!)
         }
-
-
+        
+        
         editProfileButton.rx.tap.asDriver().drive(onNext: { _ in
             self.showImgSourceActionSheet()
         }).disposed(by: bag)
@@ -87,45 +174,14 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         }).disposed(by: bag)
         
         self.recoveryPasswordButton.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
-           self.setRecoveryPassword()
+            self.setRecoveryPassword()
         }).disposed(by: bag)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        self.showQRCodeBtn.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
+            self.showQRCode()
+        }).disposed(by: bag)
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.setGradientColor()
-    }
-    
-    override func renderLang(_ lang: Lang) {
-        
-        self.saveButton.setTitle(lang.dls.ab_update_btn_save, for: .normal)
-        self.userNameTextField.placeholder = lang.dls.myIdentity_label_name
-        self.recoveryPasswordButton.setTitle(lang.dls.user_profile_transfer_account, for: .normal)
-    }
-    
-    override func renderTheme(_ theme: Theme) {
-        renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
-        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
-
-        self.saveButton.backgroundColor = theme.palette.application_main
-        self.recoveryPasswordButton.backgroundColor = theme.palette.application_main
-        
-        self.userNameTextField.set(textColor: theme.palette.input_text, font: .owRegular(size: 25), placeHolderColor: theme.palette.input_placeholder)
-        
-        
-    }
-
     
     func updateProfilePhoto() {
         
@@ -141,10 +197,9 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             switch result {
             case .success(let model):
                 
-//                if let url = URL.init(string: model.image), let data = try? Data.init(contentsOf: url) {
                     IMUserManager.manager.userModel.value!.headImg = self.profileImageView.image
                     IMUserManager.manager.userModel.value!.headImgUrl = model.image
-//                }
+
                 LocalIMUser.updateLocalIMUser()
                 
                 if self.imUser!.nickName != self.userNameTextField.text {
@@ -244,6 +299,13 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         }
     }
     
+    func showQRCode() {
+        guard let uid = IMUserManager.manager.userModel.value?.uID else {
+            return
+        }
+        let vc = UserIMQRCodeViewController.navInstance(from: UserIMQRCodeViewController.Config(uid:uid, title:LM.dls.myQRCode))
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
 }
 
 extension ProfileViewController {
@@ -352,5 +414,14 @@ extension UIImage {
         }
         UIGraphicsEndImageContext()
         return nil
+    }
+}
+
+extension ProfileViewController :UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == idTextField {
+            return false
+        }
+        return true
     }
 }

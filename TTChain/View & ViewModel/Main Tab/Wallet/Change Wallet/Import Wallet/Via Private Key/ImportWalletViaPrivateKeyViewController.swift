@@ -133,7 +133,7 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
                     guard let wSelf = self else { return }
                     let palette = ThemeManager.instance.theme.value.palette
                     wSelf.importBtn.backgroundColor =
-                        isValid ? palette.btn_bgFill_enable_bg2 : palette.btn_bgFill_disable_bg
+                        isValid ? palette.btn_bgFill_enable_bg : palette.btn_bgFill_disable_bg
                 }
             )
         )
@@ -306,7 +306,7 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         }
         importBtn.set(
             font: UIFont.owRegular(size: 14),
-            backgroundColor: theme.palette.btn_bgFill_enable_bg2
+            backgroundColor: theme.palette.btn_bgFill_enable_bg
         )
         
         pKeyBase.set(

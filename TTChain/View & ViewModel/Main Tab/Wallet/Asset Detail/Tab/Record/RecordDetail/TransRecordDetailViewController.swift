@@ -96,7 +96,7 @@ final class TransRecordDetailViewController: KLModuleViewController,KLVMVC  {
         
         self.toLinkButton.cornerRadius = self.toLinkButton.height/2
         
-        self.view.backgroundColor = theme.palette.btn_bgFill_enable_bg2
+        self.view.backgroundColor = theme.palette.btn_bgFill_enable_bg
     }
     
     override func renderLang(_ lang: Lang) {

@@ -40,8 +40,11 @@ class GroupChatListViewModel: KLRxViewModel {
     struct Input {
         var searchTextInOut:Driver<String>
     }
-    
-    required init(input: Input, output: Void) {
+    struct Output {
+        let messageSubject = PublishSubject<String>()
+        let onShowingHUD:(Bool) -> Void
+    }
+    required init(input: Input, output: Output) {
         self.input = input
         self.output = output
         fetchGroupList()
@@ -49,7 +52,7 @@ class GroupChatListViewModel: KLRxViewModel {
     
     var input: Input
     
-    var output: Void
+    var output: Output
     
     func concatInput() {
         
@@ -61,7 +64,7 @@ class GroupChatListViewModel: KLRxViewModel {
     
     typealias InputSource = Input
     
-    typealias OutputSource = Void
+    typealias OutputSource = Output
     
     var bag: DisposeBag = DisposeBag.init()
     
@@ -100,7 +103,7 @@ class GroupChatListViewModel: KLRxViewModel {
         Server.instance.getUserGroupList(imUserId:userId).asObservable().subscribe(onNext: { (result) in
             switch result {
             case .failed(error: let err):
-                print(err)
+                self.output.messageSubject.onNext(err.descString)
             case .success(let model):
                 self.groupRequestList.accept(model.invitationList)
                 self.groupList.accept(model.groupList)
@@ -117,5 +120,40 @@ class GroupChatListViewModel: KLRxViewModel {
                 self.fetchGroupList()
             }
         }).disposed(by:bag)
+    }
+    
+    func joinGroup(groupID:String) {
+        guard let userId = IMUserManager.manager.userModel.value?.uID else {
+            return
+        }
+        //        self.output.onShowingHUD(true)
+        Server.instance.getGroupInfo(forGroupId: groupID).flatMap { response -> RxAPIResponse<GroupMembersAPIModel> in
+            switch response {
+            case .success(let model):
+                if !model.groupInfo.isPrivate {
+                    let param = GroupMembersAPI.Parameters.init(groupID: groupID, members: [userId])
+                    return Server.instance.groupMembers(parameters: param)
+                }else {
+                    return RxAPIResponse.just(.failed(error:GTServerAPIError.incorrectResult("", LM.dls.alert_cant_join_pvt_group)))
+                }
+            case .failed(error: let error):
+                return RxAPIResponse.just(.failed(error: error))
+            }
+            }.subscribe(onSuccess: { (model) in
+                self.output.onShowingHUD(false)
+
+                switch model {
+                case .failed(error:let error):
+                    self.output.messageSubject.onNext(error.descString)
+                case .success(let model) :
+                    self.output.messageSubject.onNext(LM.dls.group_join_success)
+                    if model.isSuccess {
+                        self.fetchGroupList()
+                    }
+                }
+            }) { (error) in
+                print(error)
+                self.output.onShowingHUD(false)
+            }.disposed(by: bag)
     }
 }

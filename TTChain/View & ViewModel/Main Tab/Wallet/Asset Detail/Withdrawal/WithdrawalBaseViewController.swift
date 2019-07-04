@@ -255,7 +255,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             [unowned self]
             isEnabled in
             let palette = TM.palette
-            self.nextStepBtn.backgroundColor = isEnabled ? palette.btn_bgFill_enable_bg2 : palette.btn_bgFill_disable_bg
+            self.nextStepBtn.backgroundColor = isEnabled ? palette.btn_bgFill_enable_bg : palette.btn_bgFill_disable_bg
         })
         .disposed(by: bag)
         

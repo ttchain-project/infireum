@@ -23,6 +23,6 @@ class ChatTabViewModel:KLRxViewModel {
     }
     func concatInput() {}
     func concatOutput() {}
-    
+
     
 }

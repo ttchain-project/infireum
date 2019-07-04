@@ -59,7 +59,6 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.tabBar.isHidden = true
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -75,6 +74,7 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
                                backgroundColor: palette.btn_bgFill_enable_bg)
         changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
         renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
+        renderNavTitle(color: palette.nav_item_2, font: .owRegular(size: 20))
     }
     
     func config(constructor: UserIMQRCodeViewController.Config) {
