@@ -758,6 +758,12 @@ struct DLS_ZH_TW: DLS {
     var add_wallet_password_warning_two = "如遺忘密碼將一併遺失錢包內的資產，請特別注意。"
 
     var new_wallet_name = "請為新錢包命名"
+    var chat_nick_name = "聊天暱稱"
+    var personal_information = "個人資訊"
+    
+    var receipt_request_warning_label = "发送收款请求时，矿工费用将由付款方支出。"
+    var receipt_request_coin_address_placeholder = "請先選擇收款幣種，系統將自動偵測"
+    
 }
 
 

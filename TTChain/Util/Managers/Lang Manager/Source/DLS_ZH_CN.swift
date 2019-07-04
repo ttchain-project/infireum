@@ -743,5 +743,10 @@ struct DLS_ZH_CN: DLS {
     var add_wallet_password_warning_one = "TTChain团队不会保存您的钱包密码，也无法在您遗失钱包密码时协助寻回，请谨慎设立密码与密码提示。"
     var add_wallet_password_warning_two: String = "如遗忘密码将一并遗失钱包内的资产，请特别注意。"
     var new_wallet_name = "请为新钱包命名"
+    
+    var chat_nick_name = "聊天昵称"
+    var personal_information = "个人资讯"
+    var receipt_request_warning_label = "發送收款請求時，礦工費用將由付款方支出。"
+    var receipt_request_coin_address_placeholder = "请先选择收款币种，系统将自动侦测"
 }
 

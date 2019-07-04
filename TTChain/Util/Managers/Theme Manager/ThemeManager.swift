@@ -122,9 +122,9 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var application_success: UIColor = .owCoolGreen
     
-    var btn_bgFill_enable_bg: UIColor = .yellowGreen
+    var btn_bgFill_enable_bg: UIColor = .cloudBurst
     
-    var btn_bgFill_enable_bg2:UIColor = .cloudBurst
+    var btn_bgFill_enable_bg2:UIColor = .yellowGreen
     var btn_bgFill_enable_text: UIColor = .owWhite
     
     var btn_bgFill_disable_bg: UIColor = .owSilver

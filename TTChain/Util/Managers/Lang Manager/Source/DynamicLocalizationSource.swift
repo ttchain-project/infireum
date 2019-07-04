@@ -727,4 +727,10 @@ protocol DynamicLocalizationSource {
     var add_wallet_password_warning_one:String {get set}
     var add_wallet_password_warning_two:String {get set}
     var new_wallet_name:String {get set}
+    var chat_nick_name:String {get set}
+    var personal_information:String {get set}
+    
+    var receipt_request_warning_label :String {get set}
+    
+    var receipt_request_coin_address_placeholder :String {get set}
 }

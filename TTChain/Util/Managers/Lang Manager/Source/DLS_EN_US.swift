@@ -760,5 +760,13 @@ struct DLS_EN_US: DLS {
     var add_wallet_password_warning_two = "If you forget the password, you will lose the assets in your wallet. Please pay special attention."
     
     var new_wallet_name = "Please name your new wallet"
+    
+    var chat_nick_name = "Chat nick name"
+    
+    var personal_information = "Personal Information"
+    
+    var receipt_request_warning_label = "When sending a payment request, the miner fee will be paid by the payer."
+
+    var receipt_request_coin_address_placeholder = "Please select the coin first. The system will detect the address"
 }
 
