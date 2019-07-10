@@ -150,13 +150,21 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
     }
     
     override func renderTheme(_ theme: Theme) {
         
-        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bg_1)
-        renderNavTitle(color: theme.palette.nav_item_1, font: .owMedium(size: 18))
-        changeBackBarButton(toColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
+        renderNavTitle(color: theme.palette.nav_item_2, font: .owMedium(size: 18))
+        
+        changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+
         changeNavShadowVisibility(true)
 
         userNameLabel.set(
@@ -219,27 +227,15 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         logoutIMLabel.text = dls.user_profile_transfer_account
     }
     
-    @objc func toQRCode() {
-        guard let user = user else {
-            #if Debug
-            fatalError("user should not be nil.")
-            #endif
-            return
+    @objc func backButtonTapped() {
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+             self.navigationController?.popViewController()
+        }else if (self.presentingViewController != nil) || (self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+            self.dismiss(animated: true, completion: nil)
+        }else {
+            self.navigationController?.popViewController()
         }
-        let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uid, title:LM.dls.qrcode_title))
-//        self.navigationController?.pushViewController(vc)
-//        let vc = xib(vc: UserIMQRCodeViewController.self)
-        let screen = UIScreen.main.bounds
-        let width = screen.width * 0.9
-        let height = screen.height * 0.56
-        let form = vc.formSheetVC(
-            size: CGSize.init(width: width,
-                              height: height)
-        )
-
-        present(form, animated: true, completion: nil)
     }
-    
     @IBAction func clickTransferButton(_ sender: UIButton) {
         setRecoverBag = DisposeBag()
         let alertController = UIAlertController(title: LM.dls.user_profile_alert_transfer_account_title, message: LM.dls.user_profile_alert_transfer_account_message, preferredStyle: .alert)

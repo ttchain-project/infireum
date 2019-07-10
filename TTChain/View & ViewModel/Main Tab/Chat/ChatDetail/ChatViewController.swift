@@ -30,16 +30,20 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var blockedLabel: UILabel!
     @IBOutlet weak var viewToHideKeyboard: UIView!
     private lazy var profileBarButtonButton: UIBarButtonItem = {
-        let barButtonButton = UIBarButtonItem(image: #imageLiteral(resourceName: "iconCommunicationUserDark.png"), style: .plain, target: self, action: nil)
+        let barButtonButton = UIBarButtonItem(image: #imageLiteral(resourceName: "chat_info_icon"), style: .plain, target: self, action: nil)
         barButtonButton.rx.tap.subscribe(onNext: {
             [unowned self] in
             switch self.viewModel.input.roomType {
             case .group, .channel:
                 
                 guard let userGroupInfoModel = self.viewModel.groupInfoModel.value else { return }
-                let viewModel = GroupInformationViewModel(userGroupInfoModel: userGroupInfoModel)
-                let viewController = GroupInformationViewController.init(viewModel: viewModel)
-                self.show(viewController, sender: nil)
+                var action:CreateNewGroupViewController.Config.GroupAction = .Normal
+                if let user = IMUserManager.manager.userModel.value, userGroupInfoModel.groupOwnerUID == user.uID {
+                    action = .Edit
+                }
+                
+                let vc = CreateNewGroupViewController.instance(from: CreateNewGroupViewController.Config(groupAction: action, groupModel: userGroupInfoModel))
+                self.navigationController?.pushViewController(vc,animated:true)
             case .pvtChat:
                 self.toUserProfileVC(forFriend:self.viewModel.getFriendsModel(for:self.viewModel.input.uid!)!)
             }
@@ -47,16 +51,16 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         return barButtonButton
     }()
     
-    private lazy var qrCodeBarButton: UIBarButtonItem = {
-        let barButtonButton = UIBarButtonItem(image: #imageLiteral(resourceName: "tt_QRCode_icon"), style: .plain, target: self, action: nil)
+    
+    private lazy var secretChatBarButton: UIBarButtonItem = {
+        let barButtonButton = UIBarButtonItem(image: #imageLiteral(resourceName: "secret_chat_timer"), style: .plain, target: self, action: nil)
         barButtonButton.rx.tap.subscribe(onNext: {
             [unowned self] in
             switch self.viewModel.input.roomType {
-            case .channel:
-                guard let userGroupInfoModel = self.viewModel.groupInfoModel.value else { return }
-                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:userGroupInfoModel.groupID, title:LM.dls.group_qr_code))
-                self.navigationController?.pushViewController(vc)
-            default: return
+            case .pvtChat:
+                self.toChatSecretViewController()
+            default:
+                return
             }
         }).disposed(by: bag)
         return barButtonButton
@@ -92,19 +96,12 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                 chatTitle: constructor.chatTitle,
                 roomID: constructor.roomID,
                 chatAvatar: constructor.chatAvatar,
-                messageText: self.keyboardView.textField, uid: constructor.uid
+                messageText: self.keyboardView.textField,
+                uid: constructor.uid
             ),
             output: ())
         self.chatEntryPoint = constructor.entryPoint
-        viewModel.blockSubject.subscribe(onNext: {
-            [weak self] status in
-            guard let `self` = self else { return }
-            self.keyboardView.endEditing(true)
-//            self.alert(title: LM.dls.chat_room_has_blocked, button: LM.dls.g_ok)
-            self.blockviewHeight.constant = status ? 44 : 0
-            self.view.layoutIfNeeded()
-            self.keyboardView.isBlock = status
-        }).disposed(by: bag)
+        
         
         initTableView()
         initKeyboardView()
@@ -115,6 +112,8 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         self.viewModel.outputMessageSubject.asObservable().subscribe(onNext:{ message in
             self.showAlert(title: "", message: message)
         }).disposed(by:bag)
+        
+        self.tableView.contentInset.bottom = 40
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,7 +152,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: palette.nav_item_2, image:#imageLiteral(resourceName: "arrowNavBlack") )
         self.viewToHideKeyboard.backgroundColor = palette.btn_bgFill_enable_bg
         
-        navigationItem.rightBarButtonItems = viewModel.input.roomType == .channel ? [profileBarButtonButton,qrCodeBarButton] : [profileBarButtonButton]
+        navigationItem.rightBarButtonItems = viewModel.input.roomType == .channel ? [profileBarButtonButton] : [profileBarButtonButton,secretChatBarButton]
         navigationItem.rightBarButtonItem?.tintColor = palette.nav_item_2
         self.blockedLabel.set(textColor: .white, font: .owMedium(size: 14))
         self.blockView.set(backgroundColor: .owPinkRed)
@@ -360,14 +359,25 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
             .asObservable().map {[weak self] status in
                 if status {
                     self?.keyboardView.privateChatDurationTitleLabel.text = LM.dls.secret_chat_on
+                    self?.secretChatBarButton.tintColor = .owPumpkinOrange
                 }else {
                     self?.keyboardView.privateChatDurationTitleLabel.text = ""
+                    self?.secretChatBarButton.tintColor = .white
                 }
                 return !status
             }
             .bind(to: self.keyboardView.privateChatBannerView.rx.isHidden)
             .disposed(by: bag)
     
+        viewModel.blockSubject.subscribe(onNext: {
+            [weak self] status in
+            guard let `self` = self else { return }
+            self.keyboardView.endEditing(true)
+            self.blockviewHeight.constant = status ? 44 : 0
+            self.view.layoutIfNeeded()
+            self.keyboardView.isBlock = status
+        }).disposed(by: bag)
+        
     }
     
     @objc func backButtonTapped() {
@@ -391,8 +401,6 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                 })
                             }, onSelectChatFunction: { [unowned self]function in
                                 switch function.type {
-                                case .startSecretChat:
-                                    self.toChatSecretViewController()
                                 case .addPhoto:
                                     guard PhotoAuthHandler.hasAuthedPhotoLibrary else {
                                         return
@@ -405,15 +413,12 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
                                     self.displayCamera(forSource: .camera)
                                 case .addReceipt:
                                     self.toAddReciept()
-                                case .makeAudioCall:
-                                    self.makeAudioCall()
                                 case .redEnv:
                                     self.toCreateRedEnv()
                                 case .sendDocument:
-                                    DLogInfo("SEndFIle")
                                     self.openDocumentViewer()
                                 default:
-                                    print("Pending implementation")
+                                    break
                                 }
                                 }, onVoiceMessageSuccess: { [unowned self] data in
                                     self.viewModel.sendVoiceMessage(data: data)

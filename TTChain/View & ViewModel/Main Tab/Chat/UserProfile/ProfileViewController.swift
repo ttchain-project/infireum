@@ -300,11 +300,11 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     }
     
     func showQRCode() {
-        guard let uid = IMUserManager.manager.userModel.value?.uID else {
+        guard let user = IMUserManager.manager.userModel.value else {
             return
         }
-        let vc = UserIMQRCodeViewController.navInstance(from: UserIMQRCodeViewController.Config(uid:uid, title:LM.dls.myQRCode))
-        self.navigationController?.present(vc, animated: true, completion: nil)
+        let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uID, title:LM.dls.myQRCode,imageURL:user.headImgUrl,groupTitle:user.nickName!))
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

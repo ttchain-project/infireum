@@ -18,22 +18,17 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
     struct Config {
         let uid :String
         let title:String
+        let imageURL:String?
+        let groupTitle:String
     }
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var qrCodeImageView: UIImageView!
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var uidLabel: UILabel!
     @IBOutlet weak var uidCopyButton: UIButton!
-    @IBOutlet weak var qrcodeBase: UIView! {
-        didSet {
-            qrcodeBase.addShadow(ofColor: .owBlack20,
-                                 radius: 1,
-                                 offset: CGSize.init(width: 2, height: 4),
-                                 opacity: 1)
-
-        }
-    }
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var saveImageBtn: UIButton!
+    @IBOutlet weak var containerView: UIView!
+    
     
     var bag: DisposeBag = DisposeBag.init()
     var viewModel: UserQRCodeViewModel!
@@ -42,19 +37,11 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
         super.viewDidLoad()
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
-        doneButton.rx.tap.asDriver()
-            .drive(onNext: {
-                [unowned self]
-                _ in
-                self.dismiss(animated: true, completion: nil)
-            })
-            .disposed(by: bag)
+        
     }
     
     override func renderLang(_ lang: Lang) {
-        let dls = lang.dls
-//        self.titleLabel.text = dls.exportPKey_tab_qrcode
-        doneButton.setTitleForAllStates(dls.g_confirm)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,18 +50,14 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         let palette = theme.palette
-        titleLabel.set(textColor: palette.label_main_2,
-                       font: .owMedium(size: 18))
         uidLabel.set(textColor: .black,
                      font: .owMedium(size:12 ))
-        titleView.backgroundColor = palette.nav_bg_clear
-
-        doneButton.setPureText(color: palette.btn_bgFill_enable_text,
-                               font: .owRegular(size: 14),
-                               backgroundColor: palette.btn_bgFill_enable_bg)
-        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
+        self.view.backgroundColor = .cloudBurst
+        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
         renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owRegular(size: 20))
+        createRightBarButton(target: self, selector: #selector(shareQRCode), image: #imageLiteral(resourceName: "btn_share.png"), toColor: palette.nav_item_2)
+        
     }
     
     func config(constructor: UserIMQRCodeViewController.Config) {
@@ -92,5 +75,20 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
                 self.view.makeToast(LM.dls.g_toast_addr_copied)
             })
             .disposed(by: bag)
+        
+        saveImageBtn.rx.klrx_tap.drive(onNext:{[unowned self] _ in
+            let img = self.containerView.screenshot
+            ImageSaver.saveImage(image: img!, onViewController: self).subscribe(onSuccess: nil, onError: nil).disposed(by: self.bag)
+        }).disposed(by: bag)
+        if let imageURL = constructor.imageURL {
+            self.userImageView.setProfileImage(image: imageURL, tempName: constructor.groupTitle)
+        }
+        self.nameLabel.text = constructor.groupTitle
+    }
+    
+    @objc func shareQRCode() {
+        let img = containerView.screenshot!
+        let activityVC = UIActivityViewController.init(activityItems: [img], applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
     }
 }

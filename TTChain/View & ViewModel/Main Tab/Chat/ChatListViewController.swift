@@ -148,10 +148,10 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
         self.qrcodeButton.rx.tap.asDriver()
             .drive(onNext: {
                 _ in
-                guard let uid = IMUserManager.manager.userModel.value?.uID else {
+                guard let user = IMUserManager.manager.userModel.value else {
                     return
                 }
-                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:uid, title:LM.dls.myQRCode))
+                let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uID, title:LM.dls.myQRCode, imageURL: user.headImgUrl,groupTitle:user.nickName!))
                 self.navigationController?.pushViewController(vc)
             })
             .disposed(by: bag)

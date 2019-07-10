@@ -128,8 +128,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
     }
     override func renderTheme(_ theme: Theme) {
         renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
-        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
-
+        changeLeftBarButton(target: self, selector: #selector(popOrDismiss), tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
     }
     func showStep1AlertDialog() {
         let alertController = UIAlertController.init(title: LM.dls.add_friend_alert_title, message: LM.dls.add_friend_alert_message, preferredStyle: .alert)
@@ -157,14 +156,14 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
             guard let `self` = self else { return }
             switch result {
             case .success: self.showAlert(title: LM.dls.add_friend_alert_success, message: nil, completion: { [weak self] (_) in
-                self?.navigationController?.popViewController()
+                self?.popOrDismiss()
             })
             case .failed(error: let error):
                 switch error {
                 case .incorrectResult(let code, let errorString):
                     if code == "9048" {
                         self.showSimplePopUp(with: "", contents: errorString, cancelTitle: LM.dls.g_cancel, cancelHandler: { (_) in
-                            self.navigationController?.popViewController(animated: true)
+                            self.popOrDismiss()
                         })
                     }
                 default:
@@ -174,4 +173,13 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
         }).disposed(by: inviteBag)
     }
     
+    @objc func popOrDismiss() {
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+            self.navigationController?.popViewController()
+        }else if (self.presentingViewController != nil) || (self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+            self.dismiss(animated: true, completion: nil)
+        }else {
+            self.navigationController?.popViewController()
+        }
+    }
 }

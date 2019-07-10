@@ -58,7 +58,7 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
         viewModel = ViewModel.init(input:ViewModel.InputSource(searchTextInOut: searchDriver),
                                    output: GroupChatListViewModel.Output(onShowingHUD: {status in
                                     if status {
-                                        self.hud.startAnimating()
+                                        self.hud.startAnimating(inView:self.view)
                                     }else {
                                         self.hud.stopAnimating()
                                     }

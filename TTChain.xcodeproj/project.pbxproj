@@ -413,6 +413,24 @@
 		556B61E82277FD6D004CCE45 /* LightTransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556B61E72277FD6D004CCE45 /* LightTransferManager.swift */; };
 		556B61E92277FD6D004CCE45 /* LightTransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556B61E72277FD6D004CCE45 /* LightTransferManager.swift */; };
 		556B61EA2277FD6D004CCE45 /* LightTransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556B61E72277FD6D004CCE45 /* LightTransferManager.swift */; };
+		556D4DBD22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DBB22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift */; };
+		556D4DBE22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DBB22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift */; };
+		556D4DBF22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DBB22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift */; };
+		556D4DC022CDF1DE00EF5D03 /* CreateNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D4DBC22CDF1DE00EF5D03 /* CreateNewGroupViewController.xib */; };
+		556D4DC122CDF1DE00EF5D03 /* CreateNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D4DBC22CDF1DE00EF5D03 /* CreateNewGroupViewController.xib */; };
+		556D4DC222CDF1DE00EF5D03 /* CreateNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D4DBC22CDF1DE00EF5D03 /* CreateNewGroupViewController.xib */; };
+		556D4DC422CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DC322CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift */; };
+		556D4DC522CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DC322CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift */; };
+		556D4DC622CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DC322CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift */; };
+		556D4DCA22D444F000EF5D03 /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DC822D444F000EF5D03 /* GroupMembersViewController.swift */; };
+		556D4DCB22D444F000EF5D03 /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DC822D444F000EF5D03 /* GroupMembersViewController.swift */; };
+		556D4DCC22D444F000EF5D03 /* GroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DC822D444F000EF5D03 /* GroupMembersViewController.swift */; };
+		556D4DCD22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D4DC922D444F000EF5D03 /* GroupMembersViewController.xib */; };
+		556D4DCE22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D4DC922D444F000EF5D03 /* GroupMembersViewController.xib */; };
+		556D4DCF22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D4DC922D444F000EF5D03 /* GroupMembersViewController.xib */; };
+		556D4DD122D4453300EF5D03 /* GroupMembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DD022D4453300EF5D03 /* GroupMembersViewModel.swift */; };
+		556D4DD222D4453300EF5D03 /* GroupMembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DD022D4453300EF5D03 /* GroupMembersViewModel.swift */; };
+		556D4DD322D4453300EF5D03 /* GroupMembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556D4DD022D4453300EF5D03 /* GroupMembersViewModel.swift */; };
 		55787FBB21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */; };
 		55787FBC21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */; };
 		55787FBD21F83FE900A4F7D6 /* GroupInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */; };
@@ -2402,6 +2420,12 @@
 		5569803A2188566F00346757 /* TTChain_PRD-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_PRD-Info.plist"; sourceTree = "<group>"; };
 		5569803B2188566F00346757 /* TTChain_SIT-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TTChain_SIT-Info.plist"; sourceTree = "<group>"; };
 		556B61E72277FD6D004CCE45 /* LightTransferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTransferManager.swift; sourceTree = "<group>"; };
+		556D4DBB22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewGroupViewController.swift; sourceTree = "<group>"; };
+		556D4DBC22CDF1DE00EF5D03 /* CreateNewGroupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateNewGroupViewController.xib; sourceTree = "<group>"; };
+		556D4DC322CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewGroupViewModel.swift; sourceTree = "<group>"; };
+		556D4DC822D444F000EF5D03 /* GroupMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMembersViewController.swift; sourceTree = "<group>"; };
+		556D4DC922D444F000EF5D03 /* GroupMembersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupMembersViewController.xib; sourceTree = "<group>"; };
+		556D4DD022D4453300EF5D03 /* GroupMembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMembersViewModel.swift; sourceTree = "<group>"; };
 		55787FBA21F83FE900A4F7D6 /* GroupInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupInformationViewController.xib; sourceTree = "<group>"; };
 		55787FD121F9612F00A4F7D6 /* tt_splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tt_splash.gif; sourceTree = "<group>"; };
 		557C84BB22360E3B004C2E16 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -3711,6 +3735,27 @@
 			path = WalletsContainerView;
 			sourceTree = "<group>";
 		};
+		556D4DBA22CDF1B100EF5D03 /* GroupInfo */ = {
+			isa = PBXGroup;
+			children = (
+				556D4DC722D444DF00EF5D03 /* GroupMembers */,
+				556D4DBB22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift */,
+				556D4DBC22CDF1DE00EF5D03 /* CreateNewGroupViewController.xib */,
+				556D4DC322CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift */,
+			);
+			path = GroupInfo;
+			sourceTree = "<group>";
+		};
+		556D4DC722D444DF00EF5D03 /* GroupMembers */ = {
+			isa = PBXGroup;
+			children = (
+				556D4DC822D444F000EF5D03 /* GroupMembersViewController.swift */,
+				556D4DC922D444F000EF5D03 /* GroupMembersViewController.xib */,
+				556D4DD022D4453300EF5D03 /* GroupMembersViewModel.swift */,
+			);
+			path = GroupMembers;
+			sourceTree = "<group>";
+		};
 		557C8494223209AE004C2E16 /* AudioCall */ = {
 			isa = PBXGroup;
 			children = (
@@ -4232,6 +4277,7 @@
 		55EF69EE21A812C5007E074A /* Extend Function Menu */ = {
 			isa = PBXGroup;
 			children = (
+				556D4DBA22CDF1B100EF5D03 /* GroupInfo */,
 				55AADEF621FF109800F403C8 /* Receipt */,
 				55EF69EF21A812C5007E074A /* ChatExtendFunctionMenuViewController.swift */,
 				55EF69F021A812C5007E074A /* ChatExtendFunctionMenuViewController.xib */,
@@ -7087,6 +7133,7 @@
 				559BDB062276CE8500727244 /* LightWithdrawNoteViewController.xib in Resources */,
 				6470D6E020F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.xib in Resources */,
 				55EF6A7721A812C6007E074A /* ChatExtendFunctionMenuViewController.xib in Resources */,
+				556D4DC222CDF1DE00EF5D03 /* CreateNewGroupViewController.xib in Resources */,
 				55EF6A8F21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
 				6424B68920F5CD4100AEBCAD /* TransferRecordCoinOptionViewController.xib in Resources */,
 				643200BD20FB1D9400B11334 /* WithdrawalCICFeeInfoViewController.xib in Resources */,
@@ -7128,6 +7175,7 @@
 				6470D6B420F35B1000EB0780 /* WithdrawalETHFeeInfoViewController.xib in Resources */,
 				640D88D220EDD6540010D986 /* ImportChainTypeChooseViewController.xib in Resources */,
 				6481397220DA496000CAA4D8 /* OWMnemonicWordCollectionViewCell.xib in Resources */,
+				556D4DCF22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */,
 				5508741521EC3291007B3B3B /* BannerCollectionViewCell.xib in Resources */,
 				550873E821E49753007B3B3B /* SettingMenuViewController.xib in Resources */,
 				6470D68C20F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.xib in Resources */,
@@ -7262,6 +7310,7 @@
 				640D88C220EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
 				64C9D47220FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				64C9D46A20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
+				556D4DCD22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */,
 				55A583E222CA0F4D0025809B /* AddWalletViewController.xib in Resources */,
 				55A3D27222729EBC002ABE13 /* LightTransferViewController.xib in Resources */,
 				55EF69D321A7F922007E074A /* MainWalletViewController.xib in Resources */,
@@ -7373,6 +7422,7 @@
 				640D890220EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
 				55EF6A6F21A812C6007E074A /* ChatNavigationController.xib in Resources */,
 				5565065522B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */,
+				556D4DC022CDF1DE00EF5D03 /* CreateNewGroupViewController.xib in Resources */,
 				64D8268520E33FAF00C8FC63 /* ManageAssetTableViewCell.xib in Resources */,
 				55EF6AC621A812C6007E074A /* ExtendFunctionTableViewCell.xib in Resources */,
 				64E4E4D32147B434009B556B /* LaunchViewController.xib in Resources */,
@@ -7458,6 +7508,7 @@
 				640D88C320EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
 				64C9D47320FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				64C9D46B20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
+				556D4DCE22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */,
 				55A583E322CA0F4D0025809B /* AddWalletViewController.xib in Resources */,
 				55A3D27322729EBC002ABE13 /* LightTransferViewController.xib in Resources */,
 				55EF69D221A7F921007E074A /* MainWalletViewController.xib in Resources */,
@@ -7569,6 +7620,7 @@
 				640D890320EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
 				55EF6A7021A812C6007E074A /* ChatNavigationController.xib in Resources */,
 				5565065622B33C190042EFC4 /* WalletsContainerViewController.xib in Resources */,
+				556D4DC122CDF1DE00EF5D03 /* CreateNewGroupViewController.xib in Resources */,
 				64D8268620E33FAF00C8FC63 /* ManageAssetTableViewCell.xib in Resources */,
 				55EF6AC721A812C6007E074A /* ExtendFunctionTableViewCell.xib in Resources */,
 				64E4E4D42147B434009B556B /* LaunchViewController.xib in Resources */,
@@ -8268,6 +8320,7 @@
 				55EF6ADA21A812C6007E074A /* InviteTableViewCell.swift in Sources */,
 				55340305224F227A007F355D /* UnknownFileTableViewCell.swift in Sources */,
 				55F987C6227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift in Sources */,
+				556D4DBF22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift in Sources */,
 				64D8265120E0D8D600C8FC63 /* ChangeAssetViewModel.swift in Sources */,
 				6424B69220F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.swift in Sources */,
 				5539A48A21676F8C00A59ACC /* IdentityQRCodeDecryptionFlow.swift in Sources */,
@@ -8351,6 +8404,7 @@
 				64C614AC2109BA50005B7394 /* String+PrivateMode.swift in Sources */,
 				6481398220DA719700CAA4D8 /* BackupWalletNoteViewController.swift in Sources */,
 				64E77DE521206BD200B0AC15 /* EtherscanUrlCreator.swift in Sources */,
+				556D4DD322D4453300EF5D03 /* GroupMembersViewModel.swift in Sources */,
 				55EF6B8D21A81D43007E074A /* DLS_ZH_TW.swift in Sources */,
 				64F07DEA20D241A000A60C5C /* UIImage+Sizing.swift in Sources */,
 				64F07DE420D241A000A60C5C /* UIViewController+Visible.swift in Sources */,
@@ -8435,12 +8489,14 @@
 				64F07DE720D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
 				649E48BF20ECE7A700B217AD /* WalletPrivateKeyInfoViewModel.swift in Sources */,
 				555E4AD2224CBAFC00C7CAD5 /* SendRedEnvelopeHistoryViewModel.swift in Sources */,
+				556D4DC622CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift in Sources */,
 				55EF6B1E21A814E8007E074A /* ViewModel.swift in Sources */,
 				6424B63020F4D94100AEBCAD /* TransferRecordInfoBarViewModel.swift in Sources */,
 				649E484620E7D96000B217AD /* ChangeWalletTableViewCell.swift in Sources */,
 				645006FD20F45E0500C0FC11 /* WithdrawalConfirmETHFeeInputViewModel.swift in Sources */,
 				64769B1C2121E86F00C4AB9E /* AgreementViewController.swift in Sources */,
 				6424B6A720F5E43500AEBCAD /* TransferRecordsListViewModel.swift in Sources */,
+				556D4DCC22D444F000EF5D03 /* GroupMembersViewController.swift in Sources */,
 				643200B620FAE22E00B11334 /* LightningTradeConfirmViewModel.swift in Sources */,
 				64813A7C20DCADD500CAA4D8 /* Identity+Helper.swift in Sources */,
 				554D2CFF2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift in Sources */,
@@ -8817,6 +8873,7 @@
 				648139CA20DBADC900CAA4D8 /* Constants.swift in Sources */,
 				55340307224F227E007F355D /* UnknownFileTableViewCell.swift in Sources */,
 				55F987C4227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift in Sources */,
+				556D4DBD22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift in Sources */,
 				55EF6AD821A812C6007E074A /* InviteTableViewCell.swift in Sources */,
 				640D88DB20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.swift in Sources */,
 				64C9D49D20FDFA23000B0774 /* EditABUnitViewModel.swift in Sources */,
@@ -8900,6 +8957,7 @@
 				6481398B20DA752200CAA4D8 /* BackupWalletMnemonicDisplayViewController.swift in Sources */,
 				64813A8220DCAE0100CAA4D8 /* Wallet+Helper.swift in Sources */,
 				64813A9220DCAFCE00CAA4D8 /* KLDebugHelper.swift in Sources */,
+				556D4DD122D4453300EF5D03 /* GroupMembersViewModel.swift in Sources */,
 				55EF6B8B21A81D43007E074A /* DLS_ZH_TW.swift in Sources */,
 				64813A4020DCA6EE00CAA4D8 /* CoinToFiatRate+CoreDataProperties.swift in Sources */,
 				64C614AA2109BA50005B7394 /* String+PrivateMode.swift in Sources */,
@@ -8984,12 +9042,14 @@
 				6481397A20DA4D1700CAA4D8 /* MnemonicHelper.swift in Sources */,
 				64D826A320E3E2AC00C8FC63 /* LightningTransRecord+CoreDataProperties.swift in Sources */,
 				555E4AD0224CBAFC00C7CAD5 /* SendRedEnvelopeHistoryViewModel.swift in Sources */,
+				556D4DC422CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift in Sources */,
 				55EF6B1C21A814E8007E074A /* ViewModel.swift in Sources */,
 				64813ADB20DD22F400CAA4D8 /* MainWalletAssetTableViewCell.swift in Sources */,
 				64D8265E20E22F4300C8FC63 /* ManageAssetViewController.swift in Sources */,
 				6485002520D9340F00107473 /* UIView+FastUISetup.swift in Sources */,
 				64F07DD320D241A000A60C5C /* GTThemeExtensions.swift in Sources */,
 				64C9D44820FDC8C6000B0774 /* AddressBookViewController.swift in Sources */,
+				556D4DCA22D444F000EF5D03 /* GroupMembersViewController.swift in Sources */,
 				64813ACC20DD071F00CAA4D8 /* MainWalletOverviewViewController.swift in Sources */,
 				6424B62E20F4D94100AEBCAD /* TransferRecordInfoBarViewModel.swift in Sources */,
 				554D2CFD2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift in Sources */,
@@ -9359,6 +9419,7 @@
 				64F07DAE20D240FF00A60C5C /* Any+ReachabilityMonitor.swift in Sources */,
 				55340308224F227F007F355D /* UnknownFileTableViewCell.swift in Sources */,
 				55F987C5227BE6C8000C32F9 /* LightDepositWalletChooseViewModel.swift in Sources */,
+				556D4DBE22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift in Sources */,
 				55EF6AD921A812C6007E074A /* InviteTableViewCell.swift in Sources */,
 				640D88DC20EDD84D0010D986 /* ImportChainTypeChooseTableViewCell.swift in Sources */,
 				64C9D49E20FDFA23000B0774 /* EditABUnitViewModel.swift in Sources */,
@@ -9442,6 +9503,7 @@
 				64F07DFE20D241A000A60C5C /* GTQuickLogExtensions.swift in Sources */,
 				64D826D020E4C6A000C8FC63 /* SearchAssetViewModel.swift in Sources */,
 				64C614AB2109BA50005B7394 /* String+PrivateMode.swift in Sources */,
+				556D4DD222D4453300EF5D03 /* GroupMembersViewModel.swift in Sources */,
 				55EF6B8C21A81D43007E074A /* DLS_ZH_TW.swift in Sources */,
 				64B2772420D55BDC004FF75B /* KLRxImageDownloader.swift in Sources */,
 				64E77DE421206BD200B0AC15 /* EtherscanUrlCreator.swift in Sources */,
@@ -9526,12 +9588,14 @@
 				64A1179120D5372C00797C2C /* ChainType.swift in Sources */,
 				6470D6DC20F38E2B00EB0780 /* WithdrawalETHInfoOverviewViewController.swift in Sources */,
 				555E4AD1224CBAFC00C7CAD5 /* SendRedEnvelopeHistoryViewModel.swift in Sources */,
+				556D4DC522CDFD4E00EF5D03 /* CreateNewGroupViewModel.swift in Sources */,
 				55EF6B1D21A814E8007E074A /* ViewModel.swift in Sources */,
 				6470D6B020F35B1000EB0780 /* WithdrawalETHFeeInfoViewController.swift in Sources */,
 				6470D61520F0E01B00EB0780 /* WithdrawalAddressViewModel.swift in Sources */,
 				64C9D44920FDC8C6000B0774 /* AddressBookViewController.swift in Sources */,
 				649E48C720ECF43800B217AD /* WalletPKeyQRCodeViewController.swift in Sources */,
 				640D88E720EE25860010D986 /* TransRecordStatus.swift in Sources */,
+				556D4DCB22D444F000EF5D03 /* GroupMembersViewController.swift in Sources */,
 				6424B62F20F4D94100AEBCAD /* TransferRecordInfoBarViewModel.swift in Sources */,
 				6485000F20D8DFE100107473 /* OWStringValidator.swift in Sources */,
 				554D2CFE2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift in Sources */,

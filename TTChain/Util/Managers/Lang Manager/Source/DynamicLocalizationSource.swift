@@ -733,4 +733,11 @@ protocol DynamicLocalizationSource {
     var receipt_request_warning_label :String {get set}
     
     var receipt_request_coin_address_placeholder :String {get set}
+    var group_info_label_title_string:String {get set}
+    var group_setting_title:String{get set}
+    var group_member_mgmgt_title:String {get set}
+    
+
+    var group_invite_member_title:String {get set}
+    var group_info_title:String {get set}
 }

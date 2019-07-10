@@ -29,6 +29,17 @@ class SearchMemberViewController: UIViewController {
         }
     }
     
+    lazy var hud:KLHUD = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: CGSize.init(width: 100, height: 100)
+            ),
+            spinnerColor: TM.palette.hud_spinner
+        )
+    }()
+    
     private let viewModel: SearchMemberViewModel
     private let disposeBag = DisposeBag()
     private lazy var confirmBarButtonItem: UIBarButtonItem = {
@@ -79,5 +90,13 @@ class SearchMemberViewController: UIViewController {
             _, source, cell in
             cell.viewModel = source
             }.disposed(by: disposeBag)
+        
+        viewModel.input.hudAnimationSubject.subscribe { (event) in
+            if let status = event.element,status  {
+                self.hud.startAnimating(inView:self.view)
+            }else {
+                self.hud.stopAnimating()
+            }
+        }.disposed(by: disposeBag)
     }
 }

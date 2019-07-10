@@ -364,4 +364,6 @@ final class GroupInformationViewModel: ViewModel {
             }
         }).disposed(by: disposeBag)
     }
+    
+  
 }

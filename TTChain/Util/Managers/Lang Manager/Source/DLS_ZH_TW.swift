@@ -763,7 +763,14 @@ struct DLS_ZH_TW: DLS {
     
     var receipt_request_warning_label = "发送收款请求时，矿工费用将由付款方支出。"
     var receipt_request_coin_address_placeholder = "請先選擇收款幣種，系統將自動偵測"
+
+    var group_info_label_title_string:String = "社群公告"
     
+    var group_setting_title:String = "社群設定"
+    var group_member_mgmgt_title:String  = "成員管理"
+    
+    var group_invite_member_title:String = "邀請成員"
+    var group_info_title:String = "社群資訊"
 }
 
 

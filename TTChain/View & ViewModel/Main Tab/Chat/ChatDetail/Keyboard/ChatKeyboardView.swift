@@ -79,12 +79,6 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         self.input = input
         self.output = output
         
-        if self.input!.roomType == .pvtChat {
-            self.functions.append(contentsOf:[
-                                  FunctionModel.init(title: LM.dls.chat_room_audio_call, image: #imageLiteral(resourceName: "iconCallColor"), type: .makeAudioCall)]
-            )
-            self.collectionView.reloadData()
-        }
     }
     
     var inputContentViewHeight: CGFloat {
@@ -97,8 +91,8 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     var functions: [FunctionModel] = [FunctionModel.init(title: LM.dls.chat_room_receipt, image:#imageLiteral(resourceName: "chat_btn_request.png") , type: .addReceipt),
                                       FunctionModel.init(title: LM.dls.chat_room_image, image: UIImage(named: "iconPhotosColor"), type: .addPhoto),
                                       FunctionModel.init(title: LM.dls.chat_room_camera, image: UIImage(named: "iconCameraColor"), type: .openCamera),
-                                      FunctionModel.init(title: LM.dls.chat_room_red_env, image: #imageLiteral(resourceName: "chat_btn_redenvelope.png"), type: .redEnv),
-                                      FunctionModel.init(title: LM.dls.send_file_title, image: UIImage(named: "iconFileColor"), type: .sendDocument)
+                                      FunctionModel.init(title: LM.dls.send_file_title, image: UIImage(named: "iconFileColor"), type: .sendDocument),
+                                      FunctionModel.init(title: LM.dls.chat_room_red_env, image: #imageLiteral(resourceName: "chat_btn_redenvelope.png"), type: .redEnv)
                                       
 ]
 
@@ -148,7 +142,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
             
             let offset = self?.inputContentViewBottomConstraint.constant
             
-            self?.animateInputContentView(offset: offset == 0 ? 156 : 0)
+            self?.animateInputContentView(offset: offset == 0 ? 78 : 0)
             self?.moreButton.isSelected = !(self?.moreButton.isSelected ?? false)
         }).disposed(by: bag)
     }
@@ -352,7 +346,7 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     }
     //
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = 0.25 * UIScreen.main.bounds.size.width
+        let width = 0.20 * UIScreen.main.bounds.size.width
         
         return CGSize.init(width: width, height: 78)
     }
@@ -367,7 +361,6 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         
         cell?.descriptionLabel.text = functions[indexPath.row].title
         cell?.imageView.image       = functions[indexPath.row].image
-        
         
         return cell!
     }

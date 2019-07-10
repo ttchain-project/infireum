@@ -768,5 +768,15 @@ struct DLS_EN_US: DLS {
     var receipt_request_warning_label = "When sending a payment request, the miner fee will be paid by the payer."
 
     var receipt_request_coin_address_placeholder = "Please select the coin first. The system will detect the address"
+    
+    var group_info_label_title_string:String = "Group Announcement"
+    
+    var group_setting_title:String = "Group Settings"
+    var group_member_mgmgt_title:String = "Member Management"
+    
+    var group_invite_member_title:String = "Invite members"
+    
+    var group_info_title:String = "Community Information"
+
 }
 

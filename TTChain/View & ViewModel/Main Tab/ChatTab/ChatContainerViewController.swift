@@ -102,9 +102,12 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
                 let vc = InviteFriendViewController.navInstance(from: InviteFriendViewController.Config(userId:nil))
                 self.navigationController?.present(vc, animated: true, completion: nil)
             case .Groups:
-                let viewModel = GroupInformationViewModel()
-                let navController = UINavigationController.init(rootViewController:GroupInformationViewController.init(viewModel: viewModel))
-                self.navigationController?.present(navController, animated: true, completion: nil)
+//                let viewModel = GroupInformationViewModel()
+//                let navController = UINavigationController.init(rootViewController:GroupInformationViewController.init(viewModel: viewModel))
+//                self.navigationController?.present(navController, animated: true, completion: nil)
+                
+                let vc = CreateNewGroupViewController.navInstance(from: CreateNewGroupViewController.Config(groupAction: .Create,groupModel:nil))
+                self.navigationController?.present(vc,animated:true,completion:nil)
             default:
                 return
             }
@@ -130,12 +133,11 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         self.messagesButton.isSelected = false
         self.groupsButton.isSelected = false
         self.friendsButton.isSelected = false
-        self.createButton.isHidden = false
+        self.createButton.isHidden = true
         switch tab {
         case .Message:
             self.messagesButton.isSelected = true
             configureChildView(forVC: self.getChatListViewController())
-            self.createButton.isHidden = true
         case .Friends:
             self.friendsButton.isSelected = true
             configureChildView(forVC: self.getFriendListController())
@@ -143,6 +145,8 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         case .Groups:
             self.groupsButton.isSelected = true
             configureChildView(forVC: self.getGroupListController())
+            self.createButton.isHidden = false
+
         }
     }
     

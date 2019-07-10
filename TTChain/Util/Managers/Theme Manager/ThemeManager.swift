@@ -189,7 +189,7 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var nav_bg_clear: UIColor = .clear
     
-    var nav_item_1: UIColor = .owBlack
+    var nav_item_1: UIColor = .cloudBurst
     
     var nav_item_2: UIColor = .owWhite
     

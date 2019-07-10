@@ -47,8 +47,6 @@ class PrivateChatSettingViewModel: KLRxViewModel  {
     struct Input {
         var selectedDuration: PrivateChatDuration?
         var selectedStatus: Bool?
-        var privateChatSwitch:ControlProperty<Bool>
-        var pickerSelectedIndex: Driver<Int>
         var roomId:String
         var roomType:RoomType
         var uId:String
@@ -56,8 +54,8 @@ class PrivateChatSettingViewModel: KLRxViewModel  {
     
     
     
-    private lazy var _isPrivateChatEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: self.input.selectedStatus ?? false)
-    private lazy var _privateChatDuration: BehaviorRelay<PrivateChatDuration> = BehaviorRelay.init(value: self.input.selectedDuration ?? .pvt_10_minutes)
+    public lazy var _isPrivateChatEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: self.input.selectedStatus ?? false)
+    public lazy var _privateChatDuration: BehaviorRelay<PrivateChatDuration> = BehaviorRelay.init(value: self.input.selectedDuration ?? .pvt_10_minutes)
     
     public var privateChatDurationObserver: Observable<PrivateChatDuration> {
         return _privateChatDuration.asObservable()
@@ -79,19 +77,18 @@ class PrivateChatSettingViewModel: KLRxViewModel  {
         self.output = output
         self.concatInput()
         self.concatOutput()
-        self.bindUI()
     }
     
     var input: Input
     var output: Void
     
     func concatInput() {
-        input.pickerSelectedIndex
-            .drive(onNext: {
-                [unowned self] row in
-                self._privateChatDuration.accept(self.durationOptions[row])
-            })
-            .disposed(by: bag)
+//        input.pickerSelectedIndex
+//            .drive(onNext: {
+//                [unowned self] row in
+//                self._privateChatDuration.accept(self.durationOptions[row])
+//            })
+//            .disposed(by: bag)
     }
     
     func concatOutput() {
@@ -103,9 +100,6 @@ class PrivateChatSettingViewModel: KLRxViewModel  {
     
     var bag: DisposeBag = DisposeBag.init()
     
-    private func bindUI () {
-        self.input.privateChatSwitch.skip(1).bind(to: self._isPrivateChatEnabled).disposed(by: bag)
-    }
     
     func setDestructMessageSetting() -> RxAPIResponse<SelfDestructMessageSettingAPIModel> {
         let value:String

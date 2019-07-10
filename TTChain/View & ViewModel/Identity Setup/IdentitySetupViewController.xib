@@ -60,7 +60,7 @@
                         <constraint firstAttribute="width" secondItem="zT7-G3-y1o" secondAttribute="width" constant="40" id="vgD-fu-4gG"/>
                     </constraints>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPL-dP-dQF">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPL-dP-dQF">
                     <rect key="frame" x="20" y="373" width="280" height="175"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="980" verticalCompressionResistancePriority="980" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZh-bo-raJ">

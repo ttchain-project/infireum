@@ -24,19 +24,34 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     var viewModel: PrivateChatSettingViewModel!
     var bag: DisposeBag = DisposeBag()
 
-    
-    @IBOutlet weak var privateModelLabel: UILabel!
-    @IBOutlet weak var privateModeTitleLabel: UILabel!
-    @IBOutlet weak var privateModeSwitch: UISwitch!
-    @IBOutlet weak var privateModeDurationLabel: UILabel!
-    @IBOutlet weak var privateModelDurationButton: UIButton!
-    @IBOutlet weak var privateChatDurationContentView: UIView!
-    @IBOutlet weak var titleContentView: UIView!
+
     @IBOutlet weak var stackView: UIStackView!
     
-    let pickerView: UIPickerView = UIPickerView.init()
-    private let pickerResponder = UITextField.init()
- 
+    @IBOutlet weak var privateModeButton: UIButton!
+    
+    @IBOutlet weak var deleteImmediatelyBtn: UIButton!
+    @IBOutlet weak var deleteAfterFiveBtn: UIButton!
+    @IBOutlet weak var deleteAfterTenBtn: UIButton!
+    @IBOutlet weak var deleteAfterTwentyBtn: UIButton!
+    @IBOutlet weak var deleteAfterThirtyBtn: UIButton! {
+        didSet {
+            deleteAfterThirtyBtn.isHidden = true
+        }
+    }
+    @IBOutlet weak var deleteAfterSixtyBtn: UIButton!{
+        didSet {
+            deleteAfterSixtyBtn.isHidden = true
+        }
+    }
+    
+    lazy var buttons :[UIButton] = [deleteImmediatelyBtn,
+                                    deleteAfterFiveBtn,
+                                    deleteAfterTenBtn,
+                                    deleteAfterTwentyBtn]
+    
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    
     private let chatSecretChoices : PublishRelay<(PrivateChatDuration?,Bool)> = PublishRelay.init()
     
     var onChatSecretChoicesComplete : Observable<(PrivateChatDuration?,Bool)> {
@@ -52,16 +67,14 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
             ViewModel.init(input: PrivateChatSettingViewModel.InputSource(
             selectedDuration:constructor.selectedDurationIfAny,
             selectedStatus:constructor.privateModeStatusIfAny,
-            privateChatSwitch: self.privateModeSwitch.rx.isOn,
-            pickerSelectedIndex: self.pickerView.rx.itemSelected.asDriver().map { $0.row },
             roomId: constructor.roomId,
             roomType:constructor.roomType,
             uId:constructor.uId
             ),output: ())
+
         self.startMonitorLangIfNeeded()
         self.startMonitorThemeIfNeeded()
         self.bindViewModel()
-        self.setupPickerView()
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -80,66 +93,93 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
                             title: nil)
         
         view.backgroundColor = palette.bgView_sub
-//        self.titleContentView.backgroundColor
-            self.stackView.backgroundColor = palette.bgView_main
         
-//        self.privateChatDurationContentView.backgroundColor = palette.bgView_main
-        privateModelLabel.set(
-            textColor: palette.label_main_1,
-            font: .owRegular(size: 17)
-        )
-        privateModeDurationLabel.set(
-            textColor: palette.label_main_1,
-            font: .owRegular(size: 17)
-        )
-        privateModeTitleLabel.set(
-            textColor: palette.label_sub,
-            font: .owRegular(size: 10)
-        )
+        for (btn, title) in zip(self.buttons,self.viewModel.durationOptions) {
+            btn.setTitleForAllStates(title.title)
+            btn.set( font: .owRegular(size:14))
+            btn.setTitleColor(palette.label_main_1, for: .normal)
+            btn.setTitleColor(palette.label_sub,for:.disabled)
+        }
         
-        privateModelDurationButton.set(color: palette.label_main_1, font: UIFont.owRegular(size: 12))
-        privateModelDurationButton.setTitleColor(palette.label_sub, for: .disabled)
+        privateModeButton.set( font: .owRegular(size:14))
         
-        self.privateModeSwitch.layer.anchorPoint = CGPoint.init(x: 1.0, y: 1.0)
-        self.privateModeSwitch.transform = CGAffineTransform(scaleX: 0.50, y: 0.50)
-        
-        privateModelDurationButton.set(image: #imageLiteral(resourceName: "arrowNavBlue"),
-                                       title: nil,
-                                       titlePosition: .left,
-                                       additionalSpacing: 8,
-                                       state: .normal)
-        
-        self.createRightBarButton(target: self, selector: #selector(saveSetting), title: LM.dls.ab_update_btn_save, toColor: palette.label_main_2, shouldClear: true)
+//        self.createRightBarButton(target: self, selector: #selector(saveSetting), title: LM.dls.ab_update_btn_save, toColor: palette.label_main_2, shouldClear: true)
     }
     
     override func renderLang(_ lang: Lang) {
-        self.privateModeTitleLabel.text = lang.dls.chat_secret_setting
-        self.privateModelLabel.text = lang.dls.decentralize
-        self.privateModeDurationLabel.text = lang.dls.time_limit
+
+        self.privateModeButton.setTitleForAllStates(lang.dls.chat_secret_setting)
+         nextButton.setTitleForAllStates(lang.dls.g_confirm)
+        backButton.setTitleForAllStates(lang.dls.g_cancel)
+
     }
     
     func bindViewModel() {
-        self.viewModel.privateChatDurationObserver.subscribe(onNext: { (duration) in
+        
+        self.deleteImmediatelyBtn.rx.tap.bind { self.viewModel._privateChatDuration.accept(.singleConversation) }.disposed(by: bag)
+        
+        self.deleteAfterFiveBtn.rx.tap.bind { self.viewModel._privateChatDuration.accept(.pvt_5_minutes) }.disposed(by: bag)
+        
+        self.deleteAfterTenBtn.rx.tap.bind { self.viewModel._privateChatDuration.accept(.pvt_10_minutes) }.disposed(by: bag)
+        
+        self.deleteAfterTwentyBtn.rx.tap.bind { self.viewModel._privateChatDuration.accept(.pvt_20_minutes) }.disposed(by: bag)
+        
+        
+        Observable.combineLatest(self.viewModel.privateChatDurationObserver,self.viewModel!._isPrivateChatEnabled).asObservable().subscribe(onNext: { (arg) in
+            
+            let (duration,status) = arg
+            self.buttons.forEach { $0.isEnabled = status }
+            
+            self.buttons.forEach { $0.isSelected = false }
+            if status {
+                switch duration {
+                case .singleConversation:
+                    self.deleteImmediatelyBtn.isSelected = true
+                case .pvt_10_minutes:
+                    self.deleteAfterTenBtn.isSelected = true
+                case .pvt_5_minutes:
+                    self.deleteAfterFiveBtn.isSelected = true
+                case .pvt_20_minutes:
+                    self.deleteAfterTwentyBtn.isSelected = true
+                }
+            }
+            
+        }).disposed(by: bag)
+        
+//        self.viewModel.privateChatDurationObserver.subscribe(onNext: { (duration) in
+//            self.buttons.forEach { $0.isSelected = false }
+//            switch duration {
+//            case .singleConversation:
+//                self.deleteImmediatelyBtn.isSelected = true
+//            case .pvt_10_minutes:
+//                self.deleteAfterTenBtn.isSelected = true
+//            case .pvt_5_minutes:
+//                self.deleteAfterFiveBtn.isSelected = true
+//            case .pvt_20_minutes:
+//                self.deleteAfterTwentyBtn.isSelected = true
+//            }
+//        }).disposed(by: bag)
+//
+//        self.viewModel._isPrivateChatEnabled.subscribe(onNext: { (status) in
+//            self.buttons.forEach { $0.isEnabled = status }
+//        }).disposed(by: bag)
+        
+        self.privateModeButton.isSelected = self.viewModel.isChatPrivate()
+        
+        self.privateModeButton.rx.klrx_tap.drive(onNext:{ _ in
+            self.privateModeButton.isSelected = !self.privateModeButton.isSelected
+            self.viewModel._isPrivateChatEnabled.accept(self.privateModeButton.isSelected)
+        }).disposed(by: bag)
+        
+        self.backButton.rx.klrx_tap.drive(onNext:{ _ in
+            self.navigationController?.popViewController()
+        }).disposed(by: bag)
+        
+        self.nextButton.rx.klrx_tap.drive(onNext:{ _ in
+            self.saveSetting()
+        }).disposed(by: bag)
+    }
 
-            self.privateModelDurationButton.set(image: nil, title: duration.title, titlePosition: .left, additionalSpacing: 8, state: .normal)
-        }).disposed(by: bag)
-        
-        Observable.just(self.viewModel.durationOptions).bind(to: self.pickerView.rx.itemTitles){ (row,element) in
-            return element.title
-        }.disposed(by: bag)
-        self.privateModeSwitch.isOn = self.viewModel.isChatPrivate()
-        
-        self.privateModeSwitch.rx.isOn.map { $0 }.bind(to: self.privateModelDurationButton.rx.isEnabled).disposed(by: bag)
-    }
-    
-    private func setupPickerView() {
-        pickerResponder.inputView = pickerView
-        privateChatDurationContentView.addSubview(pickerResponder)
-        self.privateModelDurationButton.rx.tap.asDriver().drive(onNext: {
-            [unowned self] in
-            self.pickerResponder.becomeFirstResponder()
-        }).disposed(by: bag)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,7 +191,7 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     }
     
     
-    @objc func saveSetting() {
+    func saveSetting() {
         self.viewModel.setDestructMessageSetting().asObservable()
             .subscribe(onNext: { response in
                 switch response {
@@ -170,20 +210,3 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
     }
 }
 
-//extension PrivateChatSettingViewController : UIPickerViewDelegate, UIPickerViewDataSource {
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return self.viewModel.durationOptions.count
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return self.viewModel.durationOptions[row].title
-//    }
-////    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-////        self.viewModel.input.selectedDuration. = durationOptions[row]
-////    }
-//
-//}

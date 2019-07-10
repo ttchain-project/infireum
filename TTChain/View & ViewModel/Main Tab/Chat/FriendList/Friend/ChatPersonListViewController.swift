@@ -38,8 +38,8 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
             ).map {_ in return self.searchBar.text ?? ""}.distinctUntilChanged().asDriver(onErrorJustReturn: "")
         
         viewModel = ViewModel.init(input: ChatPersonListViewModel.InputSource(searchTextInOut: searchDriver), output: ())
-        self.bindTableView()
         initTableView()
+        self.bindTableView()
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
     }
@@ -48,7 +48,7 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
         tableView.register(InviteTableViewCell.nib, forCellReuseIdentifier: InviteTableViewCell.nameOfClass)
         tableView.register(FriendTableViewCell.nib, forCellReuseIdentifier: FriendTableViewCell.nameOfClass)
         tableView.backgroundColor = .clear
-        tableView.delegate = self
+        tableView.rx.setDelegate(self).disposed(by: bag)
         
         self.searchBar.rx.cancelButtonClicked.asDriver().drive(onNext: { _ in
             self.searchBar.endEditing(true)

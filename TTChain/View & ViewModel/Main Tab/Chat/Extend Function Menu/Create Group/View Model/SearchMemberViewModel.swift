@@ -18,6 +18,7 @@ final class SearchMemberViewModel: ViewModel {
         let collectionViewItemSelected = PublishSubject<Int>()
         let tableViewItemDeselected = PublishSubject<Int>()
         let confirmButtonSubject = PublishSubject<Void>()
+        let hudAnimationSubject = PublishSubject<Bool>()
     }
     
     struct Output {
@@ -29,9 +30,9 @@ final class SearchMemberViewModel: ViewModel {
     var input = Input()
     var output = Output()
     private let disposeBag = DisposeBag()
-    
-    init() {
-        
+    private var groupMemberId:String?
+    init(groupMemberId:String? = nil) {
+        self.groupMemberId = groupMemberId
         input.friendInfoModels.map { (viewModels) -> [AddGroupMemeberTableViewCellModel] in
             return viewModels.map(AddGroupMemeberTableViewCellModel.init)
             }.bind(to: output.addGroupMemberTableViewCellModels).disposed(by: disposeBag)
@@ -97,7 +98,35 @@ final class SearchMemberViewModel: ViewModel {
        
         input.confirmButtonSubject.subscribe(onNext: {
             [unowned self] in
-            self.output.selectedFriends.onNext(self.output.addGroupMemberCollectionViewCellModels.value.map({ $0.input.friendInfoModel }))
+            self.inviteMembersToChat()
+//            self.output.selectedFriends.onNext(self.output.addGroupMemberCollectionViewCellModels.value.map({ $0.input.friendInfoModel }))
+        }).disposed(by: disposeBag)
+    }
+    
+    func inviteMembersToChat() {
+        
+        let memberIDs = self.output.addGroupMemberCollectionViewCellModels.value.map({ $0.input.friendInfoModel.uid })
+        
+        guard let groupID = self.groupMemberId,groupID.count > 0 else{
+            return
+        }
+        input.hudAnimationSubject.onNext(true)
+        let parameters = GroupMembersAPI.Parameters.init(groupID: groupID, members: memberIDs)
+        Server.instance.groupMembers(parameters: parameters).asObservable().subscribe(onNext: {
+            [weak self] result in
+            
+            guard let `self` = self else { return }
+            self.input.hudAnimationSubject.onNext(false)
+            switch result {
+            case .success(let model):
+                if model.isSuccess {
+                    self.output.selectedFriends.onNext([])
+//                    self.groupMembersInvitedSuccessfully.onNext(())
+//                    self.getGroupDetails()
+                }
+            case .failed(error: let error):
+                print(error)
+            }
         }).disposed(by: disposeBag)
     }
 }
