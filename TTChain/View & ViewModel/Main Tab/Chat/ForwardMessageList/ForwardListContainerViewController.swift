@@ -12,7 +12,7 @@ import Pageboy
 import RxSwift
 import RxCocoa
 
-final class ForwardListContainerViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable,PageboyViewControllerDataSource,TMBarDataSource {
+final class ForwardListContainerViewController: TabmanViewController, RxThemeRespondable, RxLangRespondable,PageboyViewControllerDataSource, TMBarDataSource {
     
     var langBag: DisposeBag = DisposeBag.init()
     
@@ -28,7 +28,7 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
     var onForwardChatToSelection : Observable<(ChatListPage)> {
         return forwardChatToSelection.asObservable()
     }
-    var items:[TMBarItem] = []
+    private var items: [TMBarItem] = []
     private lazy var vcs: [ForwardListViewController] = {
         return []
     }()
@@ -45,6 +45,18 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
         vcs = createPages()
         let palette = TM.palette
         //        renderNavBar(tint: palette.nav_bg_1, barTint: palette.nav_bg_1)
+        typealias TTBar = TMBarView<TMHorizontalBarLayout, TTTabManButton, TMBarIndicator.None>
+
+        let bar = TTBar()
+        dataSource = self
+        
+        bar.layout.alignment = .center
+        bar.layout.transitionStyle = .snap // Customize
+        bar.layout.contentMode = .fit
+        bar.backgroundView.style = TMBarBackgroundView.Style.flat(color: .licorice)
+        self.items = self.items(with: LM.dls)
+        
+        addBar(bar, dataSource: self, at: .top)
         changeBackBarButton(toColor: palette.nav_item_1, image:#imageLiteral(resourceName: "arrowNavBlack"))
     }
 
@@ -69,36 +81,17 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
         return [friendsVC, groupVC, chatVC]
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.items = [LM.dls.group,LM.dls.chat_list_title].map {
+    private func items(with dls: DLS) -> [TMBarItem] {
+        return [LM.dls.friend,LM.dls.group,LM.dls.chat_list_title].map {
             (name) -> TMBarItem in
             let item = TMBarItem.init(title: name)
             return item
         }
-        
-        let bar = TMBar.ButtonBar()
-        addBar(bar, dataSource: self, at: .top)
-        bar.indicator.weight = .light
-        bar.layout.alignment = .center
-        bar.indicator.cornerStyle = .rounded
-        bar.buttons.customize { (button) in
-            button.backgroundColor = .clear
-        }
-        
-//        bar.appearance = TabmanBar.Appearance.init({ (appearance) in
-//            appearance.layout.itemDistribution = TabmanBar.Appearance.Layout.ItemDistribution.leftAligned
-//            appearance.layout.minimumItemWidth = UIScreen.main.bounds.width/3
-//            appearance.layout.interItemSpacing = 0.0
-//            appearance.layout.edgeInset = 0.0
-//
-//            appearance.indicator.color = UIColor.white
-//
-//            appearance.indicator.bounces = true
-//
-//            appearance.style.background = TabmanBar.BackgroundView.Style.solid(color:UIColor.owIceCold)
-//            appearance.bottomSeparator.color = UIColor.init(hex: 0xd6d6d6, transparency: 0.5)
-//        })
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
         
         // Do any additional setup after loading the view.
     }
