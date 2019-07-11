@@ -32,12 +32,13 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         self.state = constructor.groupAction
 
         setupUIForEdit()
+        self.renderNavBar(tint: TM.palette.nav_bg_1, barTint: TM.palette.nav_bar_tint)
         changeLeftBarButton(target: self, selector: #selector(navBarBackTapped), tintColor: .white, image: #imageLiteral(resourceName: "arrowNavBlack"))
         self.viewModel.groupModel.accept(constructor.groupModel)
         bindUI()
         self.view.backgroundColor = TM.palette.bgView_main
         self.title = LM.dls.group_info_title
-       
+        
     }
     
     override func viewDidLoad() {
@@ -176,13 +177,15 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
             self.viewModel.createGroup()
         }).disposed(by: bag)
         
-        self.viewModel.output.groupCreationComplete
-            .map { groupId in
-                return self.viewModel.fetchGroupInfoFromServer(for: groupId)
-            }.asObservable().subscribe { _ in
+        self.viewModel.output.groupCreationComplete.subscribe(onNext:{ groupId in
+            var fetchGroupBag = DisposeBag()
+            self.viewModel.fetchGroupInfoFromServer(for: groupId).subscribe({ _ in
                 self.state = .Edit
                 self.setupUIForEdit()
-            }.disposed(by: bag)
+                fetchGroupBag = DisposeBag()
+            }).disposed(by: fetchGroupBag)
+        }).disposed(by: bag)
+            
         
         self.viewModel.output.animateHUDSubject.asObservable().subscribe(onNext: { (status) in
             if status {
@@ -197,7 +200,7 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
             .disposed(by:bag)
         
         self.viewModel.output.exitGroupCompleted.asObservable().subscribe(onNext: { _ in
-            if self.navigationController?.viewControllers.count ?? 0 > 0 {
+            if self.navigationController?.viewControllers.count ?? 0 > 1 {
                 self.navigationController?.popViewController(animated: true)
             }else {
                 self.dismiss(animated: true, completion: nil)
@@ -210,9 +213,11 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         self.infoTextView.isEditable = false
         switch  self.state {
         case .Create:
-        self.settingsView.isHidden = true
-        self.editGroupInfoButton.isHidden = true
-        self.groupIconButton.isHidden = false
+            self.settingsView.isHidden = true
+            self.editGroupInfoButton.isHidden = true
+            self.groupIconButton.isHidden = false
+            self.groupNameTextField.isEnabled = true
+            self.infoTextView.isEditable = true
         case .Edit:
             self.addEditButtons()
             fallthrough
@@ -247,10 +252,14 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         if self.state == .Edit {
             self.viewModel.updateGroupInfo().asObservable().subscribe(onNext: { _ in
                 self.didUpdateGroupInfo?(self.viewModel?.groupModel.value)
-                self.navigationController?.popViewController(animated: true)
+                if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                    self.navigationController?.popViewController(animated: true)
+                }else {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }).disposed(by:bag)
         }else {
-            if self.navigationController?.viewControllers.count ?? 0 > 0 {
+            if self.navigationController?.viewControllers.count ?? 0 > 1 {
                 self.navigationController?.popViewController(animated: true)
             }else {
                 self.dismiss(animated: true, completion: nil)

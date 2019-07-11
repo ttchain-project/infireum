@@ -135,10 +135,7 @@ class CreateNewGroupViewModel : KLRxViewModel {
     func updateGroupInfo() -> Single<Void>{
         
         if let model = self.groupModel.value, (self.groupName.value != model.groupName || self.groupInfo.value != model.introduction || self.shouldUploadGroupImage) {
-            
-            
             guard let groupName = self.groupName.value else { fatalError("groupName should not be nil.") }
-            
             let parameters = UpdateGroupAPI.Parameters.init(groupID: model.groupID, groupName: groupName, isPostMsg: model.isPostMsg, introduction: self.groupInfo.value ?? "")
             
             self.output.animateHUDSubject.onNext(true)

@@ -252,7 +252,8 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
                         vc.viewModel.joinGroup(groupID: id)
                     } else{
                         let vc = InviteFriendViewController.navInstance(from: InviteFriendViewController.Config(userId:id))
-                        self?.navigationController?.present(vc, animated: true, completion: nil)
+                        self?.navigationController?.presentedViewController?.dismiss(animated: false, completion: nil)
+                        self?.navigationController?.present(vc, animated: false, completion: nil)
                     }
                 default: return
                 }

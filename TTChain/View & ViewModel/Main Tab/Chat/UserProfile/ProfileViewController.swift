@@ -38,7 +38,11 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.isHidden = true
+        }
+    }
     
     @IBOutlet weak var showQRCodeBtn: UIButton!
     @IBOutlet weak var recoveryPasswordButton: UIButton!
@@ -123,7 +127,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     override func renderTheme(_ theme: Theme) {
         renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
         renderNavTitle(color: theme.palette.nav_item_2, font: .owRegular(size: 20))
-        changeLeftBarButtonToDismissToRoot(tintColor: .white,image:#imageLiteral(resourceName: "btn_previous_light"))
+        changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: theme.palette.nav_bg_1, image: #imageLiteral(resourceName: "btn_previous_light"))
         self.view.backgroundColor = .white
         self.saveButton.backgroundColor = theme.palette.btn_bgFill_enable_bg
         self.recoveryPasswordButton.backgroundColor = theme.palette.application_main
@@ -169,7 +173,11 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             } else if self.imUser!.nickName != self.userNameTextField.text {
                 self.updateUserName()
             }else {
-                self.navigationController?.popViewController(animated: true)
+                if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                    self.navigationController?.popViewController(animated: true)
+                }else {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }).disposed(by: bag)
         
@@ -206,7 +214,11 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
                     //UpdateName
                     self.updateUserName()
                 } else {
-                    self.navigationController?.popViewController(animated: true)
+                    if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                        self.navigationController?.popViewController(animated: true)
+                    }else {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
             case .failed(error: let error):
                 print("error %@", error)
@@ -234,7 +246,11 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             case .success(_):
                 self.imUser?.nickName = self.userNameTextField.text!
                 LocalIMUser.updateLocalIMUser()
-                self.navigationController?.popViewController(animated: true)
+                if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                    self.navigationController?.popViewController(animated: true)
+                }else {
+                    self.dismiss(animated: true, completion: nil)
+                }
             case .failed(error: let error):
                 print("error %@", error)
             }
@@ -305,6 +321,21 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         }
         let vc = UserIMQRCodeViewController.instance(from: UserIMQRCodeViewController.Config(uid:user.uID, title:LM.dls.myQRCode,imageURL:user.headImgUrl,groupTitle:user.nickName!))
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func backButtonTapped() {
+        if self.didUpdateProfileImage  {
+            //UpdateImage
+            self.updateProfilePhoto()
+        } else if self.imUser!.nickName != self.userNameTextField.text {
+            self.updateUserName()
+        }else {
+            if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 }
 
