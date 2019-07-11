@@ -154,7 +154,9 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     
     private func handleCreateIdentityResult() {
         let idenitySource = self.viewModel.getIdentitySource()
-        let vc = BackupWalletNoteViewController.instance(source: idenitySource)
+//        let vc = BackupWalletNoteViewController.instance(source: idenitySource)
+        
+        let vc = BackupWalletViewController.instance(from: idenitySource)
         navigationController?.pushViewController(vc)
     }
     
@@ -184,7 +186,7 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         self.hideDefaultNavBar()
         for field in fields {
             field.sepline.backgroundColor = theme.palette.sepline
-            field.textColor = theme.palette.input_text
+            field.textColor = theme.palette.bg_fill_new
             field.placeHolderColor = theme.palette.input_placeholder
         }
         for label in labels {

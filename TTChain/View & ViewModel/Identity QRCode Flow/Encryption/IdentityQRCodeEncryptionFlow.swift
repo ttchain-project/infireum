@@ -17,6 +17,7 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
     enum Result {
         case qrCodeStored
         case skipped
+        case createOwnQRCode(IdentityQRCodeContent)
     }
     
     enum LaunchType {
@@ -112,6 +113,7 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
                     })
                     
                 case .success(pwd: let pwd, pwdHint: let pwdHint):
+                    
                     self.presentQRCodeContentView(withPwd: pwd, hint: pwdHint)
                 }
             })
@@ -185,6 +187,7 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
             alert.addTextField(configurationHandler: { (tf) in
                 wSelf.pwdTextField = tf
                 tf.delegate = self
+                tf.isSecureTextEntry = true
                 tf.set(placeholder: dls.qrCodeExport_alert_placeholder_pwd)
                 //                print("Reach tf build up")
             })
@@ -220,6 +223,7 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
     }
     
     private func presentQRCodeContentView(withPwd pwd: String, hint: String) {
+        
         guard let qrCodeContent = IdentityQRCodeContent.init(
             identity: identity, pwd: pwd, pwdHint: hint
             ) else {
@@ -238,7 +242,11 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
             })
         )
         
-        requestVC?.present(vc, animated: true, completion: nil)
+        if self.launchType == .create {
+            self._onComplete.accept(Result.createOwnQRCode(qrCodeContent))
+        }else {
+            requestVC?.present(vc, animated: true, completion: nil)
+        }
     }
 }
 

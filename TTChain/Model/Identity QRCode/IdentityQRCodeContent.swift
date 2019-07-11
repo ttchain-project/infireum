@@ -21,7 +21,7 @@ class IdentityQRCodeContent: Codable {
     private(set) var systemMnemonic: String
     private(set) var systemWallets: [IdentityQRCodeContentWalletUnit]
     private(set) var importedWallets: [IdentityQRCodeContentWalletUnit]
-
+    private(set) var pwd:String? = nil
     required init(timestamp: TimeInterval,
                   pwdHint: String,
                   systemMnemonic: String,
@@ -131,6 +131,7 @@ class IdentityQRCodeContent: Codable {
                   systemMnemonic: mnemonic,
                   systemWallets: systemWalletUnits,
                   importedWallets: importedWalletUnits)
+        self.pwd = pwd
     }
     
     fileprivate static func parse(qrCodeRawContent: String) -> JSON? {

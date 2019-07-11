@@ -771,6 +771,12 @@ struct DLS_ZH_TW: DLS {
     
     var group_invite_member_title:String = "邀請成員"
     var group_info_title:String = "社群資訊"
+    
+    var backup_qrcode_message_label = "此行動條碼為甜甜圈錢包為您貼心設計，供您日後可方便快速恢復您在甜甜圈錢上的所有錢包帳號。 請妥善備份您的帳號資訊，並且不要上傳至雲端硬碟或在任何公用網路上存取。這與您日後要維護資產安全、恢復帳號等動作至關重要。"
+    
+    var back_up_skip_warning_msg =  "備份帳號行動碼與您日後要維護資產安全、恢復帳號等動作相當重要。 如在無備份帳號的情況下遺失手機或各種意外導致帳號遺失，將永遠無法尋回。"
+    
+    var backup_skip_msg_title = "您確定要略過嗎？"
 }
 
 

@@ -756,5 +756,11 @@ struct DLS_ZH_CN: DLS {
     
     var group_invite_member_title:String = "邀请成员"
     var group_info_title:String = "社群资讯"
+
+    var backup_qrcode_message_label = "此行动条码为甜甜圈钱包为您贴心设计，供您日后可方便快速恢复您在甜甜圈钱上的所有钱包帐号。 请妥善备份您的帐号资讯，并且不要上传至云端硬碟或在任何公用网路上存取。这与您日后要维护资产安全、恢复帐号等动作至关重要。"
+    
+    var back_up_skip_warning_msg = "备份帐号行动码与您日后要维护资产安全、恢复帐号等动作相当重要。 如在无备份帐号的情况下遗失手机或各种意外导致帐号遗失，将永远无法寻回。"
+    
+    var backup_skip_msg_title = "您确定要略过吗？"
 }
 

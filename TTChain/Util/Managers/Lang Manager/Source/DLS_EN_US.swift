@@ -778,5 +778,10 @@ struct DLS_EN_US: DLS {
     
     var group_info_title:String = "Community Information"
 
+    var backup_qrcode_message_label = "This QR code is designed for you with TTChain wallet, so you can quickly and easily restore all your wallet accounts. Please back up your account information and don't upload it to the cloud, or access on any public network. This is essential for you to maintain asset security and recover your account in the future."
+    
+    var back_up_skip_warning_msg = "Backup account action code is very important for you to maintain asset security and restore account in the future. If you lose your phone or have accidents caused by a backup account, you will never be able to retrieve it."
+    
+    var backup_skip_msg_title = "Are you sure you want to skip it?"
 }
 

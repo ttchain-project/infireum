@@ -740,4 +740,9 @@ protocol DynamicLocalizationSource {
 
     var group_invite_member_title:String {get set}
     var group_info_title:String {get set}
+    var backup_qrcode_message_label:String {get set}
+    
+    var back_up_skip_warning_msg:String {get set}
+    var backup_skip_msg_title:String {get set}
+    
 }

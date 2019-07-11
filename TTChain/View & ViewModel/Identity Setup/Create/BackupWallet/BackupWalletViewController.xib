@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BackupWalletViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="backQRCodeMessageLabel" destination="nep-Af-kuy" id="xfS-Sf-mue"/>
+                <outlet property="confirmButton" destination="naf-n5-URL" id="a6h-SX-Y3c"/>
+                <outlet property="qrCodeImageView" destination="SjL-7t-mNt" id="PxE-A2-O2I"/>
+                <outlet property="qrCodeView" destination="W2m-HF-GmQ" id="Vzn-OF-SL1"/>
+                <outlet property="qrCodemsgLabel" destination="bbN-QZ-Och" id="vFv-bI-Rhu"/>
+                <outlet property="showQRCodeBtn" destination="N6L-6B-Dxc" id="4aO-X3-WMm"/>
+                <outlet property="skipButton" destination="v7a-OS-hwM" id="gOM-ni-aVa"/>
+                <outlet property="titleLabel" destination="kgX-Ms-FnC" id="Wmb-Wo-tmZ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgX-Ms-FnC">
+                    <rect key="frame" x="20" y="40" width="335" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2m-HF-GmQ">
+                    <rect key="frame" x="62.5" y="91" width="250" height="250"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6L-6B-Dxc">
+                            <rect key="frame" x="94" y="108" width="62" height="34"/>
+                            <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbN-QZ-Och">
+                            <rect key="frame" x="25" y="146" width="200" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SjL-7t-mNt">
+                            <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="bbN-QZ-Och" firstAttribute="top" secondItem="N6L-6B-Dxc" secondAttribute="bottom" constant="4" id="5ut-9B-ycH"/>
+                        <constraint firstItem="N6L-6B-Dxc" firstAttribute="centerY" secondItem="SjL-7t-mNt" secondAttribute="centerY" id="7sX-F1-ysp"/>
+                        <constraint firstAttribute="bottom" secondItem="SjL-7t-mNt" secondAttribute="bottom" id="OnE-U9-qwo"/>
+                        <constraint firstItem="SjL-7t-mNt" firstAttribute="leading" secondItem="W2m-HF-GmQ" secondAttribute="leading" id="QX6-Fe-wvl"/>
+                        <constraint firstItem="bbN-QZ-Och" firstAttribute="width" secondItem="W2m-HF-GmQ" secondAttribute="width" multiplier="0.8" id="fid-Vq-29B"/>
+                        <constraint firstItem="bbN-QZ-Och" firstAttribute="centerX" secondItem="N6L-6B-Dxc" secondAttribute="centerX" id="gua-Xs-72G"/>
+                        <constraint firstItem="N6L-6B-Dxc" firstAttribute="centerX" secondItem="SjL-7t-mNt" secondAttribute="centerX" id="qAr-Cy-qB6"/>
+                        <constraint firstAttribute="trailing" secondItem="SjL-7t-mNt" secondAttribute="trailing" id="sSm-KA-FcH"/>
+                        <constraint firstItem="SjL-7t-mNt" firstAttribute="top" secondItem="W2m-HF-GmQ" secondAttribute="top" id="wH9-9c-b0t"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="nep-Af-kuy">
+                    <rect key="frame" x="47" y="366" width="281" height="203"/>
+                    <string key="text">"This QR code is designed for you with TTChain wallet, so you can quickly and easily restore all your wallet accounts. Please back up your account information and don't upload it to the cloud, or access on any public network. This is essential for you to maintain asset security and recover your account in the future."</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7a-OS-hwM">
+                    <rect key="frame" x="233" y="599" width="122" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="ELf-Wi-L5o"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                    <state key="normal" title="Button" image="btn_notice">
+                        <color key="titleColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naf-n5-URL">
+                    <rect key="frame" x="233" y="599" width="122" height="48"/>
+                    <color key="backgroundColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="7aY-R9-VID"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                    <state key="normal" title="Button" image="btn_agree">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nep-Af-kuy" firstAttribute="top" secondItem="W2m-HF-GmQ" secondAttribute="bottom" constant="25" id="3CM-4h-veQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v7a-OS-hwM" secondAttribute="trailing" constant="20" id="406-EO-orI"/>
+                <constraint firstItem="kgX-Ms-FnC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ETh-V7-ZP3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="naf-n5-URL" secondAttribute="bottom" constant="20" id="GCX-dq-LgS"/>
+                <constraint firstItem="W2m-HF-GmQ" firstAttribute="width" secondItem="W2m-HF-GmQ" secondAttribute="height" id="Gi1-Hf-MkZ"/>
+                <constraint firstItem="W2m-HF-GmQ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="2:3" id="JCW-Lb-Xbr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="naf-n5-URL" secondAttribute="trailing" constant="20" id="Kds-Q4-bEg"/>
+                <constraint firstItem="kgX-Ms-FnC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="PqW-LT-viV"/>
+                <constraint firstItem="W2m-HF-GmQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Rn5-eH-YTs"/>
+                <constraint firstItem="v7a-OS-hwM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="nep-Af-kuy" secondAttribute="bottom" constant="10" id="RqX-xV-6yV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kgX-Ms-FnC" secondAttribute="trailing" constant="20" id="WwZ-so-aEk"/>
+                <constraint firstItem="nep-Af-kuy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ahj-eV-yrw"/>
+                <constraint firstItem="nep-Af-kuy" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="3:4" id="uv3-Mq-sYK"/>
+                <constraint firstItem="W2m-HF-GmQ" firstAttribute="top" secondItem="kgX-Ms-FnC" secondAttribute="bottom" constant="30" id="x5T-oG-GwY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="v7a-OS-hwM" secondAttribute="bottom" constant="20" id="zMI-Mo-V8t"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_agree" width="48" height="48"/>
+        <image name="btn_notice" width="48" height="48"/>
+    </resources>
+</document>

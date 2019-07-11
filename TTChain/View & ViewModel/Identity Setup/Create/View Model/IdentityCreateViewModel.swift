@@ -170,8 +170,8 @@ class IdentityCreateViewModel: KLRxViewModel {
         return .valid
     }
     
-    public func getIdentitySource() -> BackupWalletNoteViewController.Config {
-        return BackupWalletNoteViewController.Config(name:name.value!,pwd:pwd.value!,pwdHint:pwdHint.value!)
+    public func getIdentitySource() -> BackupWalletViewController.Config {
+        return BackupWalletViewController.Config(name:name.value!,pwd:pwd.value!,pwdHint:pwdHint.value!)
     }
     //MARK: - Identity create
     private func createIdentity() -> RxAPIResponse<CreateResult> {
