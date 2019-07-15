@@ -47,7 +47,6 @@ class GroupChatListViewModel: KLRxViewModel {
     required init(input: Input, output: Output) {
         self.input = input
         self.output = output
-        fetchGroupList()
     }
     
     var input: Input

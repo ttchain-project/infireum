@@ -109,7 +109,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
         startMonitorThemeIfNeeded()
         bindViewModel()
     
-        self.viewModel.outputMessageSubject.asObservable().subscribe(onNext:{ message in
+        self.viewModel.outputMessageSubject.asObservable().subscribe(onNext:{[unowned self] message in
             self.showAlert(title: "", message: message)
         }).disposed(by:bag)
         
@@ -381,10 +381,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     
     @objc func backButtonTapped() {
-//        self.viewModel.postChatSection()
-        self.viewModel.timerSub?.dispose()
         self.dismiss(animated: true, completion: nil)
-
     }
     
     func initKeyboardView() {

@@ -745,4 +745,10 @@ protocol DynamicLocalizationSource {
     var back_up_skip_warning_msg:String {get set}
     var backup_skip_msg_title:String {get set}
     
+    var create_identity_username_placeholder :String {get set}
+    var create_identity_password_placeholder :String {get set}
+    var create_identity_reenter_password_placeholder :String {get set}
+    var create_identity_password_reminder_placeholder :String {get set}
+    var create_identity_privacy_policy_btn_title :String {get set}
+    var agree_bnt_title: String {get set}
 }

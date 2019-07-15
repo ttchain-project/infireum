@@ -45,7 +45,10 @@ final class ChatGroupListViewController: KLModuleViewController, KLVMVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.fetchGroupList()
+    }
     
     func config(constructor: Void) {
         self.view.layoutIfNeeded()

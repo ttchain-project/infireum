@@ -65,16 +65,8 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
     @IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var qrCodeView: UIView!
     @IBOutlet weak var backQRCodeMessageLabel: UILabel!
-    @IBOutlet weak var skipButton: UIButton! {
-        didSet {
-            skipButton.roundBothSides()
-        }
-    }
-    @IBOutlet weak var confirmButton: UIButton! {
-        didSet {
-            confirmButton.roundBothSides()
-        }
-    }
+    @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton!
     
     override func renderTheme(_ theme: Theme) {
         let p = theme.palette
@@ -82,6 +74,8 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
         self.backQRCodeMessageLabel.set(textColor: p.label_main_1, font: .owRegular(size: 14))
         self.titleLabel.set(textColor: p.label_main_1, font: .owRegular(size: 16))
         self.qrCodemsgLabel.set(textColor: .owPinkRed, font: .owRegular(size: 14))
+        self.navigationItem.setHidesBackButton(true, animated: false)
+
     }
     
     override func renderLang(_ lang: Lang) {

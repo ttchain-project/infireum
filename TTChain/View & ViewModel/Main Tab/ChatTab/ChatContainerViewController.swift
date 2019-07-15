@@ -102,9 +102,6 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
                 let vc = InviteFriendViewController.navInstance(from: InviteFriendViewController.Config(userId:nil))
                 self.navigationController?.present(vc, animated: true, completion: nil)
             case .Groups:
-//                let viewModel = GroupInformationViewModel()
-//                let navController = UINavigationController.init(rootViewController:GroupInformationViewController.init(viewModel: viewModel))
-//                self.navigationController?.present(navController, animated: true, completion: nil)
                 
                 let vc = CreateNewGroupViewController.navInstance(from: CreateNewGroupViewController.Config(groupAction: .Create,groupModel:nil))
                 self.navigationController?.present(vc,animated:true,completion:nil)

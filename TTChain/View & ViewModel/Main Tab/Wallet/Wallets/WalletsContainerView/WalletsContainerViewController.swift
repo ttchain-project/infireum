@@ -45,7 +45,11 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var mainWalletBtn: UIButton!
     @IBOutlet weak var stableWalletBtn: UIButton!
-    @IBOutlet weak var listWalletBtn: UIButton!
+    @IBOutlet weak var listWalletBtn: UIButton! {
+        didSet {
+            listWalletBtn.isHidden = true
+        }
+    }
     @IBOutlet weak var importWalletButton: UIButton!
     
     override func renderTheme(_ theme: Theme) {

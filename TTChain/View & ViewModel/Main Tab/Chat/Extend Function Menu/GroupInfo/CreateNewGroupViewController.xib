@@ -25,6 +25,7 @@
                 <outlet property="manageMembersLabel" destination="IEW-2b-TjA" id="RQB-rT-NeQ"/>
                 <outlet property="manageMembersView" destination="Ifx-Cg-P6n" id="dtp-dn-6MX"/>
                 <outlet property="nextButton" destination="uwA-fG-j5Q" id="MYa-Ii-7O7"/>
+                <outlet property="placeholderLabel" destination="avl-1e-Nl5" id="4aW-fI-5ta"/>
                 <outlet property="settingsTitleLabel" destination="vtQ-n8-JPI" id="myY-dn-g7H"/>
                 <outlet property="settingsView" destination="y0D-1w-RuR" id="T1V-ON-unl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -136,12 +137,18 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9y2-PV-RGI">
                                             <rect key="frame" x="0.0" y="41.5" width="375" height="83.5"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ckJ-Z3-Cjc" customClass="KLPlaceholderTextView" customModule="Hope_Seed" customModuleProvider="target">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ckJ-Z3-Cjc">
                                                     <rect key="frame" x="20" y="5" width="335" height="68.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avl-1e-Nl5">
+                                                    <rect key="frame" x="25" y="10" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zR-nz-5AL">
                                                     <rect key="frame" x="340" y="48.5" width="30" height="30"/>
                                                     <constraints>
@@ -157,8 +164,10 @@
                                                 <constraint firstItem="ckJ-Z3-Cjc" firstAttribute="top" secondItem="9y2-PV-RGI" secondAttribute="top" constant="5" id="9Ei-Iu-U7A"/>
                                                 <constraint firstAttribute="trailing" secondItem="ckJ-Z3-Cjc" secondAttribute="trailing" constant="20" id="RX9-nb-kII"/>
                                                 <constraint firstAttribute="trailing" secondItem="7zR-nz-5AL" secondAttribute="trailing" constant="5" id="eKv-ZY-c3v"/>
+                                                <constraint firstItem="avl-1e-Nl5" firstAttribute="top" secondItem="9y2-PV-RGI" secondAttribute="top" constant="10" id="ueN-WD-knn"/>
                                                 <constraint firstItem="ckJ-Z3-Cjc" firstAttribute="leading" secondItem="9y2-PV-RGI" secondAttribute="leading" constant="20" id="vtg-Di-MCi"/>
                                                 <constraint firstAttribute="bottom" secondItem="7zR-nz-5AL" secondAttribute="bottom" constant="5" id="xdK-Jo-ryf"/>
+                                                <constraint firstItem="avl-1e-Nl5" firstAttribute="leading" secondItem="ckJ-Z3-Cjc" secondAttribute="leading" constant="5" id="yIq-41-S4w"/>
                                             </constraints>
                                         </view>
                                     </subviews>

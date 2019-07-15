@@ -777,6 +777,17 @@ struct DLS_ZH_TW: DLS {
     var back_up_skip_warning_msg =  "備份帳號行動碼與您日後要維護資產安全、恢復帳號等動作相當重要。 如在無備份帳號的情況下遺失手機或各種意外導致帳號遺失，將永遠無法尋回。"
     
     var backup_skip_msg_title = "您確定要略過嗎？"
+    
+    var create_identity_username_placeholder = "帳號建立僅限英文字母與數字組合，至少8個字元"
+    
+    var create_identity_password_placeholder = "建議使用英文字母大小寫與數字組合"
+    
+    var create_identity_reenter_password_placeholder = "請再次輸入密碼"
+    
+    var create_identity_password_reminder_placeholder = "提示內容請勿與密碼一樣，以免被輕易盜取"
+    var create_identity_privacy_policy_btn_title = "我同意《TTChain隱私政策》"
+    
+    var agree_bnt_title: String  = "同意"
 }
 
 

@@ -33,6 +33,7 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
 
         setupUIForEdit()
         self.renderNavBar(tint: TM.palette.nav_bg_1, barTint: TM.palette.nav_bar_tint)
+        renderNavTitle(color: TM.palette.nav_bg_1, font: .owRegular(size:16))
         changeLeftBarButton(target: self, selector: #selector(navBarBackTapped), tintColor: .white, image: #imageLiteral(resourceName: "arrowNavBlack"))
         self.viewModel.groupModel.accept(constructor.groupModel)
         bindUI()
@@ -77,14 +78,24 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var groupNameTextField: UITextField! {
         didSet {
             groupNameTextField.placeholder = LM.dls.group_name
+            groupNameTextField.set(textColor: TM.palette.input_text, font: .owRegular(size: 14), placeHolderColor: TM.palette.input_placeholder)
         }
     }
     @IBOutlet weak var imageViewLabel: UILabel!
-    @IBOutlet weak var infoTextView: KLPlaceholderTextView! {
+    @IBOutlet weak var infoTextView: UITextView! {
         didSet {
-            infoTextView.placeholder = LM.dls.group_description
+            infoTextView.font = .owRegular(size: 14)
+            infoTextView.textColor = TM.palette.input_text
         }
     }
+    
+    @IBOutlet weak var placeholderLabel: UILabel! {
+        didSet {
+            placeholderLabel.text = LM.dls.group_description
+            placeholderLabel.set(textColor: TM.palette.input_placeholder, font: .owRegular(size: 12))
+        }
+    }
+    
     @IBOutlet weak var nextButton: UIButton! {
         didSet {
             nextButton.setTitleForAllStates(LM.dls.g_confirm)
@@ -103,14 +114,8 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         }
     }
     
-    @IBOutlet weak var settingsView: UIView! {
-        didSet {
-            settingsView.rx.klrx_tap.drive(onNext:{ _ in
-                let vc = GroupMembersViewController.instance(from: GroupMembersViewController.Config(groupInfo: self.viewModel.groupModel.value!))
-                self.navigationController?.pushViewController(vc)
-            }).disposed(by: bag)
-        }
-    }
+    @IBOutlet weak var settingsView: UIView!
+    
     @IBOutlet weak var settingsTitleLabel: UILabel! {
         didSet {
             settingsTitleLabel.text = LM.dls.group_setting_title
@@ -151,13 +156,17 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         (groupNameTextField.rx.text <-> viewModel.groupName).disposed(by: bag)
         (infoTextView.rx.text <-> viewModel.groupInfo).disposed(by: bag)
        
-        self.groupNameTextField.rx.controlEvent(UIControlEvents.editingDidEnd).subscribe { _ in
-            self.groupNameTextField.isEnabled = false
-        }.disposed(by: bag)
+        viewModel.groupInfo.map({ !($0?.isEmpty ?? true) })
+            .bind(to: placeholderLabel.rx.isHidden)
+            .disposed(by: bag)
+        self.groupNameTextField.rx.controlEvent(UIControlEvents.editingDidEnd).map { self.state == .Create }.subscribe (onNext: { status in
+            self.groupNameTextField.isEnabled = status
+        }).disposed(by: bag)
         
-        self.infoTextView.rx.didEndEditing.subscribe { _ in
-            self.infoTextView.isEditable = false
-        }.disposed(by: bag)
+        
+        self.infoTextView.rx.didEndEditing.map { self.state == .Create }.subscribe(onNext: { status in
+            self.infoTextView.isEditable = status
+        }).disposed(by: bag)
         
         self.viewModel.output.bottomButtonIsEnabled
             .bind(to:self.nextButton.rx.isEnabled)
@@ -200,11 +209,7 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
             .disposed(by:bag)
         
         self.viewModel.output.exitGroupCompleted.asObservable().subscribe(onNext: { _ in
-            if self.navigationController?.viewControllers.count ?? 0 > 1 {
-                self.navigationController?.popViewController(animated: true)
-            }else {
-                self.dismiss(animated: true, completion: nil)
-            }
+            self.dismiss(animated: true, completion: nil)
         }).disposed(by: bag)
     }
     
@@ -224,8 +229,9 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         case .Normal:
             self.navigationItem.rightBarButtonItem = self.optionsBarButton
             self.settingsView.isHidden = false
-            self.manageMembersView.rx.klrx_tap.drive(onNext:{
-                DLogInfo("Showmembers view")
+            self.manageMembersView.rx.klrx_tap.drive(onNext:{ _ in
+                let vc = GroupMembersViewController.instance(from: GroupMembersViewController.Config(groupInfo: self.viewModel.groupModel.value!))
+                self.navigationController?.pushViewController(vc)
             }).disposed(by: bag)
             bottomButtonView.isHidden = true
             

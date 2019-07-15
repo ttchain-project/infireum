@@ -1036,6 +1036,12 @@
 		55F5A7F122D6EBEB00C35879 /* BackupWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5A7F022D6EBEB00C35879 /* BackupWalletViewModel.swift */; };
 		55F5A7F222D6EBEB00C35879 /* BackupWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5A7F022D6EBEB00C35879 /* BackupWalletViewModel.swift */; };
 		55F5A7F322D6EBEB00C35879 /* BackupWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5A7F022D6EBEB00C35879 /* BackupWalletViewModel.swift */; };
+		55F5A7F722D8796A00C35879 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5A7F522D8796A00C35879 /* PrivacyPolicyViewController.swift */; };
+		55F5A7F822D8796A00C35879 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5A7F522D8796A00C35879 /* PrivacyPolicyViewController.swift */; };
+		55F5A7F922D8796B00C35879 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F5A7F522D8796A00C35879 /* PrivacyPolicyViewController.swift */; };
+		55F5A7FA22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F5A7F622D8796A00C35879 /* PrivacyPolicyViewController.xib */; };
+		55F5A7FB22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F5A7F622D8796A00C35879 /* PrivacyPolicyViewController.xib */; };
+		55F5A7FC22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F5A7F622D8796A00C35879 /* PrivacyPolicyViewController.xib */; };
 		55F70E4921F986E400B5ED75 /* ChatMessageImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F70E4721F986E400B5ED75 /* ChatMessageImageTableViewCell.swift */; };
 		55F70E4A21F986E400B5ED75 /* ChatMessageImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F70E4721F986E400B5ED75 /* ChatMessageImageTableViewCell.swift */; };
 		55F70E4B21F986E400B5ED75 /* ChatMessageImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F70E4721F986E400B5ED75 /* ChatMessageImageTableViewCell.swift */; };
@@ -2670,6 +2676,8 @@
 		55F5A7E822D6E16800C35879 /* BackupWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupWalletViewController.swift; sourceTree = "<group>"; };
 		55F5A7E922D6E16800C35879 /* BackupWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BackupWalletViewController.xib; sourceTree = "<group>"; };
 		55F5A7F022D6EBEB00C35879 /* BackupWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupWalletViewModel.swift; sourceTree = "<group>"; };
+		55F5A7F522D8796A00C35879 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		55F5A7F622D8796A00C35879 /* PrivacyPolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivacyPolicyViewController.xib; sourceTree = "<group>"; };
 		55F70E4721F986E400B5ED75 /* ChatMessageImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageImageTableViewCell.swift; sourceTree = "<group>"; };
 		55F70E4821F986E400B5ED75 /* ChatMessageImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageImageTableViewCell.xib; sourceTree = "<group>"; };
 		55F70E4F21F999D000B5ED75 /* AssetDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetDetailViewController.xib; sourceTree = "<group>"; };
@@ -4552,6 +4560,15 @@
 			path = BackupWallet;
 			sourceTree = "<group>";
 		};
+		55F5A7F422D878BB00C35879 /* PrivacyPolicyVC */ = {
+			isa = PBXGroup;
+			children = (
+				55F5A7F522D8796A00C35879 /* PrivacyPolicyViewController.swift */,
+				55F5A7F622D8796A00C35879 /* PrivacyPolicyViewController.xib */,
+			);
+			path = PrivacyPolicyVC;
+			sourceTree = "<group>";
+		};
 		55F987BA227BE579000C32F9 /* LightDepositWalletChoose */ = {
 			isa = PBXGroup;
 			children = (
@@ -5900,6 +5917,7 @@
 		6485002C20D9FEC300107473 /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				55F5A7F422D878BB00C35879 /* PrivacyPolicyVC */,
 				55F5A7E722D6E14800C35879 /* BackupWallet */,
 				6485003220DA006900107473 /* IdentityCreateViewController.swift */,
 				6485003320DA006900107473 /* IdentityCreateViewController.xib */,
@@ -7129,6 +7147,7 @@
 				64C9D47420FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				5526B53922114BB100573576 /* ForwardListContainerViewController.xib in Resources */,
 				55EF6A8321A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
+				55F5A7FC22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */,
 				5537F0762265CFE30058B98D /* LightTransMenuViewController.xib in Resources */,
 				55E7305C2186DC4B003AE47E /* MainWalletViewController.xib in Resources */,
 				64C9D46C20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
@@ -7415,6 +7434,7 @@
 				55EF6A5421A812C6007E074A /* ChatViewController.xib in Resources */,
 				5508741321EC3291007B3B3B /* BannerCollectionViewCell.xib in Resources */,
 				6470D68A20F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.xib in Resources */,
+				55F5A7FA22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */,
 				55D7D1BA2238B02E00309A22 /* IncomingCallViewController.xib in Resources */,
 				55EF6A8D21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
 				55B5C037221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */,
@@ -7614,6 +7634,7 @@
 				55EF6A5521A812C6007E074A /* ChatViewController.xib in Resources */,
 				5508741421EC3291007B3B3B /* BannerCollectionViewCell.xib in Resources */,
 				6470D68B20F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.xib in Resources */,
+				55F5A7FB22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */,
 				55D7D1BB2238B02E00309A22 /* IncomingCallViewController.xib in Resources */,
 				55EF6A8E21A812C6007E074A /* GroupMemberCollectionViewCell.xib in Resources */,
 				55B5C038221A9D61007250FA /* TransRecordDetailViewController.xib in Resources */,
@@ -8150,6 +8171,7 @@
 				649E48AD20ECCB8400B217AD /* ExportWalletPrivateKeyTabmanViewController.swift in Sources */,
 				64F07E0E20D241A000A60C5C /* UIViewController+QuickAlertPopUp.swift in Sources */,
 				645D4E812112E7D00052D0E1 /* ETHTxFetcher.swift in Sources */,
+				55F5A7F922D8796B00C35879 /* PrivacyPolicyViewController.swift in Sources */,
 				640D893020F069BF0010D986 /* WithdrawalAssetViewController.swift in Sources */,
 				649E485520E7D98E00B217AD /* ImportedWalletTableHeaderView.swift in Sources */,
 				5508742321EDC6EF007B3B3B /* ExploreDetailCollectionViewController.swift in Sources */,
@@ -8705,6 +8727,7 @@
 				640D88E220EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
 				6485002920D9F28700107473 /* UIViewController+KLInstanceSetup.swift in Sources */,
 				64D8262E20DFA0BB00C8FC63 /* WalletRefreshControl.swift in Sources */,
+				55F5A7F722D8796A00C35879 /* PrivacyPolicyViewController.swift in Sources */,
 				64813A6A20DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataProperties.swift in Sources */,
 				649E488620EC705100B217AD /* ManageWalletViewModel.swift in Sources */,
 				5508742121EDC6EF007B3B3B /* ExploreDetailCollectionViewController.swift in Sources */,
@@ -9253,6 +9276,7 @@
 				64F07E4C20D29B9500A60C5C /* Palette.swift in Sources */,
 				64F07E1C20D241A000A60C5C /* NVActivityExtension.swift in Sources */,
 				640D893C20F06DFB0010D986 /* WithdrawalAssetViewModel.swift in Sources */,
+				55F5A7F822D8796A00C35879 /* PrivacyPolicyViewController.swift in Sources */,
 				64F07E1620D241A000A60C5C /* UIApplication+Top.swift in Sources */,
 				6485003020D9FF0500107473 /* OWInputTextField.swift in Sources */,
 				5508742221EDC6EF007B3B3B /* ExploreDetailCollectionViewController.swift in Sources */,

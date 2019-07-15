@@ -762,5 +762,17 @@ struct DLS_ZH_CN: DLS {
     var back_up_skip_warning_msg = "备份帐号行动码与您日后要维护资产安全、恢复帐号等动作相当重要。 如在无备份帐号的情况下遗失手机或各种意外导致帐号遗失，将永远无法寻回。"
     
     var backup_skip_msg_title = "您确定要略过吗？"
+    
+    var create_identity_username_placeholder = "帐号建立仅限英文字母与数字组合，至少8个字元"
+    
+    var create_identity_password_placeholder = "建议使用英文字母大小写与数字组合"
+    
+    var create_identity_reenter_password_placeholder = "请再次输入密码"
+    
+    var create_identity_password_reminder_placeholder = "提示内容请勿与密码一样，以免被轻易盗取"
+    var create_identity_privacy_policy_btn_title = "我同意《TTChain隐私政策》"
+    
+    var agree_bnt_title:String = "同意"
+
 }
 

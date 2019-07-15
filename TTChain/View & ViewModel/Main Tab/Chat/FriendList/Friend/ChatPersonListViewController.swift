@@ -28,6 +28,10 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.fetchFriendsList()
+    }
 
     func config(constructor: Void) {
         self.view.layoutSubviews()

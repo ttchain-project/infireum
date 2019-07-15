@@ -23,6 +23,9 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var pwdHintTitleLabel: UILabel!
     @IBOutlet weak var pwdHintTextField: OWInputTextField!
     
+    @IBOutlet weak var privacyPolicyLabel: UILabel!
+    @IBOutlet weak var acceptPrivacyPolicyBtn: UIButton!
+    
     private var fields: [OWInputTextField] {
         return [nameTextField, pwdTextField, confirmTextField, pwdHintTextField]
     }
@@ -35,6 +38,8 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     typealias ViewModel = IdentityCreateViewModel
     var viewModel: IdentityCreateViewModel!
     var bag: DisposeBag = DisposeBag.init()
+    
+    var privacyVC:PrivacyPolicyViewController?
     
     lazy var hud: KLHUD = {
         return KLHUD.init(
@@ -59,28 +64,12 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
                 pwdInput: pwdTextField.rx.text,
                 confirmPwdInput: confirmTextField.rx.text,
                 pwdHintInput: pwdHintTextField.rx.text,
-                confirmInput: createBtn.rx.tap.asDriver()
+                confirmInput: createBtn.rx.tap.asDriver(),
+                accpetBtnInput:self.acceptPrivacyPolicyBtn
             ),
             output:
             IdentityCreateViewModel.OutputSource(
-//                onStartCreateIdentity: {
-//                    [weak self] in
-//                    guard let wSelf = self else { return }
-//                    wSelf.hud.startAnimating(inView: wSelf.view)
-//
-//                },
-//                onFinishCreateIdentity: {
-//                    [weak self] (apiResult) in
-//                    guard let wSelf = self else { return }
-//                    wSelf.hud.stopAnimating()
-//
-//                    switch apiResult {
-//                    case .failed(error: let err):
-//                        wSelf.showAPIErrorResponsePopUp(from: err, cancelTitle: LM.dls.g_cancel)
-//                    case .success(let result):
-//                        wSelf.handleCreateIdentityResult(result)
-//                    }
-//                },
+
                 onFinishCheckingInputValidity: {
                     [weak self] validity in
                     guard let wSelf = self else { return }
@@ -137,6 +126,14 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
                 self.navigationController?.popViewController(animated: true)
             }
         }).disposed(by: bag)
+        self.privacyPolicyLabel.rx.klrx_tap.drive(onNext:{
+            let vc = PrivacyPolicyViewController.init(status: { (status) in
+                self.acceptPrivacyPolicyBtn.isSelected = status
+                self.privacyVC?.dismiss(animated: true)
+            })
+            self.privacyVC = vc
+            self.present(vc, animated: true, completion: nil)
+        }).disposed(by: bag)
     }
     
     override func viewDidLoad() {
@@ -154,8 +151,6 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     
     private func handleCreateIdentityResult() {
         let idenitySource = self.viewModel.getIdentitySource()
-//        let vc = BackupWalletNoteViewController.instance(source: idenitySource)
-        
         let vc = BackupWalletViewController.instance(from: idenitySource)
         navigationController?.pushViewController(vc)
     }
@@ -163,25 +158,21 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         title = nil
-        createBtn.setTitleForAllStates(dls.createID_btn_create)
+        createBtn.setTitleForAllStates(dls.g_next)
         backButton.setTitleForAllStates(lang.dls.g_cancel)
-        nameTitleLabel.text = dls.createID_placeholder_name
-        nameTextField.set(placeholder: dls.createID_placeholder_name)
+        nameTitleLabel.text = dls.account
+        nameTextField.set(placeholder: dls.create_identity_username_placeholder)
         pwdTitleLabel.text =  dls.createID_placeholder_password
-        pwdTextField.set(placeholder: dls.createID_placeholder_password)
+        pwdTextField.set(placeholder: dls.create_identity_password_placeholder)
         confirmPwdTitleLabel.text = dls.createID_placeholder_confirmPassword
-        confirmTextField.set(placeholder: dls.createID_placeholder_confirmPassword)
+        confirmTextField.set(placeholder: dls.create_identity_reenter_password_placeholder)
         pwdHintTitleLabel.text = dls.createID_placeholder_passwordNote
-        pwdHintTextField.set(placeholder: dls.createID_placeholder_passwordNote)
+        pwdHintTextField.set(placeholder: dls.create_identity_password_reminder_placeholder)
+        
+        privacyPolicyLabel.text = dls.create_identity_privacy_policy_btn_title
     }
     
     override func renderTheme(_ theme: Theme) {
-//        renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
-//
-//        changeLeftBarButtonToDismissToRoot(
-//            tintColor: theme.palette.nav_item_1,
-//            image: #imageLiteral(resourceName: "arrowNavBlack")
-//        )
 
         self.hideDefaultNavBar()
         for field in fields {
@@ -199,6 +190,7 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         
         createBtn.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
         createBtn.setTitleColor(theme.palette.btn_bgFill_disable_text, for: .disabled)
+        privacyPolicyLabel.set(textColor: theme.palette.bg_fill_new, font: .owRegular(size:14))
     }
     
     private func respondToFieldCheckValidityResult(validity: ViewModel.InputValidity) {
@@ -232,20 +224,12 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
             pwdHintTextField.becomeFirstResponder()
         case .emptyConfirmPwd:
             confirmTextField.becomeFirstResponder()
-            
+        case .conditionsNotAccepted:
+            self.privacyPolicyLabel.shake()
         case .valid: break
         }
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

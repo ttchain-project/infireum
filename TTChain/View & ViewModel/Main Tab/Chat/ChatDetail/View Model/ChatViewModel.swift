@@ -79,9 +79,10 @@ class ChatViewModel: KLRxViewModel {
         }else {
             self.isBlocked()
         }
-        self.timerSub = timer.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] _ in
+//        self.timerSub =
+            timer.observeOn(MainScheduler.instance).subscribe(onNext: { [unowned self] _ in
             self.fetchAllMessagesForPrivateChat()
-        })
+        }).disposed(by: bag)
         
         self.groupInfoModel.asObservable().subscribe(onNext: {[weak self] (model) in
             guard model?.membersArray != nil else {
@@ -370,7 +371,7 @@ class ChatViewModel: KLRxViewModel {
     func redEnvelopeAction(forRedEnvId redEnvMessage:RedEnvelope, navigateTo toViewController:@escaping (UIViewController) -> ()) {
         let parameter = RedEnvelopeInfoAPI.Parameters.init(redEnvelopeId: redEnvMessage.identifier)
         Server.instance.getRedEnvelopeInfo(parameter: parameter).asObservable().subscribe(onNext: {[weak self] (response) in
-            guard let `self` = self else {
+            guard self != nil else {
                 return
             }
             switch response {

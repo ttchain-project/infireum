@@ -783,5 +783,16 @@ struct DLS_EN_US: DLS {
     var back_up_skip_warning_msg = "Backup account action code is very important for you to maintain asset security and restore account in the future. If you lose your phone or have accidents caused by a backup account, you will never be able to retrieve it."
     
     var backup_skip_msg_title = "Are you sure you want to skip it?"
+    
+    var create_identity_username_placeholder = "Use letters and numbers, need 8 characters or more"
+    
+    var create_identity_password_placeholder = "Use letters and numbers"
+    
+    var create_identity_reenter_password_placeholder = "Please reenter password"
+    
+    var create_identity_password_reminder_placeholder = "Reminder message should not be the same as password "
+    var create_identity_privacy_policy_btn_title = "I agree 《TTChain privacy policy》"
+    
+    var agree_bnt_title:String = "Agree"
 }
 

@@ -25,6 +25,7 @@ final class SearchMemberViewModel: ViewModel {
         let addGroupMemberTableViewCellModels = BehaviorRelay<[AddGroupMemeberTableViewCellModel]>(value: [AddGroupMemeberTableViewCellModel]())
         let addGroupMemberCollectionViewCellModels = BehaviorRelay<[AddGroupMemberCollectinoViewCellModel]>(value: [AddGroupMemberCollectinoViewCellModel]())
         let selectedFriends = PublishSubject<[FriendInfoModel]>()
+        let errorMessageSubject = PublishSubject<String>()
     }
     
     var input = Input()
@@ -125,7 +126,7 @@ final class SearchMemberViewModel: ViewModel {
 //                    self.getGroupDetails()
                 }
             case .failed(error: let error):
-                print(error)
+                self.output.errorMessageSubject.onNext(error.descString)
             }
         }).disposed(by: disposeBag)
     }

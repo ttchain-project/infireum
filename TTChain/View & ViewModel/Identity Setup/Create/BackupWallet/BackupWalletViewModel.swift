@@ -48,7 +48,7 @@ class BackupWalletViewModel:KLRxViewModel {
             #if DEBUG
             fatalError()
             #else
-            self.output.errorMessageSubject.onNext(LM.dls.LM.dls.sortMnemonic_error_create_user_fail)
+            self.output.errorMessageSubject.onNext(LM.dls.sortMnemonic_error_create_user_fail)
             
             return
             #endif

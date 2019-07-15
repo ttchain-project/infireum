@@ -86,6 +86,7 @@ class SearchMemberViewController: UIViewController {
             _, source, cell in
             cell.viewModel = source
             }.disposed(by: disposeBag)
+        
         viewModel.output.addGroupMemberCollectionViewCellModels.bind(to: collectionView.rx.items(cellIdentifier: AddGroupMemberCollectionViewCell.className, cellType: AddGroupMemberCollectionViewCell.self)) {
             _, source, cell in
             cell.viewModel = source
@@ -98,5 +99,7 @@ class SearchMemberViewController: UIViewController {
                 self.hud.stopAnimating()
             }
         }.disposed(by: disposeBag)
+        
+        self.viewModel.output.errorMessageSubject.bind(to:self.rx.message).disposed(by:disposeBag)
     }
 }
