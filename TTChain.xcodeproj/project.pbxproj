@@ -3724,6 +3724,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		555EA56C22DC50E7000C81EE /* CreateWallet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreateWallet;
+			sourceTree = "<group>";
+		};
 		5565064A22B24F210042EFC4 /* WalletHeaderViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5973,6 +5980,7 @@
 		649E482F20E7CE7C00B217AD /* Change Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				555EA56C22DC50E7000C81EE /* CreateWallet */,
 				55A583DC22CA0F330025809B /* AddWallet */,
 				649E483D20E7D90600B217AD /* Table */,
 				649E483020E7CED900B217AD /* ChangeWalletViewController.swift */,

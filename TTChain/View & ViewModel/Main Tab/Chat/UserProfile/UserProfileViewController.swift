@@ -163,7 +163,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bar_tint)
         renderNavTitle(color: theme.palette.nav_item_2, font: .owMedium(size: 18))
         
-        changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
 
         changeNavShadowVisibility(true)
 

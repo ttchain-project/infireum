@@ -32,10 +32,11 @@ final class ChatMessageListViewController: KLModuleViewController,KLVMVC {
                                         output: ChatMsgListViewModel.Output(selectedChat: {model in
                                             
                                         }, onShowingHUD:{ status in
-                                            if status {
+                                            if status && !self.refreshControl.isRefreshing{
                                                 self.hud.startAnimating(inView: self.view)
                                             }else {
                                                 self.hud.stopAnimating()
+                                                self.refreshControl.endRefreshing()
                                             }
                                         }))
         startMonitorThemeIfNeeded()

@@ -94,7 +94,7 @@ final class WithdrawalLightningPwdValidationViewController: KLModuleViewControll
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
-        changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         
         view.backgroundColor = palette.bgView_sub
         

@@ -80,7 +80,7 @@ final class FriendsListViewController: TabmanViewController, RxThemeRespondable,
         vcs = createPages()
         let palette = TM.palette
 //        renderNavBar(tint: palette.nav_bg_1, barTint: palette.nav_bg_1)
-        changeBackBarButton(toColor: palette.nav_item_1, image:#imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor: palette.nav_item_1, image:#imageLiteral(resourceName: "btn_previous_light"))
     }
     
     override func viewWillAppear(_ animated: Bool) {

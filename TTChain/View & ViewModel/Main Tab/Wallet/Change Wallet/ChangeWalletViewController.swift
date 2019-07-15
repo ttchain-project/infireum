@@ -60,35 +60,6 @@ final class ChangeWalletViewController: KLModuleViewController, KLVMVC {
             output: ()
         )
         
-//        viewModel.datasource.configureCell = {
-//            [unowned self]
-//            source, tv, idxPath, wallet -> UITableViewCell in
-//            //TODO: Config cell with wallet
-//            let cell = tv.dequeueReusableCell(withIdentifier: ChangeWalletTableViewCell.cellIdentifier()) as! ChangeWalletTableViewCell
-//            cell.config(
-//                wallet: wallet,
-//                onAddrTap: {
-//                    [unowned self] in
-//                    self.copiedAddr(ofWallet: wallet)
-//                },
-//                onSettingsTap: {
-//                    [unowned self] in
-//                    self.toSettings(withWallet: wallet)
-//                },
-//               isNetworkReachable: NetworkReachabilityHandler.instance.reachable.value.hasNetwork,
-//               isAbleToSelect: self.viewModel.isAbleToSelectWallet(wallet)
-//            )
-//
-//            return cell
-//        }
-//
-//        viewModel
-//            .sectionModelSources
-//            .bind(to: tableView.rx.items(
-//                dataSource: viewModel.datasource)
-//            )
-//            .disposed(by: bag)
-        
         self.viewModel.assets.bind(to:self.tableView.rx.items) {
             tv,row,asset in
             var cell: SelectWalletTableViewCell

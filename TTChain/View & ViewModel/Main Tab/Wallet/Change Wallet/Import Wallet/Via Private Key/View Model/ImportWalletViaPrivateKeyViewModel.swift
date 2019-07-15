@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import HDWalletKit
 
 class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
     typealias InputSource = Input
@@ -24,13 +25,15 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
         let pwdHintInput: ControlProperty<String?>
         let confirmInput: Driver<Void>
         let walletName: ControlProperty<String?>
+        let purpose:ImportWalletViaPrivateKeyViewController.Config.Purpose
     }
 
     struct Output {
         let onStartImportWallet: () -> Void
-        let onFinishImportWallet: (APIResult<CreateResult>) -> Void
+        let onFinishImportWallet: () -> Void
         let onFinishCheckingInputValidity: (InputValidity) -> Void
         let onUpdateEmptyFieldsStatus: (Bool) -> Void
+        let onErrorMessage = PublishSubject<String>()
     }
     
     enum InputValidity {
@@ -98,18 +101,9 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
                 return shouldContinue
             }
             .filter { $0 }
-            .asObservable()
-            .flatMapLatest {
-                [unowned self]
-                _ -> RxAPIResponse<CreateResult> in
+            .asObservable().subscribe(onNext:{ _ in
                 self.output.onStartImportWallet()
-                return self.importWallet()
-            }
-            .asObservable()
-            .subscribe(onNext: {
-                [unowned self]
-                result in
-                self.output.onFinishImportWallet(result)
+                self.input.purpose == .create ? self.createWallet() : self.importWallet()
             })
             .disposed(by: bag)
     }
@@ -139,8 +133,11 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
     
     //MARK: - Validity
     private func checkValidity() -> InputValidity {
-        guard let _pKey = pKey.value, _pKey.count > 0 else {
-            return .emptyPKey
+        
+        if self.input.purpose == .import {
+            guard let _pKey = pKey.value, _pKey.count > 0 else {
+                return .emptyPKey
+            }
         }
         
         guard let _pwd = pwd.value, _pwd.count > 0 else {
@@ -195,45 +192,93 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
     }
     
     //MARK: - Wallet Import
-    private func importWallet() -> RxAPIResponse<CreateResult> {
-        guard let _pKey = pKey.value,
-            let _pwd = pwd.value,
-            let _hint = pwdHint.value,let _walletName = walletName.value else {
-                return RxAPIResponse.just(.failed(error: .noData))
+    private func importWallet() {
+
+            guard let _pKey = self.pKey.value,
+                let _pwd = self.pwd.value,
+                let _hint = self.pwdHint.value,let _walletName = self.walletName.value else {
+                    self.output.onErrorMessage.onNext(LM.dls.g_error_emptyData)
+                    return
+            }
+            
+            let mainCoinID = self.input.mainCoinID
+            let coin:HDWalletKit.Coin = mainCoinID == Coin.btc_identifier ? .bitcoin : .ethereum
+            guard let privateKey = PrivateKey.init(pk: _pKey, coin: coin) else {
+                self.output.onErrorMessage.onNext(LM.dls.g_error_decryptFail_privateKey)
+                return
+            }
+        
+            let publicAddress = privateKey.publicKey.address
+        
+        guard !self.walletIsExistInDB(address: publicAddress, pKey: _pKey, mainCoiniD: mainCoinID) else {
+            self.output.onErrorMessage.onNext(LM.dls.importWallet_privateKey_error_wallet_exist_already)
+            return
+        }
+            let result = CreateResult(
+                pKey: _pKey,
+                address: publicAddress,
+                mainCoinID: mainCoinID,
+                pwd: _pwd,
+                pwdHint: _hint,
+                walletName:_walletName
+            )
+        self.handleImportWalletResult(result)
+    }
+    private func handleImportWalletResult(_ result: CreateResult) {
+        guard let ids = DB.instance.get(type: Identity.self, predicate: nil, sorts: nil),
+            ids.count == 1, let id = ids.first else {
+                return errorDebug(response: ())
         }
         
-        let mainCoinID = input.mainCoinID
-        return Server.instance.convertKeyToAddress(pKey: _pKey,encrypted: true)
-            .map {
-                [unowned self]
-                result in
-                switch result {
-                case .failed(error: let err): return .failed(error: err)
-                case .success(let model):
-                    let addr: String
-                    guard let _addr = model.addressMap[mainCoinID] else {
-                        return .failed(error: GTServerAPIError.noData)
-                    }
-                    
-                    addr = _addr
-                    
-                    guard !self.walletIsExistInDB(address: addr, pKey: _pKey, mainCoiniD: mainCoinID) else {
-                        let alertMsg = LM.dls.importWallet_privateKey_error_wallet_exist_already
-                        return .failed(error: GTServerAPIError.incorrectResult(alertMsg, alertMsg))
-                    }
-                    
-                    let result = CreateResult(
-                        pKey: _pKey,
-                        address: addr,
-                        mainCoinID: mainCoinID,
-                        pwd: _pwd,
-                        pwdHint: _hint,
-                        walletName:_walletName
-                    )
-                    
-                    return .success(result)
-                }
-            }
+        let mainCoin = Coin.getCoin(ofIdentifier: input.mainCoinID)!
+        
+        guard let newWallet = Wallet.create(
+            identity: id,
+            source: (
+                address: result.address,
+                pKey: result.pKey,
+                mnenomic: nil,
+                isFromSystem: false,
+                name: result.walletName,
+                pwd: result.pwd,
+                pwdHint: result.pwdHint,
+                chainType: mainCoin.owChainType,
+                mainCoinID: mainCoin.walletMainCoinID!
+            )
+            ) else {
+                return errorDebug(response: ())
+        }
+        self.output.onFinishImportWallet()
+        OWRxNotificationCenter.instance.notifyWalletImported(of: newWallet)
+    }
+    
+    private func createWallet() {
+        
+        guard  let _pwd = self.pwd.value,
+            let _hint = self.pwdHint.value,
+            let _walletName = self.walletName.value else {
+                self.output.onErrorMessage.onNext(LM.dls.g_error_emptyData)
+                return
+        }
+        let chain:ChainType = self.input.mainCoinID == Coin.btc_identifier ? .btc : .eth
+        let predForWallet = Wallet.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Wallet.chainType), value: chain.rawValue))
+        guard let wallets = DB.instance.get(type: Wallet.self, predicate: predForWallet, sorts: nil),
+            let wallet = wallets.filter ({ $0.isFromSystem }).first else {
+                self.output.onErrorMessage.onNext(LM.dls.g_error_emptyData)
+
+                return
+        }
+        guard let mnemonic = wallet.attemptDecryptMnemonic(withRawPwd: _pwd) else {
+            self.output.onErrorMessage.onNext(LM.dls.walletManage_error_pwd)
+
+            return
+        }
+        
+        WalletCreator.createNewWallet(forChain: chain, mnemonic: mnemonic, pwd: _pwd, pwdHint: _hint, isSystemWallet:false,walletName:_walletName)
+            .subscribe({ [unowned self] (status) in
+                self.output.onFinishImportWallet()
+                OWRxNotificationCenter.instance.notifyWalletsImported()
+            }).disposed(by: bag)
     }
     
 }

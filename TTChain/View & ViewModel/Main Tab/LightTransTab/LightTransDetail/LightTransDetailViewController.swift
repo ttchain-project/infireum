@@ -105,7 +105,7 @@ class LightTransDetailViewController: UIViewController {
         
         renderNavBar(tint: pallete.nav_item_2, barTint: pallete.nav_bar_tint)
         renderNavTitle(color: pallete.nav_item_2, font: .owMedium(size: 20))
-        changeLeftBarButtonToDismissToRoot(tintColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeLeftBarButtonToDismissToRoot(tintColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
     }
     
     func viewModelBinding() {

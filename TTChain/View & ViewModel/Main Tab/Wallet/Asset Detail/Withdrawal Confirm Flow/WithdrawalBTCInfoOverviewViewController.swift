@@ -200,7 +200,7 @@ final class WithdrawalBTCInfoOverviewViewController: KLModuleViewController, KLV
         
         // Do any additional setup after loading the view.
         view.backgroundColor = .red
-        changeLeftBarButtonToDismissToRoot(tintColor: .black, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor: .black, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -271,7 +271,7 @@ final class WithdrawalBTCInfoOverviewViewController: KLModuleViewController, KLV
         vc.isAllFieldsHaveValue.bind(to: completeBtn.rx.isEnabled).disposed(by: vc.bag)
         
         vc.title = dls.withdrawalConfirm_changeFee_title
-        vc.changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        vc.changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
 //        vc.changeNavShadowVisibility()
     }
     

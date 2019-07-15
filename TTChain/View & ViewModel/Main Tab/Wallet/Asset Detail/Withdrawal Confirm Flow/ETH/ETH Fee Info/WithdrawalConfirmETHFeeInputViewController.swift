@@ -132,7 +132,7 @@ final class WithdrawalConfirmETHFeeInputViewController: KLModuleViewController, 
         feeTotalLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 13))
         feeDetailLabel.set(textColor: palette.label_sub, font: UIFont.owRegular(size: 13))
         completeBtn.set(color: palette.application_main, font: UIFont.owRegular(size: 18))
-        changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
     }
     
     /*

@@ -190,7 +190,7 @@ class CreateRedEnvelopeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         viewModel.output.isTypeButtonHiddenSubject.bind(to: distributionTypeStackView.rx.isHidden).disposed(by: viewModel.disposeBag)
-        changeBackBarButton(toColor:Theme.default.palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor:Theme.default.palette.nav_item_2, image:  #imageLiteral(resourceName: "btn_previous_light"))
         self.scheduleStackView.isHidden = true
         self.navigationItem.title = LM.dls.create_red_env_title
     }

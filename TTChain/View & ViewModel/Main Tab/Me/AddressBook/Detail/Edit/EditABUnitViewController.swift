@@ -105,9 +105,9 @@ final class EditABUnitViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
         if navigationController?.viewControllers.first == self {
-            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         }else {
-            changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+            changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         }
         
         changeNavShadowVisibility(true)

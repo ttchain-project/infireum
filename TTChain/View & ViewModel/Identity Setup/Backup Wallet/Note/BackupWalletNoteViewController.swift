@@ -81,7 +81,7 @@ class BackupWalletNoteViewController: KLModuleViewController {
     
     override func renderTheme(_ theme: Theme) {
         title = nil
-        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"))
         renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bg_1)
         
         titleLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 18))

@@ -142,7 +142,7 @@ final class ManageWalletViewController: KLModuleViewController, KLVMVC {
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
         changeBackBarButton(toColor: palette.nav_item_1,
-                                           image: #imageLiteral(resourceName: "arrowNavBlack"),
+                                           image: #imageLiteral(resourceName: "btn_previous_light"),
                                            title: nil)
 
         changeNavShadowVisibility(true)

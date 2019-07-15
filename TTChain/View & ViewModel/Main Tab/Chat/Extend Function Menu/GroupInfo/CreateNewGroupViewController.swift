@@ -34,7 +34,7 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         setupUIForEdit()
         self.renderNavBar(tint: TM.palette.nav_bg_1, barTint: TM.palette.nav_bar_tint)
         renderNavTitle(color: TM.palette.nav_bg_1, font: .owRegular(size:16))
-        changeLeftBarButton(target: self, selector: #selector(navBarBackTapped), tintColor: .white, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeLeftBarButton(target: self, selector: #selector(navBarBackTapped), tintColor: .white, image: #imageLiteral(resourceName: "btn_previous_light"))
         self.viewModel.groupModel.accept(constructor.groupModel)
         bindUI()
         self.view.backgroundColor = TM.palette.bgView_main

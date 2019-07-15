@@ -86,7 +86,7 @@ final class ManageAssetViewController: KLModuleViewController, KLVMVC {
     override func renderTheme(_ theme: Theme) {
         renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bg_1)
         changeLeftBarButtonToDismissToRoot(
-            tintColor: theme.palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack")
+            tintColor: theme.palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light")
         )
         
         changeNavShadowVisibility(false)

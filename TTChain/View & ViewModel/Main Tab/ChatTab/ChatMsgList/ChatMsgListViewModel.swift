@@ -70,7 +70,9 @@ class ChatMsgListViewModel: KLRxViewModel {
     
 
     func getCommunicationList() {
+        self.output.onShowingHUD(true)
         Server.instance.getCommunicationsList().asObservable().subscribe(onNext: { (result) in
+            self.output.onShowingHUD(false)
             switch result {
             case .failed(error: let err) :
                 DLogError(err)

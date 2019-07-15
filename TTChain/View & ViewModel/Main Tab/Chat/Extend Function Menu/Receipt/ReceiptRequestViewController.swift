@@ -72,7 +72,7 @@ final class ReceiptRequestViewController: KLModuleViewController, KLVMVC {
     
     override func renderTheme(_ theme: Theme) {
         
-        changeBackBarButton(toColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
 
         receiptAmounTextField.textColor = theme.palette.input_text
         receiptAmounTextField.placeHolderColor = theme.palette.input_placeholder

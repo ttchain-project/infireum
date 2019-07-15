@@ -128,7 +128,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
     }
     override func renderTheme(_ theme: Theme) {
         renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
-        changeLeftBarButton(target: self, selector: #selector(popOrDismiss), tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeLeftBarButton(target: self, selector: #selector(popOrDismiss), tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
     }
     func showStep1AlertDialog() {
         let alertController = UIAlertController.init(title: LM.dls.add_friend_alert_title, message: LM.dls.add_friend_alert_message, preferredStyle: .alert)

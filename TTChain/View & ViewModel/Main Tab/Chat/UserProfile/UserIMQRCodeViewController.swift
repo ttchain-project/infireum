@@ -53,7 +53,7 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
         uidLabel.set(textColor: .black,
                      font: .owMedium(size:12 ))
         self.view.backgroundColor = .cloudBurst
-        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
         renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owRegular(size: 20))
         createRightBarButton(target: self, selector: #selector(shareQRCode), image: #imageLiteral(resourceName: "btn_share.png"), toColor: palette.nav_item_2)

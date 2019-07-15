@@ -13,7 +13,7 @@ import HDWalletKit
 
 class WalletCreator {
     
-    static func createNewWallet(forChain chain: ChainType, mnemonic: String?, pwd:String, pwdHint:String, isSystemWallet:Bool) -> Single<Bool> {
+    static func createNewWallet(forChain chain: ChainType, mnemonic: String?, pwd:String, pwdHint:String, isSystemWallet:Bool, walletName:String? = nil) -> Single<Bool> {
         return Single.create { (handler) -> Disposable in
             
             //used Just for termination
@@ -55,7 +55,7 @@ class WalletCreator {
                           pKey: pvtKeyForNewWallet!.get(),
                           mnenomic: mnemonic,
                           isFromSystem: isSystemWallet,
-                          name: Wallet.importedWalletName(ofMainCoin: mainCoin),
+                          name: walletName ?? Wallet.importedWalletName(ofMainCoin: mainCoin),
                           pwd: pwd,
                           pwdHint: pwdHint,
                           chainType: chain,

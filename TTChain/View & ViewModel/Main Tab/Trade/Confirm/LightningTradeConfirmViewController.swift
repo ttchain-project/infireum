@@ -364,7 +364,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
         vc.isAllFieldsHaveValue.bind(to: completeBtn.rx.isEnabled).disposed(by: vc.bag)
         
         vc.title = dls.ltTx_minerFee_title
-        vc.changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        vc.changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         //        vc.changeNavShadowVisibility()
     }
     
@@ -398,7 +398,7 @@ final class LightningTradeConfirmViewController: KLModuleViewController, KLVMVC 
         vc.viewModel.isFeeInfoCompleted.bind(to: completeBtn.rx.isEnabled).disposed(by: vc.bag)
         
         vc.title = dls.ltTx_minerFee_title
-        vc.changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil) */
+        vc.changeBackBarButton(toColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil) */
         //        vc.changeNavShadowVisibility()
     }
     

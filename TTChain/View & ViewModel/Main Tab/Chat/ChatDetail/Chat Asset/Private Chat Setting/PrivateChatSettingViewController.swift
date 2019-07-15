@@ -89,7 +89,7 @@ final class PrivateChatSettingViewController: KLModuleViewController, KLVMVC {
         )
         changeNavShadowVisibility(true)
         changeBackBarButton(toColor: palette.nav_item_2,
-                            image: #imageLiteral(resourceName: "arrowNavBlack"),
+                            image: #imageLiteral(resourceName: "btn_previous_light"),
                             title: nil)
         
         view.backgroundColor = palette.bgView_sub

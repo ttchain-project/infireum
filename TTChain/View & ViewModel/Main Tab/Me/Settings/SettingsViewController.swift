@@ -115,7 +115,7 @@ final class SettingsViewController: KLModuleViewController, KLVMVC, UIPickerView
         
         changeLeftBarButtonToDismissToRoot(
             tintColor: palette.nav_item_1,
-            image: #imageLiteral(resourceName: "arrowNavBlack"),
+            image: #imageLiteral(resourceName: "btn_previous_light"),
             title: nil
         )
         

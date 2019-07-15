@@ -91,7 +91,7 @@ final class ImportChainTypeChooseViewController: KLModuleViewController, KLVMVC 
         
         title = nil
         changeBackBarButton(toColor: palette.nav_item_1,
-                            image: #imageLiteral(resourceName: "arrowNavBlack"),
+                            image: #imageLiteral(resourceName: "btn_previous_light"),
                             title: nil)
         
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
@@ -101,7 +101,7 @@ final class ImportChainTypeChooseViewController: KLModuleViewController, KLVMVC 
     
     //MARK: - Routing
     private func toImportWallet(withMainCoinID mainCoinID: String) {
-        let vc = ImportWalletViaPrivateKeyViewController.instance(from: ImportWalletViaPrivateKeyViewController.Config(mainCoinID: mainCoinID, defaultPKey: nil))
+        let vc = ImportWalletViaPrivateKeyViewController.instance(from: ImportWalletViaPrivateKeyViewController.Config(mainCoinID: mainCoinID, defaultPKey: nil, purpose: .import))
         navigationController?.pushViewController(vc)
     }
 

@@ -163,7 +163,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         
-        changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
+        changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "btn_previous_light"))
 
         depositAddressTitile.set(textColor: palette.label_main_1, font: .owRegular(size: 17))
         transferAmountTextField.set(textColor: palette.input_text, font: .owRegular(size: 17), placeHolderColor: palette.input_placeholder)

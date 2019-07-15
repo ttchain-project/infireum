@@ -254,10 +254,10 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         switch self.viewModel.entryPoint {
         case .MainWallet?:
-            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
             createCustomRightBarButton(img: #imageLiteral(resourceName: "wallet_settings"), target: self, action: #selector(toSettings))
         default:
-            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         }
         tableView.backgroundColor = .white
     }
@@ -414,7 +414,7 @@ final class MainWalletViewController: KLModuleViewController, KLVMVC {
     }
     
     private func toImportWallet(pKey: String, address: String, mainCoinID: String) {
-        let vc = ImportWalletViaPrivateKeyViewController.navInstance(from: ImportWalletViaPrivateKeyViewController.Config(mainCoinID: mainCoinID, defaultPKey: pKey)
+        let vc = ImportWalletViaPrivateKeyViewController.navInstance(from: ImportWalletViaPrivateKeyViewController.Config(mainCoinID: mainCoinID, defaultPKey: pKey, purpose: .import)
         )
         
         dismiss(animated: false) {

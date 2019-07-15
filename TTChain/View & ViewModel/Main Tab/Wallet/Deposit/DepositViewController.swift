@@ -198,7 +198,7 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
     override func renderTheme(_ theme: Theme) {
         renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
         renderNavTitle(color: theme.palette.nav_item_2, font: .owMedium(size: 18))
-        changeLeftBarButtonToDismissToRoot(tintColor:theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor:theme.palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
 //        createRightBarButton(target: self, selector: #selector(settingsButton), image: #imageLiteral(resourceName: "settings"), title: nil, toColor: theme.palette.nav_item_2, shouldClear: true)
         
 //        view.backgroundColor = theme.palette.specific(color: .owMarineBlue)

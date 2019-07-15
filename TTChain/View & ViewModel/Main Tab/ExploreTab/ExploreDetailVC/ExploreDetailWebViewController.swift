@@ -56,7 +56,7 @@ final class ExploreDetailWebViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         
         if self.navigationController?.viewControllers.count == 1 {
-            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+            changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         }
         
     }

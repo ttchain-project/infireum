@@ -213,7 +213,7 @@ final class WithdrawalETHInfoOverviewViewController: KLModuleViewController, KLV
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        changeLeftBarButtonToDismissToRoot(tintColor: .black, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor: .black, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

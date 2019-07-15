@@ -80,7 +80,7 @@ class IdentityBackupTypeChooseViewController: KLModuleViewController, Rx {
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bar_tint)
         changeLeftBarButtonToDismissToRoot(
-            tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil
+            tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil
         )
         
         titleLabel.set(textColor: palette.label_main_1, font: .owMedium(size: 18))

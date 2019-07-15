@@ -41,7 +41,7 @@ final class QAViewController: KLModuleViewController, KLVMVC, UIWebViewDelegate 
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_1, barTint: palette.nav_bg_1)
         renderNavTitle(color: palette.nav_item_1, font: .owMedium(size: 18))
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         changeNavShadowVisibility(true)
         
         view.backgroundColor = palette.bgView_sub

@@ -92,7 +92,7 @@ class LightReceiptQRCodeViewController: UIViewController {
         self.lightTransferLabel.set(textColor: .black, font: .owMedium(size:16))
         self.addressLabel.set(textColor: UIColor.owWarmGrey, font: .owMedium(size:11))
         renderNavTitle(color: pallete.nav_item_2, font: .owMedium(size: 20))
-        changeBackBarButton(toColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor: pallete.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
         createRightBarButton(target: self, selector: #selector(startSharing), image: #imageLiteral(resourceName: "btnNavShareNormal"), title: nil, toColor: pallete.nav_item_2, shouldClear: true)
         self.navigationItem.title = LM.dls.walletOverview_btn_deposit
     }

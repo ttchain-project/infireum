@@ -41,7 +41,7 @@ final class AddWalletViewController: KLModuleViewController, KLVMVC {
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
 
     }
     
@@ -57,14 +57,10 @@ final class AddWalletViewController: KLModuleViewController, KLVMVC {
         self.tableView.rx.itemSelected.asDriver().drive(onNext: { (indexPath) in
             let model = self.viewModel.animatableSectionModel.value[indexPath.section]
             switch (model.model.action,model.items[indexPath.row].walletType) {
-                case (.create,let chainType):
-                self.createWallet(forChainType: chainType)
-                case (.import,.btc):
-                self.toImportWallet(withMainCoinID: Coin.btc_identifier)
-                case (.import,.eth):
-                self.toImportWallet(withMainCoinID: Coin.eth_identifier)
-            default:
-                break
+            case (.create,let chainType):
+                self.toCreateWallet(withMainCoinID: chainType.defaultCoin.identifier!)
+            case (.import,let chainType):
+                self.toImportWallet(withMainCoinID: chainType.defaultCoin.identifier!)
             }
         }).disposed(by: bag)
     }
@@ -184,7 +180,14 @@ extension AddWalletViewController {
     }
     
     fileprivate func toImportWallet(withMainCoinID mainCoinID: String) {
-        let vc = ImportWalletViaPrivateKeyViewController.instance(from: ImportWalletViaPrivateKeyViewController.Config(mainCoinID: mainCoinID, defaultPKey: nil))
+        
+        let vc = ImportWalletViaPrivateKeyViewController.instance(from: ImportWalletViaPrivateKeyViewController.Config(mainCoinID: mainCoinID, defaultPKey: nil,purpose:.import))
+        navigationController?.pushViewController(vc)
+    }
+    
+    fileprivate func toCreateWallet(withMainCoinID mainCoinID: String) {
+        
+        let vc = ImportWalletViaPrivateKeyViewController.instance(from: ImportWalletViaPrivateKeyViewController.Config(mainCoinID: mainCoinID, defaultPKey: nil,purpose:.create))
         navigationController?.pushViewController(vc)
     }
 }

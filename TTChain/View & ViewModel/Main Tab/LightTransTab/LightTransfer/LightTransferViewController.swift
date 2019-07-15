@@ -214,9 +214,9 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.nav_item_2, shouldClear: true)
         if self.purpose == .ttnTransfer {
-            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
+            changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "btn_previous_light"))
         }else {
-            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "arrowNavBlack"))
+            changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "btn_previous_light"))
         }
 
         nextStepBtn.setTitleColor(palette.btn_bgFill_enable_text, for: .normal)

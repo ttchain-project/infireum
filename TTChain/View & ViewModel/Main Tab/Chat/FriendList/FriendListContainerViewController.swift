@@ -95,7 +95,7 @@ final class FriendListContainerViewController: KLModuleViewController,KLVMVC {
         renderNavBar(tint: palette.nav_item_2, barTint: .clear)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         self.titleLabel.set(textColor: palette.nav_item_2, font: .owMedium(size: 18))
-        self.backButton.setImageForAllStates(#imageLiteral(resourceName: "arrowNavBlack").withRenderingMode(.alwaysTemplate))
+        self.backButton.setImageForAllStates(#imageLiteral(resourceName: "btn_previous_light").withRenderingMode(.alwaysTemplate))
         self.backButton.tintColor = palette.nav_item_2
         
         self.view.backgroundColor = palette.application_main

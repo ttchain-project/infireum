@@ -128,7 +128,7 @@ class BackupWalletMnemonicVerifyViewController: KLModuleViewController {
     
     override func renderTheme(_ theme: Theme) {
         title = nil
-        changeBackBarButton(toColor: theme.palette.nav_item_1, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor: theme.palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"))
         renderNavBar(tint: theme.palette.nav_item_1, barTint: theme.palette.nav_bg_1)
         titleLabel.set(textColor: theme.palette.label_main_1, font: .owMedium(size: 18))
         mainNoteLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))

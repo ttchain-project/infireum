@@ -84,7 +84,7 @@ final class IdentityQRCodeImportInfoFillUpViewController: KLModuleViewController
         let palette = theme.palette
         renderNavBar(tint: palette.nav_item_2, barTint: palette.nav_bar_tint)
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
-        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor: palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
         
         introLabel.set(textColor: palette.label_asAppMain, font: .owRegular(size: 12))
         

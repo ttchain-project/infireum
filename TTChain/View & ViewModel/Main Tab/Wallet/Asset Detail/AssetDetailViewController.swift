@@ -84,7 +84,7 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: palette.nav_bg_1, font: .owMedium(size: 18))
         changeNavShadowVisibility(false)
         
-        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_bg_1, image: #imageLiteral(resourceName: "arrowNavBlack"), title: nil)
+        changeLeftBarButtonToDismissToRoot(tintColor: palette.nav_bg_1, image: #imageLiteral(resourceName: "btn_previous_light"), title: nil)
         if self.purpose == .mainWallet {
             createCustomRightBarButton(img: #imageLiteral(resourceName: "wallet_settings"), target: self, action: #selector(toSettings))
         }

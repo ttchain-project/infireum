@@ -69,7 +69,7 @@ final class ForwarMessageViewController: KLModuleViewController, KLVMVC {
         
         renderNavBar(tint: .white, barTint: TM.palette.nav_bar_tint)
         renderNavTitle(color: .white, font: .owMedium(size: 18))
-        self.changeLeftBarButtonToDismissToRoot(tintColor: .black, image: #imageLiteral(resourceName: "arrowNavBlack"))
+        self.changeLeftBarButtonToDismissToRoot(tintColor: .white, image: #imageLiteral(resourceName: "btn_previous_light"))
     }
     
     var bag: DisposeBag = DisposeBag.init()

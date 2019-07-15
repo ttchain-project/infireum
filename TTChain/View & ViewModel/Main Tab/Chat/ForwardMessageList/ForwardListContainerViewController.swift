@@ -57,7 +57,7 @@ final class ForwardListContainerViewController: TabmanViewController, RxThemeRes
         self.items = self.items(with: LM.dls)
         
         addBar(bar, dataSource: self, at: .top)
-        changeBackBarButton(toColor: palette.nav_item_1, image:#imageLiteral(resourceName: "arrowNavBlack"))
+        changeBackBarButton(toColor: palette.nav_item_1, image:#imageLiteral(resourceName: "btn_previous_light"))
     }
 
     
