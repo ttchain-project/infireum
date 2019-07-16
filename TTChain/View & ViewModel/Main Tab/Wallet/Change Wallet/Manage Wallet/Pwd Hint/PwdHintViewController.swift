@@ -77,8 +77,8 @@ final class PwdHintViewController: KLModuleViewController, KLVMVC {
         visibleBtn.isSelected = false
         hintTextField.isSecureTextEntry = true
         
-        visibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOff"), for: .normal)
-        visibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOn"), for: .selected)
+        visibleBtn.setImage(#imageLiteral(resourceName: "btn_show"), for: .normal)
+        visibleBtn.setImage(#imageLiteral(resourceName: "btn_hide"), for: .selected)
         visibleBtn.setTitleForAllStates("")
     }
     

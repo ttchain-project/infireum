@@ -86,7 +86,7 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
             textColor: theme.palette.bg_fill_new,
             font: UIFont.owRegular(size: 12)
         )
-                
+        
         restoreBtn.set(
             textColor: .cloudBurst,
             font: UIFont.owRegular(size: 14),backgroundColor:.white, borderInfo:(color:.cloudBurst, width: 1)
@@ -219,24 +219,6 @@ extension IdentitySetupViewController: UIImagePickerControllerDelegate, UINaviga
         
         qrcodeCameraVC = nav
         present(nav, animated: true, completion: nil)
-        
-        
-//        requestPhotoLibraryPermissionIfNeeded {
-//            [weak self]
-//            (status) in
-//            switch status {
-//            case .denied, .restricted, .notDetermined:
-//                self?.presentAlbumAuthorizationDeniedAlert()
-//            case .authorized:
-//
-//                let imgPicker = UIImagePickerController.init()
-//                imgPicker.sourceType = .savedPhotosAlbum
-//                imgPicker.delegate = self
-//
-//                self?.imgPicker = imgPicker
-//                self?.present(imgPicker, animated: true, completion: nil)
-//            }
-//        }
     }
     
     

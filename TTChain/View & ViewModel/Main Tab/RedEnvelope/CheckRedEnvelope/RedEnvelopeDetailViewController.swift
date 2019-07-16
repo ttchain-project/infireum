@@ -133,8 +133,8 @@ class RedEnvelopeDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = closeBarButtonItem
         navigationItem.leftBarButtonItem = spaceBarButtonItem
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "arrowNavWhite.png")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "arrowNavWhite.png")
+        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "btn_previous_light")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "btn_previous_light")
         navigationItem.titleView = titleView
     }
 

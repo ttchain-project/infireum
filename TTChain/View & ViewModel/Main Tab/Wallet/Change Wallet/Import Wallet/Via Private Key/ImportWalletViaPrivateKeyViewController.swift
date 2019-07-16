@@ -138,8 +138,8 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         self.privateKeyStackView.isHidden = purpose == .create
 
         pwdVisibleBtn = UIButton.init(type: .custom)
-        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOn"), for: .normal)
-        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "iconTextfieldEyeOff"), for: .selected)
+        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "btn_show"), for: .normal)
+        pwdVisibleBtn.setImage(#imageLiteral(resourceName: "btn_hide"), for: .selected)
         pwdVisibleBtn.frame = CGRect.init(origin: .zero, size: CGSize.init(width: 44, height: 44))
         pwdVisibleBtn.isSelected = true
         

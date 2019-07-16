@@ -48,7 +48,7 @@
                         <constraint firstAttribute="height" constant="30" id="7nY-Nq-yYf"/>
                         <constraint firstAttribute="width" constant="30" id="UCd-3Z-prH"/>
                     </constraints>
-                    <state key="normal" image="copyAddressButtonCircle"/>
+                    <state key="normal" image="Copy"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4U8-K3-8la">
                     <rect key="frame" x="99" y="456.5" width="122" height="30"/>
@@ -91,6 +91,6 @@
         </view>
     </objects>
     <resources>
-        <image name="copyAddressButtonCircle" width="77" height="77"/>
+        <image name="Copy" width="36" height="36"/>
     </resources>
 </document>

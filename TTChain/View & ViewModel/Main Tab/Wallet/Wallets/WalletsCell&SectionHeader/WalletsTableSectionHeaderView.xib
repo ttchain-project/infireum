@@ -19,7 +19,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WhH-Xg-6ID">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BTCSmallIcon" translatesAutoresizingMaskIntoConstraints="NO" id="woX-hD-3jz">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btcn_coin_icon" translatesAutoresizingMaskIntoConstraints="NO" id="woX-hD-3jz">
                             <rect key="frame" x="20" y="27" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="22M-sP-udg"/>
@@ -94,7 +94,7 @@
         </view>
     </objects>
     <resources>
-        <image name="BTCSmallIcon" width="118" height="118"/>
+        <image name="btcn_coin_icon" width="108" height="108"/>
         <image name="btn_close" width="96" height="96"/>
         <image name="btn_open" width="96" height="96"/>
     </resources>

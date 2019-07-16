@@ -49,7 +49,8 @@ final class WithdrawalConfirmPwdValidationViewController: KLModuleViewController
         viewModel.isPwdVisible
             .subscribe(onNext: {
                 [unowned self] isVisible in
-                self.pwdVisibleBtn.setImageForAllStates(isVisible ? #imageLiteral(resourceName: "iconTextfieldEyeOn") : #imageLiteral(resourceName: "iconTextfieldEyeOff"))
+                
+                self.pwdVisibleBtn.setImageForAllStates(isVisible ? #imageLiteral(resourceName: "btn_show"): #imageLiteral(resourceName: "btn_hide"))
             })
             .disposed(by: bag)
         
