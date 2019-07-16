@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="fiatCurrencyLabel" destination="Kb3-v6-gno" id="OV6-Q8-9nh"/>
                 <outlet property="manageCoinButton" destination="j2C-yL-kAe" id="TDd-5B-dkY"/>
+                <outlet property="privateModeView" destination="2lc-Er-Yj9" id="6g2-qG-LBZ"/>
                 <outlet property="totalAssetValue" destination="NGL-DA-aad" id="pQ1-nH-JJD"/>
                 <outlet property="totalAssetValueTitleLabel" destination="0vM-Dk-cB5" id="Hzd-x0-faT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -53,11 +54,19 @@
                                 </label>
                             </subviews>
                         </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lc-Er-Yj9">
+                            <rect key="frame" x="163.66666666666666" y="68.666666666666657" width="48" height="64.666666666666657"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="2lc-Er-Yj9" firstAttribute="trailing" secondItem="mta-Ra-FqT" secondAttribute="trailing" id="ICY-bD-eQe"/>
+                        <constraint firstItem="2lc-Er-Yj9" firstAttribute="top" secondItem="mta-Ra-FqT" secondAttribute="top" id="IY2-C6-5HS"/>
                         <constraint firstItem="mta-Ra-FqT" firstAttribute="centerY" secondItem="mzR-YI-P8T" secondAttribute="centerY" id="Iqq-ir-Suk"/>
                         <constraint firstItem="mta-Ra-FqT" firstAttribute="centerX" secondItem="mzR-YI-P8T" secondAttribute="centerX" id="JA4-mt-IDV"/>
+                        <constraint firstItem="2lc-Er-Yj9" firstAttribute="bottom" secondItem="mta-Ra-FqT" secondAttribute="bottom" id="Mnn-H6-U8s"/>
+                        <constraint firstItem="2lc-Er-Yj9" firstAttribute="leading" secondItem="mta-Ra-FqT" secondAttribute="leading" id="QOS-eM-XXh"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEL-KI-DNP">

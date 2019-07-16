@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 final class WalletHeaderViewController: KLModuleViewController, KLVMVC{
-   
+    
     var viewModel: WalletHeaderViewModel!
     
     func config(constructor: WalletHeaderViewController.Config) {
@@ -45,6 +45,7 @@ final class WalletHeaderViewController: KLModuleViewController, KLVMVC{
     @IBOutlet weak var totalAssetValue: UILabel!
     @IBOutlet weak var fiatCurrencyLabel: UILabel!
     @IBOutlet weak var manageCoinButton: UIButton!
+    @IBOutlet weak var privateModeView: UIView!
     
     
     override func renderLang(_ lang: Lang) {
@@ -67,10 +68,27 @@ final class WalletHeaderViewController: KLModuleViewController, KLVMVC{
     func bindUI() {
         self.viewModel.input.fiatSource.map { $0.fullSymbol }.bind(to:self.fiatCurrencyLabel.rx.text).disposed(by:bag)
         
-        self.viewModel.input.fiatAmtValue.flatMapLatest { $0 }.map { $0?.asString(digits: 2, force: true).disguiseIfNeeded() ?? "--" }.bind(to:self.totalAssetValue.rx.text).disposed(by:bag)
+        let observer = Observable.combineLatest(self.viewModel.input.fiatAmtValue.flatMapLatest { $0 },self.viewModel.input.disguiseFiatAmt)
+        
+        observer.map {
+            amt, pMode in
+            let amtStr:String = (amt?.asString(digits: 2, force: true) ?? "--")
+            if pMode {
+                return String(amtStr.map {_ in "*"})
+            }else {
+                return amtStr
+            }
+        }.bind(to:self.totalAssetValue.rx.text).disposed(by:bag)
         
         self.manageCoinButton.rx.klrx_tap.drive(onNext:{[unowned self] in
             self.manageAssetBtnAction()
         }).disposed(by:bag)
+        
+        
+        self.privateModeView.rx.tapGesture()
+            .scan(true){ state, _ in
+                !state
+            }
+            .bind(to:self.viewModel.input.disguiseFiatAmt).disposed(by:bag)
     }
 }

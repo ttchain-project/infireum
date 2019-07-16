@@ -18,6 +18,7 @@ class WalletHeaderViewModel:KLRxViewModel {
     struct Input {
         let fiatAmtValue: Observable<BehaviorRelay<Decimal?>>
         let fiatSource: Observable<Fiat>
+        let disguiseFiatAmt: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     }
     
     var bag:DisposeBag = DisposeBag()
