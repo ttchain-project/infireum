@@ -45,7 +45,6 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        self.view.setGradientColor()
 
     }
     override func didReceiveMemoryWarning() {
@@ -121,9 +120,9 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     }
     
     private func toRestore() {
-        let nav = IdentityRestoreViewController.navInstance()
-        nav.navigationBar.renderShadow()
-        present(nav, animated: true, completion: nil)
+        let vc = RestoreMnemonicViewController.navInstance()
+        vc.navigationBar.renderShadow()
+        present(vc, animated: true, completion: nil)
     }
 
     func showRestoreView() {

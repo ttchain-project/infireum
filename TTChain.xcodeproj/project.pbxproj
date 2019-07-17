@@ -251,6 +251,15 @@
 		554EB38922C364DD008E847B /* SettingHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */; };
 		554EB38A22C364DD008E847B /* SettingHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */; };
 		554EB38B22C364DD008E847B /* SettingHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */; };
+		5558B0B122DD89F5007C7C1E /* RestoreMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0AF22DD89F5007C7C1E /* RestoreMnemonicViewController.swift */; };
+		5558B0B222DD89F5007C7C1E /* RestoreMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0AF22DD89F5007C7C1E /* RestoreMnemonicViewController.swift */; };
+		5558B0B322DD89F5007C7C1E /* RestoreMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0AF22DD89F5007C7C1E /* RestoreMnemonicViewController.swift */; };
+		5558B0B422DD89F5007C7C1E /* RestoreMnemonicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0B022DD89F5007C7C1E /* RestoreMnemonicViewController.xib */; };
+		5558B0B522DD89F5007C7C1E /* RestoreMnemonicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0B022DD89F5007C7C1E /* RestoreMnemonicViewController.xib */; };
+		5558B0B622DD89F5007C7C1E /* RestoreMnemonicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0B022DD89F5007C7C1E /* RestoreMnemonicViewController.xib */; };
+		5558B0B822DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */; };
+		5558B0B922DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */; };
+		5558B0BA22DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */; };
 		5559CADB228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADC228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADD228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
@@ -2381,6 +2390,9 @@
 		554EB37F22C36306008E847B /* SettingHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderViewController.swift; sourceTree = "<group>"; };
 		554EB38022C36306008E847B /* SettingHeaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingHeaderViewController.xib; sourceTree = "<group>"; };
 		554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderViewModel.swift; sourceTree = "<group>"; };
+		5558B0AF22DD89F5007C7C1E /* RestoreMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreMnemonicViewController.swift; sourceTree = "<group>"; };
+		5558B0B022DD89F5007C7C1E /* RestoreMnemonicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestoreMnemonicViewController.xib; sourceTree = "<group>"; };
+		5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreMnemonicViewModel.swift; sourceTree = "<group>"; };
 		5559CADA228E688300D37895 /* SignETHTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignETHTransaction.swift; sourceTree = "<group>"; };
 		555A45AC22057F35004A713A /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		555A45AD22057F35004A713A /* ChatImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageViewController.xib; sourceTree = "<group>"; };
@@ -3611,6 +3623,16 @@
 				554EB38822C364DD008E847B /* SettingHeaderViewModel.swift */,
 			);
 			path = SettingHeaderVC;
+			sourceTree = "<group>";
+		};
+		5558B0AE22DD896D007C7C1E /* RestoreMnemonic */ = {
+			isa = PBXGroup;
+			children = (
+				5558B0AF22DD89F5007C7C1E /* RestoreMnemonicViewController.swift */,
+				5558B0B022DD89F5007C7C1E /* RestoreMnemonicViewController.xib */,
+				5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */,
+			);
+			path = RestoreMnemonic;
 			sourceTree = "<group>";
 		};
 		5559CAD9228E686600D37895 /* SignETHTransaction */ = {
@@ -6848,6 +6870,7 @@
 		64F07E6F20D36ADD00A60C5C /* Identity Setup */ = {
 			isa = PBXGroup;
 			children = (
+				5558B0AE22DD896D007C7C1E /* RestoreMnemonic */,
 				64F07E7020D36AFE00A60C5C /* IdentitySetupViewController.swift */,
 				64F07E7120D36AFE00A60C5C /* IdentitySetupViewController.xib */,
 				64F07E7820D36B1F00A60C5C /* View Model */,
@@ -7163,6 +7186,7 @@
 				55EF6AF221A812C7007E074A /* GroupChatTableViewCell.xib in Resources */,
 				6424B6AF20F5F7B800AEBCAD /* TransferRecordsListViewController.xib in Resources */,
 				55CAC61D22AFB8E600BEBE25 /* WalletsTableViewCell.xib in Resources */,
+				5558B0B622DD89F5007C7C1E /* RestoreMnemonicViewController.xib in Resources */,
 				64F07E7720D36AFE00A60C5C /* IdentitySetupViewController.xib in Resources */,
 				555E4A8E224A472800C7CAD5 /* ReceiveRedEnvelopeTableViewCell.xib in Resources */,
 				5508743321EDD628007B3B3B /* ExploreDetailWebViewController.xib in Resources */,
@@ -7459,6 +7483,7 @@
 				55EF6A8121A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
 				64769B1D2121E86F00C4AB9E /* AgreementViewController.xib in Resources */,
 				6446E24C20FCE85A00EC1E2E /* SelectFiatTableViewCell.xib in Resources */,
+				5558B0B422DD89F5007C7C1E /* RestoreMnemonicViewController.xib in Resources */,
 				643200CE20FB22F400B11334 /* WithdrawalChangeToAddressViewController.xib in Resources */,
 				555A45B122057F35004A713A /* ChatImageViewController.xib in Resources */,
 				649E489520ECAC4900B217AD /* PwdHintViewController.xib in Resources */,
@@ -7659,6 +7684,7 @@
 				55EF6A8221A812C6007E074A /* AddGroupMemberTableViewCell.xib in Resources */,
 				64769B1E2121E86F00C4AB9E /* AgreementViewController.xib in Resources */,
 				6446E24D20FCE85A00EC1E2E /* SelectFiatTableViewCell.xib in Resources */,
+				5558B0B522DD89F5007C7C1E /* RestoreMnemonicViewController.xib in Resources */,
 				643200CF20FB22F400B11334 /* WithdrawalChangeToAddressViewController.xib in Resources */,
 				555A45B222057F35004A713A /* ChatImageViewController.xib in Resources */,
 				649E489620ECAC4900B217AD /* PwdHintViewController.xib in Resources */,
@@ -8414,6 +8440,7 @@
 				6414C142214A1BFA00E45F32 /* IdentityQRCodeContent.swift in Sources */,
 				64769B322124151D00C4AB9E /* CICTxFilter.swift in Sources */,
 				6424B62520F4CBC500AEBCAD /* MultiSelectDataSourceManager.swift in Sources */,
+				5558B0B322DD89F5007C7C1E /* RestoreMnemonicViewController.swift in Sources */,
 				640D88EE20EF0D890010D986 /* AssetDetailViewController.swift in Sources */,
 				55C9DA3D22BB984A00FB0BCA /* ChatMessageListViewController.swift in Sources */,
 				643F9E5B2108424400CE70F4 /* EZCToast.swift in Sources */,
@@ -8578,6 +8605,7 @@
 				55E1140121F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				640D88E420EE24E30010D986 /* TransRecord+Helper.swift in Sources */,
 				55AADF1E2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */,
+				5558B0BA22DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */,
 				6470D63B20F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,
 				643200C620FB1E0400B11334 /* WithdrawalCICFeeInfoViewModel.swift in Sources */,
 				64CFD3C82134204F00A04727 /* LightningTransMatchInfoPackager.swift in Sources */,
@@ -8970,6 +8998,7 @@
 				6470D62920F1124300EB0780 /* WithdrawalFeeInfoProvider.swift in Sources */,
 				6EEA2F1A2164B22D005FE393 /* QAViewController.swift in Sources */,
 				6485003C20DA009A00107473 /* IdentityCreateViewModel.swift in Sources */,
+				5558B0B122DD89F5007C7C1E /* RestoreMnemonicViewController.swift in Sources */,
 				64F07E3B20D25ADD00A60C5C /* DatabaseManager.swift in Sources */,
 				55C9DA3B22BB984A00FB0BCA /* ChatMessageListViewController.swift in Sources */,
 				55EF6B3621A81516007E074A /* RocketChatUserMappable.swift in Sources */,
@@ -9134,6 +9163,7 @@
 				55E113FF21F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				64F07DE520D241A000A60C5C /* UIView+ShadowOffSet.swift in Sources */,
 				55AADF1C2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */,
+				5558B0B822DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */,
 				640D88BF20EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				64813A3720DCA6EE00CAA4D8 /* SubAddress+CoreDataClass.swift in Sources */,
 				64F07DEE20D241A000A60C5C /* UILabel+Gradient.swift in Sources */,
@@ -9519,6 +9549,7 @@
 				64F07E8420D36B8E00A60C5C /* KLRxViewModel.swift in Sources */,
 				6EEA2F1B2164B22D005FE393 /* QAViewController.swift in Sources */,
 				6470D62120F0FEFA00EB0780 /* UIButton+Position.swift in Sources */,
+				5558B0B222DD89F5007C7C1E /* RestoreMnemonicViewController.swift in Sources */,
 				64813A4420DCA6EE00CAA4D8 /* Fiat+CoreDataClass.swift in Sources */,
 				55C9DA3C22BB984A00FB0BCA /* ChatMessageListViewController.swift in Sources */,
 				6414C141214A1BFA00E45F32 /* IdentityQRCodeContent.swift in Sources */,
@@ -9683,6 +9714,7 @@
 				55E1140021F7278C0062198B /* GroupCollectionReusableView.swift in Sources */,
 				64813AE220DE241500CAA4D8 /* MainTabBarViewController.swift in Sources */,
 				55AADF1D2202D42B00F403C8 /* USDTTxFetcher.swift in Sources */,
+				5558B0B922DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */,
 				6446E23C20FCE3F700EC1E2E /* ChangePrefFiatViewController.swift in Sources */,
 				648139B120DB5E4000CAA4D8 /* IdentityRestoreViewController.swift in Sources */,
 				6470D63A20F19FB300EB0780 /* WithdrawalFeeViewControllerBase.swift in Sources */,

@@ -751,4 +751,8 @@ protocol DynamicLocalizationSource {
     var create_identity_password_reminder_placeholder :String {get set}
     var create_identity_privacy_policy_btn_title :String {get set}
     var agree_bnt_title: String {get set}
+    
+    var sign_in_using_mnemonic_title: String {get set}
+    
+    var sign_in_mnemonic_subtitle: String {get set}
 }

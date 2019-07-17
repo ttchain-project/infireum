@@ -788,6 +788,10 @@ struct DLS_ZH_TW: DLS {
     var create_identity_privacy_policy_btn_title = "我同意《TTChain隱私政策》"
     
     var agree_bnt_title: String  = "同意"
+
+    var sign_in_using_mnemonic_title = "使用《助記詞》登入帳號"
+    
+    var sign_in_mnemonic_subtitle = "輸入中文助記詞，共 12 個中文字"
 }
 
 

@@ -16,12 +16,12 @@ class IdentityRestoreViewModel: KLRxViewModel {
     typealias CreateResult = APIWalletCreateResult
     
     struct Input {
-        let mnemonicInput: ControlProperty<String?>
         let pwdInput: ControlProperty<String?>
         let userNameInput: ControlProperty<String?>
         let confirmPwdInput: ControlProperty<String?>
         let pwdHintInput: ControlProperty<String?>
         let confirmInput: Driver<Void>
+        let mnemonic:String
     }
     
     struct Output {
@@ -67,7 +67,7 @@ class IdentityRestoreViewModel: KLRxViewModel {
         return self.pwdHint.value
     }
     public func getMnemonicString() -> String? {
-        return self.mnemonic.value
+        return self.input.mnemonic
     }
     
     //MARK: - functions
@@ -80,7 +80,7 @@ class IdentityRestoreViewModel: KLRxViewModel {
     }
     
     func concatInput() {
-        (input.mnemonicInput <-> mnemonic).disposed(by: bag)
+//        (input.mnemonicInput <-> mnemonic).disposed(by: bag)
         (input.pwdInput <-> pwd).disposed(by: bag)
         (input.confirmPwdInput <-> confirmPwd).disposed(by: bag)
         (input.pwdHintInput <-> pwdHint).disposed(by: bag)
@@ -93,14 +93,6 @@ class IdentityRestoreViewModel: KLRxViewModel {
                 validity -> InputValidity in
                 return validity
             }
-//            .filter { $0 }
-//            .asObservable()
-//            .flatMapLatest {
-//                [unowned self]
-//                _ -> RxAPIResponse<CreateResult> in
-//                self.output.onStartRestoreIdentity()
-//                return self.restoreIdentity()
-//            }
             .asObservable()
             .subscribe(onNext: {
                 [unowned self]
@@ -139,11 +131,11 @@ class IdentityRestoreViewModel: KLRxViewModel {
     
     //MARK: - Validity
     private func checkValidity() -> InputValidity {
-        guard let _mnemonic = mnemonic.value, _mnemonic.count > 0 else {
-            return .emptyMnemonic
-        }
-        
-        switch _mnemonic.ow_isValidMnemonic {
+//        guard let _mnemonic = mnemonic.value, _mnemonic.count > 0 else {
+//            return .emptyMnemonic
+//        }
+//
+        switch self.input.mnemonic.ow_isValidMnemonic {
         case .incorrectFormat(desc: let desc):
             return .mnemonic_invalidFormat(desc: desc)
         case .valid:
@@ -193,29 +185,6 @@ class IdentityRestoreViewModel: KLRxViewModel {
             let _hint = pwdHint.value else {
                 return RxAPIResponse.just(.failed(error: .noData))
         }
-        
-//        let fakeWallets: [CreateResult.WalletResource] =
-//            [
-//                CreateResult.WalletResource(
-//                    pKey: "b38840f94dec1f1d7ce95db0c4cadbfb964be3333db313a89b9e5d2935471b5d",
-//                    address: "0x9887FA8062E8D4e8B045BD2ca805e447b4340275",
-//                    type: .eth
-//                ),
-//                CreateResult.WalletResource(
-//                    pKey: "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF",
-//                    address: "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj",
-//                    type: .btc
-//                ),
-//                CreateResult.WalletResource(
-//                    pKey: "b38840f94dec1f1d7ce95db0c4cadbfb964be3333db313a89b9e5d2935471b5e",
-//                    address: "0xF5e544462FE66cb30C2d3546cFF82c061616b42D",
-//                    type: .cic
-//                )
-//        ]
-//
-//        let defaultName: String = "Identity_Name"
-//        let result = CreateResult(name: defaultName, mnemonic: _mnemonic, walletsResource: fakeWallets, pwd: _pwd, pwdHint: _hint)
-//        return RxAPIResponse.just(.success(result)).delay(2, scheduler: MainScheduler.instance)
         
         let defaultName: String = userName.value ?? "Identity_Name"
     

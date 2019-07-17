@@ -774,5 +774,8 @@ struct DLS_ZH_CN: DLS {
     
     var agree_bnt_title:String = "同意"
 
+    var sign_in_using_mnemonic_title = "使用《助记词》登入帐号"
+    
+    var sign_in_mnemonic_subtitle = "输入中文助记词，共 12 个中文字"
 }
 

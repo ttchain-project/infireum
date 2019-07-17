@@ -13,7 +13,7 @@ import HDWalletKit
 
 final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     
-    typealias Constructor = Void
+    typealias Constructor = IdentityRestoreViewController.Config
     typealias ViewModel = IdentityRestoreViewModel
     
     var bag: DisposeBag = DisposeBag.init()
@@ -25,21 +25,27 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var mnemonicTextView: KLPlaceholderTextView!
     @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var pwdTitleLabel: UILabel!
     
+    @IBOutlet weak var nameTitleLabel: UILabel!
+    @IBOutlet weak var pwdTitleLabel: UILabel!
+    @IBOutlet weak var confirmPwdTitleLabel: UILabel!
+    @IBOutlet weak var pwdHintTitleLabel: UILabel!
+
     @IBOutlet weak var userNameTextField: OWInputTextField!
     @IBOutlet weak var pwdTextField: OWInputTextField!
     @IBOutlet weak var confirmPwdTextField: OWInputTextField!
     @IBOutlet weak var pwdHintTextField: OWInputTextField!
     
     @IBOutlet weak var importBtn: UIButton!
-    
+    @IBOutlet weak var backButton: UIButton!
     fileprivate var pwdVisibleBtn: UIButton!
     
     private var fields: [OWInputTextField] {
         return [userNameTextField, pwdTextField, confirmPwdTextField, pwdHintTextField]
     }
-    
+    private var labels: [UILabel] {
+        return [nameTitleLabel, pwdTitleLabel, confirmPwdTitleLabel, pwdHintTitleLabel]
+    }
     lazy var hud: KLHUD = {
         return KLHUD.init(
             type: .spinner,
@@ -53,45 +59,24 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         )
     }()
     
-    func config(constructor: Void) {
+    struct Config {
+        let mnemonic:String
+    }
+    func config(constructor: IdentityRestoreViewController.Config) {
         view.layoutIfNeeded()
         setupUI()
         viewModel = ViewModel.init(
             input:
             IdentityRestoreViewModel.InputSource(
-                mnemonicInput: mnemonicTextView.rx.text,
                 pwdInput: pwdTextField.rx.text,
                 userNameInput: userNameTextField.rx.text,
                 confirmPwdInput: confirmPwdTextField.rx.text,
                 pwdHintInput: pwdHintTextField.rx.text,
-                confirmInput: importBtn.rx.tap.asDriver()
+                confirmInput: importBtn.rx.tap.asDriver(),
+                mnemonic:constructor.mnemonic
             ),
             output:
             IdentityRestoreViewModel.OutputSource(
-//                onStartRestoreIdentity: {
-//                    [weak self] in
-//                    guard let wSelf = self else { return }
-//                    wSelf.hud.startAnimating(inView: wSelf.navigationController!.view)
-//
-//                },
-//                onFinishRestoreIdentity: {
-//                    [weak self] (apiResult) in
-//                    guard let wSelf = self else { return }
-//                    wSelf.hud.updateType(KLHUD.HUDType.img(#imageLiteral(resourceName: "iconSpinnerAlertOk")),
-//                                         text: LM.dls
-//                                            .restoreIdentity_hud_restoreSuccess)
-//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: {
-//                        wSelf.hud.stopAnimating()
-//
-//                        switch apiResult {
-//                        case .failed(error: let err):
-//                            wSelf.showAPIErrorResponsePopUp(from: err, cancelTitle: LM.dls.g_cancel)
-//                        case .success(let result):
-//                            wSelf.handleRestoreIdentityResult(result)
-//                        }
-//
-//                    })
-//                },
                 onFinishCheckingInputValidity: {
                     [weak self] validity in
                     guard let wSelf = self else { return }
@@ -145,7 +130,11 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         })
             .disposed(by: bag)
         
-        mnemonicTextView.rx.contentSize.map { $0.height }.bind(to: textViewHeight.rx.constant).disposed(by: bag)
+        self.backButton.rx.klrx_tap.drive(onNext:{ _ in
+            self.navigationController?.popViewController(animated: true)
+        }).disposed(by: bag)
+        
+//        mnemonicTextView.rx.contentSize.map { $0.height }.bind(to: textViewHeight.rx.constant).disposed(by: bag)
     }
     
     override func viewDidLoad() {
@@ -213,45 +202,24 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
                 
             }.disposed(by: bag)
         
-//        let sources = result.walletsResource.map {
-//            res -> (address: String, pKey: String, mnenomic: String?, isFromSystem: Bool, name: String, pwd: String, pwdHint: String, chainType: ChainType, mainCoinID: String) in
-//            return (address: res.address,
-//                    pKey: res.pKey,
-//                    mnenomic: result.mnemonic,
-//                    isFromSystem: true,
-//                    name: Wallet.defaultName(ofMainCoin: res.mainCoin),
-//                    pwd: result.pwd,
-//                    pwdHint: result.pwdHint,
-//                    chainType: res.mainCoin.owChainType,
-//                    mainCoinID: res.mainCoin.walletMainCoinID!)
-//        }
-//
-//        guard Wallet.create(identity: id, sources: sources) != nil else {
-//            #if DEBUG
-//            fatalError()
-//            #else
-//            showSimplePopUp(with: LM.dls.restoreIdentity_error_create_wallet_fail,
-//                            contents: "",
-//                            cancelTitle: LM.dls.g_cancel,
-//                            cancelHandler: nil)
-//            return
-//            #endif
-//        }
-//
-//        startBackupIdentityQRCodeFlow()
+
     }
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         title = dls.restoreIdentity_title
         titleLabel.text = dls.restoreIdentity_label_able_to_change_pwd_note
-        pwdTitleLabel.text = dls.restoreIdentity_label_settingPwd
-        userNameTextField.set(placeholder: dls.qrCodeImport_info_placeholder_idName)
         importBtn.setTitleForAllStates(dls.restoreIdentity_btn_import)
-        mnemonicTextView.placeholder = dls.restoreIdentity_placeholder_mnemonic
-        pwdTextField.set(placeholder: dls.restoreIdentity_placeholder_walletPwd)
-        confirmPwdTextField.set(placeholder: dls.restoreIdentity_placeholder_walletConfirmPwd)
-        pwdHintTextField.set(placeholder: dls.restoreIdentity_placeholder_pwdHint)
+        
+        backButton.setTitleForAllStates(lang.dls.g_cancel)
+        nameTitleLabel.text = dls.account
+        userNameTextField.set(placeholder: dls.create_identity_username_placeholder)
+        pwdTitleLabel.text =  dls.createID_placeholder_password
+        pwdTextField.set(placeholder: dls.create_identity_password_placeholder)
+        confirmPwdTitleLabel.text = dls.createID_placeholder_confirmPassword
+        confirmPwdTextField.set(placeholder: dls.create_identity_reenter_password_placeholder)
+        pwdHintTitleLabel.text = dls.createID_placeholder_passwordNote
+        pwdHintTextField.set(placeholder: dls.create_identity_password_reminder_placeholder)
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -271,10 +239,9 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             font: UIFont.owRegular(size: 12)
         )
         
-        pwdTitleLabel.set(
-            textColor: theme.palette.label_main_1,
-            font: .owRegular(size: 14)
-        )
+        for label in labels {
+            label.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
+        }
         
         for field in fields {
             field.sepline.backgroundColor = theme.palette.sepline
@@ -293,8 +260,8 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             borderInfo: (color: theme.palette.bgView_border, width: 1)
         )
         
-        mnemonicTextView.textColor = theme.palette.input_text
-        mnemonicTextView.placeholderLabel.textColor = theme.palette.input_placeholder
+//        mnemonicTextView.textColor = theme.palette.input_text
+//        mnemonicTextView.placeholderLabel.textColor = theme.palette.input_placeholder
         importBtn.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
         importBtn.setTitleColor(theme.palette.btn_bgFill_disable_text, for: .disabled)
     }

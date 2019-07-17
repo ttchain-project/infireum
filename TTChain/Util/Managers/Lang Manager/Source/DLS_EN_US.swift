@@ -794,5 +794,9 @@ struct DLS_EN_US: DLS {
     var create_identity_privacy_policy_btn_title = "I agree 《TTChain privacy policy》"
     
     var agree_bnt_title:String = "Agree"
+    
+    var sign_in_using_mnemonic_title = "Login account using Mnemonics"
+    
+    var sign_in_mnemonic_subtitle = "Enter Chinese mnemonic, a total of 12 Chinese characters"
 }
 
