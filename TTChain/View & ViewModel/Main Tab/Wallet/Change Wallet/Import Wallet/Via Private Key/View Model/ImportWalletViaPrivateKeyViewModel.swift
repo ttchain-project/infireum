@@ -25,7 +25,7 @@ class ImportWalletViaPrivateKeyViewModel: KLRxViewModel {
         let pwdHintInput: ControlProperty<String?>
         let confirmInput: Driver<Void>
         let walletName: ControlProperty<String?>
-        let purpose:ImportWalletViaPrivateKeyViewController.Config.Purpose
+        let purpose:ImportWalletViaPrivateKeyViewController.Purpose
     }
 
     struct Output {

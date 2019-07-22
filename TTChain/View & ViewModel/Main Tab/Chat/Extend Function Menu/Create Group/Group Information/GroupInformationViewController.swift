@@ -416,7 +416,7 @@ class GroupInformationViewController: UIViewController {
         self.show(viewController, sender: nil)
     }
     func toProfileVC() {
-        let viewController = ProfileViewController.instance()
+        let viewController = ProfileViewController.instance(from: ProfileViewController.Constructor(purpose: ProfileViewController.Purpose.IMProfile))
         self.show(viewController, sender: nil)
     }
 }

@@ -86,7 +86,7 @@ final class ChatPersonListViewController: KLModuleViewController, KLVMVC {
             switch indexPath.section {
             case 0:
                 let model = self.viewModel.friendRequestList.value[indexPath.row]
-                let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.notMyFriend, user: model)
+                let config = UserProfileViewController.Config.init(purpose: UserProfileViewController.Purpose.friendRequest, user: model)
                 let viewController = UserProfileViewController.navInstance(from: config)
                 self.present(viewController, animated: true)
             case 1:

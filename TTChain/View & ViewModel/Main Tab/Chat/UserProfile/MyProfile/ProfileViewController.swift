@@ -12,15 +12,41 @@ import RxSwift
 import PhotosUI
 
 final class ProfileViewController: KLModuleViewController, KLVMVC {
-    var viewModel: UserProfileViewModel!
+    enum Purpose {
+        case IMProfile
+        case SettingProfile
+    }
+    var purpose:Purpose!
+    var viewModel: ProfileViewModel!
         
-    typealias ViewModel = UserProfileViewModel
+    typealias ViewModel = ProfileViewModel
     
     var bag: DisposeBag = DisposeBag.init()
 
-    fileprivate var imagePicker: UIImagePickerController!
+    struct Config {
+        let purpose :ProfileViewController.Purpose
+    }
+    
+    func config(constructor: ProfileViewController.Config) {
+        self.view.layoutIfNeeded()
+        self.purpose = constructor.purpose
+        self.viewModel = ProfileViewModel.init(input: ProfileViewModel.InputSource(userName:self.userNameTextField.rx.text),
+                                               output: ProfileViewModel.OutputSource())
+        self.startMonitorLangIfNeeded()
+        self.startMonitorThemeIfNeeded()
+        setupTextFields()
 
-    typealias Constructor = Void
+        self.bindUI()
+        if self.purpose == .IMProfile {
+            self.accountView.isHidden = true
+            self.passwordView.isHidden = true
+        }else {
+            self.showQRCodeBtn.isHidden = true
+        }
+    }
+    
+    fileprivate var imagePicker: UIImagePickerController!
+    typealias Constructor = Config
     var didUpdateProfileImage: Bool = false
 
     var imUser: IMUser? = {
@@ -37,25 +63,38 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     }
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton! {
-        didSet {
-            saveButton.isHidden = true
-        }
-    }
+    @IBOutlet weak var userNameTextField: OWInputTextField!
+//    @IBOutlet weak var saveButton: UIButton! {
+//        didSet {
+//            saveButton.isHidden = true
+//        }
+//    }
     
     @IBOutlet weak var showQRCodeBtn: UIButton!
-    @IBOutlet weak var recoveryPasswordButton: UIButton!
+//    @IBOutlet weak var recoveryPasswordButton: UIButton!
     
     @IBOutlet weak var idTitleLabel: UILabel!
-    @IBOutlet weak var idTextField: UITextField! {
+    @IBOutlet weak var idTextField: OWInputTextField! {
         didSet {
             idTextField.delegate = self
         }
     }
 
+    
+    @IBOutlet weak var accountNameLabel: UILabel!
+    @IBOutlet weak var accountNameTextfield: OWInputTextField!
+    
+    @IBOutlet weak var accountPasswordLabel: UILabel!
+    @IBOutlet weak var accountPasswordTextfield: OWInputTextField!
+    
+    @IBOutlet weak var accountView: UIStackView!
+    @IBOutlet weak var passwordView: UIStackView!
+    
+    lazy var textFields:[OWInputTextField] = [userNameTextField,idTextField,accountNameTextfield,accountPasswordTextfield]
+    
     let editImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
     let copyImgView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+    let editPasswordImgView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
 
     private lazy var hud = {
         return KLHUD.init(
@@ -67,16 +106,6 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         )
     }()
     
-    func config(constructor: Void) {
-        self.view.layoutIfNeeded()
-       
-        self.startMonitorLangIfNeeded()
-        self.startMonitorThemeIfNeeded()
-        setupTextFields()
-
-        self.bindUI()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -85,7 +114,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -111,17 +140,28 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             UIPasteboard.general.string = self.idTextField.text
             EZToast.present(on: self, content: LM.dls.copied_successfully)
         }).disposed(by: bag)
+        
+        editPasswordImgView.image = #imageLiteral(resourceName: "btn_edit.png")
+        self.accountPasswordTextfield.rightView = editPasswordImgView
+        self.accountPasswordTextfield.rightViewMode = .always
+        editPasswordImgView.rx.klrx_tap.drive(onNext: { () in
+//            self.accountPasswordTextfield.becomeFirstResponder()
+        }).disposed(by: bag)
+        editPasswordImgView.contentMode = .scaleAspectFit
+        
     }
     
     override func renderLang(_ lang: Lang) {
         self.title = lang.dls.personal_information
-        self.saveButton.setTitle(lang.dls.ab_update_btn_save, for: .normal)
+//        self.saveButton.setTitle(lang.dls.ab_update_btn_save, for: .normal)
         self.userNameTextField.placeholder = lang.dls.myIdentity_label_name
-        self.recoveryPasswordButton.setTitle(lang.dls.user_profile_transfer_account, for: .normal)
+//        self.recoveryPasswordButton.setTitle(lang.dls.user_profile_transfer_account, for: .normal)
         self.userNameLabel.text = lang.dls.chat_nick_name
         self.idTitleLabel.text = lang.dls.tab_chat + "ID"
         self.showQRCodeBtn.setTitleForAllStates(lang.dls.show_qr_code)
         
+        self.accountNameLabel.text = lang.dls.createID_placeholder_name
+        self.accountPasswordLabel.text = lang.dls.createID_placeholder_password
     }
     
     override func renderTheme(_ theme: Theme) {
@@ -129,25 +169,29 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
         renderNavTitle(color: theme.palette.nav_item_2, font: .owRegular(size: 20))
         changeLeftBarButton(target: self, selector: #selector(backButtonTapped), tintColor: theme.palette.nav_bg_1, image: #imageLiteral(resourceName: "btn_previous_light"))
         self.view.backgroundColor = .white
-        self.saveButton.backgroundColor = theme.palette.btn_bgFill_enable_bg
-        self.recoveryPasswordButton.backgroundColor = theme.palette.application_main
+//        self.saveButton.backgroundColor = theme.palette.btn_bgFill_enable_bg
+//        self.recoveryPasswordButton.backgroundColor = theme.palette.application_main
         
-        self.userNameTextField.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
-        
-         self.idTextField.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
+        for textField in textFields {
+            textField.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
+            textField.sepline.backgroundColor = .black
+        }
         
         self.userNameLabel.set(textColor: theme.palette.btn_bgFill_enable_bg, font: .owRegular(size: 12))
         self.idTitleLabel.set(textColor: theme.palette.btn_bgFill_enable_bg, font: .owRegular(size: 12))
         
+        self.accountNameLabel.set(textColor: theme.palette.btn_bgFill_enable_bg, font: .owRegular(size: 12))
+        self.accountPasswordLabel.set(textColor: theme.palette.btn_bgFill_enable_bg, font: .owRegular(size: 12))
         self.showQRCodeBtn.set(textColor: .white, font: .owRegular(size:14), backgroundColor: .creamCan)
         self.showQRCodeBtn.cornerRadius = showQRCodeBtn.height/2
     }
 
     func bindUI() {
-        self.recoveryPasswordButton.isHidden = true
+//        self.recoveryPasswordButton.isHidden = true
         
         self.userNameTextField.text = imUser?.nickName
         self.idTextField.text = imUser?.uID
+        self.accountNameTextfield.text = Identity.singleton?.name
         
         if let img = imUser?.headImgUrl  {
             self.profileImageView.setProfileImage(image: img, tempName: imUser?.nickName)
@@ -160,121 +204,33 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             self.showImgSourceActionSheet()
         }).disposed(by: bag)
         
-        self.userNameTextField.rx.controlEvent([.editingDidBegin, .editingDidEnd]).asObservable().asObservable()
-            .subscribe(onNext: { _ in
-                self.saveButton.isEnabled = true
-            })
-            .disposed(by: bag)
-        
-        self.saveButton.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
-            if self.didUpdateProfileImage  {
-                //UpdateImage
-                self.updateProfilePhoto()
-            } else if self.imUser!.nickName != self.userNameTextField.text {
-                self.updateUserName()
-            }else {
-                if self.navigationController?.viewControllers.count ?? 0 > 1 {
-                    self.navigationController?.popViewController(animated: true)
-                }else {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-        }).disposed(by: bag)
-        
-        self.recoveryPasswordButton.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
-            self.setRecoveryPassword()
-        }).disposed(by: bag)
-        
         self.showQRCodeBtn.rx.tap.asDriver().drive(onNext: { [unowned self] _ in
             self.showQRCode()
         }).disposed(by: bag)
         
+        self.viewModel.output.onUpdateComplete.subscribe(onNext:{
+            if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                self.navigationController?.popViewController(animated: true)
+            }else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }).disposed(by: bag)
+        
+        self.viewModel.output.messageSubject.bind(to:self.rx.message).disposed(by: bag)
     }
     
     func updateProfilePhoto() {
-        
-        let image = self.profileImageView.image?.updateImageOrientionUpSide() ?? self.profileImageView.image
-        
-        let parameter = UploadHeadImageAPI.Parameters.init(personalOrGroupId:imUser!.uID , isGroup: false, image: UIImageJPEGRepresentation(image!, 0.5)!)
-        self.hud.startAnimating(inView: view)
-        Server.instance.uploadHeadImg(parameters: parameter).asObservable().subscribe(onNext: {[weak self] (result) in
-            guard let `self` = self else {
-                return
-            }
-            self.hud.stopAnimating()
-            switch result {
-            case .success(let model):
-                
-                    IMUserManager.manager.userModel.value!.headImg = self.profileImageView.image
-                    IMUserManager.manager.userModel.value!.headImgUrl = model.image
-
-                LocalIMUser.updateLocalIMUser()
-                
-                if self.imUser!.nickName != self.userNameTextField.text {
-                    //UpdateName
-                    self.updateUserName()
-                } else {
-                    if self.navigationController?.viewControllers.count ?? 0 > 1 {
-                        self.navigationController?.popViewController(animated: true)
-                    }else {
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                }
-            case .failed(error: let error):
-                print("error %@", error)
-            }
-        }).disposed(by: bag)
-        
+         let image = self.profileImageView.image?.updateImageOrientionUpSide() ?? self.profileImageView.image
+        self.viewModel.updateProfilePic(image:image!)
     }
     
     func updateUserName() {
-        guard let userName = self.userNameTextField.text, userName.count > 0 else {
-            self.showSimplePopUp(with: "", contents: LM.dls.profile_edit_empty_name_error, cancelTitle: LM.dls.g_ok) { _ in
-                self.userNameTextField.becomeFirstResponder()
-            }
-            return
-        }
-        let parameter = UpdateUserAPI.Parameters.init(uid: (imUser?.uID)! , nickName: userName, introduction: imUser?.introduction ?? "")
-        self.hud.startAnimating(inView: view)
-
-        Server.instance.updateUserData(parameters: parameter).asObservable().subscribe(onNext: { [weak self] (result) in
-            guard let `self` = self else {
-                return
-            }
-            self.hud.stopAnimating()
-            switch result {
-            case .success(_):
-                self.imUser?.nickName = self.userNameTextField.text!
-                LocalIMUser.updateLocalIMUser()
-                if self.navigationController?.viewControllers.count ?? 0 > 1 {
-                    self.navigationController?.popViewController(animated: true)
-                }else {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            case .failed(error: let error):
-                print("error %@", error)
-            }
-        }).disposed(by: bag)
+        self.viewModel.updateUserName()
     }
     
     func setRecoveryPassword() {
-        
         self.getRecoveryPasswordFromUser().subscribe(onSuccess: { password in
-            guard let id = IMUserManager.manager.userModel.value?.uID else { return }
-            self.hud.startAnimating(inView: self.view)
-            Server.instance.setRecoveryPassword(withIMUserId: id, recoveryPassword: password).asObservable().subscribe(onNext: {
-                [weak self] result in
-                guard let `self` = self else { return }
-                self.hud.stopAnimating()
-                switch result {
-                case .success:
-                    DLogDebug("set recovery key successful.")
-                    EZToast.present(on: self, content: LM.dls.chat_recovery_password_successful)
-                case .failed(error: let error):
-                    DLogError(error)
-                    EZToast.present(on: self, content: error.descString)
-                }
-            }).disposed(by:self.bag)
+            self.viewModel.setRecoveryPassword(password: password)
         }).disposed(by: bag)
     }
     
@@ -450,9 +406,11 @@ extension UIImage {
 
 extension ProfileViewController :UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == idTextField {
+        switch textField  {
+        case idTextField, accountNameTextfield:
             return false
+        default:
+            return true
         }
-        return true
     }
 }

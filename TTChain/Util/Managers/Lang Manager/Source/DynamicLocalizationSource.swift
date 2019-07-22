@@ -755,4 +755,9 @@ protocol DynamicLocalizationSource {
     var sign_in_using_mnemonic_title: String {get set}
     
     var sign_in_mnemonic_subtitle: String {get set}
+    
+    var new_wallet_created_msg: String {get set}
+    
+    var new_wallet_imported_msg: String {get set}
+     var wallet_import_success_subtitle_msg: String {get set}
 }

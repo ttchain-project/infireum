@@ -251,8 +251,8 @@ struct DLS_ZH_CN: DLS {
     var importWallet_privateKey_import_guc_wallet = "导入GUC钱包"
     func importWallet_privateKey_import_general_wallet(_ args: String...) -> String { return String.init(format: "导入%@钱包", arguments: args) }
     var importWallet_privateKey_error_import = "导入失败"
-    var importWallet_privateKey_label_desc_private_key = "复制粘贴 PrivateKey 文件内容至输入框。或通过扫描 Private Key 内容生成的二维码录入。"
-    var importWallet_privateKey_placeholder_hint_fill_in_private_key = "输入明文私钥"
+    var importWallet_privateKey_label_desc_private_key = "请输入私钥 或 使用行动条码扫描"
+    var importWallet_privateKey_placeholder_hint_fill_in_private_key = "输入私钥"
     var importWallet_privateKey_hud_importing = "导入中..."
     var importWallet_privateKey_hud_imported = "导入成功"
     var importWallet_privateKey_label_setPwd = "设置密码"
@@ -528,7 +528,7 @@ struct DLS_ZH_CN: DLS {
     var group_member = "群组成员"
     var manage_currency = "管理币种"
 
-    var create_new_wallet = "新增钱包"
+    var create_new_wallet = "创建新钱包"
     var create_new_wallet_desc = "选择新增钱包，将使用助记词产生新的钱包地址。"
     var create_new_btc_wallet = "新增BTC钱包"
     var create_new_eth_wallet = "新增ETH钱包"
@@ -777,5 +777,9 @@ struct DLS_ZH_CN: DLS {
     var sign_in_using_mnemonic_title = "使用《助记词》登入帐号"
     
     var sign_in_mnemonic_subtitle = "输入中文助记词，共 12 个中文字"
+    
+    var new_wallet_created_msg = "已创建新钱包"
+    var wallet_import_success_subtitle_msg = "您可以开始使用此钱包功能"
+    var new_wallet_imported_msg = "已成功导入钱包"
 }
 

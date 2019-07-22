@@ -15,10 +15,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     var viewModel: UserProfileViewModel!
     func config(constructor: UserProfileViewController.Config) {
         view.layoutIfNeeded()
-        viewModel = ViewModel.init(
-            input: (),
-            output: ()
-        )
+        viewModel = UserProfileViewModel.init(input: UserProfileViewModel.InputSource(), output: UserProfileViewModel.OutputSource())
         
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
@@ -31,10 +28,20 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         changeUserInterface(purpose: purpose)
         
         self.sendRequestButton.rx.klrx_tap.asDriver().drive(onNext: { _ in
-           self.showStep1AlertDialog()
+            if self.purpose == .friendRequest {
+                self.acceptFriendRequest()
+            }else {
+                self.showStep1AlertDialog()
+            }
+
+        }).disposed(by: bag)
+        
+        self.rejectRequest.rx.klrx_tap.asDriver().drive(onNext: { _ in
+            self.rejectFriendRequest()
         }).disposed(by: bag)
         
         self.userIconImageView.cornerRadius = userIconImageView.height/2
+        bindViewModel()
     }
     
     typealias ViewModel = UserProfileViewModel
@@ -43,6 +50,16 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     private var setRecoverBag = DisposeBag()
     
     let blockStatusChanged: PublishSubject<Bool> = PublishSubject.init()
+   
+    private lazy var hud = {
+        return KLHUD.init(
+            type: .spinner,
+            frame: CGRect.init(
+                origin: .zero,
+                size: .init(width: 100, height: 100)
+            )
+        )
+    }()
     
     var user: FriendModel? = nil {
         didSet {
@@ -59,7 +76,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
                     switch result {
                     case .failed(error: _): return
                     case .success(let value):
-                        guard let url = URL.init(string: value.headImg) else {
+                        guard URL.init(string: value.headImg) != nil else {
                             return
                         }
                         self.userIconImageView.setProfileImage(image: value.headImg, tempName: value.nickName)
@@ -92,17 +109,13 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         case myself
         case myFriend
         case notMyFriend
+        case friendRequest
     }
-    
     
     typealias Constructor = Config
     
-    
-    
-    
     @IBOutlet weak var userIconImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var editUserNameButton: UIButton!
     @IBOutlet weak var userIdView: UIView!
     @IBOutlet weak var userIdLabel: UILabel!
     @IBOutlet weak var copyUserIdButton: UIButton! {
@@ -144,14 +157,11 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     
     
     @IBOutlet weak var sendRequestButton: UIButton!
-
-    
+    @IBOutlet weak var rejectRequest: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -197,25 +207,24 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     }
     
     func changeUserInterface(purpose: Purpose) {
+        rejectRequest.isHidden  = true
+        blockUserView.isHidden      = true
+        sendRequestButton.isHidden  = true
+        logoutView.isHidden         = true
+
         switch purpose {
         case .myself:
-            blockUserView.isHidden      = true
             logoutView.isHidden         = false
-            sendRequestButton.isHidden  = true
-//            editUserNameButton.isHidden = false
-            break
         case .myFriend:
             blockUserView.isHidden      = false
             logoutView.isHidden         = true
-            sendRequestButton.isHidden  = true
-//            editUserNameButton.isHidden = true
-            break
         case .notMyFriend:
-            blockUserView.isHidden      = true
-            logoutView.isHidden         = true
             sendRequestButton.isHidden  = false
-//            editUserNameButton.isHidden = true
-            break
+        case .friendRequest:
+            sendRequestButton.isHidden  = false
+            rejectRequest.isHidden  = false
+            sendRequestButton.backgroundColor = UIColor.init(hexString: "33A6B8")
+            rejectRequest.backgroundColor = UIColor.init(hexString: "E85461")
         }
     }
     
@@ -225,6 +234,7 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         sendRequestButton.setTitle(dls.user_profile_button_add_friend, for: .normal)
         blockUserLabel.text = dls.user_profile_block_user
         logoutIMLabel.text = dls.user_profile_transfer_account
+        rejectRequest.setTitle(dls.reject_request, for: .normal)
     }
     
     @objc func backButtonTapped() {
@@ -259,6 +269,21 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         present(alertController, animated: true, completion: nil)
     }
     
+    func bindViewModel() {
+        self.viewModel.output.messageSubject.bind(to:self.rx.message).disposed(by: bag)
+        self.viewModel.output.animateSubject.subscribe(onNext:{ status in
+            if status {
+                self.hud.startAnimating(inView: self.view)
+            }else {
+                self.hud.stopAnimating()
+            }
+        }).disposed(by: bag)
+        
+        self.viewModel.output.friendRequestDoneSubject.subscribe(onNext:{
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }).disposed(by: bag)
+    }
+    
     func showStep1AlertDialog() {
         let alertController = UIAlertController.init(title: LM.dls.add_friend_alert_title, message: LM.dls.add_friend_alert_message, preferredStyle: .alert)
         
@@ -278,17 +303,15 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
     }
     
     func showStep2AlertDialog(rocketChatUID: String, welcomeMessage: String) {
-        guard let myselfRocketChatUID = RocketChatManager.manager.rocketChatUser.value?.name else { return }
-        IMUserManager.manager.inviteFriend(myselfRocketChatUID: myselfRocketChatUID, friendRocketChatUID: rocketChatUID, welcomeMessage: welcomeMessage).asObservable().subscribe(onNext: {
-            [weak self] result in
-            guard let `self` = self else { return }
-            switch result {
-            case .success: self.showAlert(title: LM.dls.add_friend_alert_success, message: nil, completion: {  (_) in
-            })
-            case .failed(error: let error):
-                
-                EZToast.present(on: self, content: error.descString)
-            }
-        }).disposed(by: bag)
+        self.viewModel.sendFriendRequest(rocketChatUID: rocketChatUID, welcomeMessage: welcomeMessage)
+    }
+    
+    func acceptFriendRequest() {
+        self.viewModel.handleFriendRequest(withStatus: true, forModel: self.user! )
+    }
+    
+    func rejectFriendRequest() {
+        self.viewModel.handleFriendRequest(withStatus: false, forModel: self.user! )
+
     }
 }

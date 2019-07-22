@@ -16,9 +16,9 @@
                 <outlet property="blockUserSwitch" destination="rY8-Y5-Mf2" id="8je-rE-Ega"/>
                 <outlet property="blockUserView" destination="dVc-vF-mDy" id="XlQ-mY-Txu"/>
                 <outlet property="copyUserIdButton" destination="hGG-FY-ecA" id="dhQ-a1-Z0j"/>
-                <outlet property="editUserNameButton" destination="4Af-Qk-9J6" id="j7h-td-Lg9"/>
                 <outlet property="logoutIMLabel" destination="fXO-K2-wbH" id="VRA-y3-qMA"/>
                 <outlet property="logoutView" destination="scg-Gm-OT0" id="bSH-Tl-Ond"/>
+                <outlet property="rejectRequest" destination="PuA-9F-f5z" id="8TT-LM-j1W"/>
                 <outlet property="relationShipTiitleLabel" destination="4cK-If-DmA" id="C6J-b9-UHn"/>
                 <outlet property="sendRequestButton" destination="377-1R-ul6" id="pRn-rR-XeY"/>
                 <outlet property="userIconImageView" destination="oek-Tw-knX" id="9V9-Uq-t8e"/>
@@ -54,22 +54,14 @@
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5n-QQ-8DK">
-                            <rect key="frame" x="143.5" y="117" width="88.5" height="36"/>
+                            <rect key="frame" x="143.5" y="138.5" width="88.5" height="14.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="userNameLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTn-C1-xsh">
-                                    <rect key="frame" x="0.0" y="0.0" width="88.5" height="36"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="88.5" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Af-Qk-9J6">
-                                    <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="36" id="HCz-Pd-SWN"/>
-                                        <constraint firstAttribute="width" secondItem="4Af-Qk-9J6" secondAttribute="height" multiplier="1:1" id="oAB-oB-QYQ"/>
-                                    </constraints>
-                                    <state key="normal" image="tt_icon_edit"/>
-                                </button>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -90,7 +82,7 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLx-4t-hpO">
-                    <rect key="frame" x="18" y="198" width="339" height="469"/>
+                    <rect key="frame" x="18" y="198" width="339" height="407"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wV7-jy-YMt">
                             <rect key="frame" x="0.0" y="0.0" width="339" height="196"/>
@@ -254,28 +246,52 @@
                         <constraint firstAttribute="trailing" secondItem="wV7-jy-YMt" secondAttribute="trailing" id="cmR-px-biY"/>
                     </constraints>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="377-1R-ul6">
-                    <rect key="frame" x="0.0" y="625" width="375" height="42"/>
-                    <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="42" id="p2e-3y-3Pj"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="添加好友"/>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6lz-G5-mMr">
+                    <rect key="frame" x="20" y="605" width="335" height="42"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="377-1R-ul6">
+                            <rect key="frame" x="0.0" y="0.0" width="157.5" height="42"/>
+                            <color key="backgroundColor" red="0.062745098039215685" green="0.55686274509803924" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="p2e-3y-3Pj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="添加好友"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="22"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuA-9F-f5z">
+                            <rect key="frame" x="177.5" y="0.0" width="157.5" height="42"/>
+                            <color key="backgroundColor" red="0.062745098040000002" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="TA3-1l-6yU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="添加好友"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="22"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QLx-4t-hpO" secondAttribute="bottom" id="56V-fZ-IlQ"/>
+                <constraint firstItem="6lz-G5-mMr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="3qq-i0-WmK"/>
                 <constraint firstItem="Aew-Re-dAy" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="6NJ-V2-KcH"/>
-                <constraint firstItem="377-1R-ul6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7Ka-yr-JvH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6lz-G5-mMr" secondAttribute="trailing" constant="20" id="8Qp-8n-gyS"/>
                 <constraint firstItem="Aew-Re-dAy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="M1a-bX-eWQ"/>
                 <constraint firstItem="QLx-4t-hpO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="18" id="U6e-8m-hrK"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="377-1R-ul6" secondAttribute="bottom" id="V1A-WJ-KCy"/>
-                <constraint firstItem="377-1R-ul6" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="VbC-Lw-SA1"/>
+                <constraint firstItem="6lz-G5-mMr" firstAttribute="top" secondItem="QLx-4t-hpO" secondAttribute="bottom" id="gen-7e-t0D"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QLx-4t-hpO" secondAttribute="trailing" constant="18" id="i16-3E-BuY"/>
                 <constraint firstItem="QLx-4t-hpO" firstAttribute="top" secondItem="Aew-Re-dAy" secondAttribute="bottom" constant="16" id="odZ-Ca-QIb"/>
                 <constraint firstItem="Aew-Re-dAy" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="tlq-1k-TcI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6lz-G5-mMr" secondAttribute="bottom" constant="20" id="zsb-UG-XVR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="140" y="154.27286356821591"/>
@@ -285,7 +301,6 @@
         <image name="Copy" width="36" height="36"/>
         <image name="arrowNavBlue" width="9" height="15.5"/>
         <image name="iconAvatarBorder180" width="90" height="90"/>
-        <image name="tt_icon_edit" width="64" height="64"/>
         <image name="userAvatarDefault01180" width="90" height="90"/>
     </resources>
 </document>

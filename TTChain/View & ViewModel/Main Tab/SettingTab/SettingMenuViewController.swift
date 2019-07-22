@@ -79,6 +79,11 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
             view.edges == sup.edges
         }
         tableView.tableHeaderView = base
+        
+        settingTableHeader.settingButton.rx.klrx_tap.drive(onNext:{ [weak self] in
+            let vc = ProfileViewController.instance(from: ProfileViewController.Constructor(purpose: ProfileViewController.Purpose.SettingProfile))
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: settingTableHeader.bag)
     }
     
     

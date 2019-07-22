@@ -798,5 +798,11 @@ struct DLS_EN_US: DLS {
     var sign_in_using_mnemonic_title = "Login account using Mnemonics"
     
     var sign_in_mnemonic_subtitle = "Enter Chinese mnemonic, a total of 12 Chinese characters"
+    
+    var new_wallet_created_msg = "New wallet created"
+    
+    var new_wallet_imported_msg = "The wallet has been successfully imported"
+    var wallet_import_success_subtitle_msg = "You can start using this wallet feature"
+
 }
 

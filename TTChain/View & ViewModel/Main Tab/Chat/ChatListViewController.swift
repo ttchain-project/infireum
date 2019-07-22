@@ -327,7 +327,7 @@ final class ChatListViewController: KLModuleViewController, KLVMVC {
     }
     
     func toEditProfile() {
-        let viewController = ProfileViewController.instance()
+        let viewController = ProfileViewController.instance(from: ProfileViewController.Constructor(purpose: ProfileViewController.Purpose.IMProfile))
         self.show(viewController, sender: nil)
     }
     

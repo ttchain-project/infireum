@@ -98,7 +98,7 @@ class IMUserManager {
             case .success(let userData):
                 DLogInfo(userData)
                 let userModel = IMUser.init(uID: uID, nickName: userData.nickName, introduction: userData.introduction, headImg: userData.headImg)
-                self.userModel = BehaviorRelay.init(value: userModel)
+                self.userModel.accept(userModel)
                 self.shouldLoginToRocketChat.onNext(())
                 self.userLoginStatus.accept(.userExists)
                 self.saveIMUser()
@@ -153,7 +153,7 @@ class IMUserManager {
                     handle(false)
                 case .userExists:
                     let userModel = IMUser.init(uID: model.uID, nickName: user.name ?? "", introduction: "", headImg: nil)
-                    self.userModel = BehaviorRelay.init(value: userModel)
+                    self.userModel.accept(userModel)
                     self.shouldLoginToRocketChat.onNext(())
                     self.saveIMUser()
                     handle(true)

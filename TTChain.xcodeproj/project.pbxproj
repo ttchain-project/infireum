@@ -260,6 +260,21 @@
 		5558B0B822DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */; };
 		5558B0B922DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */; };
 		5558B0BA22DDA77E007C7C1E /* RestoreMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */; };
+		5558B0BE22DF30F0007C7C1E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0BD22DF30F0007C7C1E /* ProfileViewModel.swift */; };
+		5558B0BF22DF30F0007C7C1E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0BD22DF30F0007C7C1E /* ProfileViewModel.swift */; };
+		5558B0C022DF30F0007C7C1E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0BD22DF30F0007C7C1E /* ProfileViewModel.swift */; };
+		5558B0C322E06546007C7C1E /* SuccessWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0C122E06546007C7C1E /* SuccessWalletViewController.swift */; };
+		5558B0C422E06546007C7C1E /* SuccessWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0C122E06546007C7C1E /* SuccessWalletViewController.swift */; };
+		5558B0C522E06546007C7C1E /* SuccessWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0C122E06546007C7C1E /* SuccessWalletViewController.swift */; };
+		5558B0C622E06546007C7C1E /* SuccessWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0C222E06546007C7C1E /* SuccessWalletViewController.xib */; };
+		5558B0C722E06546007C7C1E /* SuccessWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0C222E06546007C7C1E /* SuccessWalletViewController.xib */; };
+		5558B0C822E06546007C7C1E /* SuccessWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0C222E06546007C7C1E /* SuccessWalletViewController.xib */; };
+		5558B0CC22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0CA22E07C27007C7C1E /* SkipBackupWarningViewController.swift */; };
+		5558B0CD22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0CA22E07C27007C7C1E /* SkipBackupWarningViewController.swift */; };
+		5558B0CE22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5558B0CA22E07C27007C7C1E /* SkipBackupWarningViewController.swift */; };
+		5558B0CF22E07C27007C7C1E /* SkipBackupWarningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0CB22E07C27007C7C1E /* SkipBackupWarningViewController.xib */; };
+		5558B0D022E07C27007C7C1E /* SkipBackupWarningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0CB22E07C27007C7C1E /* SkipBackupWarningViewController.xib */; };
+		5558B0D122E07C27007C7C1E /* SkipBackupWarningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5558B0CB22E07C27007C7C1E /* SkipBackupWarningViewController.xib */; };
 		5559CADB228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADC228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
 		5559CADD228E688300D37895 /* SignETHTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559CADA228E688300D37895 /* SignETHTransaction.swift */; };
@@ -2393,6 +2408,11 @@
 		5558B0AF22DD89F5007C7C1E /* RestoreMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreMnemonicViewController.swift; sourceTree = "<group>"; };
 		5558B0B022DD89F5007C7C1E /* RestoreMnemonicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestoreMnemonicViewController.xib; sourceTree = "<group>"; };
 		5558B0B722DDA77E007C7C1E /* RestoreMnemonicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreMnemonicViewModel.swift; sourceTree = "<group>"; };
+		5558B0BD22DF30F0007C7C1E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		5558B0C122E06546007C7C1E /* SuccessWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessWalletViewController.swift; sourceTree = "<group>"; };
+		5558B0C222E06546007C7C1E /* SuccessWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessWalletViewController.xib; sourceTree = "<group>"; };
+		5558B0CA22E07C27007C7C1E /* SkipBackupWarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipBackupWarningViewController.swift; sourceTree = "<group>"; };
+		5558B0CB22E07C27007C7C1E /* SkipBackupWarningViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SkipBackupWarningViewController.xib; sourceTree = "<group>"; };
 		5559CADA228E688300D37895 /* SignETHTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignETHTransaction.swift; sourceTree = "<group>"; };
 		555A45AC22057F35004A713A /* ChatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewController.swift; sourceTree = "<group>"; };
 		555A45AD22057F35004A713A /* ChatImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageViewController.xib; sourceTree = "<group>"; };
@@ -3234,6 +3254,7 @@
 		550873E021E49713007B3B3B /* SettingTab */ = {
 			isa = PBXGroup;
 			children = (
+				5558B0BB22DF1937007C7C1E /* SettingProfile */,
 				550873E921E49783007B3B3B /* ViewModel */,
 				550873E121E49753007B3B3B /* SettingMenuViewController.swift */,
 				550873E221E49753007B3B3B /* SettingMenuViewController.xib */,
@@ -3635,6 +3656,32 @@
 			path = RestoreMnemonic;
 			sourceTree = "<group>";
 		};
+		5558B0BB22DF1937007C7C1E /* SettingProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingProfile;
+			sourceTree = "<group>";
+		};
+		5558B0BC22DF309D007C7C1E /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				5568384921F5A8460006892C /* ProfileViewController.swift */,
+				5568384A21F5A8460006892C /* ProfileViewController.xib */,
+				5558B0BD22DF30F0007C7C1E /* ProfileViewModel.swift */,
+			);
+			path = MyProfile;
+			sourceTree = "<group>";
+		};
+		5558B0C922E07C05007C7C1E /* SkipBackupWarning */ = {
+			isa = PBXGroup;
+			children = (
+				5558B0CA22E07C27007C7C1E /* SkipBackupWarningViewController.swift */,
+				5558B0CB22E07C27007C7C1E /* SkipBackupWarningViewController.xib */,
+			);
+			path = SkipBackupWarning;
+			sourceTree = "<group>";
+		};
 		5559CAD9228E686600D37895 /* SignETHTransaction */ = {
 			isa = PBXGroup;
 			children = (
@@ -3746,11 +3793,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		555EA56C22DC50E7000C81EE /* CreateWallet */ = {
+		555EA56C22DC50E7000C81EE /* SuccessView */ = {
 			isa = PBXGroup;
 			children = (
+				5558B0C122E06546007C7C1E /* SuccessWalletViewController.swift */,
+				5558B0C222E06546007C7C1E /* SuccessWalletViewController.xib */,
 			);
-			path = CreateWallet;
+			path = SuccessView;
 			sourceTree = "<group>";
 		};
 		5565064A22B24F210042EFC4 /* WalletHeaderViewController */ = {
@@ -4478,8 +4527,7 @@
 				55EF6A3521A812C6007E074A /* UserProfileViewController.swift */,
 				55EF6A3621A812C6007E074A /* UserProfileViewController.xib */,
 				55EF6A3721A812C6007E074A /* ViewModel */,
-				5568384921F5A8460006892C /* ProfileViewController.swift */,
-				5568384A21F5A8460006892C /* ProfileViewController.xib */,
+				5558B0BC22DF309D007C7C1E /* MyProfile */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -5946,6 +5994,7 @@
 		6485002C20D9FEC300107473 /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				5558B0C922E07C05007C7C1E /* SkipBackupWarning */,
 				55F5A7F422D878BB00C35879 /* PrivacyPolicyVC */,
 				55F5A7E722D6E14800C35879 /* BackupWallet */,
 				6485003220DA006900107473 /* IdentityCreateViewController.swift */,
@@ -6002,7 +6051,7 @@
 		649E482F20E7CE7C00B217AD /* Change Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				555EA56C22DC50E7000C81EE /* CreateWallet */,
+				555EA56C22DC50E7000C81EE /* SuccessView */,
 				55A583DC22CA0F330025809B /* AddWallet */,
 				649E483D20E7D90600B217AD /* Table */,
 				649E483020E7CED900B217AD /* ChangeWalletViewController.swift */,
@@ -7194,6 +7243,7 @@
 				550873F521E49FC1007B3B3B /* SettingMenuCollectionViewCell.xib in Resources */,
 				5537F099226D9D0C0058B98D /* ringtone.wav in Resources */,
 				555E4AF3224CEC8100C7CAD5 /* ReceiveRedEnvelopeHistoryViewController.xib in Resources */,
+				5558B0D122E07C27007C7C1E /* SkipBackupWarningViewController.xib in Resources */,
 				649E484920E7D96000B217AD /* ChangeWalletTableViewCell.xib in Resources */,
 				55CF240322C481C50012CC35 /* ExploreShortcutCollectionViewCell.xib in Resources */,
 				640D890D20EF5FA10010D986 /* TransRecordListTableViewCell.xib in Resources */,
@@ -7294,6 +7344,7 @@
 				55F5A7EF22D6E16800C35879 /* BackupWalletViewController.xib in Resources */,
 				5508741D21ED871E007B3B3B /* CoinMarketCollectionViewCell.xib in Resources */,
 				55A3D2862272FC33002ABE13 /* LightWithdrawalAddressViewController.xib in Resources */,
+				5558B0C822E06546007C7C1E /* SuccessWalletViewController.xib in Resources */,
 				55EF6AFE21A812C7007E074A /* ChatGroupListViewController.xib in Resources */,
 				640D890420EF5F860010D986 /* TransRecordListViewController.xib in Resources */,
 				5569803C2188566F00346757 /* TTChain_PRD-Info.plist in Resources */,
@@ -7385,6 +7436,7 @@
 				640D88C220EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
 				64C9D47220FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				64C9D46A20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
+				5558B0C622E06546007C7C1E /* SuccessWalletViewController.xib in Resources */,
 				556D4DCD22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */,
 				55A583E222CA0F4D0025809B /* AddWalletViewController.xib in Resources */,
 				55A3D27222729EBC002ABE13 /* LightTransferViewController.xib in Resources */,
@@ -7465,6 +7517,7 @@
 				6481397020DA496000CAA4D8 /* OWMnemonicWordCollectionViewCell.xib in Resources */,
 				55EF6A5421A812C6007E074A /* ChatViewController.xib in Resources */,
 				5508741321EC3291007B3B3B /* BannerCollectionViewCell.xib in Resources */,
+				5558B0CF22E07C27007C7C1E /* SkipBackupWarningViewController.xib in Resources */,
 				6470D68A20F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.xib in Resources */,
 				55F5A7FA22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */,
 				55D7D1BA2238B02E00309A22 /* IncomingCallViewController.xib in Resources */,
@@ -7586,6 +7639,7 @@
 				640D88C320EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.xib in Resources */,
 				64C9D47320FDDFAA000B0774 /* CreatetABUnitAddressViewController.xib in Resources */,
 				64C9D46B20FDDE78000B0774 /* EditABUnitViewController.xib in Resources */,
+				5558B0C722E06546007C7C1E /* SuccessWalletViewController.xib in Resources */,
 				556D4DCE22D444F000EF5D03 /* GroupMembersViewController.xib in Resources */,
 				55A583E322CA0F4D0025809B /* AddWalletViewController.xib in Resources */,
 				55A3D27322729EBC002ABE13 /* LightTransferViewController.xib in Resources */,
@@ -7666,6 +7720,7 @@
 				6481397120DA496000CAA4D8 /* OWMnemonicWordCollectionViewCell.xib in Resources */,
 				55EF6A5521A812C6007E074A /* ChatViewController.xib in Resources */,
 				5508741421EC3291007B3B3B /* BannerCollectionViewCell.xib in Resources */,
+				5558B0D022E07C27007C7C1E /* SkipBackupWarningViewController.xib in Resources */,
 				6470D68B20F3324300EB0780 /* WithdrawalConfirmChangeWalletTableViewCell.xib in Resources */,
 				55F5A7FB22D8796B00C35879 /* PrivacyPolicyViewController.xib in Resources */,
 				55D7D1BB2238B02E00309A22 /* IncomingCallViewController.xib in Resources */,
@@ -8243,6 +8298,7 @@
 				64813A3920DCA6EE00CAA4D8 /* SubAddress+CoreDataClass.swift in Sources */,
 				55A3D28C22730A32002ABE13 /* LightWithdrawalFeeViewController.swift in Sources */,
 				5539A49321676F8C00A59ACC /* IdentityQRCodeImportInfoFillUpViewModel.swift in Sources */,
+				5558B0C522E06546007C7C1E /* SuccessWalletViewController.swift in Sources */,
 				55EF6B3521A81516007E074A /* RocketChatManager.swift in Sources */,
 				55089BC822795032002E4682 /* TTNTx.swift in Sources */,
 				64F07DFC20D241A000A60C5C /* UIImage+ColorRendering.swift in Sources */,
@@ -8412,6 +8468,7 @@
 				6446E24520FCE40A00EC1E2E /* ChangePrefFiatViewModel.swift in Sources */,
 				64F07E0820D241A000A60C5C /* NSObject+NameOfClass.swift in Sources */,
 				64D8263020DFA0BB00C8FC63 /* WalletRefreshControl.swift in Sources */,
+				5558B0C022DF30F0007C7C1E /* ProfileViewModel.swift in Sources */,
 				6470D61120F091C400EB0780 /* WithdrawalBaseViewModel.swift in Sources */,
 				64813A8420DCAE0100CAA4D8 /* Wallet+Helper.swift in Sources */,
 				6424B67D20F5B98A00AEBCAD /* TransferRecordWalletOptionViewModel.swift in Sources */,
@@ -8665,6 +8722,7 @@
 				55EF6B8121A81D43007E074A /* Any+RxLangRespondable.swift in Sources */,
 				55EF6B8421A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4421A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
+				5558B0CE22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */,
 				559C4F18222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				5565065C22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
 				64F07E7420D36AFE00A60C5C /* IdentitySetupViewController.swift in Sources */,
@@ -8801,6 +8859,7 @@
 				64CDE1A0213E50ED00105BFB /* MigrationPolicy_1_0_0To1_0_4.swift in Sources */,
 				55A3D28A22730A32002ABE13 /* LightWithdrawalFeeViewController.swift in Sources */,
 				64813AA220DCB18F00CAA4D8 /* Asset+CoreDataProperties.swift in Sources */,
+				5558B0C322E06546007C7C1E /* SuccessWalletViewController.swift in Sources */,
 				64D826C120E3E53600C8FC63 /* Identity+CoreDataProperties.swift in Sources */,
 				55089BC622795032002E4682 /* TTNTx.swift in Sources */,
 				55EF6B3321A81516007E074A /* RocketChatManager.swift in Sources */,
@@ -8970,6 +9029,7 @@
 				640D891020EF62C40010D986 /* BlockExplorerURLCreator.swift in Sources */,
 				648139B020DB5E4000CAA4D8 /* IdentityRestoreViewController.swift in Sources */,
 				6424B69020F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.swift in Sources */,
+				5558B0BE22DF30F0007C7C1E /* ProfileViewModel.swift in Sources */,
 				6446E24320FCE40A00EC1E2E /* ChangePrefFiatViewModel.swift in Sources */,
 				6470D61420F0E01B00EB0780 /* WithdrawalAddressViewModel.swift in Sources */,
 				64B2772720D7F04B004FF75B /* KLMoyaAPIBase.swift in Sources */,
@@ -9223,6 +9283,7 @@
 				55EF6B7F21A81D43007E074A /* Any+RxLangRespondable.swift in Sources */,
 				55EF6B8221A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4221A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
+				5558B0CC22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */,
 				559C4F16222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				5565065A22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
 				64B98EE020FA03BE00C4EB11 /* LightningTransRecordTableViewCell.swift in Sources */,
@@ -9352,6 +9413,7 @@
 				64D8267D20E339C200C8FC63 /* OfflineWallet.xcdatamodeld in Sources */,
 				55A3D28B22730A32002ABE13 /* LightWithdrawalFeeViewController.swift in Sources */,
 				649E48C220ECF42600B217AD /* WalletPKeyQRCodeViewModel.swift in Sources */,
+				5558B0C422E06546007C7C1E /* SuccessWalletViewController.swift in Sources */,
 				55EF6B3421A81516007E074A /* RocketChatManager.swift in Sources */,
 				55089BC722795032002E4682 /* TTNTx.swift in Sources */,
 				6470D6A120F3550700EB0780 /* WithdrawalETHFeeInputViewController.swift in Sources */,
@@ -9521,6 +9583,7 @@
 				64D826D620E4CFD500C8FC63 /* SearchAssetTableViewCell.swift in Sources */,
 				64B2772820D7F04B004FF75B /* KLMoyaAPIBase.swift in Sources */,
 				6424B69120F5CF9E00AEBCAD /* TransferRecordStatusOptionViewController.swift in Sources */,
+				5558B0BF22DF30F0007C7C1E /* ProfileViewModel.swift in Sources */,
 				6446E24420FCE40A00EC1E2E /* ChangePrefFiatViewModel.swift in Sources */,
 				64F07DE920D241A000A60C5C /* UIImage+Sizing.swift in Sources */,
 				64813A9320DCAFCE00CAA4D8 /* KLDebugHelper.swift in Sources */,
@@ -9774,6 +9837,7 @@
 				55EF6B8021A81D43007E074A /* Any+RxLangRespondable.swift in Sources */,
 				55EF6B8321A81D43007E074A /* LangManager.swift in Sources */,
 				55EF6A4321A812C6007E074A /* ChatMessageTableViewCell.swift in Sources */,
+				5558B0CD22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */,
 				559C4F17222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				5565065B22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
 				64813A6B20DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataProperties.swift in Sources */,

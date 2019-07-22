@@ -117,7 +117,7 @@ final class ChatContainerViewController: KLModuleViewController,KLVMVC {
         }).disposed(by: bag)
         
         self.profileButton.rx.klrx_tap.drive(onNext:{[unowned self] _ in
-            let viewController = ProfileViewController.navInstance()
+            let viewController = ProfileViewController.navInstance(from: ProfileViewController.Constructor(purpose: ProfileViewController.Purpose.IMProfile))
             self.navigationController?.present(viewController, animated: true, completion: nil)
         }).disposed(by: bag)
     }

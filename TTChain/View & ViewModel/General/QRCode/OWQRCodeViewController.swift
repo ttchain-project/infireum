@@ -425,7 +425,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
             NSAttributedStringKey.font : UIFont.owDemiBold(size: 20)
         ]
         
-        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "arrowNavWhite"))
+        changeLeftBarButtonToDismissToRoot(tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
         
         introLabel.set(
             textColor: theme.palette.specific(color: .owWhite), font: UIFont.owMedium(size: 15)

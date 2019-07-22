@@ -11,16 +11,16 @@ import RxSwift
 import RxCocoa
 
 final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLVMVC {
-    
+    enum Purpose {
+        case `import`
+        case create
+    }
     struct Config {
         let mainCoinID: String
         /// The Private Key (might be scanned from QRCode)
         let defaultPKey: String?
         let purpose:Purpose?
-        enum Purpose {
-            case `import`
-            case create
-        }
+        
     }
     
     typealias Constructor = Config
@@ -77,7 +77,7 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         )
     }()
     
-    var purpose: Constructor.Purpose!
+    var purpose: Purpose!
     
     func config(constructor: Config) {
         view.layoutIfNeeded()
@@ -102,14 +102,14 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
                 onStartImportWallet: {
                     [weak self] in
                     guard let wSelf = self else { return }
-                    wSelf.hud.startAnimating(inView: wSelf.navigationController!.view)
+                    wSelf.hud.startAnimating(inView: wSelf.view)
                     
                 },
                 onFinishImportWallet: {
                     [weak self] in
                     guard let wSelf = self else { return }
-                    wSelf.notifyUserQRCodeUpdated()
                     wSelf.hud.stopAnimating()
+                    wSelf.showSuccessPopup()
                 },
                 
                 onFinishCheckingInputValidity: {
@@ -126,12 +126,19 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
                 }
             )
         )
-        
+
         self.viewModel.output.onErrorMessage.bind(to:self.rx.message).disposed(by:bag)
         bindUI()
         startMonitorNetworkStatusIfNeeded()
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
+    }
+    
+    func showSuccessPopup() {
+        let successPopup = SuccessWalletViewController.init(purpose: self.purpose) {
+            self.navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        }
+        self.present(successPopup, animated: false, completion: nil)
     }
     
     private func setupUI() {

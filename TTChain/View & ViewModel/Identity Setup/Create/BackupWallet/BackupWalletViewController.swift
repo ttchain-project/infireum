@@ -104,13 +104,14 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
         self.viewModel.output.errorMessageSubject.bind(to:self.rx.message).disposed(by: bag)
         
         self.skipButton.rx.klrx_tap.drive(onNext:{
-            self.showAlert(title: LM.dls.backup_skip_msg_title, message: LM.dls.back_up_skip_warning_msg, buttonTitles: [LM.dls.qrcodeExport_alert_btn_skip,LM.dls.g_cancel], completion: { (idx) in
-                if idx == 0 {
+            
+            let vc = SkipBackupWarningViewController.init(completion: { (status) in
+                self.dismiss(animated: false, completion: nil)
+                if !status {
                     self.toMainTab()
-                }else {
-                    self.startQRCodeBackupFlow()
                 }
             })
+            self.present(vc, animated: false, completion: nil)
         }).disposed(by: bag)
         
         self.confirmButton.rx.klrx_tap.drive(onNext:{

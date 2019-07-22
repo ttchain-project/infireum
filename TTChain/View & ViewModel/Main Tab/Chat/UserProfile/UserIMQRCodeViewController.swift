@@ -80,9 +80,8 @@ final class UserIMQRCodeViewController: KLModuleViewController, KLVMVC {
             let img = self.containerView.screenshot
             ImageSaver.saveImage(image: img!, onViewController: self).subscribe(onSuccess: nil, onError: nil).disposed(by: self.bag)
         }).disposed(by: bag)
-        if let imageURL = constructor.imageURL {
-            self.userImageView.setProfileImage(image: imageURL, tempName: constructor.groupTitle)
-        }
+        self.userImageView.setProfileImage(image: constructor.imageURL, tempName: constructor.groupTitle)
+        
         self.nameLabel.text = constructor.groupTitle
     }
     

@@ -252,8 +252,8 @@ struct DLS_ZH_TW: DLS {
     var importWallet_privateKey_import_guc_wallet = "導入GUC錢包"
     func importWallet_privateKey_import_general_wallet(_ args: String...) -> String { return String.init(format: "導入%@錢包", arguments: args) }
     var importWallet_privateKey_error_import = "導入失敗"
-    var importWallet_privateKey_label_desc_private_key = "複製粘貼 PrivateKey 文件內容至輸入框。或通過掃描 Private Key 內容生成的二維碼錄入。"
-    var importWallet_privateKey_placeholder_hint_fill_in_private_key = "輸入明文私鑰"
+    var importWallet_privateKey_label_desc_private_key = "請輸入私鑰 或 使用行動條碼掃描"
+    var importWallet_privateKey_placeholder_hint_fill_in_private_key = "輸入私鑰"
     var importWallet_privateKey_hud_importing = "導入中..."
     var importWallet_privateKey_hud_imported = "導入成功"
     var importWallet_privateKey_label_setPwd = "設置密碼"
@@ -534,7 +534,7 @@ struct DLS_ZH_TW: DLS {
     
     var manage_currency = "管理幣種"
     
-    var create_new_wallet = "新增錢包"
+    var create_new_wallet = "創建新錢包"
     var create_new_wallet_desc = "選擇新增錢包，將使用助記詞產生新的錢包地址。"
     var create_new_btc_wallet = "新增BTC錢包"
     var create_new_eth_wallet = "新增ETH錢包"
@@ -792,6 +792,9 @@ struct DLS_ZH_TW: DLS {
     var sign_in_using_mnemonic_title = "使用《助記詞》登入帳號"
     
     var sign_in_mnemonic_subtitle = "輸入中文助記詞，共 12 個中文字"
+    var new_wallet_created_msg = "已創建新錢包"
+    var wallet_import_success_subtitle_msg = "您可以開始使用此錢包功能"
+    var new_wallet_imported_msg = "已成功導入錢包"
 }
 
 
