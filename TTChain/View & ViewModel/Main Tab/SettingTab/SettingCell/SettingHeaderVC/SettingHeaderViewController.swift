@@ -27,7 +27,16 @@ final class SettingHeaderViewController: KLModuleViewController,KLVMVC {
         super.viewDidLoad()
     }
     
-    @IBOutlet weak var userName:UILabel!
+    @IBOutlet weak var userName:UILabel!{
+        didSet {
+            userName.isHidden = true
+        }
+    }
+    @IBOutlet weak var accountNameLabel: UILabel!{
+        didSet {
+            accountNameLabel.isHidden = true
+        }
+    }
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var userImageView: UIImageView!
     
@@ -36,6 +45,8 @@ final class SettingHeaderViewController: KLModuleViewController,KLVMVC {
     }
     override func renderTheme(_ theme: Theme) {
         self.userName.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 16))
+        self.accountNameLabel.set(textColor: theme.palette.label_main_2, font: .owMedium(size: 16))
+
     }
     
     func bindUI() {
@@ -43,11 +54,13 @@ final class SettingHeaderViewController: KLModuleViewController,KLVMVC {
             guard let user = user else {
                 return
             }
+            self.userName.text = user.nickName
+            self.userName.isHidden = false
             self.userImageView.setProfileImage(image: user.headImgUrl, tempName: user.nickName)
         }).disposed(by: bag)
 
-        self.userName.text = Identity.singleton?.name
-        
+        self.accountNameLabel.text = Identity.singleton?.name
+        accountNameLabel.isHidden = false
     }
     
 }

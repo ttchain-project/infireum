@@ -75,7 +75,7 @@ struct SettingSectionModel: SectionModelType{
     
     init(original: SettingSectionModel, items: [Item]) {
         self = original
-        self.categoryTitle = ""
+        self.categoryTitle = original.categoryTitle
         self.items = items
     }
     

@@ -293,8 +293,9 @@ final class ImportWalletViaPrivateKeyViewController: KLModuleViewController, KLV
         
         for field in fields {
             field.sepline.backgroundColor = theme.palette.sepline
-            field.textColor = theme.palette.input_text
-            field.placeHolderColor = theme.palette.input_placeholder
+//            field.textColor = theme.palette.input_text
+//            field.placeHolderColor = theme.palette.input_placeholder
+            field.set(textColor: theme.palette.input_text, font: UIFont.init(name: "PingFangSC-Medium", size: 20)!, placeHolderColor: theme.palette.input_placeholder)
         }
         
         for label in labels {

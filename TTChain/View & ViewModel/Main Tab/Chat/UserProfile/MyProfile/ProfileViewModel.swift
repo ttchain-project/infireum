@@ -62,6 +62,7 @@ class ProfileViewModel : KLRxViewModel {
             switch result {
             case .success(_):
                 self.imUser?.nickName = userName
+                IMUserManager.manager.userModel.accept(self.imUser)
                 LocalIMUser.updateLocalIMUser()
                 self.output.onUpdateComplete.onNext(())
             case .failed(error: let error):

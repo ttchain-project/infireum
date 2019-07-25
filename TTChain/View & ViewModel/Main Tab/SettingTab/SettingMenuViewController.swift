@@ -67,6 +67,14 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         // Do any additional setup after loading the view.
 
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     func configTableView() {
         tableView.register(cellType: SettingsTabTableViewCell.self)
         tableView.register(cellType: ExportWalletSettingsTableViewCell.self)
@@ -82,6 +90,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         
         settingTableHeader.settingButton.rx.klrx_tap.drive(onNext:{ [weak self] in
             let vc = ProfileViewController.instance(from: ProfileViewController.Constructor(purpose: ProfileViewController.Purpose.SettingProfile))
+            vc.hidesBottomBarWhenPushed = true
             self?.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: settingTableHeader.bag)
     }
@@ -90,7 +99,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     func bindTableView() {
 
         self.viewModel.settingsArray.bind(to: self.tableView.rx.items(dataSource: self.viewModel.dataSource)).disposed(by:bag)
-        
+        self.tableView.delegate = self
         tableView.rx.modelSelected(SettingType.self).subscribe(onNext: { (type) in
             switch type {
             case .Address:
@@ -113,6 +122,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
                 self.startCheckVersion()
             }
         }).disposed(by: bag)
+        
     }
     
     private func setUpLangSelectView() {
@@ -137,45 +147,9 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
         view.backgroundColor = palette.bgView_main
     }
     
-    func handleNavigation(model:MarketTestTabModel) {
-        guard let url = model.url else {
-            return
-        }
-        if url.scheme == "app" {
-            let key = url.absoluteString.replacingOccurrences(of: "app://", with: "")
-            switch key {
-            case "safety":
-                toExportWalletPKey()
-            case "notify":break
-            case "common_addr":
-                toAddressBook()
-            case "update":
-                startCheckVersion()
-            case "delete":
-                self.clear()
-            case "userQrCode":
-                self.backup()
-            case "currency":
-                self.toFiatSelectView()
-            case "language":
-                self.pickerResponder.becomeFirstResponder()
-            case "pin":break
-            case "agreement":
-                toAgreement(title: model.title, content: model.content)
-            case "about":
-                toAgreement(title: model.title, content: model.content)
-            case "help":
-                toAgreement(title: model.title, content: model.content)
-            case "suggestion":
-                sendMail()
-            default:
-                break
-            }
-        }
-    }
-    
     private func toFiatSelectView() {
         let vc = ChangePrefFiatViewController.instance(from: ChangePrefFiatViewController.Config(identity: Identity.singleton!))
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc)
     }
     
@@ -536,16 +510,27 @@ extension SettingMenuViewController: UIPickerViewDelegate,UIPickerViewDataSource
 
 extension SettingMenuViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.set(textColor: .yellowGreen, font: .owRegular(size: 12))
-        return header
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 45))
+        let label = UILabel(frame: CGRect(x: 18, y: 16, width: UIScreen.main.bounds.size.width - 36, height: 18))
+        label.set(textColor: .yellowGreen, font: .owRegular(size: 14))
+        label.text = self.viewModel.dataSource[section].categoryTitle
+        view.addSubview(label)
+        view.backgroundColor = TM.palette.bgView_main
+        return view
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 45
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 10))
+        view.backgroundColor = TM.palette.bgView_main
+        return view
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10
     }
+
 }
 
 //Export Wallet
@@ -624,6 +609,7 @@ extension SettingMenuViewController {
                 self.verifyPwdForExportWallet(wallets[0]).subscribe(onNext: { (wallet,status) in
                     if status {
                         let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallet)
+                        vc.hidesBottomBarWhenPushed = true
                         self.navigationController?.pushViewController(vc)
                     }else {
                         self.showSimplePopUp(with: LM.dls.walletManage_error_pwd,
@@ -646,6 +632,7 @@ extension SettingMenuViewController {
                             }
                             if status {
                                 let vc = ExportWalletPrivateKeyTabmanViewController.instance(of: wallet)
+                                vc.hidesBottomBarWhenPushed = true
                                 self.navigationController?.pushViewController(vc)
                             }else {
                                 self.showSimplePopUp(with: LM.dls.walletManage_error_pwd,

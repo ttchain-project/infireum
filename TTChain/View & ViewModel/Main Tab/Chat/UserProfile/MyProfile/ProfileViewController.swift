@@ -216,6 +216,13 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             }
         }).disposed(by: bag)
         
+        self.viewModel.output.animateHud.subscribe(onNext:{ status in
+            if status {
+                self.hud.startAnimating(inView: self.view)
+            }else {
+                self.hud.stopAnimating()
+            }
+        })
         self.viewModel.output.messageSubject.bind(to:self.rx.message).disposed(by: bag)
     }
     
