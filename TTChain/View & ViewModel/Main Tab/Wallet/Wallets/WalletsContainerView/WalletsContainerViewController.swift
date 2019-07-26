@@ -141,21 +141,20 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
     }
     
     func toWalletDetail(asset:Asset) {
+    
+        switch (asset.coin!.owChainType) {
+        case (.btc):
+            let vc = AssetDetailViewController.navInstance(
+                from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
+            )
+            present(vc, animated: true, completion: nil)
+        case (.eth):
+            let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: asset.wallet!, source:MainWalletViewController.Source.ETH))
+            self.present(vc, animated: true, completion: nil)
         
-        let source : MainWalletViewController.Source = {
-            switch (asset.coin!.owChainType,self.selectedChild) {
-        case (.btc,.mainChain):
-            return MainWalletViewController.Source.BTC
-        case (.eth,.mainChain):
-            return MainWalletViewController.Source.ETH
-        case (_,.stableChain):
-                return MainWalletViewController.Source.StableCoin
         default:
-            return MainWalletViewController.Source.BTC
-            }
-        }()
+            break
+        }
         
-        let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: asset.wallet!, source:source))
-        self.present(vc, animated: true, completion: nil)
     }
 }

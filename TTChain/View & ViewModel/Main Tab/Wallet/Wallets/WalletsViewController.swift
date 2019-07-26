@@ -126,10 +126,11 @@ extension WalletsViewController:UITableViewDelegate {
         
        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: WalletsTableSectionHeaderView.nameOfClass) as! WalletsTableSectionHeaderView
         let sectionModel = self.viewModel.sectionModelSources.value[section]
-        headerView.expandButton.rx.klrx_tap.drive(onNext: { _ in
+        headerView.rx.klrx_tap.drive(onNext: { _ in
             self.viewModel.updateSectionModel(forSection: section)
             headerView.expandButton.isSelected = !headerView.expandButton.isSelected
         }).disposed(by: headerView.bag)
+        
         let amtSource = self.viewModel.totalAssetAmtForCoin(coin: sectionModel.header)
         let fiatValSrc = self.viewModel.totalFiatAmoutForCoin(coin: sectionModel.header)
         headerView.config(sectionModel:sectionModel,amtSource:amtSource,fiatValSrc:fiatValSrc)
