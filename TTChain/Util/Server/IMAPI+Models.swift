@@ -61,6 +61,8 @@ enum IMAPI :KLMoyaAPISet {
         case .uploadHeadImage(let api): return api
         case .uploadFile(let api): return api
         case .sendMessage(let api): return api
+        case .muteRoomNotifications(let api): return api
+        case .getRoomNotificationStatus(let api): return api
         case .blockUser(let api): return api
         case .registerJiGuangPush(let api): return api
         case .inAppCall(let api): return api
@@ -98,6 +100,8 @@ enum IMAPI :KLMoyaAPISet {
     case sendMessage(IMSendMessageAPI)
     case sendCoinRequest(IMSendCoinRequestAPI)
     case blockUser(BlockUserAPI)
+    case muteRoomNotifications(MuteRoomNotificationAPI)
+    case getRoomNotificationStatus(GetRoomNotificationStatusAPI)
     case getDestructMessageSetting(GetSelfDestructingStatusAPI)
     case registerJiGuangPush(JiGuangPushSettingAPI)
     case inAppCall(InAppCallApi)
@@ -1098,6 +1102,66 @@ struct DeleteGroupAPIModel: KLJSONMappableMoyaResponse {
     let isSuccess: Bool
     
     init(json: JSON, sourceAPI: DeleteGroupAPI) throws {
+        guard let response = json.bool else { throw GTServerAPIError.noData }
+        self.isSuccess = response
+    }
+}
+
+
+//GET /IM/Member/MuteRooms
+struct GetRoomNotificationStatusAPI:KLMoyaIMAPIData {
+    var path: String {
+        return "/IM/Member/MuteRooms"
+    }
+    var method: Moya.Method {return .get}
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: ["uid":parameters.uid], encoding: URLEncoding.default)
+    }
+    var stub: Data? {return nil}
+    var parameters:Parameter
+    struct Parameter:Paramenter {
+        let uid:String
+        let roomId:String
+    }
+}
+
+struct GetRoomNotificationStatusAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = GetRoomNotificationStatusAPI
+    let isMute: Bool
+    init(json: JSON, sourceAPI: GetRoomNotificationStatusAPI) throws {
+        guard let response = json.array else { throw GTServerAPIError.noData }
+        isMute = response.compactMap {
+            $0.dictionaryObject as? [String:String]
+            }.compactMap {$0["roomId"]}
+            .contains(sourceAPI.parameters.roomId)
+    }
+}
+
+//POST /{lang}/IM/Member/MuteRoom
+struct MuteRoomNotificationAPI:KLMoyaIMAPIData {
+    var path: String {
+        return "/IM/Member/MuteRoom"
+    }
+    
+    var method: Moya.Method {return .post}
+    
+    var task: Task {
+        return Moya.Task.requestParameters(parameters: parameters.asDictionary(), encoding: JSONEncoding.default)
+    }
+    var stub: Data? {return nil}
+    var parameters:Parameter
+    struct Parameter:Paramenter {
+        let uid:String
+        let roomId:String
+        let isNotificaitonActive:Bool
+    }
+    
+}
+
+struct MuteRoomNotificationAPIModel: KLJSONMappableMoyaResponse {
+    typealias API = MuteRoomNotificationAPI
+    let isSuccess: Bool
+    init(json: JSON, sourceAPI: MuteRoomNotificationAPI) throws {
         guard let response = json.bool else { throw GTServerAPIError.noData }
         self.isSuccess = response
     }

@@ -738,9 +738,9 @@ protocol DynamicLocalizationSource {
     var group_member_mgmgt_title:String {get set}
     
 
-    var group_invite_member_title:String {get set}
-    var group_info_title:String {get set}
-    var backup_qrcode_message_label:String {get set}
+    var group_invite_member_title: String {get set}
+    var group_info_title: String {get set}
+    var backup_qrcode_message_label: String {get set}
     
     var back_up_skip_warning_msg:String {get set}
     var backup_skip_msg_title:String {get set}
@@ -760,4 +760,11 @@ protocol DynamicLocalizationSource {
     
     var new_wallet_imported_msg: String {get set}
      var wallet_import_success_subtitle_msg: String {get set}
+    
+    var chat_notifications_turn_off_title: String {get set}
+    
+    var chat_community_mgmt_label: String {get set}
+    
+    var only_admin_post_title: String {get set}
+
 }

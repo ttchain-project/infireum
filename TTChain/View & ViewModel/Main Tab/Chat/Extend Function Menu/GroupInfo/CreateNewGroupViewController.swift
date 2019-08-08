@@ -64,7 +64,6 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
     var state: Config.GroupAction = .Normal
     
     @IBOutlet weak var groupImageView: UIImageView!
-
     @IBOutlet weak var groupIconButton: UIButton! {
         didSet {
             groupIconButton.isHidden = true
@@ -139,7 +138,21 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
             editGroupNameBtn.isHidden = true
         }
     }
+    @IBOutlet weak var groupNotificationButton: UIButton! {
+        didSet {
+            groupNotificationButton.setTitleForAllStates(LM.dls.chat_notifications_turn_off_title)
+            groupNotificationButton.set(textColor: TM.palette.label_main_1, font: .owRegular(size:14))
+            
+        }
+    }
     @IBOutlet weak var bottomButtonView: UIView!
+    @IBOutlet weak var manageCommunityView: UIView!
+    @IBOutlet weak var manageCommunityLabel: UILabel! {
+        didSet {
+            manageCommunityLabel.set(textColor: TM.palette.label_main_1, font: .owRegular(size: 14))
+            manageCommunityLabel.text = LM.dls.chat_community_mgmt_label
+        }
+    }
     
     private lazy var hud = {
         return KLHUD.init(
@@ -185,6 +198,25 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         self.nextButton.rx.klrx_tap.drive(onNext:{
             self.viewModel.createGroup()
         }).disposed(by: bag)
+
+        self.viewModel.getRoomNotificationStatus().map {
+            self.viewModel.notificaitonStatus.accept($0)
+            self.groupNotificationButton.rx.tap.scan(self.viewModel.notificaitonStatus.value){ state, _ in
+                self.viewModel.shouldChangeMessageNotification = true
+                self.groupNotificationButton.isSelected = !self.groupNotificationButton.isSelected
+                return state
+                }.bind(to: self.viewModel.notificaitonStatus).disposed(by: self.bag)
+            return $0
+            }.bind(to: self.groupNotificationButton.rx.isSelected).disposed(by: bag)
+        
+        
+        self.manageCommunityView.rx.klrx_tap.drive(onNext:{
+            let vc = CommunityManagementViewController.instance(from: CommunityManagementViewController.Config(postMsgStatus: self.viewModel.groupModel.value?.isPostMsg ?? true, didUpdatePostStatus:{ status in
+                self.viewModel.groupModel.value?.isPostMsg = status
+                self.viewModel.shouldUpdateGroup.accept(true)
+            }))
+            self.navigationController?.pushViewController(vc)
+        }).disposed(by: bag)
         
         self.viewModel.output.groupCreationComplete.subscribe(onNext:{ groupId in
             var fetchGroupBag = DisposeBag()
@@ -194,7 +226,6 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
                 fetchGroupBag = DisposeBag()
             }).disposed(by: fetchGroupBag)
         }).disposed(by: bag)
-            
         
         self.viewModel.output.animateHUDSubject.asObservable().subscribe(onNext: { (status) in
             if status {
@@ -211,11 +242,13 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         self.viewModel.output.exitGroupCompleted.asObservable().subscribe(onNext: { _ in
             self.dismiss(animated: true, completion: nil)
         }).disposed(by: bag)
+        
     }
     
     func setupUIForEdit() {
         self.groupNameTextField.isEnabled = false
         self.infoTextView.isEditable = false
+        self.manageCommunityView.isHidden = true
         switch  self.state {
         case .Create:
             self.settingsView.isHidden = true
@@ -225,6 +258,7 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
             self.infoTextView.isEditable = true
         case .Edit:
             self.addEditButtons()
+            self.manageCommunityView.isHidden = false
             fallthrough
         case .Normal:
             self.navigationItem.rightBarButtonItem = self.optionsBarButton
@@ -258,18 +292,24 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         if self.state == .Edit {
             self.viewModel.updateGroupInfo().asObservable().subscribe(onNext: { _ in
                 self.didUpdateGroupInfo?(self.viewModel?.groupModel.value)
-                if self.navigationController?.viewControllers.count ?? 0 > 1 {
-                    self.navigationController?.popViewController(animated: true)
-                }else {
-                    self.dismiss(animated: true, completion: nil)
-                }
+                self.popOrDismiss()
             }).disposed(by:bag)
+        }else if self.viewModel.shouldChangeMessageNotification {
+            self.viewModel.muteRoomNotifications(status: self.viewModel.notificaitonStatus.value).asObservable().subscribe(onNext: { _ in
+                self.popOrDismiss()
+            }).disposed(by: bag)
         }else {
-            if self.navigationController?.viewControllers.count ?? 0 > 1 {
-                self.navigationController?.popViewController(animated: true)
-            }else {
-                self.dismiss(animated: true, completion: nil)
-            }
+           self.popOrDismiss()
+        }
+    }
+    
+    private func popOrDismiss() {
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+            self.navigationController?.popViewController()
+        }else if (self.presentingViewController != nil) || (self.navigationController?.presentingViewController?.presentedViewController == self.navigationController) {
+            self.dismiss(animated: true, completion: nil)
+        }else {
+            self.navigationController?.popViewController()
         }
     }
     

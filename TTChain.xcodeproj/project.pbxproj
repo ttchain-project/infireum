@@ -578,6 +578,8 @@
 		559CB0E2218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E3218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
 		559CB0E4218FF8C800D7654E /* ExploreTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */; };
+		559CD13222FAAF2700520497 /* CommunityManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559CD13022FAAF2700520497 /* CommunityManagementViewController.swift */; };
+		559CD13322FAAF2700520497 /* CommunityManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559CD13122FAAF2700520497 /* CommunityManagementViewController.xib */; };
 		55A3D25C227012B2002ABE13 /* TTNWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */; };
 		55A3D25D227012B2002ABE13 /* TTNWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */; };
 		55A3D25E227012B2002ABE13 /* TTNWalletSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */; };
@@ -2546,6 +2548,8 @@
 		559C4F15222665A2009466A8 /* TTNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTNotificationHandler.swift; sourceTree = "<group>"; };
 		559C4F192226A9FC009466A8 /* 甜甜圈.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "甜甜圈.entitlements"; sourceTree = "<group>"; };
 		559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTabViewModel.swift; sourceTree = "<group>"; };
+		559CD13022FAAF2700520497 /* CommunityManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityManagementViewController.swift; sourceTree = "<group>"; };
+		559CD13122FAAF2700520497 /* CommunityManagementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityManagementViewController.xib; sourceTree = "<group>"; };
 		55A3D25B227012B2002ABE13 /* TTNWalletSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTNWalletSetup.swift; sourceTree = "<group>"; };
 		55A3D2602271A3DC002ABE13 /* LightReceiptQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightReceiptQRCodeViewController.swift; sourceTree = "<group>"; };
 		55A3D2612271A3DC002ABE13 /* LightReceiptQRCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LightReceiptQRCodeViewController.xib; sourceTree = "<group>"; };
@@ -3836,6 +3840,7 @@
 		556D4DBA22CDF1B100EF5D03 /* GroupInfo */ = {
 			isa = PBXGroup;
 			children = (
+				559CD12F22FAACD500520497 /* CommunityManagement */,
 				556D4DC722D444DF00EF5D03 /* GroupMembers */,
 				556D4DBB22CDF1DE00EF5D03 /* CreateNewGroupViewController.swift */,
 				556D4DBC22CDF1DE00EF5D03 /* CreateNewGroupViewController.xib */,
@@ -3965,6 +3970,15 @@
 				559CB0E1218FF8C800D7654E /* ExploreTabViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		559CD12F22FAACD500520497 /* CommunityManagement */ = {
+			isa = PBXGroup;
+			children = (
+				559CD13022FAAF2700520497 /* CommunityManagementViewController.swift */,
+				559CD13122FAAF2700520497 /* CommunityManagementViewController.xib */,
+			);
+			path = CommunityManagement;
 			sourceTree = "<group>";
 		};
 		55A3D25A2270129B002ABE13 /* TTNWalletSetup */ = {
@@ -7377,6 +7391,7 @@
 				6424B65520F508E000AEBCAD /* TransferRecordCancellableOptionBarCollectionViewCell.xib in Resources */,
 				64C9D44D20FDC8C6000B0774 /* AddressBookViewController.xib in Resources */,
 				559144EB2279C43A00542E76 /* LightTransRecordListViewController.xib in Resources */,
+				559CD13322FAAF2700520497 /* CommunityManagementViewController.xib in Resources */,
 				55EF6A4721A812C6007E074A /* ChatMessageTableViewCell.xib in Resources */,
 				649E485920E7D99200B217AD /* ImportedWalletTableHeaderView.xib in Resources */,
 				649E48BB20ECE79600B217AD /* WalletPrivateKeyInfoViewController.xib in Resources */,
@@ -8324,6 +8339,7 @@
 				64813A3C20DCA6EE00CAA4D8 /* SubAddress+CoreDataProperties.swift in Sources */,
 				555E4AF6224CEC8100C7CAD5 /* ReceiveRedEnvelopeHistoryViewController.swift in Sources */,
 				55EF6B2E21A81500007E074A /* LocalIMUser.swift in Sources */,
+				559CD13222FAAF2700520497 /* CommunityManagementViewController.swift in Sources */,
 				555A45B022057F35004A713A /* ChatImageViewController.swift in Sources */,
 				64C9D42D20FD98BC000B0774 /* AddressBookUnit+Helper.swift in Sources */,
 				5537F07A2265D0B40058B98D /* LightTransViewModel.swift in Sources */,

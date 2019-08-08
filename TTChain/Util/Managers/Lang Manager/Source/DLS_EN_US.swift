@@ -804,5 +804,9 @@ struct DLS_EN_US: DLS {
     var new_wallet_imported_msg = "The wallet has been successfully imported"
     var wallet_import_success_subtitle_msg = "You can start using this wallet feature"
 
+    var chat_notifications_turn_off_title = "Turn off notification"
+    
+    var chat_community_mgmt_label = "Community Management"
+    var only_admin_post_title = "Only admins can post"
 }
 

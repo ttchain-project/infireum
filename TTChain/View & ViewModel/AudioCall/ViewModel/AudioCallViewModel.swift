@@ -117,6 +117,7 @@ class AudioCallViewModel: KLRxViewModel {
             try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
             
             try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.none)
+            
             audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: url))
             audioPlayer?.play()
             audioPlayer?.numberOfLoops = -1

@@ -46,6 +46,9 @@ class CreateNewGroupViewModel : KLRxViewModel {
     var groupInfo:BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
 
     var shouldUploadGroupImage:Bool = false
+    var shouldChangeMessageNotification: Bool = false
+    var shouldUpdateGroup: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    var notificaitonStatus:BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     var bag: DisposeBag = DisposeBag()
     
     required init(input: InputSource, output: OutputSource) {
@@ -57,9 +60,11 @@ class CreateNewGroupViewModel : KLRxViewModel {
             return true
             }.bind(to:self.output.bottomButtonIsEnabled).disposed(by:bag)
         self.prepareForEditGroup()
-        self.output.groupImage.asObservable().subscribe { _ in
-            self.shouldUploadGroupImage = true
-        }.disposed(by: bag)
+        self.output.groupImage.asObservable().subscribe(onNext: { (image) in
+            self.shouldUploadGroupImage = image != nil
+        }) .disposed(by: bag)
+        
+        Observable.combineLatest(self.groupName, self.groupInfo).map { _ in return true}.bind(to: shouldUpdateGroup).disposed(by: bag)
     }
     
     func prepareForEditGroup() {
@@ -111,16 +116,24 @@ class CreateNewGroupViewModel : KLRxViewModel {
         }).disposed(by: bag)
     }
     
-    func uploadGroupPicture(forGroupID groupId:String) -> RxAPIResponse<UploadHeadImageAPIModel> {
+    func uploadGroupPicture(forGroupID groupId:String) -> Single<APIResult<Void>> {
         
         guard let image = self.output.groupImage.value, self.shouldUploadGroupImage == true else {
             return .just(.failed(error: GTServerAPIError.noData))
         }
         let parameter = UploadHeadImageAPI.Parameters.init(personalOrGroupId:groupId , isGroup: true, image: UIImageJPEGRepresentation(image, 0.5)!)
-        return Server.instance.uploadHeadImg(parameters: parameter)
+        return Server.instance.uploadHeadImg(parameters: parameter).map { result in
+            switch result {
+            case .success(_):
+                return APIResult.success(())
+            case .failed(error: let error):
+                DLogError(error.descString)
+                return APIResult.failed(error: error)
+            }
+        }
     }
     
-    func fetchGroupInfoFromServer(for groupID:String) -> Single<Void> {
+    func fetchGroupInfoFromServer(for groupID: String) -> Single<Void> {
         
         return Server.instance.getGroupInfo(forGroupId: groupID).map { result in
             switch result {
@@ -132,30 +145,74 @@ class CreateNewGroupViewModel : KLRxViewModel {
         }
     }
 
+    func muteRoomNotifications(status: Bool) ->  Single<Void> {
+        let uid = IMUserManager.manager.userModel.value!.uID
+        guard let groupId = self.input.groupModel?.groupID else {
+            return Single.error(GTServerAPIError.noData)
+            
+        }
+        let parameter = MuteRoomNotificationAPI.Parameter.init(uid: uid, roomId: groupId, isNotificaitonActive: status)
+        return Server.instance.muteNotificationForRoom(parameters: parameter).map { resut in
+            switch resut {
+            case .success(_): break
+            case .failed(error:let error):
+                DLogError(error)
+            }
+        }
+    }
+    
+    func getRoomNotificationStatus() -> Observable<Bool> {
+        let uid = IMUserManager.manager.userModel.value!.uID
+        guard let groupId = self.input.groupModel?.groupID else {
+            return Observable.of(false)
+        }
+        let parameter = GetRoomNotificationStatusAPI.Parameter.init(uid: uid,roomId:groupId)
+        return Server.instance.getRoomNotificationStatus(parameters:parameter).asObservable().map { model in
+            switch model {
+            case .success(let value):
+                return value.isMute
+            case .failed(error:let error):
+                self.output.errorMessageSubject.onNext(error.descString)
+                return false
+            }
+        }
+    }
+    
     func updateGroupInfo() -> Single<Void>{
-        
-        if let model = self.groupModel.value, (self.groupName.value != model.groupName || self.groupInfo.value != model.introduction || self.shouldUploadGroupImage) {
+        if let model = self.groupModel.value, (self.shouldUpdateGroup.value || self.shouldUploadGroupImage || shouldChangeMessageNotification) {
             guard let groupName = self.groupName.value else { fatalError("groupName should not be nil.") }
             let parameters = UpdateGroupAPI.Parameters.init(groupID: model.groupID, groupName: groupName, isPostMsg: model.isPostMsg, introduction: self.groupInfo.value ?? "")
-            
             self.output.animateHUDSubject.onNext(true)
-            
             return Server.instance.updateGroup(parameters: parameters).flatMap {
-                [unowned self] result -> RxAPIResponse<UploadHeadImageAPIModel> in
-        
+                [unowned self] result -> Single<APIResult<Void>> in
                 switch result {
                 case .success(_):
-                    return self.uploadGroupPicture(forGroupID: model.groupID)
+                    if self.shouldUploadGroupImage {
+                        return self.uploadGroupPicture(forGroupID: model.groupID)
+                    }else {
+                        return Single.just(APIResult.success(()))
+                    }
                 case .failed(error: let error):
                     DLogError(error)
                     self.output.errorMessageSubject.onNext(error.descString)
                     self.output.animateHUDSubject.onNext(false)
                     return Single.just(APIResult.failed(error: .incorrectResult("", "")))
                 }
-                }.flatMap({ (model) -> Single<Void> in
-                    self.output.animateHUDSubject.onNext(false)
-                    return Single.just(())
-                })
+                }.flatMap { (model) -> Single<Void> in
+                    switch model {
+                    case .success(_):
+                        if self.shouldChangeMessageNotification {
+                            return self.muteRoomNotifications(status: self.notificaitonStatus.value)
+                        }else {
+                            return Single.just(())
+                        }
+                    case .failed(error: let error):
+                        DLogError(error)
+                        self.output.errorMessageSubject.onNext(error.descString)
+                        self.output.animateHUDSubject.onNext(false)
+                        return Single.just(())
+                    }
+                }
         }
         return Single.just(())
     }

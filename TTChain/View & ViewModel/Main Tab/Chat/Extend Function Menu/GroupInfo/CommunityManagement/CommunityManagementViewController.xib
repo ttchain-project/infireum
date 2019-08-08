@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunityManagementViewController" customModule="Hope_Seed" customModuleProvider="target">
+            <connections>
+                <outlet property="postMessageAdminBtn" destination="wfX-O3-wyB" id="guh-d8-ZyT"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPZ-wE-SVc">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Mzz-HQ-N7m">
+                            <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3OT-ZQ-VBh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfX-O3-wyB">
+                                            <rect key="frame" x="16" y="5" width="349" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="Community Management" image="btn_nochoose">
+                                                <color key="titleColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <state key="selected" image="btn_choose"/>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="wfX-O3-wyB" secondAttribute="trailing" constant="10" id="bdA-wB-pZM"/>
+                                        <constraint firstItem="wfX-O3-wyB" firstAttribute="top" secondItem="3OT-ZQ-VBh" secondAttribute="top" constant="5" id="erL-Ma-Vg3"/>
+                                        <constraint firstAttribute="bottom" secondItem="wfX-O3-wyB" secondAttribute="bottom" constant="5" id="fci-iE-Axl"/>
+                                        <constraint firstItem="wfX-O3-wyB" firstAttribute="leading" secondItem="3OT-ZQ-VBh" secondAttribute="leading" constant="16" id="zLu-ay-d64"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Mzz-HQ-N7m" secondAttribute="bottom" id="Aus-gt-nxQ"/>
+                        <constraint firstAttribute="trailing" secondItem="Mzz-HQ-N7m" secondAttribute="trailing" id="Ob7-ap-9eL"/>
+                        <constraint firstItem="Mzz-HQ-N7m" firstAttribute="top" secondItem="LPZ-wE-SVc" secondAttribute="top" constant="20" id="RI5-oU-pxR"/>
+                        <constraint firstItem="Mzz-HQ-N7m" firstAttribute="leading" secondItem="LPZ-wE-SVc" secondAttribute="leading" id="vxK-fa-jil"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LPZ-wE-SVc" secondAttribute="trailing" id="4Tv-ZC-bCq"/>
+                <constraint firstItem="LPZ-wE-SVc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LcG-HZ-xoq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="LPZ-wE-SVc" secondAttribute="bottom" id="Msd-ke-ALy"/>
+                <constraint firstItem="LPZ-wE-SVc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UJE-gk-p70"/>
+                <constraint firstItem="Mzz-HQ-N7m" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="wXm-ak-27k"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_choose" width="40" height="40"/>
+        <image name="btn_nochoose" width="40" height="40"/>
+    </resources>
+</document>

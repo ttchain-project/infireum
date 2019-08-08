@@ -795,6 +795,12 @@ struct DLS_ZH_TW: DLS {
     var new_wallet_created_msg = "已創建新錢包"
     var wallet_import_success_subtitle_msg = "您可以開始使用此錢包功能"
     var new_wallet_imported_msg = "已成功導入錢包"
+    
+    var chat_notifications_turn_off_title = "關閉提醒"
+    
+    var chat_community_mgmt_label = "社群管理"
+    
+    var only_admin_post_title = "只有管理員以上階級可以張貼訊息"
 }
 
 

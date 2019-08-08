@@ -77,6 +77,9 @@ class IMUserManager {
                 switch model.status {
                 case .deviceIDNotMatched:
                     DLogDebug("Call Recovery API")
+                    self.recoverUser(withPassword: "", handle: { (status) in
+                        
+                    })
                 case .noSuchUser:
                     DLogDebug("Call create user api")
                     self.createUserForIM()

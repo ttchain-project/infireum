@@ -222,7 +222,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             }else {
                 self.hud.stopAnimating()
             }
-        })
+        }).disposed(by: bag)
         self.viewModel.output.messageSubject.bind(to:self.rx.message).disposed(by: bag)
     }
     

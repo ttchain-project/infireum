@@ -714,6 +714,23 @@
         return fire(router: .IM(.deleteGroup(api)))
     }
     
+    
+    
+    //POST /{lang}/IM/Member/MuteRoom
+
+    func muteNotificationForRoom(parameters: MuteRoomNotificationAPI.Parameter) -> RxAPIResponse<MuteRoomNotificationAPIModel> {
+        let api = MuteRoomNotificationAPI.init(parameters: parameters)
+        return fire(router: .IM(.muteRoomNotifications(api)))
+    }
+    
+    
+    //GET /IM/Member/MuteRooms
+    
+    func getRoomNotificationStatus(parameters: GetRoomNotificationStatusAPI.Parameter) -> RxAPIResponse<GetRoomNotificationStatusAPIModel> {
+        let api = GetRoomNotificationStatusAPI.init(parameters: parameters)
+        return fire(router: .IM(.getRoomNotificationStatus(api)))
+    }
+    
     // MARK: - POST /IM/blocklist -
     
     func blockUser(parameters: BlockUserAPI.Parameters) -> RxAPIResponse<BlockUserAPIModel> {
