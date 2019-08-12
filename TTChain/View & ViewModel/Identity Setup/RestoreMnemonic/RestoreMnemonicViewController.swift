@@ -78,6 +78,7 @@ final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
             let tx = mnemonicFields[index]
             tx.delegate = self
             tx.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
+            tx.sepline.backgroundColor = .gray
         }
         
         nextButton.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
