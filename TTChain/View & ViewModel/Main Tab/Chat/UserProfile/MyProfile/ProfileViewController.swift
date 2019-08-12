@@ -189,7 +189,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
     func bindUI() {
 //        self.recoveryPasswordButton.isHidden = true
         
-        self.userNameTextField.text = imUser?.nickName
+//        self.userNameTextField.text = imUser?.nickName
         self.idTextField.text = imUser?.uID
         self.accountNameTextfield.text = Identity.singleton?.name
         
@@ -216,7 +216,7 @@ final class ProfileViewController: KLModuleViewController, KLVMVC {
             }
         }).disposed(by: bag)
         
-        self.viewModel.output.animateHud.subscribe(onNext:{ status in
+        self.viewModel.output.animateHud.observeOn(MainScheduler.instance).subscribe(onNext:{ status in
             if status {
                 self.hud.startAnimating(inView: self.view)
             }else {

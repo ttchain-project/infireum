@@ -19,6 +19,8 @@ class ProfileViewModel : KLRxViewModel {
         self.input = input
         self.output = output
         concatInput()
+        self.userName.accept(imUser?.nickName)
+        
     }
     var input: ProfileViewModel.Input
     var output: ProfileViewModel.Output

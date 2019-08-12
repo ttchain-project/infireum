@@ -131,8 +131,12 @@ extension RestoreMnemonicViewController:UITextFieldDelegate {
             textField.text = replacementStr
             setNextResponder(textFieldsIndexes[textField], direction: .right)
        } else if range.length == 1 {
-            textField.text = ""
-            setNextResponder(textFieldsIndexes[textField], direction: .left)
+            textField.text = replacementStr
+            if replacementStr.isEmpty {
+                setNextResponder(textFieldsIndexes[textField], direction: .left)
+            }else {
+                setNextResponder(textFieldsIndexes[textField], direction: .right)
+            }
         }
         return false
     }

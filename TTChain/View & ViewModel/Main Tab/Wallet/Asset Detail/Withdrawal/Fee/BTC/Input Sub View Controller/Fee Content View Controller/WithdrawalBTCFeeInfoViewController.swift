@@ -112,7 +112,6 @@ final class WithdrawalBTCFeeInfoViewController: KLModuleViewController, Withdraw
         })
         .disposed(by: bag)
         
-        let dls = LM.dls
         viewModel.regularSatPerByte.map {
             rate -> String in
             return
