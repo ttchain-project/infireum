@@ -218,25 +218,28 @@ class FeeManager {
     
     //MARK: - API Request (Server)
     static func updateBTCFeeRates() -> RxAPIVoidResponse {
-        return RxAPIVoidResponse.create { (event) -> Disposable in
-            
-            self.setValue(C.BTCFee.regular, forOption: .btc(.regular))
-            self.setValue(C.BTCFee.priority, forOption: .btc(.priority))
-            event(.success(APIResult.success(())))
-            return Disposables.create()
-        }
-//        return Server.instance.getBTCFee()
-//            .map {
-//                result in
-//                switch result {
-//                case .failed(error: let err):
-//                    return RxAPIVoidResponse.ElementType.failed(error: err)
-//                case .success(let model):
-//                    self.setValue(model.regularFee.btcToSatoshi, forOption: .btc(.regular))
-//                    self.setValue(model.priorityFee.btcToSatoshi, forOption: .btc(.priority))
-//                    return RxAPIVoidResponse.ElementType.success(())
-//                }
+//        return RxAPIVoidResponse.create { (event) -> Disposable in
+//
+//            self.setValue(C.BTCFee.regular, forOption: .btc(.regular))
+//            self.setValue(C.BTCFee.priority, forOption: .btc(.priority))
+//            event(.success(APIResult.success(())))
+//            return Disposables.create()
 //        }
+        return Server.instance.getBTCFee()
+            .map {
+                result in
+                switch result {
+                case .failed(error: let err):
+                    return RxAPIVoidResponse.ElementType.failed(error: err)
+                case .success(let model):
+                    let regularFee = (model.regularFee * Decimal(225)).rounded(toPlaces: 4, rule: FloatingPointRoundingRule.up)
+                    let priorityFee = (model.priorityFee * Decimal(225)).rounded(toPlaces: 4, rule: FloatingPointRoundingRule.up)
+
+                    self.setValue(regularFee, forOption: .btc(.regular))
+                    self.setValue(priorityFee, forOption: .btc(.priority))
+                    return RxAPIVoidResponse.ElementType.success(())
+                }
+        }
         
 //        let mockResponse: (Decimal, Decimal) = (35, 45)
 //        return Observable.just(mockResponse).map {
