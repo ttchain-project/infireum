@@ -89,7 +89,7 @@ class WithdrawalConfirmationViewModel:KLRxViewModel {
         let info = self.input.info
         
         return Observable.create({ (observer) -> Disposable in
-            switch info.asset.coinID! {
+            switch info.asset.wallet?.walletMainCoinID! {
             case Coin.btc_identifier:
                 TransferManager.manager.startBTCTransferFlow(with: info, progressObserver: observer, isCompressed: false)
             case Coin.eth_identifier:
