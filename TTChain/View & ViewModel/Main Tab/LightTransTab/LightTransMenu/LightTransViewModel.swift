@@ -63,20 +63,13 @@ class LightTransViewModel: KLRxViewModel {
 
         var _assets = [Asset]()
         _assets = Asset.getAllWalletAssetsUnderCurrenIdentity(wallet: ttnWallet, selectedOnly: true)
-    
         let ttn = _assets.filter{ $0.coin?.identifier == Coin.ttn_identifier }.first
         let exr = _assets.filter{ $0.coin?.identifier == Coin.exr_identifier }.first
+        let mcc = _assets.filter{ $0.coin?.identifier == Coin.mcc_identifier }.first
+        let btcn = _assets.filter{ $0.coin?.identifier == Coin.btcn_identifier }.first
+        let usdtn = _assets.filter{ $0.coin?.identifier == Coin.usdtn_identifier }.first
         
-        _assets = _assets.filter { [Coin.ttn_identifier,Coin.exr_identifier,Coin.btcn_identifier,Coin.usdtn_identifier].contains($0.coin?.identifier) }
-        if let idTTN = _assets.indices(of: ttn!).first {
-            _assets.remove(at: idTTN)
-            _assets.insert(ttn!, at: 0)
-        }
-        if exr != nil, let idExr = _assets.indices(of: exr!).first {
-            _assets.remove(at: idExr)
-            _assets.insert(exr!, at: 1)
-        }
-        self.assets.accept(_assets)
+        self.assets.accept([ttn, usdtn, btcn, mcc, exr].compactMap{ $0 })
     }
     
     // implemented but not used as yet.
@@ -111,6 +104,9 @@ class LightTransViewModel: KLRxViewModel {
                     case Coin.exr_identifier:
                         v.accept(BehaviorRelay.init(value: balance.exrBalance))
                         k.updateAmt(balance.exrBalance)
+                    case Coin.mcc_identifier:
+                        v.accept(BehaviorRelay.init(value: balance.mccBalance))
+                        k.updateAmt(balance.mccBalance)
                     default:
                         continue
                     }

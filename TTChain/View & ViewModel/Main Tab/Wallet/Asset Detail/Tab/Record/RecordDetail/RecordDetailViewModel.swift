@@ -136,7 +136,7 @@ class RecordDetailViewModel:KLRxViewModel {
         }
         
         switch record.fromCoinID! {
-        case Coin.ttn_identifier,Coin.exr_identifier:
+        case Coin.ttn_identifier,Coin.exr_identifier, Coin.mcc_identifier:
             feeAmtStr = "0.1 TTN"
             coinName = ""
         case Coin.btcn_identifier,Coin.usdtn_identifier:

@@ -136,7 +136,7 @@ class LightTransMenuTableViewCell: UITableViewCell {
             self.bgView.backgroundColor = .clear
         }
         
-        if asset.coinID == Coin.exr_identifier {
+        if asset.coinID == Coin.exr_identifier || asset.coinID == Coin.mcc_identifier {
             self.depositButton.isHidden = true
             self.transferButton.isHidden = true
         }

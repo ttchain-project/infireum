@@ -250,7 +250,7 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                     let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
                     let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
                     let elxrBal = Decimal.init(string:tokenDict["exr"]?.string ?? "") ?? 0
-                    
+                    let mccBal = Decimal.init(string:tokenDict["mcc"]?.string ?? "") ?? 0
                     switch sourceAPI.asset.coinID {
                     case Coin.usdtn_identifier:
                         self.balanceInCoin = usdtBal * rateToCoinUnit
@@ -260,7 +260,8 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                         self.balanceInCoin = ethnBal * rateToCoinUnit
                     case Coin.exr_identifier:
                         self.balanceInCoin = elxrBal * rateToCoinUnit
-
+                    case Coin.mcc_identifier:
+                        self.balanceInCoin = mccBal * rateToCoinUnit
                     default:
                         self.balanceInCoin = 0
                     }
@@ -1698,11 +1699,12 @@ struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
         let ethnBalance:Decimal
         let exrBalance:Decimal
         let btcnBalance:Decimal
+        let mccBalance:Decimal
     }
     var balance:Balance!
     init(json: JSON, sourceAPI: API) throws {
         guard let ttnBalanceStr = json["Balance"].string, let ttnBal = Decimal.init(string: ttnBalanceStr) else {
-            balance = Balance.init(ttnBalance: 0, usdtnBalance: 0, ethnBalance: 0, exrBalance: 0, btcnBalance: 0)
+            balance = Balance.init(ttnBalance: 0, usdtnBalance: 0, ethnBalance: 0, exrBalance: 0, btcnBalance: 0, mccBalance: 0)
             return
         }
         let tokenDict = json["Token"].dictionary ?? [:]
@@ -1720,8 +1722,13 @@ struct GetTTNAssetAmountAPIModel : KLJSONMappableMoyaResponse {
         let ethnBal = Decimal.init(string:tokenDict["ethn"]?.string ?? "") ?? 0
         let btcnBal = Decimal.init(string:tokenDict["btcn"]?.string ?? "") ?? 0
         let exrBal = Decimal.init(string:tokenDict["exr"]?.string ?? "") ?? 0
-        
-        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit, usdtnBalance: usdtBal*rateToCoinUnitBTCN, ethnBalance: ethnBal*rateToCoinUnit, exrBalance: exrBal*rateToCoinUnit, btcnBalance: btcnBal*rateToCoinUnitBTCN)
+        let mccBal = Decimal.init(string:tokenDict["mcc"]?.string ?? "") ?? 0
+        self.balance = Balance.init(ttnBalance: ttnBal*rateToCoinUnit,
+                                    usdtnBalance: usdtBal*rateToCoinUnitBTCN,
+                                    ethnBalance: ethnBal*rateToCoinUnit,
+                                    exrBalance: exrBal*rateToCoinUnit,
+                                    btcnBalance: btcnBal*rateToCoinUnitBTCN,
+                                    mccBalance: mccBal*rateToCoinUnit)
     }
 }
 

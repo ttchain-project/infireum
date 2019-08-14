@@ -123,22 +123,23 @@ final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
 
 extension RestoreMnemonicViewController:UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var replacementStr = string
-        if string.count > 1 {
-            replacementStr = string.firstCharacterAsString ?? ""
-        }
-        if range.length == 0 {
-            textField.text = replacementStr
-            setNextResponder(textFieldsIndexes[textField], direction: .right)
-       } else if range.length == 1 {
-            textField.text = replacementStr
-            if replacementStr.isEmpty {
-                setNextResponder(textFieldsIndexes[textField], direction: .left)
-            }else {
-                setNextResponder(textFieldsIndexes[textField], direction: .right)
-            }
-        }
-        return false
+//        var replacementStr = string
+        //Currently this logic is not being used
+//        if string.count > 1 {
+//            replacementStr = string.firstCharacterAsString ?? ""
+//        }
+//        if range.length == 0 {
+//            textField.text = replacementStr
+////            setNextResponder(textFieldsIndexes[textField], direction: .right)
+//       } else if range.length == 1 {
+//            textField.text = replacementStr
+//            if replacementStr.isEmpty {
+//                setNextResponder(textFieldsIndexes[textField], direction: .left)
+//            }else {
+////                setNextResponder(textFieldsIndexes[textField], direction: .right)
+//            }
+//        }
+        return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let tf = textField as? OWInputTextField else {

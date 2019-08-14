@@ -205,7 +205,8 @@ extension Coin {
             return #imageLiteral(resourceName: "usdtn_coin_icon")
         case Coin.exr_identifier:
             return #imageLiteral(resourceName: "exr_coin_icon_white")
-            
+        case Coin.mcc_identifier:
+            return #imageLiteral(resourceName: "mcc_coin_icon")
         default:
             break
         }
@@ -428,6 +429,9 @@ extension Coin {
     }
     static var exr_identifier:String {
         return "Identifier_EXR"
+    }
+    static var mcc_identifier:String {
+        return "Identifier_MCC"
     }
 }
 
