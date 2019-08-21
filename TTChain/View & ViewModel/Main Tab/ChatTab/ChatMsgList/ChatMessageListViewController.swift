@@ -84,6 +84,12 @@ final class ChatMessageListViewController: KLModuleViewController,KLVMVC {
         self.viewModel.communicationList.bind(to: self.tableView.rx.items) ({ (tv, index, model) -> ChatHistoryTableViewCell in
             let cell = tv.dequeueReusableCell(withClass: ChatHistoryTableViewCell.self)
             cell.config(model: model)
+            cell.rx.longPressGesture().skip(1).subscribe(onNext: { (_) in
+                if model.roomType == .pvtChat {
+                    self.showDeletePopUp(forChat: model)
+                }
+            }).disposed(by: cell.disposeBag)
+
             return cell
         }).disposed(by: bag)
         
@@ -96,5 +102,29 @@ final class ChatMessageListViewController: KLModuleViewController,KLVMVC {
         self.searchBar.rx.cancelButtonClicked.asDriver().drive(onNext: { _ in
             self.searchBar.endEditing(true)
         }).disposed(by: bag)
+    }
+    
+    func showDeletePopUp(forChat chat: CommunicationListModel) {
+        let alert = UIAlertController.init(title: LM.dls.chat_history_delete_chat_title, message: LM.dls.chat_history_delete_chat_message, preferredStyle: .alert)
+        let actionYes = UIAlertAction.init(title: LM.dls.g_confirm, style: .default) {[weak self] _ in
+            guard let `self` = self else {
+                return
+            }
+            let parameter = DeleteChatHistoryAPI.Parameter.init(roomId: chat.roomId)
+            Server.instance.deleteChatHistory(parameter: parameter).asObservable().subscribe(onNext: { result in
+                switch result {
+                case .failed(error: let error):
+                    DLogError(error)
+                case .success(let model):
+                    if model.status {
+                        self.viewModel.getCommunicationList()
+                    }
+                }
+            }).disposed(by:self.bag)
+        }
+        let cancelAction = UIAlertAction.init(title: LM.dls.g_cancel, style: .cancel, handler: nil)
+        alert.addAction(actionYes)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }

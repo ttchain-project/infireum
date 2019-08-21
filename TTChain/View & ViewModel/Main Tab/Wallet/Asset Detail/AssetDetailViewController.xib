@@ -7,7 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-         
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AssetDetailViewController" customModule="Hope_Seed" customModuleProvider="target">
@@ -18,6 +18,7 @@
                 <outlet property="depositBtn" destination="71J-84-iL2" id="xOx-nU-0SZ"/>
                 <outlet property="recordTabBase" destination="Tws-vD-1rs" id="Hzi-r4-QgM"/>
                 <outlet property="transferBase" destination="NIR-YL-rVY" id="GMe-eE-zuz"/>
+                <outlet property="ttcShortcutView" destination="9pv-4d-Zod" id="1MN-XB-ZQn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="walletNameLabel" destination="0QU-og-TZN" id="AK6-p7-jc3"/>
                 <outlet property="withdrawalBtn" destination="gQN-7X-LuA" id="H66-Nc-Nrp"/>
@@ -29,22 +30,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1Q-W7-fbN">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="137.66666666666666"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="136"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F74-2i-ntz">
-                            <rect key="frame" x="166.66666666666666" y="71.666666666666671" width="42" height="21"/>
+                            <rect key="frame" x="166.66666666666666" y="71.333333333333329" width="41.666666666666657" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ID3-2d-Wr4">
-                            <rect key="frame" x="166.66666666666666" y="96.666666666666671" width="42" height="21"/>
+                            <rect key="frame" x="166.66666666666666" y="95.666666666666671" width="41.666666666666657" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QU-og-TZN" userLabel="WalletNameLabel">
-                            <rect key="frame" x="166.66666666666666" y="46" width="42" height="20.666666666666671"/>
+                            <rect key="frame" x="166.66666666666666" y="46" width="41.666666666666657" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -61,41 +62,87 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tws-vD-1rs">
-                    <rect key="frame" x="0.0" y="137.66666666666669" width="375" height="575.33333333333326"/>
+                    <rect key="frame" x="0.0" y="136" width="375" height="577"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIR-YL-rVY">
                     <rect key="frame" x="0.0" y="714" width="375" height="64"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71J-84-iL2">
-                            <rect key="frame" x="8" y="12" width="175.66666666666666" height="40"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="G9T-Rb-dpO">
+                            <rect key="frame" x="8" y="12" width="359" height="40"/>
+                            <subviews>
+                                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="9pv-4d-Zod" userLabel="ttc_shortcut_view">
+                                    <rect key="frame" x="0.0" y="0.0" width="133.66666666666666" height="40"/>
+                                    <subviews>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="ttn_coin_icon" translatesAutoresizingMaskIntoConstraints="NO" id="uGm-zl-FJY">
+                                            <rect key="frame" x="62" y="7.6666666666666288" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="DW7-MX-FdA"/>
+                                                <constraint firstAttribute="width" constant="25" id="YXX-Mc-Qs0"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="wallet_btn_to" translatesAutoresizingMaskIntoConstraints="NO" id="4uQ-Ev-R4a">
+                                            <rect key="frame" x="40" y="10" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="Arc-sS-wPH"/>
+                                                <constraint firstAttribute="height" constant="20" id="gvt-Qz-VJ2"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="chat_btn_request" translatesAutoresizingMaskIntoConstraints="NO" id="Can-Be-DZk">
+                                            <rect key="frame" x="10" y="7.6666666666666288" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="7uT-th-1fT"/>
+                                                <constraint firstAttribute="height" constant="25" id="QeC-15-V2x"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="7mp-9G-fTD"/>
+                                        <constraint firstItem="Can-Be-DZk" firstAttribute="leading" secondItem="9pv-4d-Zod" secondAttribute="leading" constant="10" id="Cp6-PO-h1X"/>
+                                        <constraint firstItem="4uQ-Ev-R4a" firstAttribute="centerY" secondItem="9pv-4d-Zod" secondAttribute="centerY" id="PDn-xX-TEC"/>
+                                        <constraint firstItem="4uQ-Ev-R4a" firstAttribute="leading" secondItem="Can-Be-DZk" secondAttribute="trailing" constant="5" id="aa7-VW-jMI"/>
+                                        <constraint firstItem="uGm-zl-FJY" firstAttribute="centerY" secondItem="9pv-4d-Zod" secondAttribute="centerY" id="clG-3Q-OMw"/>
+                                        <constraint firstItem="uGm-zl-FJY" firstAttribute="leading" secondItem="4uQ-Ev-R4a" secondAttribute="trailing" constant="2" id="k7C-lO-bD7"/>
+                                        <constraint firstItem="Can-Be-DZk" firstAttribute="centerY" secondItem="9pv-4d-Zod" secondAttribute="centerY" id="qCa-fD-sUI"/>
+                                        <constraint firstAttribute="trailing" secondItem="uGm-zl-FJY" secondAttribute="trailing" constant="10" id="xq8-pX-zeG"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71J-84-iL2">
+                                    <rect key="frame" x="140.66666666666666" y="0.0" width="105.66666666666666" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="Qog-NL-TZp"/>
+                                    </constraints>
+                                    <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                                    <state key="normal" title="Button" image="wallet_btn_in"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQN-7X-LuA">
+                                    <rect key="frame" x="253.33333333333329" y="0.0" width="105.66666666666666" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="aAv-OO-kdS"/>
+                                    </constraints>
+                                    <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                                    <state key="normal" title="Button" image="wallet_btn_out"/>
+                                </button>
+                            </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Qog-NL-TZp"/>
+                                <constraint firstItem="71J-84-iL2" firstAttribute="width" secondItem="gQN-7X-LuA" secondAttribute="width" id="I9X-V5-C2B"/>
                             </constraints>
-                            <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
-                            <state key="normal" title="Button" image="wallet_btn_in"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQN-7X-LuA">
-                            <rect key="frame" x="191.66666666666663" y="12" width="175.33333333333337" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="aAv-OO-kdS"/>
-                            </constraints>
-                            <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
-                            <state key="normal" title="Button" image="wallet_btn_out"/>
-                        </button>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="71J-84-iL2" firstAttribute="width" secondItem="gQN-7X-LuA" secondAttribute="width" id="47T-jX-XfQ"/>
-                        <constraint firstAttribute="trailing" secondItem="gQN-7X-LuA" secondAttribute="trailing" constant="8" id="A58-LY-NcD"/>
-                        <constraint firstItem="71J-84-iL2" firstAttribute="leading" secondItem="NIR-YL-rVY" secondAttribute="leading" constant="8" id="DvS-XU-7DO"/>
-                        <constraint firstItem="71J-84-iL2" firstAttribute="top" secondItem="NIR-YL-rVY" secondAttribute="top" constant="12" id="SYQ-ee-FqK"/>
-                        <constraint firstItem="gQN-7X-LuA" firstAttribute="leading" secondItem="71J-84-iL2" secondAttribute="trailing" constant="8" id="aei-QQ-c5i"/>
-                        <constraint firstAttribute="bottom" secondItem="gQN-7X-LuA" secondAttribute="bottom" constant="12" id="bN5-SW-lgc"/>
-                        <constraint firstItem="gQN-7X-LuA" firstAttribute="top" secondItem="NIR-YL-rVY" secondAttribute="top" constant="12" id="cc2-Pe-iXh"/>
-                        <constraint firstAttribute="bottom" secondItem="71J-84-iL2" secondAttribute="bottom" constant="12" id="d49-HU-3bL"/>
+                        <constraint firstAttribute="trailing" secondItem="G9T-Rb-dpO" secondAttribute="trailing" constant="8" id="5vQ-vn-5PP"/>
+                        <constraint firstItem="G9T-Rb-dpO" firstAttribute="leading" secondItem="NIR-YL-rVY" secondAttribute="leading" constant="8" id="Dwt-A1-FWT"/>
+                        <constraint firstItem="G9T-Rb-dpO" firstAttribute="top" secondItem="NIR-YL-rVY" secondAttribute="top" constant="12" id="OOU-sv-huG"/>
+                        <constraint firstAttribute="bottom" secondItem="G9T-Rb-dpO" secondAttribute="bottom" constant="12" id="ZJU-cE-HFg"/>
                     </constraints>
                 </view>
             </subviews>
@@ -121,11 +168,14 @@
                     <exclude reference="ekH-zD-vGx"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="32.799999999999997" y="52.623688155922046"/>
+            <point key="canvasLocation" x="32.799999999999997" y="52.463054187192121"/>
         </view>
     </objects>
     <resources>
+        <image name="chat_btn_request" width="72" height="72"/>
+        <image name="ttn_coin_icon" width="96" height="96"/>
         <image name="wallet_btn_in" width="48" height="48"/>
         <image name="wallet_btn_out" width="48" height="48"/>
+        <image name="wallet_btn_to" width="48" height="48"/>
     </resources>
 </document>

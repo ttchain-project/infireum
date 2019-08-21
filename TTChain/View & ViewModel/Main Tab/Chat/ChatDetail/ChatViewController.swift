@@ -117,6 +117,7 @@ final class ChatViewController: KLModuleViewController, KLVMVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     private lazy var hud = {

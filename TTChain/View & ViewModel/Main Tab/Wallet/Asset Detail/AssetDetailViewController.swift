@@ -48,9 +48,12 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         startMonitorThemeIfNeeded()
         
         if constructor.purpose == .lightTx {
-            
             self.transferBase.isHidden = true
             self.view.layoutIfNeeded()
+        }else {
+            if viewModel.input.asset.wallet!.mainCoin!.identifier == Coin.btc_identifier {
+                self.ttcShortcutView.isHidden = false
+            }
         }
     }
     
@@ -67,6 +70,11 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var transferBase: UIView!
     @IBOutlet weak var depositBtn: UIButton!
     @IBOutlet weak var withdrawalBtn: UIButton!
+    @IBOutlet weak var ttcShortcutView: UIView! {
+        didSet {
+            ttcShortcutView.isHidden = true
+        }
+    }
     
     private var tabVC: TransRecordListTabViewController!
     
@@ -90,12 +98,6 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         }
         
         view.backgroundColor = .white
-//        assetInfoBase.addShadow(
-//            ofColor: UIColor.init(white: 214.0/256.0, alpha: 0.5),
-//            radius: 1,
-//            offset: CGSize.init(width: 0, height: 1),
-//            opacity: 1
-//        )
         assetInfoBase.backgroundColor = .cloudBurst
         assetAmtLabel.set(textColor: palette.label_main_2, font: .owMedium(size: 26))
         assetFiatAmtLabel.set(textColor: palette.label_main_2, font: .owRegular(size: 12))
@@ -194,6 +196,9 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         })
             .disposed(by: bag)
         
+        ttcShortcutView.rx.klrx_tap.drive(onNext: {
+            self.toTTCShortcut(asset: self.viewModel.input.asset)
+        }).disposed(by: bag)
         
         viewModel.startWithdrawal
             .flatMapLatest {
@@ -273,6 +278,23 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         }
     }
     
+    private func toTTCShortcut(asset: Asset) {
+        let toAsset:Asset? = {
+            switch asset.coinID {
+            case Coin.btc_identifier:
+                return Asset.getAssetsForCoinID(coinId: Coin.btcn_identifier).first
+            case Coin.usdt_identifier:
+                return Asset.getAssetsForCoinID(coinId: Coin.usdtn_identifier).first
+            default:
+                return nil
+            }
+        }()
+        
+        let vc = LightDepositWalletChooseViewController.navInstance(from: LightDepositWalletChooseViewController.Config(toAsset: toAsset!, fromAsset: asset))
+        self.present(vc, animated: true, completion: nil)
+
+    }
+    
     
     //MARK: Fee Preparation
     private func prepareFee(ofAsset asset: Asset) -> RxAPIVoidResponse {
@@ -284,15 +306,5 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
             return FeeManager.updateCICFeeRates(mainCoinID: mainCoinID)
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

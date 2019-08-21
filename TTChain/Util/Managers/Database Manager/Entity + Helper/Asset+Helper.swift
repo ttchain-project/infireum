@@ -93,8 +93,8 @@ extension Asset {
         return assets
     }
     
-    static func getAssetsForCoin(coin:Coin) -> [Asset] {
-        let assetPred = Asset.genPredicate(fromIdentifierType: .str(keyPath: #keyPath(coinID), value: coin.identifier!))
+    static func getAssetsForCoinID(coinId:String) -> [Asset] {
+        let assetPred = Asset.genPredicate(fromIdentifierType: .str(keyPath: #keyPath(coinID), value: coinId))
         guard let assets = DB.instance.get(type: self, predicate: assetPred, sorts: nil)?.filter({ $0.wallet != nil }) else {
             return errorDebug(response: [])
         }

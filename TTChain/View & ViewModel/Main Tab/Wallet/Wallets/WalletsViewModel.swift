@@ -155,7 +155,7 @@ class WalletsViewModel: KLRxViewModel {
     func prepareSectionModels() {
         self.sectionModelSources.accept(self.input.coins.map(SectionOfTable.init))
         self.assets.accept(self.input.coins.map{ coin -> [Asset] in
-            let assets = Asset.getAssetsForCoin(coin: coin)
+            let assets = Asset.getAssetsForCoinID(coinId: coin.identifier!)
             self.coinToAssetsTable[coin] = assets
             return assets
             }.flatMap { $0 })
@@ -225,7 +225,7 @@ class WalletsViewModel: KLRxViewModel {
         if let assets = coinToAssetsTable[coin] {
             return assets
         } else {
-            return Asset.getAssetsForCoin(coin: coin)
+            return Asset.getAssetsForCoinID(coinId: coin.identifier!)
         }
     }
     

@@ -118,6 +118,7 @@ extension ChatPersonListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         self.viewModel.sections.map { $0[section] }.map { $0.title }.bind(to: label.rx.text).disposed(by: bag)
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         
         let view = UIView()
@@ -134,6 +135,9 @@ extension ChatPersonListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 && self.viewModel.friendRequestList.value.count == 0 {
+            return 0
+        }
         return 35.0
     }
 }

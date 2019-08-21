@@ -159,6 +159,9 @@ extension ChatGroupListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 && self.viewModel.groupRequestList.value.count == 0 {
+            return 0
+        }
         return 35.0
     }
 }
