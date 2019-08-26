@@ -115,8 +115,16 @@ final class IdentitySetupViewController: KLModuleViewController, KLVMVC {
     }
     
     private func toCreate() {
-        let nav = IdentityCreateViewController.navInstance()
-        present(nav, animated: true, completion: nil)
+        
+            let vc = PrivacyPolicyViewController.init(status: { (status) in
+                self.presentedViewController?.dismiss(animated: true, completion: {
+                    if status {
+                        let nav = IdentityCreateViewController.navInstance()
+                        self.present(nav, animated: true, completion: nil)
+                    }
+                })
+            })
+            self.present(vc, animated: true, completion: nil)
     }
     
     private func toRestore() {

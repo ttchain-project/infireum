@@ -218,6 +218,12 @@
 		553ACEE321646024002C59AB /* UIImageView+CrispQRCodeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553ACEE021646024002C59AB /* UIImageView+CrispQRCodeImage.swift */; };
 		553ACEE421649CB7002C59AB /* AgreementMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */; };
 		553ACEE521649CB7002C59AB /* AgreementMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */; };
+		553BEE9D230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BEE9B230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift */; };
+		553BEE9E230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BEE9B230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift */; };
+		553BEE9F230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553BEE9B230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift */; };
+		553BEEA0230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553BEE9C230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib */; };
+		553BEEA1230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553BEE9C230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib */; };
+		553BEEA2230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553BEE9C230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib */; };
 		554D2CFD2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D2CFB2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift */; };
 		554D2CFE2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D2CFB2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift */; };
 		554D2CFF2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D2CFB2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift */; };
@@ -2394,6 +2400,8 @@
 		5539A48521676F8C00A59ACC /* IdentityQRCodeImportTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityQRCodeImportTableViewHeader.xib; sourceTree = "<group>"; };
 		5539A48721676F8C00A59ACC /* IdentityQRCodeImportViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityQRCodeImportViewModel.swift; sourceTree = "<group>"; };
 		553ACEE021646024002C59AB /* UIImageView+CrispQRCodeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+CrispQRCodeImage.swift"; sourceTree = "<group>"; };
+		553BEE9B230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackQRCodePwdEntryViewController.swift; sourceTree = "<group>"; };
+		553BEE9C230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BackQRCodePwdEntryViewController.xib; sourceTree = "<group>"; };
 		554D2CE822448F0F0004CA09 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		554D2CEA22448F0F0004CA09 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		554D2CFB2244CE6A0004CA09 /* CreateRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRedEnvelopeViewController.swift; sourceTree = "<group>"; };
@@ -3533,6 +3541,8 @@
 			children = (
 				5539A46921676F0300A59ACC /* IdentityQRCodeEncryptionFlow.swift */,
 				5539A46A21676F0300A59ACC /* QRCode Content */,
+				553BEE9B230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift */,
+				553BEE9C230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -7291,6 +7301,7 @@
 				55AADF0C22004ED900F403C8 /* ReceiptTableViewCell.xib in Resources */,
 				64D8266320E22F4300C8FC63 /* ManageAssetViewController.xib in Resources */,
 				645619232150D339001092E5 /* ImportWalletTypeChooseViewController.xib in Resources */,
+				553BEEA2230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib in Resources */,
 				555E4A642248F81500C7CAD5 /* RceiveRedEnvelopeTableViewCell.xib in Resources */,
 				5569803D2188566F00346757 /* TTChain_SIT-Info.plist in Resources */,
 				555E4AC7224CB99900C7CAD5 /* SendRedEnvelopeHistoryView.xib in Resources */,
@@ -7609,6 +7620,7 @@
 				64D826CA20E4C66B00C8FC63 /* SearchAssetViewController.xib in Resources */,
 				6481399B20DA754D00CAA4D8 /* BackupWalletMnemonicVerifyViewController.xib in Resources */,
 				6446E23E20FCE3F700EC1E2E /* ChangePrefFiatViewController.xib in Resources */,
+				553BEEA0230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib in Resources */,
 				55F987C0227BE59F000C32F9 /* LightDepositWalletChooseViewController.xib in Resources */,
 				55EF6A9321A812C6007E074A /* SearchMemberViewController.xib in Resources */,
 				649E48C920ECF43800B217AD /* WalletPKeyQRCodeViewController.xib in Resources */,
@@ -7812,6 +7824,7 @@
 				64D826CB20E4C66B00C8FC63 /* SearchAssetViewController.xib in Resources */,
 				6481399C20DA754D00CAA4D8 /* BackupWalletMnemonicVerifyViewController.xib in Resources */,
 				6446E23F20FCE3F700EC1E2E /* ChangePrefFiatViewController.xib in Resources */,
+				553BEEA1230D25E400C250A3 /* BackQRCodePwdEntryViewController.xib in Resources */,
 				55F987C1227BE59F000C32F9 /* LightDepositWalletChooseViewController.xib in Resources */,
 				55EF6A9421A812C6007E074A /* SearchMemberViewController.xib in Resources */,
 				649E48CA20ECF43800B217AD /* WalletPKeyQRCodeViewController.xib in Resources */,
@@ -8234,6 +8247,7 @@
 				640D893820F069F80010D986 /* WithdrawalChildVCProtocol.swift in Sources */,
 				640D891C20EF6DD00010D986 /* TransRecordListTabViewController.swift in Sources */,
 				550873FF21E5A398007B3B3B /* SettingMenuHeaderCollectionReusableView.swift in Sources */,
+				553BEE9F230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift in Sources */,
 				555E4AC1224CB99900C7CAD5 /* RedEnvelopeHistoryTableViewCell.swift in Sources */,
 				64F07E0520D241A000A60C5C /* UIViewController+StoryboardInstance.swift in Sources */,
 				64D80D6421364B50004DAC09 /* APISensitiveDataCrypter.swift in Sources */,
@@ -9302,6 +9316,7 @@
 				5558B0CC22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */,
 				559C4F16222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				5565065A22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
+				553BEE9D230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift in Sources */,
 				64B98EE020FA03BE00C4EB11 /* LightningTransRecordTableViewCell.swift in Sources */,
 				64D8267C20E339C200C8FC63 /* OfflineWallet.xcdatamodeld in Sources */,
 				64A1178B20D4E7FB00797C2C /* Database+Configuration.swift in Sources */,
@@ -9856,6 +9871,7 @@
 				5558B0CD22E07C27007C7C1E /* SkipBackupWarningViewController.swift in Sources */,
 				559C4F17222665A2009466A8 /* TTNotificationHandler.swift in Sources */,
 				5565065B22B342640042EFC4 /* WalletsContainerViewModel.swift in Sources */,
+				553BEE9E230D25E400C250A3 /* BackQRCodePwdEntryViewController.swift in Sources */,
 				64813A6B20DCA6EE00CAA4D8 /* ServerSyncRecord+CoreDataProperties.swift in Sources */,
 				640D88C020EDBA980010D986 /* ImportWalletViaPrivateKeyViewController.swift in Sources */,
 				649732CE213F7D2B00C4D1D5 /* Coin+CoreDataProperties.swift in Sources */,

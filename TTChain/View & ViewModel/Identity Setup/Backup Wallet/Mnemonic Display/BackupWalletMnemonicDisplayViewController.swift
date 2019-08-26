@@ -57,7 +57,7 @@ class BackupWalletMnemonicDisplayViewController: KLModuleViewController {
     }
     
     override func renderTheme(_ theme: Theme) {
-        changeBackBarButton(toColor: theme.palette.nav_item_1, image: #imageLiteral(resourceName: "btn_previous_light"))
+        changeBackBarButton(toColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
         titleLabel.set(
             textColor: theme.palette.label_main_1,
             font: .owMedium(size: 18)

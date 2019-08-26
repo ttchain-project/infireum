@@ -109,6 +109,16 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         pwdTextField.delegate = self
         confirmTextField.delegate = self
         pwdHintTextField.delegate = self
+        acceptPrivacyPolicyBtn.isSelected = true
+    }
+    
+    fileprivate func showPrivacyPolicyVC() {
+        let vc = PrivacyPolicyViewController.init(status: { (status) in
+            self.acceptPrivacyPolicyBtn.isSelected = status
+            self.privacyVC?.dismiss(animated: true)
+        })
+        self.privacyVC = vc
+        self.present(vc, animated: true, completion: nil)
     }
     
     private func bindUI() {
@@ -127,18 +137,12 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
             }
         }).disposed(by: bag)
         self.privacyPolicyLabel.rx.klrx_tap.drive(onNext:{
-            let vc = PrivacyPolicyViewController.init(status: { (status) in
-                self.acceptPrivacyPolicyBtn.isSelected = status
-                self.privacyVC?.dismiss(animated: true)
-            })
-            self.privacyVC = vc
-            self.present(vc, animated: true, completion: nil)
+            self.showPrivacyPolicyVC()
         }).disposed(by: bag)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
@@ -191,6 +195,7 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         createBtn.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
         createBtn.setTitleColor(theme.palette.btn_bgFill_disable_text, for: .disabled)
         privacyPolicyLabel.set(textColor: theme.palette.bg_fill_new, font: .owRegular(size:14))
+        
     }
     
     private func respondToFieldCheckValidityResult(validity: ViewModel.InputValidity) {

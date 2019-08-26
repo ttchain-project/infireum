@@ -7,7 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-         
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatKeyboardView" customModule="Hope_Seed" customModuleProvider="target">
@@ -20,7 +20,8 @@
                 <outlet property="privateChatBannerView" destination="wP6-FT-Ool" id="Z43-d7-Wnw"/>
                 <outlet property="privateChatDurationTitleLabel" destination="2HH-b1-1aB" id="U9a-ak-Vnz"/>
                 <outlet property="recordAudioButton" destination="EL4-jm-Aox" id="8QL-Ki-w1E"/>
-                <outlet property="recorderKeyboardSwitchButton" destination="hY6-Rj-llJ" id="7d1-cv-lKN"/>
+                <outlet property="recorderKeyboardSwitchButton" destination="tkv-Ba-wwI" id="G2E-S1-REv"/>
+                <outlet property="sendButton" destination="06z-Lv-M3v" id="AsV-9H-ehl"/>
                 <outlet property="textField" destination="RcF-G5-WIi" id="3jH-4a-CVK"/>
             </connections>
         </placeholder>
@@ -57,9 +58,68 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfZ-UH-fEG">
                     <rect key="frame" x="0.0" y="84" width="375" height="48"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EL4-jm-Aox">
-                            <rect key="frame" x="83" y="7" width="30" height="34"/>
-                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDn-4d-gwd">
+                            <rect key="frame" x="39" y="5" width="331" height="38"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EL4-jm-Aox">
+                                    <rect key="frame" x="10" y="4" width="281" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="efC-Xu-nec"/>
+                                    </constraints>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RcF-G5-WIi">
+                                    <rect key="frame" x="10" y="4" width="281" height="30"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkv-Ba-wwI">
+                                    <rect key="frame" x="296" y="4" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="9WP-Ez-5xS"/>
+                                        <constraint firstAttribute="height" constant="30" id="LqC-3e-dzS"/>
+                                    </constraints>
+                                    <color key="tintColor" red="1" green="0.96078431369999995" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" image="chat_btn_voice"/>
+                                    <state key="selected" image="keyboard_black"/>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06z-Lv-M3v">
+                                    <rect key="frame" x="296" y="4" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="IkJ-xu-1M9"/>
+                                        <constraint firstAttribute="height" constant="30" id="Wxw-KS-yOa"/>
+                                    </constraints>
+                                    <state key="normal" image="iconSendActive"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="06z-Lv-M3v" firstAttribute="trailing" secondItem="tkv-Ba-wwI" secondAttribute="trailing" id="MDb-u9-Aod"/>
+                                <constraint firstItem="RcF-G5-WIi" firstAttribute="leading" secondItem="TDn-4d-gwd" secondAttribute="leading" constant="10" id="QgD-k7-y1j"/>
+                                <constraint firstItem="06z-Lv-M3v" firstAttribute="bottom" secondItem="tkv-Ba-wwI" secondAttribute="bottom" id="QyF-sI-Vro"/>
+                                <constraint firstItem="06z-Lv-M3v" firstAttribute="leading" secondItem="tkv-Ba-wwI" secondAttribute="leading" id="Y1C-Jr-fib"/>
+                                <constraint firstItem="tkv-Ba-wwI" firstAttribute="centerY" secondItem="TDn-4d-gwd" secondAttribute="centerY" id="cAX-SK-TI2"/>
+                                <constraint firstAttribute="trailing" secondItem="tkv-Ba-wwI" secondAttribute="trailing" constant="5" id="dsW-HE-cnf"/>
+                                <constraint firstItem="EL4-jm-Aox" firstAttribute="trailing" secondItem="RcF-G5-WIi" secondAttribute="trailing" id="gP5-Ml-vD6"/>
+                                <constraint firstItem="EL4-jm-Aox" firstAttribute="height" secondItem="RcF-G5-WIi" secondAttribute="height" id="hYg-tA-wfV"/>
+                                <constraint firstItem="tkv-Ba-wwI" firstAttribute="leading" secondItem="RcF-G5-WIi" secondAttribute="trailing" constant="5" id="mFD-cn-uR0"/>
+                                <constraint firstItem="EL4-jm-Aox" firstAttribute="centerY" secondItem="TDn-4d-gwd" secondAttribute="centerY" id="tDF-5n-ohm"/>
+                                <constraint firstItem="RcF-G5-WIi" firstAttribute="centerY" secondItem="TDn-4d-gwd" secondAttribute="centerY" id="vr1-aR-OQt"/>
+                                <constraint firstItem="EL4-jm-Aox" firstAttribute="leading" secondItem="RcF-G5-WIi" secondAttribute="leading" id="ydh-xy-hBt"/>
+                                <constraint firstItem="06z-Lv-M3v" firstAttribute="top" secondItem="tkv-Ba-wwI" secondAttribute="top" id="zZF-Ia-Wa6"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ft0-rF-tYL">
                             <rect key="frame" x="7" y="8" width="32" height="32"/>
                             <constraints>
@@ -69,33 +129,13 @@
                             <state key="normal" image="chat_btn_open"/>
                             <state key="selected" image="chat_btn_close"/>
                         </button>
-                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RcF-G5-WIi">
-                            <rect key="frame" x="83" y="7" width="282" height="34"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY6-Rj-llJ">
-                            <rect key="frame" x="46" y="9" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="GjZ-ot-8YU"/>
-                                <constraint firstAttribute="height" constant="30" id="zkg-wV-UbY"/>
-                            </constraints>
-                            <state key="normal" image="chat_btn_voice"/>
-                            <state key="selected" image="keyboard_black"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.20784313730000001" green="0.25882352939999997" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="RcF-G5-WIi" firstAttribute="leading" secondItem="hY6-Rj-llJ" secondAttribute="trailing" constant="7" id="116-7w-IM8"/>
-                        <constraint firstItem="EL4-jm-Aox" firstAttribute="height" secondItem="RcF-G5-WIi" secondAttribute="height" id="1YH-LN-Lut"/>
-                        <constraint firstItem="EL4-jm-Aox" firstAttribute="centerY" secondItem="EfZ-UH-fEG" secondAttribute="centerY" id="6Z5-gV-B71"/>
-                        <constraint firstItem="hY6-Rj-llJ" firstAttribute="centerY" secondItem="Ft0-rF-tYL" secondAttribute="centerY" id="7Ie-Ta-y5E"/>
-                        <constraint firstItem="hY6-Rj-llJ" firstAttribute="leading" secondItem="Ft0-rF-tYL" secondAttribute="trailing" constant="7" id="F8v-zW-vJG"/>
-                        <constraint firstItem="RcF-G5-WIi" firstAttribute="centerY" secondItem="EfZ-UH-fEG" secondAttribute="centerY" id="GmC-Zc-ltY"/>
-                        <constraint firstAttribute="trailing" secondItem="RcF-G5-WIi" secondAttribute="trailing" constant="10" id="NHe-sQ-HFK"/>
-                        <constraint firstItem="EL4-jm-Aox" firstAttribute="leading" secondItem="hY6-Rj-llJ" secondAttribute="trailing" constant="7" id="WWu-RA-Hrx"/>
+                        <constraint firstAttribute="bottom" secondItem="TDn-4d-gwd" secondAttribute="bottom" constant="5" id="0A5-at-2m1"/>
+                        <constraint firstAttribute="trailing" secondItem="TDn-4d-gwd" secondAttribute="trailing" constant="5" id="3O8-wd-AoI"/>
+                        <constraint firstItem="TDn-4d-gwd" firstAttribute="leading" secondItem="Ft0-rF-tYL" secondAttribute="trailing" id="Ocf-Em-rfQ"/>
+                        <constraint firstItem="TDn-4d-gwd" firstAttribute="top" secondItem="EfZ-UH-fEG" secondAttribute="top" constant="5" id="ZxB-Zm-9b1"/>
                         <constraint firstItem="Ft0-rF-tYL" firstAttribute="leading" secondItem="EfZ-UH-fEG" secondAttribute="leading" constant="7" id="bz8-JM-2aT"/>
                         <constraint firstAttribute="height" constant="48" id="pvq-tv-L5o"/>
                         <constraint firstItem="Ft0-rF-tYL" firstAttribute="centerY" secondItem="EfZ-UH-fEG" secondAttribute="centerY" id="sPI-9X-0YO"/>
@@ -175,6 +215,7 @@
         <image name="chat_btn_close" width="120" height="120"/>
         <image name="chat_btn_open" width="120" height="120"/>
         <image name="chat_btn_voice" width="72" height="72"/>
+        <image name="iconSendActive" width="72" height="72"/>
         <image name="keyboard_black" width="36" height="36"/>
     </resources>
 </document>

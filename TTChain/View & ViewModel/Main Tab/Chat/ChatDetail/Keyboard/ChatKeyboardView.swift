@@ -39,13 +39,12 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
         didSet { blockView.isHidden = !isBlock }
     }
     @IBOutlet weak var recorderKeyboardSwitchButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
     
     @IBOutlet weak var recordAudioButton: UIButton!
     
     @IBOutlet weak var privateChatBannerView: UIView!
     @IBOutlet weak var privateChatDurationTitleLabel: UILabel!
-    
-    var sendButton:UIButton!
     
     enum ChatFunctionEnum : Int{
         
@@ -117,22 +116,15 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
     func initTextField() {
         textField.inputView = nil
         
-        self.sendButton = UIButton.init(type: .custom)
-        sendButton.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
-        sendButton.setImageForAllStates(#imageLiteral(resourceName: "iconSendActive"))
-        sendButton.isEnabled = false
-        let rightView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
-        rightView.addSubview(sendButton)
-        textField.rightView = rightView
-        textField.rightViewMode = .always
-        
-//        sendButton.setImageForAllStates(#imageLiteral(resourceName: "iconSendActive"))
-//        sendButton.setImage(#imageLiteral(resourceName: "iconSendGray"), for: .disabled)
-//        sendButton.isEnabled = false
         textField.rx.text
             .replaceNilWith("")
             .map { $0.count > 0 }
-            .bind(to: sendButton.rx.isEnabled).disposed(by: bag)
+            .bind(to: recorderKeyboardSwitchButton.rx.isHidden).disposed(by: bag)
+        
+        textField.rx.text
+            .replaceNilWith("")
+            .map { $0.count == 0 }
+            .bind(to: sendButton.rx.isHidden).disposed(by: bag)
     }
     
     func initMoreButton() {
@@ -186,17 +178,6 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
             }).disposed(by: bag)
 
     }
-    
-//    @objc func keyboardWillShow(notification: Notification) {
-//        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-//            animateInputContentView(offset: keyboardFrame.cgRectValue.height)
-//        }
-//    }
-//
-//    @objc func keyboardWillHide(notification: Notification) {
-//        animateInputContentView(offset: 0)
-//    }
-//
     
     func configRecorderButton() {
         

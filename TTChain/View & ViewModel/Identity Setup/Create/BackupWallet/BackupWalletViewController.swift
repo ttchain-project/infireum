@@ -31,6 +31,7 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
         self.confirmButton.isHidden = true
         self.viewModel = BackupWalletViewModel.init(input: BackupWalletViewModel.Input(name:constructor.name, pwd:constructor.pwd, pwdHint:constructor.pwdHint), output: BackupWalletViewModel.OutputSource())
         self.bindUI()
+        self.viewModel.createIdentity()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,6 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.viewModel.createIdentity()
     }
     lazy var hud: KLHUD = {
         return KLHUD.init(
@@ -142,8 +142,8 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
                 switch result {
                 case .createOwnQRCode(let content):
                     self?.viewModel.createQRCode(fromContent:content)
-                case .skipped:
-                    self?.toMainTab()
+//                case .skipped:
+//                    self?.toMainTab()
                 default:
                     break
                 }

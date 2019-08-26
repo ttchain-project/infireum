@@ -132,7 +132,7 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
             .disposed(by: bag)
     }
     
-    private enum PwdAndHintInputResult {
+    enum PwdAndHintInputResult {
         case skipped
         case invalidPwdFormat(desc: String)
         case invalidPwdHintFormat(desc: String)
@@ -144,82 +144,9 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
     private var pwdHintTextField: UITextField?
     private func presentPwdAndHintInputAlert() -> Observable<PwdAndHintInputResult> {
 
-        return Observable.create({ [weak self]
-            (observer) -> Disposable in
-            guard
-                let wSelf = self,
-                let vc = wSelf.requestVC else {
-                observer.onNext(.skipped)
-                return Disposables.create()
-            }
-            let dls = LM.dls
-            let alert = UIAlertController.init(
-                title: dls.qrCodeExport_alert_backup_title,
-                message: dls.qrCodeExport_alert_note_content,
-                preferredStyle: .alert)
-            
-            
-            let skipped = UIAlertAction.init(title: dls.qrcodeExport_alert_btn_skip, style: .cancel) { (_) in
-                observer.onNext(.skipped)
-            }
-            
-            let confirm = UIAlertAction.init(title: LM.dls.qrcodeExport_alert_btn_backup, style: .default, handler: { (_) in
-                guard let pwd = wSelf.pwdTextField?.text,
-                    let hint = wSelf.pwdHintTextField?.text else {
-                        observer.onNext(errorDebug(response: .skipped))
-                        return
-                }
-                
-                if case .incorrectFormat(let desc) = pwd.ow_isValidWalletPwd {
-                    observer.onNext(.invalidPwdFormat(desc: desc))
-                    return
-                }else if case .incorrectFormat(let desc) = hint.ow_isValidPwdHint {
-                    observer.onNext(.invalidPwdHintFormat(desc: desc))
-                    return
-                }else if pwd == hint  {
-                    observer.onNext(.samePasswordAndHint(desc: dls.strValidate_field_pwdHintSame))
-                    return
-                }
-                
-                observer.onNext(.success(pwd: pwd, pwdHint: hint))
-            })
-            
-            alert.addTextField(configurationHandler: { (tf) in
-                wSelf.pwdTextField = tf
-                tf.delegate = self
-                tf.isSecureTextEntry = true
-                tf.set(placeholder: dls.qrCodeExport_alert_placeholder_pwd)
-                //                print("Reach tf build up")
-            })
-            
-            alert.addTextField(configurationHandler: { (tf) in
-                wSelf.pwdHintTextField = tf
-                tf.set(placeholder: dls.qrCodeExport_alert_placeholder_hint)
-                tf.delegate = self
-//                print("Reach second tf build up")
-            })
-
-            alert.addAction(skipped)
-            alert.addAction(confirm)
-            
-            vc.present(alert, animated: true, completion: {
-                print("Reach block part")
-                Observable.combineLatest(
-                        wSelf.pwdTextField!.rx.text
-                            .replaceNilWith("")
-                            .map { $0.count > 0 },
-                        wSelf.pwdHintTextField!.rx.text
-                            .replaceNilWith("")
-                            .map { $0.count > 0 }
-                    )
-                    .map { $0 && $1 }
-                    .bind(to: confirm.rx.isEnabled)
-                    .disposed(by: wSelf.bag)
-                
-            })
-            
-            return Disposables.create()
-        })
+        let vc = BackQRCodePwdEntryViewController.init()
+        self.requestVC?.present(vc, animated: false, completion: nil)
+        return vc.finalResult.asObservable()
     }
     
     private func presentQRCodeContentView(withPwd pwd: String, hint: String) {
@@ -245,6 +172,7 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
         if self.launchType == .create {
             self._onComplete.accept(Result.createOwnQRCode(qrCodeContent))
         }else {
+            requestVC?.presentedViewController?.dismiss(animated: true, completion: nil)
             requestVC?.present(vc, animated: true, completion: nil)
         }
     }
