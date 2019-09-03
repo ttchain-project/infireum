@@ -808,5 +808,8 @@ struct DLS_EN_US: DLS {
     
     var chat_community_mgmt_label = "Community Management"
     var only_admin_post_title = "Only admins can post"
+    var imported_wallets = "Imporeted Wallets"
+    var login_success = "You have successfully logged in"
+    var welcome_back = "Welcome Back"
 }
 

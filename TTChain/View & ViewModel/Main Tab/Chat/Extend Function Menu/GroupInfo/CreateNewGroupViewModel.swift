@@ -94,7 +94,7 @@ class CreateNewGroupViewModel : KLRxViewModel {
     
     func createGroup()  {
         guard let groupName = self.groupName.value else { fatalError("groupName should not be nil.") }
-        let parameters = CreateGroupAPI.Parameters.init(isPrivate: false, groupName: groupName, isPostMsg: false, introduction: self.groupInfo.value ?? "" )
+        let parameters = CreateGroupAPI.Parameters.init(isPrivate: false, groupName: groupName, isPostMsg: true, introduction: self.groupInfo.value ?? "" )
         self.output.animateHUDSubject.onNext(true)
         Server.instance.createGroup(parameters: parameters).asObservable().subscribe(onNext: {
             [weak self] result in

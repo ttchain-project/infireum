@@ -42,7 +42,7 @@ class WalletsContainerViewModel:KLRxViewModel {
         case .mainChain:
             return [Coin.btc,Coin.eth]
         case .stableChain:
-            return coins.filter { $0.identifier == Coin.usdt_identifier || $0.identifier?.contains("_FIAT") == true }.compactMap { $0 }
+            return coins.filter { $0.identifier == Coin.usdt_identifier }.compactMap { $0 }
         default:
             return []
         }

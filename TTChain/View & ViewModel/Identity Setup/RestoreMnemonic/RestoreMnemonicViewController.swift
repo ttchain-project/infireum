@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
+import Foundation
 final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
     var viewModel: RestoreMnemonicViewModel!
     
@@ -118,6 +118,8 @@ final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
     func toIdentityRestore(_ mnemonic:String) {
         let vc = IdentityRestoreViewController.instance(from: IdentityRestoreViewController.Config(mnemonic: mnemonic))
         self.navigationController?.pushViewController(vc)
+        
+
     }
 }
 

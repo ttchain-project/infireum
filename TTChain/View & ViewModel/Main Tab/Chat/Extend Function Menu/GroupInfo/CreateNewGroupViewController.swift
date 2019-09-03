@@ -212,7 +212,7 @@ final class CreateNewGroupViewController: KLModuleViewController, KLVMVC {
         
         self.manageCommunityView.rx.klrx_tap.drive(onNext:{
             let vc = CommunityManagementViewController.instance(from: CommunityManagementViewController.Config(postMsgStatus: self.viewModel.groupModel.value?.isPostMsg ?? true, didUpdatePostStatus:{ status in
-                self.viewModel.groupModel.value?.isPostMsg = status
+                self.viewModel.groupModel.value?.isPostMsg = !status
                 self.viewModel.shouldUpdateGroup.accept(true)
             }))
             self.navigationController?.pushViewController(vc)

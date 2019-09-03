@@ -56,7 +56,7 @@ extension Asset {
         
         let selections = CoinSelection.getAllSelections(of: wallet,
                                                         filterIsSelected: true)
-        let assets = selections.filter { $0.coinIdentifier?.contains("_FIAT") == false  }.compactMap { $0.findAsset() }
+        let assets = selections.compactMap { $0.findAsset() }
         return assets
     }
     

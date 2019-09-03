@@ -801,6 +801,9 @@ struct DLS_ZH_TW: DLS {
     var chat_community_mgmt_label = "社群管理"
     
     var only_admin_post_title = "只有管理員以上階級可以張貼訊息"
+    var imported_wallets = "已導入的錢包"
+    var login_success = "您已成功登入"
+    var welcome_back = "歡迎回來"
 }
 
 

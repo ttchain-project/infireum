@@ -60,7 +60,7 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     }()
     
     struct Config {
-        let mnemonic:String
+        let mnemonic: String
     }
     func config(constructor: IdentityRestoreViewController.Config) {
         view.layoutIfNeeded()
@@ -185,8 +185,12 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
                 self.hud.stopAnimating()
                 if status {
                     TTNWalletManager.setupTTNWallet(withPwd: pwd)
-
-                    self.startBackupIdentityQRCodeFlow()
+                    guard let wallets = Identity.singleton!.wallets?.array as? [Wallet] else {
+                        self.toMainTab()
+                        return
+                    }
+                    let vc = ImportSuccessViewController.instance(from: ImportSuccessViewController.Config(wallets:wallets))
+                    self.navigationController?.pushViewController(vc, animated:true)
                 }else {
                     self.showSimplePopUp(with: LM.dls.sortMnemonic_error_create_wallet_fail,
                                          contents: "",

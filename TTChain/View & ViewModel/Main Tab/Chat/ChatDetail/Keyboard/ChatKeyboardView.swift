@@ -351,6 +351,10 @@ class ChatKeyboardView: XIBView, UICollectionViewDataSource, UICollectionViewDel
        
             self.output?.onSelectChatFunction(self.functions[indexPath.row])
         }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+    }
 }
 
 extension ChatKeyboardView: AVAudioRecorderDelegate,AVAudioPlayerDelegate {

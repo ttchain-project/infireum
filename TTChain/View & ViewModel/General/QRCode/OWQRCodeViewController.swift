@@ -522,7 +522,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
         
         DispatchQueue.global().async {
             var firstResult : String?
-            if self._scanningType.value == .userId {
+            if self._scanningType.value == .userId || self._scanningType.value == .withdrawal {
                 
                 firstResult = scanner.detectForuserId(img)?.first
                 

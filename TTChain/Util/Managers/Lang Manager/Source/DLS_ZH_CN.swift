@@ -786,6 +786,9 @@ struct DLS_ZH_CN: DLS {
     var chat_community_mgmt_label = "社群管理"
     
     var only_admin_post_title = "只有管理员以上阶级可以张贴讯息"
-    
+    var imported_wallets = "已导入的钱包"
+
+    var login_success = "您已成功登入"
+    var welcome_back = "欢迎回来"
 }
 

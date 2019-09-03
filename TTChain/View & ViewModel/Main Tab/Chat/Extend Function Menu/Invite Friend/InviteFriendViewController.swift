@@ -128,6 +128,7 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
     }
     override func renderTheme(_ theme: Theme) {
         renderNavBar(tint: theme.palette.nav_item_2, barTint: theme.palette.nav_bar_tint)
+        
         changeLeftBarButton(target: self, selector: #selector(popOrDismiss), tintColor: theme.palette.nav_item_2, image: #imageLiteral(resourceName: "btn_previous_light"))
     }
     func showStep1AlertDialog() {
@@ -149,7 +150,10 @@ final class InviteFriendViewController: KLModuleViewController, KLVMVC {
     }
     
     func showStep2AlertDialog(rocketChatUID: String, welcomeMessage: String) {
-        guard let myselfRocketChatUID = RocketChatManager.manager.rocketChatUser.value?.name else { return }
+        guard let myselfRocketChatUID = RocketChatManager.manager.rocketChatUser.value?.name else {
+            EZToast.present(on: self, content: LM.dls.g_something_went_wrong)
+            return
+        }
         inviteBag = DisposeBag()
         IMUserManager.manager.inviteFriend(myselfRocketChatUID: myselfRocketChatUID, friendRocketChatUID: rocketChatUID, welcomeMessage: welcomeMessage).asObservable().subscribe(onNext: {
             [weak self] result in

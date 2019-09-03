@@ -152,9 +152,6 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         }
     }
     
-    @IBOutlet weak var logoutView: UIView!
-    @IBOutlet weak var logoutIMLabel: UILabel!
-    
     
     @IBOutlet weak var sendRequestButton: UIButton!
     @IBOutlet weak var rejectRequest: UIButton!
@@ -193,10 +190,6 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
             textColor: theme.palette.label_main_1,
             font: UIFont.owRegular(size: 12)
         )
-        logoutIMLabel.set(
-            textColor: theme.palette.label_main_1,
-            font: UIFont.owRegular(size: 12)
-        )
         
         sendRequestButton.set(
             textColor: theme.palette.btn_bgFill_enable_text,
@@ -210,14 +203,11 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         rejectRequest.isHidden  = true
         blockUserView.isHidden      = true
         sendRequestButton.isHidden  = true
-        logoutView.isHidden         = true
 
         switch purpose {
-        case .myself:
-            logoutView.isHidden         = false
+        case .myself:break
         case .myFriend:
             blockUserView.isHidden      = false
-            logoutView.isHidden         = true
         case .notMyFriend:
             sendRequestButton.isHidden  = false
         case .friendRequest:
@@ -233,7 +223,6 @@ final class UserProfileViewController: KLModuleViewController, KLVMVC {
         title = dls.user_profile_title
         sendRequestButton.setTitle(dls.user_profile_button_add_friend, for: .normal)
         blockUserLabel.text = dls.user_profile_block_user
-        logoutIMLabel.text = dls.user_profile_transfer_account
         rejectRequest.setTitle(dls.reject_request, for: .normal)
     }
     

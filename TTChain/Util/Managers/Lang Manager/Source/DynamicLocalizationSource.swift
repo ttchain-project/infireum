@@ -766,5 +766,7 @@ protocol DynamicLocalizationSource {
     var chat_community_mgmt_label: String {get set}
     
     var only_admin_post_title: String {get set}
-
+    var imported_wallets: String {get set}
+    var login_success: String {get set}
+    var welcome_back: String {get set}
 }
