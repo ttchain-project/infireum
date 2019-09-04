@@ -54,12 +54,12 @@ struct Constants {
             switch env() {
             case .prd:
                 //sit as prd for now
-                return "http://api-trading.git4u.net:63339"
+                return "http://offlinewallet-lb-2013777849.ap-northeast-1.elb.amazonaws.com"
 //                return "https://hopeseed-api.bibi2u.com"
             case .sit:
-                return "http://api-trading.git4u.net:63339"
+                return "http://offlinewallet-lb-2013777849.ap-northeast-1.elb.amazonaws.com"
             case .uat:
-                return "http://api-trading.git4u.net:63339"
+                return "http://offlinewallet-lb-2013777849.ap-northeast-1.elb.amazonaws.com"
             }
         }
         static var rocketChatURL:String {
@@ -67,12 +67,12 @@ struct Constants {
             case .prd:
                 //sit as prd for now
 
-                return "http://api-trading.git4u.net:3000"
+                return "http://3.113.34.69:3000"
 //                return "http://hopeseed-im.bibi2u.com:3000"
             case .sit:
-                return "http://192.168.51.21:3000"
+                return "http://3.113.34.69:3000/"
             case .uat:
-                return "http://api-trading.git4u.net:3000"
+                return "http://3.113.34.69:3000/"
             }
         }
     }

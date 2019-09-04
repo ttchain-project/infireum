@@ -378,9 +378,9 @@ extension AppDelegate {
         
         JPUSHService.register(forRemoteNotificationTypes: UNAuthorizationOptions.sound.rawValue | UNAuthorizationOptions.badge.rawValue | UNAuthorizationOptions.alert.rawValue , categories: nil)
         #if DEBUG
-        JPUSHService.setup(withOption: launchOptions, appKey: "b4526b7273b4bfc188148713", channel: "DEV", apsForProduction: false)
+        JPUSHService.setup(withOption: launchOptions, appKey: "4708fdee616c87b88f5fd157", channel: "DEV", apsForProduction: false)
         #else
-        JPUSHService.setup(withOption: launchOptions, appKey: "b4526b7273b4bfc188148713", channel: "Hockey", apsForProduction: true)
+        JPUSHService.setup(withOption: launchOptions, appKey: "4708fdee616c87b88f5fd157", channel: "Hockey", apsForProduction: true)
         #endif
         
         UIApplication.shared.applicationIconBadgeNumber = 0
