@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #7 in ExploreViewController.bindCollectionView():ExploreViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.window?.rootViewController">
+            </PersistentString>
+            <PersistentString
+               value = "MarketTestHandler.shared.bannerArray.value[indexPath.section].items[indexPath.row]">
+            </PersistentString>
+            <PersistentString
+               value = "(self.view.window?.rootViewController as! MainTabBarViewController)">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "settingModel.url!.absoluteString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ExploreViewController.bindCollectionView():ExploreViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "MarketTestHandler.shared.bannerArray.value[0]">
+            </PersistentString>
+            <PersistentString
+               value = "MarketTestHandler.shared.bannerArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

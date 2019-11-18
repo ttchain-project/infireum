@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -9911,7 +9911,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = UL4ADCKZV3;
 				ENABLE_BITCODE = NO;
@@ -9922,7 +9922,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anrisoft.TTChain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttchain.ttchainm;
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = TTChain;
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
@@ -9942,7 +9942,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = UL4ADCKZV3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_PRD-Info.plist";
@@ -9952,7 +9952,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anrisoft.TTChain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttchain.ttchainm;
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = TTChain;
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";

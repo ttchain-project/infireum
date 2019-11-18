@@ -10,7 +10,7 @@ xcode-select --install
 
 Install _fastlane_ using
 ```
-[sudo] gem install fastlane -NV
+[sudo] gem install fastlane -NV -n /usr/local/bin
 ```
 or alternatively using `brew cask install fastlane`
 
