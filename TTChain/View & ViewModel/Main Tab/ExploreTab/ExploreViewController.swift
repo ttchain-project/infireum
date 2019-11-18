@@ -152,13 +152,13 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
                 if settingModel.url!.absoluteString == "internal://wallet" {
                     (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 0
                 } else if settingModel.url!.absoluteString == "internal://chat" {
-                    self.view.window?.rootViewController?.tabBarController?.selectedIndex = 1
+                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 1
                 } else if settingModel.url!.absoluteString == "internal://trade" {
-                    self.view.window?.rootViewController?.tabBarController?.selectedIndex = 2
+                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 2
                 } else if settingModel.url!.absoluteString == "internal://explorer" {
-                    self.view.window?.rootViewController?.tabBarController?.selectedIndex = 3
+                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 3
                 } else if settingModel.url!.absoluteString == "internal://setting" {
-                    self.view.window?.rootViewController?.tabBarController?.selectedIndex = 4
+                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 4
                 } else if UIApplication.shared.canOpenURL(settingModel.url!) {
                     UIApplication.shared.open(settingModel.url!, options: [:], completionHandler: nil)
                 }
