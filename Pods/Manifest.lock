@@ -65,9 +65,9 @@ PODS:
     - HockeySDK/DefaultLib (= 5.1.2)
   - HockeySDK/DefaultLib (5.1.2)
   - IQKeyboardManagerSwift (6.2.0)
-  - JCore (1.2.5)
-  - JPush (3.1.1.1):
-    - JCore (~> 1.2.5)
+  - JCore (2.1.4-noidfa)
+  - JPush (3.2.4-noidfa):
+    - JCore (< 3.0.0, >= 2.0.0)
   - libjingle_peerconnection (11177.2.0)
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
@@ -145,7 +145,8 @@ DEPENDENCIES:
   - HDWalletKit
   - HockeySDK
   - IQKeyboardManagerSwift
-  - JPush (~> 3.1.1.1)
+  - JCore (= 2.1.4-noidfa)
+  - JPush (= 3.2.4-noidfa)
   - libjingle_peerconnection
   - Moya/RxSwift
   - MZFormSheetPresentationController
@@ -165,7 +166,7 @@ DEPENDENCIES:
   - Toast-Swift (~> 3.0.1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
     - AutoInsetter
@@ -235,8 +236,8 @@ SPEC CHECKSUMS:
   HDWalletKit: f0268857289221d4d6c2041d43ee78f1e84fc8e5
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  JCore: 14706de2640b25fb77dbd02332696491407f37c9
-  JPush: 25dd9013fbe106082c14f9f30a82364ee98852fb
+  JCore: 2f15311e6889ab43ed5d629802ef793cac566465
+  JPush: 2ff11d3013b360bc1b7da16741027e88f12fe3e6
   libjingle_peerconnection: 3458f646ddd61f08a9f3a0c43fb01fff5c165eb8
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   MZAppearance: 0c06d3fa9cc55142f1da14bc8631fbe8fd6e19d5
@@ -261,6 +262,6 @@ SPEC CHECKSUMS:
   Tabman: 6e0888c9b9227d9da03e51a90f1f91f53454bfa1
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: f56b942d5f2d6982d25b92218caa949472f60952
+PODFILE CHECKSUM: c88b0aec0034e12c8b758cf7e13d0c19a2a144cf
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

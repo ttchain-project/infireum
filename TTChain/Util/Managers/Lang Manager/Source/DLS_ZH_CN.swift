@@ -483,10 +483,19 @@ struct DLS_ZH_CN: DLS {
     var group = "群组"
     
     var trend = "行情"
+    
     var hot_group = "热门群组"
-    var media =  "媒体"
+    var hot_group_sub = "最火社群等您来参与"
+    
+    var media =  "币圈财经媒体"
+    var media_sub = "币圈新知都在这"
+    
+    var dapp = "DApp"
+    var dapp_sub = "游戏一把抓"
     
     var blockchain_explorer = "区块链浏览器"
+    var blockchain_explorer_sub = "快速查询您的交易资讯"
+    
     var select_from_camera = "相機"
     var select_from_gallery = "從照片相簿選取"
     var create_group = "建立群組"

@@ -485,9 +485,18 @@ struct DLS_ZH_TW: DLS {
     
 
     var trend = "行情"
+    
     var hot_group = "熱門群組"
-    var media =  "媒體"
+    var hot_group_sub = "最火社群等您來參與"
+    
+    var media =  "幣圈財經媒體"
+    var media_sub = "幣圈新知都在這"
+    
+    var dapp = "DApp"
+    var dapp_sub = "遊戲一把抓"
+    
     var blockchain_explorer = "區塊鏈瀏覽器"
+    var blockchain_explorer_sub = "快速查詢您的交易資訊"
     
     var select_from_camera = "相机"
     var select_from_gallery = "从照片相簿选取"

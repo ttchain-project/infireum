@@ -19,6 +19,10 @@ class KLModuleViewController: UIViewController,
     var langBag: DisposeBag = DisposeBag.init()
     
     override func viewDidLoad() {
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

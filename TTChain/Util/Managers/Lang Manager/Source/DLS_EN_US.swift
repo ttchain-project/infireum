@@ -1,7 +1,6 @@
 import Foundation
 
 struct DLS_EN_US: DLS {
-    
     var g_ok = "Ok"
     var g_cancel = "Cancel"
     var g_loading = "Loading, please wait."
@@ -486,9 +485,18 @@ struct DLS_EN_US: DLS {
     var group = "Group"
     
     var trend = "Trend"
+    
     var hot_group = "Hot Group"
+    var hot_group_sub = "Amazing groups you like"
+
     var media =  "Media"
+    var media_sub = "All news about BlockChain"
+    
+    var dapp = "DApp"
+    var dapp_sub = "A bunch game"
+    
     var blockchain_explorer = "BlockChain Explorer"
+    var blockchain_explorer_sub = "Explorer your transaction records easily"
 
     var select_from_camera = "Camera"
     var select_from_gallery = "Select From Gallery"

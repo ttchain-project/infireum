@@ -33,7 +33,8 @@ def my_pods
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
     pod 'Starscream', '~> 3.0.2'
-    pod 'JPush', '~> 3.1.1.1'
+    pod 'JCore', '2.1.4-noidfa'
+    pod 'JPush', '3.2.4-noidfa'
     pod 'libjingle_peerconnection'
     pod 'SocketRocket'
 end

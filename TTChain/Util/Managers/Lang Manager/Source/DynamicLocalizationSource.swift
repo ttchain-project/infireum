@@ -489,8 +489,13 @@ protocol DynamicLocalizationSource {
     
     var trend: String { get set }
     var hot_group: String { get set }
+    var hot_group_sub: String { get set }
     var media: String { get set }
+    var media_sub: String { get set }
+    var dapp: String { get set }
+    var dapp_sub: String { get set }
     var blockchain_explorer: String { get set }
+    var blockchain_explorer_sub: String { get set }
     
     var select_from_camera: String { get set }
     var select_from_gallery: String { get set }

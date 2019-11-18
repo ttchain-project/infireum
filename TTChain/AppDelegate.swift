@@ -15,7 +15,7 @@ import Flurry_iOS_SDK
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder,            UIApplicationDelegate {
 
     var window: UIWindow?
     var bag: DisposeBag = DisposeBag.init()
@@ -289,7 +289,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showMainTab() {
-        
         window?.rootViewController = xib(vc: MainTabBarViewController.self)
         IMUserManager.launch()
         self.setupSetting()
