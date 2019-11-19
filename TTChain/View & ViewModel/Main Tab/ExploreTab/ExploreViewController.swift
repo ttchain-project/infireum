@@ -149,16 +149,18 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
             let settingModel: MarketTestTabModel = MarketTestHandler.shared.bannerArray.value[indexPath.section].items[indexPath.row] as! MarketTestTabModel
             if settingModel.isExternalLink, settingModel.url != nil {
                 NSLog("url: " + settingModel.url!.absoluteString)
-                if settingModel.url!.absoluteString == "internal://wallet" {
-                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 0
-                } else if settingModel.url!.absoluteString == "internal://chat" {
-                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 1
-                } else if settingModel.url!.absoluteString == "internal://trade" {
-                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 2
-                } else if settingModel.url!.absoluteString == "internal://explorer" {
-                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 3
-                } else if settingModel.url!.absoluteString == "internal://setting" {
-                    (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 4
+                if settingModel.url!.scheme == "app" {
+                    if settingModel.url!.absoluteString == "app://wallet" {
+                        (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 0
+                    } else if settingModel.url!.absoluteString == "app://chat" {
+                        (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 1
+                    } else if settingModel.url!.absoluteString == "app://trade" {
+                        (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 2
+                    } else if settingModel.url!.absoluteString == "app://explorer" {
+                        (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 3
+                    } else if settingModel.url!.absoluteString == "app://setting" {
+                        (self.view.window?.rootViewController as! MainTabBarViewController).selectedIndex = 4
+                    }
                 } else if UIApplication.shared.canOpenURL(settingModel.url!) {
                     UIApplication.shared.open(settingModel.url!, options: [:], completionHandler: nil)
                 }
@@ -169,7 +171,8 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
         Observable.of(self.viewModel.shortcutsArray)
             .bind(to: self.exploreShortcutsCollectionView.rx.items) { cv, row, element in
                 let cell = cv.dequeueReusableCell(withClass: ExploreShortcutCollectionViewCell.self, for: IndexPath.init(row: row, section: 0))
-                cell.titleLabel.text = element
+                cell.titleLabel.text = element.label
+                cell.iconView.image = element.img
                 return cell
             }.disposed(by: bag)
 
@@ -186,11 +189,9 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
             .disposed(by: bag)
 
         bannerCollectionView.rx.didScroll.asObservable().subscribe(onNext: { () in
-
             let width = self.bannerCollectionView.frame.width
             let page = ((self.bannerCollectionView.contentOffset.x - width / 2.0) / width) + 1.0
             self.pageControl.currentPage = Int(page)
-
         }).disposed(by: bag)
     }
 
@@ -226,8 +227,8 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
             }
         }
     }
-    func showGroupChat(model: GroupShortcutModel) {
 
+    func showGroupChat(model: GroupShortcutModel) {
         let vc = ChatViewController.instance(from: ChatViewController.Config(roomType: .channel, chatTitle: model.title, roomID: model.content, chatAvatar: model.img, uid: nil, entryPoint: .chatList))
         show(vc, sender: self)
     }
@@ -240,7 +241,6 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
         let nextRow = currentIndexPath.row == (items - 1) ? 0 : currentIndexPath.row + 1
         let nextIndexPath = IndexPath.init(item: nextRow, section: 0)
         self.bannerCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
-
     }
 
     func sendMail() {
@@ -257,13 +257,13 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
             self .showErrorMessage()
         }
     }
+
     func showErrorMessage() {
         let alertMessage = UIAlertController(title: "Could not sent email", message: "Check if your device has email support!", preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil)
         alertMessage.addAction(action)
         self.present(alertMessage, animated: true, completion: nil)
     }
-
 
     //MARK: - Mail Composer Delegate Method
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -294,10 +294,8 @@ extension ExploreViewController: UICollectionViewDelegateFlowLayout {
         switch collectionView {
         case self.bannerCollectionView:
             return UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
-
         case self.exploreShortcutsCollectionView:
             return UIEdgeInsets.init(top: 5, left: 10, bottom: 5, right: 10)
-
         case self.exploreOptionsCollectionView:
             return UIEdgeInsets.init(top: 5, left: 20, bottom: 5, right: 10)
         default:

@@ -14,7 +14,9 @@ class ExploreShortcutCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         titleLabel.set(textColor: .cloudBurst, font: .owRegular(size: 14))
+        
     }
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var iconView: UIImageView!
 }
