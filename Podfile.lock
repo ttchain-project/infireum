@@ -32,9 +32,7 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.2)
   - FLAnimatedImage (1.0.12)
-  - Flurry-iOS-SDK/FlurryAds (9.0.0):
-    - Flurry-iOS-SDK/FlurrySDK (~> 9.0.0)
-  - Flurry-iOS-SDK/FlurrySDK (9.0.0)
+  - Flurry-iOS-SDK/FlurrySDK (10.0.2)
   - GoogleAppMeasurement (5.1.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2.0)
     - GoogleUtilities/MethodSwizzler (~> 5.2.0)
@@ -139,7 +137,6 @@ DEPENDENCIES:
   - Fabric
   - Firebase
   - FLAnimatedImage (~> 1.0)
-  - Flurry-iOS-SDK/FlurryAds
   - Flurry-iOS-SDK/FlurrySDK
   - GzipSwift
   - HDWalletKit
@@ -229,7 +226,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 27bd80e5bfaaf9552a1f5cacb4c7e8bb925bab22
   FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  Flurry-iOS-SDK: 58e48e417fee667154e4d240040b270b3734d28a
+  Flurry-iOS-SDK: 71da0ebf2088b15d8899da71050efc8b33bfd21f
   GoogleAppMeasurement: fc4a4c3fe0144db9313cbf443ffe62e6b1d6268c
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
@@ -262,6 +259,6 @@ SPEC CHECKSUMS:
   Tabman: 6e0888c9b9227d9da03e51a90f1f91f53454bfa1
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: c88b0aec0034e12c8b758cf7e13d0c19a2a144cf
+PODFILE CHECKSUM: cd2ff189650a26336726a363c2ff7d498c24ac3b
 
 COCOAPODS: 1.8.4

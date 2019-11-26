@@ -3,7 +3,7 @@
 platform :ios, '11.0'
 
 def my_pods
-    
+
     pod 'IQKeyboardManagerSwift'
     pod 'AlamofireImage'
     pod 'SwiftMoment'
@@ -27,7 +27,7 @@ def my_pods
     pod 'RxOptional'
     pod 'MZFormSheetPresentationController'
     pod 'Flurry-iOS-SDK/FlurrySDK'
-    pod 'Flurry-iOS-SDK/FlurryAds'
+    # pod 'Flurry-iOS-SDK/FlurryAds'
     pod 'GzipSwift'
     pod 'EliteFramework'
     pod 'HDWalletKit'
@@ -45,7 +45,7 @@ target 'TTChain' do
 
   # Pods for OfflineWallet
   my_pods
-    
+
   target 'TTChainTests' do
     inherit! :search_paths
     # Pods for testing
@@ -85,7 +85,7 @@ post_install do |installer|
             end
         end
     end
-    
+
     puts("Update debug pod settings to speed up build time 2")
     Dir.glob(File.join("Pods", "**", "Pods*{debug,Private}.xcconfig")).each do |file|
         File.open(file, 'a') { |f| f.puts "\nDEBUG_INFORMATION_FORMAT = dwarf" }

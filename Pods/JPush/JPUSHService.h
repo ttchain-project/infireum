@@ -183,8 +183,7 @@ typedef NS_OPTIONS(NSUInteger, JPAuthorizationOptions) {
 + (void)setupWithOption:(NSDictionary *)launchingOption
                  appKey:(NSString *)appKey
                 channel:(NSString *)channel
-       apsForProduction:(BOOL)isProduction
-  advertisingIdentifier:(NSString *)advertisingId;
+       apsForProduction:(BOOL)isProduction;
 
 
 ///----------------------------------------------------
@@ -277,7 +276,7 @@ typedef NS_OPTIONS(NSUInteger, JPAuthorizationOptions) {
 
 /**
  验证tag是否绑定
- 
+
  @param completion 响应回调，回调中查看是否绑定
  @param seq 请求序列号
  */
@@ -393,7 +392,7 @@ typedef NS_OPTIONS(NSUInteger, JPAuthorizationOptions) {
 
 /**
  删除地理围栏
- 
+
  @param geofenceId 地理围栏id
  */
 + (void)removeGeofenceWithIdentifier:(NSString *)geofenceId;
@@ -668,7 +667,7 @@ callbackSelector:(SEL)cbSelector
 
 /**
  进入地理围栏区域
- 
+
  @param geofenceId 地理围栏id
  @param userInfo 地理围栏触发时返回的信息
  @param error 错误信息
@@ -677,7 +676,7 @@ callbackSelector:(SEL)cbSelector
 
 /**
  离开地理围栏区域
- 
+
  @param geofenceId 地理围栏id
  @param userInfo 地理围栏触发时返回的信息
  @param error 错误信息

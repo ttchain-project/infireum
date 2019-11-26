@@ -9911,9 +9911,9 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 24;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = UL4ADCKZV3;
+				DEVELOPMENT_TEAM = 4UM79A8YMB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_PRD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9921,12 +9921,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.52;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttchain.ttchainm;
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = TTChain;
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
-				PROVISIONING_PROFILE_SPECIFIER = TTChain;
+				PROVISIONING_PROFILE_SPECIFIER = TTCHAIN;
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -9942,8 +9943,8 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 21;
-				DEVELOPMENT_TEAM = UL4ADCKZV3;
+				CURRENT_PROJECT_VERSION = 24;
+				DEVELOPMENT_TEAM = 4UM79A8YMB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_PRD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9951,12 +9952,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.52;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ttchain.ttchainm;
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = TTChain;
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
-				PROVISIONING_PROFILE_SPECIFIER = TTChain;
+				PROVISIONING_PROFILE_SPECIFIER = TTCHAIN;
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
