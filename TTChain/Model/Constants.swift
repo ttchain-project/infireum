@@ -54,12 +54,12 @@ struct Constants {
             switch env() {
             case .prd:
                 //sit as prd for now
-                return "http://offlinewallet-lb-2013777849.ap-northeast-1.elb.amazonaws.com"
+                return "http://sit-api.ttchainwallet.com"
 //                return "https://hopeseed-api.bibi2u.com"
             case .sit:
-                return "http://offlinewallet-lb-2013777849.ap-northeast-1.elb.amazonaws.com"
+                return "http://sit-api.ttchainwallet.com"
             case .uat:
-                return "http://offlinewallet-lb-2013777849.ap-northeast-1.elb.amazonaws.com"
+                return "http://sit-api.ttchainwallet.com"
             }
         }
         static var rocketChatURL:String {
