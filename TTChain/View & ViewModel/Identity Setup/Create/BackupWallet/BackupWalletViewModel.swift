@@ -42,7 +42,7 @@ class BackupWalletViewModel:KLRxViewModel {
     func createIdentity() {
         self.output.animateHUDSubject.onNext(true)
         
-        let mnemonic = Mnemonic.create(language: .simplifiedChinese)
+        let mnemonic = Mnemonic.create()
         guard Identity.create(mnemonic: mnemonic, name:self.input.name , pwd: input.pwd, hint: input.pwdHint) != nil else {
             self.output.animateHUDSubject.onNext(false)
             #if DEBUG
