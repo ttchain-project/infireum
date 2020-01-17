@@ -13,8 +13,8 @@ import RxCocoa
 final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     typealias Constructor = Void
     
-    @IBOutlet weak var nameTitleLabel: UILabel!
-    @IBOutlet weak var nameTextField: OWInputTextField!
+//    @IBOutlet weak var nameTitleLabel: UILabel!
+//    @IBOutlet weak var nameTextField: OWInputTextField!
     @IBOutlet weak var pwdTitleLabel: UILabel!
     @IBOutlet weak var pwdTextField: OWInputTextField!
     @IBOutlet weak var confirmPwdTitleLabel: UILabel!
@@ -27,10 +27,10 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var acceptPrivacyPolicyBtn: UIButton!
     
     private var fields: [OWInputTextField] {
-        return [nameTextField, pwdTextField, confirmTextField, pwdHintTextField]
+        return [pwdTextField, confirmTextField, pwdHintTextField]
     }
     private var labels: [UILabel] {
-        return [nameTitleLabel, pwdTitleLabel, confirmPwdTitleLabel, pwdHintTitleLabel]
+        return [pwdTitleLabel, confirmPwdTitleLabel, pwdHintTitleLabel]
     }
     @IBOutlet weak var createBtn: UIButton!
     @IBOutlet weak var backButton: UIButton!
@@ -60,7 +60,7 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         viewModel = ViewModel.init(
             input:
             IdentityCreateViewModel.InputSource(
-                nameInput: nameTextField.rx.text,
+//                nameInput: nameTextField.rx.text,
                 pwdInput: pwdTextField.rx.text,
                 confirmPwdInput: confirmTextField.rx.text,
                 pwdHintInput: pwdHintTextField.rx.text,
@@ -105,7 +105,7 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         
         pwdTextField.isSecureTextEntry = true
         
-        nameTextField.delegate = self
+//        nameTextField.delegate = self
         pwdTextField.delegate = self
         confirmTextField.delegate = self
         pwdHintTextField.delegate = self
@@ -164,8 +164,8 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
         title = nil
         createBtn.setTitleForAllStates(dls.g_next)
         backButton.setTitleForAllStates(lang.dls.g_cancel)
-        nameTitleLabel.text = dls.account
-        nameTextField.set(placeholder: dls.create_identity_username_placeholder)
+//        nameTitleLabel.text = dls.account
+//        nameTextField.set(placeholder: dls.create_identity_username_placeholder)
         pwdTitleLabel.text =  dls.createID_placeholder_password
         pwdTextField.set(placeholder: dls.create_identity_password_placeholder)
         confirmPwdTitleLabel.text = dls.createID_placeholder_confirmPassword
@@ -223,8 +223,8 @@ final class IdentityCreateViewController: KLModuleViewController, KLVMVC {
                             cancelHandler: nil)
         case .emptyPwd:
             pwdTextField.becomeFirstResponder()
-        case .emptyIdentityName:
-            nameTextField.becomeFirstResponder()
+//        case .emptyIdentityName:
+//            nameTextField.becomeFirstResponder()
         case .emptyPwdHint:
             pwdHintTextField.becomeFirstResponder()
         case .emptyConfirmPwd:

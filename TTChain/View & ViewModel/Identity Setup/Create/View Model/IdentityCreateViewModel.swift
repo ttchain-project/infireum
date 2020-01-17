@@ -19,7 +19,7 @@ class IdentityCreateViewModel: KLRxViewModel {
     var bag: DisposeBag = DisposeBag.init()
     
     struct Input {
-        let nameInput: ControlProperty<String?>
+//        let nameInput: ControlProperty<String?>
         let pwdInput: ControlProperty<String?>
         let confirmPwdInput: ControlProperty<String?>
         let pwdHintInput: ControlProperty<String?>
@@ -36,7 +36,7 @@ class IdentityCreateViewModel: KLRxViewModel {
     
     enum InputValidity {
         case valid
-        case emptyIdentityName
+//        case emptyIdentityName
         case identity_invalidFormat(desc: String)
         case emptyPwd
         case pwd_invalidFormat(desc: String)
@@ -52,7 +52,7 @@ class IdentityCreateViewModel: KLRxViewModel {
     var input: IdentityCreateViewModel.Input
     var output: IdentityCreateViewModel.Output
 
-    private let name: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
+    private let name: BehaviorRelay<String?> = BehaviorRelay.init(value: " ")
     private let pwd: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     private let confirmPwd: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     private let pwdHint: BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
@@ -69,7 +69,7 @@ class IdentityCreateViewModel: KLRxViewModel {
     }
     
     func concatInput() {
-        (input.nameInput <-> name).disposed(by: bag)
+//        (input.nameInput <-> name).disposed(by: bag)
         (input.pwdInput <-> pwd).disposed(by: bag)
         (input.confirmPwdInput <-> confirmPwd).disposed(by: bag)
         (input.pwdHintInput <-> pwdHint).disposed(by: bag)
@@ -120,16 +120,16 @@ class IdentityCreateViewModel: KLRxViewModel {
     
     //MARK: - Validity
     private func checkValidity() -> InputValidity {
-        guard let _name = name.value, _name.count > 0 else {
-            return .emptyIdentityName
-        }
-        
-        switch _name.ow_isValidIdentityName {
-        case .incorrectFormat(desc: let desc):
-            return .identity_invalidFormat(desc: desc)
-        case .valid:
-            break
-        }
+//        guard let _name = name.value, _name.count > 0 else {
+//            return .emptyIdentityName
+//        }
+//
+//        switch _name.ow_isValidIdentityName {
+//        case .incorrectFormat(desc: let desc):
+//            return .identity_invalidFormat(desc: desc)
+//        case .valid:
+//            break
+//        }
         
         guard let _pwd = pwd.value, _pwd.count > 0 else {
             return .emptyPwd
