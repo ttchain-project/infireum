@@ -109,8 +109,8 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
         self.settingNav = settingsNav
         viewControllers = [
             walletOptionsNav,
-            chatNav,
-            tradeNav,
+//            chatNav,
+//            tradeNav,
             exploreNav,
             settingsNav
         ]
