@@ -12,12 +12,15 @@ enum ChainType: Int16 {
     case eth = 1
     case cic = 2
     case ttn = 3
+    case ifrc = 6
+
     var undeletableCoinIds: [String] {
         switch self {
         case .btc: return [Coin.btc_identifier]
         case .eth: return [Coin.eth_identifier]
         case .cic: return [Coin.cic_identifier, Coin.guc_identifier]
         case .ttn: return [""]
+        case .ifrc: return [""]
         }
     }
     
@@ -27,6 +30,7 @@ enum ChainType: Int16 {
         case .cic: return "CIC"
         case .eth: return "ETH"
         case .ttn: return "TTN"
+        case .ifrc: return "IFRC"
         }
     }
     
@@ -39,7 +43,7 @@ enum ChainType: Int16 {
         case .eth: return Coin.eth
         case .cic: return Coin.cic
         case .ttn: return Coin.ttn
-
+        case .ifrc: return Coin.ifrc
         }
     }
 }

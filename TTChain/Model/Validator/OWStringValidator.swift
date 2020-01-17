@@ -163,6 +163,18 @@ extension OWStringValidator {
                             return .unsupported(source)
                         }
                 }
+            case .ifrc:
+                let _regex = regex(forMainCoinID: _mainCoinID)
+                let mainCoin = Coin.getCoin(ofIdentifier: _mainCoinID)
+                return isSourceTTNChainTypeAddress(source, regex: _regex, mainCoin: mainCoin)
+                    .map {
+                        resultCoin in
+                        if let coin = resultCoin {
+                            return .address(source, chainType: .ttn, coin: coin, amt: nil)
+                        }else {
+                            return .unsupported(source)
+                        }
+                }
             }
         }else {
             //Non-specific type detection

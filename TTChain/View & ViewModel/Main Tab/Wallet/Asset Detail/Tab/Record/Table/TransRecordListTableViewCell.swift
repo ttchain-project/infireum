@@ -159,6 +159,8 @@ class TransRecordListTableViewCell: UITableViewCell {
                 explorerURL = nil
             case .ttn:
                 explorerURL = TTNURLCreator.url(txid: txid)
+            case .ifrc:
+                explorerURL = IFRCURLCreator.url(txid: txid)
             }
         }
     }

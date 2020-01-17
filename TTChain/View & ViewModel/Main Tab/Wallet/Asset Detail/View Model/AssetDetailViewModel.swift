@@ -207,7 +207,7 @@
             }
         case .cic:
             relay = cicHandler.records
-        case .ttn:
+        case .ttn,.ifrc:
             relay = ttnHandler.records
         }
         
@@ -268,7 +268,7 @@
             }
             
             load = cicHandler.loadCurrentPage()
-        case .ttn:
+        case .ttn,.ifrc:
             if reset { ttnHandler.reset() }
             guard !ttnHandler.didReachedSearchLine else {
                 _finishLoading.accept(.success(()))

@@ -22,3 +22,10 @@ class TTNURLCreator {
     }
 }
 
+class IFRCURLCreator {
+    private static let base = "http://3.112.106.186/tables_txresult.html?tx="
+    static func url(txid:String)-> URL {
+        return URL.init(string: "\(IFRCURLCreator.base)\(txid)")!
+    }
+}
+

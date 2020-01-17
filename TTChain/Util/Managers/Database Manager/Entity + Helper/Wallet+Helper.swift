@@ -195,6 +195,8 @@ extension Wallet {
             return Coin.cic_identifier
         case .ttn:
             return Coin.ttn_identifier
+        case .ifrc:
+        return Coin.ifrc_identifier
         }
     }
 }

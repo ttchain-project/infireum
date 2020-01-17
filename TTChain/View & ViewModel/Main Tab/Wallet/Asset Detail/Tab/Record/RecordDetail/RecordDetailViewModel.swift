@@ -180,6 +180,8 @@ class RecordDetailViewModel:KLRxViewModel {
                 return nil
             case .ttn:
                 return TTNURLCreator.url(txid: txid)
+            case .ifrc:
+                return IFRCURLCreator.url(txid: txid)
             }
         }
         return nil

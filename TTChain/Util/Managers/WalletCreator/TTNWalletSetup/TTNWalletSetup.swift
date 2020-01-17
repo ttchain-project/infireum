@@ -35,11 +35,11 @@ class TTNWalletManager {
                       pKey: ethWallet.pKey,
                       mnenomic: Optional(ethWallet.mnemonic),
                       isFromSystem: true,
-                      name: Wallet.walletNamePrefix(ofMainCoin: Coin.ttn),
+                      name: Wallet.walletNamePrefix(ofMainCoin: Coin.ifrc),
                       pwd: pwd,
                       pwdHint: ethWallet.pwdHint!,
-                      chainType: ChainType.ttn,
-                      mainCoinID: Coin.ttn_identifier)
+                      chainType: ChainType.ifrc,
+                      mainCoinID: Coin.ifrc_identifier)
         
         return Wallet.create(identity: Identity.singleton!, source: source)
     }

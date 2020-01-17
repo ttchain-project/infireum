@@ -270,6 +270,17 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                 }
 
             }
+        case .ifrc:
+            
+            let rateToCoinUnit: Decimal = 1 / pow(
+                Decimal.init(10),
+                Int(sourceAPI.asset.coin!.requiredDigit)
+            )
+            if sourceAPI.asset.coin?.identifier == Coin.ttn_identifier,let balance = json["Balance"].string {
+                self.balanceInCoin = (Decimal.init(string: balance) ?? 0) * rateToCoinUnit
+            } else {
+                self.balanceInCoin = 0
+            }
 
         }
     }
@@ -1476,7 +1487,7 @@ struct SignCICTxAPI: KLMoyaAPIData {
         case .eth: addressTypeStr = "eth"
         case .cic:
             addressTypeStr = token
-        case .ttn:
+        case .ttn,.ifrc:
             addressTypeStr = ""
         }
         

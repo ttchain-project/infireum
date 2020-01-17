@@ -248,14 +248,14 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
             return
         }
 
-        if !systemWalletSyncedFlag {
-            attempSyncSystemWallets() {
-                [weak self] in
-                self?.displayAgreementIfNeeded()
-            }
-        } else {
+//        if !systemWalletSyncedFlag {
+//            attempSyncSystemWallets() {
+//                [weak self] in
+//                self?.displayAgreementIfNeeded()
+//            }
+//        } else {
             displayAgreementIfNeeded()
-        }
+//        }
 
         checkForTTNWallet()
 

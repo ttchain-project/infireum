@@ -57,6 +57,8 @@ class AddressbookTableViewCell: UITableViewCell {
             }
         case .ttn:
             return #imageLiteral(resourceName: "ttn_icon")
+        case .ifrc:
+            return #imageLiteral(resourceName: "ttn_icon")
         }
     }
 }

@@ -362,7 +362,7 @@ extension LightningTransRecord {
                     record.feeCoinID = Coin.btc_identifier
                 case .cic:
                     record.feeCoinID = Coin.cic_identifier
-                case .eth,.ttn:
+                case .eth,.ttn,.ifrc:
                     fatalError()
                 }
                 record.feeAmt = feeAmt as NSDecimalNumber

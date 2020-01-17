@@ -126,7 +126,7 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             baseScrollView.addSubview(feeVC.view)
             
 //            return
-        case .cic,.ttn:
+        case .cic,.ttn,.ifrc:
             //This shuold not happen
             return errorDebug(response: ())
         }

@@ -44,8 +44,8 @@ class CoinSyncHandler {
     }
     
     static func syncCoins(forVersion version: String) -> RxAPIVoidResponse {
-//        let req = Server.instance.getCoins(queryString: nil, chainType: nil, defaultOnly: true, mainCoinID: nil)
-        let req = Server.instance.getCoinsTest(queryString: nil, chainType: nil, defaultOnly: true, mainCoinID: nil)
+        let req = Server.instance.getCoins(queryString: nil, chainType: nil, defaultOnly: true, mainCoinID: nil)
+//        let req = Server.instance.getCoinsTest(queryString: nil, chainType: nil, defaultOnly: true, mainCoinID: nil)
         let currentCoins = DB.instance.get(type: Coin.self, predicate: nil, sorts: nil) ?? []
         
         return req
@@ -207,6 +207,8 @@ extension Coin {
             return #imageLiteral(resourceName: "exr_coin_icon_white")
         case Coin.mcc_identifier:
             return #imageLiteral(resourceName: "mcc_coin_icon")
+        case Coin.ifrc_identifier:
+            return #imageLiteral(resourceName: "ttn_coin_icon")
         default:
             break
         }
@@ -389,7 +391,15 @@ extension Coin {
         }
         
         return _usdt
-    }}
+    }
+
+    static var ifrc: Coin {
+        guard let _ifrc = getCoin(ofIdentifier: Coin.ifrc_identifier) else {
+            fatalError()
+        }
+        return _ifrc
+    }
+}
 
 // MARK: - Coin Static ID Definition
 extension Coin {
@@ -433,6 +443,9 @@ extension Coin {
     static var mcc_identifier:String {
         return "Identifier_MCC"
     }
+    static var ifrc_identifier:String {
+        return "Identifier_IFRC"
+    }
 }
 
 extension Coin {
@@ -444,6 +457,8 @@ extension Coin {
             fallthrough
         case Coin.usdtn_identifier:
             return 8
+        case Coin.ifrc_identifier :
+            return 18
         default:
             return self.digit
         }
@@ -482,6 +497,8 @@ extension Coin {
         case .cic:
             return [fCoin]
         case .ttn:
+            return []
+        case .ifrc:
             return []
         }
     }

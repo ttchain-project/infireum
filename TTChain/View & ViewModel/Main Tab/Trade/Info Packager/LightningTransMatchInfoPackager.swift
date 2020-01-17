@@ -377,7 +377,7 @@ class LightningTransMatchInfoPackager {
         case .cic:
             let fromMainCoinID = getFromCoin().walletMainCoinID!
             feeUpdate = FeeManager.updateCICFeeRates(mainCoinID: fromMainCoinID)
-        case .ttn:
+        case .ttn,.ifrc:
             feeUpdate = FeeManager.updateETHFeeRates()
         }
         
@@ -425,7 +425,7 @@ class LightningTransMatchInfoPackager {
             feeOption = .btc(.regular)
             feeRate = FeeManager.getValue(fromOption: feeOption).satoshiToBTC
             feeID = Coin.btc_identifier
-        case .eth,.ttn:
+        case .eth,.ttn,.ifrc:
             //This should not happened
             fatalError()
         }

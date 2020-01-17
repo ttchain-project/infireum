@@ -296,6 +296,8 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
             }
         case .ttn:
             return theme.palette.wallet_3_gradient_to
+        case .ifrc:
+            return theme.palette.wallet_3_gradient_to
         }
     }
     
@@ -336,6 +338,11 @@ final class DepositViewController: KLModuleViewController, KLVMVC{
                 ]
             }
         case .ttn:
+            return [
+                theme.palette.wallet_3_gradient_from.cgColor,
+                theme.palette.wallet_3_gradient_to.cgColor
+            ]
+        case .ifrc:
             return [
                 theme.palette.wallet_3_gradient_from.cgColor,
                 theme.palette.wallet_3_gradient_to.cgColor
