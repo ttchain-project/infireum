@@ -135,7 +135,8 @@ class SettingMenuViewModel: KLRxViewModel {
     func createSettingOptionsArray() {
         
         let _settingsArray = [SettingSectionModel.init(title: LM.dls.system_settings_title,
-                                                      items: [SettingType.Notification,
+//                                                      items: [SettingType.Notification,
+                                                      items: [
                                                               SettingType.Language,
                                                               SettingType.VersionCheck]),
                              SettingSectionModel.init(title: LM.dls.wallet_settings_title,
