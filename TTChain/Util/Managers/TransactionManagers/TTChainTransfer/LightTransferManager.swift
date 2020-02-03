@@ -28,7 +28,7 @@ extension LightTransferManager {
     func startTTNTransfer(fromInfo info: WithdrawalInfo,
                           progressObserver observer: AnyObserver<LightTransferFlowState>, isWithdrawal:Bool) {
         observer.onNext(.signing)
-        getTTNNonce(fromInfo: info)
+        getIfrcNonce(fromInfo: info)
             .flatMap {
                 [unowned self] result -> RxAPIResponse<SignTTNTxAPIModel> in
                 switch result {
@@ -39,7 +39,7 @@ extension LightTransferManager {
                     
                     return .just(.failed(error: err))
                 case .success(let model):
-                    return self.signTTNTx(with: info, nonce: model.nonce,isWithdrawal: isWithdrawal)
+                    return self.signIfrcTx(with: info, nonce: model.nonce,isWithdrawal: isWithdrawal)
                 }
             }
             .flatMap {
@@ -96,8 +96,8 @@ extension LightTransferManager {
             .disposed(by: bag)
     }
     
-    private func getTTNNonce(fromInfo info: WithdrawalInfo) -> RxAPIResponse<GetTTNNonceAPIModel> {
-        guard info.asset.coin?.owChainType == .ttn else {
+    private func getIfrcNonce(fromInfo info: WithdrawalInfo) -> RxAPIResponse<GetTTNNonceAPIModel> {
+        guard info.asset.coin?.owChainType == .ifrc else {
             return errorDebug(response: RxAPIResponse.just(.failed(error: .noData)))
         }
         
@@ -110,7 +110,7 @@ extension LightTransferManager {
         )
     }
     
-    private func signTTNTx(with info: WithdrawalInfo, nonce: Int,isWithdrawal:Bool) -> RxAPIResponse<SignTTNTxAPIModel> {
+    private func signIfrcTx(with info: WithdrawalInfo, nonce: Int,isWithdrawal:Bool) -> RxAPIResponse<SignTTNTxAPIModel> {
         guard info.asset.wallet != nil
             else {
                 return RxAPIResponse.just(.failed(error: .noData))
@@ -127,7 +127,7 @@ extension LightTransferManager {
                                          toAddress: address,
                                          toAddressType: .ttn,
                                          feeInTTNSmallestUnit: feeAmt,
-                                         nonce: nonce, transType: isWithdrawal ? .btcnWithdraw : .ttnTx  )
+                                         nonce: nonce, transType: isWithdrawal ? .btcnWithdraw : .ifrcTx  )
     }
     
     private func broadcastTTNTx(with content: [String : Any], mainCoin: Coin) -> RxAPIResponse<BroadcastTTNTxAPIModel> {

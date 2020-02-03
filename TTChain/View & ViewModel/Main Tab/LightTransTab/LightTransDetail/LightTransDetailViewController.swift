@@ -115,7 +115,7 @@ class LightTransDetailViewController: UIViewController {
     }
     
     func showTransferAction() {
-        let vc = LightTransferViewController.instance(from: LightTransferViewController.Config(asset: self.viewModel.input.asset.value, purpose: LightTransferViewController.Purpose.ttnTransfer))
+        let vc = LightTransferViewController.instance(from: LightTransferViewController.Config(asset: self.viewModel.input.asset.value, purpose: LightTransferViewController.Purpose.ifrcTransfer))
         self.navigationController?.pushViewController(vc)
     }
     func showDepositAction() {

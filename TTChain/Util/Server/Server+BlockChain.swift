@@ -340,8 +340,8 @@
                    toAddress: String,
                    toAddressType: ChainType,
                    feeInTTNSmallestUnit: Decimal,
-                   nonce: Int,transType:SignTTNTxAPI.TransType) -> RxAPIResponse<SignTTNTxAPIModel> {
-        let api = SignTTNTxAPI.init(fromAsset: fromAsset, transferAmt_smallestUnit: transferAmt_smallestUnit, toAddress: toAddress, feeInSmallestUnit: feeInTTNSmallestUnit, nonce: nonce, transType: transType)
+                   nonce: Int,transType:SignIfrcTxAPI.TransType) -> RxAPIResponse<SignTTNTxAPIModel> {
+        let api = SignIfrcTxAPI.init(fromAsset: fromAsset, transferAmt_smallestUnit: transferAmt_smallestUnit, toAddress: toAddress, feeInSmallestUnit: feeInTTNSmallestUnit, nonce: nonce, transType: transType)
         
         return fire(router: .blockchain(.signTTNTx(api)))
     }

@@ -65,7 +65,7 @@ enum BlockchainAPI: KLMoyaAPISet {
     case getTTNAssetAmt(GetTTNAssetAmountAPI)
     case getTTNNOnce(GetTTNNonceAPI)
     case signBTCToTTNTxAPI(SignBTCToTTNTxAPI)
-    case signTTNTx(SignTTNTxAPI)
+    case signTTNTx(SignIfrcTxAPI)
     case broadcastTTNTx(BroadcastTTNTxAPI)
     case getTTNTxRecords(GetTTNTxRecordsAPI)
 
@@ -108,10 +108,11 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
             urlString = "https://blockchain.info"
         case (.btc?,Coin.usdt_identifier):
             urlString = "https://api.omniexplorer.info"
-        case (.ttn?,_):
-            urlString = "http://3.112.106.186:9997"
+        case (.ifrc?,_):
+            urlString = "http://13.251.130.190:9998"
         default:
-            urlString = C.BlockchainAPI.urlStr_32000
+//            urlString = C.BlockchainAPI.urlStr_32000
+            urlString = "http://54.64.162.167:3206"
         }
         
         let url = URL.init(string: urlString)!
@@ -132,7 +133,7 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
             return "/balance"
         case (.btc,Coin.usdt_identifier):
             return "/v1/address/addr/"
-        case(.ttn,_):
+        case(.ifrc,_):
             return "/getAccount"
         default:
             return "/topChain/getBalance_app/\(address)"
@@ -170,7 +171,7 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
                 encoding: URLEncoding.default
             )
             
-        case .ttn:
+        case .ifrc:
             return Moya.Task.requestParameters(parameters: ["address":asset.wallet?.address ?? ""], encoding: URLEncoding.default)
         default:
              return Moya.Task.requestPlain
@@ -276,7 +277,7 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
                 Decimal.init(10),
                 Int(sourceAPI.asset.coin!.requiredDigit)
             )
-            if sourceAPI.asset.coin?.identifier == Coin.ttn_identifier,let balance = json["Balance"].string {
+            if sourceAPI.asset.coin?.identifier == Coin.ifrc_identifier,let balance = json["Balance"].string {
                 self.balanceInCoin = (Decimal.init(string: balance) ?? 0) * rateToCoinUnit
             } else {
                 self.balanceInCoin = 0
@@ -1748,7 +1749,7 @@ struct GetTTNNonceAPI: KLMoyaAPIData {
     let address: String
     let mainCoin: Coin
     var base: APIBaseEndPointType {
-        let urlString = "http://3.112.106.186:9997"
+        let urlString = "http://13.251.130.190:9998"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
@@ -1875,7 +1876,7 @@ struct SignBTCToTTNTxAPIModel: KLJSONMappableMoyaResponse {
 }
 
 
-struct SignTTNTxAPI:KLMoyaAPIData {
+struct SignIfrcTxAPI:KLMoyaAPIData {
     let fromAsset: Asset
     var epKey: String? {return fromAsset.wallet?.pKey }
     let transferAmt_smallestUnit: Decimal
@@ -1884,14 +1885,14 @@ struct SignTTNTxAPI:KLMoyaAPIData {
     let nonce: Int
     let transType:TransType
     enum TransType {
-        case ttnTx
+        case ifrcTx
         case btcnWithdraw
     }
     
     var input: String { return transType == .btcnWithdraw ? C.TTNTx.withdrawInputPrefix + toAddress : ""}
     
     var base: APIBaseEndPointType {
-        let urlString = "http://3.112.106.186:9997"
+        let urlString = "http://13.251.130.190:9998"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
@@ -1914,12 +1915,12 @@ struct SignTTNTxAPI:KLMoyaAPIData {
             "crypto" : "cic",
             "balance" : transferAmt_smallestUnit.asString(digits: 0),
             "nonce" : nonce,
-            "type" : "ttn",
+            "type" : "ifrc",
             "input" : input,
             "PrivateKey" : epKey ?? ""
         ]
         
-        if fromAsset.coinID != Coin.ttn_identifier {
+        if fromAsset.coinID != Coin.ifrc_identifier {
             let balance = self.transType == .btcnWithdraw ? transferAmt_smallestUnit + feeInSmallestUnit : transferAmt_smallestUnit
             let outDict = ["balance":balance.asString(digits: 0),"token" : fromAsset.coin?.chainName?.lowercased() ?? ""]
             let outArray : [[String:String]] = [outDict]
@@ -1939,7 +1940,7 @@ struct SignTTNTxAPI:KLMoyaAPIData {
 struct SignTTNTxAPIModel:KLJSONMappableMoyaResponse {
    
     let broadcastContent: [String : Any]
-    init(json: JSON, sourceAPI: SignTTNTxAPI) throws {
+    init(json: JSON, sourceAPI: SignIfrcTxAPI) throws {
         guard let content = json["result"].dictionaryObject else {
             throw GTServerAPIError.noData
         }
@@ -1947,7 +1948,7 @@ struct SignTTNTxAPIModel:KLJSONMappableMoyaResponse {
         self.broadcastContent = content
     }
     
-    typealias API = SignTTNTxAPI
+    typealias API = SignIfrcTxAPI
 }
 
 struct BroadcastTTNTxAPI: KLMoyaAPIData {
@@ -1958,7 +1959,7 @@ struct BroadcastTTNTxAPI: KLMoyaAPIData {
     var langDepended: Bool { return false }
     
     var base: APIBaseEndPointType {
-        let urlString = "http://3.112.106.186:9997"
+        let urlString = "http://13.251.130.190:9998"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
@@ -2013,7 +2014,7 @@ struct GetTTNTxRecordsAPI: KLMoyaAPIData {
     let mainCoin: Coin
     
     var base: APIBaseEndPointType {
-        let urlString = "http://3.112.106.186:9997"
+        let urlString = "http://13.251.130.190:9998"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }

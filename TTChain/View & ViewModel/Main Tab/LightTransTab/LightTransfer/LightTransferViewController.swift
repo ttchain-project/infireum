@@ -44,7 +44,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
     typealias Constructor = Config
 
     enum Purpose {
-        case ttnTransfer
+        case ifrcTransfer
         case btcnWithdrawal
     }
     struct Config {
@@ -83,13 +83,13 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         }).disposed(by:bag)
         
        
-        let toAddressCoinID = self.purpose == .ttnTransfer ? config.asset.coinID! : Coin.btc_identifier
+        let toAddressCoinID = self.purpose == .ifrcTransfer ? config.asset.coinID! : Coin.btc_identifier
         
         addressVC = LightWithdrawalAddressViewController.instance(from: LightWithdrawalAddressViewController.Config(asset: config.asset, toAddressCoinID: toAddressCoinID))
         addChildViewController(addressVC)
         addressVC.didMove(toParentViewController: self)
         scrollView.addSubview(addressVC.view)
-        addressVC.addrbookBtn.isHidden = self.purpose == .ttnTransfer
+        addressVC.addrbookBtn.isHidden = self.purpose == .ifrcTransfer
         
         
         addressVC.onTapChangeToAddress.drive(onNext: {
@@ -106,7 +106,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
 
         remarkNoteVC = WithdrawalRemarksViewController.instance(from: WithdrawalRemarksViewController.Config())
 
-        if self.purpose == .ttnTransfer {
+        if self.purpose == .ifrcTransfer {
             addChildViewController(remarkNoteVC)
             remarkNoteVC.didMove(toParentViewController: self)
             scrollView.addSubview(remarkNoteVC.view)
@@ -165,7 +165,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
 //            }
 //        }
 
-        if self.purpose == .ttnTransfer {
+        if self.purpose == .ifrcTransfer {
             constrain(remarkNoteVC.view, addressVC.view, scrollView) { [unowned self] (remark, address, scroll) in
                 remark.leading == address.leading
                 remark.trailing == address.trailing
@@ -213,7 +213,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         self.navigationController?.navigationBar.backgroundColor = UIColor.init(hexString: "2C3C4E")!
         renderNavTitle(color: palette.nav_item_2, font: .owMedium(size: 20))
         createRightBarButton(target: self, selector: #selector(toQRCode), image: #imageLiteral(resourceName: "btnNavScannerqrNormal"), title: nil, toColor: palette.nav_item_2, shouldClear: true)
-        if self.purpose == .ttnTransfer {
+        if self.purpose == .ifrcTransfer {
             changeBackBarButton(toColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "btn_previous_light"))
         }else {
             changeLeftBarButtonToDismissToRoot(tintColor:palette.nav_item_2, image:  #imageLiteral(resourceName: "btn_previous_light"))
@@ -307,7 +307,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         let nav = AddressBookViewController.navInstance(from: AddressBookViewController.Config(
             identity: Identity.singleton!,
             purpose: .select(
-            targetMainCoinID: self.purpose == .ttnTransfer ? viewModel.input.asset.wallet!.walletMainCoinID : Coin.btc_identifier
+            targetMainCoinID: self.purpose == .ifrcTransfer ? viewModel.input.asset.wallet!.walletMainCoinID : Coin.btc_identifier
             )
             )
         )

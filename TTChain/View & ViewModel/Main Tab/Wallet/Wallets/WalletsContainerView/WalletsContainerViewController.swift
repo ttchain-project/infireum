@@ -151,6 +151,11 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
         case (.eth):
             let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: asset.wallet!, source:MainWalletViewController.Source.ETH))
             self.present(vc, animated: true, completion: nil)
+        case (.ifrc):
+            let viewModel = LightTransDetailViewModel.init(withAsset: asset)
+            let vc = LightTransDetailViewController.init(withViewModel: viewModel)
+            let navController = UINavigationController.init(rootViewController: vc)
+            self.present(navController, animated: true, completion: nil)
         
         default:
             break

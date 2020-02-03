@@ -16,9 +16,9 @@ final class LightWithdrawalFeeViewController: KLModuleViewController,KLVMVC,With
         self.view.layoutIfNeeded()
         self.viewModel = LightWithdrawalFeeViewModel.init(input: LightWithdrawalFeeViewModel.Input(asset:constructor.asset, purpose: constructor.purpose), output: LightWithdrawalFeeViewModel.Output())
        
-        if constructor.purpose == .ttnTransfer {
+        if constructor.purpose == .ifrcTransfer {
             Observable.of(FeeManager.getValue(fromOption: .ttn(.systemDefault))).map { (fee) -> String in
-                return fee.asString(digits: 4) + "TTN"
+                return fee.asString(digits: 4) + "IFRC"
                 }.bind(to: self.totalMinorFee.rx.text).disposed(by: bag)
 
         }else {
