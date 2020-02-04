@@ -72,7 +72,7 @@ extension DatabaseManager {
     
     fileprivate func remoteConfigure() -> Observable<Bool> {
         //Fire API and wait for configuration responses
-        let getCoin = Server.instance.getCoinsTest(
+        let getCoin = Server.instance.getCoins(
             queryString: nil,
             chainType: nil,
             defaultOnly: true,
