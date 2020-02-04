@@ -208,7 +208,7 @@ extension Coin {
         case Coin.mcc_identifier:
             return #imageLiteral(resourceName: "mcc_coin_icon")
         case Coin.ifrc_identifier:
-            return #imageLiteral(resourceName: "ttn_coin_icon")
+            return #imageLiteral(resourceName: "ifrc_coin_icon")
         default:
             break
         }
