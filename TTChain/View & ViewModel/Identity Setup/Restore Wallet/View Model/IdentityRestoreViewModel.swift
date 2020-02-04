@@ -17,7 +17,7 @@ class IdentityRestoreViewModel: KLRxViewModel {
     
     struct Input {
         let pwdInput: ControlProperty<String?>
-        let userNameInput: ControlProperty<String?>
+//        let userNameInput: ControlProperty<String?>
         let confirmPwdInput: ControlProperty<String?>
         let pwdHintInput: ControlProperty<String?>
         let confirmInput: Driver<Void>
@@ -84,7 +84,7 @@ class IdentityRestoreViewModel: KLRxViewModel {
         (input.pwdInput <-> pwd).disposed(by: bag)
         (input.confirmPwdInput <-> confirmPwd).disposed(by: bag)
         (input.pwdHintInput <-> pwdHint).disposed(by: bag)
-        (input.userNameInput <-> userName).disposed(by: bag)
+//        (input.userNameInput <-> userName).disposed(by: bag)
         input.confirmInput
             .map {
                 [unowned self] in self.checkValidity()

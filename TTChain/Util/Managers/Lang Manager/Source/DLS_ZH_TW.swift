@@ -800,7 +800,7 @@ struct DLS_ZH_TW: DLS {
 
     var sign_in_using_mnemonic_title = "使用《助記詞》登入帳號"
     
-    var sign_in_mnemonic_subtitle = "輸入中文助記詞，共 12 個中文字"
+    var sign_in_mnemonic_subtitle = "輸入助記詞，共 12 個字"
     var new_wallet_created_msg = "已創建新錢包"
     var wallet_import_success_subtitle_msg = "您可以開始使用此錢包功能"
     var new_wallet_imported_msg = "已成功導入錢包"

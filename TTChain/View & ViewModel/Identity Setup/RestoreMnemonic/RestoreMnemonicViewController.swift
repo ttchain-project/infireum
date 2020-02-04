@@ -50,21 +50,23 @@ final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
             
         }
     }
-    @IBOutlet var mnemonicFields: [OWInputTextField]!
-    var textFieldsIndexes:[UITextField:Int] = [:]
+//    @IBOutlet var mnemonicFields: [OWInputTextField]!
+//    var textFieldsIndexes:[UITextField:Int] = [:]
+//
+//    func setNextResponder(_ index:Int?, direction:Direction) {
+//        guard let index = index else { return }
+//        if direction == .left {
+//            index == 0 ?
+//                (_ = mnemonicFields.first?.resignFirstResponder()) :
+//                (_ = mnemonicFields[(index - 1)].becomeFirstResponder())
+//        } else {
+//            index == mnemonicFields.count - 1 ?
+//                (_ = mnemonicFields.last?.resignFirstResponder()) :
+//                (_ = mnemonicFields[(index + 1)].becomeFirstResponder())
+//        }
+//    }
     
-    func setNextResponder(_ index:Int?, direction:Direction) {
-        guard let index = index else { return }
-        if direction == .left {
-            index == 0 ?
-                (_ = mnemonicFields.first?.resignFirstResponder()) :
-                (_ = mnemonicFields[(index - 1)].becomeFirstResponder())
-        } else {
-            index == mnemonicFields.count - 1 ?
-                (_ = mnemonicFields.last?.resignFirstResponder()) :
-                (_ = mnemonicFields[(index + 1)].becomeFirstResponder())
-        }
-    }
+    @IBOutlet weak var mnemonicTextView: UITextView!
     
     override func renderTheme(_ theme: Theme) {
         self.hideDefaultNavBar()
@@ -73,13 +75,13 @@ final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
             backgroundColor: theme.palette.btn_bgFill_enable_bg
         )
         
-        for index in 0 ..< mnemonicFields.count {
-            textFieldsIndexes[mnemonicFields[index]] = index
-            let tx = mnemonicFields[index]
-            tx.delegate = self
-            tx.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
-            tx.sepline.backgroundColor = .gray
-        }
+//        for index in 0 ..< mnemonicFields.count {
+//            textFieldsIndexes[mnemonicFields[index]] = index
+//            let tx = mnemonicFields[index]
+//            tx.delegate = self
+//            tx.set(textColor: theme.palette.input_text, font: .owRegular(size: 14), placeHolderColor: theme.palette.input_placeholder)
+//            tx.sepline.backgroundColor = .gray
+//        }
         
         nextButton.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
         nextButton.setTitleColor(theme.palette.btn_bgFill_disable_text, for: .disabled)
@@ -105,7 +107,8 @@ final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
         
         self.nextButton.rx.klrx_tap.drive(onNext:{ _ in
             
-            let mnemonicString = self.mnemonicFields!.reduce("") { $0 + " " + ($1.text ?? "") }.removingPrefix(" ")
+//            let mnemonicString = self.mnemonicFields!.reduce("") { $0 + " " + ($1.text ?? "") }.removingPrefix(" ")
+            let mnemonicString = self.mnemonicTextView!.text!
             self.viewModel.createWalletWithMnemonics(mnemonicString)
         }).disposed(by: bag)
         

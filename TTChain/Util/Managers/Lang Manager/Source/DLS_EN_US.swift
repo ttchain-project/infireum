@@ -805,7 +805,7 @@ struct DLS_EN_US: DLS {
     
     var sign_in_using_mnemonic_title = "Login account using Mnemonics"
     
-    var sign_in_mnemonic_subtitle = "Enter Chinese mnemonic, a total of 12 Chinese characters"
+    var sign_in_mnemonic_subtitle = "Enter mnemonics, a total of 12 words"
     
     var new_wallet_created_msg = "New wallet created"
     

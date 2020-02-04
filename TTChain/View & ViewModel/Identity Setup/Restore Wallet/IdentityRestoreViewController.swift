@@ -26,12 +26,12 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     
     
-    @IBOutlet weak var nameTitleLabel: UILabel!
+//    @IBOutlet weak var nameTitleLabel: UILabel!
     @IBOutlet weak var pwdTitleLabel: UILabel!
     @IBOutlet weak var confirmPwdTitleLabel: UILabel!
     @IBOutlet weak var pwdHintTitleLabel: UILabel!
 
-    @IBOutlet weak var userNameTextField: OWInputTextField!
+//    @IBOutlet weak var userNameTextField: OWInputTextField!
     @IBOutlet weak var pwdTextField: OWInputTextField!
     @IBOutlet weak var confirmPwdTextField: OWInputTextField!
     @IBOutlet weak var pwdHintTextField: OWInputTextField!
@@ -41,10 +41,10 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     fileprivate var pwdVisibleBtn: UIButton!
     
     private var fields: [OWInputTextField] {
-        return [userNameTextField, pwdTextField, confirmPwdTextField, pwdHintTextField]
+        return [pwdTextField, confirmPwdTextField, pwdHintTextField]
     }
     private var labels: [UILabel] {
-        return [nameTitleLabel, pwdTitleLabel, confirmPwdTitleLabel, pwdHintTitleLabel]
+        return [pwdTitleLabel, confirmPwdTitleLabel, pwdHintTitleLabel]
     }
     lazy var hud: KLHUD = {
         return KLHUD.init(
@@ -69,7 +69,7 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             input:
             IdentityRestoreViewModel.InputSource(
                 pwdInput: pwdTextField.rx.text,
-                userNameInput: userNameTextField.rx.text,
+//                userNameInput: "",
                 confirmPwdInput: confirmPwdTextField.rx.text,
                 pwdHintInput: pwdHintTextField.rx.text,
                 confirmInput: importBtn.rx.tap.asDriver(),
@@ -115,7 +115,6 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         
         mnemonicBase.cornerRadius = 5
         
-        userNameTextField.delegate = self
         pwdTextField.delegate = self
         confirmPwdTextField.delegate = self
         pwdHintTextField.delegate = self
@@ -216,8 +215,6 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
         importBtn.setTitleForAllStates(dls.restoreIdentity_btn_import)
         
         backButton.setTitleForAllStates(lang.dls.g_cancel)
-        nameTitleLabel.text = dls.account
-        userNameTextField.set(placeholder: dls.create_identity_username_placeholder)
         pwdTitleLabel.text =  dls.createID_placeholder_password
         pwdTextField.set(placeholder: dls.create_identity_password_placeholder)
         confirmPwdTitleLabel.text = dls.createID_placeholder_confirmPassword
