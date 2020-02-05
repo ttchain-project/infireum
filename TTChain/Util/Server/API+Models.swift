@@ -47,8 +47,8 @@ enum BlockchainAPI: KLMoyaAPISet {
         case .broadcastCICTx(let api): return api
         case .getCICTxRecords(let api): return api
            
-        case .getMarketTestAPI(let api): return api
-        case .getQuotesTestAPI(let api): return api
+//        case .getMarketTestAPI(let api): return api
+//        case .getQuotesTestAPI(let api): return api
         
         case .getVersion(let api): return api
         }
@@ -90,8 +90,8 @@ enum BlockchainAPI: KLMoyaAPISet {
     case signCICTx(SignCICTxAPI)
     case broadcastCICTx(BroadcastCICTxAPI)
     case getCICTxRecords(GetCICTxRecordsAPI)
-    case getMarketTestAPI(MarketTestAPI)
-    case getQuotesTestAPI(QuotesTestAPI)
+//    case getMarketTestAPI(MarketTestAPI)
+//    case getQuotesTestAPI(QuotesTestAPI)
     
     case getVersion(GetVersionAPI)
 
@@ -2322,27 +2322,28 @@ struct MarketTestAPI: KLMoyaAPIData {
     
     var langDepended: Bool { return false }
     
-    var path: String { return "/topChain/markettest" }
+    var path: String { return "/zh-tw/GetMarketInfo" }
     
     var method: Moya.Method { return .get }
         
     var task: Task {
-        var lang: String
-        switch LangManager.instance.lang.value._db_name {
-        case Lang.en_us._db_name:
-            lang = "en"
-        case Lang.zh_cn._db_name:
-            lang = "cs"
-        case Lang.zh_tw._db_name:
-            lang = "zh"
-        default:
-            lang = "zh"
-        }
-        return Moya.Task.requestParameters(
-            parameters: [ "language" : lang
-                          ],
-            encoding: URLEncoding.default
-        )
+//        var lang: String
+//        switch LangManager.instance.lang.value._db_name {
+//        case Lang.en_us._db_name:
+//            lang = "en"
+//        case Lang.zh_cn._db_name:
+//            lang = "cs"
+//        case Lang.zh_tw._db_name:
+//            lang = "zh"
+//        default:
+//            lang = "zh"
+//        }
+//        return Moya.Task.requestParameters(
+//            parameters: [ "language" : lang
+//                          ],
+//            encoding: URLEncoding.default
+//        )
+        return Moya.Task.requestPlain
     }
     
     var stub: Data? { return nil }
@@ -2366,7 +2367,7 @@ struct QuotesTestAPI: KLMoyaAPIData {
     
     var langDepended: Bool { return false }
     
-    var path: String { return "/topChain/quotesTest" }
+    var path: String { return "/CrypetocurrencyQuotes" }
     
     var method: Moya.Method { return .get }
     
@@ -2416,6 +2417,8 @@ enum HelperAPI: KLMoyaAPISet {
         case .signETHTx(let api): return api
         case .signBTCTx(let api): return api
             
+        case .getMarketTestAPI(let api): return api
+        case .getQuotesTestAPI(let api): return api
         }
     }
     
@@ -2443,6 +2446,8 @@ enum HelperAPI: KLMoyaAPISet {
     case signETHTx(SignETHTxAPI)
     case signBTCTx(SignBTCTxAPI)
     
+    case getMarketTestAPI(MarketTestAPI)
+    case getQuotesTestAPI(QuotesTestAPI)
 }
 
 //MARK: - GET /Addressbook

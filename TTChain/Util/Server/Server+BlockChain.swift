@@ -565,12 +565,12 @@
     
     func getMarketTest() -> RxAPIResponse<MarketTestAPIModel> {
         let api = MarketTestAPI.init()
-        return fire(router: .blockchain(.getMarketTestAPI(api)))
+        return fire(router: .helper(.getMarketTestAPI(api)))
     }
     
     func getQuotesTest() -> RxAPIResponse<QuotesTestAPIModel> {
         let api = QuotesTestAPI.init()
-        return fire(router: .blockchain(.getQuotesTestAPI(api)))
+        return fire(router: .helper(.getQuotesTestAPI(api)))
     }
  }
  

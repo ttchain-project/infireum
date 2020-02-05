@@ -104,7 +104,7 @@ class MarketTestHandler {
     
     func managetQuotesTestData(json:JSON) {
         MarketTestHandler.shared.coinMarketArray.accept(
-            [MarketTestSectionModel.init(title: "", items: self.parseCoinMarketJSON(json: json[SettingKeyEnum.CoinMarket.rawValue]))])
+            [MarketTestSectionModel.init(title: "", items: self.parseCoinMarketJSON(json: json))])
         
     }
     
