@@ -53,7 +53,8 @@ class MarketTestHandler {
             .map {
                  chatGroupArray,finNewsArray,dappArray,explorerArray -> [MarketTestSectionModel] in
                 return
-                    [MarketTestSectionModel.init(title: "", items: chatGroupArray),
+                    [
+//                     MarketTestSectionModel.init(title: "", items: chatGroupArray),
                      MarketTestSectionModel.init(title: "", items: finNewsArray),
                      MarketTestSectionModel.init(title: "", items: dappArray),
                      MarketTestSectionModel.init(title: "", items: explorerArray)]

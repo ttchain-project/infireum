@@ -86,13 +86,13 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
                 let headerView = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SettingMenuHeaderCollectionReusableView.className, for: indexpath) as! SettingMenuHeaderCollectionReusableView
 
                 switch indexpath.section {
+//                case 0:
+//                    headerView.setup(title: LM.dls.hot_group, subTitle: LM.dls.hot_group_sub)
                 case 0:
-                    headerView.setup(title: LM.dls.hot_group, subTitle: LM.dls.hot_group_sub)
-                case 1:
                     headerView.setup(title: LM.dls.media, subTitle: LM.dls.media_sub)
-                case 2:
+                case 1:
                     headerView.setup(title: LM.dls.dapp, subTitle: LM.dls.dapp_sub)
-                case 3:
+                case 2:
                     headerView.setup(title: LM.dls.blockchain_explorer, subTitle: LM.dls.blockchain_explorer_sub)
                 default: break
                 }
@@ -132,18 +132,18 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
             return cell
         }
 
-        MarketTestHandler.shared.bannerArray.map { array in
-            guard array.count > 0, array[0].items.count > 0 else {
-                return array
-            }
-
-            self.pageControl.numberOfPages = array[0].items.count
-            return array
-        }
-            .bind(to: bannerCollectionView.rx.items(
-                dataSource: viewModel.bannerDataSource)
-            )
-            .disposed(by: bag)
+//        MarketTestHandler.shared.bannerArray.map { array in
+//            guard array.count > 0, array[0].items.count > 0 else {
+//                return array
+//            }
+//
+//            self.pageControl.numberOfPages = array[0].items.count
+//            return array
+//        }
+//            .bind(to: bannerCollectionView.rx.items(
+//                dataSource: viewModel.bannerDataSource)
+//            )
+//            .disposed(by: bag)
 
         bannerCollectionView.rx.itemSelected.subscribe(onNext: { (indexPath) in
             let settingModel: MarketTestTabModel = MarketTestHandler.shared.bannerArray.value[indexPath.section].items[indexPath.row] as! MarketTestTabModel
@@ -168,13 +168,13 @@ final class ExploreViewController: KLModuleViewController, KLVMVC, MFMailCompose
         }).disposed(by: bag)
 
 
-        Observable.of(self.viewModel.shortcutsArray)
-            .bind(to: self.exploreShortcutsCollectionView.rx.items) { cv, row, element in
-                let cell = cv.dequeueReusableCell(withClass: ExploreShortcutCollectionViewCell.self, for: IndexPath.init(row: row, section: 0))
-                cell.titleLabel.text = element.label
-                cell.iconView.image = element.img
-                return cell
-            }.disposed(by: bag)
+//        Observable.of(self.viewModel.shortcutsArray)
+//            .bind(to: self.exploreShortcutsCollectionView.rx.items) { cv, row, element in
+//                let cell = cv.dequeueReusableCell(withClass: ExploreShortcutCollectionViewCell.self, for: IndexPath.init(row: row, section: 0))
+//                cell.titleLabel.text = element.label
+//                cell.iconView.image = element.img
+//                return cell
+//            }.disposed(by: bag)
 
         exploreShortcutsCollectionView.rx.itemSelected.subscribe(onNext: { [unowned self] (indexPath) in
             if indexPath.row == 0 {

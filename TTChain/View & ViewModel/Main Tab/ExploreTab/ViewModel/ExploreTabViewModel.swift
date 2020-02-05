@@ -32,16 +32,16 @@ class ExploreTabViewModel: KLRxViewModel {
     func concatInput() {
         input.selectionIdxPath.drive(onNext: { [unowned self](indexpath) in
             switch indexpath.section {
+//            case 0:
+//                //ChatGroup
+//                self.joinPublicGroup(groupModel: MarketTestHandler.shared.chatGroupArray.value[indexpath.row])
             case 0:
-                //ChatGroup
-                self.joinPublicGroup(groupModel: MarketTestHandler.shared.chatGroupArray.value[indexpath.row])
-            case 1:
                 //FinNews
                 self.output.selectedModel(MarketTestHandler.shared.finNewsArray.value[indexpath.row])
-            case 2:
+            case 1:
                 //Daps
                 self.output.selectedModel(MarketTestHandler.shared.dappArray.value[indexpath.row])
-            case 3:
+            case 2:
                 //Explore
                 self.output.selectedModel(MarketTestHandler.shared.explorerArray.value[indexpath.row])
 
