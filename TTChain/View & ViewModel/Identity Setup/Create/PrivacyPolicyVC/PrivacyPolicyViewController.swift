@@ -1,6 +1,6 @@
 //
 //  PrivacyPolicyViewController.swift
-//  TTChain
+//  Infireum
 //
 //  Created by Ajinkya Sharma on 2019/7/12.
 //  Copyright © 2019 gib. All rights reserved.
@@ -22,7 +22,7 @@ class PrivacyPolicyViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.set(textColor: .cloudBurst, font: .owMedium(size: 18))
-            titleLabel.text = "《 TTChainWallet隱私政策 》"
+            titleLabel.text = "《 Infireum Wallet隱私政策 》"
         }
     }
     @IBOutlet weak var contentLabel: UILabel! {

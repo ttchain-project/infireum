@@ -57,7 +57,7 @@ struct DLS_ZH_CN: DLS {
     var fee_sat_per_byte = "sat/b"
     var fee_eth_gwei = "gwei"
     var fee_ether = "ether"
-    var intro_title_page_one = "Welcome !\n欢迎来到HopeSeed"
+    var intro_title_page_one = "Welcome !\n欢迎来到Infireum"
     var intro_title_page_two = "多币种交易"
     var intro_title_page_three = "创新快速安全"
     var qrCodeImport_alert_error_wrong_pwd_title = "密码错误"
@@ -107,7 +107,7 @@ struct DLS_ZH_CN: DLS {
     var tab_trade = "交易"
     var tab_me = "我的"
     var tab_chat = "聊天"
-    var tab_alert_newSystemWallet_title = "Hope Seed 支援了新的钱包！"
+    var tab_alert_newSystemWallet_title = "Infireum 支援了新的钱包！"
     var tab_alert_newSystemWallet_content = "若要新增钱包，请输入身份(钱包)密码"
     var tab_alert_placeholder_identityPwd = "身份(钱包)密码"
     var tab_alert_error_mnemonic_decrypt_failed = "密码输入错误"
@@ -749,7 +749,7 @@ struct DLS_ZH_CN: DLS {
     var transfer_back_button_title :String = "修改"
     var import_key_string = "导入"
     
-    var add_wallet_password_warning_one = "TTChain团队不会保存您的钱包密码，也无法在您遗失钱包密码时协助寻回，请谨慎设立密码与密码提示。"
+    var add_wallet_password_warning_one = "Infireum团队不会保存您的钱包密码，也无法在您遗失钱包密码时协助寻回，请谨慎设立密码与密码提示。"
     var add_wallet_password_warning_two: String = "如遗忘密码将一并遗失钱包内的资产，请特别注意。"
     var new_wallet_name = "请为新钱包命名"
     
@@ -779,7 +779,7 @@ struct DLS_ZH_CN: DLS {
     var create_identity_reenter_password_placeholder = "请再次输入密码"
     
     var create_identity_password_reminder_placeholder = "提示内容请勿与密码一样，以免被轻易盗取"
-    var create_identity_privacy_policy_btn_title = "我同意《TTChain隐私政策》"
+    var create_identity_privacy_policy_btn_title = "我同意《Infireum隐私政策》"
     
     var agree_bnt_title:String = "同意"
 

@@ -56,7 +56,7 @@ struct DLS_EN_US: DLS {
     var fee_sat_per_byte = "sat/b"
     var fee_eth_gwei = "gwei"
     var fee_ether = "ether"
-    var intro_title_page_one = "Welcome !\nWelcome to HopeSeed"
+    var intro_title_page_one = "Welcome !\nWelcome to Infireum"
     var intro_title_page_two = "Multi-currency transaction"
     var intro_title_page_three = "Innovative fast and safe"
     var qrCodeImport_alert_error_wrong_pwd_title = "Incorrect password"
@@ -106,7 +106,7 @@ struct DLS_EN_US: DLS {
     var tab_trade = "Trade"
     var tab_me = "Me"
     var tab_chat = "Chat"
-    var tab_alert_newSystemWallet_title = "Hope Seed supports a new wallets!"
+    var tab_alert_newSystemWallet_title = "Infireum supports a new wallets!"
     var tab_alert_newSystemWallet_content = "To add a wallet, please enter identity (wallet) password."
     var tab_alert_placeholder_identityPwd = "Identity (wallet) password"
     var tab_alert_error_mnemonic_decrypt_failed = "Incorrect password"
@@ -763,7 +763,7 @@ struct DLS_EN_US: DLS {
     var transfer_back_button_title = "Revise"
     var import_key_string = "Import"
  
-    var add_wallet_password_warning_one = "The TTChain team will not save your wallet password, nor will you be able to assist in the recovery if you lose your wallet password. Please set a password and password prompt."
+    var add_wallet_password_warning_one = "The Infireum team will not save your wallet password, nor will you be able to assist in the recovery if you lose your wallet password. Please set a password and password prompt."
 
     var add_wallet_password_warning_two = "If you forget the password, you will lose the assets in your wallet. Please pay special attention."
     
@@ -786,7 +786,7 @@ struct DLS_EN_US: DLS {
     
     var group_info_title:String = "Community Information"
 
-    var backup_qrcode_message_label = "This QR code is designed for you with TTChain wallet, so you can quickly and easily restore all your wallet accounts. Please back up your account information and don't upload it to the cloud, or access on any public network. This is essential for you to maintain asset security and recover your account in the future."
+    var backup_qrcode_message_label = "This QR code is designed for you with Infireum wallet, so you can quickly and easily restore all your wallet accounts. Please back up your account information and don't upload it to the cloud, or access on any public network. This is essential for you to maintain asset security and recover your account in the future."
     
     var back_up_skip_warning_msg = "Backup account action code is very important for you to maintain asset security and restore account in the future. If you lose your phone or have accidents caused by a backup account, you will never be able to retrieve it."
     
@@ -799,7 +799,7 @@ struct DLS_EN_US: DLS {
     var create_identity_reenter_password_placeholder = "Please reenter password"
     
     var create_identity_password_reminder_placeholder = "Reminder message should not be the same as password "
-    var create_identity_privacy_policy_btn_title = "I agree 《TTChain privacy policy》"
+    var create_identity_privacy_policy_btn_title = "I agree 《Infireum privacy policy》"
     
     var agree_bnt_title:String = "Agree"
     
