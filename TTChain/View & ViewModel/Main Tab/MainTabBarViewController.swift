@@ -254,7 +254,7 @@ class MainTabBarViewController: UITabBarController, RxThemeRespondable, RxLangRe
 //                self?.displayAgreementIfNeeded()
 //            }
 //        } else {
-            displayAgreementIfNeeded()
+//            displayAgreementIfNeeded()
 //        }
 
 //        checkForTTNWallet()
