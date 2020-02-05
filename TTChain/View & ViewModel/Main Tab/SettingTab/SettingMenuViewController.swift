@@ -38,7 +38,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     let pickerView: UIPickerView = UIPickerView.init()
     private let pickerResponder = UITextField.init()
 
-    private var settingTableHeader : SettingHeaderViewController = {return SettingHeaderViewController.instance()}()
+//    private var settingTableHeader : SettingHeaderViewController = {return SettingHeaderViewController.instance()}()
     private lazy var hud: KLHUD = {
         return KLHUD.init(type: .spinner,
                           frame: CGRect.init(
@@ -78,21 +78,21 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
     func configTableView() {
         tableView.register(cellType: SettingsTabTableViewCell.self)
         tableView.register(cellType: ExportWalletSettingsTableViewCell.self)
-        let base = UIView.init()
-        base.backgroundColor = .clear
-        base.addSubview(settingTableHeader.view)
-        base.frame = CGRect.init(origin: .zero, size: CGSize(width: self.tableView.width, height: 120))
-        constrain(settingTableHeader.view) { (view) in
-            let sup = view.superview!
-            view.edges == sup.edges
-        }
-        tableView.tableHeaderView = base
+//        let base = UIView.init()
+//        base.backgroundColor = .clear
+//        base.addSubview(settingTableHeader.view)
+//        base.frame = CGRect.init(origin: .zero, size: CGSize(width: self.tableView.width, height: 120))
+//        constrain(settingTableHeader.view) { (view) in
+//            let sup = view.superview!
+//            view.edges == sup.edges
+//        }
+//        tableView.tableHeaderView = base
         
-        settingTableHeader.settingButton.rx.klrx_tap.drive(onNext:{ [weak self] in
-            let vc = ProfileViewController.instance(from: ProfileViewController.Constructor(purpose: ProfileViewController.Purpose.SettingProfile))
-            vc.hidesBottomBarWhenPushed = true
-            self?.navigationController?.pushViewController(vc, animated: true)
-        }).disposed(by: settingTableHeader.bag)
+//        settingTableHeader.settingButton.rx.klrx_tap.drive(onNext:{ [weak self] in
+//            let vc = ProfileViewController.instance(from: ProfileViewController.Constructor(purpose: ProfileViewController.Purpose.SettingProfile))
+//            vc.hidesBottomBarWhenPushed = true
+//            self?.navigationController?.pushViewController(vc, animated: true)
+//        }).disposed(by: settingTableHeader.bag)
     }
     
     
