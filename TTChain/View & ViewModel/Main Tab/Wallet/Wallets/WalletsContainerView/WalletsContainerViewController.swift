@@ -50,7 +50,7 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
             listWalletBtn.isHidden = true
         }
     }
-    @IBOutlet weak var importWalletButton: UIButton!
+//    @IBOutlet weak var importWalletButton: UIButton!
     
     override func renderTheme(_ theme: Theme) {
         mainWalletBtn.set(textColor: .white, font: .owRegular(size:14), backgroundColor: .clear)
@@ -86,13 +86,13 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
             self.handleButtonSelection(childType: .stockCoin)
         }).disposed(by: bag)
         
-        self.importWalletButton.rx.klrx_tap.drive(onNext: {[unowned self] _ in
-//            let vc = xib(vc: ImportWalletTypeChooseViewController.self)
-//            let nav = UINavigationController.init(rootViewController: vc)
-            
-            let vc = AddWalletViewController.navInstance()
-            self.present(vc, animated: true, completion: nil)
-        }).disposed(by: bag)
+//        self.importWalletButton.rx.klrx_tap.drive(onNext: {[unowned self] _ in
+////            let vc = xib(vc: ImportWalletTypeChooseViewController.self)
+////            let nav = UINavigationController.init(rootViewController: vc)
+//
+//            let vc = AddWalletViewController.navInstance()
+//            self.present(vc, animated: true, completion: nil)
+//        }).disposed(by: bag)
         
     }
     
