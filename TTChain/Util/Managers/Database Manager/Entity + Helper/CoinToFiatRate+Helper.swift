@@ -112,7 +112,7 @@ extension CoinToFiatRate {
         let usdToFiatRate = FiatToFiatRate.get(fromFiat: usd, toFiat: fiat)?.rate
         
         if MarketTestHandler.shared.coinMarketArray.value.count > 0 {
-             currentValue = MarketTestHandler.shared.coinMarketArray.value[0].items.filter { $0.title == "Tether" }.first as! CoinMarketModel
+             currentValue = MarketTestHandler.shared.coinMarketArray.value[0].items.filter { $0.title == "USDT" }.first as! CoinMarketModel
             return Single.create(subscribe: { (response) -> Disposable in
                 let value = NSDecimalNumber.init(string: currentValue.price)
                 let total = usdToFiatRate?.multiplying(by: value)
@@ -122,7 +122,7 @@ extension CoinToFiatRate {
         } else {
             return request.map {
                 result -> NSDecimalNumber? in
-                guard let currentValue = (MarketTestHandler.shared.coinMarketArray.value.first?.items.filter { $0.title == "Tether" }.first) as? CoinMarketModel
+                guard let currentValue = (MarketTestHandler.shared.coinMarketArray.value.first?.items.filter { $0.title == "USDT" }.first) as? CoinMarketModel
                  else {
                     return 0
                 }
