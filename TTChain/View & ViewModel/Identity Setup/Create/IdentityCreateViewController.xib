@@ -103,7 +103,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7J-6T-Ym7">
                                             <rect key="frame" x="38.5" y="10" width="13.5" height="22"/>
                                             <state key="normal" image="btn_nochoose"/>
-                                            <state key="selected" image="btn_choose_green"/>
+                                            <state key="selected" image="btn_choose_navy_blue"/>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -191,7 +191,7 @@
         </view>
     </objects>
     <resources>
-        <image name="btn_choose_green" width="13.333333015441895" height="13.333333015441895"/>
+        <image name="btn_choose_navy_blue" width="24" height="24"/>
         <image name="btn_next_light" width="16" height="16"/>
         <image name="btn_nochoose" width="13.333333015441895" height="13.333333015441895"/>
         <image name="btn_previous_dark" width="16" height="16"/>

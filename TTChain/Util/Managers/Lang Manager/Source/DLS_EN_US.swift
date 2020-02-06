@@ -126,8 +126,8 @@ struct DLS_EN_US: DLS {
     var login_label_desc = "Multi-chain wallet will be created automatically when creating identity"
     var login_btn_restore = "Restore identity"
     var login_label_or = "Or"
-    var login_actionsheet_restore_mnemonic = "Restore mnemonic"
-    var login_actionsheet_restore_qrcode = "Restore QR CODE"
+    var login_actionsheet_restore_mnemonic = "Retrieve via Mnemonics"
+    var login_actionsheet_restore_qrcode = "Retrieve via QR Code"
     var login_alert_title_camera_permission_denied = "Permissions have not been opened"
     var login_alert_content_camera_permission_denied = "You have not enabled access to the album. Please go to Settings to enable access to save QR Code."
     var login_alert_title_import_qrcode_failed = "Wallet import failed"
@@ -137,18 +137,18 @@ struct DLS_EN_US: DLS {
     var createID_btn_create = "Create"
     var createID_placeholder_name = "Identity name"
     var createID_placeholder_password = "Password"
-    var createID_placeholder_confirmPassword = "Reenter password"
-    var createID_placeholder_passwordNote = "Password reminder message"
+    var createID_placeholder_confirmPassword = "Re-enter password"
+    var createID_placeholder_passwordNote = "Password Reminder"
     var createID_error_pwd_title = "Incorrect password"
     var createID_error_confirmPwd_title = "Incorrect confirm password"
     var createID_error_identityName_title = "Incorrect identity name"
     var createID_error_pwdHint_title = "Incorrect password reminder"
     var backupWallet_title = "Backup wallet"
     var backupWallet_label_mainNote = "Asset security cannot be guaranteed without proper backup. After deleting the app or wallet, you need your back up files to restore wallet."
-    var backupWallet_label_subNote = "Please make a backup in a safe environment with no cameras around."
-    var backupWallet_btn_backupMnemonic = "Backup mnemonic"
-    var backupMnemonic_title = "Backup mnemonic"
-    var backupMnemonic_desc = "Please carefully record the mnemonic below and we will verify it in the next step."
+    var backupWallet_label_subNote = "Warning: Do not disclose your QR code to anyone."
+    var backupWallet_btn_backupMnemonic = "Recovery Seed Phrase"
+    var backupMnemonic_title = "Recovery Seed Phrase"
+    var backupMnemonic_desc = "This 12-word phrase is a set of words that allows you to recover and use your wallet. WARNING: Never store your recovery seed phrase in any digital form."
     var sortMnemonic_title = "Sorting mnemonic"
     var sortMnemonic_desc = "Please click on the mnemonic in order to confirm that you are backing up correctly."
     var sortMnemonic_error_mnemonic_wrong_order = "Incorrect mnemonic order"
@@ -284,7 +284,7 @@ struct DLS_EN_US: DLS {
     func withdrawal_label_assetAmt(_ args: String...) -> String { return String.init(format: "Balance: %@ %@", arguments: args) }
     var withdrawal_placeholder_withdrawalAmt = "Enter amount"
     var withdrawal_label_toAddr = "Receipt address"
-    var withdrawal_btn_common_used_addr = "Common used address"
+    var withdrawal_btn_common_used_addr = "Addresses"
     var withdrawal_placeholder_toAddr = "Please enter address"
     var withdrawal_label_fromAddr = "Payment address"
     var withdrawal_label_minerFee = "Miner fee"
@@ -348,7 +348,7 @@ struct DLS_EN_US: DLS {
     var ltTx_minerFee_title = "Miner fee setting"
     var ltTx_changeToAddress_title = "Choose payment address"
     var ltTx_changeToAddress_label_toAddress = "Receipt address"
-    var ltTx_changeToAddress_btn_common_used_addr = "Common used address"
+    var ltTx_changeToAddress_btn_common_used_addr = "Addresses"
     func ltTx_changeToAddress_placeholder_input_valid_addr(_ args: String...) -> String { return String.init(format: "Enter a valid %@ address", arguments: args) }
     var ltTx_changeToAddress_label_toWallet = "Receipt wallet"
     var ltTx_pwdVerify_title = "Please enter password"
@@ -364,13 +364,13 @@ struct DLS_EN_US: DLS {
     var ltTx_pwdVerify_error_miner_fee_input_p = "Please enter miner fee"
     var ltTx_pwdVerify_error_payment_detail = "Payment details"
     var me_btn_edit = "Edit"
-    var me_label_common_used_addr = "Common used address"
+    var me_label_common_used_addr = "Addresses"
     var me_label_settings = "User settings"
     var me_label_qa = "QA"
     var me_label_agreement = "Member agreement"
     var me_label_check_update = "Check for version updates"
     var me_hud_checking = "Checking"
-    var me_alert_already_latest_version_title = "You currently have the latest version"
+    var me_alert_already_latest_version_title = "You have the latest version."
     func me_alert_version_content(_ args: String...) -> String { return String.init(format: "Current version: %@\nlatest version: %@", arguments: args) }
     var me_alert_able_to_update_version_title = "There is a new version, please update now to enjoy full functionality"
     var me_btn_update = "Update"
@@ -404,9 +404,9 @@ struct DLS_EN_US: DLS {
     var settings_label_privateMode = "Privacy mode"
     var settings_label_privateMode_note = "The wallet’s assets and amount will be hidden when privacy mode is turned on."
     var settings_label_language = "Language"
-    var settings_label_currencyUnit = "Currency unit"
+    var settings_label_currencyUnit = "Currency"
     var settings_alert_verify_to_turn_off_functionality = "Verify to turn off function"
-    var changePrefFiat_title = "Currency unit"
+    var changePrefFiat_title = "Currency"
     var changePrefFiat_btn_save = "Save"
     
     var settings_notification_title:String = "Message Notifications"
@@ -427,15 +427,15 @@ struct DLS_EN_US: DLS {
     var system_settings_title:String = "System Setting"
     var wallet_settings_title:String = "Wallet Settings"
 
-    var account_safety_settings_title:String = "Account Safety"
-    var addressbook_title = "Common used address"
+    var account_safety_settings_title:String = "Security Setting"
+    var addressbook_title = "Addresses"
     var addressbook_label_empty_addressbook = "No history"
     var abInfo_title = "Contact information"
     func abInfo_label_address_type(_ args: String...) -> String { return String.init(format: "%@ address", arguments: args) }
     var abInfo_btn_edit = "Edit"
     var abInfo_label_name = "Name"
-    var abInfo_label_note = "Note"
-    var ab_update_title_create = "Add contact"
+    var abInfo_label_note = "Note (optional)"
+    var ab_update_title_create = "Add new wallet address"
     var ab_update_title_edit = "Edit contact"
     var ab_update_hud_saving = "Saving..."
     var ab_update_placeholder_name = "Name"
@@ -489,14 +489,14 @@ struct DLS_EN_US: DLS {
     var hot_group = "Hot Group"
     var hot_group_sub = "Amazing groups you like"
 
-    var media =  "Media"
-    var media_sub = "All news about BlockChain"
+    var media =  "News"
+    var media_sub = "Latest announcements and updates"
     
-    var dapp = "DApp"
-    var dapp_sub = "A bunch game"
+    var dapp = "Decentralised Applications"
+    var dapp_sub = "Hottest dApps on the block"
     
-    var blockchain_explorer = "BlockChain Explorer"
-    var blockchain_explorer_sub = "Explorer your transaction records easily"
+    var blockchain_explorer = "Block Explorer"
+    var blockchain_explorer_sub = "Explore blocks, transactions, hashrates and more!"
 
     var select_from_camera = "Camera"
     var select_from_gallery = "Select From Gallery"
@@ -512,7 +512,7 @@ struct DLS_EN_US: DLS {
     var chat_secret_keep_10 = "Keep 10 minutes"
     var chat_secret_keep_20 = "Keep 20 minutes"
     
-    var tab_explorer = "Discovery"
+    var tab_explorer = "Discover"
     var tab_social = "Social"
     var tab_setting = "Setting"
     
@@ -520,7 +520,7 @@ struct DLS_EN_US: DLS {
     var contact_individual = "Individual"
     var contact_group = "Group"
 
-    var stable_coin = "Stable Coin"
+    var stable_coin = "InBIQ"
     var sto_coin = "Listed Coin"
     var delete = "Delete"
     var forward = "Forward"
@@ -707,7 +707,7 @@ struct DLS_EN_US: DLS {
     var download_file_title:String = "Download File"
     var file_download_successful_message:String = "File Downloaded successfully"
 
-    var lightning_receipt_btn_title:String = "Lightning Receipt"
+    var lightning_receipt_btn_title:String = "Lightning Deposit"
     var transaction_details_btn_title:String = "Transaction Details"
     
     var lightning_payment_title:String = "Lightning Transfer"
@@ -726,14 +726,14 @@ struct DLS_EN_US: DLS {
     
     var forward_message_title_string :String = "Select Messages"
     
-    var light_withdrawal_placeholder_toAddr : String  = "Please enter TTN address or scan the qrcode"
+    var light_withdrawal_placeholder_toAddr : String  = "Please enter IFR address or scan the qrcode"
     
     var alert_post_message_restriction = "Only administrators can post messages in this group"
     
     var total_assets_title = "Total assets"
     var asset_management_btn_title :String = "Asset Management"
     
-    var wallet_type_btn_main_chain:String  = "Main Chain"
+    var wallet_type_btn_main_chain:String  = "Digital Assets"
     
     var total_amount_transfer_info_alert_title:String = "What is the total amount of transfer?"
     var total_amount_transfer_info_alert_message:String  = "After clicking this option, the system will automatically transfer all the coins in the wallet without having to calculate the input. The system will also automatically deduct the selected miner's fees."
@@ -754,11 +754,11 @@ struct DLS_EN_US: DLS {
     var loading_please_wait_label:String  = "System loading, please wait"
     
     
-    var register_new_account_btn_title = "Register New Account"
+    var register_new_account_btn_title = "Sign Up"
     
-    var register_account_msg_label_login = "Registered account will automatically add multi-chain wallet"
+    var register_account_msg_label_login = "An e-wallet will automatically be created once you set up a new account"
     
-    var original_account_login = "Original Account Login"
+    var original_account_login = "Log In"
 
     var transfer_back_button_title = "Revise"
     var import_key_string = "Import"
@@ -786,7 +786,7 @@ struct DLS_EN_US: DLS {
     
     var group_info_title:String = "Community Information"
 
-    var backup_qrcode_message_label = "This QR code is designed for you with Infireum wallet, so you can quickly and easily restore all your wallet accounts. Please back up your account information and don't upload it to the cloud, or access on any public network. This is essential for you to maintain asset security and recover your account in the future."
+    var backup_qrcode_message_label = "This QR code grants access to all Infireum wallets, chat history, account identity, and will allow you to recover your account. It is recommended to keep a physical copy of your QR code. It is always advised to have multiple copies of your recovery phrase and store it in multiple locations to prevent loss from calamities like floods, earthquake, fire, etc."
     
     var back_up_skip_warning_msg = "Backup account action code is very important for you to maintain asset security and restore account in the future. If you lose your phone or have accidents caused by a backup account, you will never be able to retrieve it."
     

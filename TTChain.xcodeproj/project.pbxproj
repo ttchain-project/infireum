@@ -9927,7 +9927,7 @@
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = " Infireum";
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
-				PROVISIONING_PROFILE_SPECIFIER = infireum;
+				PROVISIONING_PROFILE_SPECIFIER = "infireum wallet";
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -9958,7 +9958,7 @@
 				PRODUCT_MODULE_NAME = Hope_Seed;
 				PRODUCT_NAME = " Infireum";
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
-				PROVISIONING_PROFILE_SPECIFIER = infireum;
+				PROVISIONING_PROFILE_SPECIFIER = "infireum wallet";
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

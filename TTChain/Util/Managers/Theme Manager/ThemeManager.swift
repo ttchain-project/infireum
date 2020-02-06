@@ -116,7 +116,7 @@ extension OfflineWalletThemePalette {
 
 struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
-    var application_main: UIColor = .yellowGreen
+    var application_main: UIColor = .navyBlue
     
     var application_alert: UIColor = .owPinkRed
     
@@ -124,7 +124,7 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var btn_bgFill_enable_bg: UIColor = .cloudBurst
     
-    var btn_bgFill_enable_bg2:UIColor = .yellowGreen
+    var btn_bgFill_enable_bg2:UIColor = .navyBlue
     var btn_bgFill_enable_text: UIColor = .owWhite
     
     var btn_bgFill_disable_bg: UIColor = .owSilver
@@ -227,5 +227,5 @@ struct OfflineWalletDefaultThemePalette: OfflineWalletThemePalette {
     
     var recordStatus_failed: UIColor = .owPinkRed
     
-    var bg_fill_new:UIColor = .yellowGreen
+    var bg_fill_new:UIColor = .navyBlue
 }

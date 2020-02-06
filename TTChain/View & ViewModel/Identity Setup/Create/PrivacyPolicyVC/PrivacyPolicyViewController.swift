@@ -22,7 +22,7 @@ class PrivacyPolicyViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.set(textColor: .cloudBurst, font: .owMedium(size: 18))
-            titleLabel.text = "《 Infireum Wallet隱私政策 》"
+            titleLabel.text = "《 Infireum Wallet Privacy Policy 》"
         }
     }
     @IBOutlet weak var contentLabel: UILabel! {
@@ -35,7 +35,7 @@ class PrivacyPolicyViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!{
         didSet {
             dateLabel.set(textColor: .cloudBurst, font: .owMedium(size: 12))
-            dateLabel.text = "最近更新於：2018年12月18日"
+            dateLabel.text = "Last updated on: December 18, 2018"
         }
     }
     

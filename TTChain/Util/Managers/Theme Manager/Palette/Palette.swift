@@ -141,5 +141,8 @@ extension UIColor {
     @nonobjc class var creamCan:UIColor {
         return UIColor.init(hexString: "EDBB4E")!
     }
+    @nonobjc class var navyBlue: UIColor {
+        return UIColor.init(hexString: "506EF5")!
+    }
 }
 

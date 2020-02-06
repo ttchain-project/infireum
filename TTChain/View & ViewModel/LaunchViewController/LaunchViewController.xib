@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-         
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LaunchViewController" customModule="Hope_Seed" customModuleProvider="target">
@@ -23,13 +21,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_logo" translatesAutoresizingMaskIntoConstraints="NO" id="lAA-gY-Kfm">
-                    <rect key="frame" x="56.333333333333343" y="60.666666666666686" width="262.33333333333326" height="528"/>
+                    <rect key="frame" x="56.333333333333343" y="246.66666666666663" width="262.33333333333326" height="156.33333333333337"/>
                 </imageView>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MHk-K7-vHJ">
                     <rect key="frame" x="37.666666666666657" y="676" width="300" height="2"/>
                     <color key="tintColor" red="0.59607843140000005" green="0.78039215689999997" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="progressTintColor" red="0.59607843140000005" green="0.78039215689999997" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="trackTintColor" red="0.59607843140000005" green="0.78039215689999997" blue="0.21176470589999999" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="progressTintColor" red="0.31372549020000001" green="0.43137254899999999" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="trackTintColor" red="0.31372549019607843" green="0.43137254901960786" blue="0.96078431372549022" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="2"/>
@@ -55,9 +53,10 @@
                 <constraint firstItem="MHk-K7-vHJ" firstAttribute="top" secondItem="H3X-DI-End" secondAttribute="bottom" constant="20" id="zcG-Pt-trO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="3RZ-zh-lzf"/>
+            <point key="canvasLocation" x="135" y="144"/>
         </view>
     </objects>
     <resources>
-        <image name="default_logo" width="603" height="528"/>
+        <image name="default_logo" width="201.33332824707031" height="156.33332824707031"/>
     </resources>
 </document>

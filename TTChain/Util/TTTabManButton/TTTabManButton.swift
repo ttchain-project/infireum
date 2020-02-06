@@ -41,7 +41,7 @@ class TTTabManButton: TMBarButton {
         
     }
     
-    var selectedBackgroundColor: UIColor! = UIColor.yellowGreen {
+    var selectedBackgroundColor: UIColor! = UIColor.navyBlue {
         didSet {
             update(for: self.selectionState)
         }

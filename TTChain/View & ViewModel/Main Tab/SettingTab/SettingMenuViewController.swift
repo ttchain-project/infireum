@@ -512,7 +512,7 @@ extension SettingMenuViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 45))
         let label = UILabel(frame: CGRect(x: 18, y: 16, width: UIScreen.main.bounds.size.width - 36, height: 18))
-        label.set(textColor: .yellowGreen, font: .owRegular(size: 14))
+        label.set(textColor: .navyBlue, font: .owRegular(size: 14))
         label.text = self.viewModel.dataSource[section].categoryTitle
         view.addSubview(label)
         view.backgroundColor = TM.palette.bgView_main
