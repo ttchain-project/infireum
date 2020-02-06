@@ -17,7 +17,7 @@ enum Lang: Int16 {
     case zh_tw = 1
     case en_us = 2
     
-    static var `default`: Lang { return .zh_cn }
+    static var `default`: Lang { return .en_us }
     
     var localizedName: String {
         switch self {
