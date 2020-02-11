@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyJSON
-import Gzip
+
 class IdentityQRCodeContent: Codable {
     struct Finder {
         static func findPwdHintFromQRCodeRawContentIfPossible(_ content: String) -> String? {
@@ -187,13 +187,17 @@ class IdentityQRCodeContent: Codable {
 //        guard let gzipData = decodedString.data(using: .utf8) else {
 //            return nil
 //        }
-        if decodedData.isGzipped {
-            print("IsGZIP")
-        }
-        guard let gzipDecompressedData = try? decodedData.gunzipped() else {
-            return nil
-        }
-           guard let gzipDecompressedString = String(data: gzipDecompressedData, encoding: .utf8) else {
+        
+//        if decodedData.isGzipped {
+//            print("IsGZIP")
+//        }
+//        guard let gzipDecompressedData = try? decodedData.gunzipped() else {
+//            return nil
+//        }
+        
+        guard let gzipDecompressedData = (decodedData as NSData).gunzipped() else { return nil }
+        
+        guard let gzipDecompressedString = String(data: gzipDecompressedData, encoding: .utf8) else {
                 return nil
         }
         return gzipDecompressedString

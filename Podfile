@@ -28,7 +28,7 @@ def my_pods
     pod 'MZFormSheetPresentationController'
     pod 'Flurry-iOS-SDK/FlurrySDK'
     # pod 'Flurry-iOS-SDK/FlurryAds'
-    pod 'GzipSwift'
+#    pod 'GzipSwift'
     pod 'EliteFramework'
     pod 'HDWalletKit'
     pod 'FLAnimatedImage', '~> 1.0'
@@ -37,6 +37,7 @@ def my_pods
     pod 'JPush', '3.2.4-noidfa'
     pod 'libjingle_peerconnection'
     pod 'SocketRocket'
+    pod 'GZIP', '~> 1.2'
 end
 
 target 'TTChain' do

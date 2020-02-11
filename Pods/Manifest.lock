@@ -55,7 +55,7 @@ PODS:
   - "GoogleUtilities/NSData+zlib (5.2.3)"
   - GoogleUtilities/Reachability (5.2.3):
     - GoogleUtilities/Logger
-  - GzipSwift (4.0.4)
+  - GZIP (1.2.3)
   - HDWalletKit (0.2.8):
     - CryptoSwift (~> 0.12)
     - secp256k1.swift (~> 0.1.4)
@@ -138,7 +138,7 @@ DEPENDENCIES:
   - Firebase
   - FLAnimatedImage (~> 1.0)
   - Flurry-iOS-SDK/FlurrySDK
-  - GzipSwift
+  - GZIP (~> 1.2)
   - HDWalletKit
   - HockeySDK
   - IQKeyboardManagerSwift
@@ -181,7 +181,7 @@ SPEC REPOS:
     - Flurry-iOS-SDK
     - GoogleAppMeasurement
     - GoogleUtilities
-    - GzipSwift
+    - GZIP
     - HDWalletKit
     - HockeySDK
     - IQKeyboardManagerSwift
@@ -229,7 +229,7 @@ SPEC CHECKSUMS:
   Flurry-iOS-SDK: 71da0ebf2088b15d8899da71050efc8b33bfd21f
   GoogleAppMeasurement: fc4a4c3fe0144db9313cbf443ffe62e6b1d6268c
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
-  GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
+  GZIP: af5c90ef903776a7e9afe6ebebd794a84a2929d4
   HDWalletKit: f0268857289221d4d6c2041d43ee78f1e84fc8e5
   HockeySDK: 38b7e2726af1ea86ae97ce4b5de33ab0817e3500
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
@@ -259,6 +259,6 @@ SPEC CHECKSUMS:
   Tabman: 6e0888c9b9227d9da03e51a90f1f91f53454bfa1
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
 
-PODFILE CHECKSUM: cd2ff189650a26336726a363c2ff7d498c24ac3b
+PODFILE CHECKSUM: bcd05a3d929f050e4be65a648c924231cd308042
 
 COCOAPODS: 1.8.4
