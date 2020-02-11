@@ -60,7 +60,7 @@ class IdentityQRCodeContentWalletUnit: Codable {
             guard let mnemonic = mnemonic else {
                 return nil
             }
-            let chainType:ChainType = mainCoinIdentifier == Coin.btc_identifier ? .btc : .eth
+            let chainType:ChainType = mainCoinIdentifier == Coin.btc_identifier ? .btc : mainCoinIdentifier == Coin.eth_identifier ? .eth : .ifrc
             let (pvtKey,addr) = WalletCreator.generatePvtKeyAndAddress(mnemonic: mnemonic, chain: chainType)
           
             self.init(mainCoinID: mainCoinIdentifier,

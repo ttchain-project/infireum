@@ -135,7 +135,7 @@ extension Identity {
             return nil
         }
         
-        let systemWalletSources = content.systemWallets.map {
+        let systemWalletSources = content.systemWallets.filter{$0.mainCoinID == Coin.btc_identifier || $0.mainCoinID == Coin.eth_identifier}.map {
             $0.transformToWalletCreateSource(pwd: pwd, pwdHint: hint, isFromSystem: true, mnemonic: content.systemMnemonic)
         }
         
@@ -150,7 +150,7 @@ extension Identity {
                 return nil
         }
         
-        if (wallets.filter { $0.owChainType == ChainType.ttn }.count == 0) {
+        if (wallets.filter { $0.owChainType == ChainType.ifrc }.count == 0) {
             TTNWalletManager.setupTTNWallet(withPwd: pwd)
         }
 

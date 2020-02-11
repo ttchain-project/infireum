@@ -85,14 +85,16 @@ class IdentityQRCodeContent: Codable {
         }
         
         let systemWallets = systemWalletJSONs.compactMap { (json) -> IdentityQRCodeContentWalletUnit? in
-            if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier {
+            if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier ||
+                json["mainCoinID"].string == Coin.ifrc_identifier {
                 return IdentityQRCodeContentWalletUnit.init(json: json, pwd: pwd,mnemonic:mnemonic)
             }
                 return nil
         }
 
         let importedWallets = importedWalletJSONs.compactMap { (json) -> IdentityQRCodeContentWalletUnit? in
-            if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier {
+            if json["mainCoinID"].string == Coin.btc_identifier || json["mainCoinID"].string == Coin.eth_identifier ||
+                json["mainCoinID"].string == Coin.ifrc_identifier {
                 return IdentityQRCodeContentWalletUnit.init(json: json, pwd: pwd)
             }
             return nil
@@ -211,7 +213,7 @@ class IdentityQRCodeContent: Codable {
         guard let encryMnemonic = OWDatabaseEntityCrypter.encrypt(source: systemMnemonic, key: pwd) else { return nil }
         
         //For now just add the TTN and ETH wallet in the QRCode
-        let systemWalletsEncryJSONDictionaries = systemWallets.filter { [Coin.btc_identifier,Coin.eth_identifier].contains($0.mainCoinID) }.compactMap { $0.convertToEncryJSONDictionaryForSystemWallet() }
+        let systemWalletsEncryJSONDictionaries = systemWallets.filter { [Coin.btc_identifier,Coin.eth_identifier,Coin.ifrc_identifier].contains($0.mainCoinID) }.compactMap { $0.convertToEncryJSONDictionaryForSystemWallet() }
         
         let importedWalletsEncryJSONDictionaries = importedWallets.compactMap { $0.convertToEncryJSONDictionary(withPwd: pwd) }
         
