@@ -30,7 +30,8 @@ struct MainCoinTypStorage {
     static var supportMainCoinIDs: [String]
         = [
         Coin.btc_identifier,
-        Coin.eth_identifier
+        Coin.eth_identifier,
+        Coin.ifrc_identifier
 //        Coin.cic_identifier
 //        Coin.guc_identifier
     ]

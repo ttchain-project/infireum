@@ -284,7 +284,7 @@ struct DLS_EN_US: DLS {
     func withdrawal_label_assetAmt(_ args: String...) -> String { return String.init(format: "Balance: %@ %@", arguments: args) }
     var withdrawal_placeholder_withdrawalAmt = "Enter amount"
     var withdrawal_label_toAddr = "Receipt address"
-    var withdrawal_btn_common_used_addr = "Addresses"
+    var withdrawal_btn_common_used_addr = "Commonly Used Addresses"
     var withdrawal_placeholder_toAddr = "Please enter address"
     var withdrawal_label_fromAddr = "Payment address"
     var withdrawal_label_minerFee = "Miner fee"

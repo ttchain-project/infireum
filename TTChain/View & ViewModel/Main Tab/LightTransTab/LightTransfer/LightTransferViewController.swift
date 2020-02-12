@@ -89,7 +89,7 @@ final class LightTransferViewController: KLModuleViewController, KLVMVC {
         addChildViewController(addressVC)
         addressVC.didMove(toParentViewController: self)
         scrollView.addSubview(addressVC.view)
-        addressVC.addrbookBtn.isHidden = self.purpose == .ifrcTransfer
+//        addressVC.addrbookBtn.isHidden = self.purpose == .ifrcTransfer
         
         
         addressVC.onTapChangeToAddress.drive(onNext: {
