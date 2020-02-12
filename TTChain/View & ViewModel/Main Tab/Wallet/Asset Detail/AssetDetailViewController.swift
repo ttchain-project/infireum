@@ -47,14 +47,14 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
         
-        if constructor.purpose == .lightTx {
-            self.transferBase.isHidden = true
-            self.view.layoutIfNeeded()
-        }else {
-            if viewModel.input.asset.wallet!.mainCoin!.identifier == Coin.btc_identifier {
-                self.ttcShortcutView.isHidden = false
-            }
-        }
+//        if constructor.purpose == .lightTx {
+//            self.transferBase.isHidden = true
+//            self.view.layoutIfNeeded()
+//        }else {
+//            if viewModel.input.asset.wallet!.mainCoin!.identifier == Coin.btc_identifier {
+//                self.ttcShortcutView.isHidden = false
+//            }
+//        }
     }
     
     typealias ViewModel = AssetDetailViewModel

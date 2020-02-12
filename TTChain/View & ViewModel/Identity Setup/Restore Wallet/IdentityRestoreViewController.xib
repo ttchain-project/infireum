@@ -21,7 +21,6 @@
                 <outlet property="pwdTextField" destination="2pt-kF-RAp" id="Azb-Bh-2KJ"/>
                 <outlet property="pwdTitleLabel" destination="Ocn-xZ-pnj" id="XJx-Q1-xom"/>
                 <outlet property="textViewHeight" destination="vl7-QG-AuU" id="bVi-UH-E2n"/>
-                <outlet property="titleLabel" destination="34c-17-XfI" id="mm4-Kg-qOK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,12 +32,6 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5I3-1v-wld">
                     <rect key="frame" x="20" y="30" width="335" height="295.5"/>
                     <subviews>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34c-17-XfI">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="0.0"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cek-KK-KbG">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="20"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

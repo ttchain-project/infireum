@@ -19,7 +19,7 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     var bag: DisposeBag = DisposeBag.init()
     var viewModel: IdentityRestoreViewModel!
 
-    @IBOutlet weak var titleLabel: UILabel!
+//    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var mnemonicBase: UIView!
     @IBOutlet weak var mnemonicTextView: KLPlaceholderTextView!
@@ -210,9 +210,9 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
     
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
-        title = dls.restoreIdentity_title
-        titleLabel.text = dls.restoreIdentity_label_able_to_change_pwd_note
-        importBtn.setTitleForAllStates(dls.restoreIdentity_btn_import)
+//        title = dls.restoreIdentity_title
+//        titleLabel.text = dls.restoreIdentity_label_able_to_change_pwd_note
+        importBtn.setTitleForAllStates(dls.g_next)
         
         backButton.setTitleForAllStates(lang.dls.g_cancel)
         pwdTitleLabel.text =  dls.createID_placeholder_password
@@ -233,12 +233,12 @@ final class IdentityRestoreViewController: KLModuleViewController, KLVMVC {
             image: #imageLiteral(resourceName: "btn_previous_light")
         )
         
-        createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "scanQRCodeButton"), toColor: theme.palette.nav_item_2)
+//        createRightBarButton(target: self, selector: #selector(toQRCodeCamera), image: #imageLiteral(resourceName: "scanQRCodeButton"), toColor: theme.palette.nav_item_2)
         
-        titleLabel.set(
-            textColor: theme.palette.label_main_1,
-            font: UIFont.owRegular(size: 12)
-        )
+//        titleLabel.set(
+//            textColor: theme.palette.label_main_1,
+//            font: UIFont.owRegular(size: 12)
+//        )
         
         for label in labels {
             label.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))

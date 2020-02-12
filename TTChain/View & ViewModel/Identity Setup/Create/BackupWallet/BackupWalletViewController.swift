@@ -81,7 +81,7 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
     override func renderLang(_ lang: Lang) {
         self.skipButton.setTitleForAllStates(lang.dls.qrcodeExport_alert_btn_skip)
         self.confirmButton.setTitleForAllStates(lang.dls.g_confirm)
-        self.titleLabel.text = lang.dls.backupWallet_sourceChoose_label_use_identity_qrcode
+        self.titleLabel.text = lang.dls.createID_title
         self.backQRCodeMessageLabel.text = lang.dls.backup_qrcode_message_label
         self.showQRCodeBtn.setTitleForAllStates(lang.dls.show_qr_code)
         self.qrCodemsgLabel.text = lang.dls.backupWallet_label_subNote

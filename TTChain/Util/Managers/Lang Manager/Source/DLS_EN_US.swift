@@ -137,7 +137,7 @@ struct DLS_EN_US: DLS {
     var createID_btn_create = "Create"
     var createID_placeholder_name = "Identity name"
     var createID_placeholder_password = "Password"
-    var createID_placeholder_confirmPassword = "Re-enter password"
+    var createID_placeholder_confirmPassword = "Confirm Password"
     var createID_placeholder_passwordNote = "Password Reminder"
     var createID_error_pwd_title = "Incorrect password"
     var createID_error_confirmPwd_title = "Incorrect confirm password"
@@ -568,7 +568,7 @@ struct DLS_EN_US: DLS {
     
     var group_qr_code = "Group QR Code"
     var account = "Account"
-    var assetDetail_receive = "Receive"
+    var assetDetail_receive = "Deposit"
     
     var alert_cant_join_pvt_group = "Can't join this group because this is a private group"
     var group_join_success = "Group joined successfully"
@@ -796,10 +796,10 @@ struct DLS_EN_US: DLS {
     
     var create_identity_password_placeholder = "Use letters and numbers"
     
-    var create_identity_reenter_password_placeholder = "Please reenter password"
+    var create_identity_reenter_password_placeholder = "Re-enter password"
     
     var create_identity_password_reminder_placeholder = "Reminder message should not be the same as password "
-    var create_identity_privacy_policy_btn_title = "I agree 《Infireum privacy policy》"
+    var create_identity_privacy_policy_btn_title = "I agree 《InfiniteChain privacy policy》"
     
     var agree_bnt_title:String = "Agree"
     

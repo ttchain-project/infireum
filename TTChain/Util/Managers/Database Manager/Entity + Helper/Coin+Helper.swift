@@ -194,24 +194,24 @@ extension Coin {
     }
     
     var iconImg: UIImage? {
-        switch self.identifier {
-        case Coin.ttn_identifier:
-            return #imageLiteral(resourceName: "ttn_coin_icon")
-        case Coin.btcn_identifier:
-            return #imageLiteral(resourceName: "btcn_coin_icon")
-        case Coin.ethn_identifier:
-            return #imageLiteral(resourceName: "ethn_coin_icon")
-        case Coin.usdtn_identifier:
-            return #imageLiteral(resourceName: "usdtn_coin_icon")
-        case Coin.exr_identifier:
-            return #imageLiteral(resourceName: "exr_coin_icon_white")
-        case Coin.mcc_identifier:
-            return #imageLiteral(resourceName: "mcc_coin_icon")
-        case Coin.ifrc_identifier:
-            return #imageLiteral(resourceName: "ifrc_coin_icon")
-        default:
-            break
-        }
+//        switch self.identifier {
+//        case Coin.ttn_identifier:
+//            return #imageLiteral(resourceName: "ttn_coin_icon")
+//        case Coin.btcn_identifier:
+//            return #imageLiteral(resourceName: "btcn_coin_icon")
+//        case Coin.ethn_identifier:
+//            return #imageLiteral(resourceName: "ethn_coin_icon")
+//        case Coin.usdtn_identifier:
+//            return #imageLiteral(resourceName: "usdtn_coin_icon")
+//        case Coin.exr_identifier:
+//            return #imageLiteral(resourceName: "exr_coin_icon_white")
+//        case Coin.mcc_identifier:
+//            return #imageLiteral(resourceName: "mcc_coin_icon")
+//        case Coin.ifrc_identifier:
+//            return #imageLiteral(resourceName: "ifrc_coin_icon")
+//        default:
+//            break
+//        }
         guard let _icon = icon as Data? else { return #imageLiteral(resourceName: "iconListNoimage") }
         return UIImage.init(data: _icon, scale: 1)
     }

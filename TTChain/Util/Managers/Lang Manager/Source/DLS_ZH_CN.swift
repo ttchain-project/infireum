@@ -779,7 +779,7 @@ struct DLS_ZH_CN: DLS {
     var create_identity_reenter_password_placeholder = "请再次输入密码"
     
     var create_identity_password_reminder_placeholder = "提示内容请勿与密码一样，以免被轻易盗取"
-    var create_identity_privacy_policy_btn_title = "我同意《Infireum隐私政策》"
+    var create_identity_privacy_policy_btn_title = "我同意《InfiniteChain隐私政策》"
     
     var agree_bnt_title:String = "同意"
 

@@ -118,7 +118,7 @@ class BackupWalletNoteViewController: KLModuleViewController {
     
     private func createIdentity() {
         self.hud.startAnimating(inView: self.view)
-        let mnemonic = Mnemonic.create(language: .simplifiedChinese)
+        let mnemonic = Mnemonic.create()
         print(mnemonic)
         guard Identity.create(mnemonic: mnemonic, name:identitySource.name , pwd: identitySource.pwd, hint: identitySource.pwdHint) != nil else {
             self.hud.stopAnimating()
