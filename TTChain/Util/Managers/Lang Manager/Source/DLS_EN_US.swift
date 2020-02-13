@@ -320,7 +320,7 @@ struct DLS_EN_US: DLS {
     var txRecord_btn_withdrawal = "Withdrawal"
     var txRecord_btn_fail = "Fail"
     var txRecord_empty_tx = "No transfer history"
-    var lightningTx_title = "Lightning transfer"
+    var lightningTx_title = "Lightning Transfer"
     var lightningTx_label_rate = "Exchange rate"
     var lightningTx_btn_exchange = "Quick exchange"
     var lightningTx_placeholder_out_amt = "Transfer quantity"
@@ -799,7 +799,7 @@ struct DLS_EN_US: DLS {
     var create_identity_reenter_password_placeholder = "Re-enter password"
     
     var create_identity_password_reminder_placeholder = "Reminder message should not be the same as password "
-    var create_identity_privacy_policy_btn_title = "I agree 《InfiniteChain privacy policy》"
+    var create_identity_privacy_policy_btn_title = "I agree 《InfiniteChain Privacy Policy》"
     
     var agree_bnt_title:String = "Agree"
     

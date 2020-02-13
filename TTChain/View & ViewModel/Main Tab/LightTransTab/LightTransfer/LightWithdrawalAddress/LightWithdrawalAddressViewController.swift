@@ -59,10 +59,10 @@ final class LightWithdrawalAddressViewController: KLModuleViewController,KLVMVC 
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         toAddressTitleLabel.text = dls.withdrawal_label_toAddr
-        addrbookBtn.set(image: #imageLiteral(resourceName: "arrowNavGrey"),
+        addrbookBtn.set(image: #imageLiteral(resourceName: "doneBlue"),
                         title: dls.withdrawal_btn_common_used_addr,
                         titlePosition: .left,
-                        additionalSpacing: 4,
+                        additionalSpacing: 8,
                         state: .normal)
 
         toAddressTextField.set(placeholder: dls.light_withdrawal_placeholder_toAddr)
@@ -74,8 +74,9 @@ final class LightWithdrawalAddressViewController: KLModuleViewController,KLVMVC 
         let palette = theme.palette
         
         toAddressTitleLabel.set(textColor: palette.label_main_1, font: .owRegular(size: 14))
-        addrbookBtn.set(textColor: palette.nav_bg_1, font: UIFont.owRegular(size: 14),backgroundColor:.summerSky)
-        addrbookBtn.tintColor = .white
+//        addrbookBtn.set(textColor: palette.nav_bg_1, font: UIFont.owRegular(size: 14),backgroundColor:.summerSky)
+        addrbookBtn.set(color: palette.label_main_2, font: UIFont.owRegular(size: 14),backgroundColor:palette.application_main)
+//        addrbookBtn.tintColor = .white
         addrbookBtn.cornerRadius = addrbookBtn.height/2
         toAddressTextField.set(textColor: palette.input_text, font: .owRegular(size: 14), placeHolderColor: palette.input_placeholder)
         
