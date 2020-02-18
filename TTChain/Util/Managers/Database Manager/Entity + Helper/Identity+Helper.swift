@@ -28,8 +28,8 @@ extension Identity {
             #endif
         }
         
-        let cnyID = SystemDefaultFiat.CNY.rawValue
-        let pred = Fiat.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Fiat.id), value: cnyID))
+        let usdID = SystemDefaultFiat.USD.rawValue
+        let pred = Fiat.genPredicate(fromIdentifierType: .num(keyPath: #keyPath(Fiat.id), value: usdID))
         
         guard let fiatID = DB.instance.get(type: Fiat.self, predicate: pred, sorts: nil)?.first?.id else {
             #if DEBUG
