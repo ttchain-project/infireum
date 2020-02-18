@@ -139,8 +139,38 @@ final class TransRecordDetailViewController: KLModuleViewController,KLVMVC  {
             let vc = ExploreDetailWebViewController.instance(from: ExploreDetailWebViewController.Config(model: nil,url:url))
             self.navigationController?.pushViewController(vc,animated:true)
         }).disposed(by: bag)
+        
+        receiptAddressCopyBtn.rx.tap
+            .asDriver()
+            .throttle(1)
+            .drive(onNext: {
+                [unowned self] in
+                self.copyContent(content: self.viewModel.toAddress)
+            })
+            .disposed(by: bag)
+        
+        paymentAddressCopyButtn.rx.tap
+            .asDriver()
+            .throttle(1)
+            .drive(onNext: {
+                [unowned self] in
+                self.copyContent(content: self.viewModel.fromAddress)
+            })
+            .disposed(by: bag)
+        
+        copyTxNumberBtn.rx.tap
+            .asDriver()
+            .throttle(1)
+            .drive(onNext: {
+                [unowned self] in
+                self.copyContent(content: self.viewModel.txId)
+            })
+            .disposed(by: bag)
     }
     
     
-
+    private func copyContent(content: String) {
+        UIPasteboard.general.string = content
+        view.makeToast(LM.dls.copied_successfully)
+    }
 }
