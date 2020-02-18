@@ -161,8 +161,8 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
                 } else {
                     return 0
                 }
-            case .ttn:
-                return input.asset.coinID == Coin.ttn_identifier ? feeInfo?.amt ?? 0 : 0
+            case .ifrc:
+                return input.asset.coinID == Coin.ifrc_identifier ? feeInfo?.amt ?? 0 : 0
             default:
                 return 0
             }
