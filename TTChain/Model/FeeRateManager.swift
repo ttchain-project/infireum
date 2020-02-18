@@ -185,7 +185,7 @@ class FeeManager {
         setValueIfHasNotSetBefore(25, forOption: .eth(.gasPrice(.suggest)))
         setValueIfHasNotSetBefore(10, forOption: .eth(.gasPrice(.systemMin)))
         setValueIfHasNotSetBefore(100, forOption: .eth(.gasPrice(.systemMax)))
-        setValueIfHasNotSetBefore(120000, forOption: .eth(.gas))
+        setValueIfHasNotSetBefore(21000, forOption: .eth(.gas))
         
         setValue(0.1, forOption: .ttn(.systemDefault)) //Value in TTN
         setValue(20546, forOption: .ttn(.btcnWithdrawal)) //Value in Satoshi
