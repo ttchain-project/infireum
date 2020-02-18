@@ -3099,7 +3099,7 @@
 		64E4E4CB2147AC93009B556B /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		64E4E4D22147B434009B556B /* LaunchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchViewController.xib; sourceTree = "<group>"; };
 		64E77DE221206BD200B0AC15 /* EtherscanUrlCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtherscanUrlCreator.swift; sourceTree = "<group>"; };
-		64F07CE420D0E4CB00A60C5C /*  Infireum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = " Infireum.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		64F07CE420D0E4CB00A60C5C /* Infireum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Infireum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F07CE720D0E4CB00A60C5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64F07CF120D0E4CE00A60C5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64F07CF420D0E4CE00A60C5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -6768,7 +6768,7 @@
 		64F07CE520D0E4CB00A60C5C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				64F07CE420D0E4CB00A60C5C /*  Infireum.app */,
+				64F07CE420D0E4CB00A60C5C /* Infireum.app */,
 				64F07CFB20D0E4CE00A60C5C /* TTChainTests.xctest */,
 				64F07D1B20D0E83200A60C5C /* TTChain SIT.app */,
 				64F07D2E20D0E8FA00A60C5C /* TTChain UAT.app */,
@@ -7132,7 +7132,7 @@
 			);
 			name = TTChain;
 			productName = OfflineWallet;
-			productReference = 64F07CE420D0E4CB00A60C5C /*  Infireum.app */;
+			productReference = 64F07CE420D0E4CB00A60C5C /* Infireum.app */;
 			productType = "com.apple.product-type.application";
 		};
 		64F07CFA20D0E4CE00A60C5C /* TTChainTests */ = {
@@ -9909,11 +9909,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 4UM79A8YMB;
+				DEVELOPMENT_TEAM = VM2XW9UQ3K;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_PRD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9923,11 +9923,11 @@
 				);
 				MARKETING_VERSION = 1.0.52;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttchain.infireum;
+				PRODUCT_BUNDLE_IDENTIFIER = net.infinitepay.wallet;
 				PRODUCT_MODULE_NAME = Hope_Seed;
-				PRODUCT_NAME = " Infireum";
+				PRODUCT_NAME = Infireum;
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
-				PROVISIONING_PROFILE_SPECIFIER = "infireum wallet";
+				PROVISIONING_PROFILE_SPECIFIER = "InfinitePay Wallet";
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -9941,10 +9941,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 24;
-				DEVELOPMENT_TEAM = 4UM79A8YMB;
+				CURRENT_PROJECT_VERSION = 25;
+				DEVELOPMENT_TEAM = VM2XW9UQ3K;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_PRD-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -9954,11 +9954,11 @@
 				);
 				MARKETING_VERSION = 1.0.52;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttchain.infireum;
+				PRODUCT_BUNDLE_IDENTIFIER = net.infinitepay.wallet;
 				PRODUCT_MODULE_NAME = Hope_Seed;
-				PRODUCT_NAME = " Infireum";
+				PRODUCT_NAME = Infireum;
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
-				PROVISIONING_PROFILE_SPECIFIER = "infireum wallet";
+				PROVISIONING_PROFILE_SPECIFIER = "InfinitePay Wallet";
 				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "TTChain/Model/TTChain-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -10018,7 +10018,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UL4ADCKZV3;
+				DEVELOPMENT_TEAM = 4UM79A8YMB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_SIT-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
