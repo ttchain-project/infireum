@@ -109,7 +109,7 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
         case (.btc?,Coin.usdt_identifier):
             urlString = "https://api.omniexplorer.info"
         case (.ifrc?,_):
-            urlString = "http://13.251.130.190:9997"
+            urlString = "http://3.1.196.86:9997"
         default:
 //            urlString = C.BlockchainAPI.urlStr_32000
             urlString = "http://54.64.162.167:3206"
@@ -1681,7 +1681,7 @@ struct GetTTNAssetAmountAPI:KLMoyaAPIData {
     let address: String
     
     var base: APIBaseEndPointType {
-        let urlString = "http://13.251.130.190:9997"
+        let urlString = "http://3.1.196.86:9997"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
@@ -1749,7 +1749,7 @@ struct GetTTNNonceAPI: KLMoyaAPIData {
     let address: String
     let mainCoin: Coin
     var base: APIBaseEndPointType {
-        let urlString = "http://13.251.130.190:9997"
+        let urlString = "http://3.1.196.86:9997"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
@@ -1892,7 +1892,7 @@ struct SignIfrcTxAPI:KLMoyaAPIData {
     var input: String { return transType == .btcnWithdraw ? C.TTNTx.withdrawInputPrefix + toAddress : ""}
     
     var base: APIBaseEndPointType {
-        let urlString = "http://13.251.130.190:9997"
+        let urlString = "http://3.1.196.86:9997"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
@@ -1959,7 +1959,7 @@ struct BroadcastTTNTxAPI: KLMoyaAPIData {
     var langDepended: Bool { return false }
     
     var base: APIBaseEndPointType {
-        let urlString = "http://13.251.130.190:9997"
+        let urlString = "http://3.1.196.86:9997"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
@@ -2014,7 +2014,7 @@ struct GetTTNTxRecordsAPI: KLMoyaAPIData {
     let mainCoin: Coin
     
     var base: APIBaseEndPointType {
-        let urlString = "http://13.251.130.190:9997"
+        let urlString = "http://3.1.196.86:9997"
         let url = URL.init(string: urlString)!
         return .custom(url: url)
     }
