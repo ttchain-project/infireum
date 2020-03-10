@@ -48,8 +48,13 @@ class SignBTCTransaction {
                     unsignedTx = try instance.buildUnspendTxForUSDTtoUSDT(utxos: utxosToSpend)
                 }else {
                     change = totalAmount - instance.targetValue - instance.fee
-                    targetValue = instance.targetValue
-                    instance.destinations = [(toAddress, targetValue), (fromAddress, change)]
+//                    targetValue = instance.targetValue
+//                    instance.destinations = [(toAddress, targetValue), (fromAddress, change)]
+                    if (change == 0) {
+                        instance.destinations = [(toAddress, instance.targetValue)]
+                    } else {
+                        instance.destinations = [(toAddress, instance.targetValue), (fromAddress, change)]
+                    }
                     unsignedTx = try instance.buildUnspentTxForBTCtoBTC(utxos: utxosToSpend)
                 }
                 
