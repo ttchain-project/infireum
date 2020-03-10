@@ -272,7 +272,7 @@ struct DLS_EN_US: DLS {
     var assetDetail_tab_deposit = "Deposit"
     var assetDetail_tab_fail = "Fail"
     var assetDetail_label_tx_failed = "Failed"
-    var assetDetail_label_tx_go_check = "Go check TXID"
+    var assetDetail_label_tx_go_check = "Check TXID here"
     func withdrawal_title(_ args: String...) -> String { return String.init(format: "%@ transfer", arguments: args) }
     var withdrawal_btn_nextstep = "Next step"
     var withdrawal_error_same_address_content = "The receipt address must not be the same as the payment address"
@@ -370,7 +370,7 @@ struct DLS_EN_US: DLS {
     var me_label_agreement = "Member agreement"
     var me_label_check_update = "Check for version updates"
     var me_hud_checking = "Checking"
-    var me_alert_already_latest_version_title = "You have the latest version."
+    var me_alert_already_latest_version_title = "You have the Latest version."
     func me_alert_version_content(_ args: String...) -> String { return String.init(format: "Current version: %@\nlatest version: %@", arguments: args) }
     var me_alert_able_to_update_version_title = "There is a new version, please update now to enjoy full functionality"
     var me_btn_update = "Update"
@@ -448,7 +448,7 @@ struct DLS_EN_US: DLS {
     var ab_update_actionsheet_createAddress_btc = "Add Bitcoin Address"
     var ab_update_actionsheet_createAddress_eth = "Add Ethernet address"
     var ab_update_actionsheet_createAddress_cic = "Add CIC address"
-    var ab_update_label_createAddress = "Creat address"
+    var ab_update_label_createAddress = "Create address"
     var ab_update_placeholder_input_valid_address = "Please enter a valid address"
     var ab_update_alert_confirm_delete_address_title = "Are you sure you want to delete the address?"
     var ab_update_btn_delete_addressbook = "Delete contact"
@@ -747,7 +747,7 @@ struct DLS_EN_US: DLS {
     var tx_block_number_title = "Block numbers"
     
     func tx_record_detail_title(_ args: String...) -> String {
-        return String.init(format: "%@ tranfer record", arguments: args)
+        return String.init(format: "%@ transfer record", arguments: args)
     }
 
     var chat_msg_tab_title:String = "Message"
