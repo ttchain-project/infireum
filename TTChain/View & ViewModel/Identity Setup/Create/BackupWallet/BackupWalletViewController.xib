@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,13 +27,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgX-Ms-FnC">
-                    <rect key="frame" x="20" y="40" width="335" height="21"/>
+                    <rect key="frame" x="20" y="20" width="335" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2m-HF-GmQ">
-                    <rect key="frame" x="62.5" y="91" width="250" height="250"/>
+                    <rect key="frame" x="62.5" y="71" width="250" height="250"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6L-6B-Dxc">
                             <rect key="frame" x="94" y="108" width="62" height="34"/>
@@ -66,8 +64,8 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="nep-Af-kuy">
-                    <rect key="frame" x="47" y="366" width="281" height="203"/>
-                    <string key="text">"This QR code is designed for you with TTChain wallet, so you can quickly and easily restore all your wallet accounts. Please back up your account information and don't upload it to the cloud, or access on any public network. This is essential for you to maintain asset security and recover your account in the future."</string>
+                    <rect key="frame" x="47" y="346" width="281" height="203"/>
+                    <string key="text">"This QR code is designed for you with Infireum Wallet, so you can quickly and easily restore all your wallet accounts. Please back up your account information and don't upload it to the cloud, or access on any public network. This is essential for you to maintain asset security and recover your account in the future."</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -131,10 +129,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="v7a-OS-hwM" secondAttribute="bottom" constant="20" id="zMI-Mo-V8t"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="134" y="137"/>
         </view>
     </objects>
     <resources>
-        <image name="btn_agree" width="48" height="48"/>
-        <image name="btn_notice" width="48" height="48"/>
+        <image name="btn_agree" width="16" height="16"/>
+        <image name="btn_notice" width="16" height="16"/>
     </resources>
 </document>
