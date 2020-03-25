@@ -257,4 +257,14 @@ class OWRxNotificationCenter {
     public func notifyTTNWalletCreated() {
         _ttnWalletCreated.accept(())
     }
+    
+    //Notify ReloadWalletsBalance
+    private let _reloadWalletsBalance: PublishRelay<Void> = PublishRelay.init()
+    public var reloadWalletsBalance: Observable<Void> {
+        return _reloadWalletsBalance.asObservable()
+    }
+    
+    public func notifyReloadWalletsBalance() {
+        _reloadWalletsBalance.accept(())
+    }
 }

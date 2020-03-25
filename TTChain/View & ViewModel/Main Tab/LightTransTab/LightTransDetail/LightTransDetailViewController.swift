@@ -17,6 +17,11 @@ class LightTransDetailViewController: UIViewController {
         self.setupUI()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        print("viewWillDisappear")
+        OWRxNotificationCenter.instance.notifyReloadWalletsBalance()
+    }
+    
     @IBOutlet weak var coinIconImgView: UIImageView! {
         didSet {
             coinIconImgView.image = self.viewModel.input.asset.value.coin!.iconImg
@@ -67,10 +72,22 @@ class LightTransDetailViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: LightTransDetailViewController.className, bundle: nil)
         self.viewModelBinding()
+        self.observeReloadWalletsBalance()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    private func observeReloadWalletsBalance() {
+        OWRxNotificationCenter
+            .instance
+            .reloadWalletsBalance
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] _ in
+                self.viewModel.updateBalance()
+            })
+            .disposed(by: bag)
     }
     
     override func viewDidLayoutSubviews() {

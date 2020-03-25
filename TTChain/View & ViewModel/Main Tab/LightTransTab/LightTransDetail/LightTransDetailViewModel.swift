@@ -42,7 +42,39 @@ class LightTransDetailViewModel: ViewModel,Rx {
                 return "--"
             }
         }.bind(to: self.output.amountStr).disposed(by: bag)
-     
+
+        Observable.combineLatest(self._fiat, self._fiatRate, self._amtSource)
+            .map {
+                fiat, fiatRate, amt -> String in
+                let fiatSymbol = fiat.fullSymbol
+                let prefix = "≈" + fiatSymbol + " "
+                if let rate = fiatRate, let _amt = amt {
+                    return prefix + (rate * _amt).asString(digits: 2, force: true).disguiseIfNeeded()
+                }else {
+                    return prefix + "--"
+                }
+            }
+            .bind(to: self.output.fiatAmtStr)
+            .disposed(by: bag)
+    }
+    
+    public func updateBalance() {
+        let relay = BehaviorRelay<Decimal?>.init(value: input.asset.value.amount as Decimal?)
+        getAmtFromBlockchain().bind(to: relay).disposed(by: bag)
+        
+        relay.map { amt in
+            if let _amt = amt {
+                return _amt
+                    .asString(digits: 4,
+                              force: true,
+                              maxDigits: Int(self.input.asset.value.coin!.requiredDigit),
+                              digitMoveCondition: { Decimal.init(string: $0)! != _amt })
+                    .disguiseIfNeeded()
+            }else {
+                return "--"
+            }
+        }.bind(to: self.output.amountStr).disposed(by: bag)
+        
         Observable.combineLatest(self._fiat, self._fiatRate, self._amtSource)
             .map {
                 fiat, fiatRate, amt -> String in

@@ -127,6 +127,11 @@ final class AssetDetailViewController: KLModuleViewController, KLVMVC {
         hidesBottomBarWhenPushed = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        print("viewWillDisappear")
+        OWRxNotificationCenter.instance.notifyReloadWalletsBalance()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        self.view.setGradientColor()

@@ -23,6 +23,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
         self.configHeaderView()
         self.monitorLocalWalletsUpdate()
         self.observePrivateModeUpdateEvent()
+        self.observeReloadWalletsBalance()
         bindAssetUpdate()
         self.assetSelected = constructor.assetSelected
     }
@@ -119,6 +120,17 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
             })
             .disposed(by: bag)
     }
+    private func observeReloadWalletsBalance() {
+        OWRxNotificationCenter
+            .instance
+            .reloadWalletsBalance
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                [unowned self] _ in
+                self.viewModel.refreshAllData()
+            })
+            .disposed(by: bag)
+    }
 }
 
 extension WalletsViewController:UITableViewDelegate {
@@ -127,6 +139,11 @@ extension WalletsViewController:UITableViewDelegate {
        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: WalletsTableSectionHeaderView.nameOfClass) as! WalletsTableSectionHeaderView
         let sectionModel = self.viewModel.sectionModelSources.value[section]
         headerView.rx.klrx_tap.drive(onNext: { _ in
+            self.viewModel.updateSectionModel(forSection: section)
+            headerView.expandButton.isSelected = !headerView.expandButton.isSelected
+        }).disposed(by: headerView.bag)
+        
+        headerView.expandButton.rx.klrx_tap.drive(onNext: { _ in
             self.viewModel.updateSectionModel(forSection: section)
             headerView.expandButton.isSelected = !headerView.expandButton.isSelected
         }).disposed(by: headerView.bag)
