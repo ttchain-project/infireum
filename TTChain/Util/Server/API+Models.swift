@@ -875,7 +875,7 @@ struct GetETHNonceAPI: KLMoyaAPIData {
     var path: String { return "" }
     
     var base: APIBaseEndPointType {
-        let url = URL.init(string: "https://mainnet.infura.io")!
+        let url = URL.init(string: "http://sit-api.ttchainwallet.com/MainnetInfura")!
         return .custom(url: url)
     }
     
@@ -905,15 +905,16 @@ struct GetETHNonceAPIModel: KLJSONMappableMoyaResponse {
     
     let nonce: Int
     init(json: JSON, sourceAPI: API) throws {
-        guard let hexNonce = json["result"].string?.drop0xPrefix
+        guard let hexNonce = json.string?.drop0xPrefix
             else {
-                let error = json["error"]
-                if let code = error["code"].int,
-                    let msg = error["message"].string  {
-                    throw GTServerAPIError.incorrectResult(String(code), msg)
-                }else {
-                    throw GTServerAPIError.noData
-                }
+//                let error = json["error"]
+//                if let code = error["code"].int,
+//                    let msg = error["message"].string  {
+//                    throw GTServerAPIError.incorrectResult(String(code), msg)
+//                }else {
+//                    throw GTServerAPIError.noData
+//                }
+                throw GTServerAPIError.noData
         }
         
         let nonce = hexNonce.hexaToDecimal
