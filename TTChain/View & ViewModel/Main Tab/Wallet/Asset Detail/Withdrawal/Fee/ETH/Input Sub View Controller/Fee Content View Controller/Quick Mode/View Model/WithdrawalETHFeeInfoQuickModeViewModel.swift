@@ -66,9 +66,10 @@ class WithdrawalETHFeeInfoQuickModeViewModel: KLRxViewModel, WithdrawalETFFeeInf
     }
     
     public var gasInfo: Observable<(gasPrice: Decimal?, gas: Decimal?)> {
+        print(FeeManager.getValue(fromOption: .eth(.gas)))
         return Observable
             .combineLatest(
-                gasPrice, Observable.just(FeeManager.getValue(fromOption: .eth(.gas)))
+                gasPrice, Observable.just(Decimal(21000))
             )
             .map {
                 (gasPrice: $0, gas: $1)
