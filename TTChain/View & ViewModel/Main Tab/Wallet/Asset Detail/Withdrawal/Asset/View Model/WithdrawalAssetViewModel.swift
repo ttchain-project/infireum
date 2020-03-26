@@ -151,7 +151,11 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
         let fee =  { () -> Decimal? in
             switch input.asset.wallet!.owChainType {
             case .btc:
-                return feeInfo?.totalHardCodedFee
+                if (input.asset.coinID == Coin.usdt_identifier) {
+                    return 0
+                } else {
+                    return feeInfo?.totalHardCodedFee
+                }
             case .eth:
                 guard let feeInfo = feeInfo else {
                     return 0
