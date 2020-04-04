@@ -65,7 +65,7 @@ final class LightWithdrawalAssetViewController: KLModuleViewController,KLVMVC {
                 digitMoveCondition: { Decimal.init(string: $0)! != amt })
             
             let dls = LM.dls
-            return dls.withdrawal_label_assetAmt(_amtString, coinName)
+            return dls.withdrawal_label_assetAmt(coinName, _amtString)
             }
             .bind(to: balanceAmountLabel.rx.text)
             .disposed(by: bag)

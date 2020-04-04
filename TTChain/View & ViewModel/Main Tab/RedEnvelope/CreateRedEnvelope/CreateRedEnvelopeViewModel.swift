@@ -133,7 +133,7 @@ final class CreateRedEnvelopeViewModel: ViewModel {
             guard let coin = coin,let wallet = self.input.walletRelay.value, let asset = wallet.getAsset(of: coin) else {
                 return ""
             }
-            return LM.dls.withdrawal_label_assetAmt(asset.amount!.decimalValue.asString(digits:8),"")
+            return LM.dls.withdrawal_label_assetAmt("", asset.amount!.decimalValue.asString(digits:8))
             }.bind(to: output.balanceSubject).disposed(by: disposeBag)
     }
 

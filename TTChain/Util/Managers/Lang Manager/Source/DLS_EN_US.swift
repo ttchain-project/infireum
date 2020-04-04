@@ -281,7 +281,7 @@ struct DLS_EN_US: DLS {
     func withdrawal_error_fee_insufficient(_ args: String...) -> String { return String.init(format: "Insufficient balance: Unable to pay %@ handling fee\n handling fee: %@ %@\n holding amount: %@ %@", arguments: args) }
     func withdrawal_error_fee_rate_too_low(_ args: String...) -> String { return String.init(format: "%@ is too low, it is recommended to be higher than %@ %@", arguments: args) }
     func withdrawal_error_unknown(_ args: String...) -> String { return String.init(format: "Unknown verification error\n system message: %@", arguments: args) }
-    func withdrawal_label_assetAmt(_ args: String...) -> String { return String.init(format: "Balance: %@ %@", arguments: args) }
+    func withdrawal_label_assetAmt(_ args: String...) -> String { return String.init(format: "%@ Balance: %@", arguments: args) }
     var withdrawal_placeholder_withdrawalAmt = "Enter amount"
     var withdrawal_label_toAddr = "Receipt address"
     var withdrawal_btn_common_used_addr = "Commonly Used Addresses"
@@ -718,7 +718,7 @@ struct DLS_EN_US: DLS {
 
     var insufficient_unspend_error_msg:String = "The transferable balance is insufficient. If it is USDT transfer, please check if the BTC wallet balance is enough to pay the miner fee."
 
-    var transfer_note_placeholder:String = "Please enter a description within 20 character"
+    var transfer_note_placeholder:String = "Please enter a description within 20 characters"
     
     var payment_wallet:String = "Payment Wallet"
     
@@ -726,7 +726,7 @@ struct DLS_EN_US: DLS {
     
     var forward_message_title_string :String = "Select Messages"
     
-    var light_withdrawal_placeholder_toAddr : String  = "Please enter IFR address or scan the qrcode"
+    var light_withdrawal_placeholder_toAddr : String  = "Please enter IFRC address or scan the QR code"
     
     var alert_post_message_restriction = "Only administrators can post messages in this group"
     

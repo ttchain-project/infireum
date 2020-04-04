@@ -54,7 +54,7 @@ final class WithdrawalAssetViewController: KLModuleViewController, KLVMVC {
             )
             
             let dls = LM.dls
-            return "(\(dls.withdrawal_label_assetAmt(_amtString, coinName)))"
+            return "(\(dls.withdrawal_label_assetAmt(coinName, _amtString)))"
         }
         .bind(to: availableAmtLabel.rx.text)
         .disposed(by: bag)

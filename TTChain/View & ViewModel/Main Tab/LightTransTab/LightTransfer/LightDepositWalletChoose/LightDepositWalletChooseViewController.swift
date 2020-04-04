@@ -139,7 +139,7 @@ final class LightDepositWalletChooseViewController: KLModuleViewController,KLVMV
                 digitMoveCondition: { Decimal.init(string: $0) ?? 0 != amt }
             )
             let dls = LM.dls
-            return dls.withdrawal_label_assetAmt(_amtString, coin.inAppName!)
+            return dls.withdrawal_label_assetAmt(coin.inAppName!, _amtString)
             }
             .bind(to: availableBalanceLabel.rx.text).disposed(by: bag)
         
