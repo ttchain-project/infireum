@@ -138,7 +138,7 @@ struct DLS_EN_US: DLS {
     var createID_placeholder_name = "Identity name"
     var createID_placeholder_password = "Password"
     var createID_placeholder_confirmPassword = "Confirm Password"
-    var createID_placeholder_passwordNote = "Password Reminder"
+    var createID_placeholder_passwordNote = "Password Hint"
     var createID_error_pwd_title = "Incorrect password"
     var createID_error_confirmPwd_title = "Incorrect confirm password"
     var createID_error_identityName_title = "Incorrect identity name"
@@ -798,7 +798,7 @@ struct DLS_EN_US: DLS {
     
     var create_identity_reenter_password_placeholder = "Re-enter password"
     
-    var create_identity_password_reminder_placeholder = "Password reminder message"
+    var create_identity_password_reminder_placeholder = "Password hint message"
     var create_identity_privacy_policy_btn_title = "I agree 《InfiniteChain Privacy Policy》"
     
     var agree_bnt_title:String = "Agree"
