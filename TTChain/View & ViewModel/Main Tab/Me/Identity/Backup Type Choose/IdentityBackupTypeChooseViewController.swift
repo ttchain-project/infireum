@@ -25,19 +25,19 @@ class IdentityBackupTypeChooseViewController: KLModuleViewController, Rx {
     @IBOutlet weak var mneSepline: UIView!
     @IBOutlet weak var mneDescLabel: UILabel!
     
-    static func instance(mnemonic: String) ->  IdentityBackupTypeChooseViewController {
+    static func instance(mnemonic: String?) ->  IdentityBackupTypeChooseViewController {
         let vc = xib(vc: IdentityBackupTypeChooseViewController.self)
         vc.config(mnemonic: mnemonic)
         
         return vc
     }
     
-    static func navInstance(mnemonic: String) -> UINavigationController {
+    static func navInstance(mnemonic: String?) -> UINavigationController {
         return UINavigationController.init(rootViewController: instance(mnemonic: mnemonic))
     }
     
-    private(set) var mnemonic: String!
-    private func config(mnemonic: String) {
+    private(set) var mnemonic: String?
+    private func config(mnemonic: String?) {
         self.mnemonic = mnemonic
     }
 
@@ -124,9 +124,94 @@ class IdentityBackupTypeChooseViewController: KLModuleViewController, Rx {
     }
     
     private func toUsingMnemonic() {
+        guard let mnemonic = self.mnemonic else {
+            self.backup()
+            return
+        }
         let vc = BackupWalletMnemonicDisplayViewController.instance(source: .backupIdentity(mnemonic))
         
         navigationController?.pushViewController(vc)
     }
+    
+    private func askUserInputPwdBeforeBackup(withHint hint: String?) -> Single<String> {
+        return Single.create { [unowned self] (handler) -> Disposable in
+            let palette = TM.palette
+            let dls = LM.dls
+            let alert = UIAlertController.init(
+                title: dls.myIdentity_alert_backup_identity_title,
+                message: dls.myIdentity_alert_input_pwd_content,
+                preferredStyle: .alert
+            )
+            
+            let cancel = UIAlertAction.init(title: dls.g_cancel,
+                                            style: .cancel,
+                                            handler: nil)
+            var textField: UITextField!
+            let confirm = UIAlertAction.init(title: dls.g_confirm,
+                                             style: .default) {
+                                                (_) in
+                                                if let pwd = textField.text, pwd.count > 0 {
+                                                    handler(.success(pwd))
+                                                }
+            }
+            
+            alert.addTextField { [unowned self] (tf) in
+                tf.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
+                tf.set(placeholder:(hint != nil) ? dls.qrCodeImport_alert_placeholder_pwd(hint!) : dls.myIdentity_placeholder_pwd)
+                textField = tf
+                tf.rx.text.map { $0?.count ?? 0 }.map { $0 > 0 }.bind(to: confirm.rx.isEnabled).disposed(by: self.bag)
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            self.present(alert, animated: true, completion: nil)
+            
+            return Disposables.create()
+        }
+    }
+    
+    private func backup() {
+          //NOTE: As we need to check the pwd, but pwd is related to wallet.
+          //      Since there's no pwd for identity now, must make sure that all
+          //      the pwds are same, so we can guarantee that the system has no
+          //      pwd-updating features yet.
+          guard let identity = Identity.singleton ,let wallets = identity.wallets?.array as? [Wallet] else {
+              return
+          }
+          
+          let systemWallets = wallets.filter { $0.isFromSystem }
+          let pwdSet = Set.init(systemWallets.map { $0.ePwd! })
+          guard pwdSet.count == 1 else { return }
+          let sampleWallet = systemWallets[0]
+          let pwdHintSet = Set.init(systemWallets.map { $0.pwdHint! })
+          guard pwdHintSet.count == 1 else { return errorDebug(response: ()) }
+          
+          askUserInputPwdBeforeBackup(withHint: pwdHintSet.first)
+              .subscribe(onSuccess: { [unowned self] (pwd) in
+                  let dls = LM.dls
+                  if sampleWallet.isWalletPwd(rawPwd: pwd) {
+                      guard let mnemonic = systemWallets[0].attemptDecryptMnemonic(withRawPwd: pwd) else {
+                          self.showSimplePopUp(
+                              with: dls.myIdentity_error_unable_to_decrypt_mnemonic,
+                              contents: "",
+                              cancelTitle: dls.g_confirm,
+                              cancelHandler: nil
+                          )
+                          
+                          return errorDebug(response: ())
+                      }
+                    self.mnemonic = mnemonic
+                    self.toUsingMnemonic()
+                  }else {
+                      self.showSimplePopUp(
+                          with: "",
+                          contents: dls.myIdentity_error_pwd_is_wrong,
+                          cancelTitle: dls.g_cancel,
+                          cancelHandler: nil
+                      )
+                  }
+              })
+              .disposed(by: bag)
+      }
 }
 
