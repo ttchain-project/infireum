@@ -371,7 +371,7 @@ struct DLS_EN_US: DLS {
     var me_label_check_update = "Check for version updates"
     var me_hud_checking = "Checking"
     var me_alert_already_latest_version_title = "You have the Latest version."
-    func me_alert_version_content(_ args: String...) -> String { return String.init(format: "Current version: %@\nlatest version: %@", arguments: args) }
+    func me_alert_version_content(_ args: String...) -> String { return String.init(format: "Current version: %@\nLatest version: %@", arguments: args) }
     var me_alert_able_to_update_version_title = "There is a new version, please update now to enjoy full functionality"
     var me_btn_update = "Update"
     var myIdentity_title = "My identity"
