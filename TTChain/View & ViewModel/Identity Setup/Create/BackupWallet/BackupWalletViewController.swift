@@ -138,6 +138,7 @@ final class BackupWalletViewController: KLModuleViewController,KLVMVC {
             launchType: .create,
             identity: Identity.singleton!,
             onViewController: self,
+            fromRegisterConfig: self.viewModel?.input,
             onComplete: { [weak self] result in
                 switch result {
                 case .createOwnQRCode(let content):

@@ -80,6 +80,7 @@ class BackupWalletViewModel:KLRxViewModel {
                 DispatchQueue.main.async {
                     if let qrCode = QRCodeGenerator.gZipAndgenerateQRCode(from: qrCodeRawTextContent) {
                         self.output.qrcodeImage.accept(UIImage.init(ciImage: qrCode))
+                        self.takeScreenshot(true)
                     }else {
                         self.output.errorMessageSubject.onNext("无法从钱包资讯生成 QRCODE")
                     }
@@ -88,5 +89,18 @@ class BackupWalletViewModel:KLRxViewModel {
                 self.output.errorMessageSubject.onNext("无法使用您输入的密码 \(content.pwd ?? "")  解密内容")
             }
             
+        }
+    private func takeScreenshot(_ shouldSave: Bool = true) {
+            var screenshotImage :UIImage?
+            let layer = UIApplication.shared.keyWindow!.layer
+            let scale = UIScreen.main.scale
+            UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+            guard let context = UIGraphicsGetCurrentContext() else {return}
+            layer.render(in:context)
+            screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            if let image = screenshotImage, shouldSave {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
         }
 }

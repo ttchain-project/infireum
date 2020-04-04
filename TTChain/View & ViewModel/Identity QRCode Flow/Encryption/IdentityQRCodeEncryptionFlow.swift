@@ -34,6 +34,7 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
     static func start(launchType: LaunchType,
                       identity: Identity,
                       onViewController vc: UIViewController,
+                      fromRegisterConfig: BackupWalletViewModel.Input? = nil,
                       onComplete: @escaping (Result) -> Void) -> IdentityQRCodeEncryptionFlow {
         let flow = IdentityQRCodeEncryptionFlow.init(
             launchType: launchType,
@@ -41,8 +42,11 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
             onViewController: vc,
             onComplete: onComplete
         )
-        
-        flow.start()
+        if let config = fromRegisterConfig {
+            flow.start(config: config)
+        } else {
+            flow.start()
+        }
         return flow
     }
     
@@ -68,8 +72,11 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
         bindCompleteCallback()
     }
     
-    private func start() {
-        presentPwdAndHintInputAlert()
+    private func start(config: BackupWalletViewModel.Input? = nil) {
+        if let config = config {
+            self.presentQRCodeContentView(withPwd: config.pwd, hint: config.pwdHint)
+        } else {
+            presentPwdAndHintInputAlert()
             .subscribe(onNext: {
                 [unowned self]
                 result in
@@ -118,6 +125,8 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
                 }
             })
             .disposed(by: bag)
+        }
+        
     }
     
     private func bindCompleteCallback() {
@@ -142,14 +151,22 @@ class IdentityQRCodeEncryptionFlow: NSObject, Rx {
     
     private var pwdTextField: UITextField?
     private var pwdHintTextField: UITextField?
-    private func presentPwdAndHintInputAlert() -> Observable<PwdAndHintInputResult> {
+    private func presentPwdAndHintInputAlert(config: BackupWalletViewModel.Input? = nil) -> Observable<PwdAndHintInputResult> {
 
         let vc = BackQRCodePwdEntryViewController.init()
-        self.requestVC?.present(vc, animated: false, completion: nil)
+        if let config = config {
+            vc.finalResult
+                .onNext(IdentityQRCodeEncryptionFlow
+                    .PwdAndHintInputResult
+                    .success(pwd: config.pwd,
+                             pwdHint: config.pwdHint))
+        } else {
+            self.requestVC?.present(vc, animated: false, completion: nil)
+        }
         return vc.finalResult.asObservable()
     }
     
-    private func presentQRCodeContentView(withPwd pwd: String, hint: String) {
+    private func presentQRCodeContentView(withPwd pwd: String, hint: String, isAutoSave: Bool = false) {
         
         guard let qrCodeContent = IdentityQRCodeContent.init(
             identity: identity, pwd: pwd, pwdHint: hint
