@@ -148,7 +148,7 @@ struct DLS_EN_US: DLS {
     var backupWallet_label_subNote = "Warning: Do not disclose your QR code to anyone."
     var backupWallet_btn_backupMnemonic = "Recovery Seed Phrase"
     var backupMnemonic_title = "Recovery Seed Phrase"
-    var backupMnemonic_desc = "This 12-word phrase is a set of words that allows you to recover and use your wallet. WARNING: Never store your recovery seed phrase in any digital form."
+    var backupMnemonic_desc = "Important: This 12-word phrase is vital for account recovery. Please make sure that you note down this seed phrase, as you will not be able to recover your account nor digital assets stored without it. Infireum takes no responsibility for lost assets due to the loss of your seed phrase.\n\nWarning: To prevent hacking, users are strongly advised against storing your recovery seed phrase in any digital form."
     var sortMnemonic_title = "Sorting mnemonic"
     var sortMnemonic_desc = "Please click on the mnemonic in order to confirm that you are backing up correctly."
     var sortMnemonic_error_mnemonic_wrong_order = "Incorrect mnemonic order"

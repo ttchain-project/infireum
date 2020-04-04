@@ -97,7 +97,10 @@ class BackupWalletMnemonicDisplayViewController: KLModuleViewController {
     override func renderLang(_ lang: Lang) {
         let dls = lang.dls
         titleLabel.text = dls.backupMnemonic_title
-        mainNoteLabel.text = dls.backupMnemonic_desc
+        let myAttrString = NSMutableAttributedString(string: dls.backupMnemonic_desc)
+        myAttrString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 0, length: 10))
+         myAttrString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: NSRange(location: 289, length: 8))
+        mainNoteLabel.attributedText = myAttrString
         let style = NSMutableParagraphStyle.init()
         style.lineSpacing = 20
         mnemonicLabel.attributedText = NSAttributedString.init(
