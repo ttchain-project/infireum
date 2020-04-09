@@ -118,6 +118,7 @@ protocol DynamicLocalizationSource {
     var qrcode_title: String { get set }
     var qrcode_label_intro: String { get set }
     var qrcode_btn_withdrawal: String { get set }
+    var qrcode_btn_select_photo: String { get set }
     var qrcode_btn_importWallet: String { get set }
     var qrcode_btn_contact: String { get set }
     var qrcode_actionSheet_pickChainTypeToImport_title: String { get set }

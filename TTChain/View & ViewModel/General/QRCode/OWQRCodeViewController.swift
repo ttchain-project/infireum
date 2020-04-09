@@ -380,7 +380,7 @@ final class OWQRCodeViewController: OWQRCodeBaseViewController, KLVMVC {
         _ = createRightBarButton(
             target: self,
             selector: #selector(startPickPhotoFromCamera),
-            title: "選擇相片",
+            title: dls.qrcode_btn_select_photo,
             toColor: palette.nav_item_2,
             size: CGSize.init(width: 50, height: 30)
         )

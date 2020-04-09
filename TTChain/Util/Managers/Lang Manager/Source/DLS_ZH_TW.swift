@@ -118,6 +118,7 @@ struct DLS_ZH_TW: DLS {
     var qrcode_title = "掃碼"
     var qrcode_label_intro = "請將鏡頭對準二維碼進行掃描"
     var qrcode_btn_withdrawal = "轉帳"
+    var qrcode_btn_select_photo = "選擇相片"
     var qrcode_btn_importWallet = "導入錢包"
     var qrcode_btn_contact = "連絡人"
     var qrcode_actionSheet_pickChainTypeToImport_title = "請選擇導入錢包種類"

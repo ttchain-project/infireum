@@ -119,6 +119,7 @@ struct DLS_ZH_CN: DLS {
     var qrcode_btn_withdrawal = "转帐"
     var qrcode_btn_importWallet = "导入钱包"
     var qrcode_btn_contact = "连络人"
+    var qrcode_btn_select_photo = "選擇相片"
     var qrcode_actionSheet_pickChainTypeToImport_title = "请选择导入钱包种类"
     var qrcode_actionSheet_pickChainTypeToImport_content = "请选择与原本扫描内容相同的钱包种类，以避免还原导入的资产"
     func qrcode_actionSheet_btn_mainCoinType(_ args: String...) -> String { return String.init(format: "%@ 钱包", arguments: args) }

@@ -118,6 +118,7 @@ struct DLS_EN_US: DLS {
     var qrcode_btn_withdrawal = "Transfer"
     var qrcode_btn_importWallet = "Import wallet"
     var qrcode_btn_contact = "Contact"
+    var qrcode_btn_select_photo = "Select Photo"
     var qrcode_actionSheet_pickChainTypeToImport_title = "Please select the type of wallet to import"
     var qrcode_actionSheet_pickChainTypeToImport_content = "Please select the same wallet type as in the original scan to avoid restoring imported assets"
     func qrcode_actionSheet_btn_mainCoinType(_ args: String...) -> String { return String.init(format: "%@ wallet", arguments: args) }
