@@ -185,8 +185,11 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
     typealias API = GetAssetAmtAPI
     let balanceInCoin: Decimal
     init(json: JSON, sourceAPI: API) throws {
-        
-        switch sourceAPI.asset.coin!.owChainType {
+        guard let coin = sourceAPI.asset.coin else {
+            self.balanceInCoin = 0
+            return
+        }
+        switch coin.owChainType {
         case .btc:
             if sourceAPI.asset.coinID == Coin.usdt_identifier {
                 guard let balanceArray = json["balance"].array else {
@@ -2323,7 +2326,7 @@ struct MarketTestAPI: KLMoyaAPIData {
     
     var langDepended: Bool { return false }
     
-    var path: String { return "/zh-tw/GetMarketInfo" }
+    var path: String { return "/en-us/GetMarketInfo" }
     
     var method: Moya.Method { return .get }
         
