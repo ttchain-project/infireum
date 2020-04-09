@@ -329,6 +329,7 @@ final class SettingMenuViewController: KLModuleViewController, KLVMVC,MFMailComp
                 tf.set(textColor: palette.input_text, font: .owRegular(size: 13), placeHolderColor: palette.input_placeholder)
                 tf.set(placeholder:(hint != nil) ? dls.qrCodeImport_alert_placeholder_pwd(hint!) : dls.myIdentity_placeholder_pwd)
                 textField = tf
+                textField.isSecureTextEntry = true
                 tf.rx.text.map { $0?.count ?? 0 }.map { $0 > 0 }.bind(to: confirm.rx.isEnabled).disposed(by: self.bag)
             }
             

@@ -128,6 +128,15 @@ class BackQRCodePwdEntryViewController: UIViewController {
             guard let `self` = self else {
                 return
             }
+            guard let identity = Identity.singleton ,let wallets = identity.wallets?.array as? [Wallet] else {
+                         return
+                     }
+                     
+                     let systemWallets = wallets.filter { $0.isFromSystem }
+                     let pwdSet = Set.init(systemWallets.map { $0.ePwd! })
+                     guard pwdSet.count == 1 else { return }
+                     let sampleWallet = systemWallets[0]
+            
             guard let pwd = self.pwdTextField.text, let hint = self.reminderMsgTextField.text else {
                 return
             }
@@ -137,7 +146,11 @@ class BackQRCodePwdEntryViewController: UIViewController {
                 self.finalResult.onNext(.invalidPwdHintFormat(desc: desc))
             }else if pwd == hint  {
                 self.finalResult.onNext(.samePasswordAndHint(desc: LM.dls.strValidate_field_pwdHintSame))
-            }else {
+            } else if !sampleWallet.isWalletPwd(rawPwd: pwd) {
+                self.finalResult.onNext(.invalidPwdFormat(desc: LM.dls.myIdentity_error_pwd_is_wrong))
+            } else if let pwdhint = sampleWallet.pwdHint, pwdhint != hint {
+                self.finalResult.onNext(.invalidPwdHintFormat(desc: LM.dls.qrCodeImport_info_g_alert_error_field_hint))
+            } else {
                 self.finalResult.onNext(IdentityQRCodeEncryptionFlow.PwdAndHintInputResult.success(pwd: pwd, pwdHint: hint))
             }
             self.dismiss(animated: false, completion: nil)
