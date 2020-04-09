@@ -1,2 +1,0 @@
-Hope Seed 錢包是全球首個支援 BTC 閃電轉帳的數位資產輕錢包 dApp，
-並且支援 BTC / ETH / CIC 等多種區塊鏈。

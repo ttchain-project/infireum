@@ -1,1 +1,0 @@
-BTC,CIC,ETH,Wallet,錢包,Hope,Seed,希望種子,閃電,交易,Blockchain,區塊鏈
