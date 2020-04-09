@@ -61,13 +61,16 @@ class LightTransDetailViewModel: ViewModel,Rx {
     public func updateBalance() {
         let relay = BehaviorRelay<Decimal?>.init(value: input.asset.value.amount as Decimal?)
         getAmtFromBlockchain().bind(to: relay).disposed(by: bag)
-        
+    
+        guard let coin = self.input.asset.value.coin else {
+            return
+        }
         relay.map { amt in
             if let _amt = amt {
                 return _amt
                     .asString(digits: 4,
                               force: true,
-                              maxDigits: Int(self.input.asset.value.coin!.requiredDigit),
+                              maxDigits: Int(coin.requiredDigit),
                               digitMoveCondition: { Decimal.init(string: $0)! != _amt })
                     .disguiseIfNeeded()
             }else {
