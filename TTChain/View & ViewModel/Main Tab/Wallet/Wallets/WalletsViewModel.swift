@@ -14,21 +14,32 @@ import RxDataSources
 class WalletsViewModel: KLRxViewModel {
     
     func concatInput() {
+        input.isReloadCoins
+            .filter{ $0 }
+            .subscribe(onNext: { [unowned self] _ in
+                self.refreshAllData()
+                self.sectionModelSources.accept(self.sectionModelSources.value)
+                
+            })
+        .disposed(by: bag)
+        
     }
-    
     func concatOutput() {
+//        output.coins = self.coins
     }
     
+    var coins = BehaviorRelay<[Coin]>.init(value: [])
     var bag: DisposeBag = DisposeBag()
-    
+    var showingHeaderViews: [Int] = []
     var input: WalletsViewModel.Input
     var output: WalletsViewModel.Output
     
     struct Input {
         var coins : [Coin]
+        var isReloadCoins: BehaviorRelay<Bool>
     }
     struct Output {
-        
+//        var coins : BehaviorRelay<[Coin]>
     }
     
     lazy var fiat: BehaviorRelay<Fiat> = {
@@ -42,7 +53,7 @@ class WalletsViewModel: KLRxViewModel {
         self.input = input
         self.output = output
         self.prepareSectionModels()
-        
+        self.concatInput()
         self.dataSource.configureCell = { [weak self] (dataSource, tv, indexPath, asset) -> WalletsTableViewCell in
             guard let `self` = self else {
                 return WalletsTableViewCell()
@@ -62,9 +73,10 @@ class WalletsViewModel: KLRxViewModel {
         self.observeTransferFinishedEvent()
     }
     
-    let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfTable>.init(animationConfiguration:AnimationConfiguration(insertAnimation: .fade,
-                                                                                                                               reloadAnimation: .fade,
-                                                                                                                               deleteAnimation: .fade)
+    let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfTable>
+        .init(animationConfiguration:AnimationConfiguration(insertAnimation: .none,
+                                                            reloadAnimation: .none,
+                                                            deleteAnimation: .none)
         ,configureCell: { (dataSource, tv, indexPath, viewModel) -> UITableViewCell in
             return UITableViewCell()
     })
@@ -149,6 +161,7 @@ class WalletsViewModel: KLRxViewModel {
         sectionModel.isShowing = !sectionModel.isShowing
         sectionModelsArray.remove(at: section)
         sectionModelsArray.insert(sectionModel, at: section)
+        
         self.sectionModelSources.accept(sectionModelsArray)
     }
 
@@ -270,7 +283,10 @@ class WalletsViewModel: KLRxViewModel {
     
     private func createFiatRateUpater(ofAsset asset: Asset) -> BehaviorRelay<Decimal?> {
         let source: BehaviorRelay<Decimal?>
-        let dbRatePred = CoinToFiatRate.createPredicate(from: asset.coinID!, self.fiat.value.id)
+        guard let coinID = asset.coinID else {
+            return BehaviorRelay.init(value: nil)
+        }
+        let dbRatePred = CoinToFiatRate.createPredicate(from: coinID, self.fiat.value.id)
         
         if let rate = DB.instance.get(type: CoinToFiatRate.self, predicate: dbRatePred, sorts: nil)?.first {
             source = BehaviorRelay.init(value: rate.rate! as Decimal)

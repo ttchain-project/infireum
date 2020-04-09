@@ -10,21 +10,26 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class WalletsContainerViewModel:KLRxViewModel {
-    var input: Void
-    
-    var output: Void
-    
+class WalletsContainerViewModel: KLRxViewModel {
     func concatInput() {
-        
     }
     
     func concatOutput() {
+    }
+    
+    
+    struct Input {
+    }
+    
+    struct Output {
         
     }
     
-    typealias InputSource = Void
-    typealias OutputSource = Void
+    private(set) var input: WalletsContainerViewModel.Input
+    private(set) var output: WalletsContainerViewModel.Output
+    
+    typealias InputSource = Input
+    typealias OutputSource = Output
     
     var bag:DisposeBag = DisposeBag()
  

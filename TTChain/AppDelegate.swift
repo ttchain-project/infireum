@@ -285,7 +285,9 @@ class AppDelegate: UIResponder,            UIApplicationDelegate {
             
             oldWindow?.rootViewController?.dismiss(animated: false, completion: nil)
             
-        }, completion: nil)
+        }, completion: { [unowned self] completion -> () in
+            self.configDBIfNeeded()
+        })
     }
     
     func showMainTab() {

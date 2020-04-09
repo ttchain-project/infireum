@@ -22,7 +22,6 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
     typealias ViewModel = WalletsContainerViewModel
     typealias Constructor = Void
     var childWalletsViewController:WalletsViewController!
-    
     var bag: DisposeBag = DisposeBag()
     var selectedChild:WalletChildType = .mainChain
     func config(constructor: Void) {
@@ -30,7 +29,8 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
         self.hideDefaultNavBar()
         self.navigationController?.isNavigationBarHidden = true
 
-        self.viewModel = ViewModel.init(input: WalletsContainerViewModel.InputSource(), output: WalletsContainerViewModel.OutputSource())
+        self.viewModel = ViewModel.init(input: WalletsContainerViewModel.InputSource(),
+                                        output: WalletsContainerViewModel.OutputSource())
         startMonitorThemeIfNeeded()
         startMonitorLangIfNeeded()
         self.bindUI()
@@ -40,6 +40,13 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let vc = self.childWalletsViewController {
+            vc.isReloadCoins.accept(true)
+        }
     }
     
     @IBOutlet weak var containerView: UIView!
@@ -117,9 +124,8 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
     
     func configureChildView(childType:WalletChildType) {
         let coins = self.viewModel.getCoinsForChild(child:childType)
-        let vc = WalletsViewController.instance(from: WalletsViewController.Config(coins: coins, assetSelected: {[unowned self] asset in
-            self.toWalletDetail(asset: asset)
-        }))
+        let vc = WalletsViewController
+            .instance(from: WalletsViewController.Config(coins: coins))
         if self.childViewControllers.count > 0 {
             _ = self.childViewControllers.map {
                 willMove(toParentViewController: nil)
@@ -140,26 +146,5 @@ final class WalletsContainerViewController: KLModuleViewController,KLVMVC {
         self.childWalletsViewController = vc
     }
     
-    func toWalletDetail(asset:Asset) {
-    
-        switch (asset.coin!.owChainType) {
-        case (.btc):
-            let vc = AssetDetailViewController.navInstance(
-                from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
-            )
-            present(vc, animated: true, completion: nil)
-        case (.eth):
-            let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: asset.wallet!, source:MainWalletViewController.Source.ETH))
-            self.present(vc, animated: true, completion: nil)
-        case (.ifrc):
-            let viewModel = LightTransDetailViewModel.init(withAsset: asset)
-            let vc = LightTransDetailViewController.init(withViewModel: viewModel)
-            let navController = UINavigationController.init(rootViewController: vc)
-            self.present(navController, animated: true, completion: nil)
-        
-        default:
-            break
-        }
-        
-    }
+ 
 }
