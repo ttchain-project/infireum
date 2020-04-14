@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6c-IZ-tYP">
-                    <rect key="frame" x="37.5" y="176" width="300" height="315.5"/>
+                    <rect key="frame" x="37.5" y="220" width="300" height="227"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flx-yK-hIc">
                             <rect key="frame" x="30" y="20" width="240" height="20.5"/>
@@ -35,7 +35,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Y9c-AK-Xvv">
-                            <rect key="frame" x="20" y="60.5" width="260" height="157"/>
+                            <rect key="frame" x="20" y="60.5" width="260" height="68.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oMD-9e-tWs">
                                     <rect key="frame" x="0.0" y="0.0" width="260" height="68.5"/>
@@ -56,17 +56,17 @@
                                         </textField>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YBo-cR-WUG">
-                                    <rect key="frame" x="0.0" y="88.5" width="260" height="68.5"/>
+                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YBo-cR-WUG">
+                                    <rect key="frame" x="0.0" y="0.0" width="260" height="44"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0z-ZW-chN">
-                                            <rect key="frame" x="0.0" y="0.0" width="260" height="20.5"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0z-ZW-chN">
+                                            <rect key="frame" x="0.0" y="0.0" width="260" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fcF-6a-4Hu" customClass="OWInputTextField" customModule="Hope_Seed" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="24.5" width="260" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="260" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="ckb-3n-3bJ"/>
                                             </constraints>
@@ -78,7 +78,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="sQy-06-idQ" userLabel="BottomStack">
-                            <rect key="frame" x="20" y="247.5" width="260" height="48"/>
+                            <rect key="frame" x="20" y="159" width="260" height="48"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4V-DC-r72">
                                     <rect key="frame" x="0.0" y="0.0" width="115" height="48"/>

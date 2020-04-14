@@ -98,15 +98,10 @@ class BackQRCodePwdEntryViewController: UIViewController {
     }
     
     func bindUI()  {
-        Observable.combineLatest(
+     
             pwdTextField.rx.text
                 .replaceNilWith("")
-                .map { $0.count > 0 },
-            reminderMsgTextField.rx.text
-                .replaceNilWith("")
                 .map { $0.count > 0 }
-            )
-            .map { $0 && $1 }
             .bind(to: doneButton.rx.isEnabled)
             .disposed(by: bag)
         
@@ -137,21 +132,15 @@ class BackQRCodePwdEntryViewController: UIViewController {
                      guard pwdSet.count == 1 else { return }
                      let sampleWallet = systemWallets[0]
             
-            guard let pwd = self.pwdTextField.text, let hint = self.reminderMsgTextField.text else {
+            guard let pwd = self.pwdTextField.text else {
                 return
             }
             if case .incorrectFormat(let desc) = pwd.ow_isValidWalletPwd {
                 self.finalResult.onNext(.invalidPwdFormat(desc: desc))
-            }else if case .incorrectFormat(let desc) = hint.ow_isValidPwdHint {
-                self.finalResult.onNext(.invalidPwdHintFormat(desc: desc))
-            }else if pwd == hint  {
-                self.finalResult.onNext(.samePasswordAndHint(desc: LM.dls.strValidate_field_pwdHintSame))
             } else if !sampleWallet.isWalletPwd(rawPwd: pwd) {
                 self.finalResult.onNext(.invalidPwdFormat(desc: LM.dls.myIdentity_error_pwd_is_wrong))
-            } else if let pwdhint = sampleWallet.pwdHint, pwdhint != hint {
-                self.finalResult.onNext(.invalidPwdHintFormat(desc: LM.dls.qrCodeImport_info_g_alert_error_field_hint))
-            } else {
-                self.finalResult.onNext(IdentityQRCodeEncryptionFlow.PwdAndHintInputResult.success(pwd: pwd, pwdHint: hint))
+            }  else {
+                self.finalResult.onNext(IdentityQRCodeEncryptionFlow.PwdAndHintInputResult.success(pwd: pwd, pwdHint: sampleWallet.pwdHint!))
             }
             self.dismiss(animated: false, completion: nil)
 
