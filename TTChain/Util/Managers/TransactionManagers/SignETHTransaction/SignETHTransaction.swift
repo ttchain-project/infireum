@@ -29,7 +29,7 @@ class SignETHTransaction {
                 if let contract = withdrawalInfo.asset.coin?.contract, withdrawalInfo.asset.coinID != Coin.eth_identifier {
                     let erc20Token = ERC20.init(contractAddress: contract, decimal: digitExp, symbol: withdrawalInfo.asset.coin!.inAppName!)
                     data = try Data(hex: erc20Token.generateSendBalanceParameter(toAddress: withdrawalInfo.address,
-                                                                                     amount: withdrawalInfo.withdrawalAmt.asString(digits: 0)).toHexString().addHexPrefix())
+                                                                                     amount: withdrawalInfo.withdrawalAmt.asString(digits: 18)).toHexString().addHexPrefix())
                     toAddress = contract
                     value = Wei("0")
                 }

@@ -144,7 +144,7 @@ class WithdrawalAssetViewModel: KLRxViewModel, WithdrawalAssetInfoProvider {
     //MARK: - Helper
     public func updateAmt(_ amt: Decimal) {
         _transferAmt.accept(amt)
-        _transferAmtStr.accept(amt.asString(digits: 8))
+        _transferAmtStr.accept(amt.asString(digits: 18))
     }
     public func transferAll(withFee feeInfo:WithdrawalFeeInfoProvider.FeeInfo?) {
      
