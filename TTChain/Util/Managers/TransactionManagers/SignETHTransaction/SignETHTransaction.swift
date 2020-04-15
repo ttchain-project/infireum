@@ -36,7 +36,7 @@ class SignETHTransaction {
                 let ethTx = EthereumRawTransaction(value: value!,
                                                    to: toAddress,
                                                    gasPrice: Int(withdrawalInfo.feeRate.etherToWei.doubleValue),
-                                                   gasLimit: Int(21000),
+                                                   gasLimit: Int(withdrawalInfo.feeAmt.doubleValue),
                                                    nonce: nonce,data:data)
                 
                 let dataPk = Data(hex: withdrawalInfo.asset.wallet!.pKey)

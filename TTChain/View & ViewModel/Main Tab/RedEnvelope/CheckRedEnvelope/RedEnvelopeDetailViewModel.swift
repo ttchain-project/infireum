@@ -120,7 +120,13 @@ final class RedEnvelopeDetailViewModel: ViewModel {
             feeInfo = (rate: 1, amt: 0, coin: coin, option: FeeManager.Option.btc(.regular), totalHardCodedFee:Decimal.init(3000).satoshiToBTC)
         case .eth:
             print("ETH")
-            let g = FeeManager.getValue(fromOption: .eth(.gas))
+            let g: Decimal = {
+                          if let identifier = coin.identifier, identifier == Coin.eth_identifier {
+                             return FeeManager.getValue(fromOption: .eth(.gas))
+                          } else {
+                             return FeeManager.getValue(fromOption: .eth(.erc20Gas))
+                          }
+                        }()
             let gp = FeeManager.getValue(fromOption: .eth(.gasPrice(.suggest)))
             let option = FeeManager.Option.eth(.gasPrice(.suggest))
             feeInfo = (rate: gp.gweiToEther, amt: g, coin: Coin.eth, option: option,totalHardCodedFee:nil)

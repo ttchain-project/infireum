@@ -32,9 +32,7 @@ extension Decimal {
     }
     
     var doubleValue: Double {
-        let dec = NSDecimalNumber.init(decimal: self)
-        return dec.doubleValue.rounded(toPlaces: 18,
-                                       rule: .toNearestOrAwayFromZero)
+        return Double(truncating: NSDecimalNumber(decimal:self))
     }
     
     func asString(digits: Int, force: Bool = false, separator sep: String = "", maxDigits: Int? = nil, digitMoveCondition: ((String) -> Bool)? = nil) -> String {

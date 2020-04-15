@@ -14,6 +14,7 @@ import Cartography
 final class WithdrawalETHFeeInputViewController: KLModuleViewController, WithdrawalFeeChildVC, KLVMVC, WithdrawalFeeViewControllerBase {
     struct Config {
         let fiat: Fiat
+        let coin: Coin?
     }
     
     typealias FeeInfoProvider = ViewModel
@@ -23,7 +24,7 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
     var bag: DisposeBag = DisposeBag.init()
     func config(constructor: Config) {
         view.layoutIfNeeded()
-        configChildVC()
+        configChildVC(coin: constructor.coin)
         viewModel = ViewModel.init(
             input: WithdrawalETHFeeInputViewModel.InputSource(
                 fiat: constructor.fiat,
@@ -57,12 +58,19 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
     
     @IBOutlet weak var infoBase: UIView!
     private var infoVC: WithdrawalETHFeeInfoViewController!
-    private func configChildVC() {
+    private func configChildVC(coin: Coin?) {
         infoVC = WithdrawalETHFeeInfoViewController.instance(
             from: WithdrawalETHFeeInfoViewController.Config(
                 defaultOptions: .eth(.gasPrice(.suggest)),
                 defaultGasPrice: FeeManager.getValue(fromOption: .eth(.gasPrice(.suggest))),
-                defaultGas: FeeManager.getValue(fromOption: .eth(.gas))
+                defaultGas: {
+                    if let identifier = coin?.identifier, identifier == Coin.eth_identifier {
+                        return FeeManager.getValue(fromOption: .eth(.gas))
+                    } else {
+                        return FeeManager.getValue(fromOption: .eth(.erc20Gas))
+                    }
+            }(),
+                coin: coin
             )
         )
         
@@ -80,20 +88,20 @@ final class WithdrawalETHFeeInputViewController: KLModuleViewController, Withdra
         
         let feeStr =
             viewModel.totalGasFiatValue
-            .map {
-                [unowned self]
-                 totalFiat -> String in
-                let fiatSymbol = self.viewModel.input.fiat.fullSymbol
-                let fiatStr = fiatSymbol + (totalFiat?.asString(digits: 2) ?? "--")
-                return " ≈ " + fiatStr
-            }
+                .map {
+                    [unowned self]
+                    totalFiat -> String in
+                    let fiatSymbol = self.viewModel.input.fiat.fullSymbol
+                    let fiatStr = fiatSymbol + (totalFiat?.asString(digits: 2) ?? "--")
+                    return " ≈ " + fiatStr
+        }
         
         feeStr.subscribe(onNext: {
             [unowned self]
             text in
             self.feeBtn.set(image: nil, title: text, titlePosition: .left, additionalSpacing: 8, state: .normal)
         })
-        .disposed(by: bag)
+            .disposed(by: bag)
         
         viewModel.input.gasProvider.totalGas.map {
             (($0?.gweiToEther)?.asString(digits: 18) ?? "--") + LM.dls.fee_ether

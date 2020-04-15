@@ -263,7 +263,8 @@ final class WithdrawalETHInfoOverviewViewController: KLModuleViewController, KLV
         let vc = WithdrawalConfirmETHFeeInputViewController.instance(from: WithdrawalConfirmETHFeeInputViewController.Config(
             defaultFeeManagerOption: info.feeOption,
             defaultGasPrice: info.feeRate.etherToGWei,
-            defaultGas: info.feeAmt
+            defaultGas: info.feeAmt,
+            coin: info.asset.coin
             )
         )
         

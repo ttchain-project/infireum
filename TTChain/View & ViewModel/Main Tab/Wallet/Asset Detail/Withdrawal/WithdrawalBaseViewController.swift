@@ -29,7 +29,8 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
                 amtProvider: assetVC.viewModel,
                 addressProvider: addressVC.viewModel,
                 feeProvider: feeInfoProvider,
-                getWithdrawalResultInput: nextStepBtn.rx.tap.asDriver(), note: remarkNoteVC.viewModel
+                getWithdrawalResultInput: nextStepBtn.rx.tap.asDriver(),
+                note: remarkNoteVC.viewModel
             ),
             output: ()
         )
@@ -116,7 +117,8 @@ final class WithdrawalBaseViewController: KLModuleViewController, KLVMVC {
             isInfoDisplayed = feeVC.viewModel.isInfoDisplayed
             baseScrollView.addSubview(feeVC.view)
         case .eth:
-            let feeVC = WithdrawalETHFeeInputViewController.instance(from: WithdrawalETHFeeInputViewController.Config(fiat: Identity.singleton!.fiat!)
+            let feeVC = WithdrawalETHFeeInputViewController.instance(from: WithdrawalETHFeeInputViewController.Config(fiat: Identity.singleton!.fiat!,
+                                                                                                                      coin: config.asset.coin)
             )
             addChildViewController(feeVC)
             feeVC.didMove(toParentViewController: self)

@@ -16,6 +16,7 @@ class WithdrawalETHFeeInfoQuickModeViewModel: KLRxViewModel, WithdrawalETFFeeInf
         let maxGasPrice: Decimal
         let minGasPrice: Decimal
         let percentageUpdateInout: ControlProperty<Float>
+        let coin: Coin?
     }
     
     typealias InputSource = Input
@@ -43,7 +44,7 @@ class WithdrawalETHFeeInfoQuickModeViewModel: KLRxViewModel, WithdrawalETFFeeInf
                 [unowned self]
                 gasPrice in
                 self.percentageAtGasPrice(gasPrice)
-            })
+        })
             .disposed(by: bag)
     }
     
@@ -69,17 +70,23 @@ class WithdrawalETHFeeInfoQuickModeViewModel: KLRxViewModel, WithdrawalETFFeeInf
         print(FeeManager.getValue(fromOption: .eth(.gas)))
         return Observable
             .combineLatest(
-                gasPrice, Observable.just(Decimal(21000))
-            )
+                gasPrice, Observable.just({
+                    if let identifier = self.input.coin?.identifier, identifier == Coin.eth_identifier {
+                        return FeeManager.getValue(fromOption: .eth(.gas))
+                    } else {
+                        return FeeManager.getValue(fromOption: .eth(.erc20Gas))
+                    }
+                    }())
+        )
             .map {
                 (gasPrice: $0, gas: $1)
-            }
+        }
     }
     
     public var gasPrice: Observable<Decimal> {
         return _gasPrice.asObservable()
     }
-
+    
     public func getGasPrice() -> Decimal {
         return _gasPrice.value
     }

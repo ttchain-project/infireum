@@ -16,6 +16,7 @@ final class WithdrawalConfirmETHFeeInputViewController: KLModuleViewController, 
         let defaultFeeManagerOption: FeeManager.Option?
         let defaultGasPrice: Decimal?
         let defaultGas: Decimal?
+        let coin: Coin?
     }
     
     typealias FeeInfoProvider = ViewModel
@@ -66,7 +67,8 @@ final class WithdrawalConfirmETHFeeInputViewController: KLModuleViewController, 
             from: WithdrawalETHFeeInfoViewController.Config(
                 defaultOptions: config.defaultFeeManagerOption,
                 defaultGasPrice: config.defaultGasPrice,
-                defaultGas: config.defaultGas
+                defaultGas: config.defaultGas,
+                coin: config.coin
             )
         )
         

@@ -17,6 +17,7 @@ final class WithdrawalETHFeeInfoViewController: KLModuleViewController, KLVMVC {
         let defaultOptions: FeeManager.Option?
         let defaultGasPrice: Decimal?
         let defaultGas: Decimal?
+        let coin: Coin?
     }
     
     typealias Constructor = Config
@@ -25,7 +26,7 @@ final class WithdrawalETHFeeInfoViewController: KLModuleViewController, KLVMVC {
     var bag: DisposeBag = DisposeBag.init()
     func config(constructor: Config) {
         view.layoutIfNeeded()
-        setupChildVCs()
+        setupChildVCs(coin: constructor.coin)
         viewModel = ViewModel.init(
             input: WithdrawalETHFeeInfoViewModel.InputSource(
                 systemGasProvider: quickModeVC.viewModel,
@@ -54,8 +55,8 @@ final class WithdrawalETHFeeInfoViewController: KLModuleViewController, KLVMVC {
         return view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
     }
     
-    private func setupChildVCs() {
-        quickModeVC = WithdrawalETHFeeInfoQuickModeViewController.instance()
+    private func setupChildVCs(coin: Coin?) {
+        quickModeVC = WithdrawalETHFeeInfoQuickModeViewController.instance(from: WithdrawalETHFeeInfoQuickModeViewController.Constructor(coin: coin))
         addChildViewController(quickModeVC)
         quickModeVC.didMove(toParentViewController: self)
         modeBase.addSubview(quickModeVC.view)

@@ -18,6 +18,11 @@ protocol FeeFinalOption {
 
 extension FeeFinalOption {
     var value: Decimal {
+        if localKey == FeeManager.Option.eth(.gas).localKey {
+           return Decimal(21000)
+        } else if localKey == FeeManager.Option.eth(.erc20Gas).localKey  {
+           return Decimal(120000)
+        }
         return UserDefaults.standard.double(forKey: localKey).decimalValue
     }
     
@@ -112,11 +117,13 @@ class FeeManager {
             
             case gasPrice(GasPriceOption)
             case gas
+            case erc20Gas
             
             var localKey: String {
                 switch self {
                 case .gasPrice(let option): return option.localKey
                 case .gas: return FeeManager.key_eth_suggest_gas
+                case .erc20Gas: return FeeManager.key_eth_erc20_suggest_gas
                 }
             }
         }
@@ -153,10 +160,11 @@ class FeeManager {
     private static let key_eth_systemMax_gasPrice: String = "key_eth_systemMax_gasPrice"
     private static let key_eth_systemMin_gasPrice: String = "key_eth_systemMin_gasPrice"
     private static let key_eth_suggest_gas: String = "key_eth_suggest_gas"
+    private static let key_eth_erc20_suggest_gas: String = "key_eth_erc20_suggest_gas"
     
     private static let key_ttn_system_fee:String = "key_ttn_system_fee"
     private static let key_ttn_btcn_withdrawal_fee:String = "key_ttn_btcn_withdrawal_fee"
-
+    
     static func getValue(fromOption option: Option) -> Decimal {
         return option.value
     }

@@ -76,7 +76,7 @@ final class WithdrawalConfirmationViewController: KLModuleViewController, KLVMVC
     }
     override func renderLang(_ lang: Lang) {
         
-        let titles = [lang.dls.transfer_amount_title,lang.dls.withdrawalConfirm_label_receipt_address,lang.dls.withdrawalConfirm_label_receipt_address,lang.dls.withdrawalConfirm_label_miner_fee,lang.dls.abInfo_label_note]
+        let titles = [lang.dls.transfer_amount_title,lang.dls.withdrawalConfirm_label_payment_address,lang.dls.withdrawalConfirm_label_receipt_address,lang.dls.withdrawalConfirm_label_miner_fee,lang.dls.abInfo_label_note]
         
         for (label,title) in zip(self.allTitleLabels,titles) {
             label.text = title

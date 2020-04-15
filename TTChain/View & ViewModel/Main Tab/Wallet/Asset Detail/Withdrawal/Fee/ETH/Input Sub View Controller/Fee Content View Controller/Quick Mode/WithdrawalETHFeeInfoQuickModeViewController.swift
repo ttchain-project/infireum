@@ -21,8 +21,11 @@ final class WithdrawalETHFeeInfoQuickModeViewController: KLModuleViewController,
     var viewModel: WithdrawalETHFeeInfoQuickModeViewModel!
     var bag: DisposeBag = DisposeBag.init()
     
-    typealias Constructor = Void
-    func config(constructor: Void) {
+    struct Config {
+        let coin: Coin?
+    }
+    typealias Constructor = Config
+    func config(constructor: Constructor) {
         view.layoutIfNeeded()
         viewModel = ViewModel.init(
             input:
@@ -30,7 +33,8 @@ final class WithdrawalETHFeeInfoQuickModeViewController: KLModuleViewController,
                 defaultGasPrice: FeeManager.getValue(fromOption: .eth(.gasPrice(.suggest))),
                 maxGasPrice: FeeManager.getValue(fromOption: .eth(.gasPrice(.systemMax))),
                 minGasPrice: FeeManager.getValue(fromOption: .eth(.gasPrice(.systemMin))),
-                percentageUpdateInout: slider.rx.value
+                percentageUpdateInout: slider.rx.value,
+                coin: constructor.coin
             ),
             output: ()
         )
@@ -39,14 +43,14 @@ final class WithdrawalETHFeeInfoQuickModeViewController: KLModuleViewController,
         startMonitorLangIfNeeded()
         startMonitorThemeIfNeeded()
     }
-
+    
     private func bindViewModel() {
         viewModel.gasPrice
             .map {
                 $0.asString(digits: 2, force: true) + " " + LM.dls.fee_eth_gwei
-            }
-            .bind(to: gasPriceLabel.rx.text)
-            .disposed(by: bag)
+        }
+        .bind(to: gasPriceLabel.rx.text)
+        .disposed(by: bag)
     }
     
     override func renderLang(_ lang: Lang) {
@@ -64,24 +68,24 @@ final class WithdrawalETHFeeInfoQuickModeViewController: KLModuleViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
