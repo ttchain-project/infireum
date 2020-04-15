@@ -37,7 +37,8 @@ class SignETHTransaction {
                                                    to: toAddress,
                                                    gasPrice: Int(withdrawalInfo.feeRate.etherToWei.doubleValue),
                                                    gasLimit: Int(withdrawalInfo.feeAmt.doubleValue),
-                                                   nonce: nonce,data:data)
+                                                   nonce: nonce,
+                                                   data:data)
                 
                 let dataPk = Data(hex: withdrawalInfo.asset.wallet!.pKey)
                 let signer = EIP155Signer.init(chainId: 1)

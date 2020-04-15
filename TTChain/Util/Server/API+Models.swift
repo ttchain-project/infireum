@@ -3149,7 +3149,7 @@ struct FiatRateTableAPIModel: KLJSONMappableMoyaResponse {
 
 //MARK: - GET /Version
 struct GetVersionAPI: KLMoyaAPIData {
-    var path: String { return "/topChain/versionTest" }
+    var path: String { return "/Version" }
     var method: Moya.Method { return .get }
     
     var task: Task {

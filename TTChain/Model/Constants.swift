@@ -81,7 +81,7 @@ struct Constants {
     
     struct BlockchainAPI {
         static var urlStr_3206: String {
-            return "http://125.227.132.127:3206"
+            return "http://sit-api.ttchainwallet.com"
             //            switch env() {
             //            case .prd:
             //                return "http://127.0.0.1:3200"
