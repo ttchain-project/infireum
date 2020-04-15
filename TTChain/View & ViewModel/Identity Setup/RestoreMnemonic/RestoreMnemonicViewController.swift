@@ -85,8 +85,8 @@ final class RestoreMnemonicViewController: KLModuleViewController,KLVMVC {
         
         nextButton.setTitleColor(theme.palette.btn_bgFill_enable_text, for: .normal)
         nextButton.setTitleColor(theme.palette.btn_bgFill_disable_text, for: .disabled)
-        titleLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 14))
-        subtitleLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 12))
+        titleLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 18))
+        subtitleLabel.set(textColor: theme.palette.label_main_1, font: .owRegular(size: 16))
     }
     override func renderLang(_ lang: Lang) {
         

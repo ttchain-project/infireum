@@ -23,14 +23,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1E-eZ-4tS">
-                    <rect key="frame" x="186.33333333333334" y="207.33333333333331" width="41.666666666666657" height="20.333333333333343"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1E-eZ-4tS">
+                    <rect key="frame" x="186.33333333333334" y="207.33333333333334" width="41.666666666666657" height="20.333333333333343"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJE-GJ-aEQ">
-                    <rect key="frame" x="186.33333333333334" y="247.66666666666663" width="41.666666666666657" height="20.333333333333371"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJE-GJ-aEQ">
+                    <rect key="frame" x="186.33333333333334" y="247.66666666666666" width="41.666666666666657" height="20.333333333333343"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -82,10 +82,12 @@
                         </button>
                     </subviews>
                 </stackView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="X2K-Dc-dY2">
-                    <rect key="frame" x="87" y="304" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="X2K-Dc-dY2">
+                    <rect key="frame" x="62" y="304" width="290" height="128"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="p3w-ly-hIh"/>
+                    </constraints>
                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -105,13 +107,17 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="c1E-eZ-4tS" firstAttribute="width" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="4uR-eF-Me9"/>
+                <constraint firstItem="X2K-Dc-dY2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="7GR-ds-rIV"/>
                 <constraint firstItem="fJE-GJ-aEQ" firstAttribute="width" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="ASK-Hw-hPZ"/>
                 <constraint firstItem="c1E-eZ-4tS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="B98-Cr-for"/>
                 <constraint firstItem="fJE-GJ-aEQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DF3-b4-idx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HIC-cD-mct" secondAttribute="trailing" constant="20" id="SM7-JY-RE7"/>
                 <constraint firstItem="fJE-GJ-aEQ" firstAttribute="top" secondItem="c1E-eZ-4tS" secondAttribute="bottom" constant="20" id="ZpM-4A-wrE"/>
+                <constraint firstItem="X2K-Dc-dY2" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="qkN-r5-T7c"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="HIC-cD-mct" secondAttribute="bottom" constant="10" id="tuS-UI-W7Q"/>
                 <constraint firstItem="HIC-cD-mct" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="wef-q8-HVa"/>
+                <constraint firstItem="X2K-Dc-dY2" firstAttribute="top" secondItem="fJE-GJ-aEQ" secondAttribute="bottom" constant="36" id="x9A-3R-enj"/>
+                <constraint firstItem="X2K-Dc-dY2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yut-H3-BPY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="54.375" y="47.5"/>
