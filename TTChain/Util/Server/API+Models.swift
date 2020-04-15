@@ -1467,6 +1467,9 @@ struct SignCICTxAPI: KLMoyaAPIData {
     let nonce: Int
     //Change to store variable if open input field in future.
     var input: String { return "" }
+    var base: APIBaseEndPointType {
+        return  .custom(url: URL.init(string: C.BlockchainAPI.urlStr_32000)!)
+    }
     
     var authNeeded: Bool { return false }
     
@@ -1535,6 +1538,10 @@ struct BroadcastCICTxAPI: KLMoyaAPIData {
     var authNeeded: Bool { return false }
     
     var langDepended: Bool { return false }
+    
+    var base: APIBaseEndPointType {
+        return  .custom(url: URL.init(string: C.BlockchainAPI.urlStr_32000)!)
+    }
     
     var path: String { return "/topChain/CICBroadcast" }
     
@@ -1804,10 +1811,9 @@ struct SignBTCToTTNTxAPI: KLMoyaAPIData {
     var langDepended: Bool { return false }
     
     var base: APIBaseEndPointType {
-        let urlString = "http://3.112.106.186:32000"
-        let url = URL.init(string: urlString)!
-        return .custom(url: url)
+        return  .custom(url: URL.init(string: C.BlockchainAPI.urlStr_32000)!)
     }
+    
     var path: String {
         return "/topChain/newSignAll/1/1"
     }
@@ -2119,6 +2125,10 @@ struct CreateAccountAPI: KLMoyaAPIData {
     
     var langDepended: Bool { return false }
     
+    var base: APIBaseEndPointType {
+        return  .custom(url: URL.init(string: C.BlockchainAPI.urlStr_32000)!)
+    }
+    
     var path: String { return "/topChain/account" }
     
     var method: Moya.Method { return .post }
@@ -2253,6 +2263,10 @@ struct KeyToAddressAPI: KLMoyaAPIData {
     var authNeeded: Bool { return false }
     
     var langDepended: Bool { return false }
+    
+    var base: APIBaseEndPointType {
+        return  .custom(url: URL.init(string: C.BlockchainAPI.urlStr_32000)!)
+    }
     
     var path: String { return "/topChain/keyToAddress" }
     
@@ -2762,6 +2776,9 @@ struct CoinsAPIModel: KLJSONMappableMoyaResponse {
 
 //MARK: - GET /coins
 struct CoinsTestAPI: KLMoyaLangAPIData {
+    var base: APIBaseEndPointType {
+        return  .custom(url: URL.init(string: C.BlockchainAPI.urlStr_32000)!)
+    }
     var path: String { return "/topChain/coinTest" }
     var method: Moya.Method { return .get }
     
@@ -2769,11 +2786,6 @@ struct CoinsTestAPI: KLMoyaLangAPIData {
     let defaultOnly: Bool
     let chainType: ChainType?
     let mainCoinID: String?
-    
-    var base: APIBaseEndPointType {
-        let url = URL.init(string: "http://125.227.132.127:3206")!
-        return .custom(url: url)
-    }
     
     var task: Task {
         var params: [String : Any] = [
