@@ -6,258 +6,618 @@
 	<dict>
 		<key>Alamofire.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
 		<key>AlamofireImage.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
 		<key>AutoInsetter.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
 		<key>Cartography.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
 		<key>Crashlytics.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
 		<key>CryptoSwift.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
 		<key>Differentiator.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
 		<key>EliteFramework.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
 		<key>FLAnimatedImage.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
 		<key>Fabric.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
 		<key>Firebase.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
 		<key>FirebaseAnalytics.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
 		<key>FirebaseCore.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
 		<key>FirebaseInstanceID.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
 		<key>Flurry-iOS-SDK.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>18</integer>
 		</dict>
 		<key>GZIP.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
 		<key>GoogleAppMeasurement.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
 		<key>GoogleUtilities.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
 		<key>HDWalletKit.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>22</integer>
 		</dict>
 		<key>HockeySDK-HockeySDKResources.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>24</integer>
 		</dict>
 		<key>HockeySDK.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>23</integer>
 		</dict>
 		<key>IQKeyboardManagerSwift.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>25</integer>
 		</dict>
 		<key>JCore.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>26</integer>
 		</dict>
 		<key>JPush.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>27</integer>
 		</dict>
 		<key>MZAppearance.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>30</integer>
 		</dict>
 		<key>MZFormSheetPresentationController.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>31</integer>
 		</dict>
 		<key>Moya.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>29</integer>
 		</dict>
 		<key>NVActivityIndicatorView.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>33</integer>
 		</dict>
 		<key>Pageboy.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>34</integer>
 		</dict>
 		<key>Pods-TTChain.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>35</integer>
 		</dict>
 		<key>Pods-TTChainTests.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>38</integer>
 		</dict>
 		<key>Pods-TTChain_SIT.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>36</integer>
 		</dict>
 		<key>Pods-TTChain_UAT.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>37</integer>
 		</dict>
 		<key>ReachabilitySwift.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>39</integer>
 		</dict>
 		<key>Result.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>40</integer>
 		</dict>
 		<key>RxCocoa.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>41</integer>
 		</dict>
 		<key>RxDataSources.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>42</integer>
 		</dict>
 		<key>RxGesture.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>43</integer>
 		</dict>
 		<key>RxOptional.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>44</integer>
 		</dict>
 		<key>RxSwift.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>45</integer>
 		</dict>
 		<key>SkyFloatingLabelTextField.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>47</integer>
 		</dict>
 		<key>SocketRocket.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>48</integer>
 		</dict>
 		<key>Starscream.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>49</integer>
 		</dict>
 		<key>SwiftMoment.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>51</integer>
 		</dict>
 		<key>SwifterSwift.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>50</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>52</integer>
 		</dict>
 		<key>Tabman.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>53</integer>
 		</dict>
 		<key>Toast-Swift.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>54</integer>
 		</dict>
 		<key>libjingle_peerconnection.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>28</integer>
 		</dict>
 		<key>nanopb.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>32</integer>
 		</dict>
 		<key>secp256k1.swift.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>46</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>06201A837B408E21A6F416D49AF9A573</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>072CEA044D2EF26F03496D5996BBF59F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0B00B2C167CD783351BD1D00BD5AD1F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>17F9141D333DA1A7BE5937F227221070</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1948D0B63D2CF6A48E18B0B292BC6091</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>19920488B5A93662E890ED654842BC95</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>212F79CE462FC723AF42979B57FBB8A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>23EE62D8F7B4475F49FFAC72AEF81FAF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3D8B1104C8B4F5AD74F600289D7A12AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EF26018CD886BA3143044A409D6D0B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>401909D4FB2014BF539896BF0CCA48C2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40E06479CA28138033A9C48CD398A4E0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4402AFF83DBDC4DD07E198685FDC2DF2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4A8E8992707D01510894596DB9BCCA00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4BA2587A0F497B4CB7D865B2A18EE088</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4FF1EE5493800BD023263DE462914B83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D8BB851D938AE8F1A461F95C1ABD69B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5FB6AB0A09E7A2F2BE11AD6BAEFD9AED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>60761799DFF0DD81D8FD4ABF6EEE3E9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7033BAB71137EB66282154CEDB1057A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>75C0590E2E313DE9EE9A1232E1AEEA41</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>793799F6E598EF23DACB88E3C9CF8E48</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7AD0C6DCDC9CEC8A3C7C10C7FEE07BE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8B74CDB737C067B57BDC5065CE0E2CDC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8C92EFE03CD71A06EE87E14968FF9F37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D7F5D5DD528D21A72DC87ADA5B12E2D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8FBDBAAAB58D03FB5BB194A7F5231422</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>99313990C1D76A6D1D017868B6975CC8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B78EE4AF6AE03E79D88886319853FF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9E25537BF40D1A3B30CF43FD3E6ACD94</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5F17DC5E94020E18B87E183DB7C943E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABB048B191245233986A7CD75FE412A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AF8A82876C43F4DFD625D1823E680EAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B490E7485944099E16C9CBD79119D1D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B53D977A951AFC38B21751B706C1DF83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B990BD87169C76A3ED3FE8A9258D91A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C0E41540D6862472ED7F2FA11669BE1F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C41E4D12C234EAE0870722CDB9C4205F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C49E7A4D59E5C8BE8DE9FB1EFB150185</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9778AE8394BE451567650E0B239BA21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D118A6A04828FD3CDA8640CD2B6796D2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D2B5E7DCCBBFB32341D857D01211A1A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D504B99928659EA67A1C3A9E981EB8FF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D77CA6E20D3F659D26E05339EBA33B59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DFBAF98039AB4BA7927B611FB65B61BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E163AC315AD24CFBD60C178D602BFC83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA9EA43B3B503823EE36C60D9C8A865F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EAAA1AD3A8A1B59AB91319EE40752C6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEDFE0B389D3A3F5C15B943AE607ADEC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4C44E4870ACB39E8768B16996EA78EE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC486F9932D7EFE396E624AB5BED92C2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
