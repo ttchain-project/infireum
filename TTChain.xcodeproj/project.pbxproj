@@ -3751,7 +3751,7 @@
 		6485005A20DA488000107473 /* OWMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OWMnemonicViewController.swift; sourceTree = "<group>"; };
 		6485005B20DA488000107473 /* OWMnemonicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OWMnemonicViewController.xib; sourceTree = "<group>"; };
 		649655BE24471F6400D92BB4 /* TTChain_IFRC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTChain_IFRC.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		649655BF24471F6B00D92BB4 /* TTChain copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TTChain copy-Info.plist"; path = "/Users/fengyangching/Documents/App/infireum/TTChain copy-Info.plist"; sourceTree = "<absolute>"; };
+		649655BF24471F6B00D92BB4 /* TTChain_IFRC_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = TTChain_IFRC_Info.plist; path = /Users/fengyangching/Documents/App/infireum/TTChain_IFRC_Info.plist; sourceTree = "<absolute>"; };
 		649732AE213F763800C4D1D5 /* Wallet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Wallet+CoreDataClass.swift"; sourceTree = "<group>"; };
 		649732AF213F763800C4D1D5 /* Wallet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Wallet+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		649732C6213F7D2B00C4D1D5 /* Coin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coin+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -7560,7 +7560,7 @@
 				64F07CE520D0E4CB00A60C5C /* Products */,
 				543D37C7E3A96EC380CB72E0 /* Pods */,
 				ACB257C6DF28BDACFD2CF161 /* Frameworks */,
-				649655BF24471F6B00D92BB4 /* TTChain copy-Info.plist */,
+				649655BF24471F6B00D92BB4 /* TTChain_IFRC_Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -11437,11 +11437,11 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VM2XW9UQ3K;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "TTChain copy-Info.plist";
+				INFOPLIST_FILE = TTChain_IFRC_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11450,7 +11450,7 @@
 				MARKETING_VERSION = 1.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = net.infinitepay.wallet;
-				PRODUCT_MODULE_NAME = Hope_Seed;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7418f441-77ff-446f-b9b1-8fe7c1b78b48";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Provisioning Profile";
@@ -11469,10 +11469,10 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VM2XW9UQ3K;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "TTChain copy-Info.plist";
+				INFOPLIST_FILE = TTChain_IFRC_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11481,7 +11481,7 @@
 				MARKETING_VERSION = 1.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DPRD";
 				PRODUCT_BUNDLE_IDENTIFIER = net.infinitepay.wallet;
-				PRODUCT_MODULE_NAME = Hope_Seed;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9d4fa8e8-8ccf-4fd5-91b5-b8c8921c6f5e";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Provisioning Profile";
@@ -11616,7 +11616,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4UM79A8YMB;
 				ENABLE_BITCODE = NO;
@@ -11648,7 +11648,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 4UM79A8YMB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_PRD-Info.plist";
