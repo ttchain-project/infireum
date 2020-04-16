@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "649652B024471F6300D92BB4"
-               BuildableName = "TTChain_IFRC.app"
+               BuildableName = "Infireum.app"
                BlueprintName = "TTChain_IFRC"
                ReferencedContainer = "container:TTChain.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "649652B024471F6300D92BB4"
-            BuildableName = "TTChain_IFRC.app"
+            BuildableName = "Infireum.app"
             BlueprintName = "TTChain_IFRC"
             ReferencedContainer = "container:TTChain.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "649652B024471F6300D92BB4"
-            BuildableName = "TTChain_IFRC.app"
+            BuildableName = "Infireum.app"
             BlueprintName = "TTChain_IFRC"
             ReferencedContainer = "container:TTChain.xcodeproj">
          </BuildableReference>
