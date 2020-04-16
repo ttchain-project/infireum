@@ -71,6 +71,7 @@ class WalletsViewModel: KLRxViewModel {
 
         refreshAllData()
         self.observeTransferFinishedEvent()
+        observePrefFiatUpdateEvent()
     }
     
     let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfTable>
@@ -370,6 +371,20 @@ class WalletsViewModel: KLRxViewModel {
         sum.bind(to: source).disposed(by: bag)
         return source
     }
+    
+    
+    private func observePrefFiatUpdateEvent() {
+        OWRxNotificationCenter
+            .instance
+            .prefFiatUpdate
+            .debug()
+            .subscribe(onNext: {
+                [unowned self] fiat in
+                self.fiat.accept(fiat)
+            })
+            .disposed(by: bag)
+    }
+    
     
 }
 

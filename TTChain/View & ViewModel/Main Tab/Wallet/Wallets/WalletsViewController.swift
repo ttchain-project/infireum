@@ -169,6 +169,8 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
             })
             .disposed(by: bag)
     }
+    
+    
 }
 
 extension WalletsViewController:UITableViewDelegate {

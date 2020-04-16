@@ -208,7 +208,10 @@ class MainWalletViewModel: KLRxViewModel {
     }
     
     private func observePrefFiatUpdateEvent() {
-        OWRxNotificationCenter.instance.prefFiatUpdate
+        OWRxNotificationCenter
+            .instance
+            .prefFiatUpdate
+            .debug()
             .subscribe(onNext: {
                 [unowned self] fiat in
                 self.fiat.accept(fiat)
