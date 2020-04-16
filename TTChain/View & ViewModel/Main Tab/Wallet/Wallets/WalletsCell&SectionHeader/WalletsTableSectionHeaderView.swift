@@ -46,7 +46,7 @@ class WalletsTableSectionHeaderView : UITableViewHeaderFooterView {
                 return _amt
                     .asString(digits: C.Coin.min_digit,
                               force: true,
-                              maxDigits: Int(sectionModel.header.digit),
+                              maxDigits: Int(8),
                               digitMoveCondition: { Decimal.init(string: $0)! != _amt })
                     .disguiseIfNeeded()
                 //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
