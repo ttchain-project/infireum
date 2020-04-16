@@ -41,7 +41,7 @@ class WalletsTableViewCell: UITableViewCell {
                 return _amt
                     .asString(digits: C.Coin.min_digit,
                               force: true,
-                              maxDigits: Int(asset.coin!.digit),
+                              maxDigits: 8,
                               digitMoveCondition: { Decimal.init(string: $0)! != _amt })
                     .disguiseIfNeeded()
                 //                .asString(digits: Int(coin.digit)).disguiseIfNeeded()
