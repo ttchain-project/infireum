@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>12</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
@@ -31,6 +31,8 @@
 	<string>$(PRODUCT_NAME) will like to use your mobile camera to scan qrcode or upload required certificate photos.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID / Touch ID to Identify User</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) will use Microphone to make calls and send voice messages</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>$(PRODUCT_NAME) will use your photo library to choose photos to upload.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -54,7 +56,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) will use Microphone to make calls and send voice messages</string>
 </dict>
 </plist>

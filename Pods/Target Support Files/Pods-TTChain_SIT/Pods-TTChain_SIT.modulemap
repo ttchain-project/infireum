@@ -1,6 +1,0 @@
-framework module Pods_TTChain_SIT {
-  umbrella header "Pods-TTChain_SIT-umbrella.h"
-
-  export *
-  module * { export * }
-}

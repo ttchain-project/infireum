@@ -1,6 +1,0 @@
-framework module Pods_TTChain_UAT {
-  umbrella header "Pods-TTChain_UAT-umbrella.h"
-
-  export *
-  module * { export * }
-}

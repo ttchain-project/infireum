@@ -1,6 +1,0 @@
-framework module EliteFramework {
-  umbrella header "EliteFramework-umbrella.h"
-
-  export *
-  module * { export * }
-}
