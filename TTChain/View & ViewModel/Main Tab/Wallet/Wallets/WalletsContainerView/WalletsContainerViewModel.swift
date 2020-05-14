@@ -45,7 +45,7 @@ class WalletsContainerViewModel: KLRxViewModel {
     func getCoinsForChild(child:WalletChildType) -> [Coin]{
         switch child {
         case .mainChain:
-            return [Coin.btc,Coin.eth,Coin.ifrc]
+            return [Coin.btc,Coin.eth,Coin.ifrc,Coin.ifr]
         case .stableChain:
             return coins.filter { $0.identifier == Coin.usdt_identifier }.compactMap { $0 }
         default:

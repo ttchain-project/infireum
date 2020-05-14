@@ -14,7 +14,7 @@ import Cartography
 final class WalletsViewController: KLModuleViewController, KLVMVC {
     
     typealias ViewModel = WalletsViewModel
-   
+    
     
     func config(constructor: Config) {
         self.view.layoutIfNeeded()
@@ -27,7 +27,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
         self.observePrivateModeUpdateEvent()
         bindAssetUpdate()
         
-       
+        
         let refreshControl = UIRefreshControl()
         refreshControl.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { _ in
@@ -35,48 +35,62 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
                 refreshControl.endRefreshing()
             })
             .disposed(by: bag)
-
         
-       self.tableView.addSubview(refreshControl)
         
-             
+        self.tableView.addSubview(refreshControl)
+        
+        
     }
-      
+    
     var bag: DisposeBag = DisposeBag()
     var viewModel:ViewModel!
     var isReloadCoins: BehaviorRelay<Bool> = BehaviorRelay<Bool>.init(value: false)
     var headerViewController:WalletHeaderViewController!
     typealias Constructor = Config
-
+    
     struct Config {
         var coins:[Coin]
     }
     
     func toWalletDetail(asset:Asset) {
-   
-         switch (asset.coin!.owChainType) {
-         case (.btc):
-             let vc = AssetDetailViewController.navInstance(
-                 from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
-             )
-             vc.modalPresentationStyle = .fullScreen
-             present(vc, animated: true, completion: nil)
-         case (.eth):
-             let vc = MainWalletViewController.navInstance(from: MainWalletViewController.Config(entryPoint: .MainWallet, wallet: asset.wallet!, source:MainWalletViewController.Source.ETH))
-             vc.modalPresentationStyle = .fullScreen
-             self.present(vc, animated: true, completion: nil)
-         case (.ifrc):
-             let viewModel = LightTransDetailViewModel.init(withAsset: asset)
-             let vc = LightTransDetailViewController.init(withViewModel: viewModel)
-             let navController = UINavigationController.init(rootViewController: vc)
-             navController.modalPresentationStyle = .fullScreen
-             self.present(navController, animated: true, completion: nil)
-         
-         default:
-             break
-         }
-         
-     }
+        
+        switch (asset.coin!.owChainType) {
+        case (.btc):
+            let vc = AssetDetailViewController.navInstance(
+                from: AssetDetailViewController.Config(asset: asset, purpose: AssetDetailViewController.Purpose.mainWallet)
+            )
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        case (.eth):
+            if let coin = asset.coin,
+                let mainCoinID = coin.identifier,
+                mainCoinID == Coin.eth_identifier {
+                let vc = MainWalletViewController
+                    .navInstance(from: MainWalletViewController
+                        .Config(entryPoint: .MainWallet,
+                                wallet: asset.wallet!,
+                                source:MainWalletViewController.Source.ETH))
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                let vc = AssetDetailViewController
+                    .navInstance(from: AssetDetailViewController
+                        .Config(asset: asset,
+                                purpose: AssetDetailViewController.Purpose.mainWallet)
+                )
+                self.present(vc, animated: true, completion: nil)
+            }
+        case (.ifrc):
+            let viewModel = LightTransDetailViewModel.init(withAsset: asset)
+            let vc = LightTransDetailViewController.init(withViewModel: viewModel)
+            let navController = UINavigationController.init(rootViewController: vc)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true, completion: nil)
+            
+        default:
+            break
+        }
+        
+    }
     
     private func configTableView() {
         self.tableView.rx.setDelegate(self).disposed(by: bag)
@@ -91,7 +105,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
             
         }).disposed(by: bag)
     }
-
+    
     func configHeaderView() {
         let totalFiatValues = self.viewModel.totalFiatValues.asObservable()
         headerViewController = WalletHeaderViewController.instance(from: WalletHeaderViewController.Config(totalAssetFiatValue: totalFiatValues,
@@ -112,7 +126,7 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -176,9 +190,9 @@ final class WalletsViewController: KLModuleViewController, KLVMVC {
 extension WalletsViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-       let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: WalletsTableSectionHeaderView.nameOfClass) as! WalletsTableSectionHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: WalletsTableSectionHeaderView.nameOfClass) as! WalletsTableSectionHeaderView
         let sectionModel = self.viewModel.sectionModelSources.value[section]
-
+        
         Observable.of(headerView.rx.klrx_tap, headerView.expandButton.rx.klrx_tap)
             .merge()
             .subscribe(onNext: { _ in
@@ -186,7 +200,7 @@ extension WalletsViewController:UITableViewDelegate {
                 headerView.expandButton.isSelected = !headerView.expandButton.isSelected
             })
             .disposed(by: headerView.bag)
-            
+        
         let amtSource = self.viewModel.totalAssetAmtForCoin(coin: sectionModel.header)
         let fiatValSrc = self.viewModel.totalFiatAmoutForCoin(coin: sectionModel.header)
         headerView.config(sectionModel:sectionModel,amtSource:amtSource,fiatValSrc:fiatValSrc)

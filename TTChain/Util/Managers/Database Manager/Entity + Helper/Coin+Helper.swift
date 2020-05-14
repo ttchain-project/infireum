@@ -399,6 +399,13 @@ extension Coin {
         }
         return _ifrc
     }
+    
+    static var ifr: Coin {
+        guard let _ifrc = getCoin(ofIdentifier: Coin.ifr_identifier) else {
+            fatalError()
+        }
+        return _ifrc
+    }
 }
 
 // MARK: - Coin Static ID Definition
@@ -445,6 +452,9 @@ extension Coin {
     }
     static var ifrc_identifier:String {
         return "Identifier_IFRC"
+    }
+    static var ifr_identifier: String {
+        return "0x0e7f19c634709559a3743d52d78a369b08cb6fef"
     }
 }
 
