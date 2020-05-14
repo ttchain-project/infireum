@@ -401,10 +401,10 @@ extension Coin {
     }
     
     static var ifr: Coin {
-        guard let _ifrc = getCoin(ofIdentifier: Coin.ifr_identifier) else {
+        guard let _ifr = getCoin(ofIdentifier: Coin.ifr_identifier) else {
             fatalError()
         }
-        return _ifrc
+        return _ifr
     }
 }
 
