@@ -56,10 +56,10 @@ class FileDownloader {
             let req = URLRequest.init(url: source)
             let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
             
-            Alamofire.download(req, to: destination).downloadProgress { (progress) in
+            AF.download(req, to: destination).downloadProgress { (progress) in
                 
                 }.response { (response) in
-                    let url = response.destinationURL
+                    let url = response.fileURL
                     guard let file = try? Data.init(contentsOf: url!) else {
                         observer(.success(APIResult.failed(error: .noData)))
                         return

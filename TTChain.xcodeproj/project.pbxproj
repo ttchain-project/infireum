@@ -2353,7 +2353,6 @@
 		649654E924471F6300D92BB4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84BF22360E77004C2E16 /* CoreGraphics.framework */; };
 		649654EA24471F6300D92BB4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84BD22360E71004C2E16 /* OpenGLES.framework */; };
 		649654EB24471F6300D92BB4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557C84BB22360E3B004C2E16 /* QuartzCore.framework */; };
-		649654EC24471F6300D92BB4 /* Pods_TTChain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF77B36DAA70E2215A57E527 /* Pods_TTChain.framework */; };
 		649654EE24471F6300D92BB4 /* ImportedWalletsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B7F793231660480084533B /* ImportedWalletsTableViewCell.xib */; };
 		649654EF24471F6300D92BB4 /* LightningTransactionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64B98ED120F98E9B00C4EB11 /* LightningTransactionViewController.xib */; };
 		649654F024471F6300D92BB4 /* ImportSuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5549B8162314E03300272AA3 /* ImportSuccessViewController.xib */; };
@@ -3086,6 +3085,7 @@
 		A7346B863219A43FFA268C25 /* Pods_TTChain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF77B36DAA70E2215A57E527 /* Pods_TTChain.framework */; };
 		C88226664AFE143DE6302C05 /* Pods_TTChain_SIT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7699245C91FCFBF8FEDEA586 /* Pods_TTChain_SIT.framework */; };
 		DE16130347B09765C3DF284F /* Pods_TTChain_UAT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3360AC76B847F17A293104 /* Pods_TTChain_UAT.framework */; };
+		F76E30A2BC4F7812F8B3554E /* Pods_TTChain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF77B36DAA70E2215A57E527 /* Pods_TTChain.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3929,7 +3929,6 @@
 		64F07E8920D3809800A60C5C /* API+Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "API+Models.swift"; sourceTree = "<group>"; };
 		64F43BA8210B259700982AFD /* Unspent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unspent.swift; sourceTree = "<group>"; };
 		64F43BAC210B4C0B00982AFD /* BTCTx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCTx.swift; sourceTree = "<group>"; };
-		67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChain.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTChain/Pods-TTChain.debug.xcconfig"; sourceTree = "<group>"; };
 		6EB422EE21635B0000DF75DB /* AgreementMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementMeViewController.swift; sourceTree = "<group>"; };
 		6EB422F021635B8C00DF75DB /* AgreementMeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgreementMeViewController.xib; sourceTree = "<group>"; };
 		6EB422F521635F9900DF75DB /* AgreementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewModel.swift; sourceTree = "<group>"; };
@@ -3945,8 +3944,9 @@
 		AD18A86FDA03A2FD7FDB7910 /* Pods-OfflineWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OfflineWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OfflineWalletTests/Pods-OfflineWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		BAAA7E5F261AEDA932517680 /* Pods-OfflineWallet_SIT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OfflineWallet_SIT.release.xcconfig"; path = "Pods/Target Support Files/Pods-OfflineWallet_SIT/Pods-OfflineWallet_SIT.release.xcconfig"; sourceTree = "<group>"; };
 		D9FF1A194D5C8162C5B66D58 /* Pods-OfflineWallet_SIT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OfflineWallet_SIT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OfflineWallet_SIT/Pods-OfflineWallet_SIT.debug.xcconfig"; sourceTree = "<group>"; };
+		DBCD4F295A851AEC969EC4B5 /* Pods-TTChain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChain.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTChain/Pods-TTChain.debug.xcconfig"; sourceTree = "<group>"; };
 		DF77B36DAA70E2215A57E527 /* Pods_TTChain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TTChain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F630B72BFE309FD5E439D675 /* Pods-TTChain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChain.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTChain/Pods-TTChain.release.xcconfig"; sourceTree = "<group>"; };
+		E30DA1C39B58B99AB73E7C7E /* Pods-TTChain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChain.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTChain/Pods-TTChain.release.xcconfig"; sourceTree = "<group>"; };
 		FDBA938B0BBC3250AA57F50D /* Pods-TTChainTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTChainTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTChainTests/Pods-TTChainTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3971,7 +3971,6 @@
 				649654E924471F6300D92BB4 /* CoreGraphics.framework in Frameworks */,
 				649654EA24471F6300D92BB4 /* OpenGLES.framework in Frameworks */,
 				649654EB24471F6300D92BB4 /* QuartzCore.framework in Frameworks */,
-				649654EC24471F6300D92BB4 /* Pods_TTChain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3996,6 +3995,7 @@
 				557C84BE22360E71004C2E16 /* OpenGLES.framework in Frameworks */,
 				557C84BC22360E3C004C2E16 /* QuartzCore.framework in Frameworks */,
 				A7346B863219A43FFA268C25 /* Pods_TTChain.framework in Frameworks */,
+				F76E30A2BC4F7812F8B3554E /* Pods_TTChain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4069,14 +4069,14 @@
 				BAAA7E5F261AEDA932517680 /* Pods-OfflineWallet_SIT.release.xcconfig */,
 				2EAB463251BF3ECC0FB9A931 /* Pods-OfflineWallet_UAT.debug.xcconfig */,
 				7D4565B15DFC6DE09DAD9EF1 /* Pods-OfflineWallet_UAT.release.xcconfig */,
-				67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */,
-				F630B72BFE309FD5E439D675 /* Pods-TTChain.release.xcconfig */,
 				FDBA938B0BBC3250AA57F50D /* Pods-TTChainTests.debug.xcconfig */,
 				59C4B87EB06708C0D8E5036F /* Pods-TTChainTests.release.xcconfig */,
 				AC8CA9463195E7DC3E6CC5EF /* Pods-TTChain_SIT.debug.xcconfig */,
 				5CB0825A1656DF550CAAF6E6 /* Pods-TTChain_SIT.release.xcconfig */,
 				2D016C577E961DD6B360E8EE /* Pods-TTChain_UAT.debug.xcconfig */,
 				54C0071BFAC32BE4862C30B4 /* Pods-TTChain_UAT.release.xcconfig */,
+				DBCD4F295A851AEC969EC4B5 /* Pods-TTChain.debug.xcconfig */,
+				E30DA1C39B58B99AB73E7C7E /* Pods-TTChain.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -7919,12 +7919,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 649655BB24471F6300D92BB4 /* Build configuration list for PBXNativeTarget "TTChain_IFRC" */;
 			buildPhases = (
-				649652B124471F6300D92BB4 /* [CP] Check Pods Manifest.lock */,
 				649652B224471F6300D92BB4 /* Sources */,
 				649654DB24471F6300D92BB4 /* Frameworks */,
 				649654ED24471F6300D92BB4 /* Resources */,
-				649655B924471F6300D92BB4 /* [CP] Embed Pods Frameworks */,
-				649655BA24471F6300D92BB4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -8975,58 +8972,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TTChain_UAT/Pods-TTChain_UAT-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		649652B124471F6300D92BB4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TTChain-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		649655B924471F6300D92BB4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TTChain/Pods-TTChain-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TTChain/Pods-TTChain-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TTChain/Pods-TTChain-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		649655BA24471F6300D92BB4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TTChain/Pods-TTChain-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TTChain/Pods-TTChain-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TTChain/Pods-TTChain-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AE6096016B8E627C64D218C3 /* [CP] Check Pods Manifest.lock */ = {
@@ -11431,7 +11376,6 @@
 /* Begin XCBuildConfiguration section */
 		649655BC24471F6300D92BB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
@@ -11463,7 +11407,6 @@
 		};
 		649655BD24471F6300D92BB4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F630B72BFE309FD5E439D675 /* Pods-TTChain.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
@@ -11610,7 +11553,7 @@
 		};
 		64F07D0520D0E4CE00A60C5C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67E3ED8DA18F21021B90ECF2 /* Pods-TTChain.debug.xcconfig */;
+			baseConfigurationReference = DBCD4F295A851AEC969EC4B5 /* Pods-TTChain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
@@ -11642,7 +11585,7 @@
 		};
 		64F07D0620D0E4CE00A60C5C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F630B72BFE309FD5E439D675 /* Pods-TTChain.release.xcconfig */;
+			baseConfigurationReference = E30DA1C39B58B99AB73E7C7E /* Pods-TTChain.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_dev;
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";

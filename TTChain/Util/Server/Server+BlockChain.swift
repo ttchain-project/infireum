@@ -79,10 +79,10 @@
  typealias RxAPIResponse<E> = Single<APIResult<E>>
  typealias RxAPIVoidResponse = Single<APIResult<Void>>
  
- class DefaultAlamofireManager: Alamofire.SessionManager {
+ class DefaultAlamofireManager: Alamofire.Session {
     static let sharedManager: DefaultAlamofireManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+        let configuration = URLSessionConfiguration.af.default
+        configuration.headers = .default
         configuration.timeoutIntervalForRequest = 30 // as seconds, you can set your request timeout
         configuration.timeoutIntervalForResource = 30 // as seconds, you can set your resource timeout
         configuration.requestCachePolicy = .useProtocolCachePolicy
@@ -108,8 +108,7 @@
     static let instance = Server.init()
     
     required init() {
-        super.init(manager: DefaultAlamofireManager.sharedManager,
-                   plugins: [Logger.init()])
+        super.init(plugins: [Logger.init()])
         
     }
     
