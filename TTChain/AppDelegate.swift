@@ -297,7 +297,7 @@ class AppDelegate: UIResponder,            UIApplicationDelegate {
     }
 }
 
-import HockeySDK
+//import HockeySDK
 // MARK: - 3rd party lib update
 extension AppDelegate {
     func initalizeHockey() {
@@ -307,10 +307,10 @@ extension AppDelegate {
         case .uat: identifier = C.Hockey.Identifier.UAT
         case .sit: identifier = C.Hockey.Identifier.SIT
         }
-        
-        BITHockeyManager.shared().configure(withIdentifier: identifier)
-        // Do some additional configuration if needed here
-        BITHockeyManager.shared().start()
+//
+//        BITHockeyManager.shared().configure(withIdentifier: identifier)
+//        // Do some additional configuration if needed here
+//        BITHockeyManager.shared().start()
     }
     
     func initializeFlurry() {
