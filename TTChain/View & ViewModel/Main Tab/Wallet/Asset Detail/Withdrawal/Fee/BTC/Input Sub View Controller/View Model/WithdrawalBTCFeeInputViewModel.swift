@@ -91,7 +91,7 @@ class WithdrawalBTCFeeInputViewModel: KLRxViewModel, WithdrawalFeeInfoProvider {
         Observable.combineLatest(_fiatRate, _satPerByte).map { [unowned self]
             rate, amt -> String? in
             if let r = rate, let a = amt {
-                return  "≈\(self._fiat.value.symbol!) \(r * a)"
+                return  "≈\(self._fiat.value.symbol!) \((r * a).asString(digits: 4))"
             }else {
                 return nil
             }

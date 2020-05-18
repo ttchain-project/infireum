@@ -168,7 +168,7 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
         Observable.combineLatest(_fiatRate, _regularFeeRate).map { [unowned self]
             rate, amt -> String? in
             if let r = rate {
-                return  "≈\(self._fiat.value.symbol!) \(r * amt)"
+                return  "≈\(self._fiat.value.symbol!) \((r * amt).asString(digits: 4))"
             }else {
                 return nil
             }
@@ -184,7 +184,7 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
         Observable.combineLatest(_fiatRate, _priorityFeeRate).map { [unowned self]
             rate, amt -> String? in
             if let r = rate {
-                return  "≈\(self._fiat.value.symbol!) \(r * amt)"
+                return  "≈\(self._fiat.value.symbol!) \((r * amt).asString(digits: 4))"
             }else {
                 return nil
             }
@@ -201,7 +201,7 @@ class WithdrawalBTCFeeInfoViewModel: KLRxViewModel {
             rate, amt -> String? in
             if let r = rate,let a = Decimal.init(string: amt ?? "") {
                 
-                return  "≈\(self._fiat.value.symbol!) \(r * a)"
+                return  "≈\(self._fiat.value.symbol!) \((r * a).asString(digits: 4))"
             }else {
                 return nil
             }
