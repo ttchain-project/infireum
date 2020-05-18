@@ -28,7 +28,7 @@ extension Wallet {
     static func importedWalletName(ofMainCoin mainCoin: Coin) -> String {
         let typeName: String = walletNamePrefix(ofMainCoin: mainCoin)
         let no: String = String(getWalletsCount(ofMainCoinID: mainCoin.walletMainCoinID!) + 1)
-        return typeName + " " + no
+        return typeName 
     }
     
     static func getWallets(ofMainCoinID mainCoinID: String) -> [Wallet] {
