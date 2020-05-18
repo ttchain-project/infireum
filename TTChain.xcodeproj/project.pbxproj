@@ -11371,7 +11371,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VM2XW9UQ3K;
 				ENABLE_BITCODE = NO;
@@ -11403,7 +11403,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VM2XW9UQ3K;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "TTChain copy-Info.plist";
@@ -11550,7 +11550,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4UM79A8YMB;
 				ENABLE_BITCODE = NO;
@@ -11582,7 +11582,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TTChain/甜甜圈.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 4UM79A8YMB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TTChain/plist/TTChain_PRD-Info.plist";
