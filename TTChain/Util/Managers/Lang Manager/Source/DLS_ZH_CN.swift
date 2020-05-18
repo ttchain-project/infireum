@@ -1,6 +1,9 @@
 import Foundation
 
 struct DLS_ZH_CN: DLS {
+    var g_alert_title: String = "請確認是否正確"
+    var strValidate_error_mnemonic_with_space: String = "不正常的恢复短语"
+    
     
     var g_ok = "确定"
     var g_cancel = "取消"

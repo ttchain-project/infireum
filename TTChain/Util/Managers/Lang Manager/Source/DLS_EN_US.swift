@@ -1,6 +1,9 @@
 import Foundation
 
 struct DLS_EN_US: DLS {
+    var g_alert_title: String = "Please confirm entered contant "
+    var strValidate_error_mnemonic_with_space: String = "The mnemonic has an incorrect format"
+    
     var g_ok = "Ok"
     var g_cancel = "Cancel"
     var g_loading = "Loading, please wait."

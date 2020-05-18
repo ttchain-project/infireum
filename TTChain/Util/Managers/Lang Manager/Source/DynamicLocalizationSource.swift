@@ -2,6 +2,11 @@ import Foundation
 
 typealias DLS = DynamicLocalizationSource
 protocol DynamicLocalizationSource {
+    // add by yc start
+    var g_alert_title: String { get set }
+    var strValidate_error_mnemonic_with_space: String { get set }
+    // add by yc end
+    
     var g_ok: String { get set }
     var g_cancel: String { get set }
     var g_loading: String { get set }
