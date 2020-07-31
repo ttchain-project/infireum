@@ -93,7 +93,7 @@ struct Constants {
         }
         
         static var urlStr_32000: String {
-            return "http://54.64.162.167:3206"
+            return "http://bitcoinnode.ttchaintech.com:3206"
 //            switch env() {
 //            case .prd:
 //                return "http://127.0.0.1:3200"

@@ -37,7 +37,8 @@ class TokenTxFetcher: TxFetcher {
                 case .failed(error: let err): return RxAPIResponse.ElementType.failed(error: err)
                 case .success(let model):
                     let reachEnd: Bool
-                    if let lastTxs = model.tokenTxs.last {
+                    let txsAscending = model.tokenTxs.sorted { $0.nonce < $1.nonce }
+                    if let lastTxs = txsAscending.last {
                         let txMomenet = moment(lastTxs.date)
                         let currentMomnet = moment()
                         reachEnd =  Int(currentMomnet.intervalSince(txMomenet).days) >= C.BlockchainAPI.maxTracingTxRecordDays
@@ -47,7 +48,7 @@ class TokenTxFetcher: TxFetcher {
 
 //                    let filteredTx = self.filter.filter(source: model.tokenTxs)
                     
-                    return RxAPIResponse.ElementType.success(TxFetcherElement(txs: model.tokenTxs, reachEnd: reachEnd))
+                    return RxAPIResponse.ElementType.success(TxFetcherElement(txs: txsAscending, reachEnd: reachEnd))
                 }
             }
         

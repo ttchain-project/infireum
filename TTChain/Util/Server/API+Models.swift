@@ -112,7 +112,7 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
             urlString = "http://3.1.196.86:9997"
         default:
 //            urlString = C.BlockchainAPI.urlStr_32000
-            urlString = "http://54.64.162.167:3206"
+            urlString = "http://api.ttchainwallet.com"
         }
         
         let url = URL.init(string: urlString)!
@@ -125,9 +125,6 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
     
     var path: String {
         
-        guard let wallet = asset.wallet,let address = wallet.address else {
-            return ""
-        }
         switch (asset.coin!.owChainType,asset.coinID) {
         case (.btc,Coin.btc_identifier):
             return "/balance"
@@ -136,11 +133,19 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
         case(.ifrc,_):
             return "/getAccount"
         default:
-            return "/topChain/getBalance_app/\(address)"
+           return "/MainnetInfura"
         }
     }
     
-    var method: Moya.Method { return asset.coin?.identifier == Coin.usdt_identifier ? .post : .get }
+        var method: Moya.Method {
+            if  asset.coin?.identifier == Coin.usdt_identifier  {
+                return .post
+            } else if asset.coin?.walletMainCoinID == Coin.eth_identifier {
+                 return .post
+            } else {
+                 return .get
+            }
+        }
     
     var task: Task {
         guard let coin = asset.coin else  { return Moya.Task.requestPlain }
@@ -161,15 +166,37 @@ struct GetAssetAmtAPI: KLMoyaAPIData {
             return Moya.Task.requestParameters(parameters: ["active" : address], encoding: URLEncoding.default)
 
         case .eth:
-            var params = [ "token" : "ETH" ]
-            if let contract = asset.coin?.contract, contract.count > 0 {
-                params["contractAddress"] = contract
-            }
+           guard let wallet = asset.wallet,let address = wallet.address else {
+                                            return Moya.Task.requestPlain
+                           }
+                             if asset.coinID == Coin.eth_identifier {
+                                return Moya.Task.requestParameters(
+                                                   parameters: [
+                                                       "jsonrpc" : "2.0",
+                                                       "method" : "eth_getBalance",
+                                                       "params" : ["\(address)", "latest"],
+                                                       "id" : 1
+                                                   ],
+                                                   encoding: JSONEncoding.default
+                                               )
+                             }
+            let contract = asset.coin?.contract
+            let data = "0x70a08231000000000000000000000000" + "\(address.drop0xPrefix)"
+                             var parameters: [String: Any] = [:]
+                             parameters["jsonrpc"] = "2.0"
+                             parameters["method"] = "eth_call"
+                             parameters["id"] = 1
+                             parameters["params"] = [
+                                      [
+                                          "to": "\(contract ?? "")",
+                                          "data": "\(data)"
+                                      ],
+                                 "latest"
+                             ]
             
-            return Moya.Task.requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default
-            )
+            return  Moya.Task.requestParameters(parameters: parameters,
+                                                               encoding: JSONEncoding.default
+                                                           )
             
         case .ifrc:
             return Moya.Task.requestParameters(parameters: ["address":asset.wallet?.address ?? ""], encoding: URLEncoding.default)
@@ -213,19 +240,23 @@ struct GetAssetAmtAPIModel: KLJSONMappableMoyaResponse {
             }
            
         case .eth:
-            guard let smallestUnitBalanceStr = json["balance"].string,
-                let smallestUnitBalance = Decimal.init(string: smallestUnitBalanceStr) else {
-                    throw GTServerAPIError.noData
-            }
+             guard let strWei = json.rawString() else {
+                throw GTServerAPIError.noData
+             }
             
-            let rateToCoinUnit: Decimal = 1 / pow(
-                Decimal.init(10),
-                Int(sourceAPI.asset.coin!.requiredDigit)
-            )
+             do {
+                                        let decimalNum = try strWei.converHexStringToDecimal()
+                                        if  sourceAPI.asset.coinID == Coin.eth_identifier {
+                                            self.balanceInCoin = decimalNum.weiToEther
+                                        } else {
+                                            let digit = (sourceAPI.asset.coin?.digit ?? 18)
+                                             self.balanceInCoin = (decimalNum)/pow(Decimal(10), Int(digit))
+                                        }
+                                    } catch {
+                                         self.balanceInCoin = 0
+                                     }
             
-            let coinUnitBalance = smallestUnitBalance * rateToCoinUnit
-            
-            self.balanceInCoin = coinUnitBalance
+           
         case .cic:
             let balance = json["balance"]
             let identifier = sourceAPI.asset.coin!.blockchainAPI_identifier.lowercased()
